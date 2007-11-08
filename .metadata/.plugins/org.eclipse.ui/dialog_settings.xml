@@ -7,8 +7,8 @@
 			<item key="selectionStatus" value="org.eclipse.core.resources.problemmarker:true:org.eclipse.pde.validation-marker:true:org.eclipse.jdt.core.buildpath_problem:true:org.eclipse.ant.ui.buildFileProblem:true:com.atlassw.tools.eclipse.checkstyle.CheckstyleMarker:true:org.eclipse.jdt.core.problem:true:org.tigris.subversion.subclipse.ui.conflictMarker:true:org.tigris.subversion.subclipse.core.svnremove:true:"/>
 			<item key="enabled" value="true"/>
 			<item key="severity" value="0"/>
-			<item key="description" value=""/>
 			<item key="filterOnMarkerLimit" value="true"/>
+			<item key="description" value=""/>
 			<item key="markerLimit" value="100"/>
 			<item key="onResource" value="0"/>
 		</section>
@@ -39,8 +39,8 @@
 			<item key="defaultPriority6" value="6"/>
 			<item key="defaultPriority4" value="1"/>
 			<item key="direction0" value="-1"/>
-			<item key="defaultDirection0" value="-1"/>
 			<item key="defaultDirection3" value="1"/>
+			<item key="defaultDirection0" value="-1"/>
 		</section>
 	</section>
 </section>

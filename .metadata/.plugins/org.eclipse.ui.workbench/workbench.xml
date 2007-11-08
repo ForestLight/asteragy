@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench version="2.0" progressCount="15">
+<workbench version="2.0" progressCount="13">
 <workbenchAdvisor/>
 <window maximized="true" x="22" y="22" width="1024" height="768">
 <fastViewData fastViewLocation="1024"/>
@@ -15,9 +15,9 @@
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="59" y="22"/>
 <coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="59" y="22"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="108" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="180" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -26,13 +26,45 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder expanded="2" appearance="1">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+<part id="6"/>
+</presentation>
 </folder>
 </info>
 </editorArea>
+<editor title="Field.java" name="Field.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/Field.java" partName="Field.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/Field.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Field.java"/>
+</editor>
+<editor title="Aster.java" name="Aster.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/Aster.java" partName="Aster.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/Aster.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Aster.java"/>
+</editor>
+<editor title="Player.java" name="Player.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/Player.java" partName="Player.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/Player.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Player.java"/>
+</editor>
+<editor title="KeyInputPlayer.java" name="KeyInputPlayer.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/KeyInputPlayer.java" partName="KeyInputPlayer.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/KeyInputPlayer.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/KeyInputPlayer.java"/>
+</editor>
+<editor title="Game.java" name="Game.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/Game.java" partName="Game.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/Game.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Game.java"/>
+</editor>
+<editor title="GameCanvas.java" name="GameCanvas.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/GameCanvas.java" partName="GameCanvas.java" workbook="DefaultEditorWorkbook" focus="true" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/GameCanvas.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/GameCanvas.java"/>
+</editor>
+<editor title="Main.java" name="Main.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/Main.java" partName="Main.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/Main.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Main.java"/>
+</editor>
 </editors>
 <views>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
+<view id="org.eclipse.ui.console.ConsoleView" partName="コンソール">
+<viewState/>
+</view>
 <view id="org.eclipse.ui.views.ContentOutline" partName="アウトライン">
 <viewState/>
 </view>
@@ -119,6 +151,7 @@
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <layout>
 <mainWindow>
@@ -144,18 +177,19 @@
 </info>
 <info part="org.eclipse.ui.editorss" relative="left" relationship="2" ratioLeft="251" ratioRight="755" ratio="0.24950299"/>
 <info part="bottom" relative="org.eclipse.ui.editorss" relationship="4" ratioLeft="500" ratioRight="167" ratio="0.7496252" folder="true">
-<folder activePageID="org.eclipse.ui.views.ProblemView" expanded="2" appearance="2">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" expanded="2" appearance="2">
 <page label="問題" content="org.eclipse.ui.views.ProblemView"/>
 <page label="Javadoc" content="org.eclipse.jdt.ui.JavadocView"/>
 <page label="宣言" content="org.eclipse.jdt.ui.SourceView"/>
 <page label="LabelNotFound" content="org.eclipse.search.ui.views.SearchView"/>
-<page label="LabelNotFound" content="org.eclipse.ui.console.ConsoleView"/>
+<page label="コンソール" content="org.eclipse.ui.console.ConsoleView"/>
 <page label="LabelNotFound" content="org.eclipse.ui.views.BookmarkView"/>
 <page label="LabelNotFound" content="org.eclipse.ui.views.ProgressView"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
+<part id="3"/>
 </presentation>
 </folder>
 </info>
@@ -176,16 +210,14 @@
 <editors>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Main.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Canvas.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Field.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Aster.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Player.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/KeyInputPlayer.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Game.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/Main.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/GameCanvas.java"/>
 </editors>
-<item historyLabel="Main.java" index="0">
-<position/>
-</item>
-<item historyLabel="Canvas.java" index="1">
-<position x="1" y="27" info="not_deleted"/>
-</item>
-<item historyLabel="Canvas.java" index="1">
-<position x="100" y="5" info="not_deleted"/>
-</item>
 <item historyLabel="Main.java" index="0">
 <position x="25" y="0" info="not_deleted"/>
 </item>
@@ -207,8 +239,134 @@
 <item historyLabel="Main.java" index="0">
 <position x="87" y="5" info="not_deleted"/>
 </item>
-<item active="true" historyLabel="Canvas.java" index="1">
+<item historyLabel="Canvas.java" index="1">
 <position x="100" y="5" info="not_deleted"/>
+</item>
+<item historyLabel="Field.java" index="2">
+<position/>
+</item>
+<item historyLabel="Aster.java" index="3">
+<position/>
+</item>
+<item historyLabel="Player.java" index="4">
+<position/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="5">
+<position/>
+</item>
+<item historyLabel="Field.java" index="2">
+<position x="35" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="6">
+<position/>
+</item>
+<item historyLabel="Player.java" index="4">
+<position x="2" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="5">
+<position x="200" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="6">
+<position x="58" y="4" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="6">
+<position x="85" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="6">
+<position x="166" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="5">
+<position x="15" y="14" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="5">
+<position x="200" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="5">
+<position/>
+</item>
+<item historyLabel="Canvas.java" index="1">
+<position x="100" y="5" info="not_deleted"/>
+</item>
+<item historyLabel="Player.java" index="4">
+<position x="24" y="6" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="5">
+<position x="15" y="14" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="6">
+<position x="58" y="4" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="6">
+<position x="126" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="6">
+<position x="165" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Player.java" index="4">
+<position x="24" y="6" info="not_deleted"/>
+</item>
+<item historyLabel="Player.java" index="4">
+<position x="175" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Field.java" index="2">
+<position x="42" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="6">
+<position x="79" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="6">
+<position x="104" y="24" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="5">
+<position x="203" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Main.java" index="7">
+<position/>
+</item>
+<item historyLabel="Canvas.java" index="1">
+<position x="43" y="6" info="not_deleted"/>
+</item>
+<item historyLabel="Player.java" index="4">
+<position x="175" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Main.java" index="7">
+<position x="7" y="17" info="not_deleted"/>
+</item>
+<item historyLabel="GameCanvas.java" index="8">
+<position/>
+</item>
+<item historyLabel="Main.java" index="7">
+<position x="7" y="17" info="not_deleted"/>
+</item>
+<item historyLabel="Main.java" index="7">
+<position x="321" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="6">
+<position x="194" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="5">
+<position x="50" y="44" info="not_deleted"/>
+</item>
+<item historyLabel="Player.java" index="4">
+<position x="78" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Main.java" index="7">
+<position x="177" y="5" info="not_deleted"/>
+</item>
+<item historyLabel="Main.java" index="7">
+<position x="325" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Main.java" index="7">
+<position x="306" y="1" info="not_deleted"/>
+</item>
+<item historyLabel="Main.java" index="7">
+<position x="82" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="5">
+<position x="15" y="14" info="not_deleted"/>
+</item>
+<item active="true" historyLabel="GameCanvas.java" index="8">
+<position x="104" y="5" info="not_deleted"/>
 </item>
 </navigationHistory>
 <stickyState/>
@@ -218,11 +376,26 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="asteragy/src/Main.java">
+<persistable path="/asteragy/src/Main.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Canvas.java" tooltip="asteragy/src/Canvas.java">
 <persistable path="/asteragy/src/Canvas.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="asteragy/src/Main.java">
-<persistable path="/asteragy/src/Main.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Game.java" tooltip="asteragy/src/Game.java">
+<persistable path="/asteragy/src/Game.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="KeyInputPlayer.java" tooltip="asteragy/src/KeyInputPlayer.java">
+<persistable path="/asteragy/src/KeyInputPlayer.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Player.java" tooltip="asteragy/src/Player.java">
+<persistable path="/asteragy/src/Player.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Aster.java" tooltip="asteragy/src/Aster.java">
+<persistable path="/asteragy/src/Aster.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Field.java" tooltip="asteragy/src/Field.java">
+<persistable path="/asteragy/src/Field.java"/>
 </file>
 </mruList>
 </workbench>
