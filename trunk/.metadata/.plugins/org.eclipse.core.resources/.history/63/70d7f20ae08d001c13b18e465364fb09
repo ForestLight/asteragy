@@ -1,0 +1,10 @@
+import com.nttdocomo.ui.IApplication;
+
+public class Main extends IApplication {
+
+	public void start() {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+}

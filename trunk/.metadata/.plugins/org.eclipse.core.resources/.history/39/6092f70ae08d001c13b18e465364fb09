@@ -1,0 +1,15 @@
+import com.nttdocomo.ui.Graphics;
+
+public class Canvas extends com.nttdocomo.ui.Canvas {
+
+	public Canvas() {
+		super();
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public void paint(Graphics arg0) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+}
