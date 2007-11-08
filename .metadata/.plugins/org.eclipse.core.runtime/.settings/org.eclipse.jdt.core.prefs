@@ -1,0 +1,7 @@
+#Thu Nov 08 18:45:31 JST 2007
+eclipse.preferences.version=1
+org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=*.launch
+org.eclipse.jdt.core.classpathVariable.DOJA_CLASS_ZIP=C\:/iDKDoJa4.0/lib/profile/DoJa-4.0/classes.zip
+org.eclipse.jdt.core.classpathVariable.DOJA_DOJACLASS_ZIP=C\:/iDKDoJa4.0/lib/profile/DoJa-4.0/doja_classes.zip
+org.eclipse.jdt.core.classpathVariable.DOJA_CLASSES=C\:/iDKDoJa4.0
+org.eclipse.jdt.core.codeComplete.visibilityCheck=enabled

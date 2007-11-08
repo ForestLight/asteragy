@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launchConfiguration type="com.nttdocomo.eclipse.DoJaLaunchConfiguration">
+<stringAttribute key="com.nttdocomo.eclipse.DEVICE" value="device1"/>
+<stringAttribute key="com.nttdocomo.eclipse.LAUNCH" value="0"/>
+<booleanAttribute key="com.nttdocomo.eclipse.DEBUGGER" value="false"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="asteragy"/>
+<stringAttribute key="com.nttdocomo.eclipse.TRACE" value="none"/>
+<stringAttribute key="org.eclipse.debug.ui.target_run_perspective" value="perspective_none"/>
+</launchConfiguration>
