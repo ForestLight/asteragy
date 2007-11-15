@@ -1,3 +1,6 @@
+package jp.ac.tokyo_ct.asteragy;
+
+
 import com.nttdocomo.ui.*;
 
 /**
@@ -15,7 +18,7 @@ public class Main extends IApplication {
 		Display.setCurrent(c);
 		
 		//将来的には、ここでタイトル画面を出すようにしたい。
-		Game g = new Game();
+		Game g = Game.getInstance(); //new Game();
 		g.start();
 	}
 
