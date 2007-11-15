@@ -7,5 +7,9 @@ public abstract class Player {
 		this.name = playerName;
 	}
 	
+	public Action getAction() {
+		return null;
+	}
+	
 	private String name;
 }
