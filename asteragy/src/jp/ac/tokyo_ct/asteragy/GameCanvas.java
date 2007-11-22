@@ -86,6 +86,10 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 				g.drawImage(fieldimage, top + i * measure, left + j * measure);
 				// アステル
 				Aster a = aster[i][j];
+				g.drawScaledImage(asterimage[a.getAsterClass()], top + i
+						* measure + 1, left + j * measure + 1, measure - 1,
+						measure - 1, (measure - 1) * (a.getColor() - 1), 0,
+						measure - 1, measure - 1);
 			}
 		}
 	}
@@ -98,7 +102,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 */
 	private void paintPlayerInfo(Graphics g) {
 		// 1P
-		g.setOrigin(0,this.getHeight()-playerheight);
+		g.setOrigin(0, this.getHeight() - playerheight);
 		paintPlayerInfo(g, 1);
 		// 2P
 		g.setOrigin(0, 0);
@@ -142,6 +146,9 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		fieldimage = Image.createImage(measure + 1, measure + 1);
 		Graphics g = fieldimage.getGraphics();
 		// 臨時マス
+		g.setColor(Graphics.getColorOfRGB(255, 243, 236));
+		g.fillRect(0, 0, measure+1, measure+1);
+		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.drawRect(0, 0, measure, measure);
 		g.dispose();
 	}
@@ -157,7 +164,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 			try {
 				// リソースから読み込み
 				MediaImage m = MediaManager.getImage("resource:///aster_" + i
-						+ ".jpg");
+						+ ".gif");
 				// メディアの使用開始
 				m.use();
 				// 読み込み
