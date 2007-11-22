@@ -72,25 +72,29 @@ class Field {
 	}
 
 	// つながっている同色アステルをカウント
-	private void judgeMain(int x,int y,int back,int AsterColor){
-		
-		if(x<0 || y<0 || x>X || y>Y || countAster==3){
-			return;	
+	private void judgeMain(int x, int y, int back, int AsterColor) {
+
+		if (x < 0 || y < 0 || x >= X || y >= Y || countAster == 3) {
+			return;
 		}
-		System.out.println(""+x+","+y);
-		if(field[y][x].getColor() == AsterColor){
-			System.out.println(""+countAster);
+		if (field[y][x] == null)
+			return;
+		if (field[y][x].getColor() == AsterColor) {
 			countAster++;
 			/*
 			 * 現在注目している座標を後戻りさせないように再帰 back 1 下 （以前に注目していた座標のある方向） 2 右 3 上 4 左
 			 * 
 			 * つながった同色アステルを3個見つけるだけなら判定する位置は被らないよね…?
 			 */
-			if(back!=1) judgeMain(x,y+1,3,AsterColor);
-			if(back!=2) judgeMain(x+1,y,4,AsterColor);
-			if(back!=3) judgeMain(x,y-1,1,AsterColor);
-			if(back!=4) judgeMain(x-1,y,2,AsterColor);
-			
+			if (back != 1)
+				judgeMain(x, y + 1, 3, AsterColor);
+			if (back != 2)
+				judgeMain(x + 1, y, 4, AsterColor);
+			if (back != 3)
+				judgeMain(x, y - 1, 1, AsterColor);
+			if (back != 4)
+				judgeMain(x - 1, y, 2, AsterColor);
+
 			// かなりめんどくさいことしてる気がする 動くのかも心配 修正希望
 		}
 	}
