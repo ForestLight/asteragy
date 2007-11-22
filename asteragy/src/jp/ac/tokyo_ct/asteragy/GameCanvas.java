@@ -1,12 +1,207 @@
 package jp.ac.tokyo_ct.asteragy;
+
 import com.nttdocomo.ui.*;
 
 public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
+	/**
+	 * 18×18
+	 */
+	private final int measure = 18;
+
+	/**
+	 * アステルの種類
+	 */
+	private final int asterkind = 11;
+
+	/**
+	 * プレイヤー情報領域高さ
+	 */
+	private final int playerheight = 20;
+
+	// プレイヤー情報座標
+	private final int spx = 10;
+
+	private final int spy = 16;
+
+	private final int namex = 40;
+
+	private final int namey = 16;
+
+	/**
+	 * 固定背景画像
+	 */
+	private Image background;
+
+	/**
+	 * フィールド画像
+	 */
+	private Image fieldimage;
+
+	/**
+	 * 各種アステル画像
+	 */
+	private Image[] asterimage;
+
 	public GameCanvas() {
 		super();
+		createBackGround();
+		loadAsterImage();
+		loadField();
 	}
 
 	public void paint(Graphics g) {
+		// ダブルバッファ開始
+		g.lock();
+		// クリア
+		g.clearRect(0, 0, 240, 240);
+		// 固定背景描画
+		g.drawImage(background, 0, 0);
+		// フィールド描画
+		paintField(g);
+		// プレイヤー情報描画
+		paintPlayerInfo(g);
+		// ダブルバッファ終了
+		g.unlock(false);
+	}
+
+	/**
+	 * フィールド描画
+	 * 
+	 * @param g
+	 *            描画先グラフィクス
+	 */
+	private void paintField(Graphics g) {
+
+		Aster[][] aster = Game.getInstance().getField().getField();
+		// 原点座標位置計算
+		int top = (this.getHeight() - aster.length * measure) / 2;
+		int left = (this.getWidth() - aster[0].length * measure) / 2;
+		// フィールド，アステル描画
+		for (int i = 0; i < aster.length; i++) {
+			for (int j = 0; j < aster[0].length; j++) {
+				if (aster[i][j] == null)
+					continue;
+				// フィールド
+				g.drawImage(fieldimage, top + i * measure, left + j * measure);
+				// アステル
+				Aster a = aster[i][j];
+			}
+		}
+	}
+
+	/**
+	 * プレイヤー情報描画
+	 * 
+	 * @param g
+	 *            描画先グラフィクス
+	 */
+	private void paintPlayerInfo(Graphics g) {
+		// 1P
+		g.setOrigin(0,this.getHeight()-playerheight);
+		paintPlayerInfo(g, 1);
+		// 2P
+		g.setOrigin(0, 0);
+		paintPlayerInfo(g, 2);
+	}
+
+	/**
+	 * プレイヤー情報描画
+	 * 
+	 * @param g
+	 *            描画先グラフィクス
+	 * @param playernumber
+	 *            プレイヤー
+	 */
+	private void paintPlayerInfo(Graphics g, int playernumber) {
+		Player player = null;
+		if (playernumber == 1)
+			player = Game.getInstance().getPlayer1();
+		else if (playernumber == 2)
+			player = Game.getInstance().getPlayer2();
+		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
+		g.drawString(player.getName(), namex, namey);
+		g.drawString("" + player.getSP(), spx, spy);
+	}
+
+	/**
+	 * フィールド画像読み込み
+	 */
+	private void loadField() {
+		// 読込先イメージ
+		fieldimage = null;
+		try {
+			// リソースから読み込み
+			MediaImage m = MediaManager.getImage("resource:///fieldimage.jpg");
+			// メディアの使用開始
+			m.use();
+			// 読み込み
+			fieldimage = m.getImage();
+		} catch (Exception e) {
+		}
+		fieldimage = Image.createImage(measure + 1, measure + 1);
+		Graphics g = fieldimage.getGraphics();
+		// 臨時マス
+		g.drawRect(0, 0, measure, measure);
+		g.dispose();
+	}
+
+	/**
+	 * アステル画像読み込み
+	 * 
+	 */
+	private void loadAsterImage() {
+		// 読込先イメージ
+		asterimage = new Image[asterkind];
+		for (int i = 0; i < asterimage.length; i++) {
+			try {
+				// リソースから読み込み
+				MediaImage m = MediaManager.getImage("resource:///aster_" + i
+						+ ".jpg");
+				// メディアの使用開始
+				m.use();
+				// 読み込み
+				asterimage[i] = m.getImage();
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	/**
+	 * 固定背景作成
+	 * 
+	 */
+	private void createBackGround() {
+		// 背景画像作成
+		background = Image.createImage(this.getWidth(), this.getHeight());
+		// グラフィクス作成
+		Graphics g = background.getGraphics();
+		// 背景描画
+		paintBackGround(g);
+		// グラフィクス廃棄
+		g.dispose();
+	}
+
+	/**
+	 * 背景描画
+	 * 
+	 * @param g
+	 *            描画先グラフィクス
+	 */
+	private void paintBackGround(Graphics g) {
+		// 読込先イメージ
+		Image back = null;
+		try {
+			// 背景画像リソースから読み込み
+			MediaImage m = MediaManager.getImage("resource:///back.jpg");
+			// メディアの使用開始
+			m.use();
+			// 読み込み
+			back = m.getImage();
+		} catch (Exception e) {
+		}
+		// 描画
+		if (back != null)
+			g.drawImage(back, 0, 0);
 	}
 }

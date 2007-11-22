@@ -14,8 +14,8 @@ public class Main extends IApplication {
 	 * プログラムを開始するエントリポイント
 	 */
 	public void start() {
-		GameCanvas c = new GameCanvas();
-		Display.setCurrent(c);
+//		GameCanvas c = new GameCanvas();
+//		Display.setCurrent(c);
 		
 		//将来的には、ここでタイトル画面を出すようにしたい。
 		Game g = Game.getInstance(); //new Game();
