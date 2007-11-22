@@ -32,8 +32,11 @@ public class Aster {
 	public int getAsterClass(){
 		return asterClass;
 	}
-	public void setDeleteFlag(){
-		deleteFlag = true;
+	public void setDeleteFlag(boolean b){
+		deleteFlag = b;
+	}
+	public boolean getDeleteFlag(){
+		return deleteFlag;
 	}
 	
 	public void delete(){
