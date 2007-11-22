@@ -10,5 +10,12 @@ public class KeyInputPlayer extends Player {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
+	/* (非 Javadoc)
+	 * @see jp.ac.tokyo_ct.asteragy.Player#getAction()
+	 */
+	public Action getAction() {
+		return null;
+	}
+
 
 }

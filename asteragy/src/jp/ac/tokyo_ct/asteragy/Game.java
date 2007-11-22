@@ -60,7 +60,7 @@ class Game {
 	
 	/**
 	 * 先攻プレイヤーの取得
-	 * @return 先攻プレイヤー
+	 * @return	 先攻プレイヤー
 	 */
 	Player getPlayer1() {
 		return player1;
