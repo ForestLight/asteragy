@@ -23,7 +23,8 @@ public class Aster {
 		deleteFlag = false;		
 	}
 	
-	public void swap(Field f,int x1,int y1,int x2,int y2){
+	public void swap(int x1,int y1,int x2,int y2){
+		Field f = Game.getInstance().getField();
 		f.swap(x1,y1,x2,y2);
 	}	
 	public int getColor(){
@@ -38,7 +39,10 @@ public class Aster {
 	public boolean getDeleteFlag(){
 		return deleteFlag;
 	}
-	
+	/**
+	 * íœƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚½ê‡Aíœ‚µ‚Ä¶¬‚µ‚È‚¨‚·
+	 *
+	 */
 	public void delete(){
 		if(deleteFlag){
 			color = r.nextInt(COLOR_MAX)+1;
