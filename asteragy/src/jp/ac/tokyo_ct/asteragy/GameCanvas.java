@@ -39,10 +39,19 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	private Image fieldimage;
 
 	/**
+	 * カーソル
+	 */
+	private int cursor;
+
+	private int cursorx;
+
+	private int cursory;
+
+	/**
 	 * 各種アステル画像
 	 */
 	private Image[] asterimage;
-	
+
 	private final Game game;
 
 	public GameCanvas(Game g) {
@@ -69,6 +78,24 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	}
 
 	/**
+	 * カーソル描画
+	 * 
+	 * @param g
+	 *            描画先グラフィクス
+	 */
+	private void paintCursor(Graphics g) {
+		switch (cursor) {
+		case CURSOR_CLEAR:
+			break;
+		case CURSOR_1:
+			g.setColor(Graphics.getColorOfRGB(255, 0, 0));
+			g.drawRect(cursorx * measure, cursory * measure, measure, measure);
+			g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+			break;
+		}
+	}
+
+	/**
 	 * フィールド描画
 	 * 
 	 * @param g
@@ -78,25 +105,25 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 		Aster[][] aster = game.getField().getField();
 		// 原点座標位置計算
-		int top = (this.getHeight() - aster.length * measure) / 2;
-		int left = (this.getWidth() - aster[0].length * measure) / 2;
+		g.setOrigin((this.getHeight() - aster.length * measure) / 2, (this
+				.getWidth() - aster[0].length * measure) / 2);
 		// フィールド，アステル描画
 		for (int i = 0; i < aster.length; i++) {
 			for (int j = 0; j < aster[0].length; j++) {
 				if (aster[i][j] == null)
 					continue;
 				// フィールド
-				g.drawImage(fieldimage, top + i * measure, left + j * measure);
+				g.drawImage(fieldimage, i * measure, j * measure);
 				// アステル
 				Aster a = aster[i][j];
-				g.drawScaledImage(asterimage[a.getAsterClass()],
-						top + i * measure + 1,
-						left + j * measure + 1,
-						measure - 1, measure - 1,
-						(measure - 1) * (a.getColor() - 1), 0,
-						measure - 1, measure - 1);
+				g.drawScaledImage(asterimage[a.getAsterClass()], i * measure
+						+ 1, j * measure + 1, measure - 1, measure - 1,
+						(measure - 1) * (a.getColor() - 1), 0, measure - 1,
+						measure - 1);
 			}
 		}
+		paintCursor(g);
+		g.setOrigin(0, 0);
 	}
 
 	/**
@@ -217,7 +244,9 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 			g.drawImage(back, 0, 0);
 	}
 
-	/* (非 Javadoc)
+	/*
+	 * (非 Javadoc)
+	 * 
 	 * @see com.nttdocomo.ui.Canvas#processEvent(int, int)
 	 */
 	public void processEvent(int type, int param) {
@@ -226,30 +255,37 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		else
 			super.processEvent(type, param);
 	}
-	
+
 	private volatile EventProcesser eventProcesser;
-	
+
 	public void setEventProcesser(EventProcesser e) {
 		eventProcesser = e;
 	}
-	
+
 	public EventProcesser getEventProcesser() {
 		return eventProcesser;
 	}
-	
+
 	public void resetEventProcesser() {
 		eventProcesser = null;
 	}
-	
+
 	/**
 	 * 選択している位置を表すため、フィールド内の指定した位置を枠で囲む。
+	 * 
 	 * @param x
 	 * @param y
-	 * @param cursorType カーソルの種
+	 * @param cursorType
+	 *            カーソルの種
 	 */
 	public void drawCursor(int x, int y, int cursorType) {
+		cursorx = x;
+		cursory = y;
+		cursor = cursorType;
+		this.repaint();
 	}
-	
-	public static final int CURSOR_CLEAR = 0; //カーソルの消去
+
+	public static final int CURSOR_CLEAR = 0; // カーソルの消去
+
 	public static final int CURSOR_1 = 1;
 }
