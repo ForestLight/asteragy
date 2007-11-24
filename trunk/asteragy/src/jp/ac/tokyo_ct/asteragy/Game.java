@@ -15,13 +15,14 @@ class Game {
 	 * ゲームを開始する
 	 */
 	public void start() {
-		player1 = new KeyInputPlayer("先攻");
-		player2 = new KeyInputPlayer("後攻");
-		field = new Field();
+		System.out.println("Game.start()");
+		canvas = new GameCanvas(this);
+		Display.setCurrent(canvas);
+		player1 = new KeyInputPlayer(this, "先攻");
+		player2 = new KeyInputPlayer(this, "後攻");
+		field = new Field(this);
 		field.setFieldSize(10, 10);
 		field.setAster();
-		canvas = new GameCanvas();
-		Display.setCurrent(canvas);
 
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
 		{
