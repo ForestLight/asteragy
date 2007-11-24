@@ -5,8 +5,9 @@ public abstract class Player {
 	 * @param playerName
 	 *            プレイヤーの名前
 	 */
-	public Player(String playerName) {
+	public Player(Game game, String playerName) {
 		this.name = playerName;
+		this.game = game;
 	}
 
 	/**
@@ -26,7 +27,9 @@ public abstract class Player {
 		return sp;
 	}
 
-	private String name;
+	protected final String name;
 
 	private int sp;
+	
+	protected final Game game;
 }

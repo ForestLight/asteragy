@@ -10,9 +10,12 @@ class Field {
 	private int X, Y;
 
 	private int countAster;
+	
+	private final Game game;
 
-	public Field() {
+	public Field(Game g) {
 		super();
+		game = g;
 	}
 
 	/**
@@ -25,8 +28,8 @@ class Field {
 		// 行動を起こす
 		// ...
 
-		GameCanvas c = Game.getInstance().getCanvas();
-		// cへフィールドの描画を依頼
+		GameCanvas c = game.getCanvas();
+		c.repaint();
 		return false;
 	}
 
@@ -41,7 +44,7 @@ class Field {
 		field = new Aster[Y][X];
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
-				field[i][j] = new Aster();
+				field[i][j] = new Aster(this);
 				// 消滅判定
 				while (judge(j, i) == true) {
 					field[i][j].setDeleteFlag(true);
@@ -129,15 +132,25 @@ class Field {
 
 	// swap
 	public void swap(int x1, int y1, int x2, int y2) {
-		Aster tmp = new Aster();
-
-		tmp = field[y1][x1];
+		Aster tmp = field[y1][x1];
 		field[y1][x1] = field[y2][x2];
 		field[y2][x2] = tmp;
 	}
 
 	public Aster[][] getField() {
 		return field;
+	}
+	
+	public Aster getAster(Point pt) {
+		return field[pt.y][pt.x];
+	}
+	
+	public int getX() {
+		return X;
+	}
+	
+	public int getY() {
+		return Y;
 	}
 
 }

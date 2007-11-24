@@ -42,12 +42,15 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 * 各種アステル画像
 	 */
 	private Image[] asterimage;
+	
+	private final Game game;
 
-	public GameCanvas() {
+	public GameCanvas(Game g) {
 		super();
 		createBackGround();
 		loadAsterImage();
 		loadField();
+		game = g;
 	}
 
 	public void paint(Graphics g) {
@@ -73,7 +76,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 */
 	private void paintField(Graphics g) {
 
-		Aster[][] aster = Game.getInstance().getField().getField();
+		Aster[][] aster = game.getField().getField();
 		// 原点座標位置計算
 		int top = (this.getHeight() - aster.length * measure) / 2;
 		int left = (this.getWidth() - aster[0].length * measure) / 2;
@@ -86,9 +89,11 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 				g.drawImage(fieldimage, top + i * measure, left + j * measure);
 				// アステル
 				Aster a = aster[i][j];
-				g.drawScaledImage(asterimage[a.getAsterClass()], top + i
-						* measure + 1, left + j * measure + 1, measure - 1,
-						measure - 1, (measure - 1) * (a.getColor() - 1), 0,
+				g.drawScaledImage(asterimage[a.getAsterClass()],
+						top + i * measure + 1,
+						left + j * measure + 1,
+						measure - 1, measure - 1,
+						(measure - 1) * (a.getColor() - 1), 0,
 						measure - 1, measure - 1);
 			}
 		}
@@ -120,9 +125,9 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	private void paintPlayerInfo(Graphics g, int playernumber) {
 		Player player = null;
 		if (playernumber == 1)
-			player = Game.getInstance().getPlayer1();
+			player = game.getPlayer1();
 		else if (playernumber == 2)
-			player = Game.getInstance().getPlayer2();
+			player = game.getPlayer2();
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawString(player.getName(), namex, namey);
 		g.drawString("" + player.getSP(), spx, spy);
@@ -147,7 +152,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		Graphics g = fieldimage.getGraphics();
 		// 臨時マス
 		g.setColor(Graphics.getColorOfRGB(255, 243, 236));
-		g.fillRect(0, 0, measure+1, measure+1);
+		g.fillRect(0, 0, measure + 1, measure + 1);
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.drawRect(0, 0, measure, measure);
 		g.dispose();
@@ -211,4 +216,40 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		if (back != null)
 			g.drawImage(back, 0, 0);
 	}
+
+	/* (非 Javadoc)
+	 * @see com.nttdocomo.ui.Canvas#processEvent(int, int)
+	 */
+	public void processEvent(int type, int param) {
+		if (eventProcesser != null)
+			eventProcesser.processEvent(type, param);
+		else
+			super.processEvent(type, param);
+	}
+	
+	private volatile EventProcesser eventProcesser;
+	
+	public void setEventProcesser(EventProcesser e) {
+		eventProcesser = e;
+	}
+	
+	public EventProcesser getEventProcesser() {
+		return eventProcesser;
+	}
+	
+	public void resetEventProcesser() {
+		eventProcesser = null;
+	}
+	
+	/**
+	 * 選択している位置を表すため、フィールド内の指定した位置を枠で囲む。
+	 * @param x
+	 * @param y
+	 * @param cursorType カーソルの種
+	 */
+	public void drawCursor(int x, int y, int cursorType) {
+	}
+	
+	public static final int CURSOR_CLEAR = 0; //カーソルの消去
+	public static final int CURSOR_1 = 1;
 }
