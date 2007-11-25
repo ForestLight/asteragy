@@ -54,5 +54,7 @@ public abstract class AsterClass {
 	public abstract void moveAstern();
 	
 	public abstract String getCommandName();
+	
+	public abstract String getExplain();
 
 }
