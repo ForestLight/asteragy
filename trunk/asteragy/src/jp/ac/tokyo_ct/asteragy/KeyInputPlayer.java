@@ -50,12 +50,6 @@ public class KeyInputPlayer extends Player {
 			canvas.resetEventProcesser();
 		}
 	}
-
-	/* (”ñ Javadoc)
-	 * @see jp.ac.tokyo_ct.asteragy.EventProcesser#processEvent(int, int)
-	 */
-	public void processEvent(int type, int param) {
-	}
 	
 	private Point selectAster() {
 		final class EventProcesserForSelectAster implements EventProcesser {
@@ -69,6 +63,8 @@ public class KeyInputPlayer extends Player {
 				if (isSelected) {
 					return;
 				}
+
+				System.out.println("selectAster()");
 				switch (param) {
 				case Display.KEY_UP:
 					y--;
@@ -97,12 +93,14 @@ public class KeyInputPlayer extends Player {
 			}
 			
 			public Point getPoint() {
+				System.out.println("EventProcesserForSelectAster.getPoint()");
 				while (!isSelected) {
-					try {
-						Thread.sleep(1);
-					} catch(InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
+//					try {
+						System.out.println("loop...)");
+						//Thread.sleep(10);
+//					} catch(InterruptedException e) {
+//						Thread.currentThread().interrupt();
+//					}
 				}
 				return new Point(x, y);
 			}
@@ -112,8 +110,10 @@ public class KeyInputPlayer extends Player {
 			private volatile boolean isSelected = false;
 		}
 		
+		System.out.println("KeyInputPlayer.selectAster()");
 		EventProcesserForSelectAster ep = new EventProcesserForSelectAster();
 		canvas.setEventProcesser(ep);
+		System.out.println("canvas.setEventProcesser() after");
 		Point pt = ep.getPoint();
 		System.out.println("KeyInputPlayer.selectAster() - x = " + pt.x + ", y = " + pt.y);
 		return pt;

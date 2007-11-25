@@ -18,8 +18,7 @@ public class Main extends IApplication {
 		// Display.setCurrent(c);
 
 		// 将来的には、ここでタイトル画面を出すようにしたい。
-		Game g = Game.getInstance(); // new Game();
+		Game g = new Game();
 		g.start();
 	}
-
 }

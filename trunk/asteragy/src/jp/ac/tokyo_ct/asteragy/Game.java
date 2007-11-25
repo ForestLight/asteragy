@@ -42,6 +42,9 @@ class Game {
 	 * @retval false ゲームが終了した
 	 */
 	private boolean turn(Player player) {
+		System.out.println("Game.turn()");
+		printMemoryStatus();
+		canvas.onTurnStart(player);
 		for (;;) {
 			Action a = player.getAction();
 			if (a == null) {
@@ -52,15 +55,6 @@ class Game {
 				return false;
 			}
 		}
-	}
-
-	/**
-	 * インスタンスの取得
-	 * 
-	 * @return インスタンス
-	 */
-	public static Game getInstance() {
-		return instance;
 	}
 
 	/**
@@ -99,16 +93,8 @@ class Game {
 		return canvas;
 	}
 
-	/**
-	 * シングルトンのため、private
-	 */
-	private Game() {
+	public Game() {
 	}
-
-	/**
-	 * シングルトンインスタンス
-	 */
-	private static Game instance = new Game();
 
 	/**
 	 * 先攻プレイヤー
@@ -129,4 +115,11 @@ class Game {
 	 * 描画に用いるキャンバス
 	 */
 	private GameCanvas canvas;
+	
+	private static void printMemoryStatus() {
+		Runtime r = Runtime.getRuntime();
+		System.out.println("Total memory: " + r.totalMemory()
+			+ ", Free memory: " + r.freeMemory());
+	}
+
 }
