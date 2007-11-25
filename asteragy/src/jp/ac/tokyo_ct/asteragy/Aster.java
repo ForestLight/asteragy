@@ -70,4 +70,8 @@ public class Aster {
 		asterClass = ac;
 		ac.setAster(this);
 	}
+	
+	public int getNumber() {
+		return asterClass != null ? asterClass.getNumber() : 0;
+	}
 }

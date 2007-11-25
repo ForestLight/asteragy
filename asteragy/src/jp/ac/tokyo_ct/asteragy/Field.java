@@ -200,6 +200,16 @@ class Field {
 	}
 	
 	public Point asterToPoint(Aster a) {
+		Point point;
+
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
+				if (field[i][j] == a) {
+					point = new Point(j, i);
+					return point;
+				}
+			}
+		}
 		return null; //Œ©•t‚©‚ç‚È‚©‚Á‚½‚Æ‚«
 	}
 }

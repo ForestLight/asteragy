@@ -52,5 +52,7 @@ public abstract class AsterClass {
 	 * 1‚Â‘O‚Ì‘I‘ğ‚É–ß‚éB
 	 */
 	public abstract void moveAstern();
+	
+	public abstract String getCommandName();
 
 }
