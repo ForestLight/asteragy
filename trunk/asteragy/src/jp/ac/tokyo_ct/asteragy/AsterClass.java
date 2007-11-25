@@ -29,6 +29,12 @@ public abstract class AsterClass {
 	
 	private Aster aster;
 	
+	public Player getPlayer() {
+		return player;
+	}
+	
+	private Player player;
+	
 	/**
 	 * Œ»İ‚Ì‘I‘ğ”ÍˆÍ‚ğ•Ô‚·
 	 * @return Œ»İ‚Ì‘I‘ğ”ÍˆÍ
