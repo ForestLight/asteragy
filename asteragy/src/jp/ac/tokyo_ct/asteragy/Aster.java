@@ -58,12 +58,16 @@ public class Aster {
 	 * 削除フラグが立っていた場合、削除して生成しなおす
 	 * 
 	 */
-	public void delete() {
+	public void delete(int c) {
 		if (deleteFlag) {
 			color = r.nextInt(COLOR_MAX) + 1;
 			asterClass = 0;
 			deleteFlag = false;
 			// ここでプレイヤーに対するSP配分処理もやるんだろうか
+		}
+		
+		if (c != 0){
+			color = c;
 		}
 	}
 }
