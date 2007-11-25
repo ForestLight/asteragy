@@ -116,9 +116,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 				g.drawImage(fieldimage, i * measure, j * measure);
 				// ƒAƒXƒeƒ‹
 				Aster a = aster[i][j];
-				AsterClass ac = a.getAsterClass();
-				int number = ac != null ? ac.getNumber() : 0;
-				g.drawScaledImage(asterimage[number], i * measure
+				g.drawScaledImage(asterimage[a.getNumber()], i * measure
 						+ 1, j * measure + 1, measure - 1, measure - 1,
 						(measure - 1) * (a.getColor() - 1), 0, measure - 1,
 						measure - 1);
