@@ -8,20 +8,16 @@ import java.util.Random;
  */
 public class Aster {
 	public final static int COLOR_MAX = 4;
-
 	public final static int RED = 1;
-
 	public final static int BLUE = 2;
-
 	public final static int GREEN = 3;
-
 	public final static int YELLOW = 4;
 
-	private Field field;
+	private final Field field;
 
 	private int color;
 
-	private int asterClass;
+	private AsterClass asterClass = null;
 
 	private static Random r = new Random(System.currentTimeMillis());
 
@@ -29,7 +25,6 @@ public class Aster {
 
 	Aster(Field f) {
 		color = r.nextInt(COLOR_MAX) + 1;
-		asterClass = 0;
 		deleteFlag = false;
 		field = f;
 	}
@@ -42,7 +37,7 @@ public class Aster {
 		return color;
 	}
 
-	public int getAsterClass() {
+	public AsterClass getAsterClass() {
 		return asterClass;
 	}
 
@@ -61,7 +56,7 @@ public class Aster {
 	public void delete(int c) {
 		if (deleteFlag) {
 			color = r.nextInt(COLOR_MAX) + 1;
-			asterClass = 0;
+			asterClass = null;
 			deleteFlag = false;
 			// ここでプレイヤーに対するSP配分処理もやるんだろうか
 		}
@@ -69,5 +64,10 @@ public class Aster {
 		if (c != 0){
 			color = c;
 		}
+	}
+	
+	public void setAsterClass(AsterClass ac) {
+		asterClass = ac;
+		ac.setAster(this);
 	}
 }

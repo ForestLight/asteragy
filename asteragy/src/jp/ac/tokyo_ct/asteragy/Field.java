@@ -198,5 +198,8 @@ class Field {
 	public int getY() {
 		return Y;
 	}
-
+	
+	public Point asterToPoint(Aster a) {
+		return null; //Œ©•t‚©‚ç‚È‚©‚Á‚½‚Æ‚«
+	}
 }
