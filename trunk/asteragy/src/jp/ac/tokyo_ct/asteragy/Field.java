@@ -33,13 +33,21 @@ class Field {
 		return false;
 	}
 
-	// フィールドのサイズ
+	/**
+	 * フィールドのサイズを決める
+	 * 
+	 * @param x フィールドの横マス数
+	 * @param y フィールドの縦マス数
+	 */
 	public void setFieldSize(int x, int y) {
 		X = x;
 		Y = y;
 	}
 
-	// フィールドの初期化
+	/**
+	 * フィールドの初期化
+	 *
+	 */
 	public void setAster() {
 		field = new Aster[Y][X];
 		for (int i = 0; i < Y; i++) {
@@ -48,13 +56,20 @@ class Field {
 				// 消滅判定
 				while (judge(j, i) == true) {
 					field[i][j].setDeleteFlag(true);
-					field[i][j].delete();
+					field[i][j].delete(0);
 				}
 			}
 		}
 	}
 
-	// アステルが3個つながっているかの判定をするだけ
+	/** 
+	 * アステルが3個つながっているかの判定をするだけ
+	 * 
+	 * @param x 注目するマスのx座標
+	 * @param y 注目するマスのy座標
+	 * @return true 同色アステルが3個つながっている
+	 * @return false つながった同色アステルが3個未満
+	 */
 	public boolean judge(int x, int y) {
 		int AsterColor = field[y][x].getColor();
 
@@ -67,14 +82,21 @@ class Field {
 
 		if (countAster < 3) {
 			countAster = 0;
-			return false; // つながったアステルが3個未満ならfalseを返す
+			return false;
 		} else {
 			countAster = 0;
-			return true; // 3個以上ならtrue
+			return true;
 		}
 	}
 
-	// つながっている同色アステルをカウント
+	/**
+	 * つながっている同色アステルをカウント
+	 * 
+	 * @param x 注目するマスのx座標
+	 * @param y 注目するマスのy座標
+	 * @param back 前回のjudgeMainで注目していた座標の方向ナンバー
+	 * @param AsterColor 判定対象色
+	 */
 	private void judgeMain(int x, int y, int back, int AsterColor) {
 
 		if (x < 0 || y < 0 || x >= X || y >= Y || countAster == 3) {
@@ -101,8 +123,14 @@ class Field {
 			// かなりめんどくさいことしてる気がする 動くのかも心配 修正希望
 		}
 	}
-
-	// つながった同色アステル全てにdeleteFlag立てる 再帰使い魔くり…
+	
+	/**
+	 * つながった同色アステル全てにdeleteFlagを立てる
+	 * 
+	 * @param x 注目するマスのx座標
+	 * @param y 注目するマスのy座標
+	 * @param AsterColor 判定対象色
+	 */
 	public void setDeleteFlag(int x, int y, int AsterColor) {
 		if (field[y][x].getColor() == AsterColor
 				&& field[y][x].getDeleteFlag() == false) {
@@ -114,23 +142,41 @@ class Field {
 		}
 	}
 
-	// フラグが立ってるアステルをdeleteして、再び削除判定 これも再帰
+	/**
+	 * フラグが立ってるアステルをdeleteして、再び削除判定
+	 * 
+	 * @param x 注目するマスのx座標
+	 * @param y 注目するマスのy座標
+	 */
 	public void delete(int x, int y) {
+		int AsterColor = field[y][x].getColor();
+		
 		if (field[y][x].getDeleteFlag() == true) {
-			field[y][x].delete();
+			field[y][x].delete(0);
 			delete(x, y - 1);
 			delete(x - 1, y);
 			delete(x, y + 1);
 			delete(x + 1, y);
 
-			while (judge(x, y) == true) {
+			for (int i = 1; i <= 4; i++) {
+				if (judge(x, y) == false) {
+					return;
+				}
 				field[y][x].setDeleteFlag(true);
-				field[y][x].delete();
+				field[y][x].delete(i);
+			}
+
+			if (judge(x, y) == true) {
+				field[y][x].setDeleteFlag(true);
+				field[y][x].delete(AsterColor);
 			}
 		}
 	}
 
-	// swap
+	/**
+	 * swap
+	 * 
+	 */
 	public void swap(int x1, int y1, int x2, int y2) {
 		Aster tmp = field[y1][x1];
 		field[y1][x1] = field[y2][x2];
