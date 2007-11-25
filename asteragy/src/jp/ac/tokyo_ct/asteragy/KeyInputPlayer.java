@@ -95,12 +95,11 @@ public class KeyInputPlayer extends Player {
 			public Point getPoint() {
 				System.out.println("EventProcesserForSelectAster.getPoint()");
 				while (!isSelected) {
-//					try {
-						System.out.println("loop...)");
-						//Thread.sleep(10);
-//					} catch(InterruptedException e) {
-//						Thread.currentThread().interrupt();
-//					}
+					try {
+						Thread.sleep(10);
+					} catch(InterruptedException e) {
+						Thread.currentThread().interrupt();
+					}
 				}
 				return new Point(x, y);
 			}
