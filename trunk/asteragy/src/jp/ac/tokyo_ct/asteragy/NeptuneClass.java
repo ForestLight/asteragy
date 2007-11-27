@@ -53,5 +53,12 @@ public class NeptuneClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		return "対象のアステル1個と\nこのユニットの場所を交換";
 	}
+	public int getCost(){
+		return 11;
+	}
+	
+	public int getCommandCost(){
+		return 2;
+	}
 
 }
