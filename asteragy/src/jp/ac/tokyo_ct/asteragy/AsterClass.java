@@ -53,8 +53,24 @@ public abstract class AsterClass {
 	 */
 	public abstract void moveAstern();
 	
+	/**
+	 * @return 特殊コマンドの名称
+	 */
 	public abstract String getCommandName();
 	
+	/**
+	 * @return 特殊コマンドの説明
+	 */
 	public abstract String getExplain();
+	
+	/**
+	 * 行動した回数
+	 */
+	protected int actionCount;
+	
+	/**
+	 * 対象不可フラグ
+	 */
+	protected boolean isProtected;
 
 }
