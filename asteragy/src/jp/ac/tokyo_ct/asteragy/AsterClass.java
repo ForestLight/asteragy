@@ -64,6 +64,18 @@ public abstract class AsterClass {
 	public abstract String getExplain();
 	
 	/**
+	 * 
+	 * @return クラス付与時のコスト
+	 */
+	public abstract int getCost();
+	
+	/**
+	 * 
+	 * @return 特殊コマンド使用時のコスト
+	 */
+	public abstract int getCommandCost();
+	
+	/**
 	 * 行動した回数
 	 */
 	protected int actionCount;
