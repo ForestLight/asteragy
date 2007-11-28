@@ -9,8 +9,9 @@ package jp.ac.tokyo_ct.asteragy;
  */
 public abstract class AsterClass {
 
-	public AsterClass(Aster a) {
+	public AsterClass(Aster a,Player p) {
 		aster = a;
+		player = p;
 	}
 
 	/**
@@ -32,6 +33,9 @@ public abstract class AsterClass {
 
 	public Player getPlayer() {
 		return player;
+	}
+	public void setPlayer(Player p){
+		player = p;
 	}
 
 	private Player player;
@@ -92,5 +96,79 @@ public abstract class AsterClass {
 	 * 対象不可フラグ
 	 */
 	protected boolean isProtected;
+	
+	/**
+	 * 現在の選択範囲を返す (スワップ用)
+	 * 
+	 * @return 現在の選択範囲
+	 */
+	protected int[][] swapGetRange(int[][] defaultRange,Point target1){
+		int[][] range = new int[defaultRange.length][defaultRange[0].length];
+		//1個目の対象選択
+		if(target1 == null){
+			for(int i = 0;i < defaultRange.length;i++){
+				for(int j = 0;j < defaultRange[0].length;j++){
+					//上下左右に隣接レンジが無い孤立したレンジを除外
+					if(defaultRange[i+1][j]+defaultRange[i-1][j]+defaultRange[i][j+1]+defaultRange[i][j-1] != 0)
+						range[i][j] = defaultRange[i][j];
+				}
+			}
+		//2個目の対象選択
+		}else{
+			//target1の座標をレンジ内に修正したもの
+			Point pt = new Point();
+			pt.x = target1.x - (getPlayer().game.getField().asterToPoint(getAster()).x - range[0].length/2);
+			pt.y = target1.y - (getPlayer().game.getField().asterToPoint(getAster()).y - range.length/2);
 
+			for(int i = 0;i < range.length;i++){
+				for(int j = 0;j < range.length;j++){
+					//1個目の対象の上下左右のマスで、元のレンジに含まれている場所のみ1
+					if(i == pt.y-1 && j == pt.x && defaultRange[j][i] == 1){
+						range[j][i] = 1;
+						continue;
+					}
+					if(i == pt.y+1 && j == pt.x && defaultRange[j][i] == 1){
+						range[j][i] = 1;
+						continue;
+					}
+					if(i == pt.y && j == pt.x+1 && defaultRange[j][i] == 1){
+						range[j][i] = 1;
+						continue;
+					}
+					if(i == pt.y && j == pt.x-1 && defaultRange[j][i] == 1){
+						range[j][i] = 1;
+						continue;
+					}else{
+						//1個目の対象の上下左右以外移動不可
+						range[j][i] = -1;
+					}
+				}
+			}
+			//1個目の対象の位置を移動可・選択不可
+			range[pt.y][pt.x] = 0;
+		}
+		return range;
+	}
+	protected void swapMoveAstern(Point target1,Point target2){
+		//2個目の対象選択中に呼ばれた場合
+		if(target2 == null){
+			target1 = null;
+		}
+		//2個目の対象選択後に呼ばれた場合
+		else{
+			target2 = null;
+		}
+	}
+	protected boolean swapSetPointAndNext(Point pt,Point target1,Point target2){
+		if(target1 == null){
+			target1 = pt;
+		}else{
+			target2 = pt;
+		}
+		return true;
+	}
+	protected boolean swapHasNext(Point target1,Point target2){
+		if(target1 != null && target2 != null) return false;
+		return true;
+	}
 }
