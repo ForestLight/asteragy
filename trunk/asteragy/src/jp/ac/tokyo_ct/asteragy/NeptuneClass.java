@@ -10,11 +10,13 @@ public class NeptuneClass extends AsterClass {
 		{ 0, 0, 0, 1, 0, 0, 0 },
 		{ 0, 0, 0, 1, 0, 0, 0 },
 	};
+	
+	private Point target1 = null;
+	private Point target2 = null;
+	private int mode = 0;
 
-	private Point target = null;
-
-	public NeptuneClass(Aster a) {
-		super(a);
+	public NeptuneClass(Aster a,Player p){
+		super(a,p);
 	}
 
 	public int getNumber() {
@@ -24,25 +26,50 @@ public class NeptuneClass extends AsterClass {
 
 	public int[][] getRange() {
 		// TODO 自動生成されたメソッド・スタブ
-		return defaultRange;
+		switch(mode){
+		case 0:
+			return swapGetRange(defaultRange,target1);
+		case 1:
+			return defaultRange;
+		}
+		return null;
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		target = pt;
-		return true;
+		switch(mode){
+		case 0:
+			return swapSetPointAndNext(pt,target1,target2);
+		case 1:
+			target1 = pt;
+			return true;
+		}
+		return false;
 	}
 
 	public boolean hasNext() {
 		// TODO 自動生成されたメソッド・スタブ
-		if (target == null)
-			return true;
-		else
-			return false;
+		
+		switch(mode){
+		case 0:
+			return swapHasNext(target1,target2);
+		case 1:
+			if (target1 == null)
+				return true;
+			else
+				return false;
+		}
+		return false;
 	}
 
 	public void moveAstern() {
 		// TODO 自動生成されたメソッド・スタブ
-
+		switch(mode){
+		case 0:
+			swapMoveAstern(target1,target2);
+			break;
+		case 1:
+			break;
+		}
 	}
 
 	public String getCommandName() {
@@ -61,6 +88,9 @@ public class NeptuneClass extends AsterClass {
 
 	public int getCommandCost() {
 		return 2;
+	}
+	public void setCommand(int cmd){
+		mode = cmd;
 	}
 
 }
