@@ -79,7 +79,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	/**
 	 * カーソル描画
-	 *
+	 * 
 	 * @param g
 	 *            描画先グラフィクス
 	 */
@@ -97,7 +97,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	/**
 	 * フィールド描画
-	 *
+	 * 
 	 * @param g
 	 *            描画先グラフィクス
 	 */
@@ -116,10 +116,9 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 				g.drawImage(fieldimage, i * measure, j * measure);
 				// アステル
 				Aster a = aster[i][j];
-				g.drawScaledImage(asterimage[a.getNumber()], i * measure
-						+ 1, j * measure + 1, measure - 1, measure - 1,
-						(measure - 1) * (a.getColor() - 1), 0, measure - 1,
-						measure - 1);
+				g.drawScaledImage(asterimage[a.getNumber()], i * measure + 1, j
+						* measure + 1, measure - 1, measure - 1, (measure - 1)
+						* (a.getColor() - 1), 0, measure - 1, measure - 1);
 			}
 		}
 		paintCursor(g);
@@ -128,7 +127,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	/**
 	 * プレイヤー情報描画
-	 *
+	 * 
 	 * @param g
 	 *            描画先グラフィクス
 	 */
@@ -143,7 +142,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	/**
 	 * プレイヤー情報描画
-	 *
+	 * 
 	 * @param g
 	 *            描画先グラフィクス
 	 * @param playernumber
@@ -187,7 +186,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	/**
 	 * アステル画像読み込み
-	 *
+	 * 
 	 */
 	private void loadAsterImage() {
 		// 読込先イメージ
@@ -208,7 +207,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	/**
 	 * 固定背景作成
-	 *
+	 * 
 	 */
 	private void createBackGround() {
 		// 背景画像作成
@@ -223,7 +222,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	/**
 	 * 背景描画
-	 *
+	 * 
 	 * @param g
 	 *            描画先グラフィクス
 	 */
@@ -246,7 +245,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	/*
 	 * (非 Javadoc)
-	 *
+	 * 
 	 * @see com.nttdocomo.ui.Canvas#processEvent(int, int)
 	 */
 	public void processEvent(int type, int param) {
@@ -272,7 +271,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	/**
 	 * 選択している位置を表すため、フィールド内の指定した位置を枠で囲む。
-	 *
+	 * 
 	 * @param x
 	 * @param y
 	 * @param cursorType
@@ -287,14 +286,16 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	/**
 	 * ターンが始まったときに呼ばれる。
+	 * 
 	 * @param player
 	 */
 	public void onTurnStart(Player player) {
 	}
 
-	public static final int CURSOR_CLEAR = 0; //カーソルの消去
+	public static final int CURSOR_CLEAR = 0; // カーソルの消去
+
 	public static final int CURSOR_1 = 1;
-	
+
 	public void drawCommandSelection(int cmd, Point pt) {
 	}
 }

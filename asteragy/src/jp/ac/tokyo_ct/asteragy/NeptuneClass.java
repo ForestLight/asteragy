@@ -1,20 +1,19 @@
 package jp.ac.tokyo_ct.asteragy;
 
 public class NeptuneClass extends AsterClass {
-	private static int[][] defaultRange = 
-	{
-		{0,0,0,1,0,0,0},
-		{0,0,0,1,0,0,0},
-		{0,0,1,1,1,0,0},
-		{1,1,1,1,1,1,1},
-		{0,0,1,1,1,0,0},
-		{0,0,0,1,0,0,0},
-		{0,0,0,1,0,0,0}
+	private static int[][] defaultRange = {
+		{ 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 0, 1, 1, 1, 0, 0 },
+		{ 1, 1, 1, 1, 1, 1, 1 },
+		{ 0, 0, 1, 1, 1, 0, 0 },
+		{ 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 0, 0, 1, 0, 0, 0 },
 	};
-	
+
 	private Point target = null;
-	
-	public NeptuneClass(Aster a){
+
+	public NeptuneClass(Aster a) {
 		super(a);
 	}
 
@@ -35,13 +34,15 @@ public class NeptuneClass extends AsterClass {
 
 	public boolean hasNext() {
 		// TODO 自動生成されたメソッド・スタブ
-		if(target == null) return true;
-		else return false;
+		if (target == null)
+			return true;
+		else
+			return false;
 	}
 
 	public void moveAstern() {
 		// TODO 自動生成されたメソッド・スタブ
-		
+
 	}
 
 	public String getCommandName() {
@@ -53,11 +54,12 @@ public class NeptuneClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		return "対象のアステル1個と\nこのユニットの場所を交換";
 	}
-	public int getCost(){
+
+	public int getCost() {
 		return 11;
 	}
-	
-	public int getCommandCost(){
+
+	public int getCommandCost() {
 		return 2;
 	}
 

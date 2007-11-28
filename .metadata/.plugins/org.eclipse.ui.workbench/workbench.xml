@@ -46,7 +46,7 @@
 <editor title="AsterClass.java" name="AsterClass.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java" partName="AsterClass.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java"/>
 </editor>
-<editor title="NeptuneClass.java" name="NeptuneClass.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java" partName="NeptuneClass.java" workbook="DefaultEditorWorkbook" activePart="true" focus="true" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java">
+<editor title="NeptuneClass.java" name="NeptuneClass.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java" partName="NeptuneClass.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java"/>
 </editor>
 <editor title="Main.java" name="Main.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/Main.java" partName="Main.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/Main.java">
@@ -55,7 +55,7 @@
 <editor title="Action.java" name="Action.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/Action.java" partName="Action.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/Action.java">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Action.java"/>
 </editor>
-<editor title="Aster.java" name="Aster.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java" partName="Aster.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java">
+<editor title="Aster.java" name="Aster.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java" partName="Aster.java" workbook="DefaultEditorWorkbook" activePart="true" focus="true" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java"/>
 </editor>
 <editor title="EventProcesser.java" name="EventProcesser.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/EventProcesser.java" partName="EventProcesser.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/EventProcesser.java">
@@ -227,11 +227,8 @@
 </perspectives>
 <navigationHistory>
 <editors>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Main.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Field.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/GameCanvas.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/GameCanvas.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/KeyInputPlayer.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/NeptuneClass.java"/>
@@ -246,156 +243,163 @@
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/KeyInputPlayer.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Player.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Point.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Player.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Main.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Field.java"/>
 </editors>
-<item historyLabel="GameCanvas.java" index="2">
-<position x="4366" y="5" info="not_deleted"/>
-</item>
-<item historyLabel="GameCanvas.java" index="2">
-<position x="892" y="5" info="not_deleted"/>
-</item>
-<item historyLabel="Main.java" index="0">
-<position x="371" y="0" info="not_deleted"/>
-</item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="GameCanvas.java" index="1">
 <position/>
 </item>
-<item historyLabel="GameCanvas.java" index="3">
+<item historyLabel="Aster.java" index="2">
 <position/>
 </item>
-<item historyLabel="GameCanvas.java" index="3">
+<item historyLabel="GameCanvas.java" index="1">
 <position/>
 </item>
-<item historyLabel="GameCanvas.java" index="3">
+<item historyLabel="Field.java" index="0">
 <position/>
 </item>
-<item historyLabel="KeyInputPlayer.java" index="4">
-<position x="1038" y="11" info="not_deleted"/>
-</item>
-<item historyLabel="KeyInputPlayer.java" index="4">
-<position x="2145" y="0" info="not_deleted"/>
-</item>
-<item historyLabel="GameCanvas.java" index="3">
+<item historyLabel="AsterClass.java" index="3">
 <position/>
 </item>
-<item historyLabel="GameCanvas.java" index="3">
-<position/>
-</item>
-<item historyLabel="GameCanvas.java" index="3">
-<position/>
-</item>
-<item historyLabel="Aster.java" index="5">
-<position/>
-</item>
-<item historyLabel="AsterClass.java" index="6">
-<position/>
-</item>
-<item historyLabel="AsterClass.java" index="6">
-<position/>
-</item>
-<item historyLabel="GameCanvas.java" index="3">
-<position/>
-</item>
-<item historyLabel="AsterClass.java" index="6">
-<position/>
-</item>
-<item historyLabel="GameCanvas.java" index="3">
-<position/>
-</item>
-<item historyLabel="KeyInputPlayer.java" index="4">
-<position x="2122" y="0" info="not_deleted"/>
-</item>
-<item historyLabel="Field.java" index="1">
-<position/>
-</item>
-<item historyLabel="GameCanvas.java" index="3">
-<position/>
-</item>
-<item historyLabel="GameCanvas.java" index="3">
-<position/>
-</item>
-<item historyLabel="GameCanvas.java" index="3">
-<position/>
-</item>
-<item historyLabel="Aster.java" index="5">
-<position/>
-</item>
-<item historyLabel="GameCanvas.java" index="3">
-<position/>
-</item>
-<item historyLabel="Field.java" index="1">
-<position/>
-</item>
-<item historyLabel="AsterClass.java" index="6">
-<position/>
-</item>
-<item historyLabel="Aster.java" index="5">
+<item historyLabel="Aster.java" index="2">
 <position x="110" y="5" info="not_deleted"/>
 </item>
-<item historyLabel="AsterClass.java" index="6">
+<item historyLabel="AsterClass.java" index="3">
 <position x="823" y="0" info="not_deleted"/>
 </item>
-<item historyLabel="GameCanvas.java" index="3">
+<item historyLabel="GameCanvas.java" index="1">
 <position x="1604" y="10" info="not_deleted"/>
 </item>
-<item historyLabel="GameCanvas.java" index="3">
+<item historyLabel="GameCanvas.java" index="1">
 <position x="2084" y="0" info="not_deleted"/>
 </item>
-<item historyLabel="Aster.java" index="5">
+<item historyLabel="Aster.java" index="2">
 <position x="1370" y="0" info="not_deleted"/>
 </item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="Field.java" index="0">
 <position x="4040" y="0" info="not_deleted"/>
 </item>
-<item historyLabel="AsterClass.java" index="6">
+<item historyLabel="AsterClass.java" index="3">
 <position x="106" y="10" info="not_deleted"/>
 </item>
-<item historyLabel="NeptuneClass.java" index="7">
+<item historyLabel="NeptuneClass.java" index="4">
 <position/>
 </item>
-<item historyLabel="NeptuneClass.java" index="8">
+<item historyLabel="NeptuneClass.java" index="5">
 <position/>
 </item>
-<item historyLabel="Main.java" index="9">
+<item historyLabel="Main.java" index="6">
 <position/>
 </item>
-<item historyLabel="Action.java" index="10">
+<item historyLabel="Action.java" index="7">
 <position/>
 </item>
-<item historyLabel="Aster.java" index="11">
+<item historyLabel="Aster.java" index="8">
 <position/>
 </item>
-<item historyLabel="AsterClass.java" index="6">
+<item historyLabel="AsterClass.java" index="3">
 <position/>
 </item>
-<item historyLabel="EventProcesser.java" index="12">
+<item historyLabel="EventProcesser.java" index="9">
 <position/>
 </item>
-<item historyLabel="Field.java" index="13">
+<item historyLabel="Field.java" index="10">
 <position/>
 </item>
-<item historyLabel="Game.java" index="14">
+<item historyLabel="Game.java" index="11">
 <position/>
 </item>
-<item historyLabel="GameCanvas.java" index="15">
+<item historyLabel="GameCanvas.java" index="12">
 <position/>
 </item>
-<item historyLabel="KeyInputPlayer.java" index="16">
+<item historyLabel="KeyInputPlayer.java" index="13">
 <position/>
 </item>
-<item historyLabel="NeptuneClass.java" index="8">
+<item historyLabel="NeptuneClass.java" index="5">
 <position x="720" y="0" info="not_deleted"/>
 </item>
-<item historyLabel="Main.java" index="9">
+<item historyLabel="Main.java" index="6">
 <position x="59" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Player.java" index="14">
+<position/>
+</item>
+<item historyLabel="Point.java" index="15">
+<position/>
+</item>
+<item historyLabel="NeptuneClass.java" index="5">
+<position x="720" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Aster.java" index="16">
+<position/>
 </item>
 <item historyLabel="Player.java" index="17">
 <position/>
 </item>
-<item historyLabel="Point.java" index="18">
+<item historyLabel="NeptuneClass.java" index="5">
+<position x="1046" y="20" info="not_deleted"/>
+</item>
+<item historyLabel="AsterClass.java" index="18">
 <position/>
 </item>
-<item active="true" historyLabel="NeptuneClass.java" index="8">
-<position x="720" y="0" info="not_deleted"/>
+<item historyLabel="AsterClass.java" index="18">
+<position x="131" y="10" info="not_deleted"/>
+</item>
+<item historyLabel="NeptuneClass.java" index="19">
+<position/>
+</item>
+<item historyLabel="AsterClass.java" index="18">
+<position x="378" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Aster.java" index="20">
+<position/>
+</item>
+<item historyLabel="Main.java" index="21">
+<position x="308" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Main.java" index="21">
+<position/>
+</item>
+<item historyLabel="Main.java" index="21">
+<position/>
+</item>
+<item historyLabel="Main.java" index="21">
+<position x="297" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Main.java" index="21">
+<position/>
+</item>
+<item historyLabel="Main.java" index="21">
+<position/>
+</item>
+<item historyLabel="Main.java" index="21">
+<position/>
+</item>
+<item historyLabel="Main.java" index="21">
+<position/>
+</item>
+<item historyLabel="Aster.java" index="20">
+<position x="314" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="AsterClass.java" index="18">
+<position x="1189" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Main.java" index="21">
+<position x="297" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Field.java" index="22">
+<position/>
+</item>
+<item historyLabel="Aster.java" index="20">
+<position x="314" y="0" info="not_deleted"/>
+</item>
+<item active="true" historyLabel="Aster.java" index="20">
+<position x="1424" y="0" info="not_deleted"/>
 </item>
 </navigationHistory>
 <stickyState/>

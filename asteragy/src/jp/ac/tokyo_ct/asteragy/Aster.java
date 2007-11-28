@@ -8,9 +8,13 @@ import java.util.Random;
  */
 public class Aster {
 	public final static int COLOR_MAX = 4;
+
 	public final static int RED = 1;
+
 	public final static int BLUE = 2;
+
 	public final static int GREEN = 3;
+
 	public final static int YELLOW = 4;
 
 	private final Field field;
@@ -60,18 +64,22 @@ public class Aster {
 			deleteFlag = false;
 			// ここでプレイヤーに対するSP配分処理もやるんだろうか
 		}
-		
-		if (c != 0){
+
+		if (c != 0) {
 			color = c;
 		}
 	}
-	
+
 	public void setAsterClass(AsterClass ac) {
 		asterClass = ac;
 		ac.setAster(this);
 	}
-	
+
 	public int getNumber() {
 		return asterClass != null ? asterClass.getNumber() : 0;
+	}
+	
+	public Field getField() {
+		return field;
 	}
 }

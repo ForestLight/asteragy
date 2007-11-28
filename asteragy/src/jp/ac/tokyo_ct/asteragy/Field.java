@@ -10,7 +10,7 @@ class Field {
 	private int X, Y;
 
 	private int countAster;
-	
+
 	private final Game game;
 
 	public Field(Game g) {
@@ -36,8 +36,10 @@ class Field {
 	/**
 	 * フィールドのサイズを決める
 	 * 
-	 * @param x フィールドの横マス数
-	 * @param y フィールドの縦マス数
+	 * @param x
+	 *            フィールドの横マス数
+	 * @param y
+	 *            フィールドの縦マス数
 	 */
 	public void setFieldSize(int x, int y) {
 		X = x;
@@ -46,7 +48,7 @@ class Field {
 
 	/**
 	 * フィールドの初期化
-	 *
+	 * 
 	 */
 	public void setAster() {
 		field = new Aster[Y][X];
@@ -62,11 +64,13 @@ class Field {
 		}
 	}
 
-	/** 
+	/**
 	 * アステルが3個つながっているかの判定をするだけ
 	 * 
-	 * @param x 注目するマスのx座標
-	 * @param y 注目するマスのy座標
+	 * @param x
+	 *            注目するマスのx座標
+	 * @param y
+	 *            注目するマスのy座標
 	 * @return true 同色アステルが3個つながっている
 	 * @return false つながった同色アステルが3個未満
 	 */
@@ -92,10 +96,14 @@ class Field {
 	/**
 	 * つながっている同色アステルをカウント
 	 * 
-	 * @param x 注目するマスのx座標
-	 * @param y 注目するマスのy座標
-	 * @param back 前回のjudgeMainで注目していた座標の方向ナンバー
-	 * @param AsterColor 判定対象色
+	 * @param x
+	 *            注目するマスのx座標
+	 * @param y
+	 *            注目するマスのy座標
+	 * @param back
+	 *            前回のjudgeMainで注目していた座標の方向ナンバー
+	 * @param AsterColor
+	 *            判定対象色
 	 */
 	private void judgeMain(int x, int y, int back, int AsterColor) {
 
@@ -123,13 +131,16 @@ class Field {
 			// かなりめんどくさいことしてる気がする 動くのかも心配 修正希望
 		}
 	}
-	
+
 	/**
 	 * つながった同色アステル全てにdeleteFlagを立てる
 	 * 
-	 * @param x 注目するマスのx座標
-	 * @param y 注目するマスのy座標
-	 * @param AsterColor 判定対象色
+	 * @param x
+	 *            注目するマスのx座標
+	 * @param y
+	 *            注目するマスのy座標
+	 * @param AsterColor
+	 *            判定対象色
 	 */
 	public void setDeleteFlag(int x, int y, int AsterColor) {
 		if (field[y][x].getColor() == AsterColor
@@ -145,12 +156,14 @@ class Field {
 	/**
 	 * フラグが立ってるアステルをdeleteして、再び削除判定
 	 * 
-	 * @param x 注目するマスのx座標
-	 * @param y 注目するマスのy座標
+	 * @param x
+	 *            注目するマスのx座標
+	 * @param y
+	 *            注目するマスのy座標
 	 */
 	public void delete(int x, int y) {
 		int AsterColor = field[y][x].getColor();
-		
+
 		if (field[y][x].getDeleteFlag() == true) {
 			field[y][x].delete(0);
 			delete(x, y - 1);
@@ -186,19 +199,19 @@ class Field {
 	public Aster[][] getField() {
 		return field;
 	}
-	
+
 	public Aster getAster(Point pt) {
 		return field[pt.y][pt.x];
 	}
-	
+
 	public int getX() {
 		return X;
 	}
-	
+
 	public int getY() {
 		return Y;
 	}
-	
+
 	public Point asterToPoint(Aster a) {
 		Point point;
 
@@ -210,6 +223,6 @@ class Field {
 				}
 			}
 		}
-		return null; //見付からなかったとき
+		return null; // 見付からなかったとき
 	}
 }

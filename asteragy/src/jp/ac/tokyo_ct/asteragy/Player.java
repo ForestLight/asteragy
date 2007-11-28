@@ -30,6 +30,6 @@ public abstract class Player {
 	protected final String name;
 
 	private int sp;
-	
+
 	protected final Game game;
 }
