@@ -115,11 +115,11 @@ class Game {
 	 * 描画に用いるキャンバス
 	 */
 	private GameCanvas canvas;
-	
+
 	private static void printMemoryStatus() {
 		Runtime r = Runtime.getRuntime();
 		System.out.println("Total memory: " + r.totalMemory()
-			+ ", Free memory: " + r.freeMemory());
+				+ ", Free memory: " + r.freeMemory());
 	}
 
 }
