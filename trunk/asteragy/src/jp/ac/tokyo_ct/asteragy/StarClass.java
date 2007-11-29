@@ -5,7 +5,7 @@ public class StarClass extends AsterClass {
 		{0,1,0},
 		{1,1,1},
 		{0,0,0}
-	};	
+	};
 	private Point target1 = null;
 	private Point target2 = null;
 	
@@ -41,6 +41,10 @@ public class StarClass extends AsterClass {
 	public String getCommandName() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
+	}
+	
+	public void execute(){
+		getAster().getField().swap(target1,target2);
 	}
 
 	public String getExplain() {

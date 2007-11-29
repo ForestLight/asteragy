@@ -190,10 +190,10 @@ class Field {
 	 * swap
 	 * 
 	 */
-	public void swap(int x1, int y1, int x2, int y2) {
-		Aster tmp = field[y1][x1];
-		field[y1][x1] = field[y2][x2];
-		field[y2][x2] = tmp;
+	public void swap(Point a,Point b) {
+		Aster tmp = field[a.y][a.x];
+		field[a.y][a.x] = field[b.y][b.x];
+		field[b.y][b.x] = tmp;
 	}
 
 	public Aster[][] getField() {

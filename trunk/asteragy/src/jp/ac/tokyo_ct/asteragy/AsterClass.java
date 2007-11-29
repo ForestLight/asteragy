@@ -86,6 +86,12 @@ public abstract class AsterClass {
 	 * @param cmd
 	 */
 	public abstract void setCommand(int cmd);
+	
+	/**
+	 * コマンドを実行
+	 *
+	 */
+	public abstract void execute();
 
 	/**
 	 * 行動した回数
