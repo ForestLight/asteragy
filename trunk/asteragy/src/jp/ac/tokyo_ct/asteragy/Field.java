@@ -1,5 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
-
+import java.util.Random;
 /**
  * @author Okubo
  */
@@ -11,6 +11,10 @@ class Field {
 
 	private int countAster;
 
+	private int[] table = {1,2,3,4,1,2,3,4};
+	
+	private static Random r = new Random(System.currentTimeMillis());
+	
 	private final Game game;
 
 	public Field(Game g) {
@@ -171,12 +175,13 @@ class Field {
 			delete(x, y + 1);
 			delete(x + 1, y);
 
-			for (int i = 1; i <= 4; i++) {
+			int t = r.nextInt(4); 
+			for (int i = 1; i <= 4; i++, t++) { // 初回にランダムで決定した色が置けなかった場合、4色試す
 				if (judge(x, y) == false) {
 					return;
 				}
 				field[y][x].setDeleteFlag(true);
-				field[y][x].delete(i);
+				field[y][x].delete(table[t]);
 			}
 
 			if (judge(x, y) == true) {
@@ -185,6 +190,7 @@ class Field {
 			}
 		}
 	}
+
 
 	/**
 	 * swap
