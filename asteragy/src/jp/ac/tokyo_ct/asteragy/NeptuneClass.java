@@ -76,6 +76,17 @@ public class NeptuneClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		return "スターライトストリーム";
 	}
+	
+	public void execute(){
+		switch(mode){
+		case 0:
+			getAster().getField().swap(target1,target2);
+			break;
+		case 1:
+			getAster().getField().swap(target1,getAster().getField().asterToPoint(getAster()));
+
+		}
+	}
 
 	public String getExplain() {
 		// TODO 自動生成されたメソッド・スタブ
