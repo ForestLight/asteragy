@@ -87,8 +87,12 @@ public class NeptuneClass extends AsterClass {
 
 		}
 		incActionCount();
+		target1 = null;
+		target2 = null;
 	}
-
+	public String getName(){
+		return "ネプチューン";
+	}
 	public String getExplain() {
 		// TODO 自動生成されたメソッド・スタブ
 		return "対象のアステル1個と\nこのユニットの場所を交換";
@@ -101,8 +105,4 @@ public class NeptuneClass extends AsterClass {
 	public int getCommandCost() {
 		return 2;
 	}
-	public void setCommand(int cmd){
-		mode = cmd;
-	}
-
 }

@@ -40,6 +40,14 @@ public abstract class AsterClass {
 
 	private Player player;
 
+	public void setCommand(int cmd){
+		mode = cmd;
+	}
+	public int getCommand(){
+		return mode;
+	}
+	protected int mode = 0;
+	
 	/**
 	 * 現在の選択範囲を返す
 	 * 
@@ -60,7 +68,12 @@ public abstract class AsterClass {
 	public abstract void moveAstern();
 
 	/**
-	 * @return 特殊コマンドの名称
+	 * @return クラス名
+	 */
+	public abstract String getName();
+	
+	/**
+	 * @return 特殊コマンド名
 	 */
 	public abstract String getCommandName();
 
@@ -80,12 +93,6 @@ public abstract class AsterClass {
 	 * @return 特殊コマンド使用時のコスト
 	 */
 	public abstract int getCommandCost();
-	
-	/**
-	 * コマンド種別の設定
-	 * @param cmd
-	 */
-	public abstract void setCommand(int cmd);
 	
 	/**
 	 * コマンドを実行
