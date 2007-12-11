@@ -99,8 +99,27 @@ public abstract class AsterClass {
 	 * コマンドを実行
 	 *
 	 */
-	public abstract void execute();
-
+	public void execute() {
+		// TODO 自動生成されたメソッド・スタブ
+		switch(mode){
+		case 0:
+			getAster().getField().swap(target1,target2);
+			break;
+		case 1:
+			executeSpecialCommand();
+			break;
+		}
+		//行動回数を増やす
+		incActionCount();
+		//ターゲット初期化
+		target1 = null;
+		target2 = null;
+	}
+	/**
+	 * 特殊コマンドを実行
+	 *
+	 */
+	public abstract void executeSpecialCommand();
 	/**
 	 * 行動回数、フラグ初期化
 	 */

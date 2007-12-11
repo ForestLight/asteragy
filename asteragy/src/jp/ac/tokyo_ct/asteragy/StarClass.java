@@ -64,5 +64,8 @@ public class StarClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		return 0;
 	}
+	public void executeSpecialCommand(){
+	
+	}
 
 }

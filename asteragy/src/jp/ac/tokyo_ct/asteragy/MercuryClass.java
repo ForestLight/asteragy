@@ -113,20 +113,9 @@ public class MercuryClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		return 4;
 	}
-
-	public void execute() {
-		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
-		case 0:
-			getAster().getField().swap(target1,target2);
-			break;
-		case 1:
-			//対象の行動回数を1回減らす
-			getAster().getField().getAster(target1).getAsterClass().decActionCount();                               
-		}
-		incActionCount();
-		target1 = null;
-		target2 = null;
+	public void executeSpecialCommand(){
+		//対象の行動回数を1回減らす
+		getAster().getField().getAster(target1).getAsterClass().decActionCount(); 
 	}
 
 }
