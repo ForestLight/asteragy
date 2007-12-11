@@ -6,9 +6,6 @@ public class StarClass extends AsterClass {
 		{1,1,1},
 		{0,0,0}
 	};
-	private Point target1 = null;
-	private Point target2 = null;
-	
 	StarClass(Aster a,Player p){
 		super(a,p);
 	}

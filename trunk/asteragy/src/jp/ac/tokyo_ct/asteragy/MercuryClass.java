@@ -8,10 +8,6 @@ public class MercuryClass extends AsterClass {
 		{0, 1, 1, 1, 0},
 		{0, 0, 0, 0, 0}
 	};
-	private Point target1 = null;
-	private Point target2 = null;
-	private int mode = 0;
-	
 	public MercuryClass(Aster a,Player p){
 		super(a,p);
 	}
@@ -127,7 +123,6 @@ public class MercuryClass extends AsterClass {
 		case 1:
 			//‘ÎÛ‚Ìs“®‰ñ”‚ğ1‰ñŒ¸‚ç‚·
 			getAster().getField().getAster(target1).getAsterClass().decActionCount();                               
-
 		}
 		incActionCount();
 		target1 = null;
