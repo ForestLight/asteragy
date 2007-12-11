@@ -8,7 +8,7 @@ public class NeptuneClass extends AsterClass {
 		{ 1, 1, 1, 1, 1, 1, 1 },
 		{ 0, 0, 1, 1, 1, 0, 0 },
 		{ 0, 0, 0, 1, 0, 0, 0 },
-		{ 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 0, 0, 1, 0, 0, 0 }
 	};
 	
 	private Point target1 = null;
@@ -86,6 +86,7 @@ public class NeptuneClass extends AsterClass {
 			getAster().getField().swap(target1,getAster().getField().asterToPoint(getAster()));
 
 		}
+		incActionCount();
 	}
 
 	public String getExplain() {
