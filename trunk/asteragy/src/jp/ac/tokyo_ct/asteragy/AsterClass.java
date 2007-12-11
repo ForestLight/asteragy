@@ -94,14 +94,43 @@ public abstract class AsterClass {
 	public abstract void execute();
 
 	/**
+	 * 行動回数、フラグ初期化
+	 */
+	public void init(){
+		actionCount = 0;
+		isProtected = false;
+	}
+	/**
+	 * 行動回数増
+	 */
+	public void incActionCount(){
+		actionCount++;
+	}
+	/**
+	 * 行動回数減
+	 */
+	public void decActionCount(){
+		actionCount--;
+	}
+	public void setActionCount(int i){
+		actionCount = i;
+	}
+	public int getActionCount(){
+		return actionCount;
+	}
+	
+	/**
 	 * 行動した回数
 	 */
-	protected int actionCount;
+	private int actionCount;
 
+	public void setProtectedFlag(boolean b){
+		isProtected = b;
+	}
 	/**
 	 * 対象不可フラグ
 	 */
-	protected boolean isProtected;
+	private boolean isProtected;
 	
 	/**
 	 * 現在の選択範囲を返す (スワップ用)
