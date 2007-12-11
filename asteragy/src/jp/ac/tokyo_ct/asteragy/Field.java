@@ -163,17 +163,24 @@ class Field {
 	 * @param AsterColor
 	 *            判定対象色
 	 */
-	public void setDeleteFlag(int x, int y, int AsterColor) {
+	public void setDeleteFlagSameColor(int x, int y, int AsterColor) {
 		if (field[y][x].getColor() == AsterColor
 				&& field[y][x].getDeleteFlag() == false) {
 			field[y][x].setDeleteFlag(true);
-			setDeleteFlag(x, y - 1, AsterColor);
-			setDeleteFlag(x - 1, y, AsterColor);
-			setDeleteFlag(x, y + 1, AsterColor);
-			setDeleteFlag(x + 1, y, AsterColor);
+			setDeleteFlagSameColor(x, y - 1, AsterColor);
+			setDeleteFlagSameColor(x - 1, y, AsterColor);
+			setDeleteFlagSameColor(x, y + 1, AsterColor);
+			setDeleteFlagSameColor(x + 1, y, AsterColor);
 		}
 	}
-
+	/**
+	 * アステルにdeleteFlagを立てる
+	 * @param pt
+	 * 				注目するマスの座標
+	 */
+	public void setDeleteFlag(Point pt) {
+		field[pt.y][pt.x].setDeleteFlag(true);
+	}
 	/**
 	 * フラグが立ってるアステルをdeleteして、再び削除判定
 	 * 
