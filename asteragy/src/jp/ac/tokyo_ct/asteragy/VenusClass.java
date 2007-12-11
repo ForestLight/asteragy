@@ -115,14 +115,10 @@ public class VenusClass extends AsterClass {
 		return 7;
 	}
 
-	public void setCommand(int cmd) {
-		// TODO 自動生成されたメソッド・スタブ
-		mode = cmd;
-
+	public String getName(){
+		return "ヴィーナス";
 	}
-
 	public void execute() {
-		// TODO 自動生成されたメソッド・スタブ
 		// TODO 自動生成されたメソッド・スタブ
 		switch(mode){
 		case 0:
@@ -135,6 +131,8 @@ public class VenusClass extends AsterClass {
 			getAster().getField().getAster(target1).getAsterClass().setActionCount(0);
 		}
 		incActionCount();
+		target1 = null;
+		target2 = null;
 	}
 
 }

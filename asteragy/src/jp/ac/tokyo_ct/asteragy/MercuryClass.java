@@ -95,7 +95,9 @@ public class MercuryClass extends AsterClass {
 		}
 
 	}
-
+	public String getName(){
+		return "マーキュリー";
+	}
 	public String getCommandName() {
 		// TODO 自動生成されたメソッド・スタブ
 		return "クイックタイム";
@@ -116,11 +118,6 @@ public class MercuryClass extends AsterClass {
 		return 4;
 	}
 
-	public void setCommand(int cmd) {
-		// TODO 自動生成されたメソッド・スタブ
-		mode = cmd;
-	}
-
 	public void execute() {
 		// TODO 自動生成されたメソッド・スタブ
 		switch(mode){
@@ -133,6 +130,8 @@ public class MercuryClass extends AsterClass {
 
 		}
 		incActionCount();
+		target1 = null;
+		target2 = null;
 	}
 
 }
