@@ -104,7 +104,9 @@ public abstract class AsterClass {
 	 * 行動回数、フラグ初期化
 	 */
 	public void init(){
+		//行動回数リセット
 		actionCount = 0;
+		//フラグ消去
 		isProtected = false;
 	}
 	/**

@@ -69,6 +69,23 @@ class Field {
 	}
 
 	/**
+	 * ターン開始処理
+	 * @param player
+	 */
+	public void beginTurn(Player player){
+		for(int i = 0;i < field.length;i++){
+			for(int j = 0;j < field[0].length;j++){
+				//クラス持ちで
+				if(field[i][j].getAsterClass() != null){
+					//現在ターン進行中のプレイヤーのユニットなら初期化
+					if(field[i][j].getAsterClass().getPlayer() == player){
+						field[i][j].getAsterClass().init();
+					}
+				}
+			}
+		}
+	}
+	/**
 	 * アステルが3個つながっているかの判定をするだけ
 	 * 
 	 * @param x
