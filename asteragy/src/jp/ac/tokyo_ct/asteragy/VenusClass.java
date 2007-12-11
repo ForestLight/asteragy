@@ -8,10 +8,7 @@ public class VenusClass extends AsterClass {
 		{0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0}
 	};
-	private Point target1 = null;
-	private Point target2 = null;
-	private int mode = 0;
-	
+
 	public VenusClass(Aster a, Player p) {
 		super(a, p);
 		// TODO 自動生成されたコンストラクター・スタブ

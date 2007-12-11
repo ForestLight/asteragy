@@ -10,11 +10,6 @@ public class NeptuneClass extends AsterClass {
 		{ 0, 0, 0, 1, 0, 0, 0 },
 		{ 0, 0, 0, 1, 0, 0, 0 }
 	};
-	
-	private Point target1 = null;
-	private Point target2 = null;
-	private int mode = 0;
-
 	public NeptuneClass(Aster a,Player p){
 		super(a,p);
 	}

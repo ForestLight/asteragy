@@ -47,7 +47,8 @@ public abstract class AsterClass {
 		return mode;
 	}
 	protected int mode = 0;
-	
+	protected Point target1 = null;
+	protected Point target2 = null;
 	/**
 	 * Œ»İ‚Ì‘I‘ğ”ÍˆÍ‚ğ•Ô‚·
 	 * 
