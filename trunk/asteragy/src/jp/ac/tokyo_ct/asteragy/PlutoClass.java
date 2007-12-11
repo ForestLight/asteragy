@@ -86,55 +86,29 @@ public class PlutoClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		return 8;
 	}
-
-	public void execute() {
-		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
-		case 0:
-			getAster().getField().swap(target1,target2);
-			break;
-		case 1:
-			Point me = getAster().getField().asterToPoint(getAster());
-			Point pt = new Point();
-			for(int i = 0;i < defaultRange.length;i++){
-				for(int j = 0;j < defaultRange[0].length;j++){
-					//レンジ内であり
-					if(defaultRange[i][j] == 1){
-						//自身ではない部分を破壊 (フィールドの外にはみ出た部分とかでも破壊処理しちゃってるけど)
-						if(i != defaultRange.length/2 && j != defaultRange[0].length/2){
-							pt.x = me.x-defaultRange.length+j;
-							pt.y = me.y-defaultRange[0].length+i;
-							
-							//フィールドの外にはみ出してたら処理しない
-							if(pt.x < 0 || pt.x >= getAster().getField().getField()[0].length) continue;
-							if(pt.y < 0 || pt.y >= getAster().getField().getField().length) continue;
-							
-							//ターゲットを破壊
-							getAster().getField().setDeleteFlag(pt);
-							getAster().getField().delete(pt.x, pt.y);
-						}
-					}
-				}
-			}
-			/*
-			Point me = getAster().getField().asterToPoint(getAster());
-			Point pt = new Point(me.x - 2, me.y - 2);
-			for(int i = 0; i < 15; i++, pt.x++) {
-				if(pt.x == 3){
-					pt.x = 0;
-					pt.y ++;
-				}
-				// defaultRangeのうち値が1であり自分（中心）でないアステルを破壊
-				if(defaultRange[pt.y][pt.x] == 1) {
-					if(me.x != pt.x || me.y != pt.y) {
+	public void executeSpecialCommand(){
+		Point me = getAster().getField().asterToPoint(getAster());
+		Point pt = new Point();
+		for(int i = 0;i < defaultRange.length;i++){
+			for(int j = 0;j < defaultRange[0].length;j++){
+				//レンジ内であり
+				if(defaultRange[i][j] == 1){
+					//自身ではない部分を破壊 (フィールドの外にはみ出た部分とかでも破壊処理しちゃってるけど)
+					if(i != defaultRange.length/2 && j != defaultRange[0].length/2){
+						pt.x = me.x-defaultRange.length+j;
+						pt.y = me.y-defaultRange[0].length+i;
+						
+						//フィールドの外にはみ出してたら処理しない
+						if(pt.x < 0 || pt.x >= getAster().getField().getField()[0].length) continue;
+						if(pt.y < 0 || pt.y >= getAster().getField().getField().length) continue;
+						
+						//ターゲットを破壊
 						getAster().getField().setDeleteFlag(pt);
 						getAster().getField().delete(pt.x, pt.y);
 					}
 				}
 			}
-			// サンを破壊した場合の処理もすべき？
-			 
-			 */
 		}
 	}
+
 }

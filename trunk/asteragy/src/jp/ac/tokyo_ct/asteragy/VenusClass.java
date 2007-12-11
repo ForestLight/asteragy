@@ -115,21 +115,10 @@ public class VenusClass extends AsterClass {
 	public String getName(){
 		return "ヴィーナス";
 	}
-	public void execute() {
-		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
-		case 0:
-			getAster().getField().swap(target1,target2);
-			break;
-		case 1:
-			//対象の所持者を変更
-			getAster().getField().getAster(target1).getAsterClass().setPlayer(this.getPlayer());
-			//行動済状態に
-			getAster().getField().getAster(target1).getAsterClass().setActionCount(0);
-		}
-		incActionCount();
-		target1 = null;
-		target2 = null;
+	public void executeSpecialCommand(){
+		//対象の所持者を変更
+		getAster().getField().getAster(target1).getAsterClass().setPlayer(this.getPlayer());
+		//行動済状態に
+		getAster().getField().getAster(target1).getAsterClass().setActionCount(0);
 	}
-
 }
