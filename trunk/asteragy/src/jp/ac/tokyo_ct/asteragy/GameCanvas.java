@@ -7,26 +7,26 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	/**
 	 * 18×18
 	 */
-	private final int measure = 18;
+	public static final int measure = 18;
 
 	/**
 	 * アステルの種類
 	 */
-	private final int asterkind = 11;
+	private static final int asterkind = 11;
 
 	/**
 	 * プレイヤー情報領域高さ
 	 */
-	private final int playerheight = 20;
+	private static final int playerheight = 20;
 
 	// プレイヤー情報座標
-	private final int spx = 10;
+	private static final int spx = 10;
 
-	private final int spy = 16;
+	private static final int spy = 16;
 
-	private final int namex = 40;
+	private static final int namex = 40;
 
-	private final int namey = 16;
+	private static final int namey = 16;
 
 	/**
 	 * 固定背景画像
@@ -37,15 +37,6 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 * フィールド画像
 	 */
 	private Image fieldimage;
-
-	/**
-	 * カーソル
-	 */
-	private int cursor;
-
-	private int cursorx;
-
-	private int cursory;
 
 	/**
 	 * 各種アステル画像
@@ -78,24 +69,6 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	}
 
 	/**
-	 * カーソル描画
-	 * 
-	 * @param g
-	 *            描画先グラフィクス
-	 */
-	private void paintCursor(Graphics g) {
-		switch (cursor) {
-		case CURSOR_CLEAR:
-			break;
-		case CURSOR_1:
-			g.setColor(Graphics.getColorOfRGB(255, 0, 0));
-			g.drawRect(cursorx * measure, cursory * measure, measure, measure);
-			g.setColor(Graphics.getColorOfRGB(0, 0, 0));
-			break;
-		}
-	}
-
-	/**
 	 * フィールド描画
 	 * 
 	 * @param g
@@ -121,7 +94,10 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 						* (a.getColor() - 1), 0, measure - 1, measure - 1);
 			}
 		}
-		paintCursor(g);
+		// カーソル描画
+		Cursor.paintCursor(g);
+		// コマンド描画
+		Command.paintCommand(g);
 		g.setOrigin(0, 0);
 	}
 
@@ -278,10 +254,8 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 *            カーソルの種
 	 */
 	public void drawCursor(int x, int y, int cursorType) {
-		cursorx = x;
-		cursory = y;
-		cursor = cursorType;
-		this.repaint();
+		Cursor.setCursor(x, y, cursorType);
+		repaint();
 	}
 
 	/**
@@ -292,10 +266,8 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	public void onTurnStart(Player player) {
 	}
 
-	public static final int CURSOR_CLEAR = 0; // カーソルの消去
-
-	public static final int CURSOR_1 = 1;
-
 	public void drawCommandSelection(int cmd, Point pt) {
+		Command.setCommand(cmd,pt);
+		repaint();
 	}
 }
