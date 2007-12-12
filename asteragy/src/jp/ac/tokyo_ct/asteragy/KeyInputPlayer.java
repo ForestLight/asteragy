@@ -90,7 +90,7 @@ public class KeyInputPlayer extends Player {
 					isSelected = true;
 					return;
 				}
-				canvas.drawCursor(x, y, GameCanvas.CURSOR_1);
+				canvas.drawCursor(x, y,Cursor.CURSOR_1);
 				System.out
 						.println("EventProcesserForSelectAster.processEvent x = "
 								+ x + ", y = " + y);

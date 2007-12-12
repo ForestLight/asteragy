@@ -39,14 +39,6 @@ public class StarClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
-	
-	public void execute(){
-		getAster().getField().swap(target1,target2);
-		
-		incActionCount();
-		target1 = null;
-		target2 = null;
-	}
 	public String getName(){
 		return "スター";
 	}
