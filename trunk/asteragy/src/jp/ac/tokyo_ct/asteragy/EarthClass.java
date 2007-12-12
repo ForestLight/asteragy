@@ -1,22 +1,20 @@
 package jp.ac.tokyo_ct.asteragy;
 
-public class PlutoClass extends AsterClass {
+public class EarthClass extends AsterClass {
 	private static int[][] defaultRange = {
-		{ 1, 0, 1 },
-		{ 0, 1, 0 },
-		{ 1, 1, 1 },
-		{ 0, 1, 0 },
-		{ 1, 0, 1 },
+		{1, 1, 1},
+		{1, 1, 1},
+		{1, 1, 1}
 	};
-	
-	public PlutoClass(Aster a, Player p) {
+
+	public EarthClass(Aster a, Player p) {
 		super(a, p);
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public int getNumber() {
 		// TODO 自動生成されたメソッド・スタブ
-		return 11;
+		return 5;
 	}
 
 	public int[][] getRange() {
@@ -25,7 +23,6 @@ public class PlutoClass extends AsterClass {
 		case 0:
 			return swapGetRange(defaultRange,target1);
 		case 1:
-			return null;
 		}
 		return null;
 	}
@@ -36,8 +33,8 @@ public class PlutoClass extends AsterClass {
 		case 0:
 			return swapSetPointAndNext(pt,target1,target2);
 		case 1:
-			return true;
 		}
+		
 		return false;
 	}
 
@@ -61,54 +58,61 @@ public class PlutoClass extends AsterClass {
 		case 1:
 			break;
 		}
+
 	}
 
-	public String getName(){
-		return "プルート";
+	public String getName() {
+		// TODO 自動生成されたメソッド・スタブ
+		return "アース";
 	}
 
 	public String getCommandName() {
 		// TODO 自動生成されたメソッド・スタブ
-		return "ルインクラスト";
+		return "イージス";
 	}
 
 	public String getExplain() {
 		// TODO 自動生成されたメソッド・スタブ
-		return "レンジ内のアステル\n全てを破壊する (サンにも有効)";
+		return "レンジ内の味方ユニットは、次のターン対象にならない";
 	}
 
 	public int getCost() {
 		// TODO 自動生成されたメソッド・スタブ
-		return 11;
+		return 6;
 	}
 
 	public int getCommandCost() {
 		// TODO 自動生成されたメソッド・スタブ
-		return 8;
+		return 1;
 	}
-	public void executeSpecialCommand(){
+
+	public void executeSpecialCommand() {
+		// TODO 自動生成されたメソッド・スタブ
 		Point me = getAster().getField().asterToPoint(getAster());
 		Point pt = new Point();
 		for(int i = 0;i < defaultRange.length;i++){
 			for(int j = 0;j < defaultRange[0].length;j++){
 				//レンジ内であり
 				if(defaultRange[i][j] == 1){
-					//自身ではない部分を破壊 
-					if(i != defaultRange.length/2 && j != defaultRange[0].length/2){
-						pt.x = me.x-defaultRange.length+j;
-						pt.y = me.y-defaultRange[0].length+i;
-						
-						//フィールドの外にはみ出してたら処理しない
-						if(pt.x < 0 || pt.x >= getAster().getField().getField()[0].length) continue;
-						if(pt.y < 0 || pt.y >= getAster().getField().getField().length) continue;
-						
-						//ターゲットを破壊
-						getAster().getField().setDeleteFlag(pt);
-						getAster().getField().delete(pt.x, pt.y);
+					pt.x = me.x-defaultRange.length+j;
+					pt.y = me.y-defaultRange[0].length+i;
+					
+					//フィールドの外にはみ出してたら処理しない
+					if(pt.x < 0 || pt.x >= getAster().getField().getField()[0].length) continue;
+					if(pt.y < 0 || pt.y >= getAster().getField().getField().length) continue;
+					
+					//クラス持ちであり
+					if(getAster().getField().getAster(pt).getAsterClass() != null){
+						//このユニットと同一のプレイヤーが所持しているのなら
+						if(getAster().getField().getAster(pt).getAsterClass().getPlayer() == this.getPlayer()){
+							//対象不可フラグを建てる
+							getAster().getField().getAster(pt).getAsterClass().setProtectedFlag(true);
+						}
 					}
 				}
 			}
 		}
+
 	}
 
 }
