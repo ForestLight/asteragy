@@ -156,6 +156,9 @@ public abstract class AsterClass {
 	public void setProtectedFlag(boolean b){
 		isProtected = b;
 	}
+	public boolean getProtectedFlag(){
+		return isProtected;
+	}
 	/**
 	 * 対象不可フラグ
 	 */
@@ -173,8 +176,9 @@ public abstract class AsterClass {
 			for(int i = 0;i < defaultRange.length;i++){
 				for(int j = 0;j < defaultRange[0].length;j++){
 					//上下左右に隣接レンジが無い孤立したレンジを除外
-					if(defaultRange[i+1][j]+defaultRange[i-1][j]+defaultRange[i][j+1]+defaultRange[i][j-1] != 0)
+					if(defaultRange[i+1][j]+defaultRange[i-1][j]+defaultRange[i][j+1]+defaultRange[i][j-1] != 0){
 						range[i][j] = defaultRange[i][j];
+					}
 				}
 			}
 		//2個目の対象選択
