@@ -30,9 +30,9 @@ public class MercuryClass extends AsterClass {
 			pt.y = getAster().getField().asterToPoint(getAster()).y-(range.length/2);
 			
 			for(int i = 0;i+pt.y < defaultRange.length;i++){
-				if(pt.y+i < 0) continue;
+				if(pt.y+i < 0 || pt.y + i >= getAster().getField().getField().length) continue;
 				for(int j = 0;j+pt.x < defaultRange[0].length;j++){
-					if(pt.x+j<0) continue;
+					if(pt.x+j<0 || pt.x + j >= getAster().getField().getField()[0].length) continue;
 					
 					//ƒŒƒ“ƒW“à‚Å‚ ‚è
 					if(defaultRange[i][j] == 1){
@@ -49,7 +49,7 @@ public class MercuryClass extends AsterClass {
 					}
 				}
 			}
-			return defaultRange;
+			return range;
 		}
 		return null;
 	}
