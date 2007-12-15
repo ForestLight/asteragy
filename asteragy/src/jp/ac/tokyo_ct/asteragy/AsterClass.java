@@ -109,8 +109,8 @@ public abstract class AsterClass {
 			executeSpecialCommand();
 			break;
 		}
-		//行動回数を増やす
-		incActionCount();
+		//行動可能回数を減らす
+		decActionCount();
 		//ターゲット初期化
 		target1 = null;
 		target2 = null;
@@ -121,22 +121,23 @@ public abstract class AsterClass {
 	 */
 	public abstract void executeSpecialCommand();
 	/**
-	 * 行動回数、フラグ初期化
+	 * 行動可能回数、フラグ初期化
 	 */
 	public void init(){
 		//行動回数リセット
-		actionCount = 0;
+		actionCount = getActionNum();
 		//フラグ消去
 		isProtected = false;
 	}
+	public abstract int getActionNum();
 	/**
-	 * 行動回数増
+	 * 行動可能回数増
 	 */
 	public void incActionCount(){
 		actionCount++;
 	}
 	/**
-	 * 行動回数減
+	 * 行動可能回数減
 	 */
 	public void decActionCount(){
 		actionCount--;
@@ -149,7 +150,7 @@ public abstract class AsterClass {
 	}
 	
 	/**
-	 * 行動した回数
+	 * 行動可能回数
 	 */
 	private int actionCount;
 
