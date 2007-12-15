@@ -4,17 +4,15 @@ import com.nttdocomo.ui.*;
 
 public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
-	//コミットテスト
-
 	/**
 	 * 18×18
 	 */
 	public static final int measure = 18;
 
 	/**
-	 * アステルの種類
+	 * フィールド画像
 	 */
-	private static final int asterkind = 11;
+	private Image fieldimage;
 
 	/**
 	 * プレイヤー情報領域高さ
@@ -30,29 +28,14 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	private static final int namey = 16;
 
-	/**
-	 * 固定背景画像
-	 */
-	private Image background;
-
-	/**
-	 * フィールド画像
-	 */
-	private Image fieldimage;
-
-	/**
-	 * 各種アステル画像
-	 */
-	private Image[] asterimage;
-
 	private final Game game;
 
 	public GameCanvas(Game g) {
 		super();
-		createBackGround();
-		loadAsterImage();
 		loadField();
 		game = g;
+		int[][] r = {{0,1,1},{0,1,0},{1,1,0}};
+		Range.setRange(new Point(5,5), r);
 	}
 
 	public void paint(Graphics g) {
@@ -61,46 +44,13 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		// クリア
 		g.clearRect(0, 0, 240, 240);
 		// 固定背景描画
-		g.drawImage(background, 0, 0);
+		BackImage.paint(g);
 		// フィールド描画
 		paintField(g);
 		// プレイヤー情報描画
 		paintPlayerInfo(g);
 		// ダブルバッファ終了
 		g.unlock(false);
-	}
-
-	/**
-	 * フィールド描画
-	 * 
-	 * @param g
-	 *            描画先グラフィクス
-	 */
-	private void paintField(Graphics g) {
-
-		Aster[][] aster = game.getField().getField();
-		// 原点座標位置計算
-		g.setOrigin((this.getHeight() - aster.length * measure) / 2, (this
-				.getWidth() - aster[0].length * measure) / 2);
-		// フィールド，アステル描画
-		for (int i = 0; i < aster.length; i++) {
-			for (int j = 0; j < aster[0].length; j++) {
-				if (aster[i][j] == null)
-					continue;
-				// フィールド
-				g.drawImage(fieldimage, i * measure, j * measure);
-				// アステル
-				Aster a = aster[i][j];
-				g.drawScaledImage(asterimage[a.getNumber()], i * measure + 1, j
-						* measure + 1, measure - 1, measure - 1, (measure - 1)
-						* (a.getColor() - 1), 0, measure - 1, measure - 1);
-			}
-		}
-		// カーソル描画
-		Cursor.paintCursor(g);
-		// コマンド描画
-		Command.paintCommand(g);
-		g.setOrigin(0, 0);
 	}
 
 	/**
@@ -138,6 +88,40 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	}
 
 	/**
+	 * フィールド描画
+	 * 
+	 * @param g
+	 *            描画先グラフィクス
+	 */
+	public void paintField(Graphics g) {
+		Aster[][] aster = game.getField().getField();
+		// 原点座標位置計算
+		g.setOrigin((240 - aster.length * GameCanvas.measure) / 2,
+				(240 - aster[0].length * GameCanvas.measure) / 2);
+		// フィールド，アステル描画
+		for (int i = 0; i < aster.length; i++) {
+			for (int j = 0; j < aster[0].length; j++) {
+				if (aster[i][j] == null)
+					continue;
+				// フィールド
+				g.drawImage(fieldimage, i * GameCanvas.measure, j
+						* GameCanvas.measure);
+				// アステル
+				g.drawScaledImage(aster[i][j].getImage(), i * measure + 1, j
+						* measure + 1, measure - 1, measure - 1, (measure - 1)
+						* (aster[i][j].getColor() - 1), 0, measure - 1, measure - 1);
+				//レンジ
+				Range.paint(g, i, j);
+			}
+		}
+		// カーソル描画
+		Cursor.paintCursor(g);
+		// コマンド描画
+		Command.paintCommand(g);
+		g.setOrigin(0, 0);
+	}
+
+	/**
 	 * フィールド画像読み込み
 	 */
 	private void loadField() {
@@ -165,61 +149,13 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	/**
 	 * アステル画像読み込み
 	 * 
-	 */
-	private void loadAsterImage() {
-		// 読込先イメージ
-		asterimage = new Image[asterkind];
-		for (int i = 0; i < asterimage.length; i++) {
-			try {
-				// リソースから読み込み
-				MediaImage m = MediaManager.getImage("resource:///aster_" + i
-						+ ".gif");
-				// メディアの使用開始
-				m.use();
-				// 読み込み
-				asterimage[i] = m.getImage();
-			} catch (Exception e) {
-			}
-		}
-	}
-
-	/**
-	 * 固定背景作成
 	 * 
+	 * private void loadAsterImage() { // 読込先イメージ asterimage = new
+	 * Image[asterkind]; for (int i = 0; i < asterimage.length; i++) { try { //
+	 * リソースから読み込み MediaImage m = MediaManager.getImage("resource:///aster_" + i +
+	 * ".gif"); // メディアの使用開始 m.use(); // 読み込み asterimage[i] = m.getImage(); }
+	 * catch (Exception e) { } } }
 	 */
-	private void createBackGround() {
-		// 背景画像作成
-		background = Image.createImage(this.getWidth(), this.getHeight());
-		// グラフィクス作成
-		Graphics g = background.getGraphics();
-		// 背景描画
-		paintBackGround(g);
-		// グラフィクス廃棄
-		g.dispose();
-	}
-
-	/**
-	 * 背景描画
-	 * 
-	 * @param g
-	 *            描画先グラフィクス
-	 */
-	private void paintBackGround(Graphics g) {
-		// 読込先イメージ
-		Image back = null;
-		try {
-			// 背景画像リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///back.jpg");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			back = m.getImage();
-		} catch (Exception e) {
-		}
-		// 描画
-		if (back != null)
-			g.drawImage(back, 0, 0);
-	}
 
 	/*
 	 * (非 Javadoc)
@@ -256,7 +192,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 *            カーソルの種
 	 */
 	public void drawCursor(int x, int y, int cursorType) {
-		Cursor.setCursor(x, y, cursorType);
+		Cursor.setCursor(new Point(x, y), cursorType);
 		repaint();
 	}
 
@@ -269,7 +205,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	}
 
 	public void drawCommandSelection(int cmd, Point pt) {
-		Command.setCommand(cmd,pt);
+		Command.setCommand(cmd, pt);
 		repaint();
 	}
 }
