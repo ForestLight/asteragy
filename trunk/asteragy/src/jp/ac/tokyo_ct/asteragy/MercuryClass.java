@@ -1,4 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
+import com.nttdocomo.ui.*;
 
 public class MercuryClass extends AsterClass {
 	private static int[][] defaultRange = {
@@ -8,6 +9,7 @@ public class MercuryClass extends AsterClass {
 		{0, 1, 1, 1, 0},
 		{0, 0, 0, 0, 0}
 	};
+	private static Image asterImage;
 	public MercuryClass(Aster a,Player p){
 		super(a,p);
 	}
@@ -40,8 +42,8 @@ public class MercuryClass extends AsterClass {
 						if(getAster().getField().getField()[pt.y+i][pt.x+j].getAsterClass() != null){
 							//そのクラスの所持者が自分であり
 							if(getAster().getField().getField()[pt.y+i][pt.x+j].getAsterClass().getPlayer() == getPlayer()){
-								//1回以上行動していたならば選択可能
-								if(getAster().getField().getField()[pt.y+i][pt.x+j].getAsterClass().getActionCount() != 0){
+								//行動可能回数が0ならば選択可能
+								if(getAster().getField().getField()[pt.y+i][pt.x+j].getAsterClass().getActionCount() == 0){
 									range[i][j] = 1;
 								}
 							}
@@ -114,8 +116,17 @@ public class MercuryClass extends AsterClass {
 		return 4;
 	}
 	public void executeSpecialCommand(){
-		//対象の行動回数を1回減らす
-		getAster().getField().getAster(target1).getAsterClass().decActionCount(); 
+		//対象の行動可能回数を1回増やす
+		getAster().getField().getAster(target1).getAsterClass().incActionCount(); 
+	}
+	public Image getImage(){
+		if(asterImage == null){
+			asterImage = loadImage(3);
+		}
+		return asterImage;
+	}
+	public int getActionNum(){
+		return 1;
 	}
 
 }

@@ -1,5 +1,6 @@
 package jp.ac.tokyo_ct.asteragy;
 import java.util.Random;
+
 /**
  * @author Okubo
  */
@@ -136,9 +137,8 @@ class Field {
 		if (field[y][x].getColor() == AsterColor) {
 			countAster++;
 			/*
-			 * 現在注目している座標を後戻りさせないように再帰 back 1 下 （以前に注目していた座標のある方向） 2 右 3 上 4 左
-			 * 
-			 * つながった同色アステルを3個見つけるだけなら判定する位置は被らないよね…?
+			 * 現在注目している座標を後戻りさせないように再帰 
+			 * back（以前に注目していた座標のある方向）1 下 2 右 3 上 4 左
 			 */
 			if (back != 1)
 				judgeMain(x, y + 1, 3, AsterColor);
@@ -149,7 +149,6 @@ class Field {
 			if (back != 4)
 				judgeMain(x - 1, y, 2, AsterColor);
 
-			// かなりめんどくさいことしてる気がする 動くのかも心配 修正希望
 		}
 	}
 
@@ -182,43 +181,56 @@ class Field {
 		field[pt.y][pt.x].setDeleteFlag(true);
 	}
 	/**
-	 * フラグが立ってるアステルをdeleteして、再び削除判定
+	 * deleteFlagが立っているアステルを全て消す
 	 * 
 	 * @param x
 	 *            注目するマスのx座標
 	 * @param y
 	 *            注目するマスのy座標
+	 * @param count
+	 *            消したアステル数をカウント（最初は0を入れる）
+	 * @return count
+	 *            消したアステル数
 	 */
-	public void delete(int x, int y) {
+	public int delete(int x, int y, int count) {
 		int AsterColor = field[y][x].getColor();
 
 		if (field[y][x].getDeleteFlag() == true) {
 			field[y][x].delete(0);
-			delete(x, y - 1);
-			delete(x - 1, y);
-			delete(x, y + 1);
-			delete(x + 1, y);
+			count++;
+			count = delete(x, y - 1, count);
+			count = delete(x - 1, y, count);
+			count = delete(x, y + 1, count);
+			count = delete(x + 1, y, count);
 
-			int t = r.nextInt(4); 
-			for (int i = 1; i <= 4; i++, t++) { // 初回にランダムで決定した色が置けなかった場合、4色試す
-				if (judge(x, y) == false) {
-					return;
-				}
-				field[y][x].setDeleteFlag(true);
-				field[y][x].delete(table[t]);
+			// ランダムで決定した色で問題ない場合
+			if (judge(x, y) == false) {
+				return count;
 			}
 
+			// 初回にランダムで決定した色が置けなかった場合、4色試す
+			int t = r.nextInt(4); 
+			for (int i = 1; i <= 4; i++, t++) {
+				field[y][x].setDeleteFlag(true);
+				field[y][x].delete(table[t]);
+				if(judge(x, y) == false)
+					return count;
+			}
+			// 4色試しても置けない場合、delete前の色に決定する
 			if (judge(x, y) == true) {
 				field[y][x].setDeleteFlag(true);
 				field[y][x].delete(AsterColor);
 			}
 		}
+		return count;
 	}
 
 
 	/**
-	 * swap
+	 * スワップ
 	 * 
+	 * @param a bと入れ替える
+	 * @param b aと入れ替える
 	 */
 	public void swap(Point a,Point b) {
 		Aster tmp = field[a.y][a.x];
@@ -253,6 +265,6 @@ class Field {
 				}
 			}
 		}
-		return null; // 見付からなかったとき
+		return null;
 	}
 }

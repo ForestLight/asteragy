@@ -1,4 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
+import com.nttdocomo.ui.*;
 
 public class PlutoClass extends AsterClass {
 	private static int[][] defaultRange = {
@@ -8,6 +9,8 @@ public class PlutoClass extends AsterClass {
 		{ 0, 1, 0 },
 		{ 1, 0, 1 },
 	};
+	
+	private static Image asterImage;
 	
 	public PlutoClass(Aster a, Player p) {
 		super(a, p);
@@ -104,11 +107,21 @@ public class PlutoClass extends AsterClass {
 						
 						//ターゲットを破壊
 						getAster().getField().setDeleteFlag(pt);
-						getAster().getField().delete(pt.x, pt.y);
+						getAster().getField().delete(pt.x, pt.y, 0);
 					}
 				}
 			}
 		}
+	}
+	
+	public Image getImage(){
+		if(asterImage == null){
+			asterImage = loadImage(11);
+		}
+		return asterImage;
+	}
+	public int getActionNum(){
+		return 1;
 	}
 
 }

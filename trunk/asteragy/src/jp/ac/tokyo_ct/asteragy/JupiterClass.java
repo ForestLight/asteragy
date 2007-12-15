@@ -1,4 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
+import com.nttdocomo.ui.*;
 
 public class JupiterClass extends AsterClass {
 	private static int[][] defaultRange = {
@@ -8,6 +9,7 @@ public class JupiterClass extends AsterClass {
 		{1, 1, 1, 1, 1},
 		{0, 1, 1, 1, 0}
 	};
+	private static Image asterImage;
 	public JupiterClass(Aster a, Player p) {
 		super(a, p);
 		// TODO 自動生成されたコンストラクター・スタブ
@@ -119,5 +121,13 @@ public class JupiterClass extends AsterClass {
 		getAster().getField().swap(target1,target2);
 
 	}
-
+	public Image getImage(){
+		if(asterImage == null){
+			asterImage = loadImage(7);
+		}
+		return asterImage;
+	}
+	public int getActionNum(){
+		return 1;
+	}
 }

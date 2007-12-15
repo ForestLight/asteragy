@@ -1,4 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
+import com.nttdocomo.ui.*;
 
 public class NeptuneClass extends AsterClass {
 	private static int[][] defaultRange = {
@@ -10,6 +11,7 @@ public class NeptuneClass extends AsterClass {
 		{ 0, 0, 0, 1, 0, 0, 0 },
 		{ 0, 0, 0, 1, 0, 0, 0 }
 	};
+	private static Image asterImage;
 	public NeptuneClass(Aster a,Player p){
 		super(a,p);
 	}
@@ -90,5 +92,15 @@ public class NeptuneClass extends AsterClass {
 
 	public int getCommandCost() {
 		return 2;
+	}
+	
+	public Image getImage(){
+		if(asterImage == null){
+			asterImage = loadImage(10);
+		}
+		return asterImage;
+	}
+	public int getActionNum(){
+		return 1;
 	}
 }
