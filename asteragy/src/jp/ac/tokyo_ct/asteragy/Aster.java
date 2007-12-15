@@ -1,6 +1,8 @@
 package jp.ac.tokyo_ct.asteragy;
 
 import java.util.Random;
+import com.nttdocomo.ui.*;
+import com.nttdocomo.ui.*;
 
 /**
  * @author kurix
@@ -82,4 +84,29 @@ public class Aster {
 	public Field getField() {
 		return field;
 	}
+	
+	public Image getImage() {
+		if(asterImage == null) {
+			loadImage();
+			return asterImage;
+		}
+		if(asterClass == null)
+			return asterImage;
+		return asterClass.getImage();
+	}
+	
+	private static void loadImage(){
+		try {
+			// リソースから読み込み
+			MediaImage m = MediaManager.getImage("resource:///aster_0.gif");
+			// メディアの使用開始
+			m.use();
+			// 読み込み
+			asterImage = m.getImage();
+		} catch (Exception e) {
+		}
+	}
+
+	private static Image asterImage;
+
 }

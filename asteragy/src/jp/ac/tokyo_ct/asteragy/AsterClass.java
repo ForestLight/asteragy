@@ -2,7 +2,7 @@
  * 
  */
 package jp.ac.tokyo_ct.asteragy;
-
+import com.nttdocomo.ui.*;
 /**
  * @author Yusuke
  * 
@@ -239,4 +239,20 @@ public abstract class AsterClass {
 		if(target1 != null && target2 != null) return false;
 		return true;
 	}
+	
+	public abstract Image getImage();
+
+	static Image loadImage(int n){
+		try {
+			// リソースから読み込み
+			MediaImage m = MediaManager.getImage("resource:///aster_" + n +".gif");
+			// メディアの使用開始
+			m.use();
+			// 読み込み
+			return m.getImage();
+		} catch (Exception e) {
+		}
+		return null;
+	}
+	
 }

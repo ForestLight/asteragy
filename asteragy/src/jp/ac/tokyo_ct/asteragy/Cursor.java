@@ -13,17 +13,14 @@ public class Cursor {
 
 	// ƒJ[ƒ\ƒ‹î•ñ
 
-	private static int nx;
-
-	private static int ny;
+	private static Point point;
 
 	private static int type;
 
 	// •`‰æ
 
-	public static void setCursor(int x, int y, int cursorType) {
-		nx = x;
-		ny = y;
+	public static void setCursor(Point p, int cursorType) {
+		point = p;
 		type = cursorType;
 	}
 
@@ -33,7 +30,7 @@ public class Cursor {
 			break;
 		case CURSOR_1:
 			g.setColor(Graphics.getColorOfRGB(255, 0, 0));
-			g.drawRect(nx * GameCanvas.measure, ny * GameCanvas.measure,
+			g.drawRect(point.x * GameCanvas.measure, point.y * GameCanvas.measure,
 					GameCanvas.measure, GameCanvas.measure);
 			g.setColor(Graphics.getColorOfRGB(0, 0, 0));
 			break;
