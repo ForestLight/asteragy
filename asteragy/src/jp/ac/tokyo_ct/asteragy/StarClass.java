@@ -1,4 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
+import com.nttdocomo.ui.*;
 
 public class StarClass extends AsterClass {
 	private static int[][] defaultRange = {
@@ -6,6 +7,7 @@ public class StarClass extends AsterClass {
 		{1,1,1},
 		{0,0,0}
 	};
+	private static Image asterImage;
 	StarClass(Aster a,Player p){
 		super(a,p);
 	}
@@ -58,6 +60,15 @@ public class StarClass extends AsterClass {
 	}
 	public void executeSpecialCommand(){
 	
+	}
+	public Image getImage(){
+		if(asterImage == null){
+			asterImage = loadImage(2);
+		}
+		return asterImage;
+	}
+	public int getActionNum(){
+		return 1;
 	}
 
 }

@@ -1,4 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
+import com.nttdocomo.ui.*;
 
 public class VenusClass extends AsterClass {
 	private static int[][] defaultRange = {
@@ -8,6 +9,7 @@ public class VenusClass extends AsterClass {
 		{0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0}
 	};
+	private static Image asterImage;
 
 	public VenusClass(Aster a, Player p) {
 		super(a, p);
@@ -120,5 +122,14 @@ public class VenusClass extends AsterClass {
 		getAster().getField().getAster(target1).getAsterClass().setPlayer(this.getPlayer());
 		//s“®Ïó‘Ô‚É
 		getAster().getField().getAster(target1).getAsterClass().setActionCount(0);
+	}
+	public Image getImage(){
+		if(asterImage == null){
+			asterImage = loadImage(4);
+		}
+		return asterImage;
+	}
+	public int getActionNum(){
+		return 1;
 	}
 }
