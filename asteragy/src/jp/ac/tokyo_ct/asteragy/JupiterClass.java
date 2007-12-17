@@ -86,8 +86,7 @@ public class JupiterClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 
 		// スワップの場合もコマンドの場合も同じ
-		swapSetPointAndNext(pt, target1, target2);
-		return false;
+		return swapSetPointAndNext(pt, target1, target2);
 	}
 
 	public boolean hasNext() {
