@@ -1,17 +1,13 @@
 package jp.ac.tokyo_ct.asteragy;
+
 import com.nttdocomo.ui.*;
 
 public class PlutoClass extends AsterClass {
-	private static int[][] defaultRange = {
-		{ 1, 0, 1 },
-		{ 0, 1, 0 },
-		{ 1, 1, 1 },
-		{ 0, 1, 0 },
-		{ 1, 0, 1 },
-	};
-	
+	private static int[][] defaultRange = { { 1, 0, 1 }, { 0, 1, 0 },
+			{ 1, 1, 1 }, { 0, 1, 0 }, { 1, 0, 1 }, };
+
 	private static Image asterImage;
-	
+
 	public PlutoClass(Aster a, Player p) {
 		super(a, p);
 		// TODO 自動生成されたコンストラクター・スタブ
@@ -24,9 +20,9 @@ public class PlutoClass extends AsterClass {
 
 	public int[][] getRange() {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange,target1);
+			return swapGetRange(defaultRange, target1);
 		case 1:
 			return null;
 		}
@@ -35,9 +31,9 @@ public class PlutoClass extends AsterClass {
 
 	public boolean setPointAndNext(Point pt) {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			return swapSetPointAndNext(pt,target1,target2);
+			return swapSetPointAndNext(pt, target1, target2);
 		case 1:
 			return true;
 		}
@@ -46,9 +42,9 @@ public class PlutoClass extends AsterClass {
 
 	public boolean hasNext() {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			return swapHasNext(target1,target2);
+			return swapHasNext(target1, target2);
 		case 1:
 			return false;
 		}
@@ -57,16 +53,16 @@ public class PlutoClass extends AsterClass {
 
 	public void moveAstern() {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			swapMoveAstern(target1,target2);
+			swapMoveAstern(target1, target2);
 			break;
 		case 1:
 			break;
 		}
 	}
 
-	public String getName(){
+	public String getName() {
 		return "プルート";
 	}
 
@@ -89,23 +85,29 @@ public class PlutoClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		return 8;
 	}
-	public void executeSpecialCommand(){
+
+	public void executeSpecialCommand() {
 		Point me = getAster().getField().asterToPoint(getAster());
 		Point pt = new Point();
-		for(int i = 0;i < defaultRange.length;i++){
-			for(int j = 0;j < defaultRange[0].length;j++){
-				//レンジ内であり
-				if(defaultRange[i][j] == 1){
-					//自身ではない部分を破壊 
-					if(i != defaultRange.length/2 && j != defaultRange[0].length/2){
-						pt.x = me.x-defaultRange.length+j;
-						pt.y = me.y-defaultRange[0].length+i;
-						
-						//フィールドの外にはみ出してたら処理しない
-						if(pt.x < 0 || pt.x >= getAster().getField().getField()[0].length) continue;
-						if(pt.y < 0 || pt.y >= getAster().getField().getField().length) continue;
-						
-						//ターゲットを破壊
+		for (int i = 0; i < defaultRange.length; i++) {
+			for (int j = 0; j < defaultRange[0].length; j++) {
+				// レンジ内であり
+				if (defaultRange[i][j] == 1) {
+					// 自身ではない部分を破壊
+					if (i != defaultRange.length / 2
+							&& j != defaultRange[0].length / 2) {
+						pt.x = me.x - defaultRange.length + j;
+						pt.y = me.y - defaultRange[0].length + i;
+
+						// フィールドの外にはみ出してたら処理しない
+						if (pt.x < 0
+								|| pt.x >= getAster().getField().getField()[0].length)
+							continue;
+						if (pt.y < 0
+								|| pt.y >= getAster().getField().getField().length)
+							continue;
+
+						// ターゲットを破壊
 						getAster().getField().setDeleteFlag(pt);
 						getAster().getField().delete(pt.x, pt.y, 0);
 					}
@@ -113,14 +115,15 @@ public class PlutoClass extends AsterClass {
 			}
 		}
 	}
-	
-	public Image getImage(){
-		if(asterImage == null){
+
+	public Image getImage() {
+		if (asterImage == null) {
 			asterImage = loadImage(11);
 		}
 		return asterImage;
 	}
-	public int getActionNum(){
+
+	public int getActionNum() {
 		return 1;
 	}
 

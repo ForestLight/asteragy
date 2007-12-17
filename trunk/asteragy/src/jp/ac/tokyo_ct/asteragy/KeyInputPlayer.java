@@ -33,7 +33,7 @@ public class KeyInputPlayer extends Player {
 					state++;
 					break;
 				case 1: // スワップか特殊コマンドかを選択
-					cmd = selectCommand();
+					cmd = selectCommand(pt);
 					if (cmd == -1) // キャンセルされた
 						state--;
 					else
@@ -50,74 +50,88 @@ public class KeyInputPlayer extends Player {
 		}
 	}
 
+	/**
+	 * フィールド上にカーソルを上下左右に動かして自クラス持ちのアステルを選択する。
+	 * 
+	 * @return 選択されたアステルの座標
+	 */
 	private Point selectAster() {
-		final class EventProcesserForSelectAster implements EventProcesser {
+		final class EventProcesserForSelectAster extends KeyProcessedEventProcesserImpl {
+			/**
+			 * コンストラクタ
+			 * 
+			 * @param keyInputPlayer
+			 *            基となるKeyInputPlayer
+			 */
+			EventProcesserForSelectAster(KeyInputPlayer keyInputPlayer) {
+				player = keyInputPlayer;
+				x = (player.game.getField().getX() - 1) / 2;
+				y = 0;
+				applyPosition();
+			}
+
 			/*
-			 * (非 Javadoc)
+			 * (非 Javadoc) selectAster用にprocessEventを受け取る。
 			 * 
 			 * @see jp.ac.tokyo_ct.asteragy.EventProcesser#processEvent(int,
 			 *      int)
 			 */
-			public void processEvent(int type, int param) {
-				if (type != Display.KEY_PRESSED_EVENT) {
-					return;
-				}
-				if (isSelected) {
-					return;
-				}
-
-				System.out.println("selectAster()");
-				switch (param) {
+			public void processKeyEvent(int key) {
+				switch (key) {
 				case Display.KEY_UP:
-					y--;
-					if (y < 0) {
-						y = 0;
+					if (y > 0) {
+						y--;
 					}
 					break;
 				case Display.KEY_DOWN:
-					y++;
+					if (y < player.game.getField().getY() - 1) {
+						y++;
+					}
 					break;
 				case Display.KEY_LEFT:
-					x--;
-					if (x < 0) {
-						x = 0;
+					if (x > 0) {
+						x--;
 					}
 					break;
 				case Display.KEY_RIGHT:
-					x++;
+					if (y < player.game.getField().getX() - 1) {
+						x++;
+					}
 					break;
-				case Display.KEY_SELECT:
-					isSelected = true;
-					return;
 				}
-				canvas.drawCursor(x, y,Cursor.CURSOR_1);
+				applyPosition();
 				System.out
 						.println("EventProcesserForSelectAster.processEvent x = "
 								+ x + ", y = " + y);
 			}
+			
+			/**
+			 * キャンセル不可
+			 * @return 常にfalse
+			 */
+			protected boolean onCancel(){
+				return false;
+			}
 
 			public Point getPoint() {
 				System.out.println("EventProcesserForSelectAster.getPoint()");
-				while (!isSelected) {
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
-				}
+				super.waitForSelect();
 				return new Point(x, y);
 			}
 
-			// TODO: (0, 0)ではなく、もっと適当な場所にすべき
-			private int x = 0;
+			private void applyPosition() {
+				canvas.drawCursor(x, y, Cursor.CURSOR_1);
+			}
 
-			private int y = 0;
+			private int x;
+			private int y;
 
-			private volatile boolean isSelected = false;
+			private final KeyInputPlayer player;
 		}
 
+		Command.setCommand(-1, null);
 		System.out.println("KeyInputPlayer.selectAster()");
-		EventProcesserForSelectAster ep = new EventProcesserForSelectAster();
+		EventProcesserForSelectAster ep = new EventProcesserForSelectAster(this);
 		canvas.setEventProcesser(ep);
 		System.out.println("canvas.setEventProcesser() after");
 		Point pt = ep.getPoint();
@@ -126,7 +140,57 @@ public class KeyInputPlayer extends Player {
 		return pt;
 	}
 
-	int selectCommand() {
+	/**
+	 * コマンド（スワップ・特殊）を選択する
+	 * 
+	 * @param pt
+	 *            クラスの位置
+	 * @return コマンド種別。1は特殊、0はスワップ、-1はキャンセル。
+	 */
+	int selectCommand(Point pt) {
+		final class EventProcesserForSelectCommand extends KeyProcessedEventProcesserImpl {
+			EventProcesserForSelectCommand(Point classPosition){
+				pt = classPosition;				
+			}
+			protected void processKeyEvent(int key) {
+				switch (key) {
+				case Display.KEY_UP:
+					if (command > 0){
+						command--;
+					}
+					break;
+				case Display.KEY_DOWN:
+					if (command < 1){
+						command++;
+					}
+					break;
+				}
+			}
+			
+			protected boolean onCancel(){
+				command = -1;
+				return true;
+			}
+			
+			public int selectCommand(){
+				System.out.println("EventProcesserForSelectCommand.selectCommand()");
+				waitForSelect();
+				return command;
+			}
+
+			private volatile int command = 0;
+			private final Point pt;
+		}
+
+		System.out.println("KeyInputPlayer.selectCommand()");
+		
+		Command.setCommand(0, pt);
+		game.getCanvas().repaint();
+		try {
+			Thread.sleep(60 * 1000);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
 		return -1;
 	}
 

@@ -1,14 +1,12 @@
 package jp.ac.tokyo_ct.asteragy;
+
 import com.nttdocomo.ui.*;
 
 public class VenusClass extends AsterClass {
-	private static int[][] defaultRange = {
-		{0, 0, 1, 0, 0},
-		{0, 1, 1, 1, 0},
-		{0, 1, 1, 1, 0},
-		{0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0}
-	};
+	private static int[][] defaultRange = { { 0, 0, 1, 0, 0 },
+			{ 0, 1, 1, 1, 0 }, { 0, 1, 1, 1, 0 }, { 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0 } };
+
 	private static Image asterImage;
 
 	public VenusClass(Aster a, Player p) {
@@ -23,30 +21,36 @@ public class VenusClass extends AsterClass {
 
 	public int[][] getRange() {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange,target1);
+			return swapGetRange(defaultRange, target1);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			//レンジの左上の座標のフィールド内での位置
+			final Point thisPoint = getAster().getField().asterToPoint(
+					getAster());
+			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point();
-			pt.x = getAster().getField().asterToPoint(getAster()).x-(range[0].length/2);
-			pt.y = getAster().getField().asterToPoint(getAster()).y-(range.length/2);
-			
-			for(int i = 0;i+pt.y < defaultRange.length;i++){
-				if(pt.y+i < 0) continue;
-				for(int j = 0;j+pt.x < defaultRange[0].length;j++){
-					if(pt.x+j<0) continue;
-					
-					//レンジ内であり
-					if(defaultRange[i][j] == 1){
-						//その位置のアステルにクラスがあり
-						if(getAster().getField().getField()[pt.y+i][pt.x+j].getAsterClass() != null){
-							//そのクラスの所持者が相手であり
-							if(getAster().getField().getField()[pt.y+i][pt.x+j].getAsterClass().getPlayer() != getPlayer()){
-								//サンでなければ対象に選択可能
-								if(getAster().getField().getField()[pt.y+i][pt.x+j].getNumber() != 1)
-								range[i][j] = 1;
+			pt.x = thisPoint.x - (range[0].length / 2);
+			pt.y = thisPoint.y - (range.length / 2);
+
+			for (int i = 0; i + pt.y < defaultRange.length; i++) {
+				if (pt.y + i < 0)
+					continue;
+				for (int j = 0; j + pt.x < defaultRange[0].length; j++) {
+					if (pt.x + j < 0)
+						continue;
+
+					// レンジ内であり
+					if (defaultRange[i][j] == 1) {
+						// その位置のアステルにクラスがあり
+						final Aster f = getAster().getField().getField()[pt.y
+								+ i][pt.x + j];
+						if (f.getAsterClass() != null) {
+							// そのクラスの所持者が相手であり
+							if (f.getAsterClass().getPlayer() != getPlayer()) {
+								// サンでなければ対象に選択可能
+								if (f.getNumber() != 1)
+									range[i][j] = 1;
 							}
 						}
 					}
@@ -59,9 +63,9 @@ public class VenusClass extends AsterClass {
 
 	public boolean setPointAndNext(Point pt) {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			return swapSetPointAndNext(pt,target1,target2);
+			return swapSetPointAndNext(pt, target1, target2);
 		case 1:
 			target1 = pt;
 			return true;
@@ -71,9 +75,9 @@ public class VenusClass extends AsterClass {
 
 	public boolean hasNext() {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			return swapHasNext(target1,target2);
+			return swapHasNext(target1, target2);
 		case 1:
 			if (target1 == null)
 				return true;
@@ -85,9 +89,9 @@ public class VenusClass extends AsterClass {
 
 	public void moveAstern() {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			swapMoveAstern(target1,target2);
+			swapMoveAstern(target1, target2);
 			break;
 		case 1:
 			break;
@@ -114,22 +118,27 @@ public class VenusClass extends AsterClass {
 		return 7;
 	}
 
-	public String getName(){
+	public String getName() {
 		return "ヴィーナス";
 	}
-	public void executeSpecialCommand(){
-		//対象の所持者を変更
-		getAster().getField().getAster(target1).getAsterClass().setPlayer(this.getPlayer());
-		//行動済状態に
-		getAster().getField().getAster(target1).getAsterClass().setActionCount(0);
+
+	public void executeSpecialCommand() {
+		// 対象の所持者を変更
+		getAster().getField().getAster(target1).getAsterClass().setPlayer(
+				this.getPlayer());
+		// 行動済状態に
+		getAster().getField().getAster(target1).getAsterClass().setActionCount(
+				0);
 	}
-	public Image getImage(){
-		if(asterImage == null){
+
+	public Image getImage() {
+		if (asterImage == null) {
 			asterImage = loadImage(4);
 		}
 		return asterImage;
 	}
-	public int getActionNum(){
+
+	public int getActionNum() {
 		return 1;
 	}
 }

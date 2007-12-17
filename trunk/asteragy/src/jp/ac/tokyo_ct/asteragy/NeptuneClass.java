@@ -1,19 +1,17 @@
 package jp.ac.tokyo_ct.asteragy;
+
 import com.nttdocomo.ui.*;
 
 public class NeptuneClass extends AsterClass {
-	private static int[][] defaultRange = {
-		{ 0, 0, 0, 1, 0, 0, 0 },
-		{ 0, 0, 0, 1, 0, 0, 0 },
-		{ 0, 0, 1, 1, 1, 0, 0 },
-		{ 1, 1, 1, 1, 1, 1, 1 },
-		{ 0, 0, 1, 1, 1, 0, 0 },
-		{ 0, 0, 0, 1, 0, 0, 0 },
-		{ 0, 0, 0, 1, 0, 0, 0 }
-	};
+	private static int[][] defaultRange = { { 0, 0, 0, 1, 0, 0, 0 },
+			{ 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 1, 1, 1, 0, 0 },
+			{ 1, 1, 1, 1, 1, 1, 1 }, { 0, 0, 1, 1, 1, 0, 0 },
+			{ 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 } };
+
 	private static Image asterImage;
-	public NeptuneClass(Aster a,Player p){
-		super(a,p);
+
+	public NeptuneClass(Aster a, Player p) {
+		super(a, p);
 	}
 
 	public int getNumber() {
@@ -23,9 +21,9 @@ public class NeptuneClass extends AsterClass {
 
 	public int[][] getRange() {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange,target1);
+			return swapGetRange(defaultRange, target1);
 		case 1:
 			return defaultRange;
 		}
@@ -33,9 +31,9 @@ public class NeptuneClass extends AsterClass {
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		switch(mode){
+		switch (mode) {
 		case 0:
-			return swapSetPointAndNext(pt,target1,target2);
+			return swapSetPointAndNext(pt, target1, target2);
 		case 1:
 			target1 = pt;
 			return true;
@@ -45,10 +43,10 @@ public class NeptuneClass extends AsterClass {
 
 	public boolean hasNext() {
 		// TODO 自動生成されたメソッド・スタブ
-		
-		switch(mode){
+
+		switch (mode) {
 		case 0:
-			return swapHasNext(target1,target2);
+			return swapHasNext(target1, target2);
 		case 1:
 			if (target1 == null)
 				return true;
@@ -60,9 +58,9 @@ public class NeptuneClass extends AsterClass {
 
 	public void moveAstern() {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			swapMoveAstern(target1,target2);
+			swapMoveAstern(target1, target2);
 			break;
 		case 1:
 			break;
@@ -73,14 +71,18 @@ public class NeptuneClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		return "スターライトストリーム";
 	}
-	public void executeSpecialCommand(){
-		//ターゲットと自分をswap
-		getAster().getField().swap(target1,getAster().getField().asterToPoint(getAster()));
+
+	public void executeSpecialCommand() {
+		// ターゲットと自分をswap
+		getAster().getField().swap(target1,
+				getAster().getField().asterToPoint(getAster()));
+
 	}
 
-	public String getName(){
+	public String getName() {
 		return "ネプチューン";
 	}
+
 	public String getExplain() {
 		// TODO 自動生成されたメソッド・スタブ
 		return "対象のアステル1個と\nこのユニットの場所を交換";
@@ -93,14 +95,15 @@ public class NeptuneClass extends AsterClass {
 	public int getCommandCost() {
 		return 2;
 	}
-	
-	public Image getImage(){
-		if(asterImage == null){
+
+	public Image getImage() {
+		if (asterImage == null) {
 			asterImage = loadImage(10);
 		}
 		return asterImage;
 	}
-	public int getActionNum(){
+
+	public int getActionNum() {
 		return 1;
 	}
 }

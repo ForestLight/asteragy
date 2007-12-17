@@ -1,6 +1,3 @@
-/**
- * 
- */
 package jp.ac.tokyo_ct.asteragy;
 
 /**
