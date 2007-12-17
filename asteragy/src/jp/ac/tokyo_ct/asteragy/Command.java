@@ -16,7 +16,7 @@ public class Command {
 	public static void paintCommand(Graphics g) {
 		if (command < 0 || point == null)
 			return;
-		String[] commands = new String[] { "スワップ", "コマンド" };
+		String[] commands = { "スワップ", "コマンド" };
 		for (int i = 0; i < 2; i++) {
 			g
 					.setColor(Graphics.getColorOfRGB(i == command ? 255 : 0,

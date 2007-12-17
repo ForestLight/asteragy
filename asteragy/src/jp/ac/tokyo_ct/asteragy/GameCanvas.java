@@ -34,8 +34,8 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		super();
 		loadField();
 		game = g;
-		int[][] r = {{0,1,1},{0,1,0},{1,1,0}};
-		Range.setRange(new Point(5,5), r);
+//		int[][] r = { { 0, 1, 1 }, { 0, 1, 0 }, { 1, 1, 0 } };
+//		Range.setRange(new Point(5, 5), r);
 	}
 
 	public void paint(Graphics g) {
@@ -109,8 +109,9 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 				// アステル
 				g.drawScaledImage(aster[i][j].getImage(), i * measure + 1, j
 						* measure + 1, measure - 1, measure - 1, (measure - 1)
-						* (aster[i][j].getColor() - 1), 0, measure - 1, measure - 1);
-				//レンジ
+						* (aster[i][j].getColor() - 1), 0, measure - 1,
+						measure - 1);
+				// レンジ
 				Range.paint(g, i, j);
 			}
 		}
@@ -175,12 +176,34 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		eventProcesser = e;
 	}
 
+	/**
+	 * 現在のイベントプロセッサを取得する。
+	 * @return 設定されているイベントプロセッサ。なければnull。
+	 */
 	public EventProcesser getEventProcesser() {
 		return eventProcesser;
 	}
 
+	/**
+	 * イベントプロセッサを削除する。
+	 */
 	public void resetEventProcesser() {
 		eventProcesser = null;
+	}
+
+	/**
+	 * イベントプロセッサを削除する。
+	 * @param e 削除するイベントプロセッサ
+	 * @return 削除したらtrue、しなければfalse;
+	 * 一致したら削除する。
+	 */
+	public boolean resetEventProcesser(EventProcesser e) {
+		if (e == eventProcesser){
+			eventProcesser = null;
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	/**

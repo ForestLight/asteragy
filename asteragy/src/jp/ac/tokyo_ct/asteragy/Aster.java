@@ -2,7 +2,6 @@ package jp.ac.tokyo_ct.asteragy;
 
 import java.util.Random;
 import com.nttdocomo.ui.*;
-import com.nttdocomo.ui.*;
 
 /**
  * @author kurix
@@ -35,9 +34,10 @@ public class Aster {
 		field = f;
 	}
 
-/*	public void swap(int x1, int y1, int x2, int y2) {
-		field.swap(x1, y1, x2, y2);
-	}*/
+	/*
+	 * public void swap(int x1, int y1, int x2, int y2) { field.swap(x1, y1, x2,
+	 * y2); }
+	 */
 
 	public int getColor() {
 		return color;
@@ -80,22 +80,26 @@ public class Aster {
 	public int getNumber() {
 		return asterClass != null ? asterClass.getNumber() : 0;
 	}
-	
+
 	public Field getField() {
 		return field;
 	}
-	
+
+	Point getPoint() {
+		return getField().asterToPoint(this);
+	}
+
 	public Image getImage() {
-		if(asterImage == null) {
+		if (asterImage == null) {
 			loadImage();
 			return asterImage;
 		}
-		if(asterClass == null)
+		if (asterClass == null)
 			return asterImage;
 		return asterClass.getImage();
 	}
-	
-	private static void loadImage(){
+
+	private static void loadImage() {
 		try {
 			// ÉäÉ\Å[ÉXÇ©ÇÁì«Ç›çûÇ›
 			MediaImage m = MediaManager.getImage("resource:///aster_0.gif");
@@ -108,5 +112,4 @@ public class Aster {
 	}
 
 	private static Image asterImage;
-
 }

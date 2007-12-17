@@ -1,4 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
+
 import java.util.Random;
 
 /**
@@ -12,10 +13,10 @@ class Field {
 
 	private int countAster;
 
-	private int[] table = {1,2,3,4,1,2,3,4};
-	
+	private int[] table = { 1, 2, 3, 4, 1, 2, 3, 4 };
+
 	private static Random r = new Random(System.currentTimeMillis());
-	
+
 	private final Game game;
 
 	public Field(Game g) {
@@ -71,21 +72,23 @@ class Field {
 
 	/**
 	 * ターン開始処理
+	 * 
 	 * @param player
 	 */
-	public void beginTurn(Player player){
-		for(int i = 0;i < field.length;i++){
-			for(int j = 0;j < field[0].length;j++){
-				//クラス持ちで
-				if(field[i][j].getAsterClass() != null){
-					//現在ターン進行中のプレイヤーのユニットなら初期化
-					if(field[i][j].getAsterClass().getPlayer() == player){
+	public void beginTurn(Player player) {
+		for (int i = 0; i < field.length; i++) {
+			for (int j = 0; j < field[0].length; j++) {
+				// クラス持ちで
+				if (field[i][j].getAsterClass() != null) {
+					// 現在ターン進行中のプレイヤーのユニットなら初期化
+					if (field[i][j].getAsterClass().getPlayer() == player) {
 						field[i][j].getAsterClass().init();
 					}
 				}
 			}
 		}
 	}
+
 	/**
 	 * アステルが3個つながっているかの判定をするだけ
 	 * 
@@ -137,8 +140,7 @@ class Field {
 		if (field[y][x].getColor() == AsterColor) {
 			countAster++;
 			/*
-			 * 現在注目している座標を後戻りさせないように再帰 
-			 * back（以前に注目していた座標のある方向）1 下 2 右 3 上 4 左
+			 * 現在注目している座標を後戻りさせないように再帰 back（以前に注目していた座標のある方向）1 下 2 右 3 上 4 左
 			 */
 			if (back != 1)
 				judgeMain(x, y + 1, 3, AsterColor);
@@ -172,14 +174,17 @@ class Field {
 			setDeleteFlagSameColor(x + 1, y, AsterColor);
 		}
 	}
+
 	/**
 	 * アステルにdeleteFlagを立てる
+	 * 
 	 * @param pt
-	 * 				注目するマスの座標
+	 *            注目するマスの座標
 	 */
 	public void setDeleteFlag(Point pt) {
 		field[pt.y][pt.x].setDeleteFlag(true);
 	}
+
 	/**
 	 * deleteFlagが立っているアステルを全て消す
 	 * 
@@ -189,8 +194,7 @@ class Field {
 	 *            注目するマスのy座標
 	 * @param count
 	 *            消したアステル数をカウント（最初は0を入れる）
-	 * @return count
-	 *            消したアステル数
+	 * @return count 消したアステル数
 	 */
 	public int delete(int x, int y, int count) {
 		int AsterColor = field[y][x].getColor();
@@ -209,11 +213,12 @@ class Field {
 			}
 
 			// 初回にランダムで決定した色が置けなかった場合、4色試す
-			int t = r.nextInt(4); 
+			int t = r.nextInt(4);
+
 			for (int i = 1; i <= 4; i++, t++) {
 				field[y][x].setDeleteFlag(true);
 				field[y][x].delete(table[t]);
-				if(judge(x, y) == false)
+				if (judge(x, y) == false)
 					return count;
 			}
 			// 4色試しても置けない場合、delete前の色に決定する
@@ -225,14 +230,15 @@ class Field {
 		return count;
 	}
 
-
 	/**
 	 * スワップ
 	 * 
-	 * @param a bと入れ替える
-	 * @param b aと入れ替える
+	 * @param a
+	 *            bと入れ替える
+	 * @param b
+	 *            aと入れ替える
 	 */
-	public void swap(Point a,Point b) {
+	public void swap(Point a, Point b) {
 		Aster tmp = field[a.y][a.x];
 		field[a.y][a.x] = field[b.y][b.x];
 		field[b.y][b.x] = tmp;

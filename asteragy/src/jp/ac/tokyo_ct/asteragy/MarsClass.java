@@ -1,17 +1,13 @@
 package jp.ac.tokyo_ct.asteragy;
+
 import com.nttdocomo.ui.*;
 
 public class MarsClass extends AsterClass {
-	private static int[][] defaultRange = {
-		{ 0, 1, 0 },
-		{ 1, 1, 1 },
-		{ 0, 1, 0 },
-		{ 1, 1, 1 },
-		{ 0, 0, 0 },
-		{ 0, 0, 0 },
-		{ 0, 0, 0 },
-	};
+	private static int[][] defaultRange = { { 0, 1, 0 }, { 1, 1, 1 },
+			{ 0, 1, 0 }, { 1, 1, 1 }, { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, };
+
 	private static Image asterImage;
+
 	public MarsClass(Aster a, Player p) {
 		super(a, p);
 		// TODO 自動生成されたコンストラクター・スタブ
@@ -24,33 +20,38 @@ public class MarsClass extends AsterClass {
 
 	public int[][] getRange() {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange,target1);
+			return swapGetRange(defaultRange, target1);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			//レンジの左上の座標のフィールド内での位置
+			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point();
-			pt.x = getAster().getField().asterToPoint(getAster()).x-(range[0].length/2);
-			pt.y = getAster().getField().asterToPoint(getAster()).y-(range.length/2);
-			
-			for(int i = 0;i+pt.y < defaultRange.length;i++){
-				if(pt.y+i < 0) continue;
-				for(int j = 0;j+pt.x < defaultRange[0].length;j++){
-					if(pt.x+j<0) continue;
-					
-					if(defaultRange[i][j] == 1){
+			pt.x = getAster().getField().asterToPoint(getAster()).x
+					- (range[0].length / 2);
+			pt.y = getAster().getField().asterToPoint(getAster()).y
+					- (range.length / 2);
+
+			for (int i = 0; i + pt.y < defaultRange.length; i++) {
+				if (pt.y + i < 0)
+					continue;
+				for (int j = 0; j + pt.x < defaultRange[0].length; j++) {
+					if (pt.x + j < 0)
+						continue;
+
+					if (defaultRange[i][j] == 1) {
 						// レンジ内で自身かサン以外なら選択可
-						if(getAster().getField().getField()[pt.y+i][pt.x+j].getNumber() != 1
-								&& getAster().getField().getField()[pt.y+i][pt.x+j] != getAster()) {
+						if (getAster().getField().getField()[pt.y + i][pt.x + j]
+								.getNumber() != 1
+								&& getAster().getField().getField()[pt.y + i][pt.x
+										+ j] != getAster()) {
 							range[i][j] = 1;
 						}
 						// 自身かサンなら移動のみ可
 						else {
 							range[i][j] = 0;
 						}
-					}
-					else {
+					} else {
 						range[i][j] = 0;
 					}
 				}
@@ -62,9 +63,9 @@ public class MarsClass extends AsterClass {
 
 	public boolean setPointAndNext(Point pt) {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			return swapSetPointAndNext(pt,target1,target2);
+			return swapSetPointAndNext(pt, target1, target2);
 		case 1:
 			target1 = pt;
 			return true;
@@ -74,9 +75,9 @@ public class MarsClass extends AsterClass {
 
 	public boolean hasNext() {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			return swapHasNext(target1,target2);
+			return swapHasNext(target1, target2);
 		case 1:
 			if (target1 == null)
 				return true;
@@ -88,16 +89,16 @@ public class MarsClass extends AsterClass {
 
 	public void moveAstern() {
 		// TODO 自動生成されたメソッド・スタブ
-		switch(mode){
+		switch (mode) {
 		case 0:
-			swapMoveAstern(target1,target2);
+			swapMoveAstern(target1, target2);
 			break;
 		case 1:
 			target1 = null;
 		}
 	}
 
-	public String getName(){
+	public String getName() {
 		return "マーズ";
 	}
 
@@ -125,13 +126,15 @@ public class MarsClass extends AsterClass {
 		getAster().getField().setDeleteFlag(target1);
 		getAster().getField().delete(target1.x, target1.y, 0);
 	}
-	public Image getImage(){
-		if(asterImage == null){
+
+	public Image getImage() {
+		if (asterImage == null) {
 			asterImage = loadImage(6);
 		}
 		return asterImage;
 	}
-	public int getActionNum(){
+
+	public int getActionNum() {
 		return 1;
 	}
 }
