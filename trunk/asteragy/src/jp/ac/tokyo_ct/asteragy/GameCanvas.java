@@ -147,17 +147,6 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		g.dispose();
 	}
 
-	/**
-	 * アステル画像読み込み
-	 * 
-	 * 
-	 * private void loadAsterImage() { // 読込先イメージ asterimage = new
-	 * Image[asterkind]; for (int i = 0; i < asterimage.length; i++) { try { //
-	 * リソースから読み込み MediaImage m = MediaManager.getImage("resource:///aster_" + i +
-	 * ".gif"); // メディアの使用開始 m.use(); // 読み込み asterimage[i] = m.getImage(); }
-	 * catch (Exception e) { } } }
-	 */
-
 	/*
 	 * (非 Javadoc)
 	 * 

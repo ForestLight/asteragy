@@ -1,12 +1,16 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.Graphics;
+import com.nttdocomo.ui.*;
 
 public class Command {
 
 	private static int command;
 
 	private static Point point;
+
+	private static Image commandImage;
+
+	private static final int height = 14;
 
 	public static void setCommand(int cmd, Point pt) {
 		command = cmd;
@@ -16,16 +20,29 @@ public class Command {
 	public static void paintCommand(Graphics g) {
 		if (command < 0 || point == null)
 			return;
+		g.drawImage(getCommandImage(), GameCanvas.measure * point.x,
+				GameCanvas.measure * point.y);
+		g.setColor(Graphics.getColorOfRGB(196, 255, 196, 100));
+		g.fillRect(GameCanvas.measure * point.x, GameCanvas.measure * point.y
+				+ command * height, height * 4 + 2, height);
+		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+	}
+
+	private static Image getCommandImage() {
+		if (commandImage == null)
+			loadCommandImage();
+		return commandImage;
+	}
+
+	private static void loadCommandImage() {
+		commandImage = Image.createImage(height * 4 + 2, height * 2 + 2);
+		Graphics g = commandImage.getGraphics();
+		g.setColor(Graphics.getColorOfRGB(196, 196, 255));
+		g.fillRect(0, 0, height * 4 + 2, height * 2 + 2);
+		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
 		String[] commands = { "スワップ", "コマンド" };
 		for (int i = 0; i < 2; i++) {
-			g
-					.setColor(Graphics.getColorOfRGB(i == command ? 255 : 0,
-							128, 128));
-			g.fillRect(point.x * GameCanvas.measure, point.y
-					* GameCanvas.measure + 14 * i, 48, 14);
-			g.setColor(Graphics.getColorOfRGB(0, 0, 0));
-			g.drawString(commands[i], point.x * GameCanvas.measure, point.y
-					* GameCanvas.measure + 14 * i + 12);
+			g.drawString(commands[i], 1, height * (i + 1) - 1);
 		}
 	}
 
