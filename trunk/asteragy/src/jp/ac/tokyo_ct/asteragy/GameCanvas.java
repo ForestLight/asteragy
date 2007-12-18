@@ -103,9 +103,9 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 			for (int j = 0; j < aster[0].length; j++) {
 				if (aster[i][j] == null)
 					continue;
-				// フィールド
-				g.drawImage(fieldimage, i * GameCanvas.measure, j
-						* GameCanvas.measure);
+				// フィールド 
+//				g.drawImage(fieldimage, i * GameCanvas.measure, j
+//						* GameCanvas.measure);
 				// アステル
 				g.drawScaledImage(aster[i][j].getImage(), i * measure + 1, j
 						* measure + 1, measure - 1, measure - 1, (measure - 1)
