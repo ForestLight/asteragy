@@ -56,7 +56,8 @@ public class KeyInputPlayer extends Player {
 	 * @return 選択されたアステルの座標
 	 */
 	private Point selectAster() {
-		final class EventProcesserForSelectAster extends KeyProcessedEventProcesserImpl {
+		final class EventProcesserForSelectAster extends
+				KeyProcessedEventProcesserImpl {
 			/**
 			 * コンストラクタ
 			 * 
@@ -104,12 +105,13 @@ public class KeyInputPlayer extends Player {
 						.println("EventProcesserForSelectAster.processEvent x = "
 								+ x + ", y = " + y);
 			}
-			
+
 			/**
 			 * キャンセル不可
+			 * 
 			 * @return 常にfalse
 			 */
-			protected boolean onCancel(){
+			protected boolean onCancel() {
 				return false;
 			}
 
@@ -124,6 +126,7 @@ public class KeyInputPlayer extends Player {
 			}
 
 			private int x;
+
 			private int y;
 
 			private final KeyInputPlayer player;
@@ -148,42 +151,46 @@ public class KeyInputPlayer extends Player {
 	 * @return コマンド種別。1は特殊、0はスワップ、-1はキャンセル。
 	 */
 	int selectCommand(Point pt) {
-		final class EventProcesserForSelectCommand extends KeyProcessedEventProcesserImpl {
-			EventProcesserForSelectCommand(Point classPosition){
-				pt = classPosition;				
+		final class EventProcesserForSelectCommand extends
+				KeyProcessedEventProcesserImpl {
+			EventProcesserForSelectCommand(Point classPosition) {
+				pt = classPosition;
 			}
+
 			protected void processKeyEvent(int key) {
 				switch (key) {
 				case Display.KEY_UP:
-					if (command > 0){
+					if (command > 0) {
 						command--;
 					}
 					break;
 				case Display.KEY_DOWN:
-					if (command < 1){
+					if (command < 1) {
 						command++;
 					}
 					break;
 				}
 			}
-			
-			protected boolean onCancel(){
+
+			protected boolean onCancel() {
 				command = -1;
 				return true;
 			}
-			
-			public int selectCommand(){
-				System.out.println("EventProcesserForSelectCommand.selectCommand()");
+
+			public int selectCommand() {
+				System.out
+						.println("EventProcesserForSelectCommand.selectCommand()");
 				waitForSelect();
 				return command;
 			}
 
 			private volatile int command = 0;
+
 			private final Point pt;
 		}
 
 		System.out.println("KeyInputPlayer.selectCommand()");
-		
+
 		Command.setCommand(0, pt);
 		game.getCanvas().repaint();
 		try {

@@ -13,51 +13,51 @@ public class StarClass extends AsterClass {
 	}
 
 	public int getNumber() {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO 黷ｽ\bhEX^u
 		return 2;
 	}
 
 	public int[][] getRange() {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO 黷ｽ\bhEX^u
 		return swapGetRange(defaultRange, target1);
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO 黷ｽ\bhEX^u
 		return swapSetPointAndNext(pt, target1, target2);
 	}
 
 	public boolean hasNext() {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO 黷ｽ\bhEX^u
 		return swapHasNext(target1, target2);
 	}
 
 	public void moveAstern() {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO 黷ｽ\bhEX^u
 		swapMoveAstern(target1, target2);
 	}
 
 	public String getCommandName() {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO 黷ｽ\bhEX^u
 		return null;
 	}
 
 	public String getName() {
-		return "スター";
+		return "X^[";
 	}
 
 	public String getExplain() {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO 黷ｽ\bhEX^u
 		return null;
 	}
 
 	public int getCost() {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO 黷ｽ\bhEX^u
 		return 2;
 	}
 
 	public int getCommandCost() {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO 黷ｽ\bhEX^u
 		return 0;
 	}
 

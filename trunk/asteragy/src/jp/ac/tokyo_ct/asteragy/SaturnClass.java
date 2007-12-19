@@ -3,13 +3,10 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.*;
 
 public class SaturnClass extends AsterClass {
-	private static int[][] defaultRange = {
-		{ 1, 1, 1, 1, 1 },
-		{ 1, 0, 1, 0, 1 },
-		{ 1, 1, 1, 1, 1 },
-		{ 1, 0, 1, 0, 1 },
-		{ 1, 1, 1, 1, 1 }
-	};
+	private static int[][] defaultRange = { { 1, 1, 1, 1, 1 },
+			{ 1, 0, 1, 0, 1 }, { 1, 1, 1, 1, 1 }, { 1, 0, 1, 0, 1 },
+			{ 1, 1, 1, 1, 1 } };
+
 	private static Image asterImage;
 
 	public SaturnClass(Aster a, Player p) {
@@ -96,50 +93,54 @@ public class SaturnClass extends AsterClass {
 		// 左回り
 		int i, j;
 		Point pt = new Point();
-		pt.x = getAster().getField().asterToPoint(getAster()).x-(defaultRange[0].length/2);
-		pt.y = getAster().getField().asterToPoint(getAster()).y-(defaultRange.length/2);
+		pt.x = getAster().getField().asterToPoint(getAster()).x
+				- (defaultRange[0].length / 2);
+		pt.y = getAster().getField().asterToPoint(getAster()).y
+				- (defaultRange.length / 2);
 		Aster[] queue = new Aster[16];
 
-		for(i = 0, j = 0; j < 16; j++){
+		for (i = 0, j = 0; j < 16; j++) {
 			// 外周レンジのアステルを右回りにキューに入れていく
-			if(pt.x >= 0 && pt.x < getAster().getField().getX()
-					&& pt.y >= 0 && pt.y < getAster().getField().getY()){
+			if (pt.x >= 0 && pt.x < getAster().getField().getX() && pt.y >= 0
+					&& pt.y < getAster().getField().getY()) {
 				queue[i] = getAster().getField().getField()[pt.y][pt.x];
 				i++;
 			}
 
-			if(j < 4)
+			if (j < 4)
 				pt.x++;
-			else if(j < 8)
+			else if (j < 8)
 				pt.y++;
-			else if(j < 12)
+			else if (j < 12)
 				pt.x--;
 			else
 				pt.y--;
 
 		}
-		//pt.x = getAster().getField().asterToPoint(getAster()).x-(defaultRange[0].length/2);
-		//pt.y = getAster().getField().asterToPoint(getAster()).y-(defaultRange.length/2);
-		
-		for(i = 1, j = 0; j < 16; j++){
+		// pt.x =
+		// getAster().getField().asterToPoint(getAster()).x-(defaultRange[0].length/2);
+		// pt.y =
+		// getAster().getField().asterToPoint(getAster()).y-(defaultRange.length/2);
+
+		for (i = 1, j = 0; j < 16; j++) {
 			// キューの1番目のアステルから右回りに戻していく
-			if(pt.x >= 0 && pt.x < getAster().getField().getX()
-					&& pt.y >= 0 && pt.y < getAster().getField().getY()){
+			if (pt.x >= 0 && pt.x < getAster().getField().getX() && pt.y >= 0
+					&& pt.y < getAster().getField().getY()) {
 				getAster().getField().getField()[pt.y][pt.x] = queue[i];
 				i++;
 			}
 
-			if(j < 4)
+			if (j < 4)
 				pt.x++;
-			else if(j < 8)
+			else if (j < 8)
 				pt.y++;
-			else if(j < 12)
+			else if (j < 12)
 				pt.x--;
 			else
 				pt.y--;
 
 			// ループ終了前にキューが空になったら0番目のアステルを戻してループを抜ける
-			if(queue[i] == null && j < 16){
+			if (queue[i] == null && j < 16) {
 				getAster().getField().getField()[pt.y][pt.x] = queue[0];
 				break;
 			}
@@ -154,7 +155,7 @@ public class SaturnClass extends AsterClass {
 
 	public Image getImage() {
 		// TODO 自動生成されたメソッド・スタブ
-		if(asterImage == null){
+		if (asterImage == null) {
 			asterImage = loadImage(8);
 		}
 		return asterImage;
