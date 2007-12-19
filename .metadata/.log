@@ -1458,3 +1458,2246 @@ java.lang.Exception: Generated exception.
 	at org.eclipse.core.launcher.Main.basicRun(Main.java:278)
 	at org.eclipse.core.launcher.Main.run(Main.java:973)
 	at org.eclipse.core.launcher.Main.main(Main.java:948)
+!SESSION 2007-12-11 20:11:29.421 -----------------------------------------------
+eclipse.buildId=M20050929-0840
+java.version=1.4.2_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ja_JP
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:11:54.703
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Aster.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:11:54.703
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Aster.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:11:54.968
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\GameCanvas.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:11:54.968
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\GameCanvas.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:11:54.984
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\NeptuneClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:11:54.984
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\NeptuneClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:11:55.00
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\AsterClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:11:55.00
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\AsterClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:11:55.31
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\KeyInputPlayer.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:11:55.31
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\KeyInputPlayer.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:11:55.62
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Field.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:11:55.62
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Field.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:11:55.218
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Game.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:11:55.218
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Game.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:11:55.468
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Main.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:11:55.468
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Main.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:11:55.703
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Player.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:11:55.703
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Player.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:11:55.968
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Action.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:11:55.968
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Action.class
+
+!ENTRY org.eclipse.osgi 2007-12-11 20:12:02.140
+!MESSAGE While loading class "org.tigris.subversion.subclipse.ui.console.SVNOutputConsole$2", thread "main" timed out waiting (5000ms) for thread "Worker-2" to finish starting bundle "org.tigris.subversion.subclipse.ui". To avoid deadlock, thread "main" is proceeding but "org.tigris.subversion.subclipse.ui.console.SVNOutputConsole$2" may not be fully initialized.
+!STACK 0
+java.lang.Exception: Generated exception.
+	at org.eclipse.core.runtime.adaptor.EclipseClassLoader.findLocalClass(EclipseClassLoader.java:108)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findLocalClass(BundleLoader.java:337)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:389)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:350)
+	at org.eclipse.osgi.framework.adaptor.core.AbstractClassLoader.loadClass(AbstractClassLoader.java:78)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClassInternal(Unknown Source)
+	at org.tigris.subversion.subclipse.ui.console.SVNOutputConsole.createPage(SVNOutputConsole.java:160)
+	at org.eclipse.ui.internal.console.ConsoleView.doCreatePage(ConsoleView.java:258)
+	at org.eclipse.ui.part.PageBookView.createPage(PageBookView.java:315)
+	at org.eclipse.ui.part.PageBookView.partActivated(PageBookView.java:613)
+	at org.eclipse.ui.internal.console.ConsoleView$1.run(ConsoleView.java:331)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:123)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3057)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2716)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:1699)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:1663)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:367)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:143)
+	at org.eclipse.ui.internal.ide.IDEApplication.run(IDEApplication.java:103)
+	at org.eclipse.core.internal.runtime.PlatformActivator$1.run(PlatformActivator.java:226)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:376)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:163)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.core.launcher.Main.invokeFramework(Main.java:334)
+	at org.eclipse.core.launcher.Main.basicRun(Main.java:278)
+	at org.eclipse.core.launcher.Main.run(Main.java:973)
+	at org.eclipse.core.launcher.Main.main(Main.java:948)
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.515
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Action.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.531
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Action.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.546
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Aster.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.546
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Aster.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.562
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\NeptuneClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.562
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\NeptuneClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.609
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Player.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.609
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Player.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.640
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\GameCanvas.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.640
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\GameCanvas.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.656
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Field.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.656
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Field.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.781
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\StarClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.781
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\StarClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.812
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\VenusClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.828
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\VenusClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.828
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Game.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.828
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Game.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.843
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\AsterClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.843
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\AsterClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.906
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\MercuryClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.906
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\MercuryClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:47.906
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\KeyInputPlayer.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:47.921
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\KeyInputPlayer.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:25:48.328
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Main.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:25:48.343
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Main.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:26:49.718
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Point.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:26:49.718
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Point.class
+!SESSION 2007-12-11 20:29:40.906 -----------------------------------------------
+eclipse.buildId=M20050929-0840
+java.version=1.4.2_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ja_JP
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:57.109
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\AsterClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:57.109
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\AsterClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:57.234
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\NeptuneClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:57.234
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\NeptuneClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:57.359
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\StarClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:57.359
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\StarClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:57.375
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Aster.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:57.375
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Aster.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:57.421
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\VenusClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:57.421
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\VenusClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:57.453
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\MercuryClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:57.468
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\MercuryClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:57.546
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Field.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:57.546
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Field.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:57.640
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\GameCanvas.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:57.640
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\GameCanvas.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:57.734
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\KeyInputPlayer.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:57.734
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\KeyInputPlayer.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:57.953
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Game.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:57.953
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Game.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:58.125
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Player.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:58.125
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Player.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:29:58.218
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Main.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:29:58.218
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Main.class
+
+!ENTRY org.eclipse.osgi 2007-12-11 20:30:02.515
+!MESSAGE While loading class "org.tigris.subversion.subclipse.ui.console.ConsoleDocument$ConsoleLine", thread "main" timed out waiting (5000ms) for thread "Worker-1" to finish starting bundle "org.tigris.subversion.subclipse.ui". To avoid deadlock, thread "main" is proceeding but "org.tigris.subversion.subclipse.ui.console.ConsoleDocument$ConsoleLine" may not be fully initialized.
+!STACK 0
+java.lang.Exception: Generated exception.
+	at org.eclipse.core.runtime.adaptor.EclipseClassLoader.findLocalClass(EclipseClassLoader.java:108)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findLocalClass(BundleLoader.java:337)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:389)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:350)
+	at org.eclipse.osgi.framework.adaptor.core.AbstractClassLoader.loadClass(AbstractClassLoader.java:78)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClassInternal(Unknown Source)
+	at org.tigris.subversion.subclipse.ui.console.ConsoleDocument.getLines(ConsoleDocument.java:79)
+	at org.tigris.subversion.subclipse.ui.console.SVNOutputConsole.dump(SVNOutputConsole.java:202)
+	at org.tigris.subversion.subclipse.ui.console.SVNOutputConsole.access$1(SVNOutputConsole.java:199)
+	at org.tigris.subversion.subclipse.ui.console.SVNOutputConsole$1.run(SVNOutputConsole.java:124)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:123)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3057)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2716)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:1699)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:1663)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:367)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:143)
+	at org.eclipse.ui.internal.ide.IDEApplication.run(IDEApplication.java:103)
+	at org.eclipse.core.internal.runtime.PlatformActivator$1.run(PlatformActivator.java:226)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:376)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:163)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.core.launcher.Main.invokeFramework(Main.java:334)
+	at org.eclipse.core.launcher.Main.basicRun(Main.java:278)
+	at org.eclipse.core.launcher.Main.run(Main.java:973)
+	at org.eclipse.core.launcher.Main.main(Main.java:948)
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:46:25.375
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\MercuryClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:46:25.375
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\MercuryClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:59:17.968
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\AsterClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:59:17.968
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\AsterClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:59:18.187
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Aster.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:59:18.187
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Aster.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:59:18.203
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\StarClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:59:18.203
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\StarClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:59:18.250
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\VenusClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:59:18.296
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\VenusClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:59:18.359
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\NeptuneClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:59:18.359
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\NeptuneClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:59:18.578
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\GameCanvas.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:59:18.578
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\GameCanvas.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:59:18.609
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Field.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:59:18.609
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Field.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:59:18.703
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\KeyInputPlayer.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:59:18.703
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\KeyInputPlayer.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:59:18.812
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Game.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:59:18.812
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Game.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:59:18.968
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Player.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:59:18.968
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Player.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-11 20:59:19.125
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Main.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-11 20:59:19.140
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Main.class
+!SESSION 2007-12-11 20:59:45.359 -----------------------------------------------
+eclipse.buildId=M20050929-0840
+java.version=1.4.2_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ja_JP
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.osgi 2007-12-11 21:00:10.265
+!MESSAGE While loading class "org.tigris.subversion.subclipse.ui.console.ConsoleDocument$ConsoleLine", thread "main" timed out waiting (5000ms) for thread "Worker-3" to finish starting bundle "org.tigris.subversion.subclipse.ui". To avoid deadlock, thread "main" is proceeding but "org.tigris.subversion.subclipse.ui.console.ConsoleDocument$ConsoleLine" may not be fully initialized.
+!STACK 0
+java.lang.Exception: Generated exception.
+	at org.eclipse.core.runtime.adaptor.EclipseClassLoader.findLocalClass(EclipseClassLoader.java:108)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findLocalClass(BundleLoader.java:337)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:389)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:350)
+	at org.eclipse.osgi.framework.adaptor.core.AbstractClassLoader.loadClass(AbstractClassLoader.java:78)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClassInternal(Unknown Source)
+	at org.tigris.subversion.subclipse.ui.console.ConsoleDocument.getLines(ConsoleDocument.java:79)
+	at org.tigris.subversion.subclipse.ui.console.SVNOutputConsole.dump(SVNOutputConsole.java:202)
+	at org.tigris.subversion.subclipse.ui.console.SVNOutputConsole.access$1(SVNOutputConsole.java:199)
+	at org.tigris.subversion.subclipse.ui.console.SVNOutputConsole$1.run(SVNOutputConsole.java:124)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:123)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3057)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2716)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:1699)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:1663)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:367)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:143)
+	at org.eclipse.ui.internal.ide.IDEApplication.run(IDEApplication.java:103)
+	at org.eclipse.core.internal.runtime.PlatformActivator$1.run(PlatformActivator.java:226)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:376)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:163)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.core.launcher.Main.invokeFramework(Main.java:334)
+	at org.eclipse.core.launcher.Main.basicRun(Main.java:278)
+	at org.eclipse.core.launcher.Main.run(Main.java:973)
+	at org.eclipse.core.launcher.Main.main(Main.java:948)
+!SESSION 2007-12-20 02:41:36.125 -----------------------------------------------
+eclipse.buildId=M20050929-0840
+java.version=1.4.2_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ja_JP
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:42:05.125
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\MercuryClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:42:05.125
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\MercuryClass.class
+
+!ENTRY org.eclipse.osgi 2007-12-20 02:42:13.31
+!MESSAGE While loading class "org.tigris.subversion.subclipse.ui.console.ConsoleDocument$ConsoleLine", thread "main" timed out waiting (5000ms) for thread "Worker-2" to finish starting bundle "org.tigris.subversion.subclipse.ui". To avoid deadlock, thread "main" is proceeding but "org.tigris.subversion.subclipse.ui.console.ConsoleDocument$ConsoleLine" may not be fully initialized.
+!STACK 0
+java.lang.Exception: Generated exception.
+	at org.eclipse.core.runtime.adaptor.EclipseClassLoader.findLocalClass(EclipseClassLoader.java:108)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findLocalClass(BundleLoader.java:337)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:389)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:350)
+	at org.eclipse.osgi.framework.adaptor.core.AbstractClassLoader.loadClass(AbstractClassLoader.java:78)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClassInternal(Unknown Source)
+	at org.tigris.subversion.subclipse.ui.console.ConsoleDocument.getLines(ConsoleDocument.java:79)
+	at org.tigris.subversion.subclipse.ui.console.SVNOutputConsole.dump(SVNOutputConsole.java:202)
+	at org.tigris.subversion.subclipse.ui.console.SVNOutputConsole.access$1(SVNOutputConsole.java:199)
+	at org.tigris.subversion.subclipse.ui.console.SVNOutputConsole$1.run(SVNOutputConsole.java:124)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:123)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3057)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2716)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:1699)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:1663)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:367)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:143)
+	at org.eclipse.ui.internal.ide.IDEApplication.run(IDEApplication.java:103)
+	at org.eclipse.core.internal.runtime.PlatformActivator$1.run(PlatformActivator.java:226)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:376)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:163)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.core.launcher.Main.invokeFramework(Main.java:334)
+	at org.eclipse.core.launcher.Main.basicRun(Main.java:278)
+	at org.eclipse.core.launcher.Main.run(Main.java:973)
+	at org.eclipse.core.launcher.Main.main(Main.java:948)
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:08.343
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Aster.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:08.343
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Aster.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:08.546
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Field.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:08.546
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Field.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:08.593
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\StarClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:08.593
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\StarClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:08.625
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\VenusClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:08.625
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\VenusClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:08.656
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\AsterClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:08.656
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\AsterClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:08.671
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\NeptuneClass.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:08.671
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\NeptuneClass.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:08.796
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\GameCanvas.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:08.796
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\GameCanvas.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:08.843
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\KeyInputPlayer.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:08.859
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\KeyInputPlayer.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:09.250
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Game.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:09.250
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Game.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:09.453
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Main.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:09.453
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Main.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:09.531
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Player.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:09.531
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Player.class
+
+!ENTRY org.eclipse.jdt.core 4 4 2007-12-20 02:46:09.937
+!MESSAGE JavaBuilder handling CoreException
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Action.class
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:518)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:294)
+	at org.eclipse.jdt.internal.core.util.Util.getResourceContentsAsByteArray(Util.java:997)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileCheck(IncrementalImageBuilder.java:629)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.writeClassFileBytes(IncrementalImageBuilder.java:601)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.writeClassFile(AbstractImageBuilder.java:485)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.acceptResult(AbstractImageBuilder.java:160)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:335)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:248)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:198)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:224)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:152)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:593)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:168)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:202)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:231)
+	at org.eclipse.core.internal.runtime.InternalPlatform.run(InternalPlatform.java:1044)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:783)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:234)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:253)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:282)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:139)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:200)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)
+!SUBENTRY 1 org.eclipse.core.resources 4 271 2007-12-20 02:46:09.937
+!MESSAGE ファイルが見つかりません: P:\PROGRAMS\あすてらじぃ☆\asteragy\classes\jp\ac\tokyo_ct\asteragy\Action.class
