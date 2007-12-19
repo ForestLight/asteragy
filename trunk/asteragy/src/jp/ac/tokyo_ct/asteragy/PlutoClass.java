@@ -35,7 +35,7 @@ public class PlutoClass extends AsterClass {
 		case 0:
 			return swapSetPointAndNext(pt, target1, target2);
 		case 1:
-			return true;
+			return false;
 		}
 		return false;
 	}
