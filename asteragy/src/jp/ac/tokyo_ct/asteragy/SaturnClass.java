@@ -97,7 +97,7 @@ public class SaturnClass extends AsterClass {
 				- (defaultRange[0].length / 2);
 		pt.y = getAster().getField().asterToPoint(getAster()).y
 				- (defaultRange.length / 2);
-		Aster[] queue = new Aster[16];
+		Aster[] queue = new Aster[17];
 
 		for (i = 0, j = 0; j < 16; j++) {
 			// 外周レンジのアステルを右回りにキューに入れていく
@@ -122,7 +122,7 @@ public class SaturnClass extends AsterClass {
 		// pt.y =
 		// getAster().getField().asterToPoint(getAster()).y-(defaultRange.length/2);
 
-		for (i = 1, j = 0; j < 16; j++) {
+		for (i = 1, j = 0; ; j++) {
 			// キューの1番目のアステルから右回りに戻していく
 			if (pt.x >= 0 && pt.x < getAster().getField().getX() && pt.y >= 0
 					&& pt.y < getAster().getField().getY()) {
@@ -139,8 +139,8 @@ public class SaturnClass extends AsterClass {
 			else
 				pt.y--;
 
-			// ループ終了前にキューが空になったら0番目のアステルを戻してループを抜ける
-			if (queue[i] == null && j < 16) {
+			// キューが空になったら0番目のアステルを戻してループを抜ける
+			if (queue[i] == null) {
 				getAster().getField().getField()[pt.y][pt.x] = queue[0];
 				break;
 			}
