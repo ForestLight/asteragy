@@ -73,6 +73,7 @@ public class Aster {
 	}
 
 	public void setAsterClass(AsterClass ac) {
+		System.out.println("Aster.setAsterClass");
 		asterClass = ac;
 		ac.setAster(this);
 	}

@@ -27,6 +27,12 @@ public abstract class AsterClass {
 		return aster;
 	}
 
+	/**
+	 * 対応するアスターを設定する
+	 * @param a アスター
+	 * このメソッドは、Aster.setAsterClassから呼ばれるためにある。
+	 * これを直接呼び出さないこと。
+	 */
 	void setAster(Aster a) {
 		aster = a;
 	}
@@ -258,7 +264,8 @@ public abstract class AsterClass {
 	protected boolean swapHasNext(Point target1, Point target2) {
 		if (target1 != null && target2 != null)
 			return false;
-		return true;
+		else
+			return true;
 	}
 
 	public abstract Image getImage();
