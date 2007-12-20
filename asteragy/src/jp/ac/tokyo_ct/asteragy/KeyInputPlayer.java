@@ -117,7 +117,15 @@ public class KeyInputPlayer extends Player {
 
 			public Point getPoint() {
 				System.out.println("EventProcesserForSelectAster.getPoint()");
-				super.waitForSelect();
+				AsterClass ac;
+				do {
+					resetSelected();
+					waitForSelect();
+					ac = game.getField().getField()[y][x].getAsterClass();
+					System.out
+					.println("EventProcesserForSelectAster.getPoint x = "
+							+ x + ", y = " + y);
+				} while (ac == null || ac.getPlayer() != player);
 				return new Point(x, y);
 			}
 
@@ -153,8 +161,9 @@ public class KeyInputPlayer extends Player {
 	int selectCommand(Point pt) {
 		final class EventProcesserForSelectCommand extends
 				KeyProcessedEventProcesserImpl {
-			EventProcesserForSelectCommand(Point classPosition) {
+			EventProcesserForSelectCommand(Player p, Point classPosition) {
 				pt = classPosition;
+				player = p;
 			}
 
 			protected void processKeyEvent(int key) {
@@ -170,6 +179,8 @@ public class KeyInputPlayer extends Player {
 					}
 					break;
 				}
+				Command.setCommand(command, pt);
+				player.game.getCanvas().repaint();
 			}
 
 			protected boolean onCancel() {
@@ -187,18 +198,17 @@ public class KeyInputPlayer extends Player {
 			private volatile int command = 0;
 
 			private final Point pt;
+
+			private final Player player;
 		}
 
 		System.out.println("KeyInputPlayer.selectCommand()");
 
 		Command.setCommand(0, pt);
 		game.getCanvas().repaint();
-		try {
-			Thread.sleep(60 * 1000);
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		}
-		return -1;
+		EventProcesserForSelectCommand ep = new EventProcesserForSelectCommand(
+				this, pt);
+		return ep.selectCommand();
 	}
 
 }

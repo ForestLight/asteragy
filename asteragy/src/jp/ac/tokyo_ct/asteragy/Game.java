@@ -23,6 +23,13 @@ class Game {
 		field = new Field(this);
 		field.setFieldSize(10, 10);
 		field.setAster();
+		
+		//暫定
+		Aster a = field.getField()[0][5];
+		System.out.println("Game.start()");
+		AsterClass ac = new JupiterClass(a, player1);
+//		a.setAsterClass();
+		//a.setAsterClass(new NeptuneClass(a, player1));
 
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
 		{

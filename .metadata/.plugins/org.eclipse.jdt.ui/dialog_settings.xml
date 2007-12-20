@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item key="org.eclipse.jdt.uiformatter_page.white_space.java_view.inner" value="142"/>
-	<item key="org.eclipse.jdt.uiformatter_page.modify_dialog.preferred_x" value="25"/>
 	<item key="org.eclipse.jdt.uiformatter_page.modify_dialog.last_focus" value="6"/>
+	<item key="org.eclipse.jdt.uiformatter_page.modify_dialog.preferred_x" value="25"/>
 	<item key="org.eclipse.jdt.uiformatter_page.modify_dialog_tab_page.last_focus_index" value="6"/>
-	<item key="org.eclipse.jdt.uiformatter_page.modify_dialog.preferred_y" value="75"/>
 	<item key="org.eclipse.jdt.uiformatter_page.modify_dialog.preferred_width" value="831"/>
+	<item key="org.eclipse.jdt.uiformatter_page.modify_dialog.preferred_y" value="75"/>
 	<item key="org.eclipse.jdt.uiformatter_page.white_space.java_view.option" value="151"/>
 	<item key="org.eclipse.jdt.uiformatter_page.line_wrapping_tab_page.last_category_index" value="1"/>
 	<item key="TypeHierarchyViewPart.hierarchyview" value="2"/>
-	<item key="org.eclipse.jdt.uiformatter_page.modify_dialog.preferred_height" value="566"/>
 	<item key="TypeHierarchyViewPart.orientation" value="0"/>
+	<item key="org.eclipse.jdt.uiformatter_page.modify_dialog.preferred_height" value="566"/>
 	<item key="org.eclipse.jdt.uiformatter_page.white_space_tab_page.node" value="0"/>
 	<section name="AddGetterSetterDialog">
 		<item key="SortOrdering" value="false"/>
@@ -53,10 +53,6 @@
 		<item key="VisibilityModifier" value="1"/>
 		<item key="SynchronizedModifier" value="false"/>
 	</section>
-	<section name="OptionalMessageDialog.hide.">
-		<item key="org.eclipse.jdt.ui.typecomment.deprecated" value="true"/>
-		<item key="FormatAll" value="false"/>
-	</section>
 	<section name="SourceActionDialog.constructors">
 		<item key="InsertPosition" value="0"/>
 		<item key="Comments" value="true"/>
@@ -64,14 +60,18 @@
 		<item key="VisibilityModifier" value="1"/>
 		<item key="SynchronizedModifier" value="false"/>
 	</section>
-	<section name="completion_proposal_size">
+	<section name="OptionalMessageDialog.hide.">
+		<item key="org.eclipse.jdt.ui.typecomment.deprecated" value="true"/>
+		<item key="FormatAll" value="false"/>
 	</section>
 	<section name="">
 		<item key="expanded2" value="false"/>
-		<item key="expanded1" value="false"/>
 		<item key="expanded4" value="false"/>
+		<item key="expanded1" value="false"/>
 		<item key="expanded0" value="true"/>
 		<item key="expanded5" value="false"/>
 		<item key="expanded3" value="false"/>
+	</section>
+	<section name="completion_proposal_size">
 	</section>
 </section>

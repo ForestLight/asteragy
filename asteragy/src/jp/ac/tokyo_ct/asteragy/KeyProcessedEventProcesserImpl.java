@@ -28,15 +28,18 @@ abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
 			processKeyEvent(param);
 		}
 	}
-	
+
 	/**
 	 * KEY_PRESSED_EVENTで、決定でもクリアでもないボタンが押されたときに呼ばれる。
-	 * @param key 押されたキー
+	 * 
+	 * @param key
+	 *            押されたキー
 	 */
 	abstract protected void processKeyEvent(int key);
 
 	/**
 	 * キャンセルの操作がなされたときにEventProcesserImplBaseから呼ばれる。派生クラスで上書きしてよい。
+	 * 
 	 * @return キャンセルを許可するならtrue、キャンセル操作を無視するならfalse。
 	 */
 	protected boolean onCancel() {
@@ -45,6 +48,10 @@ abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
 
 	public final boolean isSelected() {
 		return selected;
+	}
+
+	protected final void resetSelected() {
+		selected = false;
 	}
 
 	protected final void waitForSelect() {

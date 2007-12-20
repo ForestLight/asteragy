@@ -42,11 +42,14 @@
 <part id="12"/>
 <part id="13"/>
 <part id="14"/>
+<part id="15"/>
+<part id="16"/>
+<part id="17"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor title="AsterClass.java" name="AsterClass.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java" partName="AsterClass.java" workbook="DefaultEditorWorkbook" activePart="true" focus="true" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java">
+<editor title="AsterClass.java" name="AsterClass.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java" partName="AsterClass.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java"/>
 </editor>
 <editor title="NeptuneClass.java" name="NeptuneClass.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java" partName="NeptuneClass.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java">
@@ -67,7 +70,7 @@
 <editor title="Field.java" name="Field.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/Field.java" partName="Field.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/Field.java">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Field.java"/>
 </editor>
-<editor title="Game.java" name="Game.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/Game.java" partName="Game.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/Game.java">
+<editor title="Game.java" name="Game.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/Game.java" partName="Game.java" workbook="DefaultEditorWorkbook" activePart="true" focus="true" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/Game.java">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Game.java"/>
 </editor>
 <editor title="GameCanvas.java" name="GameCanvas.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/GameCanvas.java" partName="GameCanvas.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/GameCanvas.java">
@@ -90,6 +93,15 @@
 </editor>
 <editor title="StarClass.java" name="StarClass.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/StarClass.java" partName="StarClass.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/StarClass.java">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/StarClass.java"/>
+</editor>
+<editor title="Range.java" name="Range.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/Range.java" partName="Range.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/Range.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Range.java"/>
+</editor>
+<editor title="KeyProcessedEventProcesserImpl.java" name="KeyProcessedEventProcesserImpl.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/KeyProcessedEventProcesserImpl.java" partName="KeyProcessedEventProcesserImpl.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/KeyProcessedEventProcesserImpl.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/KeyProcessedEventProcesserImpl.java"/>
+</editor>
+<editor title="JupiterClass.java" name="JupiterClass.java" id="org.eclipse.jdt.ui.CompilationUnitEditor" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/JupiterClass.java" partName="JupiterClass.java" workbook="DefaultEditorWorkbook" path="P:/PROGRAMS/あすてらじぃ☆/asteragy/src/jp/ac/tokyo_ct/asteragy/JupiterClass.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/JupiterClass.java"/>
 </editor>
 </editors>
 <views>
@@ -213,7 +225,7 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" relative="left" relationship="2" ratioLeft="236" ratioRight="710" ratio="0.24947146"/>
-<info part="bottom" relative="org.eclipse.ui.editorss" relationship="4" ratioLeft="505" ratioRight="169" ratio="0.74925816" folder="true">
+<info part="bottom" relative="org.eclipse.ui.editorss" relationship="4" ratioLeft="501" ratioRight="170" ratio="0.7466468" folder="true">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" expanded="2" appearance="2">
 <page label="問題" content="org.eclipse.ui.views.ProblemView"/>
 <page label="Javadoc" content="org.eclipse.jdt.ui.JavadocView"/>
@@ -248,179 +260,168 @@
 <editors>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/MercuryClass.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/EventProcesser.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Game.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Field.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/GameCanvas.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/VenusClass.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Range.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/KeyInputPlayer.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Main.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Player.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Point.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/StarClass.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/VenusClass.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Action.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/MercuryClass.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/VenusClass.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Field.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Game.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java"/>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Aster.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java"/>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/VenusClass.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/NeptuneClass.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/KeyProcessedEventProcesserImpl.java"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/asteragy/src/jp/ac/tokyo_ct/asteragy/JupiterClass.java"/>
 </editors>
+<item historyLabel="NeptuneClass.java" index="2">
+<position x="661" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="MercuryClass.java" index="0">
+<position x="457" y="0" info="not_deleted"/>
+</item>
 <item historyLabel="Aster.java" index="1">
-<position/>
+<position x="1473" y="8" info="not_deleted"/>
 </item>
-<item historyLabel="AsterClass.java" index="2">
-<position/>
-</item>
-<item historyLabel="EventProcesser.java" index="3">
-<position/>
-</item>
-<item historyLabel="Game.java" index="4">
-<position/>
-</item>
-<item historyLabel="Field.java" index="5">
-<position/>
-</item>
-<item historyLabel="GameCanvas.java" index="6">
-<position/>
-</item>
-<item historyLabel="KeyInputPlayer.java" index="7">
-<position/>
-</item>
-<item historyLabel="Main.java" index="8">
+<item historyLabel="AsterClass.java" index="3">
 <position/>
 </item>
 <item historyLabel="MercuryClass.java" index="0">
-<position x="204" y="0" info="not_deleted"/>
-</item>
-<item historyLabel="NeptuneClass.java" index="9">
-<position/>
-</item>
-<item historyLabel="Player.java" index="10">
-<position/>
-</item>
-<item historyLabel="Point.java" index="11">
-<position/>
-</item>
-<item historyLabel="StarClass.java" index="12">
-<position/>
-</item>
-<item historyLabel="VenusClass.java" index="13">
-<position/>
-</item>
-<item historyLabel="StarClass.java" index="12">
-<position x="49" y="9" info="not_deleted"/>
-</item>
-<item historyLabel="Action.java" index="14">
-<position/>
-</item>
-<item historyLabel="MercuryClass.java" index="15">
-<position/>
-</item>
-<item historyLabel="Aster.java" index="16">
-<position x="1496" y="0" info="not_deleted"/>
-</item>
-<item historyLabel="MercuryClass.java" index="15">
-<position/>
-</item>
-<item historyLabel="Aster.java" index="16">
-<position x="1473" y="8" info="not_deleted"/>
-</item>
-<item historyLabel="MercuryClass.java" index="15">
-<position/>
-</item>
-<item historyLabel="MercuryClass.java" index="15">
-<position x="838" y="3" info="not_deleted"/>
-</item>
-<item historyLabel="NeptuneClass.java" index="17">
-<position/>
-</item>
-<item historyLabel="StarClass.java" index="12">
-<position/>
-</item>
-<item historyLabel="VenusClass.java" index="18">
-<position/>
-</item>
-<item historyLabel="NeptuneClass.java" index="17">
-<position x="661" y="0" info="not_deleted"/>
-</item>
-<item historyLabel="Aster.java" index="16">
-<position x="1473" y="8" info="not_deleted"/>
-</item>
-<item historyLabel="Field.java" index="19">
-<position/>
-</item>
-<item historyLabel="Game.java" index="20">
-<position/>
-</item>
-<item historyLabel="MercuryClass.java" index="15">
-<position x="838" y="3" info="not_deleted"/>
-</item>
-<item historyLabel="Aster.java" index="16">
-<position x="1473" y="8" info="not_deleted"/>
-</item>
-<item historyLabel="MercuryClass.java" index="15">
-<position x="838" y="3" info="not_deleted"/>
-</item>
-<item historyLabel="Aster.java" index="16">
-<position x="1473" y="8" info="not_deleted"/>
-</item>
-<item historyLabel="NeptuneClass.java" index="17">
-<position x="661" y="0" info="not_deleted"/>
-</item>
-<item historyLabel="MercuryClass.java" index="15">
-<position x="457" y="0" info="not_deleted"/>
-</item>
-<item historyLabel="Aster.java" index="16">
-<position x="1473" y="8" info="not_deleted"/>
-</item>
-<item historyLabel="AsterClass.java" index="21">
-<position/>
-</item>
-<item historyLabel="MercuryClass.java" index="15">
 <position x="2630" y="7" info="not_deleted"/>
 </item>
-<item historyLabel="AsterClass.java" index="21">
+<item historyLabel="AsterClass.java" index="3">
 <position x="1439" y="7" info="not_deleted"/>
 </item>
-<item historyLabel="AsterClass.java" index="21">
+<item historyLabel="AsterClass.java" index="3">
 <position x="197" y="0" info="not_deleted"/>
 </item>
-<item historyLabel="AsterClass.java" index="21">
+<item historyLabel="AsterClass.java" index="3">
 <position x="268" y="0" info="not_deleted"/>
 </item>
-<item historyLabel="Aster.java" index="16">
+<item historyLabel="Aster.java" index="1">
 <position x="1473" y="8" info="not_deleted"/>
 </item>
-<item historyLabel="MercuryClass.java" index="15">
+<item historyLabel="MercuryClass.java" index="0">
 <position x="2630" y="7" info="not_deleted"/>
 </item>
-<item historyLabel="Aster.java" index="16">
+<item historyLabel="Aster.java" index="1">
 <position x="1473" y="8" info="not_deleted"/>
 </item>
-<item historyLabel="AsterClass.java" index="21">
+<item historyLabel="AsterClass.java" index="3">
 <position x="3596" y="14" info="not_deleted"/>
 </item>
-<item historyLabel="MercuryClass.java" index="15">
+<item historyLabel="MercuryClass.java" index="0">
 <position x="2086" y="10" info="not_deleted"/>
 </item>
-<item historyLabel="Aster.java" index="22">
+<item historyLabel="Aster.java" index="4">
 <position/>
 </item>
-<item historyLabel="AsterClass.java" index="23">
+<item historyLabel="AsterClass.java" index="5">
 <position x="3129" y="0" info="not_deleted"/>
 </item>
-<item historyLabel="VenusClass.java" index="24">
+<item historyLabel="VenusClass.java" index="6">
 <position x="2867" y="0" info="not_deleted"/>
 </item>
-<item active="true" historyLabel="AsterClass.java" index="23">
+<item historyLabel="AsterClass.java" index="5">
 <position x="2701" y="12" info="not_deleted"/>
+</item>
+<item historyLabel="Range.java" index="7">
+<position x="79" y="5" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="8">
+<position x="3535" y="13" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="8">
+<position x="4063" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="8">
+<position x="4057" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="9">
+<position x="506" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Aster.java" index="10">
+<position x="1270" y="13" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="9">
+<position x="1720" y="4" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="9">
+<position x="677" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="NeptuneClass.java" index="11">
+<position/>
+</item>
+<item historyLabel="Game.java" index="9">
+<position x="680" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="NeptuneClass.java" index="11">
+<position/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="8">
+<position x="1119" y="11" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="8">
+<position x="2743" y="1" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="9">
+<position x="662" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="8">
+<position x="2701" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="KeyProcessedEventProcesserImpl.java" index="12">
+<position x="1081" y="13" info="not_deleted"/>
+</item>
+<item historyLabel="KeyProcessedEventProcesserImpl.java" index="12">
+<position x="1027" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="KeyProcessedEventProcesserImpl.java" index="12">
+<position x="1051" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="KeyProcessedEventProcesserImpl.java" index="12">
+<position x="949" y="10" info="not_deleted"/>
+</item>
+<item historyLabel="KeyProcessedEventProcesserImpl.java" index="12">
+<position x="709" y="15" info="not_deleted"/>
+</item>
+<item historyLabel="KeyProcessedEventProcesserImpl.java" index="12">
+<position x="236" y="12" info="not_deleted"/>
+</item>
+<item historyLabel="KeyProcessedEventProcesserImpl.java" index="12">
+<position x="1013" y="13" info="not_deleted"/>
+</item>
+<item historyLabel="KeyProcessedEventProcesserImpl.java" index="12">
+<position x="983" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="8">
+<position x="182" y="14" info="not_deleted"/>
+</item>
+<item historyLabel="KeyInputPlayer.java" index="8">
+<position x="2546" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="9">
+<position x="1830" y="7" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="9">
+<position x="1720" y="4" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="9">
+<position x="135" y="4" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="9">
+<position x="634" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="JupiterClass.java" index="13">
+<position x="425" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="Game.java" index="9">
+<position x="806" y="0" info="not_deleted"/>
+</item>
+<item historyLabel="AsterClass.java" index="5">
+<position x="160" y="10" info="not_deleted"/>
+</item>
+<item active="true" historyLabel="Game.java" index="9">
+<position x="806" y="0" info="not_deleted"/>
 </item>
 </navigationHistory>
 <stickyState/>
@@ -429,6 +430,15 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="JupiterClass.java" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/JupiterClass.java">
+<persistable path="/asteragy/src/jp/ac/tokyo_ct/asteragy/JupiterClass.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="KeyProcessedEventProcesserImpl.java" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/KeyProcessedEventProcesserImpl.java">
+<persistable path="/asteragy/src/jp/ac/tokyo_ct/asteragy/KeyProcessedEventProcesserImpl.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Range.java" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/Range.java">
+<persistable path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Range.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="StarClass.java" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/StarClass.java">
 <persistable path="/asteragy/src/jp/ac/tokyo_ct/asteragy/StarClass.java"/>
 </file>
@@ -464,15 +474,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Action.java" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/Action.java">
 <persistable path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Action.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/Main.java">
-<persistable path="/asteragy/src/jp/ac/tokyo_ct/asteragy/Main.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="NeptuneClass.java" tooltip="asteragy/src/NeptuneClass.java">
-<persistable path="/asteragy/src/NeptuneClass.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AsterClass.java" tooltip="asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java">
-<persistable path="/asteragy/src/jp/ac/tokyo_ct/asteragy/AsterClass.java"/>
 </file>
 </mruList>
 </workbench>
