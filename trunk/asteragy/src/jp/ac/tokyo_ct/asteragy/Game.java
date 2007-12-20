@@ -25,7 +25,7 @@ class Game {
 		field.setAster();
 		
 		//Žb’è
-		Aster a = field.getField()[0][5];
+		Aster a = field.getField()[0][4];
 		System.out.println("Game.start()");
 		AsterClass ac = new StarClass(a, player1);
 		a.setAsterClass(ac);
