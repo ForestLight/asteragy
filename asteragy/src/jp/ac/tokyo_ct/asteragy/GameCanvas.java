@@ -107,7 +107,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 				// g.drawImage(fieldimage, i * GameCanvas.measure, j
 				// * GameCanvas.measure);
 				// ƒAƒXƒeƒ‹
-				g.drawScaledImage(aster[i][j].getImage(), i * measure + 1, j
+				g.drawScaledImage(aster[i][j].getImage(), j * measure + 1, i
 						* measure + 1, measure - 1, measure - 1, (measure - 1)
 						* (aster[i][j].getColor() - 1), 0, measure - 1,
 						measure - 1);
