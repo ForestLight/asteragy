@@ -9,7 +9,7 @@ import com.nttdocomo.ui.Display;
  * @author Yusuke Ichinohe EventProcesserの実装補助クラス
  */
 abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
-	public void processEvent(int type, int param) {
+	public synchronized void processEvent(int type, int param) {
 		if (type != Display.KEY_PRESSED_EVENT) {
 			return;
 		}
@@ -23,8 +23,10 @@ abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
 		// ここはbreakもreturnも置かない。
 		case Display.KEY_SELECT:
 			selected = true;
+			notifyAll();
 			return;
 		default:
+			System.out.println("KeyProcessedEventProcesserImpl.processEvent - processKeyEvent");
 			processKeyEvent(param);
 		}
 	}
@@ -54,13 +56,26 @@ abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
 		selected = false;
 	}
 
-	protected final void waitForSelect() {
-		while (!selected) {
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
+	protected final void setSelected() {
+		selected = true;
+	}
+	/**
+	 * 選択をユーザに行わせるため、待機する。
+	 * @param c 画面表示を行うGameCanvas。processEventを取得する対象。
+	 */
+	protected synchronized final void waitForSelect(GameCanvas c) {
+		c.setEventProcesser(this);
+		try {
+			while (!selected) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					System.out.println("InterruptedException");
+					//Thread.currentThread().interrupt();
+				}
 			}
+		} finally {
+			c.removeEventProcesser(this);
 		}
 	}
 

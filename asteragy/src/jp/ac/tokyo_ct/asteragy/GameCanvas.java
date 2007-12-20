@@ -188,7 +188,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 *            削除するイベントプロセッサ
 	 * @return 削除したらtrue、しなければfalse; 一致したら削除する。
 	 */
-	public boolean resetEventProcesser(EventProcesser e) {
+	public boolean removeEventProcesser(EventProcesser e) {
 		if (e == eventProcesser) {
 			eventProcesser = null;
 			return true;

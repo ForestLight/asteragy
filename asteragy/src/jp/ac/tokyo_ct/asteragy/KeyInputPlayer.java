@@ -77,7 +77,7 @@ public class KeyInputPlayer extends Player {
 			 * @see jp.ac.tokyo_ct.asteragy.EventProcesser#processEvent(int,
 			 *      int)
 			 */
-			public void processKeyEvent(int key) {
+			protected void processKeyEvent(int key) {
 				switch (key) {
 				case Display.KEY_UP:
 					if (y > 0) {
@@ -95,7 +95,7 @@ public class KeyInputPlayer extends Player {
 					}
 					break;
 				case Display.KEY_RIGHT:
-					if (y < player.game.getField().getX() - 1) {
+					if (x < player.game.getField().getX() - 1) {
 						x++;
 					}
 					break;
@@ -115,12 +115,12 @@ public class KeyInputPlayer extends Player {
 				return false;
 			}
 
-			public Point getPoint() {
+			public Point getPoint(GameCanvas c) {
 				System.out.println("EventProcesserForSelectAster.getPoint()");
 				AsterClass ac;
 				do {
 					resetSelected();
-					waitForSelect();
+					waitForSelect(c);
 					ac = game.getField().getField()[y][x].getAsterClass();
 					System.out
 					.println("EventProcesserForSelectAster.getPoint x = "
@@ -145,7 +145,8 @@ public class KeyInputPlayer extends Player {
 		EventProcesserForSelectAster ep = new EventProcesserForSelectAster(this);
 		canvas.setEventProcesser(ep);
 		System.out.println("canvas.setEventProcesser() after");
-		Point pt = ep.getPoint();
+		Point pt = ep.getPoint(canvas);
+		canvas.removeEventProcesser(ep);
 		System.out.println("KeyInputPlayer.selectAster() - x = " + pt.x
 				+ ", y = " + pt.y);
 		return pt;
@@ -167,6 +168,7 @@ public class KeyInputPlayer extends Player {
 			}
 
 			protected void processKeyEvent(int key) {
+				System.out.println("selectCommand.processKeyEvent");
 				switch (key) {
 				case Display.KEY_UP:
 					if (command > 0) {
@@ -179,6 +181,7 @@ public class KeyInputPlayer extends Player {
 					}
 					break;
 				}
+				System.out.println("selectCommand.processKeyEvent");
 				Command.setCommand(command, pt);
 				player.game.getCanvas().repaint();
 			}
@@ -188,10 +191,21 @@ public class KeyInputPlayer extends Player {
 				return true;
 			}
 
-			public int selectCommand() {
+			public int selectCommand(GameCanvas c) {
 				System.out
 						.println("EventProcesserForSelectCommand.selectCommand()");
-				waitForSelect();
+				waitForSelect(c);
+				switch (command) {
+				case -1:
+					System.out.println("selectCommand - キャンセル");
+					break;
+				case 0:
+					System.out.println("selectCommand - スワップ");
+					break;
+				case 1:
+					System.out.println("selectCommand - 特殊");
+					break;
+				}
 				return command;
 			}
 
@@ -208,7 +222,7 @@ public class KeyInputPlayer extends Player {
 		game.getCanvas().repaint();
 		EventProcesserForSelectCommand ep = new EventProcesserForSelectCommand(
 				this, pt);
-		return ep.selectCommand();
+		return ep.selectCommand(canvas);
 	}
 
 }
