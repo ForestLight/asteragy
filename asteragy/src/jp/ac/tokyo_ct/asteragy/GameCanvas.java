@@ -39,6 +39,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	}
 
 	public void paint(Graphics g) {
+		System.out.println("repaint()");
 		// ダブルバッファ開始
 		g.lock();
 		// クリア

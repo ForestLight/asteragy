@@ -30,7 +30,7 @@ class Game {
 		AsterClass ac = new StarClass(a, player1);
 		a.setAsterClass(ac);
 //		a.setAsterClass();
-		//a.setAsterClass(new NeptuneClass(a, player1));
+		a.setAsterClass(new StarClass(a, player1));
 
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
 		{

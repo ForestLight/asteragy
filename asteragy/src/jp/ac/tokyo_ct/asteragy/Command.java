@@ -22,7 +22,8 @@ public class Command {
 			return;
 		g.drawImage(getCommandImage(), GameCanvas.measure * point.x,
 				GameCanvas.measure * point.y);
-		g.setColor(Graphics.getColorOfRGB(196, 255, 196, 100));
+		g.setColor(Graphics.getColorOfRGB(255, 128, 196, 100));
+		System.out.println("command = " + command);
 		g.fillRect(GameCanvas.measure * point.x, GameCanvas.measure * point.y
 				+ command * height, height * 4 + 2, height);
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
@@ -35,7 +36,7 @@ public class Command {
 	}
 
 	private static void loadCommandImage() {
-		commandImage = Image.createImage(height * 4 + 2, height * 2 + 2);
+		commandImage = Image.createImage(height * 4 + 2, height * 2 +1);
 		Graphics g = commandImage.getGraphics();
 		g.setColor(Graphics.getColorOfRGB(196, 196, 255));
 		g.fillRect(0, 0, height * 4 + 2, height * 2 + 2);
