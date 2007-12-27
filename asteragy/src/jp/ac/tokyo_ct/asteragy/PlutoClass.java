@@ -3,8 +3,12 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.*;
 
 public class PlutoClass extends AsterClass {
-	private static int[][] defaultRange = { { 1, 0, 1 }, { 0, 1, 0 },
-			{ 1, 1, 1 }, { 0, 1, 0 }, { 1, 0, 1 }, };
+	private static int[][] defaultRange = { 
+			{ 1, 0, 1 },
+			{ 0, 1, 0 },
+			{ 1, 1, 1 }, 
+			{ 0, 1, 0 }, 
+			{ 1, 0, 1 }, };
 
 	private static Image asterImage;
 
@@ -22,7 +26,7 @@ public class PlutoClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange, target1);
+			return swapGetRange(defaultRange);
 		case 1:
 			return null;
 		}
@@ -33,7 +37,7 @@ public class PlutoClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapSetPointAndNext(pt, target1, target2);
+			return swapSetPointAndNext(pt);
 		case 1:
 			return false;
 		}
@@ -55,7 +59,7 @@ public class PlutoClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			swapMoveAstern(target1, target2);
+			swapMoveAstern();
 			break;
 		case 1:
 			break;

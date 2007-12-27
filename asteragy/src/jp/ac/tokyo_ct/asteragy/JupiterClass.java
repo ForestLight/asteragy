@@ -3,8 +3,11 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.*;
 
 public class JupiterClass extends AsterClass {
-	private static int[][] defaultRange = { { 0, 0, 0, 0, 0 },
-			{ 0, 0, 1, 0, 0 }, { 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 },
+	private static int[][] defaultRange = { 
+			{ 0, 0, 0, 0, 0 },
+			{ 0, 0, 1, 0, 0 }, 
+			{ 0, 1, 1, 1, 0 },
+			{ 1, 1, 1, 1, 1 },
 			{ 0, 1, 1, 1, 0 } };
 
 	private static Image asterImage;
@@ -23,7 +26,7 @@ public class JupiterClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange, target1);
+			return swapGetRange(defaultRange);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
@@ -86,7 +89,7 @@ public class JupiterClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 
 		// スワップの場合もコマンドの場合も同じ
-		return swapSetPointAndNext(pt, target1, target2);
+		return swapSetPointAndNext(pt);
 	}
 
 	public boolean hasNext() {
@@ -96,7 +99,7 @@ public class JupiterClass extends AsterClass {
 
 	public void moveAstern() {
 		// TODO 自動生成されたメソッド・スタブ
-		swapMoveAstern(target1, target2);
+		swapMoveAstern();
 	}
 
 	public String getName() {

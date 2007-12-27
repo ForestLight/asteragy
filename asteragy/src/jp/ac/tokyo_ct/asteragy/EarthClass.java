@@ -22,7 +22,7 @@ public class EarthClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange, target1);
+			return swapGetRange(defaultRange);
 		case 1:
 		}
 		return null;
@@ -32,7 +32,7 @@ public class EarthClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapSetPointAndNext(pt, target1, target2);
+			return swapSetPointAndNext(pt);
 		case 1:
 		}
 
@@ -54,7 +54,7 @@ public class EarthClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			swapMoveAstern(target1, target2);
+			swapMoveAstern();
 			break;
 		case 1:
 			break;

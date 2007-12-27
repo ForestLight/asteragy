@@ -34,8 +34,8 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		super();
 		loadField();
 		game = g;
-		// int[][] r = { { 0, 1, 1 }, { 0, 1, 0 }, { 1, 1, 0 } };
-		// Range.setRange(new Point(5, 5), r);
+		 //int[][] r = { { 0, 1, 1 }, { 0, 1, 0 }, { 1, 1, 0 } };
+		 //Range.setRange(new Point(5, 5), r);
 	}
 
 	public void paint(Graphics g) {
@@ -113,7 +113,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 						* (aster[i][j].getColor() - 1), 0, measure - 1,
 						measure - 1);
 				// レンジ
-				Range.paint(g, i, j);
+				Range.paint(g, j,i);
 			}
 		}
 		// カーソル描画

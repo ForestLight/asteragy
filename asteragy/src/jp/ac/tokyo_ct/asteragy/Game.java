@@ -21,17 +21,32 @@ class Game {
 		player1 = new KeyInputPlayer(this, "先攻");
 		player2 = new KeyInputPlayer(this, "後攻");
 		field = new Field(this);
-		field.setFieldSize(10, 10);
+		field.setFieldSize(11, 11);
 		field.setAster();
 		
 		//暫定
-		Aster a = field.getField()[0][4];
-		System.out.println("Game.start()");
-		AsterClass ac = new StarClass(a, player1);
-		a.setAsterClass(ac);
-//		a.setAsterClass();
+		Aster a = field.getField()[6][0];
 		a.setAsterClass(new StarClass(a, player1));
-
+		a = field.getField()[6][1];
+		a.setAsterClass(new MercuryClass(a, player1));
+		a = field.getField()[6][2];
+		a.setAsterClass(new VenusClass(a, player1));
+		a = field.getField()[6][3];
+		a.setAsterClass(new EarthClass(a, player1));
+		a = field.getField()[6][4];
+		a.setAsterClass(new MarsClass(a, player1));
+		a = field.getField()[6][5];
+		a.setAsterClass(new JupiterClass(a, player1));
+		a = field.getField()[6][6];
+		a.setAsterClass(new SaturnClass(a, player1));
+		a = field.getField()[6][7];
+		a.setAsterClass(new UranusClass(a, player1));
+		a = field.getField()[6][8];
+		a.setAsterClass(new NeptuneClass(a, player1));
+		a = field.getField()[6][9];
+		a.setAsterClass(new PlutoClass(a, player1));
+		
+		System.out.println("Game.start()");
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
 		{
 			boolean gameover;
