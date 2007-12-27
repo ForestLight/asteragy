@@ -3,8 +3,11 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.*;
 
 public class VenusClass extends AsterClass {
-	private static int[][] defaultRange = { { 0, 0, 1, 0, 0 },
-			{ 0, 1, 1, 1, 0 }, { 0, 1, 1, 1, 0 }, { 0, 0, 0, 0, 0 },
+	private static int[][] defaultRange = {
+			{ 0, 0, 1, 0, 0 },
+			{ 0, 1, 1, 1, 0 }, 
+			{ 0, 1, 1, 1, 0 }, 
+			{ 0, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 0 } };
 
 	private static Image asterImage;
@@ -23,7 +26,7 @@ public class VenusClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange, target1);
+			return swapGetRange(defaultRange);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			final Point thisPoint = getAster().getField().asterToPoint(
@@ -65,7 +68,7 @@ public class VenusClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapSetPointAndNext(pt, target1, target2);
+			return swapSetPointAndNext(pt);
 		case 1:
 			target1 = pt;
 			return true;
@@ -91,7 +94,7 @@ public class VenusClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			swapMoveAstern(target1, target2);
+			swapMoveAstern();
 			break;
 		case 1:
 			break;

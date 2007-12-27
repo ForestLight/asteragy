@@ -3,8 +3,11 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.*;
 
 public class StarClass extends AsterClass {
-	private static int[][] defaultRange = { { 0, 1, 0 }, { 1, 1, 1 },
-			{ 0, 0, 0 } };
+	private static int[][] defaultRange = { 
+		{ 
+			0, 1, 0 },
+		{ 1, 1, 1 },
+		{ 0, 1, 0 } };
 
 	private static Image asterImage;
 
@@ -13,51 +16,42 @@ public class StarClass extends AsterClass {
 	}
 
 	public int getNumber() {
-		// TODO ꂽ\bhEX^u
 		return 2;
 	}
 
 	public int[][] getRange() {
-		// TODO ꂽ\bhEX^u
-		return swapGetRange(defaultRange, target1);
+		return swapGetRange(defaultRange);
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		// TODO ꂽ\bhEX^u
-		return swapSetPointAndNext(pt, target1, target2);
+		return swapSetPointAndNext(pt);
 	}
 
 	public boolean hasNext() {
-		// TODO ꂽ\bhEX^u
 		return swapHasNext(target1, target2);
 	}
 
 	public void moveAstern() {
-		// TODO ꂽ\bhEX^u
-		swapMoveAstern(target1, target2);
+		swapMoveAstern();
 	}
 
 	public String getCommandName() {
-		// TODO ꂽ\bhEX^u
 		return null;
 	}
 
 	public String getName() {
-		return "X^[";
+		return "�X�^�[";
 	}
 
 	public String getExplain() {
-		// TODO ꂽ\bhEX^u
 		return null;
 	}
 
 	public int getCost() {
-		// TODO ꂽ\bhEX^u
 		return 2;
 	}
 
 	public int getCommandCost() {
-		// TODO ꂽ\bhEX^u
 		return 0;
 	}
 

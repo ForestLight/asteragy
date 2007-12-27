@@ -193,41 +193,41 @@ public abstract class AsterClass {
 	 * 
 	 * @return 現在の選択範囲
 	 */
-	protected int[][] swapGetRange(int[][] defaultRange, Point target1) {
+	protected int[][] swapGetRange(int[][] defaultRange) {
 		int[][] range = new int[defaultRange.length][defaultRange[0].length];
-
 		// 1個目の対象選択
 		if (target1 == null) {
 			for (int i = 0; i < defaultRange.length; i++) {
 				for (int j = 0; j < defaultRange[0].length; j++) {
 					// 上下左右に隣接レンジが無い孤立したレンジを除外
-					if (defaultRange[i + 1][j] + defaultRange[i - 1][j]
-							+ defaultRange[i][j + 1] + defaultRange[i][j - 1] != 0) {
+				//	if (defaultRange[i + 1][j] + defaultRange[i - 1][j]
+				//			+ defaultRange[i][j + 1] + defaultRange[i][j - 1] != 0) {
 						range[i][j] = defaultRange[i][j];
-					}
+				//	}
 				}
 			}
-			// 2個目の対象選択
-		} else {
+			
+		}
+//		 2個目の対象選択
+		else {
 			// target1の座標をレンジ内に修正したもの
 			Point selftPoint = getAster().getPoint();
 			Point pt = new Point();
+			System.out.println("tx:"+target1.x+"ty:"+target1.y+"spx:"+selftPoint .x+"spy:"+selftPoint .y);
 			pt.x = target1.x - (selftPoint.x - range[0].length / 2);
 			pt.y = target1.y - (selftPoint.y - range.length / 2);
+			System.out.println("px:"+pt.x+"py:"+pt.y);
 
 			for (int i = 0; i < range.length; i++) {
-				for (int j = 0; j < range.length; j++) {
+				for (int j = 0; j < range[0].length; j++) {
 					// 1個目の対象の上下左右のマスで、元のレンジに含まれている場所のみ1
 					if (i == pt.y - 1 && j == pt.x && defaultRange[j][i] == 1) {
 						range[j][i] = 1;
-					} else if (i == pt.y + 1 && j == pt.x
-							&& defaultRange[j][i] == 1) {
+					} else if (i == pt.y + 1 && j == pt.x && defaultRange[j][i] == 1) {
 						range[j][i] = 1;
-					} else if (i == pt.y && j == pt.x + 1
-							&& defaultRange[j][i] == 1) {
+					} else if (i == pt.y && j == pt.x + 1 && defaultRange[j][i] == 1) {
 						range[j][i] = 1;
-					} else if (i == pt.y && j == pt.x - 1
-							&& defaultRange[j][i] == 1) {
+					} else if (i == pt.y && j == pt.x - 1 && defaultRange[j][i] == 1) {
 						range[j][i] = 1;
 					} else {
 						// 1個目の対象の上下左右以外移動不可
@@ -236,12 +236,12 @@ public abstract class AsterClass {
 				}
 			}
 			// 1個目の対象の位置を移動可・選択不可
-			range[pt.y][pt.x] = 0;
+			range[pt.x][pt.y] = 0;
 		}
 		return range;
 	}
 
-	protected void swapMoveAstern(Point target1, Point target2) {
+	protected void swapMoveAstern() {
 		// 2個目の対象選択中に呼ばれた場合
 		if (target2 == null) {
 			target1 = null;
@@ -252,7 +252,7 @@ public abstract class AsterClass {
 		}
 	}
 
-	protected boolean swapSetPointAndNext(Point pt, Point target1, Point target2) {
+	protected boolean swapSetPointAndNext(Point pt) {
 		if (target1 == null) {
 			target1 = pt;
 		} else {
@@ -262,10 +262,13 @@ public abstract class AsterClass {
 	}
 
 	protected boolean swapHasNext(Point target1, Point target2) {
-		if (target1 != null && target2 != null)
+		if (target1 != null && target2 != null){
+			System.out.println("swapHasNext return false");
 			return false;
-		else
+		}else{
+			System.out.println("swapHasNext return true");
 			return true;
+		}
 	}
 
 	public abstract Image getImage();

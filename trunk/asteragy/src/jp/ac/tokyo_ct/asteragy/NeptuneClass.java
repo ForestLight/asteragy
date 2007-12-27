@@ -23,7 +23,7 @@ public class NeptuneClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange, target1);
+			return swapGetRange(defaultRange);
 		case 1:
 			return defaultRange;
 		}
@@ -33,7 +33,7 @@ public class NeptuneClass extends AsterClass {
 	public boolean setPointAndNext(Point pt) {
 		switch (mode) {
 		case 0:
-			return swapSetPointAndNext(pt, target1, target2);
+			return swapSetPointAndNext(pt);
 		case 1:
 			target1 = pt;
 			return true;
@@ -60,7 +60,7 @@ public class NeptuneClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			swapMoveAstern(target1, target2);
+			swapMoveAstern();
 			break;
 		case 1:
 			break;

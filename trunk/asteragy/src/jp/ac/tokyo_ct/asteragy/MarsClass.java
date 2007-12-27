@@ -22,7 +22,7 @@ public class MarsClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange, target1);
+			return swapGetRange(defaultRange);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
@@ -65,7 +65,7 @@ public class MarsClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapSetPointAndNext(pt, target1, target2);
+			return swapSetPointAndNext(pt);
 		case 1:
 			target1 = pt;
 			return true;
@@ -91,7 +91,7 @@ public class MarsClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			swapMoveAstern(target1, target2);
+			swapMoveAstern();
 			break;
 		case 1:
 			target1 = null;

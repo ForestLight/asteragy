@@ -18,7 +18,8 @@ abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
 		}
 
 		switch (param) {
-		case Display.KEY_CLEAR:
+		case Display.KEY_9:
+			System.out.println("Cancel");
 			onCancel();
 		// Ç±Ç±ÇÕbreakÇ‡returnÇ‡íuÇ©Ç»Ç¢ÅB
 		case Display.KEY_SELECT:

@@ -24,7 +24,7 @@ public class UranusClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange, target1);
+			return swapGetRange(defaultRange);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
@@ -99,7 +99,7 @@ public class UranusClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 
 		// スワップの場合もコマンドの場合も同じ
-		return swapSetPointAndNext(pt, target1, target2);
+		return swapSetPointAndNext(pt);
 	}
 
 	public boolean hasNext() {
@@ -109,7 +109,7 @@ public class UranusClass extends AsterClass {
 
 	public void moveAstern() {
 		// TODO 自動生成されたメソッド・スタブ
-		swapMoveAstern(target1, target2);
+		swapMoveAstern();
 	}
 
 	public String getName() {
