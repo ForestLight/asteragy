@@ -46,15 +46,36 @@ class Game {
 		a = field.getField()[6][9];
 		a.setAsterClass(new PlutoClass(a, player1));
 		
+		a = field.getField()[4][0];
+		a.setAsterClass(new StarClass(a, player2));
+		a = field.getField()[4][1];
+		a.setAsterClass(new MercuryClass(a, player2));
+		a = field.getField()[4][2];
+		a.setAsterClass(new VenusClass(a, player2));
+		a = field.getField()[4][3];
+		a.setAsterClass(new EarthClass(a, player2));
+		a = field.getField()[4][4];
+		a.setAsterClass(new MarsClass(a, player2));
+		a = field.getField()[4][5];
+		a.setAsterClass(new JupiterClass(a, player2));
+		a = field.getField()[4][6];
+		a.setAsterClass(new SaturnClass(a, player2));
+		a = field.getField()[4][7];
+		a.setAsterClass(new UranusClass(a, player2));
+		a = field.getField()[4][8];
+		a.setAsterClass(new NeptuneClass(a, player2));
+		a = field.getField()[4][9];
+		a.setAsterClass(new PlutoClass(a, player2));
+		
 		System.out.println("Game.start()");
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
 		{
 			boolean gameover;
 			gameover = turn(player1);
-			if (gameover)
+			if (!gameover)
 				break;
 			gameover = turn(player2);
-			if (gameover)
+			if (!gameover)
 				break;
 		}
 	}
