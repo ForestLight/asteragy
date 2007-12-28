@@ -29,7 +29,7 @@ public class Range {
 			g.fillRect(x * GameCanvas.measure, y * GameCanvas.measure,
 					GameCanvas.measure, GameCanvas.measure);
 			g.setColor(Graphics.getColorOfName(Graphics.BLACK));
-		} else if (range[rx][ry] == 1) {
+		} else if (range[ry][rx] == 1) {
 			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 			g.drawRect(x * GameCanvas.measure, y * GameCanvas.measure,
 					GameCanvas.measure, GameCanvas.measure);

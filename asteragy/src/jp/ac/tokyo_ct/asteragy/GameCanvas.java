@@ -34,7 +34,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		super();
 		loadField();
 		game = g;
-		 //int[][] r = { { 0, 1, 1 }, { 0, 1, 0 }, { 1, 1, 0 } };
+		// int[][] r = { { 0, 1, 1 }, { 0, 1, 0 }, { 1, 1, 0 } };
 		 //Range.setRange(new Point(5, 5), r);
 	}
 
