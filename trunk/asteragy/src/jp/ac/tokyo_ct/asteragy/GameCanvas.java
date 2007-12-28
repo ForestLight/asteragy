@@ -108,6 +108,12 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 				// g.drawImage(fieldimage, i * GameCanvas.measure, j
 				// * GameCanvas.measure);
 				// ƒAƒXƒeƒ‹
+				if(aster[i][j].getAsterClass() != null &&
+					aster[i][j].getAsterClass().getPlayer() == game.getPlayer2()){
+					g.setFlipMode(Graphics.FLIP_VERTICAL);
+				}else{
+					g.setFlipMode(Graphics.FLIP_NONE);
+				}
 				g.drawScaledImage(aster[i][j].getImage(), j * measure + 1, i
 						* measure + 1, measure - 1, measure - 1, (measure - 1)
 						* (aster[i][j].getColor() - 1), 0, measure - 1,

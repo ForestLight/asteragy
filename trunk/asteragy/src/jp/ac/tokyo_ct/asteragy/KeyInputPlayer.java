@@ -30,6 +30,7 @@ public class KeyInputPlayer extends Player {
 				switch (state) {
 				case 0: // 操作クラスの選択
 					pt = selectAster();
+					if(pt == null) return null;
 					state++;
 					break;
 				case 1: // スワップか特殊コマンドかを選択
@@ -72,7 +73,7 @@ public class KeyInputPlayer extends Player {
 					System.out.println("実行完了");
 					
 //					 消滅判定
-
+					this.addSP(game.getField().deleteAll());
 					
 					state=0;
 					canvas.repaint();
@@ -141,12 +142,12 @@ public class KeyInputPlayer extends Player {
 			}
 
 			/**
-			 * キャンセル不可
-			 * 
-			 * @return 常にfalse
+			 * キャンセル可
+			 * キャンセルの場合ターン終了
 			 */
 			protected boolean onCancel() {
-				return false;
+				pt = null;
+				return true;
 			}
 
 			public Point getPoint(GameCanvas c) {
@@ -159,14 +160,20 @@ public class KeyInputPlayer extends Player {
 					System.out
 					.println("EventProcesserForSelectAster.getPoint x = "
 							+ x + ", y = " + y);
-				} while (ac == null || ac.getPlayer() != player);
-				return new Point(x, y);
+				} while (pt != null && (ac == null || ac.getPlayer() != player));
+				
+				//return new Point(x, y);
+				if(pt != null){
+					pt = new Point(x,y);
+				}
+				return pt;
 			}
 
 			private void applyPosition() {
 				canvas.drawCursor(x, y, Cursor.CURSOR_1);
 			}
-
+			private Point pt = new Point();
+			
 			private int x;
 
 			private int y;
@@ -181,8 +188,8 @@ public class KeyInputPlayer extends Player {
 		System.out.println("canvas.setEventProcesser() after");
 		Point pt = ep.getPoint(canvas);
 		canvas.removeEventProcesser(ep);
-		System.out.println("KeyInputPlayer.selectAster() - x = " + pt.x
-				+ ", y = " + pt.y);
+	//	System.out.println("KeyInputPlayer.selectAster() - x = " + pt.x
+	//			+ ", y = " + pt.y);
 		return pt;
 	}
 
