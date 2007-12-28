@@ -26,6 +26,11 @@ public abstract class Player {
 	public int getSP() {
 		return sp;
 	}
+	
+	public void addSP(int n){
+		sp += n;
+		System.out.println("SP+"+n+"");
+	}
 
 	protected final String name;
 

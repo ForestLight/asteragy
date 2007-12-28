@@ -77,7 +77,7 @@ public class MarsClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapHasNext(target1, target2);
+			return swapHasNext();
 		case 1:
 			if (target1 == null)
 				return true;
@@ -87,15 +87,17 @@ public class MarsClass extends AsterClass {
 		return false;
 	}
 
-	public void moveAstern() {
+	public boolean moveAstern() {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			swapMoveAstern();
-			break;
+			return swapMoveAstern();
 		case 1:
+			if(target1 == null)
+				return true;
 			target1 = null;
 		}
+		return false;
 	}
 
 	public String getName() {

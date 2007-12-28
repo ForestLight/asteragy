@@ -28,11 +28,11 @@ public class StarClass extends AsterClass {
 	}
 
 	public boolean hasNext() {
-		return swapHasNext(target1, target2);
+		return swapHasNext();
 	}
 
-	public void moveAstern() {
-		swapMoveAstern();
+	public boolean moveAstern() {
+		return swapMoveAstern();
 	}
 
 	public String getCommandName() {

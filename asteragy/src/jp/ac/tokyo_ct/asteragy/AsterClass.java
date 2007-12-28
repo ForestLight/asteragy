@@ -79,8 +79,9 @@ public abstract class AsterClass {
 
 	/**
 	 * 1つ前の選択に戻る。
+	 * @return 一つ目の対象選択中に呼ばれた場合true
 	 */
-	public abstract void moveAstern();
+	public abstract boolean moveAstern();
 
 	/**
 	 * @return クラス名
@@ -202,7 +203,7 @@ public abstract class AsterClass {
 					// 上下左右に隣接レンジが無い孤立したレンジを除外
 				//	if (defaultRange[i + 1][j] + defaultRange[i - 1][j]
 				//			+ defaultRange[i][j + 1] + defaultRange[i][j - 1] != 0) {
-						range[i][j] = defaultRange[i][j];
+						range[i][j] = defaultRange[j][i];
 				//	}
 				}
 			}
@@ -221,17 +222,17 @@ public abstract class AsterClass {
 			for (int i = 0; i < range.length; i++) {
 				for (int j = 0; j < range[0].length; j++) {
 					// 1個目の対象の上下左右のマスで、元のレンジに含まれている場所のみ1
-					if (i == pt.y - 1 && j == pt.x && defaultRange[j][i] == 1) {
+					if (i == pt.y - 1 && j == pt.x && defaultRange[i][j] == 1) {
 						range[j][i] = 1;
-					} else if (i == pt.y + 1 && j == pt.x && defaultRange[j][i] == 1) {
+					} else if (i == pt.y + 1 && j == pt.x && defaultRange[i][j] == 1) {
 						range[j][i] = 1;
-					} else if (i == pt.y && j == pt.x + 1 && defaultRange[j][i] == 1) {
+					} else if (i == pt.y && j == pt.x + 1 && defaultRange[i][j] == 1) {
 						range[j][i] = 1;
-					} else if (i == pt.y && j == pt.x - 1 && defaultRange[j][i] == 1) {
+					} else if (i == pt.y && j == pt.x - 1 && defaultRange[i][j] == 1) {
 						range[j][i] = 1;
 					} else {
 						// 1個目の対象の上下左右以外移動不可
-						range[j][i] = -1;
+						range[j][i] = 0;
 					}
 				}
 			}
@@ -241,7 +242,11 @@ public abstract class AsterClass {
 		return range;
 	}
 
-	protected void swapMoveAstern() {
+	protected boolean swapMoveAstern() {
+		//1個目の対象選択中に呼ばれた場合
+		if(target1 == null){
+			return true;
+		}
 		// 2個目の対象選択中に呼ばれた場合
 		if (target2 == null) {
 			target1 = null;
@@ -250,6 +255,7 @@ public abstract class AsterClass {
 		else {
 			target2 = null;
 		}
+		return false;
 	}
 
 	protected boolean swapSetPointAndNext(Point pt) {
@@ -261,7 +267,7 @@ public abstract class AsterClass {
 		return true;
 	}
 
-	protected boolean swapHasNext(Point target1, Point target2) {
+	protected boolean swapHasNext() {
 		if (target1 != null && target2 != null){
 			System.out.println("swapHasNext return false");
 			return false;
