@@ -4,11 +4,11 @@ import com.nttdocomo.ui.*;
 
 public class PlutoClass extends AsterClass {
 	private static int[][] defaultRange = { 
-			{ 1, 0, 1 },
-			{ 0, 1, 0 },
-			{ 1, 1, 1 }, 
-			{ 0, 1, 0 }, 
-			{ 1, 0, 1 }, };
+			{ 0, 1, 0, 1, 0 },
+			{ 0, 0, 1, 0, 0 },
+			{ 0, 1, 1, 1, 0 }, 
+			{ 0, 0, 1, 0, 0 }, 
+			{ 0, 1, 0, 1, 0 } };
 
 	private static Image asterImage;
 
