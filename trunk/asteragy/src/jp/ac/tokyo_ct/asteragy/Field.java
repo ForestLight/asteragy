@@ -201,10 +201,14 @@ class Field {
 		if (field[y][x].getDeleteFlag() == true) {
 			field[y][x].delete(0);
 			count++;
-			count = delete(x, y - 1, count);
-			count = delete(x - 1, y, count);
-			count = delete(x, y + 1, count);
-			count = delete(x + 1, y, count);
+			if(y >= 0)
+				count = delete(x, y - 1, count);
+			if(x >= 0)
+				count = delete(x - 1, y, count);
+			if(y < Y)
+				count = delete(x, y + 1, count);
+			if(x < X)
+				count = delete(x + 1, y, count);
 
 			// ƒ‰ƒ“ƒ_ƒ€‚ÅŒˆ’è‚µ‚½F‚Å–â‘è‚È‚¢ê‡
 			if (judge(x, y) == false) {
