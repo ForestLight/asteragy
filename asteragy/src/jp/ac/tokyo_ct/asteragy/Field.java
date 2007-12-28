@@ -96,8 +96,7 @@ class Field {
 	 *            注目するマスのx座標
 	 * @param y
 	 *            注目するマスのy座標
-	 * @return true 同色アステルが3個つながっている
-	 * @return false つながった同色アステルが3個未満
+	 * @return true 同色アステルが3個つながっている false 3個未満
 	 */
 	public boolean judge(int x, int y) {
 		int AsterColor = field[y][x].getColor();
@@ -194,7 +193,7 @@ class Field {
 	 *            注目するマスのy座標
 	 * @param count
 	 *            消したアステル数をカウント（最初は0を入れる）
-	 * @return count 消したアステル数
+	 * @return 消したアステル数
 	 */
 	public int delete(int x, int y, int count) {
 		int AsterColor = field[y][x].getColor();
@@ -227,6 +226,27 @@ class Field {
 				field[y][x].delete(AsterColor);
 			}
 		}
+		return count;
+	}
+
+	/**
+	 * フィールド上の消えるべきアステルを全て消す
+	 * 
+	 * @return 消したアステル数
+	 */
+	public int deleteAll() {
+		int i, j;
+		int count = 0;
+
+		for(i = 0; i < Y; i++) {
+			for(j = 0; j < X; j++) {
+				if(judge(j, i) == true) {
+					setDeleteFlagSameColor(j, i, field[i][j].getColor());
+					count += delete(j, i, 0);
+				}
+			}
+		}
+
 		return count;
 	}
 
