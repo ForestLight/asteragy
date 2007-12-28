@@ -59,7 +59,7 @@ public class VenusClass extends AsterClass {
 					}
 				}
 			}
-			return defaultRange;
+			return range;
 		}
 		return null;
 	}

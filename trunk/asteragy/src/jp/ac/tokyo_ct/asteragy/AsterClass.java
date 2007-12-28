@@ -203,7 +203,7 @@ public abstract class AsterClass {
 					// 上下左右に隣接レンジが無い孤立したレンジを除外
 				//	if (defaultRange[i + 1][j] + defaultRange[i - 1][j]
 				//			+ defaultRange[i][j + 1] + defaultRange[i][j - 1] != 0) {
-						range[i][j] = defaultRange[j][i];
+						range[i][j] = defaultRange[i][j];
 				//	}
 				}
 			}
@@ -211,6 +211,7 @@ public abstract class AsterClass {
 		}
 //		 2個目の対象選択
 		else {
+			range = new int[defaultRange.length][defaultRange[0].length];
 			// target1の座標をレンジ内に修正したもの
 			Point selftPoint = getAster().getPoint();
 			Point pt = new Point();
@@ -223,21 +224,21 @@ public abstract class AsterClass {
 				for (int j = 0; j < range[0].length; j++) {
 					// 1個目の対象の上下左右のマスで、元のレンジに含まれている場所のみ1
 					if (i == pt.y - 1 && j == pt.x && defaultRange[i][j] == 1) {
-						range[j][i] = 1;
+						range[i][j] = 1;
 					} else if (i == pt.y + 1 && j == pt.x && defaultRange[i][j] == 1) {
-						range[j][i] = 1;
+						range[i][j] = 1;
 					} else if (i == pt.y && j == pt.x + 1 && defaultRange[i][j] == 1) {
-						range[j][i] = 1;
+						range[i][j] = 1;
 					} else if (i == pt.y && j == pt.x - 1 && defaultRange[i][j] == 1) {
-						range[j][i] = 1;
+						range[i][j] = 1;
 					} else {
 						// 1個目の対象の上下左右以外移動不可
-						range[j][i] = 0;
+						range[i][j] = 0;
 					}
 				}
 			}
 			// 1個目の対象の位置を移動可・選択不可
-			range[pt.x][pt.y] = 0;
+			range[pt.y][pt.x] = 0;
 		}
 		return range;
 	}
