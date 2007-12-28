@@ -45,22 +45,22 @@ public class SaturnClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			return swapHasNext(target1, target2);
+			return swapHasNext();
 		case 1:
 			return false;
 		}
 		return false;
 	}
 
-	public void moveAstern() {
+	public boolean moveAstern() {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
-			swapMoveAstern();
-			break;
+			return swapMoveAstern();
 		case 1:
 			break;
 		}
+		return false;
 	}
 
 	public String getName() {

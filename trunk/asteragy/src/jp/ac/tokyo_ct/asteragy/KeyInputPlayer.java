@@ -54,7 +54,10 @@ public class KeyInputPlayer extends Player {
 						System.out.println("ターゲット選択中");
 						System.out.println("target - x = "+pt.x+" y = "+pt.y);
 						if(target == null){
-							ac.moveAstern();
+							if(ac.moveAstern()){
+								state=-1;
+								break;
+							}
 						}
 						ac.setPointAndNext(target);
 					}
@@ -67,6 +70,10 @@ public class KeyInputPlayer extends Player {
 					System.out.println("実行");
 					game.getField().getAster(pt).getAsterClass().execute();
 					System.out.println("実行完了");
+					
+//					 消滅判定
+
+					
 					state=0;
 					canvas.repaint();
 				}

@@ -94,12 +94,12 @@ public class JupiterClass extends AsterClass {
 
 	public boolean hasNext() {
 		// TODO 自動生成されたメソッド・スタブ
-		return swapHasNext(target1, target2);
+		return swapHasNext();
 	}
 
-	public void moveAstern() {
+	public boolean moveAstern() {
 		// TODO 自動生成されたメソッド・スタブ
-		swapMoveAstern();
+		return swapMoveAstern();
 	}
 
 	public String getName() {
