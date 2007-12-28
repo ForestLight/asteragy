@@ -103,10 +103,14 @@ class Field {
 
 		countAster = 0;
 
-		judgeMain(x, y - 1, 1, AsterColor);
-		judgeMain(x - 1, y, 2, AsterColor);
-		judgeMain(x, y + 1, 3, AsterColor);
-		judgeMain(x + 1, y, 4, AsterColor);
+		if(y > 0)
+			judgeMain(x, y - 1, 1, AsterColor);
+		if(x > 0)
+			judgeMain(x - 1, y, 2, AsterColor);
+		if(y < Y - 1)
+			judgeMain(x, y + 1, 3, AsterColor);
+		if(x < X - 1)
+			judgeMain(x + 1, y, 4, AsterColor);
 
 		if (countAster < 3) {
 			countAster = 0;
@@ -141,13 +145,13 @@ class Field {
 			/*
 			 * 現在注目している座標を後戻りさせないように再帰 back（以前に注目していた座標のある方向）1 下 2 右 3 上 4 左
 			 */
-			if (back != 1)
+			if (back != 1 && y < Y - 1)
 				judgeMain(x, y + 1, 3, AsterColor);
-			if (back != 2)
+			if (back != 2 && x < X - 1)
 				judgeMain(x + 1, y, 4, AsterColor);
-			if (back != 3)
+			if (back != 3 && y > 0)
 				judgeMain(x, y - 1, 1, AsterColor);
-			if (back != 4)
+			if (back != 4 && x > 0)
 				judgeMain(x - 1, y, 2, AsterColor);
 
 		}
@@ -167,10 +171,14 @@ class Field {
 		if (field[y][x].getColor() == AsterColor
 				&& field[y][x].getDeleteFlag() == false) {
 			field[y][x].setDeleteFlag(true);
-			setDeleteFlagSameColor(x, y - 1, AsterColor);
-			setDeleteFlagSameColor(x - 1, y, AsterColor);
-			setDeleteFlagSameColor(x, y + 1, AsterColor);
-			setDeleteFlagSameColor(x + 1, y, AsterColor);
+			if(y > 0)
+				setDeleteFlagSameColor(x, y - 1, AsterColor);
+			if(x > 0)
+				setDeleteFlagSameColor(x - 1, y, AsterColor);
+			if(y < Y - 1)
+				setDeleteFlagSameColor(x, y + 1, AsterColor);
+			if(x < X - 1)
+				setDeleteFlagSameColor(x + 1, y, AsterColor);
 		}
 	}
 
@@ -201,13 +209,13 @@ class Field {
 		if (field[y][x].getDeleteFlag() == true) {
 			field[y][x].delete(0);
 			count++;
-			if(y >= 0)
+			if(y > 0)
 				count = delete(x, y - 1, count);
-			if(x >= 0)
+			if(x > 0)
 				count = delete(x - 1, y, count);
-			if(y < Y)
+			if(y < Y - 1)
 				count = delete(x, y + 1, count);
-			if(x < X)
+			if(x < X - 1)
 				count = delete(x + 1, y, count);
 
 			// ランダムで決定した色で問題ない場合
