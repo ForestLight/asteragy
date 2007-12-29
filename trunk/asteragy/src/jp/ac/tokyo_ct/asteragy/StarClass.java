@@ -34,28 +34,8 @@ public class StarClass extends AsterClass {
 		return swapMoveAstern();
 	}
 
-	public String getCommandName() {
-		return null;
-	}
-
-	public String getName() {
-		return "ÉXÉ^Å[";
-	}
-
-	public String getExplain() {
-		return null;
-	}
-
-	public int getCost() {
-		return 2;
-	}
-
-	public int getCommandCost() {
-		return 0;
-	}
-
 	public void executeSpecialCommand() {
-
+		getAster().getField().swap(target1, target2);
 	}
 
 	public Image getImage() {

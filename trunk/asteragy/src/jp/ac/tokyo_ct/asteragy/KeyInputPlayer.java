@@ -206,6 +206,7 @@ public class KeyInputPlayer extends Player {
 			EventProcesserForSelectCommand(Player p, Point classPosition) {
 				pt = classPosition;
 				player = p;
+				ac = game.getField().getField()[pt.y][pt.x].getAsterClass();
 			}
 
 			protected void processKeyEvent(int key) {
@@ -224,6 +225,7 @@ public class KeyInputPlayer extends Player {
 				}
 				System.out.println("selectCommand.processKeyEvent");
 				Command.setCommand(command, pt);
+				Command.setAsterClass(ac);
 				player.game.getCanvas().repaint();
 			}
 
@@ -236,6 +238,11 @@ public class KeyInputPlayer extends Player {
 				System.out
 						.println("EventProcesserForSelectCommand.selectCommand()");
 				waitForSelect(c);
+				do{
+					resetSelected();
+					waitForSelect(c);
+				//SP足らないのにコマンド選んでる場合のみ受け付けない
+				}while(command == 1 && ac.getCommandCost() > player.getSP());
 				switch (command) {
 				case -1:
 					System.out.println("selectCommand - キャンセル");
@@ -249,7 +256,8 @@ public class KeyInputPlayer extends Player {
 				}
 				return command;
 			}
-
+			private final AsterClass ac;
+			
 			private volatile int command = 0;
 
 			private final Point pt;

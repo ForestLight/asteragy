@@ -87,29 +87,39 @@ public abstract class AsterClass {
 	/**
 	 * @return クラス名
 	 */
-	public abstract String getName();
+	public String getName(){
+		return AsterClassData.className[getNumber()-1];
+	}
 
 	/**
 	 * @return 特殊コマンド名
 	 */
-	public abstract String getCommandName();
-
+	public String getCommandName(){
+		return AsterClassData.commandName[getNumber()-1];
+	}
+	
 	/**
 	 * @return 特殊コマンドの説明
 	 */
-	public abstract String getExplain();
+	public String getExplain(){
+		return AsterClassData.commandExplain[getNumber()-1];
+	}
 
 	/**
 	 * 
 	 * @return クラス付与時のコスト
 	 */
-	public abstract int getCost();
+	public int getCost(){
+		return AsterClassData.classCost[getNumber()-1];
+	}
 
 	/**
 	 * 
 	 * @return 特殊コマンド使用時のコスト
 	 */
-	public abstract int getCommandCost();
+	public int getCommandCost(){
+		return AsterClassData.commandCost[getNumber()-1];
+	}
 
 	/**
 	 * コマンドを実行

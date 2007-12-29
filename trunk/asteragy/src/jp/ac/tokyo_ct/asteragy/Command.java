@@ -7,6 +7,8 @@ public class Command {
 	private static int command;
 
 	private static Point point;
+	
+	private static AsterClass asterClass;
 
 	private static Image commandImage;
 
@@ -15,6 +17,10 @@ public class Command {
 	public static void setCommand(int cmd, Point pt) {
 		command = cmd;
 		point = pt;
+	}
+	
+	public static void setAsterClass(AsterClass ac){
+		asterClass = ac;
 	}
 
 	public static void paintCommand(Graphics g) {
@@ -27,6 +33,21 @@ public class Command {
 		g.fillRect(GameCanvas.measure * point.x, GameCanvas.measure * point.y
 				+ command * height, height * 4 + 2, height);
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		
+		PaintCommandName(g);
+	}
+	/**
+	 * コマンド名とコスト描画(テスト用に仮)
+	 * @param g
+	 */
+	public static void PaintCommandName(Graphics g){
+		if(command < 0 || point == null) return;
+		g.setColor(Graphics.getColorOfRGB(255,128,255));
+		if(command == 0){
+			g.drawString("スワップ 0",55,215);
+		}else{
+		g.drawString(asterClass.getCommandName() + " " + asterClass.getCommandCost(),55,215);	
+		}
 	}
 
 	private static Image getCommandImage() {
