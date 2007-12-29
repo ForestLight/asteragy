@@ -62,7 +62,7 @@ public class NeptuneClass extends AsterClass {
 		case 0:
 			return swapMoveAstern();
 		case 1:
-			break;
+			return true;
 		}
 		return false;
 	}

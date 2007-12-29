@@ -34,7 +34,7 @@ public abstract class Player {
 
 	protected final String name;
 
-	private int sp;
+	private int sp = 999;
 
 	protected final Game game;
 }
