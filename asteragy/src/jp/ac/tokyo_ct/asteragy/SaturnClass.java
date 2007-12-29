@@ -148,11 +148,6 @@ public class SaturnClass extends AsterClass {
 		/* 左回りか右回りをプレイヤーに選択させるのはどこになるのか */
 	}
 
-	public int getActionNum() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 1;
-	}
-
 	public Image getImage() {
 		// TODO 自動生成されたメソッド・スタブ
 		if (asterImage == null) {

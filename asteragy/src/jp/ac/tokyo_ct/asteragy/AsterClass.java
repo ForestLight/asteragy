@@ -14,6 +14,7 @@ public abstract class AsterClass {
 	public AsterClass(Aster a, Player p) {
 		aster = a;
 		player = p;
+		actionCount = getActionNum();
 	}
 
 	/**
@@ -147,7 +148,9 @@ public abstract class AsterClass {
 		isProtected = false;
 	}
 
-	public abstract int getActionNum();
+	public int getActionNum(){
+		return AsterClassData.actionNum[getNumber()-1];
+	}
 
 	/**
 	 * s“®‰Â”\‰ñ”‘

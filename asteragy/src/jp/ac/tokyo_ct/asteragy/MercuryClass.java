@@ -137,9 +137,4 @@ public class MercuryClass extends AsterClass {
 		}
 		return asterImage;
 	}
-
-	public int getActionNum() {
-		return 1;
-	}
-
 }

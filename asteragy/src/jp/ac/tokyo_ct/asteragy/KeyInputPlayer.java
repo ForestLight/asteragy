@@ -160,7 +160,7 @@ public class KeyInputPlayer extends Player {
 					System.out
 					.println("EventProcesserForSelectAster.getPoint x = "
 							+ x + ", y = " + y);
-				} while (pt != null && (ac == null || ac.getPlayer() != player));
+				} while (pt != null && (ac == null || ac.getPlayer() != player || ac.getActionCount() == 0));
 				
 				//return new Point(x, y);
 				if(pt != null){

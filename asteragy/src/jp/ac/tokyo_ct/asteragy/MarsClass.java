@@ -142,7 +142,4 @@ public class MarsClass extends AsterClass {
 		return asterImage;
 	}
 
-	public int getActionNum() {
-		return 1;
-	}
 }

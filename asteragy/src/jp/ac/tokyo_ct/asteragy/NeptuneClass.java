@@ -103,7 +103,4 @@ public class NeptuneClass extends AsterClass {
 		return asterImage;
 	}
 
-	public int getActionNum() {
-		return 1;
-	}
 }

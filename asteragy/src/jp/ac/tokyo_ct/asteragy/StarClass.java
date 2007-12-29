@@ -4,8 +4,7 @@ import com.nttdocomo.ui.*;
 
 public class StarClass extends AsterClass {
 	private static int[][] defaultRange = { 
-		{ 
-			0, 1, 0 },
+		{ 0, 1, 0 },
 		{ 1, 1, 1 },
 		{ 0, 1, 0 } };
 
@@ -65,9 +64,4 @@ public class StarClass extends AsterClass {
 		}
 		return asterImage;
 	}
-
-	public int getActionNum() {
-		return 1;
-	}
-
 }
