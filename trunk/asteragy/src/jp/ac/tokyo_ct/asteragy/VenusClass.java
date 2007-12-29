@@ -140,8 +140,4 @@ public class VenusClass extends AsterClass {
 		}
 		return asterImage;
 	}
-
-	public int getActionNum() {
-		return 1;
-	}
 }

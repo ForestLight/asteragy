@@ -148,9 +148,4 @@ public class UranusClass extends AsterClass {
 		}
 		return asterImage;
 	}
-
-	public int getActionNum() {
-		return 1;
-	}
-
 }

@@ -126,9 +126,4 @@ public class PlutoClass extends AsterClass {
 		}
 		return asterImage;
 	}
-
-	public int getActionNum() {
-		return 1;
-	}
-
 }

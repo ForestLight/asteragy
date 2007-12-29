@@ -89,6 +89,7 @@ class Game {
 		System.out.println("Game.turn()");
 		printMemoryStatus();
 		canvas.onTurnStart(player);
+		field.onTurnStart(player);
 		for (;;) {
 			Action a = player.getAction();
 			if (a == null) {

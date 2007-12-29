@@ -140,7 +140,4 @@ public class JupiterClass extends AsterClass {
 		return asterImage;
 	}
 
-	public int getActionNum() {
-		return 1;
-	}
 }

@@ -253,7 +253,6 @@ class Field {
 		for(i = 0; i < Y; i++) {
 			for(j = 0; j < X; j++) {
 				if(judge(j, i) == true) {
-					System.out.println("i"+i+"j"+j);
 					setDeleteFlagSameColor(j, i, field[i][j].getColor());
 					count += delete(j, i, 0);
 				}
@@ -305,5 +304,15 @@ class Field {
 			}
 		}
 		return null;
+	}
+	
+	public void onTurnStart(Player p){
+		for(int i = 0;i < Y; i++){
+			for(int j = 0;j < X;j++){
+				if(field[i][j].getAsterClass() != null && field[i][j].getAsterClass().getPlayer() == p){
+					field[i][j].getAsterClass().init();
+				}
+			}
+		}
 	}
 }
