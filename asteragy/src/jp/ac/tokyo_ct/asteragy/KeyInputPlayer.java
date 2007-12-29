@@ -68,13 +68,16 @@ public class KeyInputPlayer extends Player {
 					break;
 					
 				case 3:
-					System.out.println("é¿çs");
+					if(cmd == 1){
+						this.addSP(-game.getField().getAster(pt).getAsterClass().getCommandCost());
+					}		
 					game.getField().getAster(pt).getAsterClass().execute();
 					System.out.println("é¿çsäÆóπ");
 					
+					
 //					 è¡ñ≈îªíË
 					this.addSP(game.getField().deleteAll());
-					
+					System.out.println("è¡ãéäÆóπ");
 					state=0;
 					canvas.repaint();
 				}
@@ -206,7 +209,7 @@ public class KeyInputPlayer extends Player {
 			EventProcesserForSelectCommand(Player p, Point classPosition) {
 				pt = classPosition;
 				player = p;
-				ac = game.getField().getField()[pt.y][pt.x].getAsterClass();
+				ac = game.getField().getAster(pt).getAsterClass();
 			}
 
 			protected void processKeyEvent(int key) {
@@ -237,7 +240,6 @@ public class KeyInputPlayer extends Player {
 			public int selectCommand(GameCanvas c) {
 				System.out
 						.println("EventProcesserForSelectCommand.selectCommand()");
-				waitForSelect(c);
 				do{
 					resetSelected();
 					waitForSelect(c);
