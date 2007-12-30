@@ -62,16 +62,27 @@ public class KeyInputPlayer extends Player {
 						}
 						ac.setPointAndNext(target);
 					}
-					state++;				
 					Range.setRange(null,null);
+					
+					if(ac.getNumber() == 1){
+						Point acs = selectAsterClass(pt);
+						if(acs.x == -1){
+							state = -1;
+						}else{
+							ac.setPointAndNext(acs);
+						}					
+					}
+					
+					state++;				
 				}
 					break;
 					
 				case 3:
+					final AsterClass ac = game.getField().getAster(pt).getAsterClass();
 					if(cmd == 1){
-						this.addSP(-game.getField().getAster(pt).getAsterClass().getCommandCost());
+						this.addSP(-ac.getCommandCost());
 					}		
-					game.getField().getAster(pt).getAsterClass().execute();
+					ac.execute();
 					System.out.println("実行完了");
 					
 					
@@ -387,5 +398,72 @@ public class KeyInputPlayer extends Player {
 			canvas.setEventProcesser(ep);
 			System.out.println("canvas.setEventProcesser() after");
 			return ep.getTarget(canvas);
+	}
+	
+	/**
+	 * サン専用　クラスを選択する
+	 * @return
+	 * 　対象 非常にアレだけど都合によりPoint型
+	 */
+	private Point selectAsterClass(Point pt) {
+		final class EventProcesserForSelectAsterClass extends
+				KeyProcessedEventProcesserImpl {
+			EventProcesserForSelectAsterClass(Player p, Point classPosition) {
+				pt = classPosition;
+				player = p;
+			}
+
+			protected void processKeyEvent(int key) {
+				switch (key) {
+				case Display.KEY_UP:
+					if (command > 0) {
+						command--;
+					}
+					break;
+				case Display.KEY_DOWN:
+					if (command < 9) {
+						command++;
+					}
+					break;
+				}
+				System.out.println("selectAsterClass.processKeyEvent");
+				System.out.println("select = " + command);
+//				Command.setCommand(command, pt);
+//				Command.setAsterClass(ac);
+//				player.game.getCanvas().repaint();
+			}
+
+			protected boolean onCancel() {
+				command = -1;
+				return true;
+			}
+
+			public int selectAsterClass(GameCanvas c) {
+				System.out
+						.println("EventProcesserForSelectCommand.selectCommand()");
+				do{
+					resetSelected();
+					waitForSelect(c);
+				//コスト足らないのにクラスを選んでる場合のみ受け付けない
+				}while(command != -1 && AsterClassData.classCost[command+1] > player.getSP());
+
+				return command;
+			}
+			private volatile int command = 0;
+
+			private final Point pt;
+
+			private final Player player;
+		}
+
+		System.out.println("KeyInputPlayer.selectCommand()");
+
+//		Command.setCommand(0, pt);
+//		game.getCanvas().repaint();
+		EventProcesserForSelectAsterClass ep = new EventProcesserForSelectAsterClass(
+				this, pt);
+		Point r = new Point();
+		r.x = ep.selectAsterClass(canvas);
+		return r;
 	}
 }

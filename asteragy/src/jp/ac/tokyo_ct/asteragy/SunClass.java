@@ -1,27 +1,29 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.*;
+import com.nttdocomo.ui.Image;
 
-public class VenusClass extends AsterClass {
-	private static int[][] defaultRange = {
-			{ 0, 0, 1, 0, 0 },
-			{ 0, 1, 1, 1, 0 }, 
-			{ 0, 1, 1, 1, 0 }, 
-			{ 0, 0, 0, 0, 0 },
-			{ 0, 0, 0, 0, 0 } };
-
+public class SunClass extends AsterClass {
+	private static int[][] defaultRange ={
+		{0,0,1,0,0},
+		{0,1,1,1,0},
+		{1,1,1,1,1},
+		{0,1,1,1,0},
+		{0,0,1,0,0}
+	};
+	
 	private static Image asterImage;
+	private int asterClassSelect;
 
-	public VenusClass(Aster a, Player p) {
+	public SunClass(Aster a, Player p) {
 		super(a, p);
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public int getNumber() {
 		// TODO 自動生成されたメソッド・スタブ
-		return 4;
+		return 1;
 	}
-
+	
 	public int[][] getRange() {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
@@ -46,15 +48,14 @@ public class VenusClass extends AsterClass {
 
 					// レンジ内であり
 					if (defaultRange[i][j] == 1) {
+						range[i][j] = 1;
 						// その位置のアステルにクラスがあり
-						final Aster f = getAster().getField().getField()[pt.y
+						final Aster f = field.getField()[pt.y
 								+ i][pt.x + j];
 						if (f.getAsterClass() != null) {
-							// そのクラスの所持者が相手であり
+							// そのクラスの所持者が相手である場合選択不可能
 							if (f.getAsterClass().getPlayer() != getPlayer()) {
-								// サンでなければ対象に選択可能
-								if (f.getNumber() != 1)
-									range[i][j] = 1;
+									range[i][j] = 0;
 							}
 						}
 					}
@@ -71,8 +72,11 @@ public class VenusClass extends AsterClass {
 		case 0:
 			return swapSetPointAndNext(pt);
 		case 1:
-			target1 = pt;
-			return true;
+			if (target1 == null) {
+				target1 = pt;
+			} else {
+				asterClassSelect = pt.x;
+			}
 		}
 		return false;
 	}
@@ -102,43 +106,55 @@ public class VenusClass extends AsterClass {
 		return false;
 	}
 
-	public String getCommandName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "テンプテーション";
-	}
-
-	public String getExplain() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "敵ユニット一体を自分のユニットにする";
-	}
-
-	public int getCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 7;
-	}
-
-	public int getCommandCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 7;
-	}
-
-	public String getName() {
-		return "ヴィーナス";
-	}
-
 	public void executeSpecialCommand() {
-		// 対象の所持者を変更
-		getAster().getField().getAster(target1).getAsterClass().setPlayer(
-				this.getPlayer());
-		// 行動済状態に
-		getAster().getField().getAster(target1).getAsterClass().setActionCount(
-				0);
+		// TODO 自動生成されたメソッド・スタブ
+		final Field field = getAster().getField();
+		final Aster a = field.getAster(target1);
+		AsterClass ac = new StarClass(a,getPlayer());
+		
+		switch(asterClassSelect){
+		case 0:
+			ac = new StarClass(a,getPlayer());
+			break;
+		case 1:
+			ac = new MercuryClass(a,getPlayer());
+			break;
+		case 2:
+			ac = new VenusClass(a,getPlayer());
+			break;
+		case 3:
+			ac = new EarthClass(a,getPlayer());
+			break;
+		case 4:
+			ac = new MarsClass(a,getPlayer());
+			break;
+		case 5:
+			ac = new JupiterClass(a,getPlayer());
+			break;
+		case 6:
+			ac = new SaturnClass(a,getPlayer());
+			break;
+		case 7:
+			ac = new UranusClass(a,getPlayer());
+			break;
+		case 8:
+			ac = new NeptuneClass(a,getPlayer());
+			break;
+		case 9:
+			ac = new PlutoClass(a,getPlayer());
+			break;
+	
+		}
+		
+		field.getAster(target1).setAsterClass(ac);
+		getPlayer().addSP(-AsterClassData.classCost[asterClassSelect+1]);
 	}
 
 	public Image getImage() {
 		if (asterImage == null) {
-			asterImage = loadImage(4);
+			asterImage = loadImage(1);
 		}
 		return asterImage;
 	}
+
 }

@@ -315,4 +315,16 @@ class Field {
 			}
 		}
 	}
+	
+	public boolean checkGameOver(Player p){
+//		for(int i = 0;i < Y; i++){
+//			for(int j = 0;j < X;j++){
+//				final AsterClass ac = field[i][j].getAsterClass();
+//				if(ac != null && ac.getNumber() == 1 && ac.getPlayer() == p){
+//					return false;
+//				}
+//			}
+//		}
+		return false;
+	}
 }
