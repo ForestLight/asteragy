@@ -101,7 +101,7 @@ public class SunClass extends AsterClass {
 		case 0:
 			return swapMoveAstern();
 		case 1:
-			return true;
+			return swapMoveAstern();
 		}
 		return false;
 	}

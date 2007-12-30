@@ -67,6 +67,7 @@ public class KeyInputPlayer extends Player {
 					if(ac.getNumber() == 1 && cmd == 1){
 						Point acs = selectAsterClass(pt);
 						if(acs.x == -1){
+							ac.moveAstern();
 							state = -1;
 						}else{
 							ac.setPointAndNext(acs);
