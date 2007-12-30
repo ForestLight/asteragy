@@ -4,13 +4,22 @@ import com.nttdocomo.ui.*;
 
 public class MarsClass extends AsterClass {
 	private static int[][] defaultRange = { 
-			{ 0, 0, 0, 1, 0, 0, 0 },
-			{ 0, 0, 1, 1, 1, 0, 0 },
-			{ 0, 0, 0, 1, 0, 0, 0 },
-			{ 0, 0, 1, 1, 1, 0, 0 },
-			{ 0, 0, 0, 0, 0, 0, 0 },
-			{ 0, 0, 0, 0, 0, 0, 0 },
-			{ 0, 0, 0, 0, 0, 0, 0 } };
+		{ 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 0, 1, 1, 1, 0, 0 },
+		{ 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 0, 1, 1, 1, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0 } };
+	
+	private static int[][] defaultRangeP2 = { 
+		{ 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 1, 1, 1, 0, 0 },
+		{ 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 0, 1, 1, 1, 0, 0 },
+		{ 0, 0, 0, 1, 0, 0, 0 } };
 
 	private static Image asterImage;
 
@@ -28,7 +37,11 @@ public class MarsClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
+			if(getPlayer() == getPlayer().game.getPlayer2()){
+				return swapGetRange(defaultRangeP2);
+			}else{
 			return swapGetRange(defaultRange);
+			}
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
@@ -38,27 +51,54 @@ public class MarsClass extends AsterClass {
 			pt.y = getAster().getField().asterToPoint(getAster()).y
 					- (range.length / 2);
 
-			for (int i = 0; i + pt.y < defaultRange.length; i++) {
-				if (pt.y + i < 0)
-					continue;
-				for (int j = 0; j + pt.x < defaultRange[0].length; j++) {
-					if (pt.x + j < 0)
+			if(getPlayer() == getPlayer().game.getPlayer2()){
+				for (int i = 0; i + pt.y < defaultRange.length; i++) {
+					if (pt.y + i < 0)
 						continue;
+					for (int j = 0; j + pt.x < defaultRange[0].length; j++) {
+						if (pt.x + j < 0)
+							continue;
 
-					if (defaultRange[i][j] == 1) {
-						// レンジ内で自身かサン以外なら選択可
-						if (getAster().getField().getField()[pt.y + i][pt.x + j]
-								.getNumber() != 1
-								&& getAster().getField().getField()[pt.y + i][pt.x
-										+ j] != getAster()) {
-							range[i][j] = 1;
-						}
-						// 自身かサンなら移動のみ可
-						else {
+						if (defaultRangeP2[i][j] == 1) {
+							// レンジ内で自身かサン以外なら選択可
+							if (getAster().getField().getField()[pt.y + i][pt.x + j]
+									.getNumber() != 1
+									&& getAster().getField().getField()[pt.y + i][pt.x
+											+ j] != getAster()) {
+								range[i][j] = 1;
+							}
+							// 自身かサンなら移動のみ可
+							else {
+								range[i][j] = 0;
+							}
+						} else {
 							range[i][j] = 0;
 						}
-					} else {
-						range[i][j] = 0;
+					}
+				}
+			}else{
+				for (int i = 0; i + pt.y < defaultRange.length; i++) {
+					if (pt.y + i < 0)
+						continue;
+					for (int j = 0; j + pt.x < defaultRange[0].length; j++) {
+						if (pt.x + j < 0)
+							continue;
+	
+						if (defaultRange[i][j] == 1) {
+							// レンジ内で自身かサン以外なら選択可
+							if (getAster().getField().getField()[pt.y + i][pt.x + j]
+									.getNumber() != 1
+									&& getAster().getField().getField()[pt.y + i][pt.x
+											+ j] != getAster()) {
+								range[i][j] = 1;
+							}
+							// 自身かサンなら移動のみ可
+							else {
+								range[i][j] = 0;
+							}
+						} else {
+							range[i][j] = 0;
+						}
 					}
 				}
 			}

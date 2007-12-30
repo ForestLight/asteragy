@@ -4,9 +4,12 @@ import com.nttdocomo.ui.*;
 
 public class MercuryClass extends AsterClass {
 
-	private static int[][] defaultRange = { { 0, 0, 0, 0, 0 },
-			{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
-			{ 0, 0, 0, 0, 0 } };
+	private static int[][] defaultRange = { 
+		{ 0, 0, 0, 0, 0 },
+		{ 0, 1, 1, 1, 0 }, 
+		{ 1, 1, 1, 1, 1 },
+		{ 0, 1, 1, 1, 0 },
+		{ 0, 0, 0, 0, 0 } };
 
 	private static Image asterImage;
 

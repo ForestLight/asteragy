@@ -25,7 +25,7 @@ class Game {
 		field.setAster();
 		
 		//‚Ä‚·‚Æ‚Õ‚ê[—p
-//		
+		
 //		Aster a = field.getField()[6][0];
 //		a.setAsterClass(new StarClass(a, player1));
 //		a = field.getField()[6][1];
@@ -74,12 +74,12 @@ class Game {
 //		a.setAsterClass(new SunClass(a,player2));
 		
 		
-		//‰Šúİ’è(‰¼)
+		//‰Šúİ’è(‰¼) 
 		Aster a = field.getField()[field.getY()-1][field.getX()/2];
 		a.setAsterClass(new SunClass(a,player1));
 		a = field.getField()[0][field.getX()/2];
 		a.setAsterClass(new SunClass(a,player2));
-		
+
 		player1.addSP(20);
 		player2.addSP(20);
 		

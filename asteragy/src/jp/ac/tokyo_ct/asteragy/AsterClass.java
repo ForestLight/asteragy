@@ -217,6 +217,7 @@ public abstract class AsterClass {
 		int[][] range = new int[defaultRange.length][defaultRange[0].length];
 		// 1個目の対象選択
 		if (target1 == null) {
+			
 			for (int i = 0; i < defaultRange.length; i++) {
 				for (int j = 0; j < defaultRange[0].length; j++) {
 					// 上下左右に隣接レンジが無い孤立したレンジを除外
