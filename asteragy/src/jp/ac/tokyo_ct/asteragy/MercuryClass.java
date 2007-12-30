@@ -28,17 +28,16 @@ public class MercuryClass extends AsterClass {
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
 			final Point tmp = getAster().getPoint();
+			final Field field = getAster().getField();
 			Point pt = new Point();
 			pt.x = tmp.x - (range[0].length / 2);
 			pt.y = tmp.y - (range.length / 2);
 
-			for (int i = 0; i + pt.y < defaultRange.length; i++) {
-				if (pt.y + i < 0
-						|| pt.y + i >= getAster().getField().getField().length)
+			for (int i = 0; i< defaultRange.length; i++) {
+				if (pt.y + i < 0 || pt.y + i >= field.getY())
 					continue;
-				for (int j = 0; j + pt.x < defaultRange[0].length; j++) {
-					if (pt.x + j < 0
-							|| pt.x + j >= getAster().getField().getField()[0].length)
+				for (int j = 0; j < defaultRange[0].length; j++) {
+					if (pt.x + j < 0 || pt.x+j >= field.getX())
 						continue;
 
 					// レンジ内であり
