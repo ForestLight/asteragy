@@ -99,9 +99,9 @@ public class PlutoClass extends AsterClass {
 				if (defaultRange[i][j] == 1) {
 					// 自身ではない部分を破壊
 					if (i != defaultRange.length / 2
-							&& j != defaultRange[0].length / 2) {
-						pt.x = me.x - defaultRange.length + j;
-						pt.y = me.y - defaultRange[0].length + i;
+							|| j != defaultRange[0].length / 2) {
+						pt.x = me.x - defaultRange.length/2 + j;
+						pt.y = me.y - defaultRange[0].length/2 + i;
 
 						// フィールドの外にはみ出してたら処理しない
 						if (pt.x < 0
