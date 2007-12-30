@@ -86,6 +86,11 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawString(player.getName(), namex, namey);
 		g.drawString("" + player.getSP(), spx, spy);
+		
+		if(game.getCurrentPlayer() == player){
+			g.setColor(Graphics.getColorOfName(Graphics.RED));
+			g.drawRect(namex-1,namey-11,25,13);
+		}
 	}
 
 	/**

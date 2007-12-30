@@ -24,55 +24,67 @@ class Game {
 		field.setFieldSize(11, 11);
 		field.setAster();
 		
-		//暫定
-		Aster a = field.getField()[6][0];
-		a.setAsterClass(new StarClass(a, player1));
-		a = field.getField()[6][1];
-		a.setAsterClass(new MercuryClass(a, player1));
-		a = field.getField()[6][2];
-		a.setAsterClass(new VenusClass(a, player1));
-		a = field.getField()[6][3];
-		a.setAsterClass(new EarthClass(a, player1));
-		a = field.getField()[6][4];
-		a.setAsterClass(new MarsClass(a, player1));
-		a = field.getField()[6][5];
-		a.setAsterClass(new JupiterClass(a, player1));
-		a = field.getField()[6][6];
-		a.setAsterClass(new SaturnClass(a, player1));
-		a = field.getField()[6][7];
-		a.setAsterClass(new UranusClass(a, player1));
-		a = field.getField()[6][8];
-		a.setAsterClass(new NeptuneClass(a, player1));
-		a = field.getField()[6][9];
-		a.setAsterClass(new PlutoClass(a, player1));
+		//てすとぷれー用
+//		
+//		Aster a = field.getField()[6][0];
+//		a.setAsterClass(new StarClass(a, player1));
+//		a = field.getField()[6][1];
+//		a.setAsterClass(new MercuryClass(a, player1));
+//		a = field.getField()[6][2];
+//		a.setAsterClass(new VenusClass(a, player1));
+//		a = field.getField()[6][3];
+//		a.setAsterClass(new EarthClass(a, player1));
+//		a = field.getField()[6][4];
+//		a.setAsterClass(new MarsClass(a, player1));
+//		a = field.getField()[6][5];
+//		a.setAsterClass(new JupiterClass(a, player1));
+//		a = field.getField()[6][6];
+//		a.setAsterClass(new SaturnClass(a, player1));
+//		a = field.getField()[6][7];
+//		a.setAsterClass(new UranusClass(a, player1));
+//		a = field.getField()[6][8];
+//		a.setAsterClass(new NeptuneClass(a, player1));
+//		a = field.getField()[6][9];
+//		a.setAsterClass(new PlutoClass(a, player1));
+//			
+//		a = field.getField()[4][0];
+//		a.setAsterClass(new StarClass(a, player2));
+//		a = field.getField()[4][1];
+//		a.setAsterClass(new MercuryClass(a, player2));
+//		a = field.getField()[4][10];
+//		a.setAsterClass(new VenusClass(a, player2));
+//		a = field.getField()[4][3];
+//		a.setAsterClass(new EarthClass(a, player2));
+//		a = field.getField()[4][4];
+//		a.setAsterClass(new MarsClass(a, player2));
+//		a = field.getField()[4][5];
+//		a.setAsterClass(new JupiterClass(a, player2));
+//		a = field.getField()[4][6];
+//		a.setAsterClass(new SaturnClass(a, player2));
+//		a = field.getField()[4][7];
+//		a.setAsterClass(new UranusClass(a, player2));
+//		a = field.getField()[4][8];
+//		a.setAsterClass(new NeptuneClass(a, player2));
+//		a = field.getField()[4][9];
+//		a.setAsterClass(new PlutoClass(a, player2));
+//		
+//		a = field.getField()[7][5];
+//		a.setAsterClass(new SunClass(a,player1));
+//		a = field.getField()[3][5];
+//		a.setAsterClass(new SunClass(a,player2));
 		
 		
-		
-		a = field.getField()[4][0];
-		a.setAsterClass(new StarClass(a, player2));
-		a = field.getField()[4][1];
-		a.setAsterClass(new MercuryClass(a, player2));
-		a = field.getField()[4][10];
-		a.setAsterClass(new VenusClass(a, player2));
-		a = field.getField()[4][3];
-		a.setAsterClass(new EarthClass(a, player2));
-		a = field.getField()[4][4];
-		a.setAsterClass(new MarsClass(a, player2));
-		a = field.getField()[4][5];
-		a.setAsterClass(new JupiterClass(a, player2));
-		a = field.getField()[4][6];
-		a.setAsterClass(new SaturnClass(a, player2));
-		a = field.getField()[4][7];
-		a.setAsterClass(new UranusClass(a, player2));
-		a = field.getField()[4][8];
-		a.setAsterClass(new NeptuneClass(a, player2));
-		a = field.getField()[4][9];
-		a.setAsterClass(new PlutoClass(a, player2));
-		
-		a = field.getField()[7][5];
+		//初期設定(仮)
+		Aster a = field.getField()[field.getY()-1][field.getX()/2];
 		a.setAsterClass(new SunClass(a,player1));
-		a = field.getField()[3][5];
+		a = field.getField()[0][field.getX()/2];
 		a.setAsterClass(new SunClass(a,player2));
+		
+		player1.addSP(20);
+		player2.addSP(20);
+		
+		
+		
 		
 		System.out.println("Game.start()");
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
@@ -95,6 +107,7 @@ class Game {
 	private boolean turn(Player player) {
 		System.out.println("Game.turn()");
 		printMemoryStatus();
+		currentPlayer = player;
 		canvas.onTurnStart(player);
 		field.onTurnStart(player);
 		for (;;) {
@@ -127,6 +140,10 @@ class Game {
 	Player getPlayer2() {
 		return player2;
 	}
+	
+	Player getCurrentPlayer(){
+		return currentPlayer;
+	}
 
 	/**
 	 * フィールドの取得
@@ -145,6 +162,7 @@ class Game {
 	GameCanvas getCanvas() {
 		return canvas;
 	}
+	
 
 	public Game() {
 	}
@@ -158,6 +176,12 @@ class Game {
 	 * 後攻プレイヤー
 	 */
 	private Player player2;
+	
+	/**
+	 * ターン進行中のプレイヤー
+	 */
+	private Player currentPlayer;
+	
 
 	/**
 	 * フィールド
