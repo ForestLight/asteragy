@@ -4,11 +4,19 @@ import com.nttdocomo.ui.*;
 
 public class VenusClass extends AsterClass {
 	private static int[][] defaultRange = {
-			{ 0, 0, 1, 0, 0 },
-			{ 0, 1, 1, 1, 0 }, 
-			{ 0, 1, 1, 1, 0 }, 
-			{ 0, 0, 0, 0, 0 },
-			{ 0, 0, 0, 0, 0 }};
+			{ 0, 0, 1, 0, 0},
+			{ 0, 1, 1, 1, 0}, 
+			{ 0, 1, 1, 1, 0}, 
+			{ 0, 0, 0, 0, 0},
+			{ 0, 0, 0, 0, 0}
+			};
+	private static int[][] defaultRangeP2 = {
+		{0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0},
+		{0, 1, 1, 1, 0},
+		{0, 1, 1, 1, 0},
+		{0, 0, 1, 0, 0}		
+	};
 
 	private static Image asterImage;
 
@@ -26,7 +34,11 @@ public class VenusClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
+			if(getPlayer() == getPlayer().game.getPlayer2()){
+				return swapGetRange(defaultRangeP2);
+			}else{
 			return swapGetRange(defaultRange);
+			}
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			final Point thisPoint = getAster().getField().asterToPoint(
@@ -36,25 +48,51 @@ public class VenusClass extends AsterClass {
 			Point pt = new Point();
 			pt.x = thisPoint.x - (range[0].length / 2);
 			pt.y = thisPoint.y - (range.length / 2);
-
-			for (int i = 0; i< defaultRange.length; i++) {
-				if (pt.y + i < 0 || pt.y + i >= field.getY())
-					continue;
-				for (int j = 0; j < defaultRange[0].length; j++) {
-					if (pt.x + j < 0 || pt.x+j >= field.getX())
+			
+			if(getPlayer() == getPlayer().game.getPlayer2()){
+				for (int i = 0; i< defaultRange.length; i++) {
+					if (pt.y + i < 0 || pt.y + i >= field.getY())
 						continue;
+					for (int j = 0; j < defaultRange[0].length; j++) {
+						if (pt.x + j < 0 || pt.x+j >= field.getX())
+							continue;
 
-					// レンジ内であり
-					if (defaultRange[i][j] == 1) {
-						// その位置のアステルにクラスがあり
-						final Aster f = getAster().getField().getField()[pt.y
-								+ i][pt.x + j];
-						if (f.getAsterClass() != null) {
-							// そのクラスの所持者が相手であり
-							if (f.getAsterClass().getPlayer() != getPlayer()) {
-								// サンでなければ対象に選択可能
-								if (f.getNumber() != 1)
-									range[i][j] = 1;
+						// レンジ内であり
+						if (defaultRangeP2[i][j] == 1) {
+							// その位置のアステルにクラスがあり
+							final Aster f = getAster().getField().getField()[pt.y
+									+ i][pt.x + j];
+							if (f.getAsterClass() != null) {
+								// そのクラスの所持者が相手であり
+								if (f.getAsterClass().getPlayer() != getPlayer()) {
+									// サンでなければ対象に選択可能
+									if (f.getNumber() != 1)
+										range[i][j] = 1;
+								}
+							}
+						}
+					}
+				}				
+			}else{
+				for (int i = 0; i< defaultRange.length; i++) {
+					if (pt.y + i < 0 || pt.y + i >= field.getY())
+						continue;
+					for (int j = 0; j < defaultRange[0].length; j++) {
+						if (pt.x + j < 0 || pt.x+j >= field.getX())
+							continue;
+	
+						// レンジ内であり
+						if (defaultRange[i][j] == 1) {
+							// その位置のアステルにクラスがあり
+							final Aster f = getAster().getField().getField()[pt.y
+									+ i][pt.x + j];
+							if (f.getAsterClass() != null) {
+								// そのクラスの所持者が相手であり
+								if (f.getAsterClass().getPlayer() != getPlayer()) {
+									// サンでなければ対象に選択可能
+									if (f.getNumber() != 1)
+										range[i][j] = 1;
+								}
 							}
 						}
 					}
