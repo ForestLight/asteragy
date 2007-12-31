@@ -8,7 +8,7 @@ import com.nttdocomo.ui.*;
  * 
  */
 public class Aster {
-	public final static int COLOR_MAX = 4;
+	public final static int COLOR_MAX = 5;
 
 	public final static int RED = 1;
 
@@ -17,6 +17,8 @@ public class Aster {
 	public final static int GREEN = 3;
 
 	public final static int YELLOW = 4;
+	
+	public final static int PINK = 5;
 
 	private final Field field;
 
