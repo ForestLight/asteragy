@@ -27,7 +27,6 @@ public class CanvasControl {
 		cursor = new Cursor(this);
 		commoncommand = new CommonCommand(this);
 		suncommand = new SunCommand(this);
-		suncommand.setCommand(5, new Point(5,5));
 		Display.setCurrent(canvas);
 	}
 
@@ -82,8 +81,11 @@ public class CanvasControl {
 	}
 
 	public PaintItem getCommand() {
-		if (suncommand.visible())
+		if (suncommand.visible()){
+			System.out.println("return suncommand");
 			return suncommand;
+		}
+		System.out.println("return commoncommand");
 		return commoncommand;
 	}
 

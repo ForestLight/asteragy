@@ -6,6 +6,7 @@ public class SunCommand extends Command {
 
 	public SunCommand(CanvasControl canvas) {
 		super(canvas);
+		command = -1;
 		loadImage();
 	}
 
@@ -14,7 +15,7 @@ public class SunCommand extends Command {
 	}
 
 	public boolean visible() {
-		return command >= 0;
+		return command > -1;
 	}
 
 	private void loadImage() {
