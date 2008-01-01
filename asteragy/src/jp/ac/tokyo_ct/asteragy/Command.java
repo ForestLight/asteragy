@@ -8,7 +8,7 @@ public class Command implements PaintItem {
 
 	protected Point point;
 
-	private static Image commandImage;
+	private Image commandImage;
 
 	protected static final int height = Font.getDefaultFont().getHeight();
 
@@ -25,16 +25,29 @@ public class Command implements PaintItem {
 	}
 
 	public void paint(Graphics g) {
+		System.out.println("paintCommand ; " + command);
 		if (command < 0 || point == null)
 			return;
 		System.out.println("paintCommand");
-		g.drawImage(commandImage, GameCanvas.measure * point.x,
-				GameCanvas.measure * point.y);
+		setPosition(g);
+		g.drawImage(commandImage, 0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 196, 100));
 		System.out.println("command = " + command);
-		g.fillRect(GameCanvas.measure * point.x, GameCanvas.measure * point.y
-				+ command * height, height * 4 + 2, height);
+		g.fillRect(0, command * height, height * 4 + 2, height);
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+	}
+
+	private void setPosition(Graphics g) {
+		int top = canvas.getTopMargin() + GameCanvas.measure * (point.y + 1);
+		int left = canvas.getLeftMargin() + GameCanvas.measure * (point.x + 1);
+		if (top >= canvas.getHeight() - commandImage.getHeight()
+				- canvas.getTopMargin())
+			top -= commandImage.getHeight() + GameCanvas.measure;
+		if (left >= canvas.getWidth() - commandImage.getWidth()
+				- canvas.getLeftMargin())
+			left -= commandImage.getWidth() + GameCanvas.measure;
+		g.setOrigin(left, top);
+		System.out.println("top:" + top + " left:" + left);
 	}
 
 	protected void setImage(Image image) {

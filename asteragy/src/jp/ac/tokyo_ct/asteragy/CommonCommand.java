@@ -33,10 +33,10 @@ public class CommonCommand extends Command {
 			return;
 		g.setColor(Graphics.getColorOfRGB(255, 128, 255));
 		if (command == 0) {
-			g.drawString("スワップ 0", 55, 215);
+			g.drawString("スワップ 0", 85, 245);
 		} else {
 			g.drawString(asterClass.getCommandName() + " "
-					+ asterClass.getCommandCost(), 55, 215);
+					+ asterClass.getCommandCost(), 85, 245);
 		}
 	}
 

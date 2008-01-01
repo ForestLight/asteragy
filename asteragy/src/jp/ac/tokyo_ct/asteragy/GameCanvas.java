@@ -58,6 +58,8 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
 		canvas.getField().paint(g);
 		canvas.getCursor().paint(g);
+		
+		
 		canvas.getCommand().paint(g);
 	}
 
