@@ -287,7 +287,6 @@ public class KeyInputPlayer extends Player {
 		System.out.println("KeyInputPlayer.selectCommand()");
 
 		canvas.getCommonCommand().setCommand(0, pt);
-		game.getCanvas().repaint();
 		EventProcesserForSelectCommand ep = new EventProcesserForSelectCommand(
 				this, pt);
 		return ep.selectCommand(canvas);
@@ -443,9 +442,8 @@ public class KeyInputPlayer extends Player {
 				}
 				System.out.println("selectAsterClass.processKeyEvent");
 				System.out.println("select = " + command);
-				// Command.setCommand(command, pt);
+				canvas.getSunCommand().setCommand(command, pt);
 				// Command.setAsterClass(ac);
-				// player.game.getCanvas().repaint();
 			}
 
 			protected boolean onCancel() {
@@ -476,12 +474,12 @@ public class KeyInputPlayer extends Player {
 
 		System.out.println("KeyInputPlayer.selectCommand()");
 
-		// Command.setCommand(0, pt);
-		// game.getCanvas().repaint();
+		canvas.getSunCommand().setCommand(0, pt);
 		EventProcesserForSelectAsterClass ep = new EventProcesserForSelectAsterClass(
 				this, pt);
 		Point r = new Point();
 		r.x = ep.selectAsterClass(canvas);
+		canvas.getSunCommand().setCommand(-1, null);
 		return r;
 	}
 }
