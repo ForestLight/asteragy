@@ -27,6 +27,7 @@ public class CanvasControl {
 		cursor = new Cursor(this);
 		commoncommand = new CommonCommand(this);
 		suncommand = new SunCommand(this);
+		suncommand.setCommand(5, new Point(5,5));
 		Display.setCurrent(canvas);
 	}
 
