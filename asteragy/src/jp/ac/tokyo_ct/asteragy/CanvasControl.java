@@ -14,6 +14,8 @@ public class CanvasControl {
 
 	private final CommonCommand commoncommand;
 
+	private final SunCommand suncommand;
+
 	private int topmargin;
 
 	private int leftmargin;
@@ -24,6 +26,7 @@ public class CanvasControl {
 		back = new BackImage(this);
 		cursor = new Cursor(this);
 		commoncommand = new CommonCommand(this);
+		suncommand = new SunCommand(this);
 		Display.setCurrent(canvas);
 	}
 
@@ -69,16 +72,17 @@ public class CanvasControl {
 		return cursor;
 	}
 
-	/**
-	 * コマンドを取得
-	 * 
-	 * @return コマンド
-	 */
 	public CommonCommand getCommonCommand() {
 		return commoncommand;
 	}
-	
-	public PaintItem getCommand(){
+
+	public SunCommand getSunCommand() {
+		return suncommand;
+	}
+
+	public PaintItem getCommand() {
+		if (suncommand.visible())
+			return suncommand;
 		return commoncommand;
 	}
 
