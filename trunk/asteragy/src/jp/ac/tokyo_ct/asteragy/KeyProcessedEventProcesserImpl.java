@@ -21,13 +21,14 @@ abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
 		case Display.KEY_0:
 			System.out.println("Cancel");
 			onCancel();
-		// ここはbreakもreturnも置かない。
+			// ここはbreakもreturnも置かない。
 		case Display.KEY_SELECT:
 			selected = true;
 			notifyAll();
 			return;
 		default:
-			System.out.println("KeyProcessedEventProcesserImpl.processEvent - processKeyEvent");
+			System.out
+					.println("KeyProcessedEventProcesserImpl.processEvent - processKeyEvent");
 			processKeyEvent(param);
 		}
 	}
@@ -60,11 +61,14 @@ abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
 	protected final void setSelected() {
 		selected = true;
 	}
+
 	/**
 	 * 選択をユーザに行わせるため、待機する。
-	 * @param c 画面表示を行うGameCanvas。processEventを取得する対象。
+	 * 
+	 * @param c
+	 *            画面表示を行うGameCanvas。processEventを取得する対象。
 	 */
-	protected synchronized final void waitForSelect(GameCanvas c) {
+	protected synchronized final void waitForSelect(CanvasControl c) {
 		c.setEventProcesser(this);
 		try {
 			while (!selected) {
@@ -72,7 +76,7 @@ abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
 					wait();
 				} catch (InterruptedException e) {
 					System.out.println("InterruptedException");
-					//Thread.currentThread().interrupt();
+					// Thread.currentThread().interrupt();
 				}
 			}
 		} finally {

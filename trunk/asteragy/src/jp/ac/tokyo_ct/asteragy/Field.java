@@ -2,10 +2,15 @@ package jp.ac.tokyo_ct.asteragy;
 
 import java.util.Random;
 
+import com.nttdocomo.ui.Graphics;
+import com.nttdocomo.ui.Image;
+import com.nttdocomo.ui.MediaImage;
+import com.nttdocomo.ui.MediaManager;
+
 /**
  * @author Okubo
  */
-class Field {
+class Field implements PaintItem {
 
 	private Aster[][] field;
 
@@ -34,8 +39,8 @@ class Field {
 		// 行動を起こす
 		// ...
 
-		GameCanvas c = game.getCanvas();
-		c.repaint();
+		// GameCanvas c = game.getCanvas();
+		// c.repaint();
 		return false;
 	}
 
@@ -103,13 +108,13 @@ class Field {
 
 		countAster = 0;
 
-		if(y > 0)
+		if (y > 0)
 			judgeMain(x, y - 1, 1, AsterColor);
-		if(x > 0)
+		if (x > 0)
 			judgeMain(x - 1, y, 2, AsterColor);
-		if(y < Y - 1)
+		if (y < Y - 1)
 			judgeMain(x, y + 1, 3, AsterColor);
-		if(x < X - 1)
+		if (x < X - 1)
 			judgeMain(x + 1, y, 4, AsterColor);
 
 		if (countAster < 3) {
@@ -171,13 +176,13 @@ class Field {
 		if (field[y][x].getColor() == AsterColor
 				&& field[y][x].getDeleteFlag() == false) {
 			field[y][x].setDeleteFlag(true);
-			if(y > 0)
+			if (y > 0)
 				setDeleteFlagSameColor(x, y - 1, AsterColor);
-			if(x > 0)
+			if (x > 0)
 				setDeleteFlagSameColor(x - 1, y, AsterColor);
-			if(y < Y - 1)
+			if (y < Y - 1)
 				setDeleteFlagSameColor(x, y + 1, AsterColor);
-			if(x < X - 1)
+			if (x < X - 1)
 				setDeleteFlagSameColor(x + 1, y, AsterColor);
 		}
 	}
@@ -209,13 +214,13 @@ class Field {
 		if (field[y][x].getDeleteFlag() == true) {
 			field[y][x].delete(0);
 			count++;
-			if(y > 0)
+			if (y > 0)
 				count = delete(x, y - 1, count);
-			if(x > 0)
+			if (x > 0)
 				count = delete(x - 1, y, count);
-			if(y < Y - 1)
+			if (y < Y - 1)
 				count = delete(x, y + 1, count);
-			if(x < X - 1)
+			if (x < X - 1)
 				count = delete(x + 1, y, count);
 
 			// ランダムで決定した色で問題ない場合
@@ -250,9 +255,9 @@ class Field {
 		int i, j;
 		int count = 0;
 
-		for(i = 0; i < Y; i++) {
-			for(j = 0; j < X; j++) {
-				if(judge(j, i) == true) {
+		for (i = 0; i < Y; i++) {
+			for (j = 0; j < X; j++) {
+				if (judge(j, i) == true) {
 					setDeleteFlagSameColor(j, i, field[i][j].getColor());
 					count += delete(j, i, 0);
 				}
@@ -305,26 +310,94 @@ class Field {
 		}
 		return null;
 	}
-	
-	public void onTurnStart(Player p){
-		for(int i = 0;i < Y; i++){
-			for(int j = 0;j < X;j++){
-				if(field[i][j].getAsterClass() != null && field[i][j].getAsterClass().getPlayer() == p){
+
+	public void onTurnStart(Player p) {
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
+				if (field[i][j].getAsterClass() != null
+						&& field[i][j].getAsterClass().getPlayer() == p) {
 					field[i][j].getAsterClass().init();
 				}
 			}
 		}
 	}
-	
-	public boolean checkGameOver(Player p){
-//		for(int i = 0;i < Y; i++){
-//			for(int j = 0;j < X;j++){
-//				final AsterClass ac = field[i][j].getAsterClass();
-//				if(ac != null && ac.getNumber() == 1 && ac.getPlayer() == p){
-//					return false;
-//				}
-//			}
-//		}
+
+	public boolean checkGameOver(Player p) {
+		// for(int i = 0;i < Y; i++){
+		// for(int j = 0;j < X;j++){
+		// final AsterClass ac = field[i][j].getAsterClass();
+		// if(ac != null && ac.getNumber() == 1 && ac.getPlayer() == p){
+		// return false;
+		// }
+		// }
+		// }
 		return false;
 	}
+
+	/**
+	 * フィールド描画
+	 * 
+	 * @param g
+	 *            描画先グラフィクス
+	 */
+	public void paint(Graphics g) {
+		// 原点座標位置計算
+		g.setOrigin((240 - field.length * GameCanvas.measure) / 2,
+				(240 - field[0].length * GameCanvas.measure) / 2);
+		// フィールド，アステル描画
+		for (int i = 0; i < field.length; i++) {
+			for (int j = 0; j < field[0].length; j++) {
+				if (field[i][j] == null)
+					continue;
+				// フィールド
+				// g.drawImage(fieldimage, i * GameCanvas.measure, j
+				// * GameCanvas.measure);
+
+				// アステル
+				// プレイヤー2のユニットは反転
+				if (field[i][j].getAsterClass() != null
+						&& field[i][j].getAsterClass().getPlayer() == game
+								.getPlayer2()) {
+					g.setFlipMode(Graphics.FLIP_VERTICAL);
+				} else {
+					g.setFlipMode(Graphics.FLIP_NONE);
+				}
+				g
+						.drawScaledImage(field[i][j].getImage(), j
+								* GameCanvas.measure + 1, i
+								* GameCanvas.measure + 1,
+								GameCanvas.measure - 1, GameCanvas.measure - 1,
+								(GameCanvas.measure - 1)
+										* (field[i][j].getColor() - 1), 0,
+								GameCanvas.measure - 1, GameCanvas.measure - 1);
+				// 行動済みユニットを識別
+				if (field[i][j].getAsterClass() != null
+						&& field[i][j].getAsterClass().getActionCount() == 0) {
+					g.setColor(Graphics.getColorOfRGB(0, 0, 0, 100));
+					g.fillRect(j * GameCanvas.measure + 1, i
+							* GameCanvas.measure + 1, GameCanvas.measure,
+							GameCanvas.measure);
+				}
+
+				// レンジ
+				Range.paint(g, j, i);
+			}
+		}
+	}
+
+	/*
+	 * フィールド画像読み込み
+	 * 
+	 * private void loadField() { // 読込先イメージ fieldimage = null; try { //
+	 * リソースから読み込み MediaImage m =
+	 * MediaManager.getImage("resource:///fieldimage.jpg"); // メディアの使用開始
+	 * m.use(); // 読み込み fieldimage = m.getImage(); } catch (Exception e) { }
+	 * fieldimage = Image.createImage(GameCanvas.measure + 1, GameCanvas.measure +
+	 * 1); Graphics g = fieldimage.getGraphics(); // 臨時マス
+	 * g.setColor(Graphics.getColorOfRGB(255, 243, 236)); g.fillRect(0, 0,
+	 * GameCanvas.measure + 1, GameCanvas.measure + 1);
+	 * g.setColor(Graphics.getColorOfName(Graphics.BLACK)); g.drawRect(0, 0,
+	 * GameCanvas.measure, GameCanvas.measure); g.dispose(); }
+	 */
+
 }
