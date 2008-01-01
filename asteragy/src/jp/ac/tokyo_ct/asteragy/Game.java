@@ -16,8 +16,9 @@ class Game {
 	 */
 	public void start() {
 		System.out.println("Game.start()");
-		canvas = new GameCanvas(this);
-		Display.setCurrent(canvas);
+		//canvas = new GameCanvas(this);
+		//Display.setCurrent(canvas);
+		canvas = new CanvasControl(this);
 		player1 = new KeyInputPlayer(this, "先攻");
 		player2 = new KeyInputPlayer(this, "後攻");
 		field = new Field(this);
@@ -159,7 +160,7 @@ class Game {
 	 * 
 	 * @return このゲームの描画を行うキャンバス
 	 */
-	GameCanvas getCanvas() {
+	CanvasControl getCanvas() {
 		return canvas;
 	}
 	
@@ -191,7 +192,7 @@ class Game {
 	/**
 	 * 描画に用いるキャンバス
 	 */
-	private GameCanvas canvas;
+	private CanvasControl canvas;
 
 	private static void printMemoryStatus() {
 		Runtime r = Runtime.getRuntime();

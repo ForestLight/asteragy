@@ -2,17 +2,24 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class BackImage {
+public class BackImage implements PaintItem {
 
 	private static Image backimage;
+
+	private final CanvasControl canvas;
+
+	public BackImage(CanvasControl canvas) {
+		this.canvas = canvas;
+		createBackGround();
+	}
 
 	/**
 	 * ŒÅ’è”wŒiì¬
 	 * 
 	 */
-	private static void createBackGround() {
+	private void createBackGround() {
 		// ”wŒi‰æ‘œì¬
-		backimage = Image.createImage(240, 240);
+		backimage = Image.createImage(canvas.getWidth(), canvas.getHeight());
 		// ƒOƒ‰ƒtƒBƒNƒXì¬
 		Graphics g = backimage.getGraphics();
 		// ”wŒi•`‰æ
@@ -27,7 +34,7 @@ public class BackImage {
 	 * @param g
 	 *            •`‰ææƒOƒ‰ƒtƒBƒNƒX
 	 */
-	private static void paintBackGround(Graphics g) {
+	private void paintBackGround(Graphics g) {
 		// “ÇæƒCƒ[ƒW
 		Image back = null;
 		try {
@@ -45,24 +52,14 @@ public class BackImage {
 	}
 
 	/**
-	 * ”wŒi“Ç‚İ‚İ
-	 * 
-	 * @return ”wŒi
-	 */
-	private static Image backImage() {
-		if (backimage == null)
-			createBackGround();
-		return backimage;
-	}
-
-	/**
 	 * •`‰æ
 	 * 
 	 * @param g
 	 *            •`‰ææƒOƒ‰ƒtƒBƒNƒX
 	 */
-	public static void paint(Graphics g) {
-		g.drawImage(backImage(), 0, 0);
+	public void paint(Graphics g) {
+		System.out.println("paintBackImage");
+		g.drawImage(backimage, 0, 0);
 	}
 
 }
