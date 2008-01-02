@@ -31,12 +31,13 @@ public class CommonCommand extends Command {
 	private void PaintCommandName(Graphics g) {
 		if (command < 0 || point == null)
 			return;
+		g.setOrigin(0,0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 255));
 		if (command == 0) {
-			g.drawString("スワップ 0", 85, 245);
+			g.drawString("スワップ 0", 85, 235);
 		} else {
 			g.drawString(asterClass.getCommandName() + " "
-					+ asterClass.getCommandCost(), 85, 245);
+					+ asterClass.getCommandCost(), 85, 235);
 		}
 	}
 
