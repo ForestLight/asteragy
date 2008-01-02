@@ -3,16 +3,16 @@ package jp.ac.tokyo_ct.asteragy;
 public class AsterClassData {
 
 	public final static String[] className = {
-		"サン",
-		"スター",
-		"マーキュリー",
-		"ヴィーナス",
-		"アース",
-		"マーズ",
-		"サターン",
-		"ウラヌス",
-		"ネプチューン",
-		"プルート"
+		"ｻﾝ",
+		"ｽﾀｰ",
+		"ﾏｰｷｭﾘｰ",
+		"ｳﾞｨｰﾅｽ",
+		"ｱｰｽ",
+		"ﾏｰｽﾞ",
+		"ｻﾀｰﾝ",
+		"ｳﾗﾇｽ",
+		"ﾈﾌﾟﾁｭｰﾝ",
+		"ﾌﾟﾙｰﾄ"
 	};
 	
 	public final static String[] commandName = {
