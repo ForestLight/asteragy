@@ -18,7 +18,7 @@ class Field implements PaintItem {
 
 	private int countAster;
 
-	private int[] table = { 1, 2, 3, 4, 1, 2, 3, 4 };
+	private int[] table = { 1, 2, 3, 4, 5, 1, 2, 3, 4, 5 };
 
 	private static Random r = new Random(System.currentTimeMillis());
 
@@ -228,16 +228,16 @@ class Field implements PaintItem {
 				return count;
 			}
 
-			// 初回にランダムで決定した色が置けなかった場合、4色試す
-			int t = r.nextInt(4);
+			// 初回にランダムで決定した色が置けなかった場合、5色試す
+			int t = r.nextInt(5);
 
-			for (int i = 1; i <= 4; i++, t++) {
+			for (int i = 1; i <= 5; i++, t++) {
 				field[y][x].setDeleteFlag(true);
 				field[y][x].delete(table[t]);
 				if (judge(x, y) == false)
 					return count;
 			}
-			// 4色試しても置けない場合、delete前の色に決定する
+			// 5色試しても置けない場合、delete前の色に決定する
 			if (judge(x, y) == true) {
 				field[y][x].setDeleteFlag(true);
 				field[y][x].delete(AsterColor);
