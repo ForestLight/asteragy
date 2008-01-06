@@ -31,5 +31,4 @@ public class SunCommand extends Command {
 		}
 		setImage(commandImage);
 	}
-
-}
+	}
