@@ -11,7 +11,8 @@ public class Title extends Canvas{
 	private static Image[] menu;
 	private static int depth = 0;
 	private static int cursor = 0;
-	private static int GameType = -1;
+	private static int gameType = -1;
+	// private static int highScore;
 
 	public Title(){
 		title = loadImage("title.jpg");
@@ -23,15 +24,15 @@ public class Title extends Canvas{
 
 	/**
 	 * タイトル画面の描画
-	 * @return GameType
+	 * @return gameType
 	 * 				0:一機対戦 1:AI対戦 2:ネットワーク対戦
 	 */
 	public int start(){
 		Graphics g = getGraphics();
 		for(;;){
 			System.out.println("roop");
-			if(GameType >= 0){
-				return GameType;
+			if(gameType >= 0){
+				return gameType;
 			}
 
 			g.lock();
@@ -86,17 +87,17 @@ public class Title extends Canvas{
 				break;
 			case Display.KEY_SELECT:
 				if(depth == 0 && cursor == 1){
-					GameType = 0;
+					gameType = 0;
 				}
 				else if(depth == 0 && cursor == 2){
 					IApplication.getCurrentApp().terminate();
 				}
 				else if(depth == 1 && cursor == 0){
-					GameType = 1;
+					gameType = 1;
 					
 				}
 				else if(depth == 1 && cursor == 1){
-					GameType = 2;
+					gameType = 2;
 				}
 				else{
 					depth++;
