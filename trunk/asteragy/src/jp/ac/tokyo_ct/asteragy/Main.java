@@ -18,6 +18,10 @@ public class Main extends IApplication {
 		// Display.setCurrent(c);
 
 		// 将来的には、ここでタイトル画面を出すようにしたい。
+		// Title t = new Title();
+		// Display.setCurrent(t);
+		// t.start();
+
 		Game g = new Game();
 		g.start();
 	}
