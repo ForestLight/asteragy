@@ -86,6 +86,7 @@ public class KeyInputPlayer extends Player {
 					if (cmd == 1) {
 						this.addSP(-ac.getCommandCost());
 					}
+					System.out.println("実行開始");
 					ac.execute();
 					System.out.println("実行完了");
 
