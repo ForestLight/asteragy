@@ -24,20 +24,18 @@ public class Range {
 			return;
 		int rx = x - aster.x + (range[0].length / 2);
 		int ry = y - aster.y + (range.length / 2);
-		if (rx < 0 || rx >= range[0].length || ry < 0 || ry >= range.length || range[rx][ry] == -1) {
+		if (rx < 0 || rx >= range[0].length || ry < 0 || ry >= range.length
+				|| range[rx][ry] == -1) {
 			g.setColor(Graphics.getColorOfRGB(0, 0, 0, 160));
-			g.fillRect(x * GameCanvas.measure, y * GameCanvas.measure,
-					GameCanvas.measure, GameCanvas.measure);
+			g.fillRect(0, 0, GameCanvas.measure, GameCanvas.measure);
 			g.setColor(Graphics.getColorOfName(Graphics.BLACK));
-		} else if(range[ry][rx] == 0){
+		} else if (range[ry][rx] == 0) {
 			g.setColor(Graphics.getColorOfRGB(0, 0, 0, 120));
-			g.fillRect(x * GameCanvas.measure, y * GameCanvas.measure,
-					GameCanvas.measure, GameCanvas.measure);
-			g.setColor(Graphics.getColorOfName(Graphics.BLACK));			
-		} else if (range[ry][rx] == 1){
+			g.fillRect(0, 0, GameCanvas.measure, GameCanvas.measure);
+			g.setColor(Graphics.getColorOfName(Graphics.BLACK));
+		} else if (range[ry][rx] == 1) {
 			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
-			g.drawRect(x * GameCanvas.measure, y * GameCanvas.measure,
-					GameCanvas.measure, GameCanvas.measure);
+			g.drawRect(0, 0, GameCanvas.measure, GameCanvas.measure);
 			g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		}
 	}

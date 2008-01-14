@@ -55,8 +55,10 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 */
 	private void paintFieldSpace(Graphics g) {
 		System.out.println("paintFieldSpace");
-		g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
+		
 		canvas.getField().paint(g);
+		
+		g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
 		canvas.getCursor().paint(g);
 		
 		
