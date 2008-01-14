@@ -46,24 +46,25 @@ public class MarsClass extends AsterClass {
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point();
-			pt.x = getAster().getField().asterToPoint(getAster()).x
+			Field f = getAster().getField();
+			pt.x = f.asterToPoint(getAster()).x
 					- (range[0].length / 2);
-			pt.y = getAster().getField().asterToPoint(getAster()).y
+			pt.y = f.asterToPoint(getAster()).y
 					- (range.length / 2);
 
 			if(getPlayer() == getPlayer().game.getPlayer2()){
-				for (int i = 0; i + pt.y < defaultRange.length; i++) {
-					if (pt.y + i < 0)
+				for (int i = 0; i < defaultRange.length; i++) {
+					if (pt.y + i < 0 || pt.y + i >= f.getY())
 						continue;
-					for (int j = 0; j + pt.x < defaultRange[0].length; j++) {
-						if (pt.x + j < 0)
+					for (int j = 0; j < defaultRange[0].length; j++) {
+						if (pt.x + j < 0 || pt.y + i >= f.getX())
 							continue;
 
 						if (defaultRangeP2[i][j] == 1) {
 							// レンジ内で自身かサン以外なら選択可
-							if (getAster().getField().getField()[pt.y + i][pt.x + j]
+							if (f.getField()[pt.y + i][pt.x + j]
 									.getNumber() != 1
-									&& getAster().getField().getField()[pt.y + i][pt.x
+									&& f.getField()[pt.y + i][pt.x
 											+ j] != getAster()) {
 								range[i][j] = 1;
 							}
@@ -77,12 +78,12 @@ public class MarsClass extends AsterClass {
 					}
 				}
 			}else{
-				for (int i = 0; i + pt.y < defaultRange.length; i++) {
-					if (pt.y + i < 0)
-						continue;
-					for (int j = 0; j + pt.x < defaultRange[0].length; j++) {
-						if (pt.x + j < 0)
+				for (int i = 0; i < defaultRange.length; i++) {
+						if (pt.y + i < 0 || pt.y + i >= f.getY())
 							continue;
+						for (int j = 0; j < defaultRange[0].length; j++) {
+							if (pt.x + j < 0 || pt.y + i >= f.getX())
+								continue;
 	
 						if (defaultRange[i][j] == 1) {
 							// レンジ内で自身かサン以外なら選択可

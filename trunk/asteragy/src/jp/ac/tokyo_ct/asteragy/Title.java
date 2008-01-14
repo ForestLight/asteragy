@@ -18,7 +18,7 @@ public class Title extends Canvas{
 		title = loadImage("title.jpg");
 		menu = new Image[5];
 		for(int i = 0; i < 5; i++)
-			menu[i] = loadImage("menu_" + i + ".jpg");
+			menu[i] = loadImage("menu_" + i + ".gif");
 
 	}
 
@@ -49,13 +49,14 @@ public class Title extends Canvas{
 				g.drawImage(menu[3],getWidth()/2-menu[3].getWidth()/2,150);
 				g.drawImage(menu[4],getWidth()/2-menu[4].getWidth()/2,150+menu[4].getHeight());
 			}
+			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 			g.drawRect(getWidth()/2-menu[0].getWidth()/2,150+menu[0].getHeight()*cursor,menu[0].getWidth(),menu[0].getHeight());
 
 			g.unlock(true);
 
 			// sleep‚Í‚È‚ñ‚©ƒ}ƒY‚¢‹C‚ª‚·‚é
 			try{
-				Thread.sleep(200);
+				Thread.sleep(50);
 			}catch(Exception e){
 			}
 		}

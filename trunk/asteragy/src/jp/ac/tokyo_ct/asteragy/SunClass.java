@@ -147,7 +147,7 @@ public class SunClass extends AsterClass {
 		}
 		//選択したクラスのユニットを行動不可能状態で召還
 		a.setAsterClass(ac);
-		a.getAsterClass().setActionCount(0);
+	//	a.getAsterClass().setActionCount(0);
 		getPlayer().addSP(-AsterClassData.classCost[asterClassSelect+1]);
 	}
 
