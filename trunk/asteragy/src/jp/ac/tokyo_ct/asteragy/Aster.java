@@ -25,6 +25,8 @@ public class Aster {
 	private int color;
 
 	private AsterClass asterClass = null;
+	
+	private PaintAsterItem paint;
 
 	private static Random r = new Random(System.currentTimeMillis());
 
@@ -34,6 +36,7 @@ public class Aster {
 		color = r.nextInt(COLOR_MAX) + 1;
 		deleteFlag = false;
 		field = f;
+		paint = new AsterPaint();
 	}
 
 	/*
@@ -78,6 +81,7 @@ public class Aster {
 		System.out.println("Aster.setAsterClass");
 		asterClass = ac;
 		ac.setAster(this);
+		paint.setClass(ac);
 	}
 
 	public int getNumber() {
@@ -91,28 +95,14 @@ public class Aster {
 	Point getPoint() {
 		return getField().asterToPoint(this);
 	}
-
-	public Image getImage() {
-		if (asterImage == null) {
-			loadImage();
-			return asterImage;
-		}
-		if (asterClass == null)
-			return asterImage;
-		return asterClass.getImage();
+	
+	public PaintItem getPaint(){
+		paint.setColor(color);
+		return paint;
+	}
+	
+	public void setPaint(PaintAsterItem paint){
+		this.paint = paint;
 	}
 
-	private static void loadImage() {
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///aster_0.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			asterImage = m.getImage();
-		} catch (Exception e) {
-		}
-	}
-
-	private static Image asterImage;
 }

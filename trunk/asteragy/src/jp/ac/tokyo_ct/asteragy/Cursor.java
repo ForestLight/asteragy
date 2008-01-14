@@ -9,8 +9,8 @@ public class Cursor implements PaintItem {
 	public static final int CURSOR_1 = 1;
 
 	private final CanvasControl canvas;
-	
-	public Cursor(CanvasControl canvas){
+
+	public Cursor(CanvasControl canvas) {
 		this.canvas = canvas;
 	}
 

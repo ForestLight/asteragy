@@ -362,34 +362,19 @@ class Field implements PaintItem {
 				} else {
 					g.setFlipMode(Graphics.FLIP_NONE);
 				}
-				if(field[i][j].getAsterClass() != null){
-					g.setColor(Graphics.getColorOfName(Graphics.WHITE));
-					g.drawRect(j*GameCanvas.measure ,i*GameCanvas.measure,GameCanvas.measure,GameCanvas.measure);
-					}
-				g
-						.drawScaledImage(field[i][j].getImage(), j
-								* GameCanvas.measure + 1, i
-								* GameCanvas.measure + 1,
-								GameCanvas.measure - 1, GameCanvas.measure - 1,
-								(GameCanvas.measure - 1)
-										* (field[i][j].getColor() - 1), 0,
-								GameCanvas.measure - 1, GameCanvas.measure - 1);
 
-				// 行動済みユニットを識別
-				if (field[i][j].getAsterClass() != null
-						&& field[i][j].getAsterClass().getActionCount() == 0) {
-					g.setColor(Graphics.getColorOfRGB(0, 0, 0, 100));
-					g.fillRect(j * GameCanvas.measure + 1, i
-							* GameCanvas.measure + 1, GameCanvas.measure,
-							GameCanvas.measure);
-				}
+				g.setOrigin(game.getCanvas().getLeftMargin() + j
+						* GameCanvas.measure, game.getCanvas().getTopMargin()
+						+ i * GameCanvas.measure);
+
+				field[i][j].getPaint().paint(g);
 
 				// レンジ
 				Range.paint(g, j, i);
 			}
 		}
 	}
-
+	
 	/*
 	 * フィールド画像読み込み
 	 * 
