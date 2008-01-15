@@ -81,11 +81,9 @@ class Game {
 		a = field.getField()[0][field.getX()/2];
 		a.setAsterClass(new SunClass(a,player2));
 
-		player1.addSP(20);
-		player2.addSP(20);
-		
-		
-		
+		player1.addSP(30);
+		player2.addSP(30);
+				
 		
 		System.out.println("Game.start()");
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
@@ -113,14 +111,22 @@ class Game {
 		field.onTurnStart(player);
 		for (;;) {
 			Action a = player.getAction();
+			
+			Player goPlayer = field.checkGameOver();
+			if (goPlayer != null) {
+				try{
+					Thread.sleep(1500);
+				}catch(Exception e){
+				}
+				if(goPlayer == getPlayer1()) System.out.println("Player2 win");
+				else System.out.println("Player1 win");
+				return false;
+			}
+			
 			if (a == null) {
 				return true;
 			}
 		//	boolean gameover = field.act(a);
-			boolean gameover = field.checkGameOver(player);
-			if (gameover) {
-				return false;
-			}
 		}
 	}
 
@@ -164,7 +170,6 @@ class Game {
 		return canvas;
 	}
 	
-
 	public Game() {
 	}
 

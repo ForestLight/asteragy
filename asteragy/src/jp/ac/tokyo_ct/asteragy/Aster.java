@@ -75,10 +75,7 @@ public class Aster {
 			//初期の生成時に実行しないようなことをしてほしい。
 			//とりあえず。
 			if(!field.isFieldInit())
-				disappearingAster();
-
-			
-			// ここでプレイヤーに対するSP配分処理もやるんだろうか
+				disappearingAster();			
 		}
 
 		if (c != 0) {
@@ -118,7 +115,7 @@ public class Aster {
 		//消失エフェクト処理
 		EffectAsterDisappearing disappear = new EffectAsterDisappearing(this);
 		paint = disappear;
-		disappear.start();
+		disappear.start();		
 	}
 
 }
