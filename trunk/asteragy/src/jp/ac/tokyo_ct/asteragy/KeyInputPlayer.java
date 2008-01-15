@@ -14,7 +14,7 @@ public class KeyInputPlayer extends Player {
 	}
 
 	private CanvasControl canvas;
-
+	
 	/*
 	 * (非 Javadoc)
 	 * 
@@ -83,16 +83,28 @@ public class KeyInputPlayer extends Player {
 				case 3:
 					final AsterClass ac = game.getField().getAster(pt)
 							.getAsterClass();
+					Player p;
 					if (cmd == 1) {
 						this.addSP(-ac.getCommandCost());
 					}
 					System.out.println("実行開始");
 					ac.execute();
 					System.out.println("実行完了");
-
+					
+					//ゲームオーバー判定仮
+					if((p = game.getField().checkGameOver()) != null){
+						return null;
+					}
+					
 					// 消滅判定
+					System.out.println("消去開始");
 					this.addSP(game.getField().deleteAll());
 					System.out.println("消去完了");
+					
+					if((p = game.getField().checkGameOver()) != null){
+						return null;
+					}
+					
 					state = 0;
 					canvas.repaint();
 				}

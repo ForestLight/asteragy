@@ -30,7 +30,7 @@ public class Title extends Canvas{
 	public int start(){
 		Graphics g = getGraphics();
 		for(;;){
-			System.out.println("roop");
+		//	System.out.println("roop");
 			if(gameType >= 0){
 				return gameType;
 			}

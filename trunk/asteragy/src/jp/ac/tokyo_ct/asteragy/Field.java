@@ -331,16 +331,21 @@ class Field implements PaintItem {
 		}
 	}
 
-	public boolean checkGameOver(Player p) {
-		// for(int i = 0;i < Y; i++){
-		// for(int j = 0;j < X;j++){
-		// final AsterClass ac = field[i][j].getAsterClass();
-		// if(ac != null && ac.getNumber() == 1 && ac.getPlayer() == p){
-		// return false;
-		// }
-		// }
-		// }
-		return false;
+	public Player checkGameOver() {
+		boolean p1=false,p2=false;
+		 for(int i = 0;i < Y; i++){
+			 for(int j = 0;j < X;j++){
+				 final AsterClass ac = field[i][j].getAsterClass();
+				 if(ac != null && ac.getNumber() == 1){
+					 if(ac.getPlayer() == game.getPlayer1()) p1=true;
+					 if(ac.getPlayer() == game.getPlayer2()) p2=true;
+				 }
+			 }
+		 }
+		 if(!p1) return game.getPlayer1();
+		 if(!p2) return game.getPlayer2();
+		 
+		return null;
 	}
 
 	/**
