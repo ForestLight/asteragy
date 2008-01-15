@@ -23,6 +23,8 @@ class Field implements PaintItem {
 	private static Random r = new Random(System.currentTimeMillis());
 
 	private final Game game;
+	
+	private boolean fieldinit;
 
 	public Field(Game g) {
 		super();
@@ -56,12 +58,17 @@ class Field implements PaintItem {
 		X = x;
 		Y = y;
 	}
+	
+	public boolean isFieldInit(){
+		return fieldinit;
+	}
 
 	/**
 	 * フィールドの初期化
 	 * 
 	 */
 	public void setAster() {
+		fieldinit = true;
 		field = new Aster[Y][X];
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
@@ -73,6 +80,7 @@ class Field implements PaintItem {
 				}
 			}
 		}
+		fieldinit = false;
 	}
 
 	/**
@@ -243,6 +251,7 @@ class Field implements PaintItem {
 				field[y][x].delete(AsterColor);
 			}
 		}
+		EffectAsterDisappearing.setDisappearingAsterNumber(count);
 		return count;
 	}
 
@@ -373,6 +382,10 @@ class Field implements PaintItem {
 				Range.paint(g, j, i);
 			}
 		}
+	}
+	
+	public CanvasControl getCanvas(){
+		return game.getCanvas();
 	}
 	
 	/*
