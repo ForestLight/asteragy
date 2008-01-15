@@ -69,6 +69,15 @@ public class Aster {
 			color = r.nextInt(COLOR_MAX) + 1;
 			asterClass = null;
 			deleteFlag = false;
+			
+			paint.setClass(null);
+			
+			//初期の生成時に実行しないようなことをしてほしい。
+			//とりあえず。
+			if(!field.isFieldInit())
+				disappearingAster();
+
+			
 			// ここでプレイヤーに対するSP配分処理もやるんだろうか
 		}
 
@@ -96,13 +105,20 @@ public class Aster {
 		return getField().asterToPoint(this);
 	}
 	
-	public PaintItem getPaint(){
+	public PaintAsterItem getPaint(){
 		paint.setColor(color);
 		return paint;
 	}
 	
 	public void setPaint(PaintAsterItem paint){
 		this.paint = paint;
+	}
+	
+	private void disappearingAster(){
+		//消失エフェクト処理
+		EffectAsterDisappearing disappear = new EffectAsterDisappearing(this);
+		paint = disappear;
+		disappear.start();
 	}
 
 }

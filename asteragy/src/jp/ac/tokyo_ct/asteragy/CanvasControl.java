@@ -20,7 +20,10 @@ public class CanvasControl {
 
 	private int leftmargin;
 
+	private boolean lockrepaint;
+
 	public CanvasControl(Game game) {
+		lockrepaint = false;
 		this.game = game;
 		canvas = new GameCanvas(this);
 		back = new BackImage(this);
@@ -81,7 +84,7 @@ public class CanvasControl {
 	}
 
 	public PaintItem getCommand() {
-		if (suncommand.visible()){
+		if (suncommand.visible()) {
 			System.out.println("return suncommand");
 			return suncommand;
 		}
@@ -112,7 +115,13 @@ public class CanvasControl {
 	 * 
 	 */
 	public void repaint() {
-		canvas.repaint();
+		if (lockrepaint)
+			return;
+		lockrepaint = true;
+		lockrepaint = false;
+		synchronized(canvas){
+			canvas.repaint();
+		}
 	}
 
 	private volatile EventProcesser eventProcesser;
