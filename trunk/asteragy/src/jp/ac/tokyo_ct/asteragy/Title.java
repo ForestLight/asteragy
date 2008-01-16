@@ -30,7 +30,7 @@ public class Title extends Canvas{
 	public int start(){
 		Graphics g = getGraphics();
 		for(;;){
-		//	System.out.println("roop");
+		//	System.out.println("loop");
 			if(gameType >= 0){
 				return gameType;
 			}
@@ -104,6 +104,9 @@ public class Title extends Canvas{
 					depth++;
 				}
 				break;
+			case Display.KEY_0:
+				if(depth > 0)
+					depth--;
 			default:
 				break;
 			}
