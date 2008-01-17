@@ -59,6 +59,7 @@ public class KeyInputPlayer extends Player {
 						if (target == null) {
 							if (ac.moveAstern()) {
 								state = -1;
+								cmd = 0;
 								break;
 							}
 						}
@@ -66,6 +67,7 @@ public class KeyInputPlayer extends Player {
 					}
 					Range.setRange(null, null);
 
+					//ƒTƒ“ê—p
 					if (ac.getNumber() == 1 && cmd == 1) {
 						Point acs = selectAsterClass(pt);
 						if (acs.x == -1) {
