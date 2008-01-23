@@ -13,6 +13,8 @@ import com.nttdocomo.ui.MediaManager;
 class Field implements PaintItem {
 
 	private Aster[][] field;
+	
+	private Aster[][] backup;
 
 	private int X, Y;
 
@@ -348,6 +350,12 @@ class Field implements PaintItem {
 		return null;
 	}
 
+//	public void fieldBackUp(){
+//
+//	}
+//	public void restoreField(){
+//
+//	}
 	/**
 	 * フィールド描画
 	 * 
