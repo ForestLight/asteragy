@@ -63,31 +63,6 @@ public class SaturnClass extends AsterClass {
 		return false;
 	}
 
-	public String getName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "サターン";
-	}
-
-	public String getCommandName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "ローテーション";
-	}
-
-	public String getExplain() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "検討中";
-	}
-
-	public int getCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 9;
-	}
-
-	public int getCommandCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 2;
-	}
-
 	public void executeSpecialCommand() {
 		// TODO 自動生成されたメソッド・スタブ
 		// 左回り

@@ -103,30 +103,6 @@ public class MercuryClass extends AsterClass {
 		return false;
 	}
 
-	public String getName() {
-		return "マーキュリー";
-	}
-
-	public String getCommandName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "クイックタイム";
-	}
-
-	public String getExplain() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "ほりゅう";
-	}
-
-	public int getCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 8;
-	}
-
-	public int getCommandCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 4;
-	}
-
 	public void executeSpecialCommand() {
 		// 対象の行動可能回数を1回増やす
 		getAster().getField().getAster(target1).getAsterClass()

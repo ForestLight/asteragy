@@ -118,13 +118,14 @@ public abstract class AsterClass {
 	 * @return 特殊コマンド使用時のコスト
 	 */
 	public int getCommandCost(){
-		switch (mode) {
-		case 0:
-			return 0;
-		case 1:
-			return AsterClassData.commandCost[getNumber()-1];
-		}
-		return 0;
+//		switch (mode) {
+//		case 0:
+//			return 0;
+//		case 1:
+//			return AsterClassData.commandCost[getNumber()-1];
+//		}
+//		return 0;
+		return AsterClassData.commandCost[getNumber()-1];
 	}
 
 	/**

@@ -74,8 +74,8 @@ public class Aster {
 			
 			//‰Šú‚Ì¶¬‚ÉÀs‚µ‚È‚¢‚æ‚¤‚È‚±‚Æ‚ğ‚µ‚Ä‚Ù‚µ‚¢B
 			//‚Æ‚è‚ ‚¦‚¸B
-			if(!field.isFieldInit())
-				disappearingAster();			
+//			if(!field.isFieldInit())
+//				disappearingAster();			
 		}
 
 		if (c != 0) {

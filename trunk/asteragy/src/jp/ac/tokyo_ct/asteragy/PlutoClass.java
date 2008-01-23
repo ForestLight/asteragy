@@ -66,30 +66,6 @@ public class PlutoClass extends AsterClass {
 		return false;
 	}
 
-	public String getName() {
-		return "プルート";
-	}
-
-	public String getCommandName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "ルインクラスト";
-	}
-
-	public String getExplain() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "レンジ内のアステル\n全てを破壊する (サンにも有効)";
-	}
-
-	public int getCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 11;
-	}
-
-	public int getCommandCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 8;
-	}
-
 	public void executeSpecialCommand() {
 		Point me = getAster().getField().asterToPoint(getAster());
 		Point pt = new Point();

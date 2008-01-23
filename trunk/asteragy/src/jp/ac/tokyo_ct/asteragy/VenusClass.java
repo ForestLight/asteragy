@@ -140,30 +140,6 @@ public class VenusClass extends AsterClass {
 		return false;
 	}
 
-	public String getCommandName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "テンプテーション";
-	}
-
-	public String getExplain() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "敵ユニット一体を自分のユニットにする";
-	}
-
-	public int getCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 7;
-	}
-
-	public int getCommandCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 7;
-	}
-
-	public String getName() {
-		return "ヴィーナス";
-	}
-
 	public void executeSpecialCommand() {
 		// 対象の所持者を変更
 		getAster().getField().getAster(target1).getAsterClass().setPlayer(

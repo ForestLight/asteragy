@@ -161,31 +161,6 @@ public class JupiterClass extends AsterClass {
 		return swapMoveAstern();
 	}
 
-	public String getName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "ジュピター";
-	}
-
-	public String getCommandName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "プロテクションシステム";
-	}
-
-	public String getExplain() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "敵ユニット1体とアステル1個を入れ替える";
-	}
-
-	public int getCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 7;
-	}
-
-	public int getCommandCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 1;
-	}
-
 	public void executeSpecialCommand() {
 		// TODO 自動生成されたメソッド・スタブ
 		getAster().getField().swap(target1, target2);
