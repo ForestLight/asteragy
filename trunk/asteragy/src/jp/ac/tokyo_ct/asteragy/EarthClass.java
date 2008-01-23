@@ -101,31 +101,6 @@ public class EarthClass extends AsterClass {
 
 	}
 
-	public String getName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "アース";
-	}
-
-	public String getCommandName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "サモンムーン";
-	}
-
-	public String getExplain() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "レンジ内にムーンを呼び出す";
-	}
-
-	public int getCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 6;
-	}
-
-	public int getCommandCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 6;
-	}
-
 	public void executeSpecialCommand() {
 		// TODO 自動生成されたメソッド・スタブ
 		/* イージス
@@ -163,6 +138,7 @@ public class EarthClass extends AsterClass {
 		final Aster a = getAster().getField().getAster(target1);
 		AsterClass ac = new MoonClass(a,getPlayer());
 		a.setAsterClass(ac);
+		a.getAsterClass().setActionCount(0);
 	}
 
 	public Image getImage() {
