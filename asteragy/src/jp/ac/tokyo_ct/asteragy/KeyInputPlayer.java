@@ -89,12 +89,22 @@ public class KeyInputPlayer extends Player {
 					if (cmd == 1) {
 						this.addSP(-ac.getCommandCost());
 					}
+//					game.getField().fieldBackUp();
 					System.out.println("実行開始");
 					ac.execute();
 					System.out.println("実行完了");
 					
 					//ゲームオーバー判定仮
 					if((p = game.getField().checkGameOver()) != null){
+//						if(p == game.getCurrentPlayer()){
+//							game.getField().restoreField();
+//							if (cmd == 1) {
+//								this.addSP(ac.getCommandCost());
+//							}
+//							state=0;
+//							System.out.println("字軍サン消滅 行動キャンセル");
+//							break;
+//						}
 						return null;
 					}
 					
@@ -104,6 +114,15 @@ public class KeyInputPlayer extends Player {
 					System.out.println("消去完了");
 					
 					if((p = game.getField().checkGameOver()) != null){
+//						if(p == game.getCurrentPlayer()){
+//							game.getField().restoreField();
+//							if (cmd == 1) {
+//								this.addSP(ac.getCommandCost());
+//							}
+//							state=0;
+//							System.out.println("字軍サン消滅 行動キャンセル");
+//							break;
+//						}
 						return null;
 					}
 					
