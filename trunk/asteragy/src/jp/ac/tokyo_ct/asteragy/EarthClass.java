@@ -3,7 +3,9 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.*;
 
 public class EarthClass extends AsterClass {
-	private static int[][] defaultRange = { { 1, 1, 1 }, { 1, 1, 1 },
+	private static int[][] defaultRange = { 
+			{ 1, 1, 1 },
+			{ 1, 1, 1 },
 			{ 1, 1, 1 } };
 
 	private static Image asterImage;
@@ -24,6 +26,36 @@ public class EarthClass extends AsterClass {
 		case 0:
 			return swapGetRange(defaultRange);
 		case 1:
+			// SunClassから拝借
+			int[][] range = new int[defaultRange.length][defaultRange[0].length];
+			final Point thisPoint = getAster().getField().asterToPoint(
+					getAster());
+			final Field field = getAster().getField();
+			// レンジの左上の座標のフィールド内での位置
+			Point pt = new Point();
+			pt.x = thisPoint.x - (range[0].length / 2);
+			pt.y = thisPoint.y - (range.length / 2);
+
+			for (int i = 0; i< defaultRange.length; i++) {
+				if (pt.y + i < 0 || pt.y + i >= field.getY())
+					continue;
+				for (int j = 0; j < defaultRange[0].length; j++) {
+					if (pt.x + j < 0 || pt.x+j >= field.getX())
+						continue;
+
+					// レンジ内であり
+					if (defaultRange[i][j] == 1) {
+						range[i][j] = 1;
+						// その位置のアステルにクラスがあれば選択不能
+						final Aster f = field.getField()[pt.y
+								+ i][pt.x + j];
+						if (f.getAsterClass() != null) {
+							range[i][j] = 0;
+						}
+					}
+				}
+			}
+			return range;
 		}
 		return null;
 	}
@@ -34,6 +66,8 @@ public class EarthClass extends AsterClass {
 		case 0:
 			return swapSetPointAndNext(pt);
 		case 1:
+			target1 = pt;
+			return true;
 		}
 
 		return false;
@@ -45,7 +79,10 @@ public class EarthClass extends AsterClass {
 		case 0:
 			return swapHasNext();
 		case 1:
-			return false;
+			if (target1 == null)
+				return true;
+			else
+				return false;
 		}
 		return false;
 	}
@@ -56,7 +93,9 @@ public class EarthClass extends AsterClass {
 		case 0:
 			return swapMoveAstern();
 		case 1:
-			break;
+			if(target1 == null)
+				return true;
+			target1 = null;
 		}
 		return false;
 
@@ -69,12 +108,12 @@ public class EarthClass extends AsterClass {
 
 	public String getCommandName() {
 		// TODO 自動生成されたメソッド・スタブ
-		return "イージス";
+		return "サモンムーン";
 	}
 
 	public String getExplain() {
 		// TODO 自動生成されたメソッド・スタブ
-		return "レンジ内の味方ユニットは、次のターン対象にならない";
+		return "レンジ内にムーンを呼び出す";
 	}
 
 	public int getCost() {
@@ -84,11 +123,12 @@ public class EarthClass extends AsterClass {
 
 	public int getCommandCost() {
 		// TODO 自動生成されたメソッド・スタブ
-		return 1;
+		return 6;
 	}
 
 	public void executeSpecialCommand() {
 		// TODO 自動生成されたメソッド・スタブ
+		/* イージス
 		Point me = getAster().getField().asterToPoint(getAster());
 		Point pt = new Point();
 		for (int i = 0; i < defaultRange.length; i++) {
@@ -119,7 +159,10 @@ public class EarthClass extends AsterClass {
 				}
 			}
 		}
-
+		*/
+		final Aster a = getAster().getField().getAster(target1);
+		AsterClass ac = new MoonClass(a,getPlayer());
+		a.setAsterClass(ac);
 	}
 
 	public Image getImage() {

@@ -28,7 +28,7 @@ class Game {
 		//‚Ä‚·‚Æ‚Õ‚ê[—p
 		
 //		Aster a = field.getField()[6][0];
-//		a.setAsterClass(new StarClass(a, player1));
+//		a.setAsterClass(new MoonClass(a, player1));
 //		a = field.getField()[6][1];
 //		a.setAsterClass(new MercuryClass(a, player1));
 //		a = field.getField()[6][2];
