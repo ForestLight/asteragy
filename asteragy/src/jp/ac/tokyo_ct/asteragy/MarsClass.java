@@ -147,30 +147,6 @@ public class MarsClass extends AsterClass {
 		return false;
 	}
 
-	public String getName() {
-		return "マーズ";
-	}
-
-	public String getCommandName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "フレアスター";
-	}
-
-	public String getExplain() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "アステル1個を破壊する (サンには無効)";
-	}
-
-	public int getCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 8;
-	}
-
-	public int getCommandCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 4;
-	}
-
 	public void executeSpecialCommand() {
 		getAster().getField().setDeleteFlag(target1);
 		getAster().getField().delete(target1.x, target1.y, 0);

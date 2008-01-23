@@ -116,31 +116,6 @@ public class UranusClass extends AsterClass {
 		return swapMoveAstern();
 	}
 
-	public String getName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "ウラヌス";
-	}
-
-	public String getCommandName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "ロングレンジスワップ";
-	}
-
-	public String getExplain() {
-		// TODO 自動生成されたメソッド・スタブ
-		return "アステル2個（自分除く）を入れ替える";
-	}
-
-	public int getCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 10;
-	}
-
-	public int getCommandCost() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 1;
-	}
-
 	public void executeSpecialCommand() {
 		// TODO 自動生成されたメソッド・スタブ
 		getAster().getField().swap(target1, target2);
