@@ -27,7 +27,6 @@ public class MoonClass extends AsterClass {
 		case 0:
 			return swapGetRange(defaultRange);
 		case 1:
-			return defaultRange;
 		}
 		return null;
 	}
@@ -38,8 +37,6 @@ public class MoonClass extends AsterClass {
 		case 0:
 			return swapSetPointAndNext(pt);
 		case 1:
-			target1 = pt;
-			return true;
 		}
 		return false;
 	}
@@ -50,10 +47,6 @@ public class MoonClass extends AsterClass {
 		case 0:
 			return swapHasNext();
 		case 1:
-			if (target1 == null)
-				return true;
-			else
-				return false;
 		}
 		return false;
 	}
@@ -64,9 +57,6 @@ public class MoonClass extends AsterClass {
 		case 0:
 			return swapMoveAstern();
 		case 1:
-			if(target1 == null)
-				return true;
-			target1 = null;
 		}
 		return false;
 	}
@@ -75,12 +65,13 @@ public class MoonClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		final Field f = getAster().getField();
 		Point pt;
+		Point me = getAster().getField().asterToPoint(getAster());
 		for(int i = 0; i < f.getY(); i++){
 			for(int j = 0; j < f.getX(); j++){
 				// 自分のサンをみつける
 				if(f.getField()[i][j].getNumber() == 1
 						&& f.getField()[i][j].getAsterClass().getPlayer() == getPlayer()){
-					f.swap(pt = new Point(j, i), target1);
+					f.swap(pt = new Point(j, i), me);
 					f.setDeleteFlag(pt);
 					f.delete(pt.x, pt.y, 0);
 					return;
