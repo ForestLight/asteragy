@@ -294,7 +294,7 @@ public class KeyInputPlayer extends Player {
 					resetSelected();
 					waitForSelect(c);
 					// SP足らないのにコマンド選んでる場合のみ受け付けない
-				} while (command == 1 && ac.getCommandCost() > player.getSP());
+				} while (command == 1 && AsterClassData.commandCost[ac.getNumber() - 1] > player.getSP());
 				switch (command) {
 				case -1:
 					System.out.println("selectCommand - キャンセル");
