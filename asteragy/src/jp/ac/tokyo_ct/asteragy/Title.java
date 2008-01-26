@@ -9,17 +9,30 @@ import com.nttdocomo.ui.*;
 public class Title extends Canvas{
 	private static Image title;
 	private static Image[] menu;
-	private static int depth = 0;
-	private static int cursor = 0;
-	private static int gameType = -1;
+	private int depth = 0;
+	private int cursor = 0;
+	private int gameType = -1;
 	// private static int highScore;
+	
+	private AudioPresenter ap;
 
-	public Title(){
-		title = loadImage("title.jpg");
-		menu = new Image[5];
-		for(int i = 0; i < 5; i++)
-			menu[i] = loadImage("menu_" + i + ".gif");
-
+	public Title() {
+		if (title == null) {
+			title = loadImage("title.jpg");
+		}
+		if (menu == null) {
+			menu = new Image[5];
+			for (int i = 0; i < 5; i++)
+				menu[i] = loadImage("menu_" + i + ".gif");
+		}
+//		MediaSound ms = MediaManager.getSound("resource:///battle1.mid");
+//		try{
+//			ms.use();
+//		}catch(Exception e){
+//			System.out.println(e.getClass().getName());
+//		}
+//		ap = AudioPresenter.getAudioPresenter();
+//		ap.setSound(ms);
 	}
 
 	/**
@@ -29,6 +42,10 @@ public class Title extends Canvas{
 	 */
 	public int start(){
 		Graphics g = getGraphics();
+		Display.setCurrent(this);
+		gameType = -1;
+		
+		
 		for(;;){
 		//	System.out.println("loop");
 			if(gameType >= 0){

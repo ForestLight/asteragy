@@ -22,7 +22,7 @@ class Game {
 		player1 = new KeyInputPlayer(this, "êÊçU");
 		player2 = new KeyInputPlayer(this, "å„çU");
 		field = new Field(this);
-		field.setFieldSize(11, 11);
+		field.setFieldSize(9, 9);
 		field.setAster();
 		
 		//ÇƒÇ∑Ç∆Ç’ÇÍÅ[óp
@@ -118,7 +118,7 @@ class Game {
 					Thread.sleep(1500);
 				}catch(Exception e){
 				}
-				if(goPlayer == getPlayer1()) System.out.println("Player2 win");
+				if (goPlayer == getPlayer1()) System.out.println("Player2 win");
 				else System.out.println("Player1 win");
 				return false;
 			}

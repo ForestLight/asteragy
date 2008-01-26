@@ -18,15 +18,14 @@ public class Main extends IApplication {
 		// Display.setCurrent(c);
 
 		// 将来的には、ここでタイトル画面を出すようにしたい。
-		Title t;
+		Title t = new Title();
 		Game g;
 		while(true){
-			t = new Title();
-			Display.setCurrent(t);
 			t.start();
 	
 			g = new Game();
 			g.start();
+			System.out.println("Game over");
 		}
 	}
 }
