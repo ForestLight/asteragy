@@ -57,6 +57,10 @@ public class SunClass extends AsterClass {
 							if (f.getAsterClass().getPlayer() != getPlayer()) {
 									range[i][j] = 0;
 							}
+							// サンである場合選択不可能
+							if(f.getAsterClass().getNumber() == 1){
+								range[i][j] = 0;
+							}
 						}
 					}
 				}
