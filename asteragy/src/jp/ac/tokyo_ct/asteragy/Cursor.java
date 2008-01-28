@@ -23,9 +23,17 @@ public class Cursor implements PaintItem {
 	// •`‰æ
 
 	public void setCursor(Point p, int cursorType) {
+		Point temp = point;
 		point = p;
 		type = cursorType;
-		canvas.repaint();
+		canvas.getField().repaintAster(temp);
+		canvas.getField().repaintAster(p);
+	}
+
+	public boolean isCursor(Point p) {
+		if (point == null)
+			return false;
+		return point.x == p.x && point.y == p.y;
 	}
 
 	public void paint(Graphics g) {
@@ -33,7 +41,8 @@ public class Cursor implements PaintItem {
 		case CURSOR_CLEAR:
 			break;
 		case CURSOR_1:
-			System.out.println("paintCursor");
+			System.out.println("paintCursor " + point.x * GameCanvas.measure
+					+ ":" + point.y * GameCanvas.measure);
 			g.setColor(Graphics.getColorOfRGB(255, 0, 0));
 			g.drawRect(point.x * GameCanvas.measure, point.y
 					* GameCanvas.measure, GameCanvas.measure,

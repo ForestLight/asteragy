@@ -30,9 +30,9 @@ public abstract class AsterClass {
 
 	/**
 	 * 対応するアスターを設定する
-	 * @param a アスター
-	 * このメソッドは、Aster.setAsterClassから呼ばれるためにある。
-	 * これを直接呼び出さないこと。
+	 * 
+	 * @param a
+	 *            アスター このメソッドは、Aster.setAsterClassから呼ばれるためにある。 これを直接呼び出さないこと。
 	 */
 	void setAster(Aster a) {
 		aster = a;
@@ -80,6 +80,7 @@ public abstract class AsterClass {
 
 	/**
 	 * 1つ前の選択に戻る。
+	 * 
 	 * @return 一つ目の対象選択中に呼ばれた場合true
 	 */
 	public abstract boolean moveAstern();
@@ -87,45 +88,45 @@ public abstract class AsterClass {
 	/**
 	 * @return クラス名
 	 */
-	public String getName(){
-		return AsterClassData.className[getNumber()-1];
+	public String getName() {
+		return AsterClassData.className[getNumber() - 1];
 	}
 
 	/**
 	 * @return 特殊コマンド名
 	 */
-	public String getCommandName(){
-		return AsterClassData.commandName[getNumber()-1];
+	public String getCommandName() {
+		return AsterClassData.commandName[getNumber() - 1];
 	}
-	
+
 	/**
 	 * @return 特殊コマンドの説明
 	 */
-	public String getExplain(){
-		return AsterClassData.commandExplain[getNumber()-1];
+	public String getExplain() {
+		return AsterClassData.commandExplain[getNumber() - 1];
 	}
 
 	/**
 	 * 
 	 * @return クラス付与時のコスト
 	 */
-	public int getCost(){
-		return AsterClassData.classCost[getNumber()-1];
+	public int getCost() {
+		return AsterClassData.classCost[getNumber() - 1];
 	}
 
 	/**
 	 * 
 	 * @return 特殊コマンド使用時のコスト
 	 */
-	public int getCommandCost(){
-//		switch (mode) {
-//		case 0:
-//			return 0;
-//		case 1:
-//			return AsterClassData.commandCost[getNumber()-1];
-//		}
-//		return 0;
-		return AsterClassData.commandCost[getNumber()-1];
+	public int getCommandCost() {
+		// switch (mode) {
+		// case 0:
+		// return 0;
+		// case 1:
+		// return AsterClassData.commandCost[getNumber()-1];
+		// }
+		// return 0;
+		return AsterClassData.commandCost[getNumber() - 1];
 	}
 
 	/**
@@ -163,10 +164,12 @@ public abstract class AsterClass {
 		actionCount = getActionNum();
 		// フラグ消去
 		isProtected = false;
+
+		aster.getField().repaintAster(aster.getPoint());
 	}
 
-	public int getActionNum(){
-		return AsterClassData.actionNum[getNumber()-1];
+	public int getActionNum() {
+		return AsterClassData.actionNum[getNumber() - 1];
 	}
 
 	/**
@@ -218,39 +221,43 @@ public abstract class AsterClass {
 		int[][] range = new int[defaultRange.length][defaultRange[0].length];
 		// 1個目の対象選択
 		if (target1 == null) {
-			
+
 			for (int i = 0; i < defaultRange.length; i++) {
 				for (int j = 0; j < defaultRange[0].length; j++) {
 					// 上下左右に隣接レンジが無い孤立したレンジを除外
-				//	if (defaultRange[i + 1][j] + defaultRange[i - 1][j]
-				//			+ defaultRange[i][j + 1] + defaultRange[i][j - 1] != 0) {
-						range[i][j] = defaultRange[i][j];
-				//	}
+					// if (defaultRange[i + 1][j] + defaultRange[i - 1][j]
+					// + defaultRange[i][j + 1] + defaultRange[i][j - 1] != 0) {
+					range[i][j] = defaultRange[i][j];
+					// }
 				}
 			}
-			
+
 		}
-//		 2個目の対象選択
+		// 2個目の対象選択
 		else {
 			range = new int[defaultRange.length][defaultRange[0].length];
 			// target1の座標をレンジ内に修正したもの
 			Point selftPoint = getAster().getPoint();
 			Point pt = new Point();
-			System.out.println("tx:"+target1.x+"ty:"+target1.y+"spx:"+selftPoint .x+"spy:"+selftPoint .y);
+			System.out.println("tx:" + target1.x + "ty:" + target1.y + "spx:"
+					+ selftPoint.x + "spy:" + selftPoint.y);
 			pt.x = target1.x - (selftPoint.x - range[0].length / 2);
 			pt.y = target1.y - (selftPoint.y - range.length / 2);
-			System.out.println("px:"+pt.x+"py:"+pt.y);
+			System.out.println("px:" + pt.x + "py:" + pt.y);
 
 			for (int i = 0; i < range.length; i++) {
 				for (int j = 0; j < range[0].length; j++) {
 					// 1個目の対象の上下左右のマスで、元のレンジに含まれている場所のみ1
 					if (i == pt.y - 1 && j == pt.x && defaultRange[i][j] == 1) {
 						range[i][j] = 1;
-					} else if (i == pt.y + 1 && j == pt.x && defaultRange[i][j] == 1) {
+					} else if (i == pt.y + 1 && j == pt.x
+							&& defaultRange[i][j] == 1) {
 						range[i][j] = 1;
-					} else if (i == pt.y && j == pt.x + 1 && defaultRange[i][j] == 1) {
+					} else if (i == pt.y && j == pt.x + 1
+							&& defaultRange[i][j] == 1) {
 						range[i][j] = 1;
-					} else if (i == pt.y && j == pt.x - 1 && defaultRange[i][j] == 1) {
+					} else if (i == pt.y && j == pt.x - 1
+							&& defaultRange[i][j] == 1) {
 						range[i][j] = 1;
 					} else {
 						// 1個目の対象の上下左右以外移動不可
@@ -265,8 +272,8 @@ public abstract class AsterClass {
 	}
 
 	protected boolean swapMoveAstern() {
-		//1個目の対象選択中に呼ばれた場合
-		if(target1 == null){
+		// 1個目の対象選択中に呼ばれた場合
+		if (target1 == null) {
 			return true;
 		}
 		// 2個目の対象選択中に呼ばれた場合
@@ -290,10 +297,10 @@ public abstract class AsterClass {
 	}
 
 	protected boolean swapHasNext() {
-		if (target1 != null && target2 != null){
+		if (target1 != null && target2 != null) {
 			System.out.println("swapHasNext return false");
 			return false;
-		}else{
+		} else {
 			System.out.println("swapHasNext return true");
 			return true;
 		}

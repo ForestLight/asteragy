@@ -4,6 +4,8 @@ import com.nttdocomo.ui.*;
 
 public class CanvasControl {
 
+	public static final int f = 30;
+
 	private final Game game;
 
 	private final GameCanvas canvas;
@@ -16,21 +18,26 @@ public class CanvasControl {
 
 	private final SunCommand suncommand;
 
+	private final Range range;
+
 	private int topmargin;
 
 	private int leftmargin;
 
-	private boolean lockrepaint;
-
 	public CanvasControl(Game game) {
-		lockrepaint = false;
 		this.game = game;
 		canvas = new GameCanvas(this);
 		back = new BackImage(this);
 		cursor = new Cursor(this);
+		range = new Range(this);
+		;
 		commoncommand = new CommonCommand(this);
 		suncommand = new SunCommand(this);
 		Display.setCurrent(canvas);
+	}
+
+	public Graphics getGraphics() {
+		return canvas.getGraphics();
 	}
 
 	private void setFieldMargin() {
@@ -54,16 +61,23 @@ public class CanvasControl {
 		return back;
 	}
 
-	public PaintItem getField() {
+	public Range getRange() {
+		return range;
+	}
+
+	public Field getField() {
 		return game.getField();
 	}
 
-	public PaintItem getPlayer1() {
-		return game.getPlayer1();
+	public PaintItem[] getPlayers() {
+		PaintItem[] players = new PaintItem[2];
+		players[0] = game.getPlayer1();
+		players[1] = game.getPlayer2();
+		return players;
 	}
 
-	public PaintItem getPalyer2() {
-		return game.getPlayer2();
+	public void repaint() {
+		canvas.repaint();
 	}
 
 	/**
@@ -101,6 +115,10 @@ public class CanvasControl {
 		return canvas.getHeight();
 	}
 
+	public int fieldHeight() {
+		return game.getField().getY() * GameCanvas.measure;
+	}
+
 	/**
 	 * 幅を取得
 	 * 
@@ -110,18 +128,8 @@ public class CanvasControl {
 		return canvas.getWidth();
 	}
 
-	/**
-	 * 再描画
-	 * 
-	 */
-	public void repaint() {
-		if (lockrepaint)
-			return;
-		lockrepaint = true;
-		lockrepaint = false;
-		synchronized(canvas){
-			canvas.repaint();
-		}
+	public int fieldWidth() {
+		return game.getField().getX() * GameCanvas.measure;
 	}
 
 	private volatile EventProcesser eventProcesser;
@@ -164,7 +172,103 @@ public class CanvasControl {
 
 	public void onTurnStart(Player player) {
 		// TODO 自動生成されたメソッド・スタブ
+		System.out.println("onTurnStart");
+		game.getPlayer1().repaint();
+		game.getPlayer2().repaint();
+
+		Graphics g = getGraphics();
+
+		Image temp;
+
+		// 背景In
+		int x = getWidth();
+		int y = getHeight() / 4;
+		while (x > 0) {
+			g.lock();
+
+			g.drawImage(player.getTurnOnBack(), x, y);
+
+			g.unlock(false);
+
+			x -= 24;
+
+			try {
+				Thread.sleep(1000 / f);
+			} catch (InterruptedException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		}
+
+		// 文字In
+		String string = player.getName() + "のターン";
+		int stringwidth = Font.getDefaultFont().getBBoxWidth(string);
+		int wx = getWidth();
+		int wy = getHeight() / 2 + Font.getDefaultFont().getHeight() / 2;
+		while (wx > getWidth() / 2 - stringwidth / 2) {
+
+			g.lock();
+
+			g.drawImage(player.getTurnOnBack(), x, y);
+			g.drawString(string, wx, wy);
+
+			g.unlock(false);
+
+			wx -= 24;
+
+			try {
+				Thread.sleep(1000 / f);
+			} catch (InterruptedException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		}
+
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+		// 文字Out
+		while (wx * -1 < stringwidth) {
+
+			g.lock();
+
+			g.drawImage(player.getTurnOnBack(), x, y);
+			g.drawString(string, wx, wy);
+
+			g.unlock(false);
+
+			wx -= 24;
+
+			try {
+				Thread.sleep(1000 / f);
+			} catch (InterruptedException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		}
+
+		// 背景Out
+		while (x * -1 < getWidth()) {
+			g.lock();
+
+			canvas.repaint(x + getWidth(), y, getWidth() - x, getHeight() / 2);
+			g.drawImage(player.getTurnOnBack(), x, y);
+
+			g.unlock(false);
+
+			x -= 24;
+
+			try {
+				Thread.sleep(1000 / f);
+			} catch (InterruptedException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		}
 
 	}
-
 }

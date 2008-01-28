@@ -13,7 +13,7 @@ import com.nttdocomo.ui.MediaManager;
 class Field implements PaintItem {
 
 	private Aster[][] field;
-	
+
 	private Aster[][] backup;
 
 	private int X, Y;
@@ -25,7 +25,7 @@ class Field implements PaintItem {
 	private static Random r = new Random(System.currentTimeMillis());
 
 	private final Game game;
-	
+
 	private boolean fieldinit;
 
 	public Field(Game g) {
@@ -60,8 +60,8 @@ class Field implements PaintItem {
 		X = x;
 		Y = y;
 	}
-	
-	public boolean isFieldInit(){
+
+	public boolean isFieldInit() {
 		return fieldinit;
 	}
 
@@ -253,7 +253,6 @@ class Field implements PaintItem {
 				field[y][x].delete(AsterColor);
 			}
 		}
-		EffectAsterDisappearing.setDisappearingAsterNumber(count);
 		return count;
 	}
 
@@ -334,28 +333,32 @@ class Field implements PaintItem {
 	}
 
 	public Player checkGameOver() {
-		boolean p1=false,p2=false;
-		 for(int i = 0;i < Y; i++){
-			 for(int j = 0;j < X;j++){
-				 final AsterClass ac = field[i][j].getAsterClass();
-				 if(ac != null && ac.getNumber() == 1){
-					 if(ac.getPlayer() == game.getPlayer1()) p1=true;
-					 if(ac.getPlayer() == game.getPlayer2()) p2=true;
-				 }
-			 }
-		 }
-		 if(!p1) return game.getPlayer1();
-		 if(!p2) return game.getPlayer2();
-		 
+		boolean p1 = false, p2 = false;
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
+				final AsterClass ac = field[i][j].getAsterClass();
+				if (ac != null && ac.getNumber() == 1) {
+					if (ac.getPlayer() == game.getPlayer1())
+						p1 = true;
+					if (ac.getPlayer() == game.getPlayer2())
+						p2 = true;
+				}
+			}
+		}
+		if (!p1)
+			return game.getPlayer1();
+		if (!p2)
+			return game.getPlayer2();
+
 		return null;
 	}
 
-//	public void fieldBackUp(){
-//
-//	}
-//	public void restoreField(){
-//
-//	}
+	// public void fieldBackUp(){
+	//
+	// }
+	// public void restoreField(){
+	//
+	// }
 	/**
 	 * フィールド描画
 	 * 
@@ -371,36 +374,59 @@ class Field implements PaintItem {
 			for (int j = 0; j < field[0].length; j++) {
 				if (field[i][j] == null)
 					continue;
-				// フィールド
-				// g.drawImage(fieldimage, i * GameCanvas.measure, j
-				// * GameCanvas.measure);
-
-				// アステル
-				// プレイヤー2のユニットは反転
-				if (field[i][j].getAsterClass() != null
-						&& field[i][j].getAsterClass().getPlayer() == game
-								.getPlayer2()) {
-					g.setFlipMode(Graphics.FLIP_VERTICAL);
-				} else {
-					g.setFlipMode(Graphics.FLIP_NONE);
-				}
-
-				g.setOrigin(game.getCanvas().getLeftMargin() + j
-						* GameCanvas.measure, game.getCanvas().getTopMargin()
-						+ i * GameCanvas.measure);
-
-				field[i][j].getPaint().paint(g);
-
-				// レンジ
-				Range.paint(g, j, i);
+				paint(g, i, j);
 			}
 		}
 	}
-	
-	public CanvasControl getCanvas(){
-		return game.getCanvas();
+
+	private void paint(Graphics g, int i, int j) {
+		// フィールド
+		// g.drawImage(fieldimage, i * GameCanvas.measure, j
+		// * GameCanvas.measure);
+
+		// アステル
+		// プレイヤー2のユニットは反転
+		if (field[i][j].getAsterClass() != null
+				&& field[i][j].getAsterClass().getPlayer() == game.getPlayer2()) {
+			g.setFlipMode(Graphics.FLIP_VERTICAL);
+		} else {
+			g.setFlipMode(Graphics.FLIP_NONE);
+		}
+
+		g.setOrigin(game.getCanvas().getLeftMargin() + j * GameCanvas.measure,
+				game.getCanvas().getTopMargin() + i * GameCanvas.measure);
+
+		field[i][j].getPaint().paint(g);
+
+		// レンジ
+		game.getCanvas().getRange().paint(g, j, i);
 	}
-	
+
+	public void repaintField() {
+		Graphics g = game.getCanvas().getGraphics();
+		g.lock();
+		game.getCanvas().getBackImage().paintFieldBack(g);
+		paint(g);
+		game.getCanvas().getCursor().paint(g);
+		g.unlock(false);
+	}
+
+	public void repaintAster(Point point) {
+		if (point == null)
+			return;
+		Graphics g = game.getCanvas().getGraphics();
+		synchronized (g) {
+			g.lock();
+			game.getCanvas().getBackImage().paintAsterBack(g, point);
+			paint(g, point.y, point.x);
+			g.setOrigin(game.getCanvas().getLeftMargin(), game.getCanvas()
+					.getTopMargin());
+			if (game.getCanvas().getCursor().isCursor(point))
+				game.getCanvas().getCursor().paint(g);
+			g.unlock(false);
+		}
+	}
+
 	/*
 	 * フィールド画像読み込み
 	 * 

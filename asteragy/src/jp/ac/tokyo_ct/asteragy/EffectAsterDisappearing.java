@@ -11,36 +11,24 @@ public class EffectAsterDisappearing extends Thread implements PaintAsterItem {
 
 	private static Image image;
 
-	private static int number;
-
-	private static int count;
-
-	private Aster parent;
+	private final Aster parent;
 
 	private PaintAsterItem paint;
+	
+	private final Point location;
 
 	private int time;
 
 	public EffectAsterDisappearing(Aster parent) {
 		this.parent = parent;
+		this.location = parent.getPoint();
 		setPaint();
 		time = 0;
 		loadImage();
 	}
-	
-	private void setPaint(){
-		paint = parent.getPaint();
-		if(paint == null){
-			//なぜだかわからないがこの中が呼び出される。。
-			//とりあえず。
-			paint = new AsterPaint();
-			paint.setClass(null);
-		}
-	}
 
-	public static void setDisappearingAsterNumber(int num) {
-		count = 0;
-		number = num;
+	private void setPaint() {
+		paint = parent.getPaint();
 	}
 
 	public void setClass(AsterClass aster) {
@@ -55,35 +43,29 @@ public class EffectAsterDisappearing extends Thread implements PaintAsterItem {
 
 	public void paint(Graphics g) {
 		// TODO 自動生成されたメソッド・スタブ
-		g.drawScaledImage(image, 1, 1, GameCanvas.measure - 1,
-				GameCanvas.measure - 1, 0, time * (GameCanvas.measure - 1),
+		g.drawImage(image, 1, 1, 0, time * (GameCanvas.measure - 1),
 				GameCanvas.measure - 1, GameCanvas.measure - 1);
 	}
 
 	public void run() {
 		while (time < frame) {
-			repaint();
-			time++;
+			
+
 			try {
-				Thread.sleep(50);
+				Thread.sleep(1000 / CanvasControl.f);
 			} catch (InterruptedException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-		}
-		parent.setPaint(paint);
-		repaint();
-	}
+			
+			time++;
 
-	private void repaint() {
-		synchronized (this) {
-			synchronized (parent) {
-				count++;
-				if (count % number == 0) {
-					parent.getField().getCanvas().repaint();
-				}
-			}
+			parent.getField().repaintAster(location);
 		}
+		
+		parent.setPaint(paint);
+		
+		parent.getField().repaintAster(location);
 	}
 
 	private static void loadImage() {

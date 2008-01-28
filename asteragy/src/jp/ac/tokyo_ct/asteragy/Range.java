@@ -4,22 +4,29 @@ import com.nttdocomo.ui.*;
 
 public class Range {
 
-	private static Point aster;
+	private Point aster;
 
-	private static int[][] range;
+	private int[][] range;
 
-	private static boolean visible;
+	private boolean visible;
 
-	public static void setVisible(boolean v) {
+	private CanvasControl canvas;
+
+	public Range(CanvasControl canvas) {
+		this.canvas = canvas;
+	}
+
+	public void setVisible(boolean v) {
 		visible = v;
 	}
 
-	public static void setRange(Point point, int[][] r) {
+	public void setRange(Point point, int[][] r) {
 		aster = point;
 		range = r;
+		canvas.getField().repaintField();
 	}
 
-	public static void paint(Graphics g, int x, int y) {
+	public void paint(Graphics g, int x, int y) {
 		if (visible = false || aster == null)
 			return;
 		int rx = x - aster.x + (range[0].length / 2);
