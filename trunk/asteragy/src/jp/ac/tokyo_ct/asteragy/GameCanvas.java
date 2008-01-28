@@ -12,7 +12,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	/**
 	 * プレイヤー情報領域高さ
 	 */
-	private static final int playerheight = 20;
+	public static final int playerheight = 20;
 
 	private final CanvasControl canvas;
 
@@ -25,9 +25,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		System.out.println("repaint()");
 		// ダブルバッファ開始
 		g.lock();
-		// クリア
-		g.clearRect(0, 0, 240, 240);
-		//描画
+		// 描画
 		paintBackGround(g);
 		paintFieldSpace(g);
 		paintPlayerInfo(g);
@@ -55,13 +53,12 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 */
 	private void paintFieldSpace(Graphics g) {
 		System.out.println("paintFieldSpace");
-		
+
 		canvas.getField().paint(g);
-		
+
 		g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
 		canvas.getCursor().paint(g);
-		
-		
+
 		canvas.getCommand().paint(g);
 	}
 
@@ -73,12 +70,10 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 */
 	private void paintPlayerInfo(Graphics g) {
 		System.out.println("paintPlayerInfo");
-		// 1P
-		g.setOrigin(0, this.getHeight() - playerheight);
-		canvas.getPlayer1().paint(g);
-		// 2P
-		g.setOrigin(0, 0);
-		canvas.getPalyer2().paint(g);
+		PaintItem[] players = canvas.getPlayers();
+		for (int i = 0; i < players.length; i++) {
+			players[i].paint(g);
+		}
 	}
 
 	/*

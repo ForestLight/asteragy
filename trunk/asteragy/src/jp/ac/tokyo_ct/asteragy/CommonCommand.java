@@ -14,7 +14,6 @@ public class CommonCommand extends Command {
 
 	public void setAsterClass(AsterClass ac) {
 		asterClass = ac;
-		canvas.repaint();
 	}
 
 	public void paint(Graphics g) {

@@ -17,7 +17,7 @@ public class Aster {
 	public final static int GREEN = 3;
 
 	public final static int YELLOW = 4;
-	
+
 	public final static int PINK = 5;
 
 	private final Field field;
@@ -25,7 +25,7 @@ public class Aster {
 	private int color;
 
 	private AsterClass asterClass = null;
-	
+
 	private PaintAsterItem paint;
 
 	private static Random r = new Random(System.currentTimeMillis());
@@ -69,13 +69,13 @@ public class Aster {
 			color = r.nextInt(COLOR_MAX) + 1;
 			asterClass = null;
 			deleteFlag = false;
-			
+
 			paint.setClass(null);
-			
-			//初期の生成時に実行しないようなことをしてほしい。
-			//とりあえず。
-//			if(!field.isFieldInit())
-//				disappearingAster();			
+
+			// 初期の生成時に実行しないようなことをしてほしい。
+			// とりあえず。
+			//if (!field.isFieldInit())
+			//	disappearingAster();
 		}
 
 		if (c != 0) {
@@ -101,21 +101,22 @@ public class Aster {
 	Point getPoint() {
 		return getField().asterToPoint(this);
 	}
-	
-	public PaintAsterItem getPaint(){
+
+	public PaintAsterItem getPaint() {
 		paint.setColor(color);
 		return paint;
 	}
-	
-	public void setPaint(PaintAsterItem paint){
+
+	public void setPaint(PaintAsterItem paint) {
+		System.out.println("setPaint:" + this.toString());
 		this.paint = paint;
 	}
-	
-	private void disappearingAster(){
-		//消失エフェクト処理
+
+	private void disappearingAster() {
+		// 消失エフェクト処理
 		EffectAsterDisappearing disappear = new EffectAsterDisappearing(this);
 		paint = disappear;
-		disappear.start();		
+		disappear.start();
 	}
 
 }

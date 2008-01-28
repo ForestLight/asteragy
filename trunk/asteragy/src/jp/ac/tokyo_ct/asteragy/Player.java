@@ -1,6 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.Graphics;
+import com.nttdocomo.ui.Image;
 
 public abstract class Player implements PaintItem {
 	/**
@@ -28,10 +29,11 @@ public abstract class Player implements PaintItem {
 	public int getSP() {
 		return sp;
 	}
-	
-	public void addSP(int n){
+
+	public void addSP(int n) {
 		sp += n;
-		System.out.println("SP+"+n+"");
+		System.out.println("SP+" + n + "");
+		repaint();
 	}
 
 	protected final String name;
@@ -39,8 +41,6 @@ public abstract class Player implements PaintItem {
 	private int sp;
 
 	protected final Game game;
-	
-
 
 	// プレイヤー情報座標
 	private static final int spx = 10;
@@ -60,6 +60,12 @@ public abstract class Player implements PaintItem {
 	 *            プレイヤー
 	 */
 	public void paint(Graphics g) {
+		if (this.equals(game.getPlayer1())) {
+			g.setOrigin(0, game.getCanvas().getHeight()
+					- GameCanvas.playerheight);
+		} else {
+			g.setOrigin(0, 0);
+		}
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawString(name, namex, namey);
 		g.drawString("" + sp, spx, spy);
@@ -69,4 +75,31 @@ public abstract class Player implements PaintItem {
 			g.drawRect(namex - 1, namey - 11, 25, 13);
 		}
 	}
+
+	public void repaint() {
+		Graphics g = game.getCanvas().getGraphics();
+		g.lock();
+		int player = 1;
+		if (this.equals(game.getPlayer2())) {
+			player = 2;
+		}
+		game.getCanvas().getBackImage().paintPlayerBakc(g, player);
+		paint(g);
+		g.unlock(false);
+	}
+
+	public Image getTurnOnBack() {
+		if (turnonback == null)
+			loadTurnOnBack();
+		return turnonback;
+	}
+
+	private void loadTurnOnBack() {
+		turnonback = Image.createImage(game.getCanvas().getWidth(), game
+				.getCanvas().getHeight() / 2);
+		// Graphics g = turnonback.getGraphics();
+	}
+
+	private static Image turnonback;
+
 }

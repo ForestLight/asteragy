@@ -14,7 +14,7 @@ public class KeyInputPlayer extends Player {
 	}
 
 	private CanvasControl canvas;
-	
+
 	/*
 	 * (非 Javadoc)
 	 * 
@@ -51,7 +51,7 @@ public class KeyInputPlayer extends Player {
 
 					while (ac.hasNext()) {
 						int[][] range = ac.getRange();
-						Range.setRange(pt, range);
+						game.getCanvas().getRange().setRange(pt, range);
 						Point target = selectTarget(range, pt);
 						System.out.println("ターゲット選択中");
 						System.out.println("target - x = " + pt.x + " y = "
@@ -65,9 +65,9 @@ public class KeyInputPlayer extends Player {
 						}
 						ac.setPointAndNext(target);
 					}
-					Range.setRange(null, null);
+					game.getCanvas().getRange().setRange(null, null);
 
-					//サン専用
+					// サン専用
 					if (ac.getNumber() == 1 && cmd == 1) {
 						Point acs = selectAsterClass(pt);
 						if (acs.x == -1) {
@@ -89,45 +89,46 @@ public class KeyInputPlayer extends Player {
 					if (cmd == 1) {
 						this.addSP(-ac.getCommandCost());
 					}
-//					game.getField().fieldBackUp();
+					// game.getField().fieldBackUp();
 					System.out.println("実行開始");
 					ac.execute();
 					System.out.println("実行完了");
-					
-					//ゲームオーバー判定仮
-					if((p = game.getField().checkGameOver()) != null){
-//						if(p == game.getCurrentPlayer()){
-//							game.getField().restoreField();
-//							if (cmd == 1) {
-//								this.addSP(ac.getCommandCost());
-//							}
-//							state=0;
-//							System.out.println("字軍サン消滅 行動キャンセル");
-//							break;
-//						}
+					game.getField().repaintField();
+
+					// ゲームオーバー判定仮
+					if ((p = game.getField().checkGameOver()) != null) {
+						// if(p == game.getCurrentPlayer()){
+						// game.getField().restoreField();
+						// if (cmd == 1) {
+						// this.addSP(ac.getCommandCost());
+						// }
+						// state=0;
+						// System.out.println("字軍サン消滅 行動キャンセル");
+						// break;
+						// }
 						return null;
 					}
-					
+
 					// 消滅判定
 					System.out.println("消去開始");
 					this.addSP(game.getField().deleteAll());
 					System.out.println("消去完了");
-					
-					if((p = game.getField().checkGameOver()) != null){
-//						if(p == game.getCurrentPlayer()){
-//							game.getField().restoreField();
-//							if (cmd == 1) {
-//								this.addSP(ac.getCommandCost());
-//							}
-//							state=0;
-//							System.out.println("字軍サン消滅 行動キャンセル");
-//							break;
-//						}
+					game.getField().repaintField();
+
+					if ((p = game.getField().checkGameOver()) != null) {
+						// if(p == game.getCurrentPlayer()){
+						// game.getField().restoreField();
+						// if (cmd == 1) {
+						// this.addSP(ac.getCommandCost());
+						// }
+						// state=0;
+						// System.out.println("字軍サン消滅 行動キャンセル");
+						// break;
+						// }
 						return null;
 					}
-					
+
 					state = 0;
-					canvas.repaint();
 				}
 			}
 			return null;
@@ -279,7 +280,6 @@ public class KeyInputPlayer extends Player {
 				System.out.println("selectCommand.processKeyEvent");
 				canvas.getCommonCommand().setCommand(command, pt);
 				canvas.getCommonCommand().setAsterClass(ac);
-				player.game.getCanvas().repaint();
 			}
 
 			protected boolean onCancel() {
@@ -294,7 +294,9 @@ public class KeyInputPlayer extends Player {
 					resetSelected();
 					waitForSelect(c);
 					// SP足らないのにコマンド選んでる場合のみ受け付けない
-				} while (command == 1 && AsterClassData.commandCost[ac.getNumber() - 1] > player.getSP());
+				} while (command == 1
+						&& AsterClassData.commandCost[ac.getNumber() - 1] > player
+								.getSP());
 				switch (command) {
 				case -1:
 					System.out.println("selectCommand - キャンセル");
@@ -423,7 +425,7 @@ public class KeyInputPlayer extends Player {
 			}
 
 			private void applyPosition() {
-				canvas.getCursor().setCursor(new Point(x,y), Cursor.CURSOR_1);
+				canvas.getCursor().setCursor(new Point(x, y), Cursor.CURSOR_1);
 			}
 
 			private volatile Point target = new Point(0, 0);
