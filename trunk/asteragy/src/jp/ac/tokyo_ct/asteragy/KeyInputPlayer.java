@@ -27,9 +27,11 @@ public class KeyInputPlayer extends Player {
 			Point pt = null;
 			int cmd = -1; // 0 = swap, 1 = 特殊コマンド
 			while (state < 4) {
+				
 				switch (state) {
 				case 0: // 操作クラスの選択
 					pt = selectAster();
+					
 					if (pt == null)
 						return null;
 					state++;
@@ -152,6 +154,7 @@ public class KeyInputPlayer extends Player {
 			 *            基となるKeyInputPlayer
 			 */
 			EventProcesserForSelectAster(KeyInputPlayer keyInputPlayer) {
+				
 				player = keyInputPlayer;
 				x = (player.game.getField().getX()) / 2;
 				y = (player.game.getField().getY()) / 2;
@@ -223,6 +226,7 @@ public class KeyInputPlayer extends Player {
 			}
 
 			private void applyPosition() {
+
 				canvas.getCursor().setCursor(new Point(x, y), Cursor.CURSOR_1);
 			}
 
@@ -235,6 +239,7 @@ public class KeyInputPlayer extends Player {
 			private final KeyInputPlayer player;
 		}
 
+		if(canvas == null)System.out.println("ぬるぽ");
 		canvas.getCommonCommand().setCommand(-1, null);
 		System.out.println("KeyInputPlayer.selectAster()");
 		EventProcesserForSelectAster ep = new EventProcesserForSelectAster(this);

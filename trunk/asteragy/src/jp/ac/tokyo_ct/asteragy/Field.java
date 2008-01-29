@@ -367,8 +367,8 @@ class Field implements PaintItem {
 	 */
 	public void paint(Graphics g) {
 		// 原点座標位置計算
-		g.setOrigin((240 - field.length * GameCanvas.measure) / 2,
-				(240 - field[0].length * GameCanvas.measure) / 2);
+		g.setOrigin((240 - X * GameCanvas.measure) / 2,
+				(240 - Y * GameCanvas.measure) / 2);
 		// フィールド，アステル描画
 		for (int i = 0; i < field.length; i++) {
 			for (int j = 0; j < field[0].length; j++) {

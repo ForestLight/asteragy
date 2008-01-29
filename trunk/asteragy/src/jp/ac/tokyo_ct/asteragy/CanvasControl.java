@@ -4,7 +4,7 @@ import com.nttdocomo.ui.*;
 
 public class CanvasControl {
 
-	public static final int f = 30;
+	public static final int f = 40;
 
 	private final Game game;
 
@@ -30,7 +30,6 @@ public class CanvasControl {
 		back = new BackImage(this);
 		cursor = new Cursor(this);
 		range = new Range(this);
-		;
 		commoncommand = new CommonCommand(this);
 		suncommand = new SunCommand(this);
 		Display.setCurrent(canvas);

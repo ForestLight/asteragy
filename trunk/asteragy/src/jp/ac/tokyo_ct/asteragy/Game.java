@@ -21,9 +21,10 @@ class Game {
 		field = new Field(this);
 		field.setFieldSize(9, 9);
 		field.setAster();
+		canvas = new CanvasControl(this);
 		player1 = new KeyInputPlayer(this, "æU");
 		player2 = new KeyInputPlayer(this, "ŒãU");
-		canvas = new CanvasControl(this);
+	//	canvas = new CanvasControl(this);
 		
 		//‚Ä‚·‚Æ‚Õ‚ê[—p
 		
