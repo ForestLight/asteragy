@@ -10,7 +10,6 @@ public class KeyInputPlayer extends Player {
 	 */
 	public KeyInputPlayer(Game game, String playerName) {
 		super(game, playerName);
-		canvas = game.getCanvas();
 		System.out.println("KeyInputPlayer");
 	}
 
@@ -23,7 +22,9 @@ public class KeyInputPlayer extends Player {
 	 */
 	public Action getAction() {
 		System.out.println("KeyInputPlayer.getAction()");
-		canvas = game.getCanvas();
+		if (canvas == null) {
+			canvas = game.getCanvas();
+		}
 		try {
 			int state = 0;
 			Point pt = null;

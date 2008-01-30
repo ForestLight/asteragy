@@ -17,7 +17,6 @@ public final class Main extends IApplication {
 		// GameCanvas c = new GameCanvas();
 		// Display.setCurrent(c);
 
-		// 将来的には、ここでタイトル画面を出すようにしたい。
 		Title t = new Title();
 		while (true) {
 			t.start();
