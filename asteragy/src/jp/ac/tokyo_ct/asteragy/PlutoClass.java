@@ -3,11 +3,8 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.*;
 
 public class PlutoClass extends AsterClass {
-	private static int[][] defaultRange = { 
-			{ 1, 1, 0, 1, 1 },
-			{ 1, 0, 1, 0, 1 },
-			{ 0, 1, 1, 1, 0 }, 
-			{ 1, 0, 1, 0, 1 }, 
+	private static int[][] defaultRange = { { 1, 1, 0, 1, 1 },
+			{ 1, 0, 1, 0, 1 }, { 0, 1, 1, 1, 0 }, { 1, 0, 1, 0, 1 },
 			{ 1, 1, 0, 1, 1 } };
 
 	private static Image asterImage;
@@ -67,7 +64,8 @@ public class PlutoClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
-		Point me = getAster().getField().asterToPoint(getAster());
+		final Field field = getAster().getField();
+		Point me = field.asterToPoint(getAster());
 		Point pt = new Point();
 		for (int i = 0; i < defaultRange.length; i++) {
 			for (int j = 0; j < defaultRange[0].length; j++) {
@@ -76,20 +74,19 @@ public class PlutoClass extends AsterClass {
 					// 自身ではない部分を破壊
 					if (i != defaultRange.length / 2
 							|| j != defaultRange[0].length / 2) {
-						pt.x = me.x - defaultRange.length/2 + j;
-						pt.y = me.y - defaultRange[0].length/2 + i;
+						pt.x = me.x - defaultRange.length / 2 + j;
+						pt.y = me.y - defaultRange[0].length / 2 + i;
 
 						// フィールドの外にはみ出してたら処理しない
-						if (pt.x < 0
-								|| pt.x >= getAster().getField().getField()[0].length)
+						final Aster[][] f = field.getField();
+						if (pt.x < 0 || pt.x >= f[0].length)
 							continue;
-						if (pt.y < 0
-								|| pt.y >= getAster().getField().getField().length)
+						if (pt.y < 0 || pt.y >= f.length)
 							continue;
 
 						// ターゲットを破壊
-						getAster().getField().setDeleteFlag(pt);
-						getAster().getField().delete(pt.x, pt.y, 0);
+						field.setDeleteFlag(pt);
+						field.delete(pt.x, pt.y);
 					}
 				}
 			}

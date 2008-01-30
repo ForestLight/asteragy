@@ -3,9 +3,6 @@ package jp.ac.tokyo_ct.asteragy;
 import java.util.Random;
 
 import com.nttdocomo.ui.Graphics;
-import com.nttdocomo.ui.Image;
-import com.nttdocomo.ui.MediaImage;
-import com.nttdocomo.ui.MediaManager;
 
 /**
  * @author Okubo
@@ -13,8 +10,6 @@ import com.nttdocomo.ui.MediaManager;
 class Field implements PaintItem {
 
 	private Aster[][] field;
-
-	private Aster[][] backup;
 
 	private int X, Y;
 
@@ -91,13 +86,14 @@ class Field implements PaintItem {
 	 * @param player
 	 */
 	public void beginTurn(Player player) {
-		for (int i = 0; i < field.length; i++) {
-			for (int j = 0; j < field[0].length; j++) {
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
 				// クラス持ちで
-				if (field[i][j].getAsterClass() != null) {
+				final AsterClass asterClass = field[i][j].getAsterClass();
+				if (asterClass != null) {
 					// 現在ターン進行中のプレイヤーのユニットなら初期化
-					if (field[i][j].getAsterClass().getPlayer() == player) {
-						field[i][j].getAsterClass().init();
+					if (asterClass.getPlayer() == player) {
+						asterClass.init();
 					}
 				}
 			}
@@ -183,9 +179,9 @@ class Field implements PaintItem {
 	 *            判定対象色
 	 */
 	public void setDeleteFlagSameColor(int x, int y, int AsterColor) {
-		if (field[y][x].getColor() == AsterColor
-				&& field[y][x].getDeleteFlag() == false) {
-			field[y][x].setDeleteFlag(true);
+		final Aster a = field[y][x];
+		if (a.getColor() == AsterColor && a.getDeleteFlag() == false) {
+			a.setDeleteFlag(true);
 			if (y > 0)
 				setDeleteFlagSameColor(x, y - 1, AsterColor);
 			if (x > 0)
@@ -218,11 +214,27 @@ class Field implements PaintItem {
 	 *            消したアステル数をカウント（最初は0を入れる）
 	 * @return 消したアステル数
 	 */
-	public int delete(int x, int y, int count) {
-		int AsterColor = field[y][x].getColor();
+	public int delete(int x, int y) {
+		return delete(x, y, 0);
+	}
 
-		if (field[y][x].getDeleteFlag() == true) {
-			field[y][x].delete(0);
+	/**
+	 * deleteFlagが立っているアステルを全て消す
+	 * 
+	 * @param x
+	 *            注目するマスのx座標
+	 * @param y
+	 *            注目するマスのy座標
+	 * @param count
+	 *            消したアステル数をカウント（最初は0を入れる）
+	 * @return 消したアステル数
+	 */
+	private int delete(int x, int y, int count) {
+		final Aster target = field[y][x];
+		int AsterColor = target.getColor();
+
+		if (target.getDeleteFlag() == true) {
+			target.delete(0);
 			count++;
 			if (y > 0)
 				count = delete(x, y - 1, count);
@@ -242,15 +254,15 @@ class Field implements PaintItem {
 			int t = r.nextInt(5);
 
 			for (int i = 1; i <= 5; i++, t++) {
-				field[y][x].setDeleteFlag(true);
-				field[y][x].delete(table[t]);
+				target.setDeleteFlag(true);
+				target.delete(table[t]);
 				if (judge(x, y) == false)
 					return count;
 			}
 			// 5色試しても置けない場合、delete前の色に決定する
 			if (judge(x, y) == true) {
-				field[y][x].setDeleteFlag(true);
-				field[y][x].delete(AsterColor);
+				target.setDeleteFlag(true);
+				target.delete(AsterColor);
 			}
 		}
 		return count;
@@ -308,25 +320,23 @@ class Field implements PaintItem {
 	}
 
 	public Point asterToPoint(Aster a) {
-		Point point;
-
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
 				if (field[i][j] == a) {
-					point = new Point(j, i);
-					return point;
+					return new Point(j, i);
 				}
 			}
 		}
+		System.out.println("Field.asterToPoint() - Not found.");
 		return null;
 	}
 
 	public void onTurnStart(Player p) {
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
-				if (field[i][j].getAsterClass() != null
-						&& field[i][j].getAsterClass().getPlayer() == p) {
-					field[i][j].getAsterClass().init();
+				final AsterClass asterClass = field[i][j].getAsterClass();
+				if (asterClass != null && asterClass.getPlayer() == p) {
+					asterClass.init();
 				}
 			}
 		}
@@ -334,21 +344,23 @@ class Field implements PaintItem {
 
 	public Player checkGameOver() {
 		boolean p1 = false, p2 = false;
+		final Player player1 = game.getPlayer1();
+		final Player player2 = game.getPlayer2();
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
 				final AsterClass ac = field[i][j].getAsterClass();
 				if (ac != null && ac.getNumber() == 1) {
-					if (ac.getPlayer() == game.getPlayer1())
+					if (ac.getPlayer() == player1)
 						p1 = true;
-					if (ac.getPlayer() == game.getPlayer2())
+					if (ac.getPlayer() == player2)
 						p2 = true;
 				}
 			}
 		}
 		if (!p1)
-			return game.getPlayer1();
+			return player1;
 		if (!p2)
-			return game.getPlayer2();
+			return player2;
 
 		return null;
 	}
@@ -367,11 +379,11 @@ class Field implements PaintItem {
 	 */
 	public void paint(Graphics g) {
 		// 原点座標位置計算
-		g.setOrigin((240 - X * GameCanvas.measure) / 2,
-				(240 - Y * GameCanvas.measure) / 2);
+		g.setOrigin((240 - X * GameCanvas.measure) / 2, (240 - Y
+				* GameCanvas.measure) / 2);
 		// フィールド，アステル描画
-		for (int i = 0; i < field.length; i++) {
-			for (int j = 0; j < field[0].length; j++) {
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
 				if (field[i][j] == null)
 					continue;
 				paint(g, i, j);
@@ -386,45 +398,54 @@ class Field implements PaintItem {
 
 		// アステル
 		// プレイヤー2のユニットは反転
-		if (field[i][j].getAsterClass() != null
-				&& field[i][j].getAsterClass().getPlayer() == game.getPlayer2()) {
+		final Aster a = field[i][j];
+		final AsterClass asterClass = a.getAsterClass();
+		if (asterClass != null && asterClass.getPlayer() == game.getPlayer2()) {
 			g.setFlipMode(Graphics.FLIP_VERTICAL);
 		} else {
 			g.setFlipMode(Graphics.FLIP_NONE);
 		}
 
-		g.setOrigin(game.getCanvas().getLeftMargin() + j * GameCanvas.measure,
-				game.getCanvas().getTopMargin() + i * GameCanvas.measure);
+		final CanvasControl canvas = game.getCanvas();
+		g.setOrigin(canvas.getLeftMargin() + j * GameCanvas.measure, canvas
+				.getTopMargin()
+				+ i * GameCanvas.measure);
 
-		field[i][j].getPaint().paint(g);
+		a.getPaint().paint(g);
 
 		// レンジ
-		game.getCanvas().getRange().paint(g, j, i);
+		canvas.getRange().paint(g, j, i);
 	}
 
 	public void repaintField() {
-		Graphics g = game.getCanvas().getGraphics();
+		final CanvasControl canvas = game.getCanvas();
+		Graphics g = canvas.getGraphics();
 		g.lock();
-		game.getCanvas().getBackImage().paintFieldBack(g);
+		canvas.getBackImage().paintFieldBack(g);
 		paint(g);
-		game.getCanvas().getCursor().paint(g);
+		canvas.getCursor().paint(g);
 		g.unlock(false);
 	}
 
 	public void repaintAster(Point point) {
 		if (point == null)
 			return;
-		Graphics g = game.getCanvas().getGraphics();
+		final CanvasControl canvas = game.getCanvas();
+		Graphics g = canvas.getGraphics();
 		synchronized (g) {
 			g.lock();
-			game.getCanvas().getBackImage().paintAsterBack(g, point);
+			canvas.getBackImage().paintAsterBack(g, point);
 			paint(g, point.y, point.x);
-			g.setOrigin(game.getCanvas().getLeftMargin(), game.getCanvas()
-					.getTopMargin());
-			if (game.getCanvas().getCursor().isCursor(point))
-				game.getCanvas().getCursor().paint(g);
+			g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
+			final Cursor cursor = canvas.getCursor();
+			if (cursor.isCursor(point))
+				cursor.paint(g);
 			g.unlock(false);
 		}
+	}
+
+	Game getGame() {
+		return game;
 	}
 
 	/*

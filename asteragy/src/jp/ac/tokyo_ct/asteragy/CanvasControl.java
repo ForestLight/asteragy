@@ -30,6 +30,7 @@ public class CanvasControl {
 		back = new BackImage(this);
 		cursor = new Cursor(this);
 		range = new Range(this);
+
 		commoncommand = new CommonCommand(this);
 		suncommand = new SunCommand(this);
 		Display.setCurrent(canvas);
@@ -40,8 +41,9 @@ public class CanvasControl {
 	}
 
 	private void setFieldMargin() {
-		topmargin = (getHeight() - game.getField().getY() * GameCanvas.measure) / 2;
-		leftmargin = (getWidth() - game.getField().getX() * GameCanvas.measure) / 2;
+		final Field field = game.getField();
+		topmargin = (getHeight() - field.getY() * GameCanvas.measure) / 2;
+		leftmargin = (getWidth() - field.getX() * GameCanvas.measure) / 2;
 	}
 
 	public int getTopMargin() {
@@ -69,10 +71,7 @@ public class CanvasControl {
 	}
 
 	public PaintItem[] getPlayers() {
-		PaintItem[] players = new PaintItem[2];
-		players[0] = game.getPlayer1();
-		players[1] = game.getPlayer2();
-		return players;
+		return game.getPlayers();
 	}
 
 	public void repaint() {
@@ -176,8 +175,6 @@ public class CanvasControl {
 		game.getPlayer2().repaint();
 
 		Graphics g = getGraphics();
-
-		Image temp;
 
 		// îwåiIn
 		int x = getWidth();

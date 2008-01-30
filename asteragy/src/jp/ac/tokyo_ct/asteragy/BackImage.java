@@ -4,7 +4,7 @@ import com.nttdocomo.ui.*;
 
 public class BackImage implements PaintItem {
 
-	private static Image backimage;
+	private Image backimage;
 
 	private final CanvasControl canvas;
 
@@ -69,10 +69,10 @@ public class BackImage implements PaintItem {
 	}
 
 	public void paintAsterBack(Graphics g, Point point) {
-		int x = canvas.getLeftMargin() + point.x * GameCanvas.measure;
-		int y = canvas.getTopMargin() + point.y * GameCanvas.measure;
-		g.drawImage(backimage, x, y, x, y, GameCanvas.measure + 1,
-				GameCanvas.measure + 1);
+		final int m = GameCanvas.measure;
+		int x = canvas.getLeftMargin() + point.x * m;
+		int y = canvas.getTopMargin() + point.y * m;
+		g.drawImage(backimage, x, y, x, y, m + 1, m + 1);
 	}
 
 	public void paintPlayerBakc(Graphics g, int player) {

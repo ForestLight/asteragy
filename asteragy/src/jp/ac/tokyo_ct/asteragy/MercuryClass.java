@@ -4,12 +4,9 @@ import com.nttdocomo.ui.*;
 
 public class MercuryClass extends AsterClass {
 
-	private static int[][] defaultRange = { 
-		{ 0, 0, 0, 0, 0 },
-		{ 0, 1, 1, 1, 0 }, 
-		{ 1, 1, 1, 1, 1 },
-		{ 0, 1, 1, 1, 0 },
-		{ 0, 0, 0, 0, 0 } };
+	private static int[][] defaultRange = { { 0, 0, 0, 0, 0 },
+			{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
+			{ 0, 0, 0, 0, 0 } };
 
 	private static Image asterImage;
 
@@ -32,28 +29,26 @@ public class MercuryClass extends AsterClass {
 			// レンジの左上の座標のフィールド内での位置
 			final Point tmp = getAster().getPoint();
 			final Field field = getAster().getField();
-			Point pt = new Point();
-			pt.x = tmp.x - (range[0].length / 2);
-			pt.y = tmp.y - (range.length / 2);
+			Point pt = new Point(tmp.x - (range[0].length / 2), tmp.y
+					- (range.length / 2));
 
-			for (int i = 0; i< defaultRange.length; i++) {
+			for (int i = 0; i < defaultRange.length; i++) {
 				if (pt.y + i < 0 || pt.y + i >= field.getY())
 					continue;
 				for (int j = 0; j < defaultRange[0].length; j++) {
-					if (pt.x + j < 0 || pt.x+j >= field.getX())
+					if (pt.x + j < 0 || pt.x + j >= field.getX())
 						continue;
 
 					// レンジ内であり
 					if (defaultRange[i][j] == 1) {
 						// その位置のアステルにクラスがあり
-						if (getAster().getField().getField()[pt.y + i][pt.x + j]
-								.getAsterClass() != null) {
+						final AsterClass asterClass = field.getField()[pt.y + i][pt.x
+								+ j].getAsterClass();
+						if (asterClass != null) {
 							// そのクラスの所持者が自分であり
-							if (getAster().getField().getField()[pt.y + i][pt.x
-									+ j].getAsterClass().getPlayer() == getPlayer()) {
+							if (asterClass.getPlayer() == getPlayer()) {
 								// 行動可能回数が0ならば選択可能
-								if (getAster().getField().getField()[pt.y + i][pt.x
-										+ j].getAsterClass().getActionCount() == 0) {
+								if (asterClass.getActionCount() == 0) {
 									range[i][j] = 1;
 								}
 							}

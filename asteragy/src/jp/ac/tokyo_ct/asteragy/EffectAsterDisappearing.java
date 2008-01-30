@@ -14,7 +14,7 @@ public class EffectAsterDisappearing extends Thread implements PaintAsterItem {
 	private final Aster parent;
 
 	private PaintAsterItem paint;
-	
+
 	private final Point location;
 
 	private int time;
@@ -32,53 +32,49 @@ public class EffectAsterDisappearing extends Thread implements PaintAsterItem {
 	}
 
 	public void setClass(AsterClass aster) {
-		// TODO 自動生成されたメソッド・スタブ
 		paint.setClass(aster);
 	}
 
 	public void setColor(int color) {
-		// TODO 自動生成されたメソッド・スタブ
 		paint.setColor(color);
 	}
 
 	public void paint(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
 		g.drawImage(image, 1, 1, 0, time * (GameCanvas.measure - 1),
 				GameCanvas.measure - 1, GameCanvas.measure - 1);
 	}
 
 	public void run() {
 		while (time < frame) {
-			
-
 			try {
 				Thread.sleep(1000 / CanvasControl.f);
 			} catch (InterruptedException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-			
+
 			time++;
 
 			parent.getField().repaintAster(location);
 		}
-		
+
 		parent.setPaint(paint);
-		
+
 		parent.getField().repaintAster(location);
 	}
 
 	private static void loadImage() {
-		if (image != null)
-			return;
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///disappear.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			image = m.getImage();
-		} catch (Exception e) {
+		if (image == null) {
+			try {
+				// リソースから読み込み
+				MediaImage m = MediaManager
+						.getImage("resource:///disappear.gif");
+				// メディアの使用開始
+				m.use();
+				// 読み込み
+				image = m.getImage();
+			} catch (Exception e) {
+			}
 		}
 	}
 

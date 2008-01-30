@@ -4,10 +4,8 @@ import com.nttdocomo.ui.Image;
 
 public class MoonClass extends AsterClass {
 
-	private static int[][] defaultRange = { 
-		{ 0, 1, 0 },
-		{ 1, 1, 1 },
-		{ 0, 1, 0 } };
+	private static int[][] defaultRange = { { 0, 1, 0 }, { 1, 1, 1 },
+			{ 0, 1, 0 } };
 
 	private static Image asterImage;
 
@@ -64,16 +62,17 @@ public class MoonClass extends AsterClass {
 	public void executeSpecialCommand() {
 		// TODO 自動生成されたメソッド・スタブ
 		final Field f = getAster().getField();
-		Point pt;
-		Point me = getAster().getField().asterToPoint(getAster());
-		for(int i = 0; i < f.getY(); i++){
-			for(int j = 0; j < f.getX(); j++){
+		Point me = f.asterToPoint(getAster());
+		for (int i = 0; i < f.getY(); i++) {
+			for (int j = 0; j < f.getX(); j++) {
 				// 自分のサンをみつける
-				if(f.getField()[i][j].getNumber() == 1
-						&& f.getField()[i][j].getAsterClass().getPlayer() == getPlayer()){
-					f.swap(pt = new Point(j, i), me);
+				final Aster a = f.getField()[i][j];
+				if (a.getNumber() == 1
+						&& a.getAsterClass().getPlayer() == getPlayer()) {
+					Point pt = new Point(j, i);
+					f.swap(pt, me);
 					f.setDeleteFlag(pt);
-					f.delete(pt.x, pt.y, 0);
+					f.delete(pt.x, pt.y);
 					return;
 				}
 			}

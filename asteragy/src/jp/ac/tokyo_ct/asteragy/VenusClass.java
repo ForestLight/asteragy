@@ -3,20 +3,13 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.*;
 
 public class VenusClass extends AsterClass {
-	private static int[][] defaultRange = {
-			{ 0, 0, 1, 0, 0},
-			{ 0, 1, 1, 1, 0}, 
-			{ 0, 1, 1, 1, 0}, 
-			{ 0, 0, 0, 0, 0},
-			{ 0, 0, 0, 0, 0}
-			};
-	private static int[][] defaultRangeP2 = {
-		{0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0},
-		{0, 1, 1, 1, 0},
-		{0, 1, 1, 1, 0},
-		{0, 0, 1, 0, 0}		
-	};
+	private static int[][] defaultRange = { { 0, 0, 1, 0, 0 },
+			{ 0, 1, 1, 1, 0 }, { 0, 1, 1, 1, 0 }, { 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0 } };
+
+	private static int[][] defaultRangeP2 = { { 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0 }, { 0, 1, 1, 1, 0 }, { 0, 1, 1, 1, 0 },
+			{ 0, 0, 1, 0, 0 } };
 
 	private static Image asterImage;
 
@@ -32,60 +25,58 @@ public class VenusClass extends AsterClass {
 
 	public int[][] getRange() {
 		// TODO 自動生成されたメソッド・スタブ
+		final Game game = getPlayer().game;
 		switch (mode) {
 		case 0:
-			if(getPlayer() == getPlayer().game.getPlayer2()){
+			if (getPlayer() == game.getPlayer2()) {
 				return swapGetRange(defaultRangeP2);
-			}else{
-			return swapGetRange(defaultRange);
+			} else {
+				return swapGetRange(defaultRange);
 			}
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			final Point thisPoint = getAster().getField().asterToPoint(
-					getAster());
 			final Field field = getAster().getField();
+			final Point thisPoint = field.asterToPoint(getAster());
 			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point();
 			pt.x = thisPoint.x - (range[0].length / 2);
 			pt.y = thisPoint.y - (range.length / 2);
-			
-			if(getPlayer() == getPlayer().game.getPlayer2()){
-				for (int i = 0; i< defaultRange.length; i++) {
+
+			if (getPlayer() == game.getPlayer2()) {
+				for (int i = 0; i < defaultRange.length; i++) {
 					if (pt.y + i < 0 || pt.y + i >= field.getY())
 						continue;
 					for (int j = 0; j < defaultRange[0].length; j++) {
-						if (pt.x + j < 0 || pt.x+j >= field.getX())
+						if (pt.x + j < 0 || pt.x + j >= field.getX())
 							continue;
 
 						// レンジ内であり
 						if (defaultRangeP2[i][j] == 1) {
 							// その位置のアステルにクラスがあり
-							final Aster f = getAster().getField().getField()[pt.y
-									+ i][pt.x + j];
-							if (f.getAsterClass() != null) {
+							final Aster a = field.getField()[pt.y + i][pt.x + j];
+							if (a.getAsterClass() != null) {
 								// そのクラスの所持者が相手であり
-								if (f.getAsterClass().getPlayer() != getPlayer()) {
+								if (a.getAsterClass().getPlayer() != getPlayer()) {
 									// サンでなければ対象に選択可能
-									if (f.getNumber() != 1)
+									if (a.getNumber() != 1)
 										range[i][j] = 1;
 								}
 							}
 						}
 					}
-				}				
-			}else{
-				for (int i = 0; i< defaultRange.length; i++) {
+				}
+			} else {
+				for (int i = 0; i < defaultRange.length; i++) {
 					if (pt.y + i < 0 || pt.y + i >= field.getY())
 						continue;
 					for (int j = 0; j < defaultRange[0].length; j++) {
-						if (pt.x + j < 0 || pt.x+j >= field.getX())
+						if (pt.x + j < 0 || pt.x + j >= field.getX())
 							continue;
-	
+
 						// レンジ内であり
 						if (defaultRange[i][j] == 1) {
 							// その位置のアステルにクラスがあり
-							final Aster f = getAster().getField().getField()[pt.y
-									+ i][pt.x + j];
+							final Aster f = field.getField()[pt.y + i][pt.x + j];
 							if (f.getAsterClass() != null) {
 								// そのクラスの所持者が相手であり
 								if (f.getAsterClass().getPlayer() != getPlayer()) {
@@ -142,11 +133,11 @@ public class VenusClass extends AsterClass {
 
 	public void executeSpecialCommand() {
 		// 対象の所持者を変更
-		getAster().getField().getAster(target1).getAsterClass().setPlayer(
-				this.getPlayer());
+		final AsterClass asterClass = getAster().getField().getAster(target1)
+				.getAsterClass();
+		asterClass.setPlayer(this.getPlayer());
 		// 行動済状態に
-		getAster().getField().getAster(target1).getAsterClass().setActionCount(
-				0);
+		asterClass.setActionCount(0);
 	}
 
 	public Image getImage() {

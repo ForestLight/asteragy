@@ -68,17 +68,18 @@ public class SaturnClass extends AsterClass {
 		// 左回り
 		int i, j;
 		Point pt = new Point();
-		pt.x = getAster().getField().asterToPoint(getAster()).x
-				- (defaultRange[0].length / 2);
-		pt.y = getAster().getField().asterToPoint(getAster()).y
-				- (defaultRange.length / 2);
+		final Aster a = getAster();
+		final Field field = a.getField();
+		pt.x = field.asterToPoint(a).x - (defaultRange[0].length / 2);
+		pt.y = field.asterToPoint(a).y - (defaultRange.length / 2);
 		Aster[] queue = new Aster[17];
 
+		final Aster[][] f = field.getField();
 		for (i = 0, j = 0; j < 16; j++) {
 			// 外周レンジのアステルを右回りにキューに入れていく
-			if (pt.x >= 0 && pt.x < getAster().getField().getX() && pt.y >= 0
-					&& pt.y < getAster().getField().getY()) {
-				queue[i] = getAster().getField().getField()[pt.y][pt.x];
+			if (pt.x >= 0 && pt.x < field.getX() && pt.y >= 0
+					&& pt.y < field.getY()) {
+				queue[i] = f[pt.y][pt.x];
 				i++;
 			}
 
@@ -97,11 +98,11 @@ public class SaturnClass extends AsterClass {
 		// pt.y =
 		// getAster().getField().asterToPoint(getAster()).y-(defaultRange.length/2);
 
-		for (i = 1, j = 0; ; j++) {
+		for (i = 1, j = 0;; j++) {
 			// キューの1番目のアステルから右回りに戻していく
-			if (pt.x >= 0 && pt.x < getAster().getField().getX() && pt.y >= 0
-					&& pt.y < getAster().getField().getY()) {
-				getAster().getField().getField()[pt.y][pt.x] = queue[i];
+			if (pt.x >= 0 && pt.x < field.getX() && pt.y >= 0
+					&& pt.y < field.getY()) {
+				f[pt.y][pt.x] = queue[i];
 				i++;
 			}
 
@@ -116,7 +117,7 @@ public class SaturnClass extends AsterClass {
 
 			// キューが空になったら0番目のアステルを戻してループを抜ける
 			if (queue[i] == null) {
-				getAster().getField().getField()[pt.y][pt.x] = queue[0];
+				f[pt.y][pt.x] = queue[0];
 				break;
 			}
 		}

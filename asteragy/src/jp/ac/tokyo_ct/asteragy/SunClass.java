@@ -3,15 +3,12 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.Image;
 
 public class SunClass extends AsterClass {
-	private static int[][] defaultRange ={
-		{0,0,1,0,0},
-		{0,1,1,1,0},
-		{1,1,1,1,1},
-		{0,1,1,1,0},
-		{0,0,1,0,0}
-	};
-	
+	private static int[][] defaultRange = { { 0, 0, 1, 0, 0 },
+			{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
+			{ 0, 0, 1, 0, 0 } };
+
 	private static Image asterImage;
+
 	private int asterClassSelect;
 
 	public SunClass(Aster a, Player p) {
@@ -23,7 +20,7 @@ public class SunClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		return 1;
 	}
-	
+
 	public int[][] getRange() {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
@@ -31,34 +28,33 @@ public class SunClass extends AsterClass {
 			return swapGetRange(defaultRange);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			final Point thisPoint = getAster().getField().asterToPoint(
-					getAster());
 			final Field field = getAster().getField();
+			final Point thisPoint = field.asterToPoint(getAster());
 			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point();
 			pt.x = thisPoint.x - (range[0].length / 2);
 			pt.y = thisPoint.y - (range.length / 2);
 
-			for (int i = 0; i< defaultRange.length; i++) {
-				if (pt.y + i < 0 || pt.y + i >= field.getY())
+			for (int i = 0; i < defaultRange.length; i++) {
+				if (!isYInFieldBound(field, pt.y + i))
 					continue;
 				for (int j = 0; j < defaultRange[0].length; j++) {
-					if (pt.x + j < 0 || pt.x+j >= field.getX())
+					if (!isXInFieldBound(field, pt.x + j))
 						continue;
 
 					// レンジ内であり
 					if (defaultRange[i][j] == 1) {
 						range[i][j] = 1;
 						// その位置のアステルにクラスがあり
-						final Aster f = field.getField()[pt.y
-								+ i][pt.x + j];
-						if (f.getAsterClass() != null) {
+						final Aster a = field.getField()[pt.y + i][pt.x + j];
+						final AsterClass c = a.getAsterClass();
+						if (c != null) {
 							// そのクラスの所持者が相手である場合選択不可能
-							if (f.getAsterClass().getPlayer() != getPlayer()) {
-									range[i][j] = 0;
+							if (c.getPlayer() != getPlayer()) {
+								range[i][j] = 0;
 							}
 							// サンである場合選択不可能
-							if(f.getAsterClass().getNumber() == 1){
+							if (c.getNumber() == 1) {
 								range[i][j] = 0;
 							}
 						}
@@ -111,48 +107,48 @@ public class SunClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
-		// TODO 自動生成されたメソッド・スタブ
 		final Field field = getAster().getField();
 		final Aster a = field.getAster(target1);
-		AsterClass ac = new StarClass(a,getPlayer());
-		
-		switch(asterClassSelect){
+		AsterClass ac = new StarClass(a, getPlayer());
+		logAction(new int[] {target1.x, target1.y, asterClassSelect});
+
+		switch (asterClassSelect) {
 		case 0:
-			ac = new StarClass(a,getPlayer());
+			ac = new StarClass(a, getPlayer());
 			break;
 		case 1:
-			ac = new MercuryClass(a,getPlayer());
+			ac = new MercuryClass(a, getPlayer());
 			break;
 		case 2:
-			ac = new VenusClass(a,getPlayer());
+			ac = new VenusClass(a, getPlayer());
 			break;
 		case 3:
-			ac = new EarthClass(a,getPlayer());
+			ac = new EarthClass(a, getPlayer());
 			break;
 		case 4:
-			ac = new MarsClass(a,getPlayer());
+			ac = new MarsClass(a, getPlayer());
 			break;
 		case 5:
-			ac = new JupiterClass(a,getPlayer());
+			ac = new JupiterClass(a, getPlayer());
 			break;
 		case 6:
-			ac = new SaturnClass(a,getPlayer());
+			ac = new SaturnClass(a, getPlayer());
 			break;
 		case 7:
-			ac = new UranusClass(a,getPlayer());
+			ac = new UranusClass(a, getPlayer());
 			break;
 		case 8:
-			ac = new NeptuneClass(a,getPlayer());
+			ac = new NeptuneClass(a, getPlayer());
 			break;
 		case 9:
-			ac = new PlutoClass(a,getPlayer());
+			ac = new PlutoClass(a, getPlayer());
 			break;
-	
+
 		}
-		//選択したクラスのユニットを行動不可能状態で召還
+		// 選択したクラスのユニットを行動不可能状態で召還
 		a.setAsterClass(ac);
-		a.getAsterClass().setActionCount(0);
-		getPlayer().addSP(-AsterClassData.classCost[asterClassSelect+1]);
+		ac.setActionCount(0);
+		getPlayer().addSP(-AsterClassData.classCost[asterClassSelect + 1]);
 	}
 
 	public Image getImage() {

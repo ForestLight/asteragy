@@ -13,8 +13,8 @@ public class AsterPaint implements PaintAsterItem {
 
 	public AsterPaint() {
 	}
-	
-	public void setClass(AsterClass aster){
+
+	public void setClass(AsterClass aster) {
 		this.aster = aster;
 	}
 
@@ -23,9 +23,8 @@ public class AsterPaint implements PaintAsterItem {
 	}
 
 	public void paint(Graphics g) {
-		g.drawScaledImage(getImage(), 1, 1, GameCanvas.measure - 1,
-				GameCanvas.measure - 1, (GameCanvas.measure - 1) * (color - 1),
-				0, GameCanvas.measure - 1, GameCanvas.measure - 1);
+		final int m = GameCanvas.measure - 1;
+		g.drawScaledImage(getImage(), 1, 1, m, m, m * (color - 1), 0, m, m);
 		// 行動済みユニットを識別
 		if (aster != null && aster.getActionCount() == 0) {
 			g.setColor(Graphics.getColorOfRGB(0, 0, 0, 100));

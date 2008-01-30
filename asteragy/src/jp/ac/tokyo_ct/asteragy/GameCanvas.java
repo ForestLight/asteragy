@@ -82,8 +82,9 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 * @see com.nttdocomo.ui.Canvas#processEvent(int, int)
 	 */
 	public void processEvent(int type, int param) {
-		if (canvas.getEventProcesser() != null)
-			canvas.getEventProcesser().processEvent(type, param);
+		final EventProcesser eventProcesser = canvas.getEventProcesser();
+		if (eventProcesser != null)
+			eventProcesser.processEvent(type, param);
 		else
 			super.processEvent(type, param);
 	}
