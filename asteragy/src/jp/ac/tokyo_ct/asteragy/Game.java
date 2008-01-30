@@ -18,10 +18,10 @@ final class Game {
 		field = new Field(this);
 		field.setFieldSize(9, 9);
 		field.setAster();
-		canvas = new CanvasControl(this);
+		//canvas = new CanvasControl(this);
 		player[0] = new KeyInputPlayer(this, "æU");
 		player[1] = new KeyInputPlayer(this, "ŒãU");
-		// canvas = new CanvasControl(this);
+		canvas = new CanvasControl(this);
 
 		// ‰Šúİ’è(‰¼)
 		Aster a = field.getField()[field.getY() - 1][field.getX() / 2];
