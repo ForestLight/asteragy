@@ -76,7 +76,7 @@ public class SaturnClass extends AsterClass {
 
 		final Aster[][] f = field.getField();
 		for (i = 0, j = 0; j < 16; j++) {
-			// 外周レンジのアステルを右回りにキューに入れていく
+			// 外周レンジのアステルを右回りにキュー（のようなもの）に入れていく
 			if (pt.x >= 0 && pt.x < field.getX() && pt.y >= 0
 					&& pt.y < field.getY()) {
 				queue[i] = f[pt.y][pt.x];
@@ -115,7 +115,7 @@ public class SaturnClass extends AsterClass {
 			else
 				pt.y--;
 
-			// キューが空になったら0番目のアステルを戻してループを抜ける
+			// キュー（のようなもの）が空になったら0番目のアステルを戻してループを抜ける
 			if (queue[i] == null) {
 				f[pt.y][pt.x] = queue[0];
 				break;

@@ -67,6 +67,7 @@ class Field implements PaintItem {
 	public void setAster() {
 		fieldinit = true;
 		field = new Aster[Y][X];
+		backup = new Aster[Y][X];
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
 				field[i][j] = new Aster(this);
@@ -204,6 +205,16 @@ class Field implements PaintItem {
 	}
 
 	/**
+	 * deleteFlagを外す
+	 * 
+	 * @param pt
+	 *            注目するマスの座標
+	 */
+	public void removeDeleteFlag(Point pt) {
+		field[pt.y][pt.x].setDeleteFlag(false);
+	}
+
+	/**
 	 * deleteFlagが立っているアステルを全て消す
 	 * 
 	 * @param x
@@ -287,6 +298,52 @@ class Field implements PaintItem {
 		}
 
 		return count;
+	}
+
+	/**
+	 * 現在のフィールドのバックアップをとる
+	 */
+	public void backupField() {
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
+				backup[i][j] = field[i][j];
+			}
+		}
+	}
+
+	/**
+	 * フィールドのバックアップを復元する
+	 */
+	public void restoreField() {
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
+				field[i][j] = backup[i][j];
+			}
+		}
+	}
+
+	/**
+	 * サン自滅判定
+	 * 
+	 * @return サンが自滅しそうな状態ならtrue
+	 */
+	public boolean judgeSelfDestruction() {
+		Player player = game.getCurrentPlayer();
+
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
+				if (field[i][j].getNumber() == 1 &&
+						field[i][j].getAsterClass().getPlayer() == player) {
+					if (field[i][j].getDeleteFlag() == true) {
+						return true;
+					}
+					if (judge(j, i) == true) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
