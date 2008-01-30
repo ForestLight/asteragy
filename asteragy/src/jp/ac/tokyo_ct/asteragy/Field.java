@@ -11,6 +11,8 @@ class Field implements PaintItem {
 
 	private Aster[][] field;
 
+	private Aster[][] backup;
+
 	private int X, Y;
 
 	private int countAster;
