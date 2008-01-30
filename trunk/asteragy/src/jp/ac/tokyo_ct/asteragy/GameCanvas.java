@@ -71,6 +71,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	private void paintPlayerInfo(Graphics g) {
 		System.out.println("paintPlayerInfo");
 		PaintItem[] players = canvas.getPlayers();
+		System.out.println("test@paintPlayerInfo");
 		for (int i = 0; i < players.length; i++) {
 			players[i].paint(g);
 		}
