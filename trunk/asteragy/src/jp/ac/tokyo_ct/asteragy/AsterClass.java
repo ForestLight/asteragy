@@ -149,6 +149,21 @@ public abstract class AsterClass {
 		System.out.println("----AsterClass.execute()");
 		switch (mode) {
 		case 0:
+			/*
+			field.backupField();
+			field.swap(target1, target2);
+			// サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください）
+			if (field.judgeSelfDestruction() == true) {
+				Dialog d = new Dialog(Dialog.DIALOG_YESNO, "注意");
+				d.setText("サンが消えます");
+				if(d.show() == Dialog.BUTTON_NO){
+					field.restoreField();
+					incActionCount();
+				}
+			}
+			*/
+			// 競合してたのでとりあえずコメントアウト
+
 			field.swap(target1, target2);
 			logAction(0, new int[] {target1.x, target1.y, target2.x, target2.y});
 			break;
