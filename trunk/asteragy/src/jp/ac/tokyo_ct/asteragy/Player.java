@@ -32,7 +32,7 @@ public abstract class Player implements PaintItem {
 
 	public void addSP(int n) {
 		sp += n;
-		System.out.println("SP+" + n + "");
+		System.out.println("SP+" + n);
 		repaint();
 	}
 
@@ -95,11 +95,15 @@ public abstract class Player implements PaintItem {
 	}
 
 	private void loadTurnOnBack() {
-		turnonback = Image.createImage(game.getCanvas().getWidth(), game
-				.getCanvas().getHeight() / 2);
-		// Graphics g = turnonback.getGraphics();
+		final CanvasControl canvas = game.getCanvas();
+		turnonback = Image.createImage(canvas.getWidth(),
+				canvas.getHeight() / 2);
 	}
 
 	private static Image turnonback;
+
+	public String toString() {
+		return name;
+	}
 
 }

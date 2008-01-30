@@ -17,4 +17,41 @@ public final class Point {
 		this.x = x;
 		this.y = y;
 	}
+
+	/*
+	 * (”ñ Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Object rhs) {
+		if (this == rhs)
+			return true;
+		try {
+			return equals((Point) rhs);
+		} catch (ClassCastException e) {
+			return false;
+		}
+	}
+
+	public boolean equals(Point rhs) {
+		return x == rhs.x && y == rhs.y;
+	}
+
+	/*
+	 * (”ñ Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	public int hashCode() {
+		return x ^ ~y;
+	}
+
+	/*
+	 * (”ñ Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return x + " " + y;
+	}
 }

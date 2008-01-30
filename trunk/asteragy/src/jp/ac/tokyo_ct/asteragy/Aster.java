@@ -1,7 +1,6 @@
 package jp.ac.tokyo_ct.asteragy;
 
 import java.util.Random;
-import com.nttdocomo.ui.*;
 
 /**
  * @author kurix
@@ -71,11 +70,10 @@ public class Aster {
 			deleteFlag = false;
 
 			paint.setClass(null);
-
 			// ‰Šú‚Ì¶¬‚ÉÀs‚µ‚È‚¢‚æ‚¤‚È‚±‚Æ‚ğ‚µ‚Ä‚Ù‚µ‚¢B
 			// ‚Æ‚è‚ ‚¦‚¸B
-			//if (!field.isFieldInit())
-			//	disappearingAster();
+			// if (!field.isFieldInit())
+			// disappearingAster();
 		}
 
 		if (c != 0) {

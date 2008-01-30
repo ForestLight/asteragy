@@ -3,14 +3,10 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.*;
 
 public class NeptuneClass extends AsterClass {
-	private static int[][] defaultRange = {
-		{ 0, 0, 0, 1, 0, 0, 0 },
-		{ 0, 0, 0, 1, 0, 0, 0 },
-		{ 0, 0, 1, 1, 1, 0, 0 },
-		{ 1, 1, 1, 1, 1, 1, 1 },
-		{ 0, 0, 1, 1, 1, 0, 0 },
-		{ 0, 0, 0, 1, 0, 0, 0 }, 
-		{ 0, 0, 0, 1, 0, 0, 0 } };
+	private static int[][] defaultRange = { { 0, 0, 0, 1, 0, 0, 0 },
+			{ 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 1, 1, 1, 0, 0 },
+			{ 1, 1, 1, 1, 1, 1, 1 }, { 0, 0, 1, 1, 1, 0, 0 },
+			{ 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 } };
 
 	private static Image asterImage;
 
@@ -78,8 +74,8 @@ public class NeptuneClass extends AsterClass {
 
 	public void executeSpecialCommand() {
 		// ターゲットと自分をswap
-		getAster().getField().swap(target1,
-				getAster().getField().asterToPoint(getAster()));
+		final Field field = getAster().getField();
+		field.swap(target1, field.asterToPoint(getAster()));
 
 	}
 

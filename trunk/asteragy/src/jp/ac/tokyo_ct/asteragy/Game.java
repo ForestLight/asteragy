@@ -1,7 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.Display;
-
 /**
  * 
  */
@@ -9,94 +7,43 @@ import com.nttdocomo.ui.Display;
 /**
  * @author Ichinohe ゲーム進行の管理
  */
-class Game {
-
+final class Game {
 	/**
 	 * ゲームを開始する
 	 */
 	public void start() {
 		System.out.println("Game.start()");
-		//canvas = new GameCanvas(this);
-		//Display.setCurrent(canvas);
+		// canvas = new GameCanvas(this);
+		// Display.setCurrent(canvas);
 		field = new Field(this);
 		field.setFieldSize(9, 9);
 		field.setAster();
 		canvas = new CanvasControl(this);
-		player1 = new KeyInputPlayer(this, "先攻");
-		player2 = new KeyInputPlayer(this, "後攻");
-	//	canvas = new CanvasControl(this);
-		
-		//てすとぷれー用
-		
-//		Aster a = field.getField()[6][0];
-//		a.setAsterClass(new MoonClass(a, player1));
-//		a = field.getField()[6][1];
-//		a.setAsterClass(new MercuryClass(a, player1));
-//		a = field.getField()[6][2];
-//		a.setAsterClass(new VenusClass(a, player1));
-//		a = field.getField()[6][3];
-//		a.setAsterClass(new EarthClass(a, player1));
-//		a = field.getField()[6][4];
-//		a.setAsterClass(new MarsClass(a, player1));
-//		a = field.getField()[6][5];
-//		a.setAsterClass(new JupiterClass(a, player1));
-//		a = field.getField()[6][6];
-//		a.setAsterClass(new SaturnClass(a, player1));
-//		a = field.getField()[6][7];
-//		a.setAsterClass(new UranusClass(a, player1));
-//		a = field.getField()[6][8];
-//		a.setAsterClass(new NeptuneClass(a, player1));
-//		a = field.getField()[6][9];
-//		a.setAsterClass(new PlutoClass(a, player1));
-//			
-//		a = field.getField()[4][0];
-//		a.setAsterClass(new StarClass(a, player2));
-//		a = field.getField()[4][1];
-//		a.setAsterClass(new MercuryClass(a, player2));
-//		a = field.getField()[4][10];
-//		a.setAsterClass(new VenusClass(a, player2));
-//		a = field.getField()[4][3];
-//		a.setAsterClass(new EarthClass(a, player2));
-//		a = field.getField()[4][4];
-//		a.setAsterClass(new MarsClass(a, player2));
-//		a = field.getField()[4][5];
-//		a.setAsterClass(new JupiterClass(a, player2));
-//		a = field.getField()[4][6];
-//		a.setAsterClass(new SaturnClass(a, player2));
-//		a = field.getField()[4][7];
-//		a.setAsterClass(new UranusClass(a, player2));
-//		a = field.getField()[4][8];
-//		a.setAsterClass(new NeptuneClass(a, player2));
-//		a = field.getField()[4][9];
-//		a.setAsterClass(new PlutoClass(a, player2));
-//		
-//		a = field.getField()[7][5];
-//		a.setAsterClass(new SunClass(a,player1));
-//		a = field.getField()[3][5];
-//		a.setAsterClass(new SunClass(a,player2));
-		
-		
-		//初期設定(仮) 
-		Aster a = field.getField()[field.getY()-1][field.getX()/2];
-		a.setAsterClass(new SunClass(a,player1));
-		a = field.getField()[0][field.getX()/2];
-		a.setAsterClass(new SunClass(a,player2));
+		player[0] = new KeyInputPlayer(this, "先攻");
+		player[1] = new KeyInputPlayer(this, "後攻");
+		// canvas = new CanvasControl(this);
 
-		player1.addSP(30);
-		player2.addSP(30);
-				
-		
+		// 初期設定(仮)
+		Aster a = field.getField()[field.getY() - 1][field.getX() / 2];
+		a.setAsterClass(new SunClass(a, player[0]));
+		a = field.getField()[0][field.getX() / 2];
+		a.setAsterClass(new SunClass(a, player[1]));
+
+		player[0].addSP(30);
+		player[1].addSP(30);
+
 		System.out.println("Game.start()");
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
 		{
 			boolean gameover;
-			gameover = turn(player1);
+			gameover = turn(player[0]);
 			if (!gameover)
 				break;
-			gameover = turn(player2);
+			gameover = turn(player[1]);
 			if (!gameover)
 				break;
 		}
+		System.gc();
 	}
 
 	/**
@@ -112,22 +59,21 @@ class Game {
 		field.onTurnStart(player);
 		for (;;) {
 			Action a = player.getAction();
-			
+
 			Player goPlayer = field.checkGameOver();
 			if (goPlayer != null) {
-				try{
+				try {
 					Thread.sleep(1500);
-				}catch(Exception e){
+				} catch (Exception e) {
 				}
-				if (goPlayer == getPlayer1()) System.out.println("Player2 win");
-				else System.out.println("Player1 win");
+				System.out.println(goPlayer + "win");
 				return false;
 			}
-			
+
 			if (a == null) {
 				return true;
 			}
-		//	boolean gameover = field.act(a);
+			// boolean gameover = field.act(a);
 		}
 	}
 
@@ -137,7 +83,7 @@ class Game {
 	 * @return 先攻プレイヤー
 	 */
 	Player getPlayer1() {
-		return player1;
+		return player[0];
 	}
 
 	/**
@@ -146,11 +92,33 @@ class Game {
 	 * @return 後攻プレイヤー
 	 */
 	Player getPlayer2() {
-		return player2;
+		return player[1];
+	}
+
+	Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	/**
+	 * プレイヤー配列の取得
+	 * 
+	 * @return プレイヤー
+	 */
+	Player[] getPlayers() {
+		return player;
 	}
 	
-	Player getCurrentPlayer(){
-		return currentPlayer;
+	int getPlayerIndex(Player p) {
+		if (p == player[0])
+			return 0;
+		else if (p == player[1])
+			return 1;
+		else
+		{
+			String s = "Game.getPlayerIndex: 引数pは有効なプレイヤーではない。";
+			System.out.println(s);
+			throw new IllegalArgumentException(s);
+		}
 	}
 
 	/**
@@ -170,25 +138,25 @@ class Game {
 	CanvasControl getCanvas() {
 		return canvas;
 	}
-	
-	public Game() {
+
+	Game() {
+	}
+
+	void logAction(Action a) {
+		System.out.print("Game.logAction: ");
+		a.printToStream(System.out);
+		System.out.println();
 	}
 
 	/**
-	 * 先攻プレイヤー
+	 * プレイヤー
 	 */
-	private Player player1;
+	private Player[] player = new Player[2];
 
-	/**
-	 * 後攻プレイヤー
-	 */
-	private Player player2;
-	
 	/**
 	 * ターン進行中のプレイヤー
 	 */
 	private Player currentPlayer;
-	
 
 	/**
 	 * フィールド

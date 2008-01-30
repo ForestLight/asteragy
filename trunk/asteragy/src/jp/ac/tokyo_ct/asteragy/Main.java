@@ -8,7 +8,7 @@ import com.nttdocomo.ui.*;
  * @author Ichinohe
  * 
  */
-public class Main extends IApplication {
+public final class Main extends IApplication {
 
 	/**
 	 * プログラムを開始するエントリポイント
@@ -19,13 +19,12 @@ public class Main extends IApplication {
 
 		// 将来的には、ここでタイトル画面を出すようにしたい。
 		Title t = new Title();
-		Game g;
-		while(true){
+		while (true) {
 			t.start();
-	
-			g = new Game();
-			g.start();
+			game.start();
 			System.out.println("Game over");
 		}
 	}
+	
+	public static final Game game = new Game();
 }

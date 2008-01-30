@@ -6,14 +6,19 @@ import com.nttdocomo.ui.*;
  * @author Okubo だれかなおして
  * 
  */
-public class Title extends Canvas{
+public class Title extends Canvas {
 	private static Image title;
+
 	private static Image[] menu;
+
 	private int depth = 0;
+
 	private int cursor = 0;
+
 	private int gameType = -1;
+
 	// private static int highScore;
-	
+
 	private AudioPresenter ap;
 
 	public Title() {
@@ -25,30 +30,29 @@ public class Title extends Canvas{
 			for (int i = 0; i < 5; i++)
 				menu[i] = loadImage("menu_" + i + ".gif");
 		}
-//		MediaSound ms = MediaManager.getSound("resource:///battle1.mid");
-//		try{
-//			ms.use();
-//		}catch(Exception e){
-//			System.out.println(e.getClass().getName());
-//		}
-//		ap = AudioPresenter.getAudioPresenter();
-//		ap.setSound(ms);
+		// MediaSound ms = MediaManager.getSound("resource:///battle1.mid");
+		// try{
+		// ms.use();
+		// }catch(Exception e){
+		// System.out.println(e.getClass().getName());
+		// }
+		// ap = AudioPresenter.getAudioPresenter();
+		// ap.setSound(ms);
 	}
 
 	/**
 	 * タイトル画面の描画
-	 * @return gameType
-	 * 				0:一機対戦 1:AI対戦 2:ネットワーク対戦
+	 * 
+	 * @return gameType 0:一機対戦 1:AI対戦 2:ネットワーク対戦
 	 */
-	public int start(){
+	public int start() {
 		Graphics g = getGraphics();
 		Display.setCurrent(this);
 		gameType = -1;
-		
-		
-		for(;;){
-		//	System.out.println("loop");
-			if(gameType >= 0){
+
+		for (;;) {
+			// System.out.println("loop");
+			if (gameType >= 0) {
 				return gameType;
 			}
 
@@ -57,72 +61,74 @@ public class Title extends Canvas{
 			g.drawImage(title, 0, 0);
 
 			// 汎用性のないコードですいません
-			if(depth == 0) {
-				g.drawImage(menu[0],getWidth()/2-menu[0].getWidth()/2,150);
-				g.drawImage(menu[1],getWidth()/2-menu[1].getWidth()/2,150+menu[1].getHeight());
-				g.drawImage(menu[2],getWidth()/2-menu[2].getWidth()/2,150+menu[1].getHeight()+menu[2].getHeight());
-			}
-			else {
-				g.drawImage(menu[3],getWidth()/2-menu[3].getWidth()/2,150);
-				g.drawImage(menu[4],getWidth()/2-menu[4].getWidth()/2,150+menu[4].getHeight());
+			if (depth == 0) {
+				g.drawImage(menu[0], getWidth() / 2 - menu[0].getWidth() / 2,
+						150);
+				g.drawImage(menu[1], getWidth() / 2 - menu[1].getWidth() / 2,
+						150 + menu[1].getHeight());
+				g.drawImage(menu[2], getWidth() / 2 - menu[2].getWidth() / 2,
+						150 + menu[1].getHeight() + menu[2].getHeight());
+			} else {
+				g.drawImage(menu[3], getWidth() / 2 - menu[3].getWidth() / 2,
+						150);
+				g.drawImage(menu[4], getWidth() / 2 - menu[4].getWidth() / 2,
+						150 + menu[4].getHeight());
 			}
 			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
-			g.drawRect(getWidth()/2-menu[0].getWidth()/2,150+menu[0].getHeight()*cursor,menu[0].getWidth(),menu[0].getHeight());
+			g.drawRect(getWidth() / 2 - menu[0].getWidth() / 2, 150
+					+ menu[0].getHeight() * cursor, menu[0].getWidth(), menu[0]
+					.getHeight());
 
 			g.unlock(true);
 
 			// sleepはなんかマズい気がする
-			try{
+			try {
 				Thread.sleep(50);
-			}catch(Exception e){
+			} catch (Exception e) {
 			}
 		}
 	}
 
-	private static Image loadImage(String s){
+	private static Image loadImage(String s) {
 		try {
 			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///"+ s);
+			MediaImage m = MediaManager.getImage("resource:///" + s);
 			// メディアの使用開始
 			m.use();
 			// 読み込み
 			return m.getImage();
-		} catch(Exception e) {
+		} catch (Exception e) {
 		}
 		return null;
 	}
 
-	public void processEvent(int type, int param){
-		if(type == Display.KEY_PRESSED_EVENT){
-			switch(param){
+	public void processEvent(int type, int param) {
+		if (type == Display.KEY_PRESSED_EVENT) {
+			switch (param) {
 			case Display.KEY_UP:
-				if(cursor > 0)
+				if (cursor > 0)
 					cursor--;
 				break;
 			case Display.KEY_DOWN:
-				if(depth + cursor < 2)
+				if (depth + cursor < 2)
 					cursor++;
 				break;
 			case Display.KEY_SELECT:
-				if(depth == 0 && cursor == 1){
+				if (depth == 0 && cursor == 1) {
 					gameType = 0;
-				}
-				else if(depth == 0 && cursor == 2){
+				} else if (depth == 0 && cursor == 2) {
 					IApplication.getCurrentApp().terminate();
-				}
-				else if(depth == 1 && cursor == 0){
+				} else if (depth == 1 && cursor == 0) {
 					gameType = 1;
-					
-				}
-				else if(depth == 1 && cursor == 1){
+
+				} else if (depth == 1 && cursor == 1) {
 					gameType = 2;
-				}
-				else{
+				} else {
 					depth++;
 				}
 				break;
 			case Display.KEY_0:
-				if(depth > 0)
+				if (depth > 0)
 					depth--;
 			default:
 				break;
@@ -130,6 +136,6 @@ public class Title extends Canvas{
 		}
 	}
 
-	public void paint(Graphics g){
+	public void paint(Graphics g) {
 	}
 }

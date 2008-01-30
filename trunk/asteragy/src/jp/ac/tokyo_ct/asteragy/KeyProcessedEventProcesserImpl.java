@@ -21,14 +21,13 @@ abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
 		case Display.KEY_0:
 			System.out.println("Cancel");
 			onCancel();
-			// ここはbreakもreturnも置かない。
+		// ここはbreakもreturnも置かない。
 		case Display.KEY_SELECT:
 			selected = true;
 			notifyAll();
 			return;
 		default:
-			System.out
-					.println("KeyProcessedEventProcesserImpl.processEvent - processKeyEvent");
+//			System.out.println("KeyProcessedEventProcesserImpl.processEvent - processKeyEvent");
 			processKeyEvent(param);
 		}
 	}

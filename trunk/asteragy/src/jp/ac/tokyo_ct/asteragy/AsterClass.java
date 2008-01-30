@@ -128,16 +128,29 @@ public abstract class AsterClass {
 		// return 0;
 		return AsterClassData.commandCost[getNumber() - 1];
 	}
+	
+	private void logAction(int commandType, int[] args) {
+		Action a = new Action(player);
+		a.commandType = commandType;
+		a.args = args;
+		Main.game.logAction(a);
+	}
 
+	protected void logAction(int[] args) {
+		logAction(1, args);
+	}
 	/**
 	 * コマンドを実行
 	 * 
 	 */
 	public void execute() {
 		// TODO 自動生成されたメソッド・スタブ
+		final Field field = getAster().getField();
+		System.out.println("----AsterClass.execute()");
 		switch (mode) {
 		case 0:
-			getAster().getField().swap(target1, target2);
+			field.swap(target1, target2);
+			logAction(0, new int[] {target1.x, target1.y, target2.x, target2.y});
 			break;
 		case 1:
 			executeSpecialCommand();
@@ -248,20 +261,13 @@ public abstract class AsterClass {
 			for (int i = 0; i < range.length; i++) {
 				for (int j = 0; j < range[0].length; j++) {
 					// 1個目の対象の上下左右のマスで、元のレンジに含まれている場所のみ1
-					if (i == pt.y - 1 && j == pt.x && defaultRange[i][j] == 1) {
-						range[i][j] = 1;
-					} else if (i == pt.y + 1 && j == pt.x
-							&& defaultRange[i][j] == 1) {
-						range[i][j] = 1;
-					} else if (i == pt.y && j == pt.x + 1
-							&& defaultRange[i][j] == 1) {
-						range[i][j] = 1;
-					} else if (i == pt.y && j == pt.x - 1
-							&& defaultRange[i][j] == 1) {
-						range[i][j] = 1;
-					} else {
-						// 1個目の対象の上下左右以外移動不可
-						range[i][j] = 0;
+					if (defaultRange[i][j] == 1) {
+						if (i == pt.y - 1 && j == pt.x ||
+							i == pt.y + 1 && j == pt.x ||
+							i == pt.y && j == pt.x + 1 ||
+							i == pt.y && j == pt.x - 1) {
+							range[i][j] = 1;
+						}
 					}
 				}
 			}
@@ -297,13 +303,9 @@ public abstract class AsterClass {
 	}
 
 	protected boolean swapHasNext() {
-		if (target1 != null && target2 != null) {
-			System.out.println("swapHasNext return false");
-			return false;
-		} else {
-			System.out.println("swapHasNext return true");
-			return true;
-		}
+		boolean ret = target1 == null || target2 == null;
+		System.out.println("swapHasNext return " + ret);
+		return ret;
 	}
 
 	public abstract Image getImage();
@@ -322,4 +324,11 @@ public abstract class AsterClass {
 		return null;
 	}
 
+	protected static boolean isYInFieldBound(Field f, int y) {
+		return 0 <= y && y < f.getY();
+	}
+
+	protected static boolean isXInFieldBound(Field f, int x) {
+		return 0 <= x && x < f.getX();
+	}
 }
