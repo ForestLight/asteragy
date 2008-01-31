@@ -58,6 +58,12 @@ public class Aster {
 	public boolean getDeleteFlag() {
 		return deleteFlag;
 	}
+	
+	public void setColor(int c){
+		if(c != 0){
+			color = c;
+		}
+	}
 
 	/**
 	 * 削除フラグが立っていた場合、削除して生成しなおす
@@ -72,8 +78,8 @@ public class Aster {
 			paint.setClass(null);
 			// 初期の生成時に実行しないようなことをしてほしい。
 			// とりあえず。
-			// if (!field.isFieldInit())
-			// disappearingAster();
+			if (!field.isFieldInit())
+				disappearingAster();
 		}
 
 		if (c != 0) {
@@ -96,11 +102,11 @@ public class Aster {
 		return field;
 	}
 
-	Point getPoint() {
+	public Point getPoint() {
 		return getField().asterToPoint(this);
 	}
 
-	public PaintAsterItem getPaint() {
+	synchronized public PaintAsterItem getPaint() {
 		paint.setColor(color);
 		return paint;
 	}

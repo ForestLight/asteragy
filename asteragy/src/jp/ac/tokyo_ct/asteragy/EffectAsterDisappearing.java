@@ -20,15 +20,14 @@ public class EffectAsterDisappearing extends Thread implements PaintAsterItem {
 	private int time;
 
 	public EffectAsterDisappearing(Aster parent) {
-		this.parent = parent;
-		this.location = parent.getPoint();
-		setPaint();
+		System.out.println("EffectAsterDisappearing Constract:"+parent.getPaint().toString());
+		synchronized (parent) {
+			this.paint = parent.getPaint();
+			this.parent = parent;
+			this.location = parent.getPoint();
+		}
 		time = 0;
 		loadImage();
-	}
-
-	private void setPaint() {
-		paint = parent.getPaint();
 	}
 
 	public void setClass(AsterClass aster) {
@@ -50,12 +49,14 @@ public class EffectAsterDisappearing extends Thread implements PaintAsterItem {
 				Thread.sleep(1000 / CanvasControl.f);
 			} catch (InterruptedException e) {
 				// TODO é©ìÆê∂ê¨Ç≥ÇÍÇΩ catch ÉuÉçÉbÉN
-				e.printStackTrace();
+				// e.printStackTrace();
+			} finally {
+				time++;
+				synchronized (parent) {
+					parent.getField().repaintAster(location);
+				}
 			}
 
-			time++;
-
-			parent.getField().repaintAster(location);
 		}
 
 		parent.setPaint(paint);
