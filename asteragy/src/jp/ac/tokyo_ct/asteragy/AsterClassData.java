@@ -17,7 +17,8 @@ public final class AsterClassData {
 			"レンジ内のアステルを全て破壊する", "アステル1個と自分のサンを入れ替える", };
 
 	public final static int[] classCost = { 0, 2, 7, 5, 5, 7, 8, 10, 10, 11,
-			11, 0 };
+			11,
+			0 };
 
 	public final static int[] commandCost = { 0, 0, 4, 7, 5, 4, 1, 2, 1, 3, 15,
 			6 };
