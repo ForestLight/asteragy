@@ -267,15 +267,15 @@ class Field implements PaintItem {
 			int t = r.nextInt(5);
 
 			for (int i = 1; i <= 5; i++, t++) {
-				target.setDeleteFlag(true);
-				target.delete(table[t]);
+				// target.setDeleteFlag(true);
+				target.setColor(table[t]);
 				if (judge(x, y) == false)
 					return count;
 			}
 			// 5色試しても置けない場合、delete前の色に決定する
 			if (judge(x, y) == true) {
-				target.setDeleteFlag(true);
-				target.delete(AsterColor);
+				// target.setDeleteFlag(true);
+				target.setColor(AsterColor);
 			}
 		}
 		return count;
@@ -334,8 +334,8 @@ class Field implements PaintItem {
 
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
-				if (field[i][j].getNumber() == 1 &&
-						field[i][j].getAsterClass().getPlayer() == player) {
+				if (field[i][j].getNumber() == 1
+						&& field[i][j].getAsterClass().getPlayer() == player) {
 					if (field[i][j].getDeleteFlag() == true) {
 						return true;
 					}
