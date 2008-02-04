@@ -83,12 +83,25 @@ public class PlutoClass extends AsterClass {
 						if (pt.y < 0 || pt.y >= f.length)
 							continue;
 
-						// ターゲットを破壊
+						// 破壊対象にdeleteFlag
 						field.setDeleteFlag(pt);
-						field.delete(pt.x, pt.y);
 					}
 				}
 			}
+		}
+		// サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください）
+		if (field.judgeSelfDestruction() == true) {
+			Dialog d = new Dialog(Dialog.DIALOG_YESNO, "注意");
+			d.setText("サンが消えます");
+			if(d.show() == Dialog.BUTTON_NO){
+				field.removeDeleteFlagAll();
+				incActionCount();
+				getPlayer().addSP(getCommandCost());
+				return;
+			}
+		}
+		else {
+			field.deleteAll();
 		}
 	}
 

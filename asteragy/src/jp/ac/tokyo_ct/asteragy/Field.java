@@ -217,15 +217,24 @@ class Field implements PaintItem {
 	}
 
 	/**
-	 * deleteFlagが立っているアステルを全て消す
+	 * deleteFlagを全て外す
+	 * 
+	 */
+	public void removeDeleteFlagAll() {
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
+				field[i][j].setDeleteFlag(false);
+			}
+		}
+	}
+
+	/**
+	 * deleteFlagが立っているアステルを全て消す（カウントを行わない）
 	 * 
 	 * @param x
 	 *            注目するマスのx座標
 	 * @param y
 	 *            注目するマスのy座標
-	 * @param count
-	 *            消したアステル数をカウント（最初は0を入れる）
-	 * @return 消したアステル数
 	 */
 	public int delete(int x, int y) {
 		return delete(x, y, 0);
@@ -267,14 +276,12 @@ class Field implements PaintItem {
 			int t = r.nextInt(5);
 
 			for (int i = 1; i <= 5; i++, t++) {
-				// target.setDeleteFlag(true);
 				target.setColor(table[t]);
 				if (judge(x, y) == false)
 					return count;
 			}
 			// 5色試しても置けない場合、delete前の色に決定する
 			if (judge(x, y) == true) {
-				// target.setDeleteFlag(true);
 				target.setColor(AsterColor);
 			}
 		}
@@ -294,6 +301,9 @@ class Field implements PaintItem {
 			for (j = 0; j < X; j++) {
 				if (judge(j, i) == true) {
 					setDeleteFlagSameColor(j, i, field[i][j].getColor());
+					count += delete(j, i, 0);
+				}
+				else if (field[i][j].getDeleteFlag() == true) {
 					count += delete(j, i, 0);
 				}
 			}
