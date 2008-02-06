@@ -20,7 +20,7 @@ public final class AsterClassData {
 			11,
 			0 };
 
-	public final static int[] commandCost = { 0, 0, 4, 7, 5, 4, 1, 2, 1, 3, 15,
+	public final static int[] commandCost = { 0, 0, 4, 7, 5, 4, 1, 2, 3, 3, 15,
 			6 };
 
 	public final static int[] actionNum = { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2 };

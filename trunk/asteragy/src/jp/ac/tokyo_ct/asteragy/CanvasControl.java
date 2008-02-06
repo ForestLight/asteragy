@@ -33,7 +33,7 @@ public class CanvasControl {
 
 		commoncommand = new CommonCommand(this);
 		suncommand = new SunCommand(this);
-		Display.setCurrent(canvas);
+	//	Display.setCurrent(canvas);
 	}
 
 	public Graphics getGraphics() {
@@ -168,6 +168,10 @@ public class CanvasControl {
 		}
 	}
 
+	public void setCurrent(){
+		Display.setCurrent(canvas);
+	}
+	
 	public void onTurnStart(Player player) {
 		// TODO 自動生成されたメソッド・スタブ
 		System.out.println("onTurnStart");

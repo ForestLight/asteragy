@@ -19,8 +19,8 @@ public final class Main extends IApplication {
 
 		Title t = new Title();
 		while (true) {
-			t.start();
-			game.start();
+			int gt = t.start();
+			game.start(gt);
 			System.out.println("Game over");
 		}
 	}
