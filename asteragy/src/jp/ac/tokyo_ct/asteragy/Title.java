@@ -30,14 +30,6 @@ public class Title extends Canvas {
 			for (int i = 0; i < 5; i++)
 				menu[i] = loadImage("menu_" + i + ".gif");
 		}
-		// MediaSound ms = MediaManager.getSound("resource:///battle1.mid");
-		// try{
-		// ms.use();
-		// }catch(Exception e){
-		// System.out.println(e.getClass().getName());
-		// }
-		// ap = AudioPresenter.getAudioPresenter();
-		// ap.setSound(ms);
 	}
 
 	/**

@@ -11,7 +11,7 @@ final class Game {
 	/**
 	 * ゲームを開始する
 	 */
-	public void start() {
+	public void start(int gameType) {
 		System.out.println("Game.start()");
 		// canvas = new GameCanvas(this);
 		// Display.setCurrent(canvas);
@@ -20,7 +20,12 @@ final class Game {
 		field.setAster();
 
 		player[0] = new KeyInputPlayer(this, "先攻");
-		player[1] = new KeyInputPlayer(this, "後攻");
+		
+		if(gameType == 1)
+			player[1] = new AIPlayer(this,"乱数");
+		else
+			player[1] = new KeyInputPlayer(this, "後攻");
+
 		canvas = new CanvasControl(this);
 
 		// 初期設定(仮)
@@ -33,6 +38,11 @@ final class Game {
 		player[1].addSP(30);
 
 		System.out.println("Game.start()");
+		try {
+			Thread.sleep(300);
+		} catch (Exception e) {
+		}
+		canvas.setCurrent();
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
 		{
 			boolean gameover;

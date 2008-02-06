@@ -245,8 +245,6 @@ public class KeyInputPlayer extends Player {
 			private final KeyInputPlayer player;
 		}
 
-		if (canvas == null)
-			System.out.println("‚Ê‚é‚Û");
 		canvas.getCommonCommand().setCommand(-1, null);
 		System.out.println("KeyInputPlayer.selectAster()");
 		EventProcesserForSelectAster ep = new EventProcesserForSelectAster(this);
