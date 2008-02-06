@@ -38,23 +38,23 @@ public class MarsClass extends AsterClass {
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
-			Point pt = new Point();
 			Field f = a.getField();
+			Point pt = new Point();
 			pt.x = f.asterToPoint(a).x - (range[0].length / 2);
 			pt.y = f.asterToPoint(a).y - (range.length / 2);
 
 			if (getPlayer() == getPlayer().game.getPlayer2()) {
 				for (int i = 0; i < defaultRange.length; i++) {
-					if (pt.y + i < 0 || pt.y + i >= f.getY())
+					if (!f.isYInFieldBound(pt.y + i))
 						continue;
 					for (int j = 0; j < defaultRange[0].length; j++) {
-						if (pt.x + j < 0 || pt.y + i >= f.getX())
+//						if (pt.x + j < 0 || pt.y + i >= f.getX())
+						if (!f.isXInFieldBound(pt.x + j))
 							continue;
 
 						if (defaultRangeP2[i][j] == 1) {
 							// レンジ内で自身かサン以外なら選択可
-							final Aster aster2 = f.getField()[pt.y + i][pt.x
-									+ j];
+							final Aster aster2 = f.at(pt.y + i, pt.x + j);
 							if (aster2.getNumber() != 1 && aster2 != a) {
 								range[i][j] = 1;
 							}
@@ -69,10 +69,11 @@ public class MarsClass extends AsterClass {
 				}
 			} else {
 				for (int i = 0; i < defaultRange.length; i++) {
-					if (pt.y + i < 0 || pt.y + i >= f.getY())
+					if (!f.isYInFieldBound(pt.y + i))
 						continue;
 					for (int j = 0; j < defaultRange[0].length; j++) {
-						if (pt.x + j < 0 || pt.y + i >= f.getX())
+//						if (pt.x + j < 0 || pt.y + i >= f.getX())
+						if (!f.isXInFieldBound(pt.x + j))
 							continue;
 
 						if (defaultRange[i][j] == 1) {
@@ -137,8 +138,9 @@ public class MarsClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
-		getAster().getField().setDeleteFlag(target1);
-		getAster().getField().delete(target1.x, target1.y);
+		final Field field = getAster().getField();
+		field.setDeleteFlag(target1);
+		field.delete(target1.x, target1.y);
 	}
 
 	public Image getImage() {

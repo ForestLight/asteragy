@@ -202,7 +202,7 @@ class Field implements PaintItem {
 	 * @param pt
 	 *            注目するマスの座標
 	 */
-	public void setDeleteFlag(Point pt) {
+	void setDeleteFlag(Point pt) {
 		field[pt.y][pt.x].setDeleteFlag(true);
 	}
 
@@ -212,7 +212,7 @@ class Field implements PaintItem {
 	 * @param pt
 	 *            注目するマスの座標
 	 */
-	public void removeDeleteFlag(Point pt) {
+	void removeDeleteFlag(Point pt) {
 		field[pt.y][pt.x].setDeleteFlag(false);
 	}
 
@@ -380,6 +380,14 @@ class Field implements PaintItem {
 		return field[pt.y][pt.x];
 	}
 
+	public Aster at(Point pt) {
+		return field[pt.y][pt.x];
+	}
+
+	public Aster at(int y, int x) {
+		return field[y][x];
+	}
+
 	public int getX() {
 		return X;
 	}
@@ -531,5 +539,13 @@ class Field implements PaintItem {
 	 * g.setColor(Graphics.getColorOfName(Graphics.BLACK)); g.drawRect(0, 0,
 	 * GameCanvas.measure, GameCanvas.measure); g.dispose(); }
 	 */
+	
+	boolean isYInFieldBound(int y) {
+		return 0 <= y && y < getY();
+	}
+	
+	boolean isXInFieldBound(int x) {
+		return 0 <= x && x < getX();
+	}
 
 }

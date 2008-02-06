@@ -34,6 +34,7 @@ public class StarClass extends AsterClass {
 
 	public void executeSpecialCommand() {
 		getAster().getField().swap(target1, target2);
+		logAction(target1, target2);
 	}
 
 	public Image getImage() {

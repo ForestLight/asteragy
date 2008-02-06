@@ -32,51 +32,24 @@ public class Title extends Canvas {
 		}
 	}
 
+	private Thread startThread;
+
 	/**
 	 * タイトル画面の描画
 	 * 
 	 * @return gameType 0:一機対戦 1:AI対戦 2:ネットワーク対戦
 	 */
 	public int start() {
-		Graphics g = getGraphics();
+		startThread = Thread.currentThread();
 		Display.setCurrent(this);
 		gameType = -1;
 
 		for (;;) {
 			// System.out.println("loop");
-			if (gameType >= 0) {
-				return gameType;
-			}
-
-			g.lock();
-
-			g.drawImage(title, 0, 0);
-
-			// 汎用性のないコードですいません
-			if (depth == 0) {
-				g.drawImage(menu[0], getWidth() / 2 - menu[0].getWidth() / 2,
-						150);
-				g.drawImage(menu[1], getWidth() / 2 - menu[1].getWidth() / 2,
-						150 + menu[1].getHeight());
-				g.drawImage(menu[2], getWidth() / 2 - menu[2].getWidth() / 2,
-						150 + menu[1].getHeight() + menu[2].getHeight());
-			} else {
-				g.drawImage(menu[3], getWidth() / 2 - menu[3].getWidth() / 2,
-						150);
-				g.drawImage(menu[4], getWidth() / 2 - menu[4].getWidth() / 2,
-						150 + menu[4].getHeight());
-			}
-			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
-			g.drawRect(getWidth() / 2 - menu[0].getWidth() / 2, 150
-					+ menu[0].getHeight() * cursor, menu[0].getWidth(), menu[0]
-					.getHeight());
-
-			g.unlock(true);
-
-			// sleepはなんかマズい気がする
 			try {
-				Thread.sleep(50);
-			} catch (Exception e) {
+				Thread.sleep(100000);
+			} catch (InterruptedException e) {
+				return gameType;
 			}
 		}
 	}
@@ -108,13 +81,15 @@ public class Title extends Canvas {
 			case Display.KEY_SELECT:
 				if (depth == 0 && cursor == 1) {
 					gameType = 0;
+					startThread.interrupt();
 				} else if (depth == 0 && cursor == 2) {
 					IApplication.getCurrentApp().terminate();
 				} else if (depth == 1 && cursor == 0) {
 					gameType = 1;
-
+					startThread.interrupt();
 				} else if (depth == 1 && cursor == 1) {
 					gameType = 2;
+					startThread.interrupt();
 				} else {
 					depth++;
 				}
@@ -123,11 +98,34 @@ public class Title extends Canvas {
 				if (depth > 0)
 					depth--;
 			default:
-				break;
+				return;
 			}
+			repaint();
 		}
 	}
 
 	public void paint(Graphics g) {
+		g.lock();
+
+		g.drawImage(title, 0, 0);
+
+		// 汎用性のないコードですいません
+		if (depth == 0) {
+			g.drawImage(menu[0], getWidth() / 2 - menu[0].getWidth() / 2, 150);
+			g.drawImage(menu[1], getWidth() / 2 - menu[1].getWidth() / 2,
+					150 + menu[1].getHeight());
+			g.drawImage(menu[2], getWidth() / 2 - menu[2].getWidth() / 2, 150
+					+ menu[1].getHeight() + menu[2].getHeight());
+		} else {
+			g.drawImage(menu[3], getWidth() / 2 - menu[3].getWidth() / 2, 150);
+			g.drawImage(menu[4], getWidth() / 2 - menu[4].getWidth() / 2,
+					150 + menu[4].getHeight());
+		}
+		g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
+		g.drawRect(getWidth() / 2 - menu[0].getWidth() / 2, 150
+				+ menu[0].getHeight() * cursor, menu[0].getWidth(), menu[0]
+				.getHeight());
+
+		g.unlock(true);
 	}
 }

@@ -15,16 +15,13 @@ public class VenusClass extends AsterClass {
 
 	public VenusClass(Aster a, Player p) {
 		super(a, p);
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public int getNumber() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 4;
 	}
 
 	public int[][] getRange() {
-		// TODO 自動生成されたメソッド・スタブ
 		final Game game = getPlayer().game;
 		switch (mode) {
 		case 0:
@@ -44,19 +41,20 @@ public class VenusClass extends AsterClass {
 
 			if (getPlayer() == game.getPlayer2()) {
 				for (int i = 0; i < defaultRange.length; i++) {
-					if (pt.y + i < 0 || pt.y + i >= field.getY())
+					if (!field.isYInFieldBound(pt.y + i))
 						continue;
 					for (int j = 0; j < defaultRange[0].length; j++) {
-						if (pt.x + j < 0 || pt.x + j >= field.getX())
+						if (!field.isXInFieldBound(pt.x + j))
 							continue;
 
 						// レンジ内であり
 						if (defaultRangeP2[i][j] == 1) {
 							// その位置のアステルにクラスがあり
 							final Aster a = field.getField()[pt.y + i][pt.x + j];
-							if (a.getAsterClass() != null) {
+							final AsterClass asterClass = a.getAsterClass();
+							if (asterClass != null) {
 								// そのクラスの所持者が相手であり
-								if (a.getAsterClass().getPlayer() != getPlayer()) {
+								if (asterClass.getPlayer() != getPlayer()) {
 									// サンでなければ対象に選択可能
 									if (a.getNumber() != 1)
 										range[i][j] = 1;
@@ -67,19 +65,20 @@ public class VenusClass extends AsterClass {
 				}
 			} else {
 				for (int i = 0; i < defaultRange.length; i++) {
-					if (pt.y + i < 0 || pt.y + i >= field.getY())
+					if (!field.isYInFieldBound(pt.y + i))
 						continue;
 					for (int j = 0; j < defaultRange[0].length; j++) {
-						if (pt.x + j < 0 || pt.x + j >= field.getX())
+						if (!field.isXInFieldBound(pt.x + j))
 							continue;
 
 						// レンジ内であり
 						if (defaultRange[i][j] == 1) {
 							// その位置のアステルにクラスがあり
 							final Aster f = field.getField()[pt.y + i][pt.x + j];
-							if (f.getAsterClass() != null) {
+							final AsterClass asterClass = f.getAsterClass();
+							if (asterClass != null) {
 								// そのクラスの所持者が相手であり
-								if (f.getAsterClass().getPlayer() != getPlayer()) {
+								if (asterClass.getPlayer() != getPlayer()) {
 									// サンでなければ対象に選択可能
 									if (f.getNumber() != 1)
 										range[i][j] = 1;
@@ -138,6 +137,7 @@ public class VenusClass extends AsterClass {
 		asterClass.setPlayer(this.getPlayer());
 		// 行動済状態に
 		asterClass.setActionCount(0);
+		logAction(target1);
 	}
 
 	public Image getImage() {

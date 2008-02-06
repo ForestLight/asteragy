@@ -90,25 +90,21 @@ public class UranusClass extends AsterClass {
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		// TODO 自動生成されたメソッド・スタブ
-
 		// スワップの場合もコマンドの場合も同じ
 		return swapSetPointAndNext(pt);
 	}
 
 	public boolean hasNext() {
-		// TODO 自動生成されたメソッド・スタブ
 		return swapHasNext();
 	}
 
 	public boolean moveAstern() {
-		// TODO 自動生成されたメソッド・スタブ
 		return swapMoveAstern();
 	}
 
 	public void executeSpecialCommand() {
-		// TODO 自動生成されたメソッド・スタブ
 		getAster().getField().swap(target1, target2);
+		logAction(target1, target2);
 	}
 
 	public Image getImage() {

@@ -76,6 +76,7 @@ public class NeptuneClass extends AsterClass {
 		// ターゲットと自分をswap
 		final Field field = getAster().getField();
 		field.swap(target1, field.asterToPoint(getAster()));
+		logAction(target1);
 
 	}
 

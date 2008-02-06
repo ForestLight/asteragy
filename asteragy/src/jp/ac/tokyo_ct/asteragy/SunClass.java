@@ -13,16 +13,13 @@ public class SunClass extends AsterClass {
 
 	public SunClass(Aster a, Player p) {
 		super(a, p);
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public int getNumber() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 1;
 	}
 
 	public int[][] getRange() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
@@ -36,17 +33,17 @@ public class SunClass extends AsterClass {
 			pt.y = thisPoint.y - (range.length / 2);
 
 			for (int i = 0; i < defaultRange.length; i++) {
-				if (!isYInFieldBound(field, pt.y + i))
+				if (!field.isYInFieldBound(pt.y + i))
 					continue;
 				for (int j = 0; j < defaultRange[0].length; j++) {
-					if (!isXInFieldBound(field, pt.x + j))
+					if (!field.isXInFieldBound(pt.x + j))
 						continue;
 
 					// レンジ内であり
 					if (defaultRange[i][j] == 1) {
 						range[i][j] = 1;
 						// その位置のアステルにクラスがあり
-						final Aster a = field.getField()[pt.y + i][pt.x + j];
+						final Aster a = field.at(pt.y + i, pt.x + j);
 						final AsterClass c = a.getAsterClass();
 						if (c != null) {
 							// そのクラスの所持者が相手である場合選択不可能
@@ -67,7 +64,6 @@ public class SunClass extends AsterClass {
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -82,7 +78,6 @@ public class SunClass extends AsterClass {
 	}
 
 	public boolean hasNext() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -96,7 +91,6 @@ public class SunClass extends AsterClass {
 	}
 
 	public boolean moveAstern() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
