@@ -21,10 +21,17 @@ final class Game {
 
 		player[0] = new KeyInputPlayer(this, "先攻");
 		
-		if(gameType == 1)
-			player[1] = new AIPlayer(this,"乱数");
-		else
+		switch (gameType) {
+		case 1:
+			player[1] = new AIPlayer(this, "乱数");
+			break;
+		case 2:
+			httpLogger = new HTTPPlayer(this, "後攻 (N)");
+			player[1] = httpLogger;
+			break;
+		default:
 			player[1] = new KeyInputPlayer(this, "後攻");
+		}
 
 		canvas = new CanvasControl(this);
 
@@ -52,8 +59,8 @@ final class Game {
 			gameover = turn(player[1]);
 			if (!gameover)
 				break;
+			System.gc();
 		}
-		System.gc();
 	}
 
 	/**
@@ -76,7 +83,7 @@ final class Game {
 					Thread.sleep(1500);
 				} catch (Exception e) {
 				}
-				System.out.println(goPlayer + "win");
+				System.out.println(goPlayer + "の負け");
 				return false;
 			}
 
@@ -117,14 +124,13 @@ final class Game {
 	Player[] getPlayers() {
 		return player;
 	}
-	
+
 	int getPlayerIndex(Player p) {
 		if (p == player[0])
 			return 0;
 		else if (p == player[1])
 			return 1;
-		else
-		{
+		else {
 			String s = "Game.getPlayerIndex: 引数pは有効なプレイヤーではない。";
 			System.out.println(s);
 			throw new IllegalArgumentException(s);
@@ -156,6 +162,9 @@ final class Game {
 		System.out.print("Game.logAction: ");
 		a.printToStream(System.out);
 		System.out.println();
+		if (httpLogger != null) {
+			httpLogger.log(a);
+		}
 	}
 
 	/**
@@ -183,5 +192,7 @@ final class Game {
 		System.out.println("Total memory: " + r.totalMemory()
 				+ ", Free memory: " + r.freeMemory());
 	}
+
+	private HTTPPlayer httpLogger = null;
 
 }

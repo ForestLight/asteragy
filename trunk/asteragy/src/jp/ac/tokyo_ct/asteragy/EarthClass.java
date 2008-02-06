@@ -10,16 +10,13 @@ public class EarthClass extends AsterClass {
 
 	public EarthClass(Aster a, Player p) {
 		super(a, p);
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public int getNumber() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 5;
 	}
 
 	public int[][] getRange() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
@@ -35,17 +32,17 @@ public class EarthClass extends AsterClass {
 			pt.y = thisPoint.y - (range.length / 2);
 
 			for (int i = 0; i < defaultRange.length; i++) {
-				if (pt.y + i < 0 || pt.y + i >= field.getY())
+				if (field.isYInFieldBound(pt.y + i))
 					continue;
 				for (int j = 0; j < defaultRange[0].length; j++) {
-					if (pt.x + j < 0 || pt.x + j >= field.getX())
+					if (field.isXInFieldBound(pt.x + j))
 						continue;
 
 					// レンジ内であり
 					if (defaultRange[i][j] == 1) {
 						range[i][j] = 1;
 						// その位置のアステルにクラスがあれば選択不能
-						final Aster f = field.getField()[pt.y + i][pt.x + j];
+						final Aster f = field.at(pt.y + i, pt.x + j);
 						if (f.getAsterClass() != null) {
 							range[i][j] = 0;
 						}
@@ -99,7 +96,6 @@ public class EarthClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
-		// TODO 自動生成されたメソッド・スタブ
 		/*
 		 * イージス Point me = getAster().getField().asterToPoint(getAster()); Point
 		 * pt = new Point(); for (int i = 0; i < defaultRange.length; i++) { for
@@ -120,6 +116,7 @@ public class EarthClass extends AsterClass {
 		AsterClass ac = new MoonClass(a, getPlayer());
 		a.setAsterClass(ac);
 		a.getAsterClass().setActionCount(0);
+		logAction(target1);
 	}
 
 	public Image getImage() {

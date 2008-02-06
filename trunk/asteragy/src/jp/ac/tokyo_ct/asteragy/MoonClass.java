@@ -73,6 +73,7 @@ public class MoonClass extends AsterClass {
 					f.swap(pt, me);
 					f.setDeleteFlag(pt);
 					f.delete(pt.x, pt.y);
+					logAction();
 					return;
 				}
 			}

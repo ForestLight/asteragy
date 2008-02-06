@@ -39,7 +39,7 @@ public class BackImage implements PaintItem {
 		Image back = null;
 		try {
 			// 背景画像リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///back.jpg");
+			MediaImage m = MediaManager.getImage("resource:///back.gif");
 			// メディアの使用開始
 			m.use();
 			// 読み込み
@@ -63,9 +63,10 @@ public class BackImage implements PaintItem {
 	}
 
 	public void paintFieldBack(Graphics g) {
-		g.drawImage(backimage, canvas.getLeftMargin(), canvas.getTopMargin(),
-				canvas.getLeftMargin(), canvas.getTopMargin(), canvas
-						.fieldWidth() + 1, canvas.fieldHeight() + 1);
+		final int leftMargin = canvas.getLeftMargin();
+		final int topMargin = canvas.getTopMargin();
+		g.drawImage(backimage, leftMargin, topMargin, leftMargin, topMargin,
+				canvas.fieldWidth() + 1, canvas.fieldHeight() + 1);
 	}
 
 	public void paintAsterBack(Graphics g, Point point) {

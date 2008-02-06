@@ -15,6 +15,7 @@ public abstract class AsterClass {
 		aster = a;
 		player = p;
 		actionCount = getActionNum();
+		game = a.getField().getGame();
 	}
 
 	/**
@@ -39,6 +40,8 @@ public abstract class AsterClass {
 	}
 
 	private Aster aster;
+
+	private Game game;
 
 	public Player getPlayer() {
 		return player;
@@ -128,17 +131,30 @@ public abstract class AsterClass {
 		// return 0;
 		return AsterClassData.commandCost[getNumber() - 1];
 	}
-	
+
 	private void logAction(int commandType, int[] args) {
 		Action a = new Action(player);
 		a.commandType = commandType;
 		a.args = args;
-		Main.game.logAction(a);
+		game.logAction(a);
 	}
 
 	protected void logAction(int[] args) {
 		logAction(1, args);
 	}
+
+	protected void logAction() {
+		logAction(1, new int[0]);
+	}
+
+	protected void logAction(Point pt1) {
+		logAction(1, new int[] { pt1.x, pt1.y });
+	}
+
+	protected void logAction(Point pt1, Point pt2) {
+		logAction(1, new int[] { pt1.x, pt1.y, pt2.x, pt2.y });
+	}
+
 	/**
 	 * コマンドを実行
 	 * 
@@ -149,19 +165,17 @@ public abstract class AsterClass {
 		System.out.println("----AsterClass.execute()");
 		switch (mode) {
 		case 0:
-			field.backupField();
+			// field.backupField();
 			field.swap(target1, target2);
-			// サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください）
-			if (field.judgeSelfDestruction() == true) {
-				Dialog d = new Dialog(Dialog.DIALOG_YESNO, "注意");
-				d.setText("サンが消えます");
-				if(d.show() == Dialog.BUTTON_NO){
-					field.restoreField();
-					incActionCount();
-					break;
-				}
-			}
-			logAction(0, new int[] {target1.x, target1.y, target2.x, target2.y});
+			/*
+			 * // サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください） if
+			 * (field.judgeSelfDestruction() == true) { Dialog d = new
+			 * Dialog(Dialog.DIALOG_YESNO, "注意"); d.setText("サンが消えます");
+			 * if(d.show() == Dialog.BUTTON_NO){ field.restoreField();
+			 * incActionCount(); break; } }
+			 */
+			logAction(0,
+					new int[] { target1.x, target1.y, target2.x, target2.y });
 			break;
 		case 1:
 			executeSpecialCommand();
@@ -273,10 +287,9 @@ public abstract class AsterClass {
 				for (int j = 0; j < range[0].length; j++) {
 					// 1個目の対象の上下左右のマスで、元のレンジに含まれている場所のみ1
 					if (defaultRange[i][j] == 1) {
-						if (i == pt.y - 1 && j == pt.x ||
-							i == pt.y + 1 && j == pt.x ||
-							i == pt.y && j == pt.x + 1 ||
-							i == pt.y && j == pt.x - 1) {
+						if (i == pt.y - 1 && j == pt.x || i == pt.y + 1
+								&& j == pt.x || i == pt.y && j == pt.x + 1
+								|| i == pt.y && j == pt.x - 1) {
 							range[i][j] = 1;
 						}
 					}
@@ -333,13 +346,5 @@ public abstract class AsterClass {
 		} catch (Exception e) {
 		}
 		return null;
-	}
-
-	protected static boolean isYInFieldBound(Field f, int y) {
-		return 0 <= y && y < f.getY();
-	}
-
-	protected static boolean isXInFieldBound(Field f, int x) {
-		return 0 <= x && x < f.getX();
 	}
 }

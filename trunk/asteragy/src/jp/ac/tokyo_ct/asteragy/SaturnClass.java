@@ -67,18 +67,19 @@ public class SaturnClass extends AsterClass {
 		// TODO 自動生成されたメソッド・スタブ
 		// 左回り
 		int i, j;
-		Point pt = new Point();
 		final Aster a = getAster();
 		final Field field = a.getField();
-		pt.x = field.asterToPoint(a).x - (defaultRange[0].length / 2);
-		pt.y = field.asterToPoint(a).y - (defaultRange.length / 2);
+		final Point me = field.asterToPoint(a);
+		Point pt = new Point();
+		pt.x = me.x - (defaultRange[0].length / 2);
+		pt.y = me.y - (defaultRange.length / 2);
 		Aster[] queue = new Aster[17];
 
 		final Aster[][] f = field.getField();
 		for (i = 0, j = 0; j < 16; j++) {
 			// 外周レンジのアステルを右回りにキュー（のようなもの）に入れていく
-			if (pt.x >= 0 && pt.x < field.getX() && pt.y >= 0
-					&& pt.y < field.getY()) {
+			if (field.isXInFieldBound(pt.x) &&
+					field.isYInFieldBound(pt.y)) {
 				queue[i] = f[pt.y][pt.x];
 				i++;
 			}
@@ -91,18 +92,17 @@ public class SaturnClass extends AsterClass {
 				pt.x--;
 			else
 				pt.y--;
-
 		}
 		// pt.x =
 		// getAster().getField().asterToPoint(getAster()).x-(defaultRange[0].length/2);
 		// pt.y =
 		// getAster().getField().asterToPoint(getAster()).y-(defaultRange.length/2);
 
-		for (i = 1, j = 0;; j++) {
+		for (i = 1, j = 0; ; j++) {
 			// キューの1番目のアステルから右回りに戻していく
-			if (pt.x >= 0 && pt.x < field.getX() && pt.y >= 0
-					&& pt.y < field.getY()) {
-				f[pt.y][pt.x] = queue[i];
+			if (field.isXInFieldBound(pt.x) &&
+					field.isYInFieldBound(pt.y)) {
+				queue[i] = f[pt.y][pt.x];
 				i++;
 			}
 
@@ -122,6 +122,8 @@ public class SaturnClass extends AsterClass {
 			}
 		}
 		/* 左回りか右回りをプレイヤーに選択させるのはどこになるのか */
+		
+		logAction();
 	}
 
 	public Image getImage() {

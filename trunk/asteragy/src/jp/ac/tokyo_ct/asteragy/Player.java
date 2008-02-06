@@ -18,19 +18,17 @@ public abstract class Player implements PaintItem {
 	 * 
 	 * @return 選択した行動。または、ターン終了ならnullを返す。
 	 */
-	public Action getAction() {
-		return null;
-	}
+	public abstract Action getAction();
 
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 
-	public int getSP() {
+	public final int getSP() {
 		return sp;
 	}
 
-	public void addSP(int n) {
+	public final void addSP(int n) {
 		sp += n;
 		System.out.println("SP+" + n);
 		repaint();
@@ -77,13 +75,11 @@ public abstract class Player implements PaintItem {
 	}
 
 	public void repaint() {
-		Graphics g = game.getCanvas().getGraphics();
+		final CanvasControl canvas = game.getCanvas();
+		Graphics g = canvas.getGraphics();
 		g.lock();
-		int player = 1;
-		if (this.equals(game.getPlayer2())) {
-			player = 2;
-		}
-		game.getCanvas().getBackImage().paintPlayerBakc(g, player);
+		int player = game.getPlayerIndex(this) + 1;
+		canvas.getBackImage().paintPlayerBakc(g, player);
 		paint(g);
 		g.unlock(false);
 	}

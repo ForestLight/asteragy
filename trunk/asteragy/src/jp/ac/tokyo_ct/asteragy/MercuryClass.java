@@ -102,6 +102,7 @@ public class MercuryClass extends AsterClass {
 		// ‘ÎÛ‚Ìs“®‰Â”\‰ñ”‚ğ1‰ñ‘‚â‚·
 		getAster().getField().getAster(target1).getAsterClass()
 				.incActionCount();
+		logAction(target1);
 	}
 
 	public Image getImage() {
