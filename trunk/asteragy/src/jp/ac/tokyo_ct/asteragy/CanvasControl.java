@@ -33,7 +33,7 @@ public class CanvasControl {
 
 		commoncommand = new CommonCommand(this);
 		suncommand = new SunCommand(this);
-	//	Display.setCurrent(canvas);
+		Display.setCurrent(canvas);
 	}
 
 	public Graphics getGraphics() {
@@ -168,10 +168,10 @@ public class CanvasControl {
 		}
 	}
 
-	public void setCurrent(){
+	public void setCurrent() {
 		Display.setCurrent(canvas);
 	}
-	
+
 	public void onTurnStart(Player player) {
 		// TODO 自動生成されたメソッド・スタブ
 		System.out.println("onTurnStart");
@@ -270,5 +270,38 @@ public class CanvasControl {
 			}
 		}
 
+	}
+
+	public boolean isInit() {
+		return game.isInit();
+	}
+
+	public void paintNowloading(Graphics g) {
+		// TODO 自動生成されたメソッド・スタブ
+		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
+		g.drawRect(0, getHeight() / 4, getWidth(), getHeight() * 3 / 4);
+		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		g.drawString("Now Loading...", 78, 126);
+
+	}
+
+	private PaintString spaint;
+
+	public void paintString(String string, boolean visible) {
+		if (visible)
+			spaint = new PaintString(this, string);
+		else
+			spaint = null;
+		paintString(getGraphics());
+	}
+
+	private void paintString(Graphics g) {
+		if (spaint != null)
+			spaint.paint(g);
+	}
+
+	public void paintOver(Graphics g) {
+		// TODO 自動生成されたメソッド・スタブ
+		paintString(g);
 	}
 }

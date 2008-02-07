@@ -47,10 +47,11 @@ public class Title extends Canvas {
 		for (;;) {
 			// System.out.println("loop");
 			try {
-				Thread.sleep(100000);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				return gameType;
 			}
+			if (gameType != -1)
+				return gameType;
 		}
 	}
 

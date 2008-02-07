@@ -7,12 +7,24 @@ package jp.ac.tokyo_ct.asteragy;
 /**
  * @author Ichinohe ゲーム進行の管理
  */
-final class Game {
+final class Game implements Runnable {
 	/**
 	 * ゲームを開始する
 	 */
 	public void start(int gameType) {
 		System.out.println("Game.start()");
+		this.gameType = gameType;
+		
+		Thread init = new Thread(this);
+		init.start();
+		try {
+			init.join();
+		} catch (InterruptedException e) {
+			// TODO 自動生成された catch ブロック
+			//e.printStackTrace();
+		}
+		
+		/*
 		// canvas = new GameCanvas(this);
 		// Display.setCurrent(canvas);
 		field = new Field(this);
@@ -23,7 +35,7 @@ final class Game {
 		
 		switch (gameType) {
 		case 1:
-			player[1] = new AIPlayer(this, "乱数");
+			//player[1] = new AIPlayer(this, "乱数");
 			break;
 		case 2:
 			httpLogger = new HTTPPlayer(this, "後攻 (N)");
@@ -49,7 +61,11 @@ final class Game {
 			Thread.sleep(300);
 		} catch (Exception e) {
 		}
+		
 		canvas.setCurrent();
+		*/
+		System.out.println("Game.start()");
+		canvas.repaint();
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
 		{
 			boolean gameover;
@@ -61,6 +77,47 @@ final class Game {
 				break;
 			System.gc();
 		}
+	}
+	
+	private void initialize(){
+		System.out.println("initialize start");
+		canvas = new CanvasControl(this);
+		canvas.repaint();
+		// Display.setCurrent(canvas);
+		field = new Field(this);
+		field.setFieldSize(9, 9);
+		field.setAster();
+
+		player[0] = new KeyInputPlayer(this, "先攻");
+		
+		switch (gameType) {
+		case 1:
+			player[1] = new AIPlayer(this, "乱数");
+			break;
+		case 2:
+			httpLogger = new HTTPPlayer(this, "後攻 (N)");
+			player[1] = httpLogger;
+			break;
+		default:
+			player[1] = new KeyInputPlayer(this, "後攻");
+		}
+
+		// 初期設定(仮)
+		Aster a = field.getField()[field.getY() - 1][field.getX() / 2];
+		a.setAsterClass(new SunClass(a, player[0]));
+		a = field.getField()[0][field.getX() / 2];
+		a.setAsterClass(new SunClass(a, player[1]));
+
+		player[0].addSP(30);
+		player[1].addSP(30);
+		
+		System.out.println("initialize end");
+	}
+	
+	public void run(){
+		init = true;
+		initialize();
+		init = false;
 	}
 
 	/**
@@ -194,5 +251,13 @@ final class Game {
 	}
 
 	private HTTPPlayer httpLogger = null;
+	
+	private int gameType;
+	
+	public boolean isInit(){
+		return init;
+	}
+	
+	private boolean init;
 
 }

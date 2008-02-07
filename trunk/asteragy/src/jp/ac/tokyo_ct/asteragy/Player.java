@@ -75,6 +75,8 @@ public abstract class Player implements PaintItem {
 	}
 
 	public void repaint() {
+		if(game.isInit())
+			return;
 		final CanvasControl canvas = game.getCanvas();
 		Graphics g = canvas.getGraphics();
 		g.lock();

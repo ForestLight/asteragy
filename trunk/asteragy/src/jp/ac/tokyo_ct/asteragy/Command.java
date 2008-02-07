@@ -39,18 +39,20 @@ public class Command implements PaintItem {
 
 	private void setPosition(Graphics g) {
 		final int m = GameCanvas.measure;
-		final int topMargin = canvas.getTopMargin();
+		// final int topMargin = canvas.getTopMargin();
 		final int leftMargin = canvas.getLeftMargin();
 		final int imageHeight = commandImage.getHeight();
 		final int imageWidth = commandImage.getWidth();
-		int top = topMargin + m * (point.y + 1);
+		int top = GameCanvas.playerheight
+				+ (canvas.getHeight() - imageHeight - GameCanvas.playerheight * 2)
+				* point.y / canvas.getField().getY();
 		int left = leftMargin + m * (point.x + 1);
-		if (top >= canvas.getHeight() - imageHeight - topMargin)
-			top -= imageHeight + m;
+		// if (top >= canvas.getHeight() - imageHeight - topMargin)
+		// top -= imageHeight + m;
 		if (left >= canvas.getWidth() - imageWidth - leftMargin)
 			left -= imageWidth + m;
 		g.setOrigin(left, top);
-		System.out.println("top:" + top + " left:" + left);
+		System.out.println("top:" + top + " left:" + left + "y:" + point.y);
 	}
 
 	protected void setImage(Image image) {
