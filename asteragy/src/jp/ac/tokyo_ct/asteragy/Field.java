@@ -302,8 +302,7 @@ class Field implements PaintItem {
 				if (judge(j, i) == true) {
 					setDeleteFlagSameColor(j, i, field[i][j].getColor());
 					count += delete(j, i, 0);
-				}
-				else if (field[i][j].getDeleteFlag() == true) {
+				} else if (field[i][j].getDeleteFlag() == true) {
 					count += delete(j, i, 0);
 				}
 			}
@@ -370,6 +369,9 @@ class Field implements PaintItem {
 		Aster tmp = field[a.y][a.x];
 		field[a.y][a.x] = field[b.y][b.x];
 		field[b.y][b.x] = tmp;
+
+		//EffectFieldSwap swap = new EffectFieldSwap(this, a, b);
+		//swap.start();
 	}
 
 	public Aster[][] getField() {
@@ -539,11 +541,11 @@ class Field implements PaintItem {
 	 * g.setColor(Graphics.getColorOfName(Graphics.BLACK)); g.drawRect(0, 0,
 	 * GameCanvas.measure, GameCanvas.measure); g.dispose(); }
 	 */
-	
+
 	boolean isYInFieldBound(int y) {
 		return 0 <= y && y < getY();
 	}
-	
+
 	boolean isXInFieldBound(int x) {
 		return 0 <= x && x < getX();
 	}

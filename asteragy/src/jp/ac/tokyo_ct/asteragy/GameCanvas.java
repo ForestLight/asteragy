@@ -25,12 +25,28 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		System.out.println("repaint()");
 		// ダブルバッファ開始
 		g.lock();
+		
+		//Now Loading...
+		if(canvas.isInit()){
+			canvas.paintNowloading(g);
+			g.unlock(false);
+			return;
+		}
+		
 		// 描画
 		paintBackGround(g);
 		paintFieldSpace(g);
 		paintPlayerInfo(g);
+		
+		paintOverGraphics(g);
 		// ダブルバッファ終了
 		g.unlock(false);
+	}
+	
+
+	private void paintOverGraphics(Graphics g) {
+		// TODO 自動生成されたメソッド・スタブ
+		canvas.paintOver(g);
 	}
 
 	/**
