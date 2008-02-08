@@ -17,6 +17,10 @@ public class Title extends Canvas {
 
 	private int gameType = -1;
 
+	private boolean optionMenuFlag = false;
+
+	private Option option = new Option();
+
 	// private static int highScore;
 
 	private AudioPresenter ap;
@@ -26,8 +30,8 @@ public class Title extends Canvas {
 			title = loadImage("title.jpg");
 		}
 		if (menu == null) {
-			menu = new Image[5];
-			for (int i = 0; i < 5; i++)
+			menu = new Image[7];
+			for (int i = 0; i < 7; i++)
 				menu[i] = loadImage("menu_" + i + ".gif");
 		}
 	}
@@ -39,7 +43,7 @@ public class Title extends Canvas {
 	 * 
 	 * @return gameType 0:一機対戦 1:AI対戦 2:ネットワーク対戦
 	 */
-	public int start() {
+	public Option start() {
 		startThread = Thread.currentThread();
 		Display.setCurrent(this);
 		gameType = -1;
@@ -50,8 +54,8 @@ public class Title extends Canvas {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
-			if (gameType != -1)
-				return gameType;
+			if (option.gameType != -1)
+				return option;
 		}
 	}
 
@@ -76,57 +80,150 @@ public class Title extends Canvas {
 					cursor--;
 				break;
 			case Display.KEY_DOWN:
-				if (depth + cursor < 2)
+				if (depth + cursor < 3)
 					cursor++;
 				break;
 			case Display.KEY_SELECT:
-				if (depth == 0 && cursor == 1) {
-					gameType = 0;
-					startThread.interrupt();
-				} else if (depth == 0 && cursor == 2) {
-					IApplication.getCurrentApp().terminate();
-				} else if (depth == 1 && cursor == 0) {
-					gameType = 1;
-					startThread.interrupt();
-				} else if (depth == 1 && cursor == 1) {
-					gameType = 2;
-					startThread.interrupt();
-				} else {
-					depth++;
+				if (!optionMenuFlag) {
+					if (depth == 0) {
+						switch (cursor) {
+						case 0:
+							depth++;
+							break;
+						case 1:
+							option.gameType = 0;
+							break;
+						case 2:
+							optionMenuFlag = true;
+							cursor = 0;
+							break;			
+						case 3:
+							IApplication.getCurrentApp().terminate();
+						}
+					}
+					else {
+						switch (cursor) {
+						case 0:
+							option.gameType = 1;
+							break;
+						case 1:
+							option.gameType = 2;
+							break;
+						case 2:
+							depth--;
+							cursor = 0;
+							break;	
+						}
+					}
+				}
+				else {
+					if (cursor == 3) {
+						optionMenuFlag = false;
+						cursor = 0;
+					}
+					else {
+						cursor = 3;
+					}
 				}
 				break;
-			case Display.KEY_0:
-				if (depth > 0)
-					depth--;
-			default:
-				return;
+			case Display.KEY_LEFT:
+				if (optionMenuFlag) {
+					switch (cursor) {
+					case 0:
+						if (option.fieldYSize > 1)
+							option.fieldYSize -= 2;
+						break;
+					case 1:
+						if (option.fieldXSize > 1)
+							option.fieldXSize -= 2;
+						break;
+					case 2:
+						if (option.numOfColors > 3)
+							option.numOfColors--;
+						break;
+					}
+				}
+				break;
+			case Display.KEY_RIGHT:
+				if (optionMenuFlag) {
+					switch (cursor) {
+					case 0:
+						if (option.fieldYSize < 11)
+							option.fieldYSize += 2;
+						break;
+					case 1:
+						if (option.fieldXSize < 11)
+							option.fieldXSize += 2;
+						break;
+					case 2:
+						if (option.numOfColors < 5)
+							option.numOfColors++;
+						break;
+					}
+				}
+				break;
 			}
 			repaint();
 		}
 	}
 
 	public void paint(Graphics g) {
-		g.lock();
 
-		g.drawImage(title, 0, 0);
+		if (!optionMenuFlag) {
+			g.lock();
 
-		// 汎用性のないコードですいません
-		if (depth == 0) {
-			g.drawImage(menu[0], getWidth() / 2 - menu[0].getWidth() / 2, 150);
-			g.drawImage(menu[1], getWidth() / 2 - menu[1].getWidth() / 2,
-					150 + menu[1].getHeight());
-			g.drawImage(menu[2], getWidth() / 2 - menu[2].getWidth() / 2, 150
-					+ menu[1].getHeight() + menu[2].getHeight());
-		} else {
-			g.drawImage(menu[3], getWidth() / 2 - menu[3].getWidth() / 2, 150);
-			g.drawImage(menu[4], getWidth() / 2 - menu[4].getWidth() / 2,
-					150 + menu[4].getHeight());
+			g.drawImage(title, 0, 0);
+
+			if (depth == 0) {
+				g.drawImage(menu[0], getWidth() / 2 - menu[0].getWidth() / 2,
+						130);
+				g.drawImage(menu[1], getWidth() / 2 - menu[1].getWidth() / 2,
+						130 + menu[1].getHeight());
+				g.drawImage(menu[2], getWidth() / 2 - menu[2].getWidth() / 2,
+						130 + menu[1].getHeight() + menu[2].getHeight());
+				g.drawImage(menu[3], getWidth() / 2 - menu[3].getWidth() / 2,
+						130 + menu[1].getHeight() + menu[2].getHeight() + menu[3].getHeight());
+			} else {
+				g.drawImage(menu[4], getWidth() / 2 - menu[4].getWidth() / 2,
+						130);
+				g.drawImage(menu[5], getWidth() / 2 - menu[5].getWidth() / 2,
+						130 + menu[5].getHeight());
+				g.drawImage(menu[6], getWidth() / 2 - menu[6].getWidth() / 2,
+						130 + menu[5].getHeight() + menu[6].getHeight());
+			}
+			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
+			g.drawRect(getWidth() / 2 - menu[0].getWidth() / 2, 130
+					+ menu[0].getHeight() * cursor, menu[0].getWidth(), menu[0].getHeight());
+
+			g.unlock(true);
 		}
-		g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
-		g.drawRect(getWidth() / 2 - menu[0].getWidth() / 2, 150
-				+ menu[0].getHeight() * cursor, menu[0].getWidth(), menu[0]
-				.getHeight());
+		else {
+			g.lock();
 
-		g.unlock(true);
+			g.drawImage(title, 0, 0);
+			g.setColor(Graphics.getColorOfRGB(0, 0, 0, 160));
+			g.fillRect(0, 0, getWidth(), getHeight());
+
+			g.setColor(Graphics.getColorOfName(Graphics.WHITE));
+			g.drawString("縦の長さ", 0, 15);
+			g.drawString("横の長さ", 0, 30);
+			g.drawString("色の数", 0, 45);
+			g.drawString("もどる", 0, 237);
+
+			g.drawString("" + option.fieldYSize, 120, 15);
+			g.drawString("" + option.fieldXSize, 120, 30);
+			g.drawString("" + option.numOfColors, 120, 45);
+
+			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
+
+			if (cursor != 3) {
+				g.drawRect(118, 0 + cursor * 15 + 2, 15, 15);
+			}
+			else {
+				g.drawRect(0, 224, 35, 15);
+			}
+
+			g.unlock(true);
+		}
 	}
 }
