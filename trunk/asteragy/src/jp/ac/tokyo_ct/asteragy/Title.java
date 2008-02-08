@@ -130,11 +130,11 @@ public class Title extends Canvas {
 				if (optionMenuFlag) {
 					switch (cursor) {
 					case 0:
-						if (option.fieldYSize > 1)
+						if (option.fieldYSize > 3)
 							option.fieldYSize -= 2;
 						break;
 					case 1:
-						if (option.fieldXSize > 1)
+						if (option.fieldXSize > 3)
 							option.fieldXSize -= 2;
 						break;
 					case 2:
