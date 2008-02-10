@@ -112,7 +112,7 @@ public class AIPlayer extends Player {
 					if (p != null) {
 						return null;
 					}
-
+					evaluation();
 					state = 0;
 				}
 			}
@@ -242,5 +242,42 @@ public class AIPlayer extends Player {
 			return new Point(r.nextInt(cmdMax+1),0);
 		}
 	}
-
+	
+	/**
+	 * •]‰¿ŠÖ”‚à‚Ç‚«
+	 * @return
+	 */
+	private int evaluation(){
+		int p = 0;
+		final Field f = game.getField();
+		
+		for(int i = 0;i < f.getY();i++){
+			for(int j = 0;j < f.getX();j++){
+				final AsterClass ac = f.getField()[i][j].getAsterClass();
+				if(ac != null){
+					if(ac.getPlayer() == game.getCurrentPlayer()){
+						p += AsterClassData.classCost[ac.getNumber()-1];
+						if(ac.getNumber() == 1){
+							p += 500;
+						}
+					}else{
+						p -= AsterClassData.classCost[ac.getNumber()-1];
+						if(ac.getNumber() == 1){
+							p -= 500;
+						}
+					}
+				}
+			}
+		}
+		
+		p += this.getSP();
+		if(game.getCurrentPlayer() == game.getPlayer1()){
+			p -= game.getPlayer2().getSP();
+		}else{
+			p -= game.getPlayer1().getSP();
+		}
+		
+		System.out.println("AIPlayer.evaluation return" + p);
+		return p;
+	}
 }
