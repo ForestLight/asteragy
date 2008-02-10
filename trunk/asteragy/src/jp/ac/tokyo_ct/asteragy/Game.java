@@ -11,9 +11,9 @@ final class Game implements Runnable {
 	/**
 	 * ÉQÅ[ÉÄÇäJénÇ∑ÇÈ
 	 */
-	public void start(int gameType) {
+	public void start(Option op) {
 		System.out.println("Game.start()");
-		this.gameType = gameType;
+		option = op;
 		
 		Thread init = new Thread(this);
 		init.start();
@@ -85,12 +85,12 @@ final class Game implements Runnable {
 		canvas.repaint();
 		// Display.setCurrent(canvas);
 		field = new Field(this);
-		field.setFieldSize(9, 9);
+		field.setFieldSize(option.fieldXSize, option.fieldYSize);
 		field.setAster();
 
 		player[0] = new KeyInputPlayer(this, "êÊçU");
 		
-		switch (gameType) {
+		switch (option.gameType) {
 		case 1:
 			player[1] = new AIPlayer(this, "óêêî");
 			break;
@@ -252,7 +252,8 @@ final class Game implements Runnable {
 
 	private HTTPPlayer httpLogger = null;
 	
-	private int gameType;
+	//private int gameType;
+	private Option option;
 	
 	public boolean isInit(){
 		return init;

@@ -20,7 +20,7 @@ public final class Main extends IApplication {
 		Title t = new Title();
 		while (true) {
 			Option op = t.start();
-			game.start(op.gameType);
+			game.start(op);
 			System.out.println("Game over");
 		}
 	}
