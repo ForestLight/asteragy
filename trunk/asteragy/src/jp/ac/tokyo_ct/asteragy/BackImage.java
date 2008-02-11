@@ -65,12 +65,14 @@ public class BackImage implements PaintItem {
 	public void paintFieldBack(Graphics g) {
 		final int leftMargin = canvas.getLeftMargin();
 		final int topMargin = canvas.getTopMargin();
+		g.setOrigin(0, 0);
 		g.drawImage(backimage, leftMargin, topMargin, leftMargin, topMargin,
 				canvas.fieldWidth() + 1, canvas.fieldHeight() + 1);
 	}
 
 	public void paintAsterBack(Graphics g, Point point) {
 		final int m = GameCanvas.measure;
+		g.setOrigin(0, 0);
 		int x = canvas.getLeftMargin() + point.x * m;
 		int y = canvas.getTopMargin() + point.y * m;
 		g.drawImage(backimage, x, y, x, y, m + 1, m + 1);

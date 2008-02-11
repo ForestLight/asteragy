@@ -15,7 +15,7 @@ public class Title extends Canvas {
 
 	private int cursor = 0;
 
-	private int gameType = -1;
+	//private int gameType = -1;
 
 	private boolean optionMenuFlag = false;
 
@@ -46,7 +46,7 @@ public class Title extends Canvas {
 	public Option start() {
 		startThread = Thread.currentThread();
 		Display.setCurrent(this);
-		gameType = -1;
+		option.gameType = -1;
 
 		for (;;) {
 			// System.out.println("loop");
