@@ -84,6 +84,9 @@ final class Game implements Runnable {
 		canvas = new CanvasControl(this);
 		canvas.repaint();
 		// Display.setCurrent(canvas);
+		
+		Aster.COLOR_MAX = option.numOfColors;
+		
 		field = new Field(this);
 		field.setFieldSize(option.fieldXSize, option.fieldYSize);
 		field.setAster();
@@ -101,6 +104,7 @@ final class Game implements Runnable {
 		default:
 			player[1] = new KeyInputPlayer(this, "ŒãU");
 		}
+		
 
 		// ‰Šúİ’è(‰¼)
 		Aster a = field.getField()[field.getY() - 1][field.getX() / 2];

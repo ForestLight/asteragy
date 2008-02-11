@@ -370,8 +370,8 @@ class Field implements PaintItem {
 		field[a.y][a.x] = field[b.y][b.x];
 		field[b.y][b.x] = tmp;
 
-		//EffectFieldSwap swap = new EffectFieldSwap(this, a, b);
-		//swap.start();
+		// EffectFieldSwap swap = new EffectFieldSwap(this, a, b);
+		// swap.start();
 	}
 
 	public Aster[][] getField() {
@@ -502,6 +502,7 @@ class Field implements PaintItem {
 		g.lock();
 		canvas.getBackImage().paintFieldBack(g);
 		paint(g);
+		g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
 		canvas.getCursor().paint(g);
 		g.unlock(false);
 	}

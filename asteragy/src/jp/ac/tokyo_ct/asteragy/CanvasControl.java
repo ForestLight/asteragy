@@ -178,97 +178,8 @@ public class CanvasControl {
 		game.getPlayer1().repaint();
 		game.getPlayer2().repaint();
 
-		Graphics g = getGraphics();
-
-		// 背景In
-		int x = getWidth();
-		int y = getHeight() / 4;
-		while (x > 0) {
-			g.lock();
-
-			g.drawImage(player.getTurnOnBack(), x, y);
-
-			g.unlock(false);
-
-			x -= 24;
-
-			try {
-				Thread.sleep(1000 / f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-		}
-
-		// 文字In
-		String string = player.getName() + "のターン";
-		int stringwidth = Font.getDefaultFont().getBBoxWidth(string);
-		int wx = getWidth();
-		int wy = getHeight() / 2 + Font.getDefaultFont().getHeight() / 2;
-		while (wx > getWidth() / 2 - stringwidth / 2) {
-
-			g.lock();
-
-			g.drawImage(player.getTurnOnBack(), x, y);
-			g.drawString(string, wx, wy);
-
-			g.unlock(false);
-
-			wx -= 24;
-
-			try {
-				Thread.sleep(1000 / f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-		}
-
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-
-		// 文字Out
-		while (wx * -1 < stringwidth) {
-
-			g.lock();
-
-			g.drawImage(player.getTurnOnBack(), x, y);
-			g.drawString(string, wx, wy);
-
-			g.unlock(false);
-
-			wx -= 24;
-
-			try {
-				Thread.sleep(1000 / f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-		}
-
-		// 背景Out
-		while (x * -1 < getWidth()) {
-			g.lock();
-
-			canvas.repaint(x + getWidth(), y, getWidth() - x, getHeight() / 2);
-			g.drawImage(player.getTurnOnBack(), x, y);
-
-			g.unlock(false);
-
-			x -= 24;
-
-			try {
-				Thread.sleep(1000 / f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-		}
+		EffectTurnon turnon = new EffectTurnon(this, player);
+		turnon.start();
 
 	}
 
@@ -303,5 +214,11 @@ public class CanvasControl {
 	public void paintOver(Graphics g) {
 		// TODO 自動生成されたメソッド・スタブ
 		paintString(g);
+	}
+
+	public void repaint(int x, int y, int width, int height) {
+		// TODO 自動生成されたメソッド・スタブ
+		canvas.repaint(x, y, width, height);
+		
 	}
 }

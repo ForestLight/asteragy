@@ -7,7 +7,7 @@ import java.util.Random;
  * 
  */
 public class Aster {
-	public final static int COLOR_MAX = 5;
+	public static int COLOR_MAX = 5;
 
 	public final static int RED = 1;
 
