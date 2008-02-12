@@ -28,7 +28,25 @@ final class HTTPPlayer extends Player implements Runnable {
 	 * @see jp.ac.tokyo_ct.asteragy.Player#getAction()
 	 */
 	public Action getAction() {
-		return null;
+		try {
+			HttpConnection con = (HttpConnection)Connector.open("http://localhost/?cmd=getaction",
+					Connector.READ);
+			try {
+				con.setRequestMethod(HttpConnection.GET);
+				con.connect();
+				InputStream is = con.openInputStream();
+				try {
+					return Action.inputFromStream(game, is);
+				} finally {
+					is.close();
+				}
+			} finally {
+				con.close();
+			}
+		} catch (IOException e) {
+			System.out.println(e.toString());
+			return null; //Žb’è
+		}
 	}
 
 	/**
@@ -56,7 +74,7 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	private void sendLog(Action a) {
 		try {
-			HttpConnection con = (HttpConnection)Connector.open("http://localhost/",
+			HttpConnection con = (HttpConnection)Connector.open("http://localhost/?cmd=postaction",
 					Connector.WRITE);
 			try {
 				con.setRequestProperty("Content-Type", "text/plain");
@@ -68,12 +86,9 @@ final class HTTPPlayer extends Player implements Runnable {
 					os.close();
 				}
 				con.connect();
-				con.close();
 			} finally {
 				con.close();
 			}
-		} catch (ConnectionException e) {
-			System.out.println(e.toString());
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}

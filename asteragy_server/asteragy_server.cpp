@@ -1,10 +1,11 @@
 #include "stdafx.h"
+#include "server.h"
 
-using boost::asio::ip::tcp;
+namespace as = boost::asio;
+using as::ip::tcp;
 
 namespace
 {
-/*
 boost::function0<void> console_ctrl_function;
 
 BOOL WINAPI console_ctrl_handler(DWORD ctrl_type)
@@ -21,58 +22,18 @@ BOOL WINAPI console_ctrl_handler(DWORD ctrl_type)
 		return FALSE;
 	}
 }
-*/
-void output_http_date_header(std::ostream& os)
-{
-	char buf[256];
-	std::time_t t = time(0);
-	std::strftime(buf, sizeof buf, "Date: %a, %d %b %Y %H:%M:%S GMT\r\n", std::gmtime(&t));
-	os << buf;
-}
 
 void server_main()
 {
 	try
 	{
-		static char const header[] =
-			"HTTP/1.1 200 OK\r\n"
-			"Connection: Close\r\n"
-			"Content-Type: text/plain\r\n";
+		as::io_service io_service;
+		console_ctrl_function = boost::bind(&as::io_service::stop, &io_service);
+		SetConsoleCtrlHandler(console_ctrl_handler, TRUE);
 
-		boost::asio::io_service io_service;
-//		console_ctrl_function = boost::bind(&boost::asio::io_service::stop, &io_service);
-//		SetConsoleCtrlHandler(console_ctrl_handler, TRUE);
+		Server s(io_service);
 
-		tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), 80));
-		acceptor.set_option(boost::asio::ip::tcp::acceptor::reuse_address(true));
-
-		std::string res; //HTTPPlayer‚Ìƒ^[ƒ“—p
-		res.reserve(80);
-
-		for (;;)
-		{
-			tcp::socket socket(io_service);
-			acceptor.accept(socket);
-
-			boost::asio::streambuf request;
-			boost::asio::read_until(socket, request, "\r\n");
-			std::cout << &request << std::endl;
-
-			boost::asio::streambuf response;
-			std::ostream os(&response);
-			os << header;
-
-
-			output_http_date_header(os);
-
-			os << "Content-Length: 2\r\n"
-				"\r\n"
-				"OK\r\n";
-
-			boost::system::error_code ignored_error;
-			boost::asio::write(socket, response,
-				boost::asio::transfer_all(), ignored_error);
-		}
+		io_service.run();
 	}
 	catch(std::exception const& e)
 	{
@@ -86,8 +47,7 @@ int main()
 {
 	try
 	{
-		boost::thread t(server_main);
-		t.join();
+		server_main();
 	}
 	catch (std::exception const& e)
 	{
