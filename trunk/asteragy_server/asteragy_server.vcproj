@@ -139,8 +139,6 @@
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="1"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -179,6 +177,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\server.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -198,12 +200,20 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\utility.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="ヘッダー ファイル"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\server.h"
+				>
+			</File>
 			<File
 				RelativePath=".\stdafx.h"
 				>

@@ -70,7 +70,7 @@ public class EffectTurnon implements Effect {
 		}
 
 		// •¶ŽšOut
-		while (wx * -1 < stringwidth) {
+		while (-wx < stringwidth) {
 
 			g.lock();
 
@@ -90,9 +90,8 @@ public class EffectTurnon implements Effect {
 		}
 
 		// ”wŒiOut
-		while (x * -1 < canvas.getWidth()) {
+		while (-x < canvas.getWidth()) {
 			g.lock();
-
 			canvas.repaint(x + canvas.getWidth(), y, canvas.getWidth() - x, canvas.getHeight() / 2);
 			g.drawImage(player.getTurnOnBack(), x, y);
 

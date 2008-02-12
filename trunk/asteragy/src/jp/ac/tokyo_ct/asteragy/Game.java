@@ -1,5 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
+import java.io.IOException;
+
 /**
  * 
  */
@@ -136,7 +138,11 @@ final class Game implements Runnable {
 		canvas.onTurnStart(player);
 		field.onTurnStart(player);
 		for (;;) {
-			Action a = player.getAction();
+			Action a;
+			while ((a = player.getAction()) != null) {
+				a.run();
+			}
+			
 
 			Player goPlayer = field.checkGameOver();
 			if (goPlayer != null) {
@@ -221,7 +227,10 @@ final class Game implements Runnable {
 
 	void logAction(Action a) {
 		System.out.print("Game.logAction: ");
-		a.printToStream(System.out);
+		try {
+			a.printToStream(System.out);
+		} catch(IOException e) {
+		}
 		System.out.println();
 		if (httpLogger != null) {
 			httpLogger.log(a);

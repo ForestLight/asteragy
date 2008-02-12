@@ -133,7 +133,8 @@ public abstract class AsterClass {
 	}
 
 	private void logAction(int commandType, int[] args) {
-		Action a = new Action(player);
+		Action a = new Action();
+		a.aster = aster;
 		a.commandType = commandType;
 		a.args = args;
 		game.logAction(a);
@@ -160,7 +161,6 @@ public abstract class AsterClass {
 	 * 
 	 */
 	public void execute() {
-		// TODO 自動生成されたメソッド・スタブ
 		final Field field = getAster().getField();
 		System.out.println("----AsterClass.execute()");
 		switch (mode) {
@@ -350,7 +350,9 @@ public abstract class AsterClass {
 			// 読み込み
 			return m.getImage();
 		} catch (Exception e) {
+			return null;
 		}
-		return null;
 	}
+	
+	public static final int MAX_CLASS = 12;
 }
