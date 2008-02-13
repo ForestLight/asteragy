@@ -221,4 +221,5 @@ public class CanvasControl {
 		canvas.repaint(x, y, width, height);
 		
 	}
+	
 }

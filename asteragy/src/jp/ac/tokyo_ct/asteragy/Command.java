@@ -8,7 +8,7 @@ public class Command implements PaintItem {
 
 	protected Point point;
 
-	private Image commandImage;
+	protected Image commandImage;
 
 	protected static final int height = Font.getDefaultFont().getHeight();
 
@@ -26,9 +26,6 @@ public class Command implements PaintItem {
 
 	public void paint(Graphics g) {
 		System.out.println("paintCommand ; " + command);
-		if (command < 0 || point == null)
-			return;
-		System.out.println("paintCommand");
 		setPosition(g);
 		g.drawImage(commandImage, 0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 196, 100));

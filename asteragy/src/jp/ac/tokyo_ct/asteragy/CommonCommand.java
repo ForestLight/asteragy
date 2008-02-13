@@ -17,6 +17,8 @@ public class CommonCommand extends Command {
 	}
 
 	public void paint(Graphics g) {
+		if (command < 0 || point == null)
+			return;
 		super.paint(g);
 		System.out.println("paintCommonCommand");
 		PaintCommandName(g);
