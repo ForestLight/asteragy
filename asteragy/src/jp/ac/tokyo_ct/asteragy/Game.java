@@ -1,6 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 import java.io.IOException;
+import java.util.Random;
 
 /**
  * 
@@ -110,9 +111,9 @@ final class Game implements Runnable {
 
 		// ‰Šúİ’è(‰¼)
 		Aster a = field.getField()[field.getY() - 1][field.getX() / 2];
-		a.setAsterClass(new SunClass(a, player[0]));
+		new SunClass(a, player[0]);
 		a = field.getField()[0][field.getX() / 2];
-		a.setAsterClass(new SunClass(a, player[1]));
+		new SunClass(a, player[1]);
 
 		player[0].addSP(30);
 		player[1].addSP(30);
@@ -274,4 +275,5 @@ final class Game implements Runnable {
 	
 	private boolean init;
 
+	static final Random random = new Random(System.currentTimeMillis());
 }

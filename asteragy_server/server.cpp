@@ -126,12 +126,15 @@ void Connection::handleRead(boost::system::error_code const& e, std::size_t)
 /*
 @brief postactionで、内容を受信したときに呼ばれる。
 */
-void Connection::handleReadPostAction(boost::system::error_code const& e, std::size_t bytesTransferred)
+void Connection::handleReadPostAction(boost::system::error_code const& e, std::size_t)
 {
-	std::istream is(&request);
-	std::string s; //暫定
-	std::getline(is, s);
-	std::cout << "postaction 受領: " << s << std::endl;
+	if (!e)
+	{
+		std::istream is(&request);
+		std::string s; //暫定
+		std::getline(is, s);
+		std::cout << "postaction 受領: " << s << std::endl;
+	}
 }
 
 /*

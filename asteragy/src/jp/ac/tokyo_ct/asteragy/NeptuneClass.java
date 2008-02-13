@@ -14,13 +14,19 @@ public class NeptuneClass extends AsterClass {
 		super(a, p);
 	}
 
+	public NeptuneClass(NeptuneClass a) {
+		super(a);
+	}
+
+	public AsterClass clone() {
+		return new NeptuneClass(this);
+	}
+
 	public int getNumber() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 10;
 	}
 
 	public int[][] getRange() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
@@ -42,7 +48,6 @@ public class NeptuneClass extends AsterClass {
 	}
 
 	public boolean hasNext() {
-		// TODO 自動生成されたメソッド・スタブ
 
 		switch (mode) {
 		case 0:
@@ -57,7 +62,6 @@ public class NeptuneClass extends AsterClass {
 	}
 
 	public boolean moveAstern() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -68,7 +72,6 @@ public class NeptuneClass extends AsterClass {
 	}
 
 	public String getCommandName() {
-		// TODO 自動生成されたメソッド・スタブ
 		return "スターライトストリーム";
 	}
 

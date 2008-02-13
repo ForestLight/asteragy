@@ -27,7 +27,7 @@ public class SunCommand extends Command {
 		g.fillRect(0, 0, height * 4 + 2, height * CLASSNUM + 2);
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
 		for (int i = 1; i < CLASSNUM + 1; i++) {
-			g.drawString(AsterClassData.className[i], 1, height * i - 1);
+			g.drawString(AsterClass.className[i], 1, height * i - 1);
 		}
 		setImage(commandImage);
 	}

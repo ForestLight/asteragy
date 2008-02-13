@@ -11,16 +11,21 @@ public class MoonClass extends AsterClass {
 
 	public MoonClass(Aster a, Player p) {
 		super(a, p);
-		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public MoonClass(MoonClass a) {
+		super(a);
+	}
+
+	public AsterClass clone() {
+		return new MoonClass(this);
 	}
 
 	public int getNumber() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 12;
 	}
 
 	public int[][] getRange() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
@@ -30,7 +35,6 @@ public class MoonClass extends AsterClass {
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -40,7 +44,6 @@ public class MoonClass extends AsterClass {
 	}
 
 	public boolean hasNext() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -50,7 +53,6 @@ public class MoonClass extends AsterClass {
 	}
 
 	public boolean moveAstern() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -60,7 +62,6 @@ public class MoonClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
-		// TODO 自動生成されたメソッド・スタブ
 		final Field f = getAster().getField();
 		Point me = f.asterToPoint(getAster());
 		for (int i = 0; i < f.getY(); i++) {
@@ -81,7 +82,6 @@ public class MoonClass extends AsterClass {
 	}
 
 	public Image getImage() {
-		// TODO 自動生成されたメソッド・スタブ
 		if (asterImage == null) {
 			asterImage = loadImage(12);
 		}

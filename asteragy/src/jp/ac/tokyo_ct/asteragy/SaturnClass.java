@@ -11,16 +11,21 @@ public class SaturnClass extends AsterClass {
 
 	public SaturnClass(Aster a, Player p) {
 		super(a, p);
-		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public SaturnClass(SaturnClass a) {
+		super(a);
+	}
+
+	public AsterClass clone() {
+		return new SaturnClass(this);
 	}
 
 	public int getNumber() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 8;
 	}
 
 	public int[][] getRange() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
@@ -31,7 +36,6 @@ public class SaturnClass extends AsterClass {
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -42,7 +46,6 @@ public class SaturnClass extends AsterClass {
 	}
 
 	public boolean hasNext() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -53,7 +56,6 @@ public class SaturnClass extends AsterClass {
 	}
 
 	public boolean moveAstern() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -64,7 +66,6 @@ public class SaturnClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
-		// TODO 自動生成されたメソッド・スタブ
 		// 左回り
 		int i, j;
 		final Aster a = getAster();
@@ -127,7 +128,6 @@ public class SaturnClass extends AsterClass {
 	}
 
 	public Image getImage() {
-		// TODO 自動生成されたメソッド・スタブ
 		if (asterImage == null) {
 			asterImage = loadImage(8);
 		}

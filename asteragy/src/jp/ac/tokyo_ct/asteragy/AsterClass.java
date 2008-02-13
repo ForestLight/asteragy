@@ -10,12 +10,25 @@ import com.nttdocomo.ui.*;
  * 
  */
 public abstract class AsterClass {
+	//asterだけはあえてコピーしていない。
+	protected AsterClass(AsterClass a) {
+		game = a.game;
+		player = a.player;
+		actionCount = a.actionCount;
+		mode = a.mode;
+		target1 = a.target1.clone();
+		target2 = a.target2.clone();
+		isProtected = a.isProtected;
+	}
+	
+	public abstract AsterClass clone();
 
 	public AsterClass(Aster a, Player p) {
 		aster = a;
 		player = p;
 		actionCount = getActionNum();
 		game = a.getField().getGame();
+		a.setAsterClass(this);
 	}
 
 	/**
@@ -29,19 +42,9 @@ public abstract class AsterClass {
 		return aster;
 	}
 
-	/**
-	 * 対応するアスターを設定する
-	 * 
-	 * @param a
-	 *            アスター このメソッドは、Aster.setAsterClassから呼ばれるためにある。 これを直接呼び出さないこと。
-	 */
-	void setAster(Aster a) {
-		aster = a;
-	}
-
 	private Aster aster;
 
-	private Game game;
+	private final Game game;
 
 	public Player getPlayer() {
 		return player;
@@ -92,21 +95,21 @@ public abstract class AsterClass {
 	 * @return クラス名
 	 */
 	public String getName() {
-		return AsterClassData.className[getNumber() - 1];
+		return AsterClass.className[getNumber() - 1];
 	}
 
 	/**
 	 * @return 特殊コマンド名
 	 */
 	public String getCommandName() {
-		return AsterClassData.commandName[getNumber() - 1];
+		return AsterClass.commandName[getNumber() - 1];
 	}
 
 	/**
 	 * @return 特殊コマンドの説明
 	 */
 	public String getExplain() {
-		return AsterClassData.commandExplain[getNumber() - 1];
+		return AsterClass.commandExplain[getNumber() - 1];
 	}
 
 	/**
@@ -114,7 +117,7 @@ public abstract class AsterClass {
 	 * @return クラス付与時のコスト
 	 */
 	public int getCost() {
-		return AsterClassData.classCost[getNumber() - 1];
+		return AsterClass.classCost[getNumber() - 1];
 	}
 
 	/**
@@ -126,10 +129,10 @@ public abstract class AsterClass {
 		// case 0:
 		// return 0;
 		// case 1:
-		// return AsterClassData.commandCost[getNumber()-1];
+		// return AsterClass.commandCost[getNumber()-1];
 		// }
 		// return 0;
-		return AsterClassData.commandCost[getNumber() - 1];
+		return AsterClass.commandCost[getNumber() - 1];
 	}
 
 	private void logAction(int commandType, int[] args) {
@@ -174,12 +177,11 @@ public abstract class AsterClass {
 			 * if(d.show() == Dialog.BUTTON_NO){ field.restoreField();
 			 * incActionCount(); break; } }
 			 */
-			
-			//スワップエフェクト。
+
+			// スワップエフェクト。
 			EffectFieldSwap swap = new EffectFieldSwap(field, target1, target2);
 			swap.start();
-			
-			
+
 			logAction(0,
 					new int[] { target1.x, target1.y, target2.x, target2.y });
 			break;
@@ -213,7 +215,7 @@ public abstract class AsterClass {
 	}
 
 	public int getActionNum() {
-		return AsterClassData.actionNum[getNumber() - 1];
+		return AsterClass.actionNum[getNumber() - 1];
 	}
 
 	/**
@@ -353,6 +355,29 @@ public abstract class AsterClass {
 			return null;
 		}
 	}
-	
+
 	public static final int MAX_CLASS = 12;
+
+	public final static String[] className = { "ｻﾝ", "ｽﾀｰ", "ﾏｰｷｭﾘｰ", "ｳﾞｨｰﾅｽ",
+			"ｱｰｽ", "ﾏｰｽﾞ", "ｼﾞｭﾋﾟﾀｰ", "ｻﾀｰﾝ", "ｳﾗﾇｽ", "ﾈﾌﾟﾁｭｰﾝ", "ﾌﾟﾙｰﾄ",
+			"ﾑｰﾝ", };
+
+	public final static String[] commandName = { "クラスチェンジ", "スワップ", "クイックタイム",
+			"テンプテーション", "サモンムーン", "フレアスター", "プロテクションシステム", "ローテーション",
+			"ロングレンジスワップ", "スターライトストリーム", "ルインクラスト", "トータルイクリプス", };
+
+	public final static String[] commandExplain = { "アステル1個にクラスを与える",
+			"二つの隣り合ったアステルを入れ替える", "行動済ユニット1体を行動可能状態にする", "敵ユニット1体を奪い取る",
+			"レンジ内にムーンを呼び出す", "アステル1個を破壊する(サンは選べない)", "敵ユニット1体を破壊する",
+			"リング部分を右回りにローテーション", "二つのアステルを入れ替える", "自分とアステル1個を入れ替える",
+			"レンジ内のアステルを全て破壊する", "アステル1個と自分のサンを入れ替える", };
+
+	public final static int[] classCost = { 0, 2, 7, 5, 5, 7, 8, 10, 10, 11,
+			11, 0 };
+
+	public final static int[] commandCost = { 0, 0, 4, 7, 5, 4, 1, 2, 3, 3, 15,
+			6 };
+
+	public final static int[] actionNum = { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2 };
+
 }

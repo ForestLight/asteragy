@@ -12,6 +12,14 @@ public class PlutoClass extends AsterClass {
 		super(a, p);
 	}
 
+	public PlutoClass(PlutoClass a) {
+		super(a);
+	}
+
+	public AsterClass clone() {
+		return new PlutoClass(this);
+	}
+
 	public int getNumber() {
 		return 11;
 	}

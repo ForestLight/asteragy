@@ -12,6 +12,14 @@ public class EarthClass extends AsterClass {
 		super(a, p);
 	}
 
+	public EarthClass(EarthClass a) {
+		super(a);
+	}
+
+	public AsterClass clone() {
+		return new EarthClass(this);
+	}
+
 	public int getNumber() {
 		return 5;
 	}
@@ -55,7 +63,6 @@ public class EarthClass extends AsterClass {
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -68,7 +75,6 @@ public class EarthClass extends AsterClass {
 	}
 
 	public boolean hasNext() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -82,7 +88,6 @@ public class EarthClass extends AsterClass {
 	}
 
 	public boolean moveAstern() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -113,8 +118,7 @@ public class EarthClass extends AsterClass {
 		 * .setProtectedFlag(true); } } } } }
 		 */
 		final Aster a = getAster().getField().getAster(target1);
-		AsterClass ac = new MoonClass(a, getPlayer());
-		a.setAsterClass(ac);
+		new MoonClass(a, getPlayer());
 		a.getAsterClass().setActionCount(0);
 		logAction(target1);
 	}

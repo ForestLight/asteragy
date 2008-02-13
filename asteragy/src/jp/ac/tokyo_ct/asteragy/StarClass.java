@@ -12,6 +12,14 @@ public class StarClass extends AsterClass {
 		super(a, p);
 	}
 
+	public StarClass(StarClass a) {
+		super(a);
+	}
+
+	public AsterClass clone() {
+		return new StarClass(this);
+	}
+
 	public int getNumber() {
 		return 2;
 	}

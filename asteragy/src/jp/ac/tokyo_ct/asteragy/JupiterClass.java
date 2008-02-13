@@ -17,6 +17,14 @@ public class JupiterClass extends AsterClass {
 		super(a, p);
 	}
 
+	public JupiterClass(JupiterClass a) {
+		super(a);
+	}
+
+	public AsterClass clone() {
+		return new JupiterClass(this);
+	}
+	
 	public int getNumber() {
 		return 7;
 	}

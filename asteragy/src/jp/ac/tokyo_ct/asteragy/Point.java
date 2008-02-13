@@ -17,6 +17,10 @@ public final class Point {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Point clone() {
+		return new Point(x, y);
+	}
 
 	/*
 	 * (”ñ Javadoc)

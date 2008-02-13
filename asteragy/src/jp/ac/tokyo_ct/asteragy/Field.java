@@ -1,7 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import java.util.Random;
-
 import com.nttdocomo.ui.Graphics;
 
 /**
@@ -17,9 +15,7 @@ class Field implements PaintItem {
 
 	private int countAster;
 
-	private int[] table = { 1, 2, 3, 4, 5, 1, 2, 3, 4, 5 };
-
-	private static Random r = new Random(System.currentTimeMillis());
+	private static final int[] table = { 1, 2, 3, 4, 5, 1, 2, 3, 4, 5 };
 
 	private final Game game;
 
@@ -29,20 +25,22 @@ class Field implements PaintItem {
 		super();
 		game = g;
 	}
-
-	/**
-	 * 指示された行動を行う
-	 * 
-	 * @param a
-	 * @return
-	 */
-	public boolean act(Action a) {
-		// 行動を起こす
-		// ...
-
-		// GameCanvas c = game.getCanvas();
-		// c.repaint();
-		return false;
+	
+	Field clone() {
+		Field f = new Field(game);
+		f.field = new Aster[Y][X];
+		f.backup = new Aster[Y][X];
+		for (int i = 0; i < Y; i++)
+			for (int j = 0; j < X; ++j)
+				f.field[i][j] = field[i][j];
+		for (int i = 0; i < Y; i++)
+			for (int j = 0; j < X; ++j)
+				f.backup[i][j] = backup[i][j];
+		f.X = X;
+		f.Y = Y;
+		f.countAster = countAster;
+		f.fieldinit = fieldinit;	
+		return f;
 	}
 
 	/**
@@ -273,7 +271,7 @@ class Field implements PaintItem {
 			}
 
 			// 初回にランダムで決定した色が置けなかった場合、5色試す
-			int t = r.nextInt(5);
+			int t = Game.random.nextInt(5);
 
 			for (int i = 1; i <= 5; i++, t++) {
 				target.setColor(table[t]);
