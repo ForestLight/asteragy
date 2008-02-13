@@ -17,6 +17,14 @@ public class VenusClass extends AsterClass {
 		super(a, p);
 	}
 
+	public VenusClass(VenusClass a) {
+		super(a);
+	}
+
+	public AsterClass clone() {
+		return new VenusClass(this);
+	}
+
 	public int getNumber() {
 		return 4;
 	}

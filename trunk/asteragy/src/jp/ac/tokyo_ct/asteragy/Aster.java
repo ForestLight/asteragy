@@ -1,7 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import java.util.Random;
-
 /**
  * @author kurix
  * 
@@ -27,15 +25,22 @@ public class Aster {
 
 	private PaintAsterItem paint;
 
-	private static Random r = new Random(System.currentTimeMillis());
-
 	private boolean deleteFlag;
 
 	Aster(Field f) {
-		color = r.nextInt(COLOR_MAX) + 1;
+		color = Game.random.nextInt(COLOR_MAX) + 1;
 		deleteFlag = false;
 		field = f;
 		paint = new AsterPaint();
+	}
+	
+	Aster clone() {
+		Aster a = new Aster(field);
+		a.color = color;
+		a.asterClass = asterClass.clone();
+		a.paint = paint;
+		a.deleteFlag = deleteFlag;
+		return a;
 	}
 
 	/*
@@ -71,7 +76,7 @@ public class Aster {
 	 */
 	public void delete(int c) {
 		if (deleteFlag) {
-			color = r.nextInt(COLOR_MAX) + 1;
+			color = Game.random.nextInt(COLOR_MAX) + 1;
 			asterClass = null;
 			deleteFlag = false;
 
@@ -90,7 +95,6 @@ public class Aster {
 	public void setAsterClass(AsterClass ac) {
 		System.out.println("Aster.setAsterClass");
 		asterClass = ac;
-		ac.setAster(this);
 		paint.setClass(ac);
 	}
 

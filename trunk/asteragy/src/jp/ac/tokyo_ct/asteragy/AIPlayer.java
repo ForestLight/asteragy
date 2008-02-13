@@ -1,5 +1,4 @@
 package jp.ac.tokyo_ct.asteragy;
-import java.util.Random;
 
 public class AIPlayer extends Player {
 
@@ -7,13 +6,11 @@ public class AIPlayer extends Player {
 		super(game, playerName);
 		System.out.println("AIPlayer");
 	}
-	
+
 	private CanvasControl canvas;
-	
-	private static Random r = new Random(System.currentTimeMillis());
-	
+
 	private Aster[] myUnit;
-	
+
 	public Action getAction() {
 		System.out.println("KeyInputPlayer.getAction()");
 		if (canvas == null) {
@@ -21,7 +18,7 @@ public class AIPlayer extends Player {
 		}
 
 		try {
-			
+
 			int state = 0;
 			Point pt = null;
 			int cmd = -1; // 0 = swap, 1 = 特殊コマンド
@@ -50,9 +47,10 @@ public class AIPlayer extends Player {
 
 					System.out.println("ターゲット選択");
 
+					final Range canvasRange = game.getCanvas().getRange();
 					while (ac.hasNext()) {
 						int[][] range = ac.getRange();
-						game.getCanvas().getRange().setRange(pt, range);
+						canvasRange.setRange(pt, range);
 						Point target = selectTarget(range, pt);
 						System.out.println("ターゲット選択中");
 						System.out.println("target - x = " + pt.x + " y = "
@@ -66,7 +64,7 @@ public class AIPlayer extends Player {
 						}
 						ac.setPointAndNext(target);
 					}
-					game.getCanvas().getRange().setRange(null, null);
+					canvasRange.setRange(null, null);
 
 					// サン専用
 					if (ac.getNumber() == 1 && cmd == 1) {
@@ -84,8 +82,8 @@ public class AIPlayer extends Player {
 					break;
 
 				case 3:
-					final AsterClass ac = game.getField().getAster(pt)
-							.getAsterClass();
+					final Field field = game.getField();
+					final AsterClass ac = field.getAster(pt).getAsterClass();
 					if (cmd == 1) {
 						this.addSP(-ac.getCommandCost());
 					}
@@ -93,9 +91,9 @@ public class AIPlayer extends Player {
 					System.out.println("実行開始");
 					ac.execute();
 					System.out.println("実行完了");
-					game.getField().repaintField();
+					field.repaintField();
 
-					Player p = game.getField().checkGameOver();
+					Player p = field.checkGameOver();
 					// ゲームオーバー判定仮
 					if (p != null) {
 						return null;
@@ -105,9 +103,9 @@ public class AIPlayer extends Player {
 					System.out.println("消去開始");
 					this.addSP(game.getField().deleteAll());
 					System.out.println("消去完了");
-					game.getField().repaintField();
+					field.repaintField();
 
-					p = game.getField().checkGameOver();
+					p = field.checkGameOver();
 
 					if (p != null) {
 						return null;
@@ -121,71 +119,82 @@ public class AIPlayer extends Player {
 			canvas.resetEventProcesser();
 		}
 	}
-	
+
 	/**
 	 * 行動可能な自ユニットを取得
-	 *
+	 * 
 	 */
-	private void getMyUnit(){
-		Aster[] a = new Aster[game.getField().getX()*game.getField().getY()];
-		final Aster[][] field = game.getField().getField();
+	private void getMyUnit() {
+		final Field f = game.getField();
+		final int x = f.getX();
+		final int y = f.getY();
+		Aster[] a = new Aster[x * y];
+		final Aster[][] field = f.getField();
 		int c = 0;
-		
-		for(int i = 0;i < game.getField().getY();i++){
-			for(int j = 0;j < game.getField().getX();j++){
+
+		final Player currentPlayer = game.getCurrentPlayer();
+		for (int i = 0; i < y; i++) {
+			for (int j = 0; j < x; j++) {
 				final AsterClass ac = field[i][j].getAsterClass();
-				if(ac != null){
-					if(ac.getPlayer() == game.getCurrentPlayer() && ac.getActionCount() != 0){
+				if (ac != null) {
+					if (ac.getPlayer() == currentPlayer
+							&& ac.getActionCount() != 0) {
 						a[c] = field[i][j];
 						c++;
 					}
 				}
 			}
 		}
-		
-		if(c != 0) myUnit = new Aster[c];
-		else myUnit = null;
-		for(int i = 0;i < c;i++){
+
+		if (c != 0)
+			myUnit = new Aster[c];
+		else
+			myUnit = null;
+		for (int i = 0; i < c; i++) {
 			myUnit[i] = a[i];
 		}
 	}
-	
+
 	/**
 	 * 操作対象選択
+	 * 
 	 * @return
 	 */
-	private Point selectAster(){
+	private Point selectAster() {
 		System.out.println("AIPlayer selectAster()");
-		if(myUnit == null) return null;
-		int n = r.nextInt(myUnit.length);
-		Point pt = myUnit[n].getPoint() ;
+		if (myUnit == null)
+			return null;
+		int n = Game.random.nextInt(myUnit.length);
+		Point pt = myUnit[n].getPoint();
 		canvas.getCursor().setCursor(pt, Cursor.CURSOR_1);
 		try {
 			Thread.sleep(1000);
-		} catch (Exception e){}
+		} catch (Exception e) {
+		}
 		return pt;
 	}
-	
-	private int selectCommand(Point pt){
+
+	private int selectCommand(Point pt) {
 		final AsterClass ac = game.getField().getAster(pt).getAsterClass();
 		System.out.println("AIPlayer selectCommand()");
-		if(AsterClassData.commandCost[ac.getNumber()-1] > this.getSP()){
+		if (AsterClass.commandCost[ac.getNumber() - 1] > this.getSP()) {
 			return 0;
-		}
-		else{
-			int cmd = r.nextInt(2);
+		} else {
+			int cmd = Game.random.nextInt(2);
 			canvas.getCommonCommand().setCommand(cmd, pt);
 			canvas.getCommonCommand().setAsterClass(ac);
-			try{
+			try {
 				Thread.sleep(1000);
-			}catch(Exception e){}
-			
-		canvas.getCommonCommand().setCommand(-1,null);
-		return cmd;
-		
+			} catch (Exception e) {
+			}
+
+			canvas.getCommonCommand().setCommand(-1, null);
+			return cmd;
+
 		}
 	}
-	private Point selectTarget(int[][] range, Point pt){
+
+	private Point selectTarget(int[][] range, Point pt) {
 		final Aster[][] f = game.getField().getField();
 		int[][] frange = new int[f.length][f[0].length];
 		Point[] targetlist;
@@ -199,7 +208,7 @@ public class AIPlayer extends Player {
 						&& j <= pt.x + range[0].length / 2) {
 					frange[i][j] = range[i - (pt.y - range.length / 2)][j
 							- (pt.x - range[0].length / 2)];
-					if(frange[i][j] == 1){
+					if (frange[i][j] == 1) {
 						c++;
 					}
 				} else {
@@ -208,75 +217,84 @@ public class AIPlayer extends Player {
 			}
 		}
 
-		if(c != 0)targetlist = new Point[c];
-		else return null;
-		c=0;
+		if (c != 0)
+			targetlist = new Point[c];
+		else
+			return null;
+		c = 0;
 		for (int i = 0; i < frange.length; i++) {
 			for (int j = 0; j < frange[0].length; j++) {
-				if(frange[i][j] == 1){
-					targetlist[c] = new Point(j,i);
+				if (frange[i][j] == 1) {
+					targetlist[c] = new Point(j, i);
 					c++;
 				}
 			}
 		}
 
-		Point p = targetlist[r.nextInt(c)];
+		Point p = targetlist[Game.random.nextInt(c)];
 		canvas.getCursor().setCursor(p, Cursor.CURSOR_1);
 		try {
 			Thread.sleep(1000);
-		} catch (Exception e){}
+		} catch (Exception e) {
+		}
 		return p;
 	}
-	
+
 	private Point selectAsterClass(Point pt) {
 		int cmdMax = 0;
-		
-		for(int i = 0;i <= 9;i++){
-			if(AsterClassData.classCost[i+1] > this.getSP()) break;
-			
+
+		for (int i = 0; i <= 9; i++) {
+			if (AsterClass.classCost[i + 1] > this.getSP())
+				break;
+
 			cmdMax++;
 		}
-		
-		if(cmdMax == 0) return new Point(-1,0);
-		else{
-			return new Point(r.nextInt(cmdMax+1),0);
+
+		if (cmdMax == 0)
+			return new Point(-1, 0);
+		else {
+			return new Point(Game.random.nextInt(cmdMax + 1), 0);
 		}
 	}
-	
+
 	/**
 	 * 評価関数もどき
+	 * 
 	 * @return
 	 */
-	private int evaluation(){
+	private int evaluation() {
 		int p = 0;
-		final Field f = game.getField();
-		
-		for(int i = 0;i < f.getY();i++){
-			for(int j = 0;j < f.getX();j++){
-				final AsterClass ac = f.getField()[i][j].getAsterClass();
-				if(ac != null){
-					if(ac.getPlayer() == game.getCurrentPlayer()){
-						p += AsterClassData.classCost[ac.getNumber()-1];
-						if(ac.getNumber() == 1){
+		final Field field2 = game.getField();
+		final int y = field2.getY();
+		final int x = field2.getX();
+		final Aster[][] f = field2.getField();
+
+		for (int i = 0; i < y; i++) {
+			for (int j = 0; j < x; j++) {
+				final AsterClass ac = f[i][j].getAsterClass();
+				if (ac != null) {
+					if (ac.getPlayer() == game.getCurrentPlayer()) {
+						p += AsterClass.classCost[ac.getNumber() - 1];
+						if (ac.getNumber() == 1) {
 							p += 500;
 						}
-					}else{
-						p -= AsterClassData.classCost[ac.getNumber()-1];
-						if(ac.getNumber() == 1){
+					} else {
+						p -= AsterClass.classCost[ac.getNumber() - 1];
+						if (ac.getNumber() == 1) {
 							p -= 500;
 						}
 					}
 				}
 			}
 		}
-		
+
 		p += this.getSP();
-		if(game.getCurrentPlayer() == game.getPlayer1()){
+		if (game.getCurrentPlayer() == game.getPlayer1()) {
 			p -= game.getPlayer2().getSP();
-		}else{
+		} else {
 			p -= game.getPlayer1().getSP();
 		}
-		
+
 		System.out.println("AIPlayer.evaluation return" + p);
 		return p;
 	}

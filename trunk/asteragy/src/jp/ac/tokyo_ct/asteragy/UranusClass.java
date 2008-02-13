@@ -12,16 +12,21 @@ public class UranusClass extends AsterClass {
 
 	public UranusClass(Aster a, Player p) {
 		super(a, p);
-		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public UranusClass(UranusClass a) {
+		super(a);
+	}
+
+	public AsterClass clone() {
+		return new UranusClass(this);
 	}
 
 	public int getNumber() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 9;
 	}
 
 	public int[][] getRange() {
-		// TODO 自動生成されたメソッド・スタブ
 		final Aster a = getAster();
 		final Field field = a.getField();
 		switch (mode) {

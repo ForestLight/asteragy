@@ -10,17 +10,14 @@
 #		define _SECURE_SCL 0
 #	endif
 #
-#	if _MSC_VER == 1500
-#		pragma comment(lib, "boost_date_time-vc90-mt.lib")
-#		pragma comment(lib, "boost_regex-vc90-mt.lib")
-#		pragma comment(lib, "boost_system-vc90-mt.lib")
-#		pragma comment(lib, "boost_thread-vc90-mt.lib")
+/*
 #	elif _MSC_VER == 1400
 #		pragma comment(lib, "boost_date_time-vc80-mt.lib")
 #		pragma comment(lib, "boost_regex-vc80-mt.lib")
 #		pragma comment(lib, "boost_system-vc80-mt.lib")
 #		pragma comment(lib, "boost_thread-vc80-mt.lib")
 #	endif
+*/
 #
 #	pragma warning(push)
 #	pragma warning(disable: 4819 4127 4512 4510 4610 4100 4251)
@@ -51,7 +48,6 @@
 
 
 #define BOOST_ALL_DYN_LINK
-#define BOOST_ALL_NO_LIB
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>

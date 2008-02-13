@@ -17,16 +17,21 @@ public class MarsClass extends AsterClass {
 
 	public MarsClass(Aster a, Player p) {
 		super(a, p);
-		// TODO 自動生成されたコンストラクター・スタブ
+	}
+	
+	public MarsClass(MarsClass a) {
+		super(a);
 	}
 
+	public AsterClass clone() {
+		return new MarsClass(this);
+	}
+	
 	public int getNumber() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 6;
 	}
 
 	public int[][] getRange() {
-		// TODO 自動生成されたメソッド・スタブ
 		final Aster a = getAster();
 		switch (mode) {
 		case 0:
@@ -99,7 +104,6 @@ public class MarsClass extends AsterClass {
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -111,7 +115,6 @@ public class MarsClass extends AsterClass {
 	}
 
 	public boolean hasNext() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -125,7 +128,6 @@ public class MarsClass extends AsterClass {
 	}
 
 	public boolean moveAstern() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -149,5 +151,4 @@ public class MarsClass extends AsterClass {
 		}
 		return asterImage;
 	}
-
 }

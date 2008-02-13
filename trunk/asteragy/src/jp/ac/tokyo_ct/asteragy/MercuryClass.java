@@ -14,6 +14,14 @@ public class MercuryClass extends AsterClass {
 		super(a, p);
 	}
 
+	public MercuryClass(MercuryClass a) {
+		super(a);
+	}
+
+	public AsterClass clone() {
+		return new MercuryClass(this);
+	}
+	
 	public int getNumber() {
 		// TODO 自動生成されたメソッド・スタブ
 		return 3;

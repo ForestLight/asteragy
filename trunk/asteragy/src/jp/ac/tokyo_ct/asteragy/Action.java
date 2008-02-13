@@ -1,7 +1,6 @@
 package jp.ac.tokyo_ct.asteragy;
 
 import java.io.*;
-import com.nttdocomo.io.*;
 
 /**
  * @author Yusuke

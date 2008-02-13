@@ -36,7 +36,7 @@ public class CommonCommand extends Command {
 			g.drawString("ƒXƒƒbƒv 0", 85, 235);
 		} else {
 			g.drawString(asterClass.getCommandName() + " "
-					+ AsterClassData.commandCost[asterClass.getNumber() - 1],
+					+ AsterClass.commandCost[asterClass.getNumber() - 1],
 					85, 235);
 		}
 	}
