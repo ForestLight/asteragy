@@ -355,6 +355,7 @@ public abstract class AsterClass {
 			return null;
 		}
 	}
+	
 
 	public static final int MAX_CLASS = 12;
 
