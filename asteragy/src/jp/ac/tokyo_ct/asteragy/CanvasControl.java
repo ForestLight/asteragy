@@ -219,7 +219,7 @@ public class CanvasControl {
 	public void repaint(int x, int y, int width, int height) {
 		// TODO 自動生成されたメソッド・スタブ
 		canvas.repaint(x, y, width, height);
-		
+
 	}
-	
+
 }

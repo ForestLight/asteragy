@@ -108,6 +108,11 @@ public class UranusClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
+
+		Effect effect = new EffectCommandUranus(getAster().getField(), target1,
+				target2);
+		effect.start();
+
 		getAster().getField().swap(target1, target2);
 		logAction(target1, target2);
 	}

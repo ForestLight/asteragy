@@ -10,7 +10,7 @@ import com.nttdocomo.ui.*;
  * 
  */
 public abstract class AsterClass {
-	//asterだけはあえてコピーしていない。
+	// asterだけはあえてコピーしていない。
 	protected AsterClass(AsterClass a) {
 		game = a.game;
 		player = a.player;
@@ -20,7 +20,7 @@ public abstract class AsterClass {
 		target2 = a.target2.clone();
 		isProtected = a.isProtected;
 	}
-	
+
 	public abstract AsterClass clone();
 
 	public AsterClass(Aster a, Player p) {
@@ -170,6 +170,11 @@ public abstract class AsterClass {
 		case 0:
 			// field.backupField();
 			field.swap(target1, target2);
+			
+
+			// スワップエフェクト。
+			Effect swap = new EffectFieldSwap(field, target1, target2);
+			swap.start();
 			/*
 			 * // サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください） if
 			 * (field.judgeSelfDestruction() == true) { Dialog d = new
@@ -177,10 +182,6 @@ public abstract class AsterClass {
 			 * if(d.show() == Dialog.BUTTON_NO){ field.restoreField();
 			 * incActionCount(); break; } }
 			 */
-
-			// スワップエフェクト。
-			EffectFieldSwap swap = new EffectFieldSwap(field, target1, target2);
-			swap.start();
 
 			logAction(0,
 					new int[] { target1.x, target1.y, target2.x, target2.y });
@@ -355,7 +356,6 @@ public abstract class AsterClass {
 			return null;
 		}
 	}
-	
 
 	public static final int MAX_CLASS = 12;
 

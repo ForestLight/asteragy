@@ -142,6 +142,10 @@ public class VenusClass extends AsterClass {
 		// ‘ÎÛ‚ÌŠÒ‚ğ•ÏX
 		final AsterClass asterClass = getAster().getField().getAster(target1)
 				.getAsterClass();
+
+		Effect effect = new EffectCommandVenus(getAster().getField(), target1);
+		effect.start();
+
 		asterClass.setPlayer(this.getPlayer());
 		// s“®Ïó‘Ô‚É
 		asterClass.setActionCount(0);

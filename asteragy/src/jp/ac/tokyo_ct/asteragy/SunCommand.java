@@ -30,7 +30,7 @@ public class SunCommand extends Command {
 		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
 		g.fillRect(6, height * (command + 1), canvas.getWidth() - 12, 14);
 		g.setColor(Graphics.getColorOfRGB(0, 0, 255));
-		g.drawString(AsterClass.commandExplain[command], 10, height
+		g.drawString(AsterClass.commandExplain[command + 1], 10, height
 				* (command + 2));
 		g.setOrigin(0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 255));

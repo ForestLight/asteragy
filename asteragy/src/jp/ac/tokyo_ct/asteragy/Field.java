@@ -25,7 +25,7 @@ class Field implements PaintItem {
 		super();
 		game = g;
 	}
-	
+
 	Field clone() {
 		Field f = new Field(game);
 		f.field = new Aster[Y][X];
@@ -39,7 +39,7 @@ class Field implements PaintItem {
 		f.X = X;
 		f.Y = Y;
 		f.countAster = countAster;
-		f.fieldinit = fieldinit;	
+		f.fieldinit = fieldinit;
 		return f;
 	}
 
@@ -513,11 +513,71 @@ class Field implements PaintItem {
 		synchronized (g) {
 			g.lock();
 			canvas.getBackImage().paintAsterBack(g, point);
+			if (point.x >= 0 && point.x < X && point.y >= 0 && point.y < Y)
+				paint(g, point.y, point.x);
+			g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
+			final Cursor cursor = canvas.getCursor();
+			if (cursor.isCursor(point))
+				cursor.paint(g);
+			g.unlock(false);
+		}
+	}
+
+	public void repaintAsterNoBack(Point point) {
+		if (point == null)
+			return;
+		if (point.x >= 0 && point.x < X && point.y >= 0 && point.y < Y)
+			return;
+		final CanvasControl canvas = game.getCanvas();
+		Graphics g = canvas.getGraphics();
+		synchronized (g) {
+			g.lock();
 			paint(g, point.y, point.x);
 			g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
 			final Cursor cursor = canvas.getCursor();
 			if (cursor.isCursor(point))
 				cursor.paint(g);
+			g.unlock(false);
+		}
+	}
+
+	public void repaintAsterRect(Point lt, Point rb) {
+		if (lt == null || rb == null)
+			return;
+		final CanvasControl canvas = game.getCanvas();
+		Graphics g = canvas.getGraphics();
+		synchronized (g) {
+			g.lock();
+			canvas.getBackImage().paintAsterBackRect(g, lt, rb);
+			for (int i = lt.y; i < rb.y + 1; i++) {
+				for (int j = lt.x; j < rb.x + 1; j++) {
+					if (j >= 0 && j < X && i >= 0 && i < Y)
+						paint(g, i, j);
+				}
+			}
+			g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
+			final Cursor cursor = canvas.getCursor();
+			cursor.paint(g);
+			g.unlock(false);
+		}
+	}
+
+	public void repaintAsterRectNoBack(Point lt, Point rb) {
+		if (lt == null || rb == null)
+			return;
+		final CanvasControl canvas = game.getCanvas();
+		Graphics g = canvas.getGraphics();
+		synchronized (g) {
+			g.lock();
+			for (int i = lt.y; i < rb.y + 1; i++) {
+				for (int j = lt.x; j < rb.x + 1; j++) {
+					if (j >= 0 && j < X && i >= 0 && i < Y)
+						paint(g, i, j);
+				}
+			}
+			g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
+			final Cursor cursor = canvas.getCursor();
+			cursor.paint(g);
 			g.unlock(false);
 		}
 	}
@@ -547,6 +607,35 @@ class Field implements PaintItem {
 
 	boolean isXInFieldBound(int x) {
 		return 0 <= x && x < getX();
+	}
+
+	public void setOrginField(Graphics g) {
+		g.setOrigin(game.getCanvas().getLeftMargin(), game.getCanvas()
+				.getTopMargin());
+	}
+
+	public void setOrignAster(Graphics g, Point aster) {
+		g.setOrigin(game.getCanvas().getLeftMargin() + GameCanvas.measure
+				* aster.x, game.getCanvas().getTopMargin() + GameCanvas.measure
+				* aster.y);
+	}
+
+	public void setOrignAster(Graphics g, Point aster, int x, int y) {
+		g.setOrigin(game.getCanvas().getLeftMargin() + GameCanvas.measure
+				* aster.x + x, game.getCanvas().getTopMargin()
+				+ GameCanvas.measure * aster.y + y);
+	}
+
+	public void setClipRectField(Graphics g) {
+		g.setClip(game.getCanvas().getLeftMargin(), game.getCanvas()
+				.getTopMargin(), GameCanvas.measure * X + 1, GameCanvas.measure
+				* Y + 1);
+	}
+
+	public void setClipRectAster(Graphics g, Point aster) {
+		g.setClip(game.getCanvas().getLeftMargin() + GameCanvas.measure
+				* aster.x, game.getCanvas().getTopMargin() + GameCanvas.measure
+				* aster.y, GameCanvas.measure, GameCanvas.measure);
 	}
 
 }

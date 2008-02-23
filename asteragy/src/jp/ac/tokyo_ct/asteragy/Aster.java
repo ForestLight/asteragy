@@ -116,7 +116,7 @@ public class Aster {
 	}
 
 	public void setPaint(PaintAsterItem paint) {
-		System.out.println("setPaint:" + this.toString());
+		//System.out.println("setPaint:" + this.toString());
 		this.paint = paint;
 	}
 
