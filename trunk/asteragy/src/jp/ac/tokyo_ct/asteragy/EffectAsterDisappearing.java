@@ -5,7 +5,8 @@ import com.nttdocomo.ui.Image;
 import com.nttdocomo.ui.MediaImage;
 import com.nttdocomo.ui.MediaManager;
 
-public class EffectAsterDisappearing extends Thread implements PaintAsterItem, Effect {
+public class EffectAsterDisappearing extends Thread implements PaintAsterItem,
+		Effect {
 
 	private static final int frame = 10;
 
@@ -20,7 +21,8 @@ public class EffectAsterDisappearing extends Thread implements PaintAsterItem, E
 	private int time;
 
 	public EffectAsterDisappearing(Aster parent) {
-		//System.out.println("EffectAsterDisappearing Constract:"+parent.getPaint().toString());
+		// System.out.println("EffectAsterDisappearing
+		// Constract:"+parent.getPaint().toString());
 		synchronized (parent) {
 			this.paint = parent.getPaint();
 			this.parent = parent;
@@ -91,12 +93,12 @@ public class EffectAsterDisappearing extends Thread implements PaintAsterItem, E
 
 	public void resetSize() {
 		// TODO 自動生成されたメソッド・スタブ
-		
+
 	}
 
 	public void setSize(int width, int height) {
 		// TODO 自動生成されたメソッド・スタブ
-		
+
 	}
 
 }

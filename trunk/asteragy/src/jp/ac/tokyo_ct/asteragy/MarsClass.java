@@ -18,7 +18,7 @@ public class MarsClass extends AsterClass {
 	public MarsClass(Aster a, Player p) {
 		super(a, p);
 	}
-	
+
 	public MarsClass(MarsClass a) {
 		super(a);
 	}
@@ -26,7 +26,7 @@ public class MarsClass extends AsterClass {
 	public AsterClass clone() {
 		return new MarsClass(this);
 	}
-	
+
 	public int getNumber() {
 		return 6;
 	}
@@ -53,7 +53,7 @@ public class MarsClass extends AsterClass {
 					if (!f.isYInFieldBound(pt.y + i))
 						continue;
 					for (int j = 0; j < defaultRange[0].length; j++) {
-//						if (pt.x + j < 0 || pt.y + i >= f.getX())
+						// if (pt.x + j < 0 || pt.y + i >= f.getX())
 						if (!f.isXInFieldBound(pt.x + j))
 							continue;
 
@@ -77,7 +77,7 @@ public class MarsClass extends AsterClass {
 					if (!f.isYInFieldBound(pt.y + i))
 						continue;
 					for (int j = 0; j < defaultRange[0].length; j++) {
-//						if (pt.x + j < 0 || pt.y + i >= f.getX())
+						// if (pt.x + j < 0 || pt.y + i >= f.getX())
 						if (!f.isXInFieldBound(pt.x + j))
 							continue;
 
@@ -141,6 +141,10 @@ public class MarsClass extends AsterClass {
 
 	public void executeSpecialCommand() {
 		final Field field = getAster().getField();
+
+		Effect effect = new EffectCommandMars(field, this, target1);
+		effect.start();
+
 		field.setDeleteFlag(target1);
 		field.delete(target1.x, target1.y);
 	}

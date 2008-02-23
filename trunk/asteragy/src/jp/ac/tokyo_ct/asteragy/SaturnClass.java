@@ -79,8 +79,7 @@ public class SaturnClass extends AsterClass {
 		final Aster[][] f = field.getField();
 		for (i = 0, j = 0; j < 16; j++) {
 			// 外周レンジのアステルを右回りにキュー（のようなもの）に入れていく
-			if (field.isXInFieldBound(pt.x) &&
-					field.isYInFieldBound(pt.y)) {
+			if (field.isXInFieldBound(pt.x) && field.isYInFieldBound(pt.y)) {
 				queue[i] = f[pt.y][pt.x];
 				i++;
 			}
@@ -94,16 +93,20 @@ public class SaturnClass extends AsterClass {
 			else
 				pt.y--;
 		}
+		
+		
+		Effect effect = new  EffectCommandSaturn(field, this, queue);
+		effect.start();
+		
 		// pt.x =
 		// getAster().getField().asterToPoint(getAster()).x-(defaultRange[0].length/2);
 		// pt.y =
 		// getAster().getField().asterToPoint(getAster()).y-(defaultRange.length/2);
 
-		for (i = 1, j = 0; ; j++) {
+		for (i = 1, j = 0;; j++) {
 			// キューの1番目のアステルから右回りに戻していく
-			if (field.isXInFieldBound(pt.x) &&
-					field.isYInFieldBound(pt.y)) {
-				queue[i] = f[pt.y][pt.x];
+			if (field.isXInFieldBound(pt.x) && field.isYInFieldBound(pt.y)) {
+				f[pt.y][pt.x] = queue[i];
 				i++;
 			}
 
@@ -123,7 +126,7 @@ public class SaturnClass extends AsterClass {
 			}
 		}
 		/* 左回りか右回りをプレイヤーに選択させるのはどこになるのか */
-		
+
 		logAction();
 	}
 

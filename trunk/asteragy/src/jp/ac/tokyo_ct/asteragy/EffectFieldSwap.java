@@ -26,6 +26,7 @@ public class EffectFieldSwap implements Effect {
 
 	public void start() {
 
+
 		Graphics g = canvas.getGraphics();
 
 		PaintAsterItem aa = field.getAster(b).getPaint();
@@ -80,6 +81,7 @@ public class EffectFieldSwap implements Effect {
 
 		field.repaintAster(a);
 		field.repaintAster(b);
+
 
 	}
 

@@ -21,7 +21,7 @@ public class MercuryClass extends AsterClass {
 	public AsterClass clone() {
 		return new MercuryClass(this);
 	}
-	
+
 	public int getNumber() {
 		// TODO 自動生成されたメソッド・スタブ
 		return 3;
@@ -107,6 +107,10 @@ public class MercuryClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
+
+		Effect effect = new EffectCommandMercury(getAster().getField(), target1);
+		effect.start();
+
 		// 対象の行動可能回数を1回増やす
 		getAster().getField().getAster(target1).getAsterClass()
 				.incActionCount();
