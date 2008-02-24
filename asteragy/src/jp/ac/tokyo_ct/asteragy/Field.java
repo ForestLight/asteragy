@@ -270,7 +270,7 @@ class Field implements PaintItem {
 				return count;
 			}
 
-			// 初回にランダムで決定した色が置けなかった場合、5色試す
+			// 初回にランダムで決定した色が置けなかった場合、全色試す
 			int t = Game.random.nextInt(5);
 
 			for (int i = 1; i <= 5; i++, t++) {
