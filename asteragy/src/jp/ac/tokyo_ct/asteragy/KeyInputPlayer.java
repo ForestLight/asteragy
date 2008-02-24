@@ -81,6 +81,7 @@ public class KeyInputPlayer extends Player {
 							state = -1;
 						} else {
 							ac.setPointAndNext(acs);
+							this.addAP(-AsterClass.classCost[acs.x + 1]);
 						}
 					}
 
@@ -92,7 +93,7 @@ public class KeyInputPlayer extends Player {
 					final Field field = game.getField();
 					final AsterClass ac = field.getAster(pt).getAsterClass();
 					if (cmd == 1) {
-						this.addSP(-ac.getCommandCost());
+						this.addAP(-ac.getCommandCost());
 					}
 					// game.getField().fieldBackUp();
 					System.out.println("実行開始");
@@ -106,7 +107,7 @@ public class KeyInputPlayer extends Player {
 						// if(p == game.getCurrentPlayer()){
 						// game.getField().restoreField();
 						// if (cmd == 1) {
-						// this.addSP(ac.getCommandCost());
+						// this.addAP(ac.getCommandCost());
 						// }
 						// state=0;
 						// System.out.println("字軍サン消滅 行動キャンセル");
@@ -117,7 +118,7 @@ public class KeyInputPlayer extends Player {
 
 					// 消滅判定
 					System.out.println("消去開始");
-					this.addSP(field.deleteAll());
+					this.addAP(field.deleteAll());
 					System.out.println("消去完了");
 					field.repaintField();
 
@@ -127,7 +128,7 @@ public class KeyInputPlayer extends Player {
 						// if(p == game.getCurrentPlayer()){
 						// game.getField().restoreField();
 						// if (cmd == 1) {
-						// this.addSP(ac.getCommandCost());
+						// this.addAP(ac.getCommandCost());
 						// }
 						// state=0;
 						// System.out.println("字軍サン消滅 行動キャンセル");
@@ -299,10 +300,10 @@ public class KeyInputPlayer extends Player {
 				do {
 					resetSelected();
 					waitForSelect(c);
-					// SP足らないのにコマンド選んでる場合のみ受け付けない
+					// AP足らないのにコマンド選んでる場合のみ受け付けない
 				} while (command == 1
 						&& AsterClass.commandCost[ac.getNumber() - 1] > KeyInputPlayer.this
-								.getSP());
+								.getAP());
 				switch (command) {
 				case -1:
 					System.out.println("selectCommand - キャンセル");
@@ -459,11 +460,15 @@ public class KeyInputPlayer extends Player {
 				case Display.KEY_UP:
 					if (command > 0) {
 						command--;
+					}else{
+						command = 9;
 					}
 					break;
 				case Display.KEY_DOWN:
 					if (command < 9) {
 						command++;
+					}else{
+						command = 0;
 					}
 					break;
 				}
@@ -487,7 +492,7 @@ public class KeyInputPlayer extends Player {
 					// コスト足らないのにクラスを選んでる場合のみ受け付けない
 				} while (command != -1
 						&& AsterClass.classCost[command + 1] > KeyInputPlayer.this
-								.getSP());
+								.getAP());
 
 				return command;
 			}
