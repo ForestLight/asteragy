@@ -14,7 +14,8 @@ public class KeyInputPlayer extends Player {
 	}
 
 	private CanvasControl canvas;
-
+	
+	private Point cursorPoint;
 	/*
 	 * (非 Javadoc)
 	 * 
@@ -28,6 +29,7 @@ public class KeyInputPlayer extends Player {
 		try {
 			int state = 0;
 			Point pt = null;
+			cursorPoint = new Point(game.getField().getX() / 2,game.getField().getY() / 2);
 			int cmd = -1; // 0 = swap, 1 = 特殊コマンド
 			while (state < 4) {
 
@@ -37,6 +39,7 @@ public class KeyInputPlayer extends Player {
 
 					if (pt == null)
 						return null;
+					cursorPoint = pt;
 					state++;
 					break;
 				case 1: // スワップか特殊コマンドかを選択
@@ -162,8 +165,8 @@ public class KeyInputPlayer extends Player {
 			 */
 			EventProcesserForSelectAster() {
 				final Field field = game.getField();
-				x = field.getX() / 2;
-				y = field.getY() / 2;
+				x = cursorPoint.x;
+				y = cursorPoint.y;
 				applyPosition();
 			}
 
@@ -276,11 +279,15 @@ public class KeyInputPlayer extends Player {
 				case Display.KEY_UP:
 					if (command > 0) {
 						command--;
+					}else{
+						command = 1;
 					}
 					break;
 				case Display.KEY_DOWN:
 					if (command < 1) {
 						command++;
+					}else{
+						command = 0;
 					}
 					break;
 				}
