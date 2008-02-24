@@ -67,6 +67,7 @@ public class PlutoClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
+		System.out.println("るいんくらすと");
 		final Field field = getAster().getField();
 		Point me = field.asterToPoint(getAster());
 		Point pt = new Point();
@@ -82,12 +83,13 @@ public class PlutoClass extends AsterClass {
 						pt.y = me.y - rangeY / 2 + i;
 
 						// フィールドの外にはみ出してたら処理しない
-						if (field.isXInFieldBound(pt.x))
+						if (!field.isXInFieldBound(pt.x))
 							continue;
-						if (field.isYInFieldBound(pt.y))
+						if (!field.isYInFieldBound(pt.y))
 							continue;
 
 						// 破壊対象にdeleteFlag
+						System.out.println("ruincrust target"+pt.x+","+pt.y);
 						field.setDeleteFlag(pt);
 					}
 				}
@@ -100,7 +102,7 @@ public class PlutoClass extends AsterClass {
 			if (d.show() == Dialog.BUTTON_NO) {
 				// field.removeDeleteFlagAll();
 				incActionCount();
-				getPlayer().addSP(getCommandCost());
+				getPlayer().addAP(getCommandCost());
 				return;
 			}
 		} else {
