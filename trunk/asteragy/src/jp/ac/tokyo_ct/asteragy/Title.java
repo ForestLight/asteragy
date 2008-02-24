@@ -78,10 +78,14 @@ public class Title extends Canvas {
 			case Display.KEY_UP:
 				if (cursor > 0)
 					cursor--;
+				else
+					cursor = 3 - depth;
 				break;
 			case Display.KEY_DOWN:
 				if (depth + cursor < 3)
 					cursor++;
+				else
+					cursor = 0;
 				break;
 			case Display.KEY_SELECT:
 				if (!optionMenuFlag) {
@@ -198,6 +202,9 @@ public class Title extends Canvas {
 			g.unlock(true);
 		}
 		else {
+			boolean leftTriangle = false;
+			boolean rightTriangle = false;
+
 			g.lock();
 
 			g.drawImage(title, 0, 0);
@@ -217,7 +224,51 @@ public class Title extends Canvas {
 			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 
 			if (cursor != 3) {
-				g.drawRect(118, 0 + cursor * 15 + 2, 15, 15);
+				g.drawRect(118, cursor * 15 + 2, 15, 15);
+				switch (cursor) {
+				case 0:
+					if (option.fieldYSize > 3)
+						leftTriangle = true;
+					else
+						leftTriangle = false;
+					if (option.fieldYSize < 11)
+						rightTriangle = true;
+					else
+						rightTriangle = false;
+					break;
+				case 1:
+					if (option.fieldXSize > 3)
+						leftTriangle = true;
+					else
+						leftTriangle = false;
+					if (option.fieldXSize < 11)
+						rightTriangle = true;
+					else
+						rightTriangle = false;
+					break;
+				case 2:
+					if (option.numOfColors > 3)
+						leftTriangle = true;
+					else
+						leftTriangle = false;
+					if (option.numOfColors < 5)
+						rightTriangle = true;
+					else
+						rightTriangle = false;
+					break;
+				}
+				if (leftTriangle) {
+					g.drawString("<", 105, cursor * 15 + 14);
+					g.drawString("<", 105, cursor * 15 + 15);
+					g.drawString("|", 108, cursor * 15 + 14);
+					g.drawString("|", 109, cursor * 15 + 14);
+				}
+				if (rightTriangle) {
+					g.drawString(">", 142, cursor * 15 + 14);
+					g.drawString(">", 142, cursor * 15 + 15);
+					g.drawString("|", 138, cursor * 15 + 14);
+					g.drawString("|", 139, cursor * 15 + 14);
+				}
 			}
 			else {
 				g.drawRect(0, 224, 35, 15);
