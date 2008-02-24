@@ -37,7 +37,10 @@ public class Aster {
 	Aster clone() {
 		Aster a = new Aster(field);
 		a.color = color;
-		a.asterClass = asterClass.clone();
+		if(asterClass != null)
+			a.asterClass = asterClass.clone();
+		else
+			a.asterClass = null;
 		a.paint = paint;
 		a.deleteFlag = deleteFlag;
 		return a;

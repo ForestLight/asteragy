@@ -24,19 +24,19 @@ public abstract class Player implements PaintItem {
 		return name;
 	}
 
-	public final int getSP() {
-		return sp;
+	public final int getAP() {
+		return ap;
 	}
 
-	public final void addSP(int n) {
-		sp += n;
-		System.out.println("SP+" + n);
+	public final void addAP(int n) {
+		ap += n;
+		System.out.println("AP+" + n);
 		repaint();
 	}
 
 	protected final String name;
 
-	private int sp;
+	private int ap;
 
 	protected final Game game;
 
@@ -66,7 +66,7 @@ public abstract class Player implements PaintItem {
 		}
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawString(name, namex, namey);
-		g.drawString("" + sp, spx, spy);
+		g.drawString("" + ap, spx, spy);
 
 		if (game.getCurrentPlayer() == this) {
 			g.setColor(Graphics.getColorOfName(Graphics.RED));
