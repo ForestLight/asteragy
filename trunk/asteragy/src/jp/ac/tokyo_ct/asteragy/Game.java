@@ -115,8 +115,8 @@ final class Game implements Runnable {
 		a = field.getField()[0][field.getX() / 2];
 		new SunClass(a, player[1]);
 
-		player[0].addSP(30);
-		player[1].addSP(30);
+		player[0].addAP(30);
+		player[1].addAP(30);
 		
 		System.out.println("initialize end");
 	}
@@ -212,6 +212,10 @@ final class Game implements Runnable {
 	 */
 	Field getField() {
 		return field;
+	}
+	
+	void setField(Field f){
+		field = f;
 	}
 
 	/**

@@ -608,7 +608,6 @@ class Field implements PaintItem {
 	boolean isXInFieldBound(int x) {
 		return 0 <= x && x < getX();
 	}
-
 	public void setOrginField(Graphics g) {
 		g.setOrigin(game.getCanvas().getLeftMargin(), game.getCanvas()
 				.getTopMargin());

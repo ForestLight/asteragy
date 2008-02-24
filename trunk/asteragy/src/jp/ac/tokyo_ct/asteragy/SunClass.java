@@ -13,7 +13,7 @@ public class SunClass extends AsterClass {
 
 	public SunClass(SunClass a) {
 		super(a);
-		asterClassSelect = a.asterClassSelect;
+		//asterClassSelect = a.asterClassSelect;
 	}
 
 	public AsterClass clone() {
@@ -150,7 +150,7 @@ public class SunClass extends AsterClass {
 		}
 		// 選択したクラスのユニットを行動不可能状態で召還
 		ac.setActionCount(0);
-		getPlayer().addSP(-AsterClass.classCost[asterClassSelect + 1]);
+		//getPlayer().addAP(-AsterClass.classCost[asterClassSelect + 1]);
 	}
 
 	public Image getImage() {
