@@ -15,8 +15,6 @@ class Field implements PaintItem {
 
 	private int countAster;
 
-	private static final int[] table = { 1, 2, 3, 4, 5, 1, 2, 3, 4, 5 };
-
 	private final Game game;
 
 	private boolean fieldinit;
@@ -271,14 +269,17 @@ class Field implements PaintItem {
 			}
 
 			// 初回にランダムで決定した色が置けなかった場合、全色試す
-			int t = Game.random.nextInt(5);
-
-			for (int i = 1; i <= 5; i++, t++) {
-				target.setColor(table[t]);
+			int i = AsterColor + 1;
+			if (i > Aster.COLOR_MAX)
+				i = 1;
+			for ( ; i != AsterColor; i++) {
+				if (i > Aster.COLOR_MAX)
+					i = 1;
+				target.setColor(i);
 				if (judge(x, y) == false)
 					return count;
 			}
-			// 5色試しても置けない場合、delete前の色に決定する
+			// 全色試しても置けない場合、delete前の色に決定する
 			if (judge(x, y) == true) {
 				target.setColor(AsterColor);
 			}
