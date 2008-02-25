@@ -99,11 +99,27 @@ public class JupiterClass extends AsterClass {
 
 	public boolean setPointAndNext(Point pt) {
 		// スワップの場合もコマンドの場合も同じ
-		return swapSetPointAndNext(pt);
+		switch (mode) {
+		case 0:
+			return swapSetPointAndNext(pt);
+		case 1:
+			target1 = pt;
+			return true;
+		}
+		return false;
 	}
 
 	public boolean hasNext() {
-		return swapHasNext();
+		switch (mode) {
+		case 0:
+			return swapHasNext();
+		case 1:
+			if (target1 == null)
+				return true;
+			else
+				return false;
+		}
+		return false;
 	}
 
 	public boolean moveAstern() {
@@ -111,9 +127,10 @@ public class JupiterClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
-		getAster().getField().swap(target1, target2);
-		logAction(target1, target2);
+		final Field field = getAster().getField();
 
+		field.setDeleteFlag(target1);
+		field.delete(target1.x, target1.y);
 	}
 
 	public Image getImage() {

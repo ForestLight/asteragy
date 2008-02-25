@@ -67,6 +67,7 @@ public class SaturnClass extends AsterClass {
 
 	public void executeSpecialCommand() {
 		// 左回り
+		//修正@2/25 右回りに
 		int i, j;
 		final Aster a = getAster();
 		final Field field = a.getField();
@@ -94,7 +95,6 @@ public class SaturnClass extends AsterClass {
 				pt.y--;
 		}
 		
-		
 		Effect effect = new  EffectCommandSaturn(field, this, queue);
 		effect.start();
 		
@@ -102,9 +102,13 @@ public class SaturnClass extends AsterClass {
 		// getAster().getField().asterToPoint(getAster()).x-(defaultRange[0].length/2);
 		// pt.y =
 		// getAster().getField().asterToPoint(getAster()).y-(defaultRange.length/2);
-
-		for (i = 1, j = 0;; j++) {
-			// キューの1番目のアステルから右回りに戻していく
+		
+		//最後の要素を最初の位置に
+		f[pt.y][pt.x] = queue[i];
+		pt.x++;
+		
+		for (i = 0, j = 1;; j++) {
+			// 右回りに戻していく
 			if (field.isXInFieldBound(pt.x) && field.isYInFieldBound(pt.y)) {
 				f[pt.y][pt.x] = queue[i];
 				i++;
@@ -119,9 +123,9 @@ public class SaturnClass extends AsterClass {
 			else
 				pt.y--;
 
-			// キュー（のようなもの）が空になったら0番目のアステルを戻してループを抜ける
+			// キュー（のようなもの）が空になったらループを抜ける
 			if (queue[i] == null) {
-				f[pt.y][pt.x] = queue[0];
+	//			f[pt.y][pt.x] = queue[0];
 				break;
 			}
 		}
