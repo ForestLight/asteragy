@@ -272,7 +272,7 @@ class Field implements PaintItem {
 			int i = AsterColor + 1;
 			if (i > Aster.COLOR_MAX)
 				i = 1;
-			for ( ; i != AsterColor; i++) {
+			for (; i != AsterColor; i++) {
 				if (i > Aster.COLOR_MAX)
 					i = 1;
 				target.setColor(i);
@@ -475,14 +475,7 @@ class Field implements PaintItem {
 		// * GameCanvas.measure);
 
 		// アステル
-		// プレイヤー2のユニットは反転
 		final Aster a = field[i][j];
-		final AsterClass asterClass = a.getAsterClass();
-		if (asterClass != null && asterClass.getPlayer() == game.getPlayer2()) {
-			g.setFlipMode(Graphics.FLIP_VERTICAL);
-		} else {
-			g.setFlipMode(Graphics.FLIP_NONE);
-		}
 
 		final CanvasControl canvas = game.getCanvas();
 		g.setOrigin(canvas.getLeftMargin() + j * GameCanvas.measure, canvas
@@ -543,10 +536,18 @@ class Field implements PaintItem {
 	}
 
 	public void repaintAsterRect(Point lt, Point rb) {
-		if (lt == null || rb == null)
-			return;
 		final CanvasControl canvas = game.getCanvas();
 		Graphics g = canvas.getGraphics();
+		if (lt == null || rb == null)
+			return;
+		repaintAsterRect(g, lt, rb);
+	}
+
+	public void repaintAsterRect(Graphics g, Point lt, Point rb) {
+		// TODO 自動生成されたメソッド・スタブ
+		final CanvasControl canvas = game.getCanvas();
+		if (lt == null || rb == null)
+			return;
 		synchronized (g) {
 			g.lock();
 			canvas.getBackImage().paintAsterBackRect(g, lt, rb);
@@ -609,6 +610,7 @@ class Field implements PaintItem {
 	boolean isXInFieldBound(int x) {
 		return 0 <= x && x < getX();
 	}
+
 	public void setOrginField(Graphics g) {
 		g.setOrigin(game.getCanvas().getLeftMargin(), game.getCanvas()
 				.getTopMargin());

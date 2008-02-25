@@ -90,10 +90,14 @@ public class BackImage implements PaintItem {
 		int width = (rb.x - lt.x + 1) * m;
 		int height = (rb.y - lt.y + 1) * m;
 		g.drawImage(backimage, x, y, x, y, width + 1, height + 1);
-		if (y < GameCanvas.playerheight)
+		if (y < GameCanvas.playerheight) {
+			paintPlayerBack(g, 2);
+			canvas.getPlayers()[1].paint(g);
+		}
+		if (y + height > canvas.getHeight() - GameCanvas.playerheight) {
 			paintPlayerBack(g, 1);
-		if (y + height > canvas.getHeight() - GameCanvas.playerheight)
-			paintPlayerBack(g, 0);
+			canvas.getPlayers()[0].paint(g);
+		}
 	}
 
 	public void paintPlayerBack(Graphics g, int player) {

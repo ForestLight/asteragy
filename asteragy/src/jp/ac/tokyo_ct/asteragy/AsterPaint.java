@@ -45,6 +45,14 @@ public class AsterPaint implements PaintAsterItem {
 
 	public void paint(Graphics g) {
 		final int m = GameCanvas.measure - 1;
+
+		// プレイヤー2のユニットは反転
+		if (aster != null && aster.getPlayer().isPlayer2()) {
+			g.setFlipMode(Graphics.FLIP_VERTICAL);
+		} else {
+			g.setFlipMode(Graphics.FLIP_NONE);
+		}
+		
 		g.drawScaledImage(getImage(), 1, 1, width, height, m * (color - 1), 0, m, m);
 		// 行動済みユニットを識別
 		if (aster != null && aster.getActionCount() == 0) {

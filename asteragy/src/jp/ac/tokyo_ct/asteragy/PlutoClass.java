@@ -3,8 +3,9 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.*;
 
 public class PlutoClass extends AsterClass {
-	private static int[][] defaultRange = {{ 1, 1, 0, 1, 1 }, { 1, 0, 1, 0, 1 }, 
-			{ 0, 1, 1, 1, 0 }, { 1, 0, 1, 0, 1 }, { 1, 1, 0, 1, 1 } };
+	private static int[][] defaultRange = { { 1, 1, 0, 1, 1 },
+			{ 1, 0, 1, 0, 1 }, { 0, 1, 1, 1, 0 }, { 1, 0, 1, 0, 1 },
+			{ 1, 1, 0, 1, 1 } };
 
 	private static Image asterImage;
 
@@ -73,6 +74,10 @@ public class PlutoClass extends AsterClass {
 		Point pt = new Point();
 		final int rangeY = defaultRange.length;
 		final int rangeX = defaultRange[0].length;
+
+		Effect effect = new EffectCommandPluto(field, me);
+		effect.start();
+
 		for (int i = 0; i < rangeY; i++) {
 			for (int j = 0; j < rangeX; j++) {
 				// ƒŒƒ“ƒW“à‚Å‚ ‚è
@@ -89,7 +94,8 @@ public class PlutoClass extends AsterClass {
 							continue;
 
 						// ”j‰ó‘ÎÛ‚ÉdeleteFlag
-						System.out.println("ruincrust target"+pt.x+","+pt.y);
+						System.out.println("ruincrust target" + pt.x + ","
+								+ pt.y);
 						field.setDeleteFlag(pt);
 					}
 				}
