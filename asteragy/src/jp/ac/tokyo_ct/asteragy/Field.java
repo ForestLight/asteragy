@@ -246,7 +246,7 @@ class Field implements PaintItem {
 	 * @param count
 	 *            消したアステル数をカウント（最初は0を入れる）
 	 * @param pt
-	 * 			  前回注目していた座標（通称4色問題の解決用措置）
+	 *            前回注目していた座標（通称4色問題の解決用措置）
 	 * @return 消したアステル数
 	 */
 	private int delete(int x, int y, int count, Point pt) {
@@ -516,6 +516,14 @@ class Field implements PaintItem {
 			return;
 		final CanvasControl canvas = game.getCanvas();
 		Graphics g = canvas.getGraphics();
+		repaintAster(g, point);
+	}
+
+	public void repaintAster(Graphics g, Point point) {
+		// TODO 自動生成されたメソッド・スタブ
+		if (point == null)
+			return;
+		final CanvasControl canvas = game.getCanvas();
 		synchronized (g) {
 			g.lock();
 			canvas.getBackImage().paintAsterBack(g, point);
@@ -536,6 +544,15 @@ class Field implements PaintItem {
 			return;
 		final CanvasControl canvas = game.getCanvas();
 		Graphics g = canvas.getGraphics();
+		repaintAsterNoBack(g, point);
+	}
+
+	public void repaintAsterNoBack(Graphics g, Point point) {
+		if (point == null)
+			return;
+		if (point.x >= 0 && point.x < X && point.y >= 0 && point.y < Y)
+			return;
+		final CanvasControl canvas = game.getCanvas();
 		synchronized (g) {
 			g.lock();
 			paint(g, point.y, point.x);

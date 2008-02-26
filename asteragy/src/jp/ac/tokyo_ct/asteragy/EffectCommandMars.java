@@ -78,12 +78,11 @@ public class EffectCommandMars implements Effect, PaintAsterItem {
 		// TODO 自動生成されたメソッド・スタブ
 		Graphics g = field.getGame().getCanvas().getGraphics();
 
-		field.setOrignAster(g, aster);
-
 		for (time = 0; time < 17; time++) {
 
 			g.lock();
-			field.repaintAsterRect(lefttop, rightbottom);
+			field.repaintAsterRect(g, lefttop, rightbottom);
+			field.setOrignAster(g, aster);
 
 			g.drawImage(effect, time * (point.x - aster.x), time
 					* (point.y - aster.y), 0, (GameCanvas.measure - 1) * time,
