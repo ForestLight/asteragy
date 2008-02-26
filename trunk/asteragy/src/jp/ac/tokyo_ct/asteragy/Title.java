@@ -11,11 +11,11 @@ public class Title extends Canvas {
 
 	private static Image[] menu;
 
+	private static Image credit;
+
 	private int depth = 0;
 
 	private int cursor = 0;
-
-	//private int gameType = -1;
 
 	private boolean optionMenuFlag = false;
 
@@ -33,6 +33,9 @@ public class Title extends Canvas {
 			menu = new Image[7];
 			for (int i = 0; i < 7; i++)
 				menu[i] = loadImage("menu_" + i + ".gif");
+		}
+		if (credit == null) {
+			credit = loadImage("credit.gif");
 		}
 	}
 
@@ -180,24 +183,27 @@ public class Title extends Canvas {
 
 			if (depth == 0) {
 				g.drawImage(menu[0], getWidth() / 2 - menu[0].getWidth() / 2,
-						130);
+						127);
 				g.drawImage(menu[1], getWidth() / 2 - menu[1].getWidth() / 2,
-						130 + menu[1].getHeight());
+						127 + menu[1].getHeight());
 				g.drawImage(menu[2], getWidth() / 2 - menu[2].getWidth() / 2,
-						130 + menu[1].getHeight() + menu[2].getHeight());
+						127 + menu[1].getHeight() + menu[2].getHeight());
 				g.drawImage(menu[3], getWidth() / 2 - menu[3].getWidth() / 2,
-						130 + menu[1].getHeight() + menu[2].getHeight() + menu[3].getHeight());
+						127 + menu[1].getHeight() + menu[2].getHeight() + menu[3].getHeight());
 			} else {
 				g.drawImage(menu[4], getWidth() / 2 - menu[4].getWidth() / 2,
-						130);
+						127);
 				g.drawImage(menu[5], getWidth() / 2 - menu[5].getWidth() / 2,
-						130 + menu[5].getHeight());
+						127 + menu[5].getHeight());
 				g.drawImage(menu[6], getWidth() / 2 - menu[6].getWidth() / 2,
-						130 + menu[5].getHeight() + menu[6].getHeight());
+						127 + menu[5].getHeight() + menu[6].getHeight());
 			}
 			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
-			g.drawRect(getWidth() / 2 - menu[0].getWidth() / 2, 130
+			g.drawRect(getWidth() / 2 - menu[0].getWidth() / 2, 127
 					+ menu[0].getHeight() * cursor, menu[0].getWidth(), menu[0].getHeight());
+
+			g.drawImage(credit, getWidth() / 2 - credit.getWidth() / 2,
+					getHeight() - credit.getHeight());
 
 			g.unlock(true);
 		}
