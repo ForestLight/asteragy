@@ -225,7 +225,7 @@ class Field implements PaintItem {
 	}
 
 	/**
-	 * deleteFlagが立っているアステルを全て消す（カウントを行わない）
+	 * deleteFlagが立っているアステルを全て消す
 	 * 
 	 * @param x
 	 *            注目するマスのx座標
@@ -233,7 +233,7 @@ class Field implements PaintItem {
 	 *            注目するマスのy座標
 	 */
 	public int delete(int x, int y) {
-		return delete(x, y, 0);
+		return delete(x, y, 0, null);
 	}
 
 	/**
@@ -245,23 +245,28 @@ class Field implements PaintItem {
 	 *            注目するマスのy座標
 	 * @param count
 	 *            消したアステル数をカウント（最初は0を入れる）
+	 * @param pt
+	 * 			  前回注目していた座標（通称4色問題の解決用措置）
 	 * @return 消したアステル数
 	 */
-	private int delete(int x, int y, int count) {
+	private int delete(int x, int y, int count, Point pt) {
 		final Aster target = field[y][x];
-		int AsterColor = target.getColor();
+		final int AsterColor = target.getColor();
+		final Point currentPt = new Point(x, y);
+		int rcolor;
 
 		if (target.getDeleteFlag() == true) {
 			target.delete(0);
+			rcolor = target.getColor();
 			count++;
 			if (y > 0)
-				count = delete(x, y - 1, count);
+				count = delete(x, y - 1, count, currentPt);
 			if (x > 0)
-				count = delete(x - 1, y, count);
+				count = delete(x - 1, y, count, currentPt);
 			if (y < Y - 1)
-				count = delete(x, y + 1, count);
+				count = delete(x, y + 1, count, currentPt);
 			if (x < X - 1)
-				count = delete(x + 1, y, count);
+				count = delete(x + 1, y, count, currentPt);
 
 			// ランダムで決定した色で問題ない場合
 			if (judge(x, y) == false) {
@@ -279,9 +284,16 @@ class Field implements PaintItem {
 				if (judge(x, y) == false)
 					return count;
 			}
-			// 全色試しても置けない場合、delete前の色に決定する
+			// 全色試しても置けない場合、つまり周りを3つ繋がった4色のアステルで囲まれている
+			// その場合、このマスは最初にランダムで決定した色に戻し、前回のdeleteのマスは別の色に変更
+			// （4色ゲームの際の特別措置）
 			if (judge(x, y) == true) {
-				target.setColor(AsterColor);
+				System.out.println("special_delete");
+				target.setColor(rcolor);
+				if (rcolor == Aster.COLOR_MAX)
+					field[currentPt.y][currentPt.x].setColor(rcolor - 1);
+				else
+					field[currentPt.y][currentPt.x].setColor(rcolor + 1);
 			}
 		}
 		return count;
@@ -300,9 +312,9 @@ class Field implements PaintItem {
 			for (j = 0; j < X; j++) {
 				if (judge(j, i) == true) {
 					setDeleteFlagSameColor(j, i, field[i][j].getColor());
-					count += delete(j, i, 0);
+					count += delete(j, i);
 				} else if (field[i][j].getDeleteFlag() == true) {
-					count += delete(j, i, 0);
+					count += delete(j, i);
 				}
 			}
 		}
