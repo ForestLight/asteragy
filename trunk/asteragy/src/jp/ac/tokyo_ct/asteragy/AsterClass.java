@@ -373,7 +373,7 @@ public abstract class AsterClass {
 			"リング部分を右回りにローテーション", "二つのアステルを入れ替える", "自分とアステル1個を入れ替える",
 			"レンジ内のアステルを全て破壊する", "自身を破壊して自分のサンを移動", };
 
-	public final static int[] classCost = { 0, 2, 7, 5, 5, 7, 8, 10, 10, 11,
+	public final static int[] classCost = { 0, 2, 6, 5, 4, 7, 8, 10, 10, 11,
 			11, 0 };
 
 	public final static int[] commandCost = { 0, 0, 4, 7, 4, 4, 1, 2, 3, 3, 15,
