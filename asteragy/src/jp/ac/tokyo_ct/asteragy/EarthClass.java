@@ -40,10 +40,10 @@ public class EarthClass extends AsterClass {
 			pt.y = thisPoint.y - (range.length / 2);
 
 			for (int i = 0; i < defaultRange.length; i++) {
-				if (field.isYInFieldBound(pt.y + i))
+				if (!field.isYInFieldBound(pt.y + i))
 					continue;
 				for (int j = 0; j < defaultRange[0].length; j++) {
-					if (field.isXInFieldBound(pt.x + j))
+					if (!field.isXInFieldBound(pt.x + j))
 						continue;
 
 					// ƒŒƒ“ƒW“à‚Å‚ ‚è
