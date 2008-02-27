@@ -79,11 +79,20 @@ public class Title extends Canvas {
 		if (type == Display.KEY_PRESSED_EVENT) {
 			switch (param) {
 			case Display.KEY_UP:
-				if (cursor > 0)
-					cursor--;
-				else
-					cursor = 3 - depth;
-				break;
+				if (!optionMenuFlag) {
+					if (cursor > 0)
+						cursor--;
+					else
+						cursor = 3 - depth;
+					break;
+				}
+				else {
+					if (cursor > 0)
+						cursor--;
+					else
+						cursor = 4;
+					break;
+				}
 			case Display.KEY_DOWN:
 				if (!optionMenuFlag) {
 					if (depth + cursor < 3)
@@ -160,6 +169,7 @@ public class Title extends Canvas {
 					case 3:
 						if (option.AP_Pointer > 0)
 							option.AP_Pointer--;
+						break;
 					}
 				}
 				break;
@@ -179,8 +189,9 @@ public class Title extends Canvas {
 							option.numOfColors++;
 						break;
 					case 3:
-						if (option.AP_Pointer < 4);
+						if (option.AP_Pointer < 4)
 							option.AP_Pointer++;
+						break;
 					}
 				}
 				break;
