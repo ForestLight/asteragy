@@ -290,10 +290,11 @@ class Field implements PaintItem {
 			if (judge(x, y) == true) {
 				System.out.println("special_delete");
 				target.setColor(rcolor);
-				if (rcolor == Aster.COLOR_MAX)
-					field[currentPt.y][currentPt.x].setColor(rcolor - 1);
-				else
-					field[currentPt.y][currentPt.x].setColor(rcolor + 1);
+				for (i = 0; i < Aster.COLOR_MAX; i++) {
+					field[pt.y][pt.x].setColor(i);
+					if (judge(pt.x, pt.y) == false)
+						break;
+				}
 			}
 		}
 		return count;
