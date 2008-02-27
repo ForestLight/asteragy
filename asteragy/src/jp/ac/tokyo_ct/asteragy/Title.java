@@ -85,11 +85,20 @@ public class Title extends Canvas {
 					cursor = 3 - depth;
 				break;
 			case Display.KEY_DOWN:
-				if (depth + cursor < 3)
-					cursor++;
-				else
-					cursor = 0;
-				break;
+				if (!optionMenuFlag) {
+					if (depth + cursor < 3)
+						cursor++;
+					else
+						cursor = 0;
+					break;
+				}
+				else {
+					if (cursor < 4)
+						cursor++;
+					else
+						cursor = 0;
+					break;
+				}
 			case Display.KEY_SELECT:
 				if (!optionMenuFlag) {
 					if (depth == 0) {
@@ -124,12 +133,12 @@ public class Title extends Canvas {
 					}
 				}
 				else {
-					if (cursor == 3) {
+					if (cursor == 4) {
 						optionMenuFlag = false;
 						cursor = 0;
 					}
 					else {
-						cursor = 3;
+						cursor = 4;
 					}
 				}
 				break;
@@ -148,6 +157,9 @@ public class Title extends Canvas {
 						if (option.numOfColors > 3)
 							option.numOfColors--;
 						break;
+					case 3:
+						if (option.AP_Pointer > 0)
+							option.AP_Pointer--;
 					}
 				}
 				break;
@@ -166,6 +178,9 @@ public class Title extends Canvas {
 						if (option.numOfColors < 5)
 							option.numOfColors++;
 						break;
+					case 3:
+						if (option.AP_Pointer < 4);
+							option.AP_Pointer++;
 					}
 				}
 				break;
@@ -221,16 +236,18 @@ public class Title extends Canvas {
 			g.drawString("c‚Ì’·‚³", 0, 15);
 			g.drawString("‰¡‚Ì’·‚³", 0, 30);
 			g.drawString("F‚Ì”", 0, 45);
+			g.drawString("‰ŠúAP", 0, 60);
 			g.drawString("‚à‚Ç‚é", 0, 237);
 
 			g.drawString("" + option.fieldYSize, 120, 15);
 			g.drawString("" + option.fieldXSize, 120, 30);
 			g.drawString("" + option.numOfColors, 120, 45);
+			g.drawString("" + option.initialAP[option.AP_Pointer], 120, 60);
 
 			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 
-			if (cursor != 3) {
-				g.drawRect(118, cursor * 15 + 2, 15, 15);
+			if (cursor != 4) {
+				g.drawRect(118, cursor * 15 + 2, 15 + 7 * (cursor / 3), 15);
 				switch (cursor) {
 				case 0:
 					if (option.fieldYSize > 3)
@@ -262,6 +279,16 @@ public class Title extends Canvas {
 					else
 						rightTriangle = false;
 					break;
+				case 3:
+					if (option.AP_Pointer > 0)
+						leftTriangle = true;
+					else
+						leftTriangle = false;
+					if (option.AP_Pointer < 4)
+						rightTriangle = true;
+					else
+						rightTriangle = false;
+					break;
 				}
 				if (leftTriangle) {
 					g.drawString("<", 105, cursor * 15 + 14);
@@ -270,10 +297,10 @@ public class Title extends Canvas {
 					g.drawString("|", 109, cursor * 15 + 14);
 				}
 				if (rightTriangle) {
-					g.drawString(">", 142, cursor * 15 + 14);
-					g.drawString(">", 142, cursor * 15 + 15);
-					g.drawString("|", 138, cursor * 15 + 14);
-					g.drawString("|", 139, cursor * 15 + 14);
+					g.drawString(">", 142 + 7 * (cursor / 3), cursor * 15 + 14);
+					g.drawString(">", 142 + 7 * (cursor / 3), cursor * 15 + 15);
+					g.drawString("|", 138 + 7 * (cursor / 3), cursor * 15 + 14);
+					g.drawString("|", 139 + 7 * (cursor / 3), cursor * 15 + 14);
 				}
 			}
 			else {

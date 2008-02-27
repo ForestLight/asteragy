@@ -115,8 +115,8 @@ final class Game implements Runnable {
 		a = field.getField()[0][field.getX() / 2];
 		new SunClass(a, player[1]);
 
-		player[0].addAP(30);
-		player[1].addAP(30);
+		player[0].addAP(option.initialAP[option.AP_Pointer]);
+		player[1].addAP(option.initialAP[option.AP_Pointer]);
 		
 		System.out.println("initialize end");
 	}
