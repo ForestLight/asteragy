@@ -34,8 +34,8 @@ public class SunCommand extends Command {
 				* (command + 2));
 		g.setOrigin(0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 255));
-		g.drawString("クラス " + AsterClass.classCost[command], 75, 235);
-		g.drawString("コマンド " + AsterClass.commandCost[command], 155, 235);
+		g.drawString("クラス " + AsterClass.classCost[command+1], 75, 235);
+		g.drawString("コマンド " + AsterClass.commandCost[command+1], 155, 235);
 	}
 
 	private void loadImage() {
