@@ -641,6 +641,22 @@ class Field implements PaintItem {
 		return 0 <= x && x < getX();
 	}
 
+	/**
+	 * ƒTƒ“‚ÌˆÊ’u
+	 * @param p
+	 * @return
+	 */
+	public Point getSunPosition(Player p){
+		for(int i = 0;i < Y;i++){
+			for(int j = 0;j < X;j++){
+				final AsterClass ac = field[i][j].getAsterClass();
+				if(ac != null && ac.getNumber() == 1 && ac.getPlayer() == p)
+					return new Point(j,i);
+			}
+		}
+		return null;
+	}
+	
 	public void setOrginField(Graphics g) {
 		g.setOrigin(game.getCanvas().getLeftMargin(), game.getCanvas()
 				.getTopMargin());

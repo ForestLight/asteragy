@@ -57,7 +57,7 @@ public class AsterPaint implements PaintAsterItem {
 		// 行動済みユニットを識別
 		if (aster != null && aster.getActionCount() == 0) {
 			g.setColor(Graphics.getColorOfRGB(0, 0, 0, 100));
-			g.fillRect(1, 1, GameCanvas.measure, GameCanvas.measure);
+			g.fillRect(1, 1, width, height);
 		}
 	}
 

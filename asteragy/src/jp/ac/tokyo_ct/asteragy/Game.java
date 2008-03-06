@@ -151,6 +151,12 @@ final class Game implements Runnable {
 					Thread.sleep(1500);
 				} catch (Exception e) {
 				}
+				canvas.paintString(goPlayer+"‚Ì•‰‚¯",true);
+				try {
+					Thread.sleep(1500);
+				} catch (Exception e) {
+				}
+				canvas.paintString("",false);
 				System.out.println(goPlayer + "‚Ì•‰‚¯");
 				return false;
 			}

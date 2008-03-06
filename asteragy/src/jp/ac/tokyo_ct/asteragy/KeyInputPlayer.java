@@ -29,7 +29,7 @@ public class KeyInputPlayer extends Player {
 		try {
 			int state = 0;
 			Point pt = null;
-			cursorPoint = new Point(game.getField().getX() / 2,game.getField().getY() / 2);
+			cursorPoint = game.getField().getSunPosition(this);
 			int cmd = -1; // 0 = swap, 1 = “ÁŽêƒRƒ}ƒ“ƒh
 			while (state < 4) {
 
