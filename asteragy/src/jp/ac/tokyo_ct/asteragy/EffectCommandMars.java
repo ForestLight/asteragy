@@ -5,7 +5,7 @@ import com.nttdocomo.ui.Image;
 import com.nttdocomo.ui.MediaImage;
 import com.nttdocomo.ui.MediaManager;
 
-public class EffectCommandMars implements Effect, PaintAsterItem {
+public class EffectCommandMars extends Effect implements PaintAsterItem {
 
 	private static Image effect;
 
@@ -75,6 +75,8 @@ public class EffectCommandMars implements Effect, PaintAsterItem {
 	}
 
 	public void start() {
+		if(!isEffect)
+			return;
 		// TODO 自動生成されたメソッド・スタブ
 		Graphics g = field.getGame().getCanvas().getGraphics();
 

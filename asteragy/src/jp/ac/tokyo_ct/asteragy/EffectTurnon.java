@@ -3,7 +3,7 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.Font;
 import com.nttdocomo.ui.Graphics;
 
-public class EffectTurnon implements Effect {
+public class EffectTurnon extends Effect {
 	
 	final private CanvasControl canvas;
 	
@@ -15,6 +15,8 @@ public class EffectTurnon implements Effect {
 	}
 
 	public void start() {
+		if(!isEffect)
+			return;
 		// TODO 自動生成されたメソッド・スタブ
 		Graphics g = canvas.getGraphics();
 

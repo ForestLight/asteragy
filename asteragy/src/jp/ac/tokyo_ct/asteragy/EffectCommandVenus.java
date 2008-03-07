@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandVenus implements Effect {
+public class EffectCommandVenus extends Effect {
 
 	private static Image effect;
 
@@ -35,6 +35,8 @@ public class EffectCommandVenus implements Effect {
 	}
 
 	public void start() {
+		if(!isEffect)
+			return;
 		// TODO 自動生成されたメソッド・スタブ
 		Graphics g = field.getGame().getCanvas().getGraphics();
 

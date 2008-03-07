@@ -1,7 +1,9 @@
 package jp.ac.tokyo_ct.asteragy;
 
-public interface Effect {
+public abstract class Effect {
 
-	public void start();
+	protected static boolean isEffect = false;
+	
+	public abstract void start();
 	
 }

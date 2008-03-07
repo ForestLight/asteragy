@@ -5,8 +5,8 @@ import com.nttdocomo.ui.Image;
 import com.nttdocomo.ui.MediaImage;
 import com.nttdocomo.ui.MediaManager;
 
-public class EffectAsterDisappearing extends Thread implements PaintAsterItem,
-		Effect {
+public class EffectAsterDisappearing extends Effect implements PaintAsterItem,
+		Runnable {
 
 	private static final int frame = 10;
 
@@ -43,6 +43,16 @@ public class EffectAsterDisappearing extends Thread implements PaintAsterItem,
 	public void paint(Graphics g) {
 		g.drawImage(image, 1, 1, 0, time * (GameCanvas.measure - 1),
 				GameCanvas.measure - 1, GameCanvas.measure - 1);
+	}
+	
+	public void start(){
+		if(!isEffect){
+			parent.setPaint(paint);
+			parent.getField().repaintAster(location);
+			return;
+		}
+		Thread thread = new Thread(this);
+		thread.start();
 	}
 
 	public void run() {

@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.Graphics;
 
-public class EffectFieldSwap implements Effect {
+public class EffectFieldSwap extends Effect {
 
 	private final Field field;
 
@@ -25,6 +25,8 @@ public class EffectFieldSwap implements Effect {
 	}
 
 	public void start() {
+		if(!isEffect)
+			return;
 
 
 		Graphics g = canvas.getGraphics();
