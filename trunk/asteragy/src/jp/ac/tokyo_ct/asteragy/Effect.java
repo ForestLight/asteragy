@@ -6,4 +6,7 @@ public abstract class Effect {
 	
 	public abstract void start();
 	
+	public static void setEffect(){
+		isEffect = !isEffect;
+	}
 }
