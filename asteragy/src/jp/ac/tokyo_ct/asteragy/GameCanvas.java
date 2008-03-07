@@ -99,6 +99,8 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 */
 	public void processEvent(int type, int param) {
 		final EventProcesser eventProcesser = canvas.getEventProcesser();
+		if(type == Display.KEY_PRESSED_EVENT && param == Display.KEY_9)
+			Effect.setEffect();
 		if (eventProcesser != null)
 			eventProcesser.processEvent(type, param);
 		else
