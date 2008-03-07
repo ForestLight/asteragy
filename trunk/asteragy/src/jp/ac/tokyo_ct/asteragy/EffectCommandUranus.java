@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandUranus implements Effect, Runnable {
+public class EffectCommandUranus extends Effect implements Runnable {
 
 	private static final int number = 3;
 
@@ -42,6 +42,8 @@ public class EffectCommandUranus implements Effect, Runnable {
 	}
 
 	public void start() {
+		if(!isEffect)
+			return;
 		// TODO 自動生成されたメソッド・スタブ
 		Graphics g = field.getGame().getCanvas().getGraphics();
 

@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandPluto implements Effect, Runnable {
+public class EffectCommandPluto extends Effect implements Runnable {
 
 	private static final int effect_number = 2;
 
@@ -61,6 +61,8 @@ public class EffectCommandPluto implements Effect, Runnable {
 	}
 
 	public void start() {
+		if(!isEffect)
+			return;
 		// TODO 自動生成されたメソッド・スタブ
 		Thread back = new Thread(this);
 		back.start();

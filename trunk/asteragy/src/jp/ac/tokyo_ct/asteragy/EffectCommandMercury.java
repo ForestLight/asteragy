@@ -5,7 +5,7 @@ import com.nttdocomo.ui.Image;
 import com.nttdocomo.ui.MediaImage;
 import com.nttdocomo.ui.MediaManager;
 
-public class EffectCommandMercury implements Effect, PaintAsterItem {
+public class EffectCommandMercury extends Effect implements PaintAsterItem {
 
 	private static Image effect;
 
@@ -45,6 +45,8 @@ public class EffectCommandMercury implements Effect, PaintAsterItem {
 	}
 
 	public void start() {
+		if(!isEffect)
+			return;
 		// TODO 自動生成されたメソッド・スタブ
 
 		aster.setPaint(this);

@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandStar implements Effect {
+public class EffectCommandStar extends Effect {
 
 	private static Image effect;
 
@@ -66,6 +66,8 @@ public class EffectCommandStar implements Effect {
 	final double theta = Math.PI * 2 / 30;
 
 	public void start() {
+		if(!isEffect)
+			return;
 		// TODO 自動生成されたメソッド・スタブ
 		final Graphics g = field.getGame().getCanvas().getGraphics();
 

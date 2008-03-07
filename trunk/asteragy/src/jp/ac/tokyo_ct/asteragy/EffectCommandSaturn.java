@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandSaturn implements Effect {
+public class EffectCommandSaturn extends Effect {
 
 	private static Image effect;
 
@@ -63,6 +63,8 @@ public class EffectCommandSaturn implements Effect {
 	}
 
 	public void start() {
+		if(!isEffect)
+			return;
 		// TODO 自動生成されたメソッド・スタブ
 		Graphics g = field.getGame().getCanvas().getGraphics();
 
