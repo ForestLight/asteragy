@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 public abstract class Effect {
 
-	protected static boolean isEffect = false;
+	protected static boolean isEffect = true;
 	
 	public abstract void start();
 	

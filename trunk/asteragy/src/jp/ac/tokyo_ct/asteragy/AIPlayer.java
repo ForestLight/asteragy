@@ -20,7 +20,7 @@ public class AIPlayer extends Player {
 	/**
 	 * 試行回数
 	 */
-	private final static int TRIAL = 5; 
+	private final static int TRIAL = 1; 
 	
 	private Field backup;
 	
@@ -34,9 +34,9 @@ public class AIPlayer extends Player {
 	
 	private int[] ap = new int[2];
 	
-	private int eMax;
+	private int eMax; //評価値の最大
 	
-	private int maxNum;
+	private int maxNum; //何回目の試行でeMaxが更新されたか
 
 	public Action getAction() {
 		System.out.println("\n\nAIplayer.getAction()");
@@ -48,6 +48,7 @@ public class AIPlayer extends Player {
 		}else{
 			pNum = 1;
 		}
+		Effect.setEffect();
 		try {
 	
 			int state = 0;
@@ -55,12 +56,13 @@ public class AIPlayer extends Player {
 			//int cmd = -1; // 0 = swap, 1 = 特殊コマンド
 			while (state < 4) {
 				int t = 0;
-				eMax = -1;
-				getMyUnit();
 				switch (state) {
 				case 0: // 操作クラスの選択
+					getMyUnit();
 					System.out.println("AIPlayer state0");
 					pt = selectAster();
+					t=0;
+					eMax = -1;
 
 					if (pt == null)
 						return null;
@@ -162,11 +164,14 @@ public class AIPlayer extends Player {
 						maxNum = t;
 					}
 					t++;
+					
 					fieldClone(field,backup); //フィールド復元
 					if(t < TRIAL){
+						System.out.println("->state1");
 						state = 1;
 						System.out.println("t = "+t);
 					}else{
+						System.out.println("execute");
 						if(execute())return null;
 				//		drawAction();
 						state = 0;
@@ -248,7 +253,8 @@ public class AIPlayer extends Player {
 //			}
 //
 //			canvas.getCommonCommand().setCommand(-1, null);
-			return cmd;
+			//return cmd;
+			return 0;
 
 		}
 	}
@@ -291,6 +297,7 @@ public class AIPlayer extends Player {
 		}
 
 		Point p = targetlist[Game.random.nextInt(c)];
+		p = targetlist[0];
 //		canvas.getCursor().setCursor(p, Cursor.CURSOR_1);
 //		try {
 //			Thread.sleep(1000);
@@ -362,11 +369,14 @@ public class AIPlayer extends Player {
 //		Field f = new Field(game);
 //		f.setFieldSize(field.getX(), field.getY());
 //		f.setAster();
+		//System.out.println("clone");
 		for(int i = 0;i < f1.getY();i++){
 			for(int j = 0;j < f1.getX();j++){
+
 				f1.getField()[i][j] = f2.getField()[i][j].clone();
 			}
 		}
+
 	}
 	/**
 	 * 一番良さそうな行動を実行
@@ -377,7 +387,7 @@ public class AIPlayer extends Player {
 		final AsterClass ac = field.getAster(pt).getAsterClass();
 		
 		int i = 0;
-		while (target[i][maxNum] != null && i < 2) {
+		while (i < 2 && target[i][maxNum] != null) {
 			ac.setPointAndNext(target[i][maxNum]);
 			i++;
 		}

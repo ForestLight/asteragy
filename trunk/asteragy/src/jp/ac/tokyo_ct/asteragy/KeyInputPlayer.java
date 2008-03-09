@@ -43,12 +43,24 @@ public class KeyInputPlayer extends Player {
 					state++;
 					break;
 				case 1: // スワップか特殊コマンドかを選択
+				{
+					Aster a = game.getField().getAster(pt);
+					AsterClass ac = a.getAsterClass();
+					final Range canvasRange = game.getCanvas().getRange();
+					int[][] range = ac.getRange();
+					
+					canvasRange.setRange(pt, range);
+					
 					cmd = selectCommand(pt);
+					
+				//	canvasRange.setRange(null, null);
+					
 					if (cmd == -1) // キャンセルされた
 						state--;
 					else
 						state++;
 					break;
+				}
 				case 2: // レンジ選択
 				{
 					Aster a = game.getField().getAster(pt);
@@ -57,7 +69,7 @@ public class KeyInputPlayer extends Player {
 
 					System.out.println("ターゲット選択");
 					final Range canvasRange = game.getCanvas().getRange();
-
+					
 					while (ac.hasNext()) {
 						int[][] range = ac.getRange();
 						canvasRange.setRange(pt, range);
