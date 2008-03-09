@@ -16,8 +16,11 @@ public abstract class AsterClass {
 		player = a.player;
 		actionCount = a.actionCount;
 		mode = a.mode;
-		target1 = a.target1.clone();
-		target2 = a.target2.clone();
+//		aster = a.getAster();
+		if(a.target1 == null) target1 = null;
+		else target1 = a.target1.clone();
+		if(a.target2 == null) target2 = null;
+		else target2 = a.target2.clone();
 		isProtected = a.isProtected;
 	}
 
@@ -62,6 +65,10 @@ public abstract class AsterClass {
 
 	public int getCommand() {
 		return mode;
+	}
+	
+	public void setAster(Aster a){
+		aster = a;
 	}
 
 	protected int mode = 0;
@@ -171,7 +178,6 @@ public abstract class AsterClass {
 			// field.backupField();
 			field.swap(target1, target2);
 			
-
 			// スワップエフェクト。
 			Effect swap = new EffectFieldSwap(field, target1, target2);
 			swap.start();
@@ -182,7 +188,7 @@ public abstract class AsterClass {
 			 * if(d.show() == Dialog.BUTTON_NO){ field.restoreField();
 			 * incActionCount(); break; } }
 			 */
-
+			System.out.println("e1");
 			logAction(0,
 					new int[] { target1.x, target1.y, target2.x, target2.y });
 			break;
