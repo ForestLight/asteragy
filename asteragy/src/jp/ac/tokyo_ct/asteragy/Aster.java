@@ -27,9 +27,12 @@ public class Aster {
 
 	private boolean deleteFlag;
 
+	private boolean judgeFlag;
+
 	Aster(Field f) {
 		color = Game.random.nextInt(COLOR_MAX) + 1;
 		deleteFlag = false;
+		judgeFlag = false;
 		field = f;
 		paint = new AsterPaint();
 	}
@@ -45,6 +48,7 @@ public class Aster {
 			a.asterClass = null;
 		a.paint = paint;
 		a.deleteFlag = deleteFlag;
+		a.judgeFlag = judgeFlag;
 		return a;
 	}
 
@@ -68,7 +72,15 @@ public class Aster {
 	public boolean getDeleteFlag() {
 		return deleteFlag;
 	}
-	
+
+	public void setJudgeFlag(boolean b) {
+		judgeFlag = b;
+	}
+
+	public boolean getJudgeFlag() {
+		return judgeFlag;
+	}
+
 	public void setColor(int c){
 		if(c != 0){
 			color = c;
@@ -84,6 +96,7 @@ public class Aster {
 			color = Game.random.nextInt(COLOR_MAX) + 1;
 			asterClass = null;
 			deleteFlag = false;
+			judgeFlag = false;
 
 			paint.setClass(null);
 			// ‰Šú‚Ì¶¬‚ÉÀs‚µ‚È‚¢‚æ‚¤‚È‚±‚Æ‚ğ‚µ‚Ä‚Ù‚µ‚¢B
