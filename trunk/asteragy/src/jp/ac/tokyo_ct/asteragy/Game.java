@@ -89,6 +89,7 @@ final class Game implements Runnable {
 		// Display.setCurrent(canvas);
 		
 		Aster.COLOR_MAX = option.numOfColors;
+		Field.CONNECTION = option.connection;
 		
 		field = new Field(this);
 		field.setFieldSize(option.fieldXSize, option.fieldYSize);
@@ -282,7 +283,11 @@ final class Game implements Runnable {
 	public boolean isInit(){
 		return init;
 	}
-	
+
+	public Option getOption() {
+		return option;
+	}
+
 	private boolean init;
 
 	static final Random random = new Random(System.currentTimeMillis());

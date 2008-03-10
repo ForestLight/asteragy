@@ -19,6 +19,8 @@ class Field implements PaintItem {
 
 	private boolean fieldinit;
 
+	public static int CONNECTION;
+
 	public Field(Game g) {
 		super();
 		game = g;
@@ -106,27 +108,31 @@ class Field implements PaintItem {
 	 *            注目するマスのx座標
 	 * @param y
 	 *            注目するマスのy座標
-	 * @return true 同色アステルが3個つながっている false 3個未満
+	 * @return 同色アステルが規定個つながっていればtrue
 	 */
 	public boolean judge(int x, int y) {
 		int AsterColor = field[y][x].getColor();
 
 		countAster = 0;
+		field[y][x].setJudgeFlag(true);
 
 		if (y > 0)
-			judgeMain(x, y - 1, 1, AsterColor);
+			judgeMain(x, y - 1, AsterColor);
 		if (x > 0)
-			judgeMain(x - 1, y, 2, AsterColor);
+			judgeMain(x - 1, y, AsterColor);
 		if (y < Y - 1)
-			judgeMain(x, y + 1, 3, AsterColor);
+			judgeMain(x, y + 1, AsterColor);
 		if (x < X - 1)
-			judgeMain(x + 1, y, 4, AsterColor);
+			judgeMain(x + 1, y, AsterColor);
 
-		if (countAster < 3) {
+		if (countAster < CONNECTION - 1) {
 			countAster = 0;
+			removeJudgeFlagAll();
 			return false;
-		} else {
+		}
+		else {
 			countAster = 0;
+			removeJudgeFlagAll();
 			return true;
 		}
 	}
@@ -138,32 +144,24 @@ class Field implements PaintItem {
 	 *            注目するマスのx座標
 	 * @param y
 	 *            注目するマスのy座標
-	 * @param back
-	 *            前回のjudgeMainで注目していた座標の方向ナンバー
 	 * @param AsterColor
 	 *            判定対象色
 	 */
-	private void judgeMain(int x, int y, int back, int AsterColor) {
+	private void judgeMain(int x, int y, int AsterColor) {
 
-		if (x < 0 || y < 0 || x >= X || y >= Y || countAster == 3) {
+		if (x < 0 || y < 0 || x >= X || y >= Y || countAster == CONNECTION - 1) {
 			return;
 		}
 		if (field[y][x] == null)
 			return;
-		if (field[y][x].getColor() == AsterColor) {
+		if (field[y][x].getColor() == AsterColor && field[y][x].getJudgeFlag() == false) {
 			countAster++;
-			/*
-			 * 現在注目している座標を後戻りさせないように再帰 back（以前に注目していた座標のある方向）1 下 2 右 3 上 4 左
-			 */
-			if (back != 1 && y < Y - 1)
-				judgeMain(x, y + 1, 3, AsterColor);
-			if (back != 2 && x < X - 1)
-				judgeMain(x + 1, y, 4, AsterColor);
-			if (back != 3 && y > 0)
-				judgeMain(x, y - 1, 1, AsterColor);
-			if (back != 4 && x > 0)
-				judgeMain(x - 1, y, 2, AsterColor);
+			field[y][x].setJudgeFlag(true);
 
+			judgeMain(x, y + 1, AsterColor);
+			judgeMain(x + 1, y, AsterColor);
+			judgeMain(x, y - 1, AsterColor);
+			judgeMain(x - 1, y, AsterColor);
 		}
 	}
 
@@ -220,6 +218,19 @@ class Field implements PaintItem {
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
 				field[i][j].setDeleteFlag(false);
+			}
+		}
+	}
+
+	/**
+	 * judgeFlagを全て外す
+	 *
+	 */
+	public void removeJudgeFlagAll() {
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
+				if (field[i][j] != null)
+					field[i][j].setJudgeFlag(false);
 			}
 		}
 	}

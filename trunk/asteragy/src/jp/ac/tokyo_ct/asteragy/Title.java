@@ -90,7 +90,7 @@ public class Title extends Canvas {
 					if (cursor > 0)
 						cursor--;
 					else
-						cursor = 4;
+						cursor = 5;
 					break;
 				}
 			case Display.KEY_DOWN:
@@ -102,7 +102,7 @@ public class Title extends Canvas {
 					break;
 				}
 				else {
-					if (cursor < 4)
+					if (cursor < 5)
 						cursor++;
 					else
 						cursor = 0;
@@ -142,12 +142,12 @@ public class Title extends Canvas {
 					}
 				}
 				else {
-					if (cursor == 4) {
+					if (cursor == 5) {
 						optionMenuFlag = false;
 						cursor = 0;
 					}
 					else {
-						cursor = 4;
+						cursor = 5;
 					}
 				}
 				break;
@@ -167,6 +167,10 @@ public class Title extends Canvas {
 							option.numOfColors--;
 						break;
 					case 3:
+						if (option.connection > 3)
+							option.connection--;
+						break;
+					case 4:
 						if (option.AP_Pointer > 0)
 							option.AP_Pointer--;
 						break;
@@ -189,7 +193,11 @@ public class Title extends Canvas {
 							option.numOfColors++;
 						break;
 					case 3:
-						if (option.AP_Pointer < 4)
+						if (option.connection < 5)
+							option.connection++;
+						break;
+					case 4:
+						if (option.AP_Pointer < option.initialAP.length - 1)
 							option.AP_Pointer++;
 						break;
 					}
@@ -247,18 +255,20 @@ public class Title extends Canvas {
 			g.drawString("c‚Ì’·‚³", 0, 15);
 			g.drawString("‰¡‚Ì’·‚³", 0, 30);
 			g.drawString("F‚Ì”", 0, 45);
-			g.drawString("‰ŠúAP", 0, 60);
+			g.drawString("Á‚¦‚é”", 0, 60);
+			g.drawString("‰ŠúAP", 0, 75);
 			g.drawString("‚à‚Ç‚é", 0, 237);
 
 			g.drawString("" + option.fieldYSize, 120, 15);
 			g.drawString("" + option.fieldXSize, 120, 30);
 			g.drawString("" + option.numOfColors, 120, 45);
-			g.drawString("" + option.initialAP[option.AP_Pointer], 120, 60);
+			g.drawString("" + option.connection, 120, 60);
+			g.drawString("" + option.initialAP[option.AP_Pointer], 120, 75);
 
 			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 
-			if (cursor != 4) {
-				g.drawRect(118, cursor * 15 + 2, 15 + 7 * (cursor / 3), 15);
+			if (cursor != 5) {
+				g.drawRect(118, cursor * 15 + 2, 15 + 7 * (cursor / 4), 15);
 				switch (cursor) {
 				case 0:
 					if (option.fieldYSize > 3)
@@ -291,11 +301,21 @@ public class Title extends Canvas {
 						rightTriangle = false;
 					break;
 				case 3:
+					if (option.connection > 3)
+						leftTriangle = true;
+					else
+						leftTriangle = false;
+					if (option.connection < 5)
+						rightTriangle = true;
+					else
+						rightTriangle = false;
+					break;
+				case 4:
 					if (option.AP_Pointer > 0)
 						leftTriangle = true;
 					else
 						leftTriangle = false;
-					if (option.AP_Pointer < 4)
+					if (option.AP_Pointer < option.initialAP.length - 1)
 						rightTriangle = true;
 					else
 						rightTriangle = false;
@@ -308,10 +328,10 @@ public class Title extends Canvas {
 					g.drawString("|", 109, cursor * 15 + 14);
 				}
 				if (rightTriangle) {
-					g.drawString(">", 142 + 7 * (cursor / 3), cursor * 15 + 14);
-					g.drawString(">", 142 + 7 * (cursor / 3), cursor * 15 + 15);
-					g.drawString("|", 138 + 7 * (cursor / 3), cursor * 15 + 14);
-					g.drawString("|", 139 + 7 * (cursor / 3), cursor * 15 + 14);
+					g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 14);
+					g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 15);
+					g.drawString("|", 138 + 7 * (cursor / 4), cursor * 15 + 14);
+					g.drawString("|", 139 + 7 * (cursor / 4), cursor * 15 + 14);
 				}
 			}
 			else {

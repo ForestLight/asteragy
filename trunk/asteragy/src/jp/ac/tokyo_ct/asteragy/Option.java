@@ -7,13 +7,15 @@ public class Option {
 	public int gameType;
 	public int[] initialAP = {0, 30, 50, 100, 999};
 	public int AP_Pointer;
+	public int connection;
 
-	public Option(int XSize, int YSize, int color, int ap) {
+	public Option(int XSize, int YSize, int color, int ap, int cn) {
 		fieldXSize = XSize;
 		fieldYSize = YSize;
 		numOfColors = color;
 		gameType = -1;
 		AP_Pointer = ap;
+		connection = cn;
 	}
 
 	public Option() {
@@ -22,5 +24,6 @@ public class Option {
 		numOfColors = 5;
 		gameType = -1;
 		AP_Pointer = 1;
+		connection = 4;		
 	}
 }
