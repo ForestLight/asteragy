@@ -188,7 +188,6 @@ public abstract class AsterClass {
 			 * if(d.show() == Dialog.BUTTON_NO){ field.restoreField();
 			 * incActionCount(); break; } }
 			 */
-			System.out.println("e1");
 			logAction(0,
 					new int[] { target1.x, target1.y, target2.x, target2.y });
 			break;
