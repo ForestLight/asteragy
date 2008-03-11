@@ -152,6 +152,10 @@ public class VenusClass extends AsterClass {
 		logAction(target1);
 	}
 
+	static int[][] getDefaultRange() {
+		return defaultRange;
+	}
+
 	public Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(4);

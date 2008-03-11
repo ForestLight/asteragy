@@ -81,6 +81,10 @@ public class MoonClass extends AsterClass {
 		}
 	}
 
+	static int[][] getDefaultRange() {
+		return defaultRange;
+	}
+
 	public Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(12);

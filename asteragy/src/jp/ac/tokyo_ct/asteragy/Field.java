@@ -257,7 +257,7 @@ class Field implements PaintItem {
 	 * @param count
 	 *            消したアステル数をカウント（最初は0を入れる）
 	 * @param pt
-	 *            前回注目していた座標（通称4色問題の解決用措置）
+	 *            前回注目していた座標
 	 * @return 消したアステル数
 	 */
 	private int delete(int x, int y, int count, Point pt) {

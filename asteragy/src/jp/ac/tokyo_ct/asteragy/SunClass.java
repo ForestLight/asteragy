@@ -152,6 +152,10 @@ public class SunClass extends AsterClass {
 		//getPlayer().addAP(-AsterClass.classCost[asterClassSelect + 1]);
 	}
 
+	static int[][] getDefaultRange() {
+		return defaultRange;
+	}
+
 	public Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(1);
