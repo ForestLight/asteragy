@@ -346,6 +346,36 @@ public abstract class AsterClass {
 		return ret;
 	}
 
+	public static int[][] getDefaultRange(int n) {
+		switch (n) {
+		case 1:
+			return SunClass.getDefaultRange();
+		case 2:
+			return StarClass.getDefaultRange();
+		case 3:
+			return MercuryClass.getDefaultRange();
+		case 4:
+			return VenusClass.getDefaultRange();
+		case 5:
+			return EarthClass.getDefaultRange();
+		case 6:
+			return MarsClass.getDefaultRange();
+		case 7:
+			return JupiterClass.getDefaultRange();
+		case 8:
+			return SaturnClass.getDefaultRange();
+		case 9:
+			return UranusClass.getDefaultRange();
+		case 10:
+			return NeptuneClass.getDefaultRange();
+		case 11:
+			return PlutoClass.getDefaultRange();
+		case 12:
+			return MoonClass.getDefaultRange();
+		}
+		return null;
+	}
+
 	public abstract Image getImage();
 
 	static Image loadImage(int n) {

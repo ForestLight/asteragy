@@ -19,7 +19,11 @@ public class Title extends Canvas {
 
 	private boolean optionMenuFlag = false;
 
+	private boolean explainFlag = false;
+
 	private Option option = new Option();
+
+	private ExplainAsterClass explain = new ExplainAsterClass();
 
 	// private static int highScore;
 
@@ -79,75 +83,84 @@ public class Title extends Canvas {
 		if (type == Display.KEY_PRESSED_EVENT) {
 			switch (param) {
 			case Display.KEY_UP:
-				if (!optionMenuFlag) {
-					if (cursor > 0)
-						cursor--;
-					else
-						cursor = 3 - depth;
-					break;
-				}
-				else {
-					if (cursor > 0)
-						cursor--;
-					else
-						cursor = 5;
-					break;
+				if (!explainFlag) {
+					if (!optionMenuFlag) {
+						if (cursor > 0)
+							cursor--;
+						else
+							cursor = 3 - depth;
+						break;
+					}
+					else {
+						if (cursor > 0)
+							cursor--;
+						else
+							cursor = 6;
+						break;
+					}
 				}
 			case Display.KEY_DOWN:
-				if (!optionMenuFlag) {
-					if (depth + cursor < 3)
-						cursor++;
-					else
-						cursor = 0;
-					break;
-				}
-				else {
-					if (cursor < 5)
-						cursor++;
-					else
-						cursor = 0;
-					break;
+				if (!explainFlag) {
+					if (!optionMenuFlag) {
+						if (depth + cursor < 3)
+							cursor++;
+						else
+							cursor = 0;
+						break;
+					}
+					else {
+						if (cursor < 6)
+							cursor++;
+						else
+							cursor = 0;
+						break;
+					}
 				}
 			case Display.KEY_SELECT:
-				if (!optionMenuFlag) {
-					if (depth == 0) {
-						switch (cursor) {
-						case 0:
-							depth++;
-							break;
-						case 1:
-							option.gameType = 0;
-							break;
-						case 2:
-							optionMenuFlag = true;
-							cursor = 0;
-							break;			
-						case 3:
-							IApplication.getCurrentApp().terminate();
+				if (!explainFlag) {
+					if (!optionMenuFlag) {
+						if (depth == 0) {
+							switch (cursor) {
+							case 0:
+								depth++;
+								break;
+							case 1:
+								option.gameType = 0;
+								break;
+							case 2:
+								optionMenuFlag = true;
+								cursor = 0;
+								break;			
+							case 3:
+								IApplication.getCurrentApp().terminate();
+							}
+						}
+						else {
+							switch (cursor) {
+							case 0:
+								option.gameType = 1;
+								break;
+							case 1:
+								option.gameType = 2;
+								break;
+							case 2:
+								depth--;
+								cursor = 0;
+								break;	
+							}
 						}
 					}
 					else {
-						switch (cursor) {
-						case 0:
-							option.gameType = 1;
-							break;
-						case 1:
-							option.gameType = 2;
-							break;
-						case 2:
-							depth--;
+						if (cursor == 6) {
+							optionMenuFlag = false;
 							cursor = 0;
-							break;	
 						}
-					}
-				}
-				else {
-					if (cursor == 5) {
-						optionMenuFlag = false;
-						cursor = 0;
-					}
-					else {
-						cursor = 5;
+						else if (cursor == 5) {
+							explainFlag = true;
+						}
+						else {
+							cursor = 6;
+						}
 					}
 				}
 				break;
@@ -176,6 +189,13 @@ public class Title extends Canvas {
 						break;
 					}
 				}
+				if (explainFlag) {
+					explain.number--;
+					if (explain.number < 1) {
+						explain.number = 12;
+					}
+					explain.renew();
+				}
 				break;
 			case Display.KEY_RIGHT:
 				if (optionMenuFlag) {
@@ -202,6 +222,18 @@ public class Title extends Canvas {
 						break;
 					}
 				}
+				if (explainFlag) {
+					explain.number++;
+					if (explain.number > 12) {
+						explain.number = 1;
+					}
+					explain.renew();
+				}
+				break;
+			case Display.KEY_0:
+				explainFlag = false;
+				explain.number = 1;
+				explain.renew();
 				break;
 			}
 			repaint();
@@ -242,103 +274,114 @@ public class Title extends Canvas {
 			g.unlock(true);
 		}
 		else {
-			boolean leftTriangle = false;
-			boolean rightTriangle = false;
-
-			g.lock();
-
-			g.drawImage(title, 0, 0);
-			g.setColor(Graphics.getColorOfRGB(0, 0, 0, 160));
-			g.fillRect(0, 0, getWidth(), getHeight());
-
-			g.setColor(Graphics.getColorOfName(Graphics.WHITE));
-			g.drawString("縦の長さ", 0, 15);
-			g.drawString("横の長さ", 0, 30);
-			g.drawString("色の数", 0, 45);
-			g.drawString("消える数", 0, 60);
-			g.drawString("初期AP", 0, 75);
-			g.drawString("もどる", 0, 237);
-
-			g.drawString("" + option.fieldYSize, 120, 15);
-			g.drawString("" + option.fieldXSize, 120, 30);
-			g.drawString("" + option.numOfColors, 120, 45);
-			g.drawString("" + option.connection, 120, 60);
-			g.drawString("" + option.initialAP[option.AP_Pointer], 120, 75);
-
-			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
-
-			if (cursor != 5) {
-				g.drawRect(118, cursor * 15 + 2, 15 + 7 * (cursor / 4), 15);
-				switch (cursor) {
-				case 0:
-					if (option.fieldYSize > 3)
-						leftTriangle = true;
-					else
-						leftTriangle = false;
-					if (option.fieldYSize < 11)
-						rightTriangle = true;
-					else
-						rightTriangle = false;
-					break;
-				case 1:
-					if (option.fieldXSize > 3)
-						leftTriangle = true;
-					else
-						leftTriangle = false;
-					if (option.fieldXSize < 11)
-						rightTriangle = true;
-					else
-						rightTriangle = false;
-					break;
-				case 2:
-					if (option.numOfColors > 3)
-						leftTriangle = true;
-					else
-						leftTriangle = false;
-					if (option.numOfColors < 5)
-						rightTriangle = true;
-					else
-						rightTriangle = false;
-					break;
-				case 3:
-					if (option.connection > 3)
-						leftTriangle = true;
-					else
-						leftTriangle = false;
-					if (option.connection < 5)
-						rightTriangle = true;
-					else
-						rightTriangle = false;
-					break;
-				case 4:
-					if (option.AP_Pointer > 0)
-						leftTriangle = true;
-					else
-						leftTriangle = false;
-					if (option.AP_Pointer < option.initialAP.length - 1)
-						rightTriangle = true;
-					else
-						rightTriangle = false;
-					break;
-				}
-				if (leftTriangle) {
-					g.drawString("<", 105, cursor * 15 + 14);
-					g.drawString("<", 105, cursor * 15 + 15);
-					g.drawString("|", 108, cursor * 15 + 14);
-					g.drawString("|", 109, cursor * 15 + 14);
-				}
-				if (rightTriangle) {
-					g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 14);
-					g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 15);
-					g.drawString("|", 138 + 7 * (cursor / 4), cursor * 15 + 14);
-					g.drawString("|", 139 + 7 * (cursor / 4), cursor * 15 + 14);
-				}
+			if(explainFlag) {
+				explain.paint(g);
 			}
 			else {
-				g.drawRect(0, 224, 35, 15);
-			}
 
-			g.unlock(true);
+				boolean leftTriangle = false;
+				boolean rightTriangle = false;
+
+				g.lock();
+
+				g.drawImage(title, 0, 0);
+				g.setColor(Graphics.getColorOfRGB(0, 0, 0, 160));
+				g.fillRect(0, 0, getWidth(), getHeight());
+
+				g.setColor(Graphics.getColorOfName(Graphics.WHITE));
+				g.drawString("縦の長さ", 0, 15);
+				g.drawString("横の長さ", 0, 30);
+				g.drawString("色の数", 0, 45);
+				g.drawString("消える数", 0, 60);
+				g.drawString("初期AP", 0, 75);
+				g.drawString("クラスの能力を見る", 0, 220);
+				g.drawString("もどる", 0, 237);
+
+				g.drawString("" + option.fieldYSize, 120, 15);
+				g.drawString("" + option.fieldXSize, 120, 30);
+				g.drawString("" + option.numOfColors, 120, 45);
+				g.drawString("" + option.connection, 120, 60);
+				g.drawString("" + option.initialAP[option.AP_Pointer], 120, 75);
+
+				g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
+
+				if (cursor < 5) {
+					g.drawRect(118, cursor * 15 + 2, 15 + 7 * (cursor / 4), 15);
+					switch (cursor) {
+					case 0:
+						if (option.fieldYSize > 3)
+							leftTriangle = true;
+						else
+							leftTriangle = false;
+						if (option.fieldYSize < 11)
+							rightTriangle = true;
+						else
+							rightTriangle = false;
+						break;
+					case 1:
+						if (option.fieldXSize > 3)
+							leftTriangle = true;
+						else
+							leftTriangle = false;
+						if (option.fieldXSize < 11)
+							rightTriangle = true;
+						else
+							rightTriangle = false;
+						break;
+					case 2:
+						if (option.numOfColors > 3)
+							leftTriangle = true;
+						else
+						leftTriangle = false;
+						if (option.numOfColors < 5)
+							rightTriangle = true;
+						else
+							rightTriangle = false;
+						break;
+					case 3:
+						if (option.connection > 3)
+							leftTriangle = true;
+						else
+							leftTriangle = false;
+						if (option.connection < 5)
+							rightTriangle = true;
+						else
+							rightTriangle = false;
+						break;
+					case 4:
+						if (option.AP_Pointer > 0)
+							leftTriangle = true;
+						else
+							leftTriangle = false;
+						if (option.AP_Pointer < option.initialAP.length - 1)
+							rightTriangle = true;
+						else
+							rightTriangle = false;
+						break;
+					}
+					if (leftTriangle) {
+						g.drawString("<", 105, cursor * 15 + 14);
+						g.drawString("<", 105, cursor * 15 + 15);
+						g.drawString("|", 108, cursor * 15 + 14);
+						g.drawString("|", 109, cursor * 15 + 14);
+					}
+					if (rightTriangle) {
+						g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 14);
+						g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 15);
+						g.drawString("|", 138 + 7 * (cursor / 4), cursor * 15 + 14);
+						g.drawString("|", 139 + 7 * (cursor / 4), cursor * 15 + 14);
+					}
+				}
+				else if(cursor == 5) {
+					g.drawRect(0, 208, 108, 15);
+				}
+				else {
+					g.drawRect(0, 224, 35, 15);
+				}
+
+				g.unlock(true);
+
+			}
 		}
 	}
 }

@@ -48,6 +48,10 @@ public class StarClass extends AsterClass {
 		logAction(target1, target2);
 	}
 
+	static int[][] getDefaultRange() {
+		return defaultRange;
+	}
+
 	public Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(2);

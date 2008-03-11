@@ -134,6 +134,10 @@ public class SaturnClass extends AsterClass {
 		logAction();
 	}
 
+	static int[][] getDefaultRange() {
+		return defaultRange;
+	}
+
 	public Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(8);

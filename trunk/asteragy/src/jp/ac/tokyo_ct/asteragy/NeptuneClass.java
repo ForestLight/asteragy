@@ -87,6 +87,10 @@ public class NeptuneClass extends AsterClass {
 
 	}
 
+	static int[][] getDefaultRange() {
+		return defaultRange;
+	}
+
 	public Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(10);

@@ -149,6 +149,10 @@ public class MarsClass extends AsterClass {
 		field.delete(target1.x, target1.y);
 	}
 
+	static int[][] getDefaultRange() {
+		return defaultRange;
+	}
+
 	public Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(6);
