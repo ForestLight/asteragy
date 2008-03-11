@@ -9,4 +9,7 @@ public abstract class Effect {
 	public static void setEffect(){
 		isEffect = !isEffect;
 	}
+	public static void setEffect(boolean b){
+		isEffect = b;
+	}
 }

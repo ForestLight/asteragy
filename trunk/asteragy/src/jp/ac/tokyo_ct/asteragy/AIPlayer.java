@@ -20,17 +20,19 @@ public class AIPlayer extends Player {
 	/**
 	 * 試行回数
 	 */
-	private final static int TRIAL = 1; 
+	private final static int TRIAL = 3; 
+	
+	private final static int WAIT = 1000;
 	
 	private Field backup;
 	
 //	private Point[] pt = new Point[TRIAL];
 	
-	private Point pt;
+	private Point pt; //操作中のユニット位置
 	
-	private int[] cmd = new int[TRIAL];
+	private int[] cmd = new int[TRIAL]; //選択したコマンド
 	
-	private Point[][] target = new Point[2][TRIAL];
+	private Point[][] target = new Point[2][TRIAL]; //選択したターゲット
 	
 	private int[] ap = new int[2];
 	
@@ -48,14 +50,13 @@ public class AIPlayer extends Player {
 		}else{
 			pNum = 1;
 		}
-		Effect.setEffect();
 		try {
 	
 			int state = 0;
 			pt = null;
 			//int cmd = -1; // 0 = swap, 1 = 特殊コマンド
+			int t = 0;
 			while (state < 4) {
-				int t = 0;
 				switch (state) {
 				case 0: // 操作クラスの選択
 					getMyUnit();
@@ -71,7 +72,7 @@ public class AIPlayer extends Player {
 				case 1: // スワップか特殊コマンドかを選択
 					System.out.println("AIPlayer state1");
 					fieldClone(backup,game.getField()); //フィールドをコピー
-					
+					Effect.setEffect(false);
 					cmd[t] = selectCommand(pt);
 					if (cmd[t] == -1) // キャンセルされた
 						state--;
@@ -89,11 +90,9 @@ public class AIPlayer extends Player {
 					target[1][t] = null;
 
 					System.out.println("ターゲット選択");
-					
-					final Range canvasRange = game.getCanvas().getRange();
+
 					while (ac.hasNext()) {
 						int[][] range = ac.getRange();
-						canvasRange.setRange(pt, range);
 						target[i][t] = selectTarget(range, pt);
 						System.out.println("ターゲット選択中");
 						System.out.println("target - x = " + pt.x + " y = "
@@ -108,7 +107,6 @@ public class AIPlayer extends Player {
 						ac.setPointAndNext(target[i][t]);
 						i++;
 					}
-					canvasRange.setRange(null, null);
 
 					// サン専用
 					if (ac.getNumber() == 1 && cmd[t] == 1) {
@@ -164,7 +162,6 @@ public class AIPlayer extends Player {
 						maxNum = t;
 					}
 					t++;
-					
 					fieldClone(field,backup); //フィールド復元
 					if(t < TRIAL){
 						System.out.println("->state1");
@@ -172,6 +169,8 @@ public class AIPlayer extends Player {
 						System.out.println("t = "+t);
 					}else{
 						System.out.println("execute");
+						Effect.setEffect(true);
+
 						if(execute())return null;
 				//		drawAction();
 						state = 0;
@@ -253,8 +252,8 @@ public class AIPlayer extends Player {
 //			}
 //
 //			canvas.getCommonCommand().setCommand(-1, null);
-			//return cmd;
-			return 0;
+			return cmd;
+			//return 0;
 
 		}
 	}
@@ -297,7 +296,7 @@ public class AIPlayer extends Player {
 		}
 
 		Point p = targetlist[Game.random.nextInt(c)];
-		p = targetlist[0];
+		//p = targetlist[0];
 //		canvas.getCursor().setCursor(p, Cursor.CURSOR_1);
 //		try {
 //			Thread.sleep(1000);
@@ -376,8 +375,20 @@ public class AIPlayer extends Player {
 				f1.getField()[i][j] = f2.getField()[i][j].clone();
 			}
 		}
-
 	}
+	
+//	private void backUpField(){
+//		final Field f = game.getField();
+//		asterColor = new int[f.getY()][f.getX()];
+//		
+//		
+//		
+//	}
+//	private void restoreField(){
+//		
+//	}
+//	
+//	int[][] asterColor;
 	/**
 	 * 一番良さそうな行動を実行
 	 *
@@ -385,12 +396,37 @@ public class AIPlayer extends Player {
 	private boolean execute(){
 		final Field field = game.getField();
 		final AsterClass ac = field.getAster(pt).getAsterClass();
+		final Range canvasRange = game.getCanvas().getRange();
+		int[][] range = ac.getRange();
 		
+		canvas.getCursor().setCursor(pt, Cursor.CURSOR_1);
+		try {
+			Thread.sleep(WAIT);
+		} catch (Exception e) {
+		}
+		canvasRange.setRange(pt, range);
+		canvas.getCommonCommand().setCommand(cmd[maxNum], pt);
+		canvas.getCommonCommand().setAsterClass(ac);
+		try {
+			Thread.sleep(WAIT);
+		} catch (Exception e) {
+		}
+
+		canvas.getCommonCommand().setCommand(-1, null);
 		int i = 0;
 		while (i < 2 && target[i][maxNum] != null) {
+			range = ac.getRange();
+			canvasRange.setRange(pt, range);
 			ac.setPointAndNext(target[i][maxNum]);
+			
+			canvas.getCursor().setCursor(target[i][maxNum], Cursor.CURSOR_1);
+			try {
+				Thread.sleep(WAIT);
+			} catch (Exception e) {
+			}
 			i++;
 		}
+		canvasRange.setRange(null, null);
 		
 		if (cmd[maxNum] == 1) {
 			this.addAP(-ac.getCommandCost());
