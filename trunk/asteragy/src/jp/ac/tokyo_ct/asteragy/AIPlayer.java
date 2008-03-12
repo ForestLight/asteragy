@@ -51,10 +51,8 @@ public class AIPlayer extends Player {
 			pNum = 1;
 		}
 		try {
-	
 			int state = 0;
 			pt = null;
-			//int cmd = -1; // 0 = swap, 1 = 特殊コマンド
 			int t = 0;
 			while (state < 4) {
 				switch (state) {
@@ -72,7 +70,7 @@ public class AIPlayer extends Player {
 				case 1: // スワップか特殊コマンドかを選択
 					System.out.println("AIPlayer state1");
 					fieldClone(backup,game.getField()); //フィールドをコピー
-					Effect.setEffect(false);
+					Effect.setEffect(false);//エフェクト非表示
 					cmd[t] = selectCommand(pt);
 					if (cmd[t] == -1) // キャンセルされた
 						state--;
@@ -137,25 +135,11 @@ public class AIPlayer extends Player {
 							ap[pNum] -= ac.getCommandCost();
 						}
 					}
-					// game.getField().fieldBackUp();
 					ac.execute();
-	//				field.repaintField();
-
-					//Player p = field.checkGameOver();
-					// ゲームオーバー判定仮
-//					if (p != null) {
-//						return null;
-//					}
 
 					// 消滅判定
 					ap[pNum] += field.deleteAll();
-//					field.repaintField();
 
-//					p = field.checkGameOver();
-//
-//					if (p != null) {
-//						return null;
-//					}
 					int ev = evaluation(field);
 					if(ev > eMax){
 						ev = eMax;
@@ -170,9 +154,7 @@ public class AIPlayer extends Player {
 					}else{
 						System.out.println("execute");
 						Effect.setEffect(true);
-
 						if(execute())return null;
-				//		drawAction();
 						state = 0;
 					}
 				}
@@ -244,14 +226,6 @@ public class AIPlayer extends Player {
 			return 0;
 		} else {
 			int cmd = Game.random.nextInt(2);
-//			canvas.getCommonCommand().setCommand(cmd, pt);
-//			canvas.getCommonCommand().setAsterClass(ac);
-//			try {
-//				Thread.sleep(1000);
-//			} catch (Exception e) {
-//			}
-//
-//			canvas.getCommonCommand().setCommand(-1, null);
 			return cmd;
 			//return 0;
 
@@ -297,11 +271,7 @@ public class AIPlayer extends Player {
 
 		Point p = targetlist[Game.random.nextInt(c)];
 		//p = targetlist[0];
-//		canvas.getCursor().setCursor(p, Cursor.CURSOR_1);
-//		try {
-//			Thread.sleep(1000);
-//		} catch (Exception e) {
-//		}
+
 		return p;
 	}
 
@@ -377,18 +347,6 @@ public class AIPlayer extends Player {
 		}
 	}
 	
-//	private void backUpField(){
-//		final Field f = game.getField();
-//		asterColor = new int[f.getY()][f.getX()];
-//		
-//		
-//		
-//	}
-//	private void restoreField(){
-//		
-//	}
-//	
-//	int[][] asterColor;
 	/**
 	 * 一番良さそうな行動を実行
 	 *
@@ -431,7 +389,6 @@ public class AIPlayer extends Player {
 		if (cmd[maxNum] == 1) {
 			this.addAP(-ac.getCommandCost());
 		}
-		// game.getField().fieldBackUp();
 		System.out.println("実行開始");
 		ac.execute();
 		System.out.println("実行完了");

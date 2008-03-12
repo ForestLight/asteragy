@@ -31,11 +31,12 @@ public class ExplainAsterClass extends Canvas {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.drawImage(asterClassImage, 20, 20);
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
-		g.drawString(AsterClass.className[number-1], 20, 60);
+		g.drawString(AsterClass.classNameB[number-1], 20, 60);
 		g.drawString("コマンド: " + AsterClass.commandName[number-1], 20, 80);
 		g.drawString(AsterClass.commandExplain[number-1], 20, 100);
 		g.drawString("クラスコスト: " + AsterClass.classCost[number-1], 20, 120);
 		g.drawString("コマンドコスト: " + AsterClass.commandCost[number-1], 20, 140);
+		g.drawString("行動回数： " + AsterClass.actionNum[number-1],20,160);
 
 		g.drawString("0: もどる", 20, 237);
 
