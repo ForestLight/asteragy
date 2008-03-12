@@ -397,6 +397,10 @@ public abstract class AsterClass {
 	public final static String[] className = { "ｻﾝ", "ｽﾀｰ", "ﾏｰｷｭﾘｰ", "ｳﾞｨｰﾅｽ",
 			"ｱｰｽ", "ﾏｰｽﾞ", "ｼﾞｭﾋﾟﾀｰ", "ｻﾀｰﾝ", "ｳﾗﾇｽ", "ﾈﾌﾟﾁｭｰﾝ", "ﾌﾟﾙｰﾄ",
 			"ﾑｰﾝ", };
+	
+	public final static String[] classNameB = { "サン", "スター", "マーキュリー", "ヴィーナス",
+		"アース", "マーズﾞ", "ジュピター", "サターン", "ウラヌス", "ネプチューン", "プルート",
+		"ムーン", };
 
 	public final static String[] commandName = { "クラスチェンジ", "スワップ", "クイックタイム",
 			"テンプテーション", "サモンムーン", "フレアスター", "プロテクションシステム", "ローテーション",
