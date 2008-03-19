@@ -176,7 +176,7 @@ public class Title extends Canvas {
 							option.fieldXSize -= 2;
 						break;
 					case 2:
-						if (option.numOfColors > 3)
+						if (option.numOfColors > 4)
 							option.numOfColors--;
 						break;
 					case 3:
@@ -329,7 +329,7 @@ public class Title extends Canvas {
 							rightTriangle = false;
 						break;
 					case 2:
-						if (option.numOfColors > 3)
+						if (option.numOfColors > 4)
 							leftTriangle = true;
 						else
 						leftTriangle = false;

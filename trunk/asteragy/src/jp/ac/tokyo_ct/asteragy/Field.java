@@ -264,11 +264,9 @@ class Field implements PaintItem {
 		final Aster target = field[y][x];
 		final int AsterColor = target.getColor();
 		final Point currentPt = new Point(x, y);
-		int rcolor;
 
 		if (target.getDeleteFlag() == true) {
 			target.delete(0);
-			rcolor = target.getColor();
 			count++;
 			if (y > 0)
 				count = delete(x, y - 1, count, currentPt);
@@ -285,28 +283,32 @@ class Field implements PaintItem {
 			}
 
 			// 初回にランダムで決定した色が置けなかった場合、全色試す
-			int i = AsterColor + 1;
-			if (i > Aster.COLOR_MAX)
-				i = 1;
-			for (; i != AsterColor; i++) {
-				if (i > Aster.COLOR_MAX)
-					i = 1;
+			for (int i = 1; i <= Aster.COLOR_MAX; i++) {
 				target.setColor(i);
 				if (judge(x, y) == false)
 					return count;
 			}
+
+			// 全色試しても置けないときは、削除前の色に決定
+			if (judge(x, y) == true) {
+				System.out.println("special_delete:AsterColor="+AsterColor);
+				target.setColor(AsterColor);
+				return count;
+			}
+			/*
 			// 全色試しても置けない場合、つまり周りを3つ繋がった4色のアステルで囲まれている
 			// その場合、このマスは最初にランダムで決定した色に戻し、前回のdeleteのマスは別の色に変更
 			// （4色ゲームの際の特別措置）
 			if (judge(x, y) == true) {
 				System.out.println("special_delete");
-				target.setColor(rcolor);
-				for (i = 0; i < Aster.COLOR_MAX; i++) {
+				target.setColor(AsterColor);
+				for (int i = 0; i < Aster.COLOR_MAX; i++) {
 					field[pt.y][pt.x].setColor(i);
 					if (judge(pt.x, pt.y) == false)
 						break;
 				}
 			}
+			*/
 		}
 		return count;
 	}

@@ -399,7 +399,7 @@ public abstract class AsterClass {
 			"ﾑｰﾝ", };
 	
 	public final static String[] classNameB = { "サン", "スター", "マーキュリー", "ヴィーナス",
-		"アース", "マーズﾞ", "ジュピター", "サターン", "ウラヌス", "ネプチューン", "プルート",
+		"アース", "マーズ", "ジュピター", "サターン", "ウラヌス", "ネプチューン", "プルート",
 		"ムーン", };
 
 	public final static String[] commandName = { "クラスチェンジ", "スワップ", "クイックタイム",
