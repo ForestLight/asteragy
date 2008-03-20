@@ -71,6 +71,10 @@ public class MoonClass extends AsterClass {
 				if (a.getNumber() == 1
 						&& a.getAsterClass().getPlayer() == getPlayer()) {
 					Point pt = new Point(j, i);
+					
+					Effect effect = new EffectCommandMoon(f, me, pt);
+					effect.start();
+					
 					f.swap(pt, me);
 					f.setDeleteFlag(pt);
 					f.delete(pt.x, pt.y);
