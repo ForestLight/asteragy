@@ -3,7 +3,7 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.*;
 
 /**
- * @author Okubo ‚¾‚ê‚©‚È‚¨‚µ‚Ä
+ * @author Okubo
  * 
  */
 public class Title extends Canvas {
@@ -34,8 +34,8 @@ public class Title extends Canvas {
 			title = loadImage("title.jpg");
 		}
 		if (menu == null) {
-			menu = new Image[7];
-			for (int i = 0; i < 7; i++)
+			menu = new Image[10];
+			for (int i = 0; i < 10; i++)
 				menu[i] = loadImage("menu_" + i + ".gif");
 		}
 		if (credit == null) {
@@ -87,8 +87,10 @@ public class Title extends Canvas {
 					if (!optionMenuFlag) {
 						if (cursor > 0)
 							cursor--;
+						else if (depth == 0)
+							cursor = 4;
 						else
-							cursor = 3 - depth;
+							cursor = 2; 
 						break;
 					}
 					else {
@@ -102,7 +104,7 @@ public class Title extends Canvas {
 			case Display.KEY_DOWN:
 				if (!explainFlag) {
 					if (!optionMenuFlag) {
-						if (depth + cursor < 3)
+						if ((depth == 0 && cursor < 4) || (depth != 0 && cursor < 2))
 							cursor++;
 						else
 							cursor = 0;
@@ -128,14 +130,18 @@ public class Title extends Canvas {
 								option.gameType = 0;
 								break;
 							case 2:
+								depth += 2;
+								cursor = 0;
+								break;
+							case 3:
 								optionMenuFlag = true;
 								cursor = 0;
 								break;			
-							case 3:
+							case 4:
 								IApplication.getCurrentApp().terminate();
 							}
 						}
-						else {
+						else if (depth == 1) {
 							switch (cursor) {
 							case 0:
 								option.gameType = 1;
@@ -145,6 +151,17 @@ public class Title extends Canvas {
 								break;
 							case 2:
 								depth--;
+								cursor = 0;
+								break;	
+							}
+						}
+						else {
+							switch (cursor) {
+							case 1:
+								explainFlag = true;
+								break;
+							case 2:
+								depth -= 2;
 								cursor = 0;
 								break;	
 							}
@@ -242,43 +259,53 @@ public class Title extends Canvas {
 
 	public void paint(Graphics g) {
 
-		if (!optionMenuFlag) {
-			g.lock();
-
-			g.drawImage(title, 0, 0);
-
-			if (depth == 0) {
-				g.drawImage(menu[0], getWidth() / 2 - menu[0].getWidth() / 2,
-						127);
-				g.drawImage(menu[1], getWidth() / 2 - menu[1].getWidth() / 2,
-						127 + menu[1].getHeight());
-				g.drawImage(menu[2], getWidth() / 2 - menu[2].getWidth() / 2,
-						127 + menu[1].getHeight() + menu[2].getHeight());
-				g.drawImage(menu[3], getWidth() / 2 - menu[3].getWidth() / 2,
-						127 + menu[1].getHeight() + menu[2].getHeight() + menu[3].getHeight());
-			} else {
-				g.drawImage(menu[4], getWidth() / 2 - menu[4].getWidth() / 2,
-						127);
-				g.drawImage(menu[5], getWidth() / 2 - menu[5].getWidth() / 2,
-						127 + menu[5].getHeight());
-				g.drawImage(menu[6], getWidth() / 2 - menu[6].getWidth() / 2,
-						127 + menu[5].getHeight() + menu[6].getHeight());
-			}
-			g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
-			g.drawRect(getWidth() / 2 - menu[0].getWidth() / 2, 127
-					+ menu[0].getHeight() * cursor, menu[0].getWidth(), menu[0].getHeight());
-
-			g.drawImage(credit, getWidth() / 2 - credit.getWidth() / 2,
-					getHeight() - credit.getHeight());
-
-			g.unlock(true);
+		if (explainFlag) {
+			explain.paint(g);
 		}
 		else {
-			if(explainFlag) {
-				explain.paint(g);
+			if (!optionMenuFlag) {
+				g.lock();
+
+				g.drawImage(title, 0, 0);
+
+				if (depth == 0) {
+					g.drawImage(menu[0], getWidth() / 2 - menu[0].getWidth() / 2,
+						127);
+					g.drawImage(menu[1], getWidth() / 2 - menu[1].getWidth() / 2,
+						127 + menu[1].getHeight());
+					g.drawImage(menu[2], getWidth() / 2 - menu[2].getWidth() / 2,
+						127 + menu[1].getHeight() + menu[2].getHeight());
+					g.drawImage(menu[3], getWidth() / 2 - menu[3].getWidth() / 2,
+						127 + menu[1].getHeight() + menu[2].getHeight() + menu[3].getHeight());
+					g.drawImage(menu[4], getWidth() / 2 - menu[4].getWidth() / 2,
+						127 + menu[1].getHeight() + menu[2].getHeight() + menu[3].getHeight() + menu[4].getHeight());
+				}
+				else if (depth == 1) {
+					g.drawImage(menu[5], getWidth() / 2 - menu[5].getWidth() / 2,
+						127);
+					g.drawImage(menu[6], getWidth() / 2 - menu[6].getWidth() / 2,
+						127 + menu[6].getHeight());
+					g.drawImage(menu[7], getWidth() / 2 - menu[7].getWidth() / 2,
+						127 + menu[6].getHeight() + menu[7].getHeight());
+				}
+				else {
+					g.drawImage(menu[8], getWidth() / 2 - menu[8].getWidth() / 2,
+						127);
+					g.drawImage(menu[9], getWidth() / 2 - menu[9].getWidth() / 2,
+						127 + menu[9].getHeight());
+					g.drawImage(menu[7], getWidth() / 2 - menu[7].getWidth() / 2,
+						127 + menu[9].getHeight() + menu[7].getHeight());
+				}
+				g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
+				g.drawRect(getWidth() / 2 - menu[0].getWidth() / 2, 127
+					+ menu[0].getHeight() * cursor, menu[0].getWidth(), menu[0].getHeight());
+
+				g.drawImage(credit, getWidth() / 2 - credit.getWidth() / 2,
+						getHeight() - credit.getHeight());
+
+				g.unlock(true);
 			}
 			else {
-
 				boolean leftTriangle = false;
 				boolean rightTriangle = false;
 
