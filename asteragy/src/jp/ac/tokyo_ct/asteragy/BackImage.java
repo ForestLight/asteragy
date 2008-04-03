@@ -1,5 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
+import java.io.*;
+import javax.microedition.io.*;
 import com.nttdocomo.ui.*;
 
 public class BackImage implements PaintItem {
@@ -24,6 +26,7 @@ public class BackImage implements PaintItem {
 		Graphics g = backimage.getGraphics();
 		// 背景描画
 		paintBackGround(g);
+		//paintPlayerBack(g);
 		// グラフィクス廃棄
 		g.dispose();
 	}
@@ -50,6 +53,21 @@ public class BackImage implements PaintItem {
 		if (back != null)
 			g.drawImage(back, 0, 0);
 	}
+/*
+	private void paintPlayerBack(Graphics g) {
+		Image back = null;
+		try {
+			// 背景画像リソースから読み込み
+			MediaImage m = MediaManager.getImage("resource:///player_back.gif");
+			// メディアの使用開始
+			m.use();
+			// 読み込み
+			back = m.getImage();
+		} catch (Exception e) {
+		}
+		if (back != null)
+			g.drawImage(back, 0, 0);
+	}*/
 
 	/**
 	 * 描画

@@ -1,7 +1,6 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.Graphics;
-import com.nttdocomo.ui.Image;
+import com.nttdocomo.ui.*;
 
 public abstract class Player implements PaintItem {
 	/**
@@ -41,13 +40,13 @@ public abstract class Player implements PaintItem {
 	protected final Game game;
 
 	// プレイヤー情報座標
-	private static final int spx = 10;
+	private static final int apx = 5;
 
-	private static final int spy = 16;
+	private static final int apy = 4;
 
-	private static final int namex = 40;
+	private static final int namex = 42;
 
-	private static final int namey = 16;
+	private static final int namey = 4 + Font.getDefaultFont().getAscent();
 
 	/**
 	 * プレイヤー情報描画
@@ -58,20 +57,24 @@ public abstract class Player implements PaintItem {
 	 *            プレイヤー
 	 */
 	public void paint(Graphics g) {
+		int y;
 		if (this.equals(game.getPlayer1())) {
 			g.setOrigin(0, game.getCanvas().getHeight()
 					- GameCanvas.playerheight);
+			y = GameCanvas.playerheight - apy;
 		} else {
 			g.setOrigin(0, 0);
+			y = apy + Font.getDefaultFont().getAscent();
 		}
-		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
-		g.drawString(name, namex, namey);
-		g.drawString("" + ap, spx, spy);
-
 		if (game.getCurrentPlayer() == this) {
-			g.setColor(Graphics.getColorOfName(Graphics.RED));
-			g.drawRect(namex - 1, namey - 11, 25, 13);
+
 		}
+		g.setColor(Graphics.getColorOfRGB(228, 196, 255));
+		g.drawString("" + ap, apx+1, y+1);
+		g.setColor(Graphics.getColorOfRGB(196, 64, 255));
+		g.drawString("" + ap, apx, y);
+		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
+		g.drawString(name, namex, namey);
 	}
 
 	public void repaint() {
