@@ -2,6 +2,11 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
+/**
+ * 
+ * @author Kazuto
+ *
+ */
 public class CanvasControl {
 
 	public static final int f = 40;
@@ -19,6 +24,8 @@ public class CanvasControl {
 	private final SunCommand suncommand;
 
 	private final Range range;
+	
+	private final EffectAsterDisappearControl disappearcontrol;
 
 	private int topmargin;
 
@@ -30,7 +37,8 @@ public class CanvasControl {
 		back = new BackImage(this);
 		cursor = new Cursor(this);
 		range = new Range(this);
-
+		disappearcontrol = new EffectAsterDisappearControl(this);
+		
 		commoncommand = new CommonCommand(this);
 		suncommand = new SunCommand(this);
 		Display.setCurrent(canvas);
@@ -72,6 +80,10 @@ public class CanvasControl {
 
 	public PaintItem[] getPlayers() {
 		return game.getPlayers();
+	}
+	
+	public EffectAsterDisappearControl getDisappearControl(){
+		return disappearcontrol;
 	}
 
 	public void repaint() {
@@ -178,6 +190,7 @@ public class CanvasControl {
 		game.getPlayer1().repaint();
 		game.getPlayer2().repaint();
 
+
 		EffectTurnon turnon = new EffectTurnon(this, player);
 		turnon.start();
 
@@ -194,6 +207,9 @@ public class CanvasControl {
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
 		g.drawString("Now Loading...", 78, 126);
 
+	}
+
+	public void gameOver() {
 	}
 
 	private PaintString spaint;

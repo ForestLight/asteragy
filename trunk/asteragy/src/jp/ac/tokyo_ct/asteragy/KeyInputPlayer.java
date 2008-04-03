@@ -136,6 +136,8 @@ public class KeyInputPlayer extends Player {
 					this.addAP(field.deleteAll());
 					System.out.println("Á‹Š®—¹");
 					field.repaintField();
+					
+					canvas.getDisappearControl().start();
 
 					p = field.checkGameOver();
 

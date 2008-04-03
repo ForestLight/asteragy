@@ -14,6 +14,7 @@ public class Range {
 
 	public Range(CanvasControl canvas) {
 		this.canvas = canvas;
+		visible = true;
 	}
 
 	public void setVisible(boolean v) {
@@ -27,7 +28,7 @@ public class Range {
 	}
 
 	public void paint(Graphics g, int x, int y) {
-		if (visible = false || aster == null)
+		if (!visible || aster == null)
 			return;
 		final int rx = x - aster.x + (range[0].length / 2);
 		final int ry = y - aster.y + (range.length / 2);

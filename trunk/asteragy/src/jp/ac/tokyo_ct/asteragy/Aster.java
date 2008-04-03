@@ -146,7 +146,7 @@ public class Aster {
 		// 消失エフェクト処理
 		EffectAsterDisappearing disappear = new EffectAsterDisappearing(this);
 		paint = disappear;
-		disappear.start();
+		//disappear.start();
 	}
 
 }

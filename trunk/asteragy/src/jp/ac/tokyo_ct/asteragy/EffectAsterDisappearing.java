@@ -5,8 +5,7 @@ import com.nttdocomo.ui.Image;
 import com.nttdocomo.ui.MediaImage;
 import com.nttdocomo.ui.MediaManager;
 
-public class EffectAsterDisappearing extends Effect implements PaintAsterItem,
-		Runnable {
+public class EffectAsterDisappearing extends Effect implements PaintAsterItem {
 
 	private static final int frame = 10;
 
@@ -28,6 +27,7 @@ public class EffectAsterDisappearing extends Effect implements PaintAsterItem,
 			this.parent = parent;
 			this.location = parent.getPoint();
 		}
+		parent.getField().getGame().getCanvas().getDisappearControl().Add(this);
 		time = 0;
 		loadImage();
 	}
@@ -44,37 +44,31 @@ public class EffectAsterDisappearing extends Effect implements PaintAsterItem,
 		g.drawImage(image, 1, 1, 0, time * (GameCanvas.measure - 1),
 				GameCanvas.measure - 1, GameCanvas.measure - 1);
 	}
-	
-	public void start(){
-		if(!isEffect){
-			parent.setPaint(paint);
-			parent.getField().repaintAster(location);
-			return;
-		}
-		Thread thread = new Thread(this);
-		thread.start();
+
+	synchronized public boolean increaseTime() {
+		time++;
+		return time >= frame;
 	}
 
-	public void run() {
-		while (time < frame) {
-			try {
-				Thread.sleep(1000 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				// e.printStackTrace();
-			} finally {
-				time++;
-				synchronized (parent) {
-					parent.getField().repaintAster(location);
-				}
-			}
-
-		}
-
+	synchronized public void endEffect() {
 		parent.setPaint(paint);
+		repaint();
+	}
 
+	synchronized public void repaint() {
 		parent.getField().repaintAster(location);
 	}
+
+	/*
+	 * public void run() { while (time < frame) { try { Thread.sleep(1000 /
+	 * CanvasControl.f); } catch (InterruptedException e) { // TODO 自動生成された
+	 * catch ブロック // e.printStackTrace(); } finally { time++; synchronized
+	 * (parent) { parent.getField().repaintAster(location); } } }
+	 * 
+	 * parent.setPaint(paint);
+	 * 
+	 * parent.getField().repaintAster(location); }
+	 */
 
 	private static void loadImage() {
 		if (image == null) {
@@ -107,6 +101,11 @@ public class EffectAsterDisappearing extends Effect implements PaintAsterItem,
 	}
 
 	public void setSize(int width, int height) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+	public void start() {
 		// TODO 自動生成されたメソッド・スタブ
 
 	}

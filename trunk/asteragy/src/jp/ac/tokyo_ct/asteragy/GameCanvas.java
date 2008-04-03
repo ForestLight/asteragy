@@ -25,24 +25,23 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 		System.out.println("repaint()");
 		// ダブルバッファ開始
 		g.lock();
-		
-		//Now Loading...
-		if(canvas.isInit()){
+
+		// Now Loading...
+		if (canvas.isInit()) {
 			canvas.paintNowloading(g);
 			g.unlock(false);
 			return;
 		}
-		
+
 		// 描画
 		paintBackGround(g);
 		paintFieldSpace(g);
 		paintPlayerInfo(g);
-		
+
 		paintOverGraphics(g);
 		// ダブルバッファ終了
 		g.unlock(false);
 	}
-	
 
 	private void paintOverGraphics(Graphics g) {
 		// TODO 自動生成されたメソッド・スタブ
@@ -99,7 +98,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 */
 	public void processEvent(int type, int param) {
 		final EventProcesser eventProcesser = canvas.getEventProcesser();
-		if(type == Display.KEY_PRESSED_EVENT && param == Display.KEY_9)
+		if (type == Display.KEY_PRESSED_EVENT && param == Display.KEY_9)
 			Effect.setEffect();
 		if (eventProcesser != null)
 			eventProcesser.processEvent(type, param);
