@@ -20,6 +20,8 @@ public class EffectCommandPluto extends Effect implements Runnable {
 
 	private boolean circle;
 
+	private Graphics g;
+
 	public EffectCommandPluto(Field field, Point aster) {
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.field = field;
@@ -60,9 +62,11 @@ public class EffectCommandPluto extends Effect implements Runnable {
 
 	}
 
-	public void start() {
-		if(!isEffect)
+	public void start(Graphics g) {
+		if (!isEffect)
 			return;
+
+		this.g = g;
 		// TODO 自動生成されたメソッド・スタブ
 		Thread back = new Thread(this);
 		back.start();
@@ -73,8 +77,6 @@ public class EffectCommandPluto extends Effect implements Runnable {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-
-		Graphics g = field.getGame().getCanvas().getGraphics();
 
 		int[] matrix = new int[6];
 
@@ -96,15 +98,16 @@ public class EffectCommandPluto extends Effect implements Runnable {
 			matrix[3] = (int) (-4096 * Math.sin(theta * i));
 			matrix[4] = (int) (4096 * Math.cos(theta * i));
 
-			field.setOrignAster(g, aster, GameCanvas.measure / 2,
-					GameCanvas.measure / 2);
+			synchronized (g) {
+				field.setOrignAster(g, aster, GameCanvas.measure / 2,
+						GameCanvas.measure / 2);
 
-			g.lock();
+				g.lock();
 
-			g.drawImage(effects[1], matrix, x, y, x, height);
+				g.drawImage(effects[1], matrix, x, y, x, height);
 
-			g.unlock(true);
-
+				g.unlock(true);
+			}
 			try {
 				Thread.sleep(1000 / CanvasControl.f);
 			} catch (InterruptedException e) {
@@ -153,7 +156,6 @@ public class EffectCommandPluto extends Effect implements Runnable {
 
 	public void run() {
 		// TODO 自動生成されたメソッド・スタブ
-		Graphics g = field.getGame().getCanvas().getGraphics();
 
 		end = false;
 
@@ -172,38 +174,40 @@ public class EffectCommandPluto extends Effect implements Runnable {
 		int time = 0;
 
 		while (!end) {
+			synchronized (g) {
 
-			g.lock();
-			field.repaintAsterRect(g, lefttop, rightbottom);
-			// field.getGame().getCanvas().getBackImage().paintAsterBackRect(g,
-			// lefttop, rightbottom);
+				g.lock();
+				field.repaintAsterRect(g, lefttop, rightbottom);
+				// field.getGame().getCanvas().getBackImage().paintAsterBackRect(g,
+				// lefttop, rightbottom);
 
-			field.setOrignAster(g, aster, GameCanvas.measure / 2,
-					GameCanvas.measure / 2);
+				field.setOrignAster(g, aster, GameCanvas.measure / 2,
+						GameCanvas.measure / 2);
 
-			for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < 4; i++) {
 
-				matrix[0] = (int) (4096 * (Math.cos(theta * time)));
-				matrix[1] = (int) (-4096 * (Math.sin(theta * time)));
-				matrix[2] = (int) (4096 * (ew * Math.cos(theta * time) + eh
-						* Math.sin(theta * time) + x
-						* Math.cos(theta * time + angle * i)));
-				matrix[3] = (int) (4096 * (Math.sin(theta * time)));
-				matrix[4] = (int) (4096 * (Math.cos(theta * time)));
-				matrix[5] = (int) (4096 * (ew * Math.cos(theta * time) - eh
-						* Math.sin(theta * time) + x
-						* Math.sin(theta * time + angle * i)));
+					matrix[0] = (int) (4096 * (Math.cos(theta * time)));
+					matrix[1] = (int) (-4096 * (Math.sin(theta * time)));
+					matrix[2] = (int) (4096 * (ew * Math.cos(theta * time) + eh
+							* Math.sin(theta * time) + x
+							* Math.cos(theta * time + angle * i)));
+					matrix[3] = (int) (4096 * (Math.sin(theta * time)));
+					matrix[4] = (int) (4096 * (Math.cos(theta * time)));
+					matrix[5] = (int) (4096 * (ew * Math.cos(theta * time) - eh
+							* Math.sin(theta * time) + x
+							* Math.sin(theta * time + angle * i)));
 
-				g.drawImage(effects[0], matrix);
-
+					g.drawImage(effects[0], matrix);
+					g.unlock(false);
+				}
 			}
 
-			if (circle)
-				g.drawImage(effects[1], w, h);
+			synchronized (g) {
+				if (circle)
+					g.drawImage(effects[1], w, h);
+			}
 
 			// field.repaintAsterRectNoBack(lefttop, rightbottom);
-
-			g.unlock(false);
 
 			try {
 				Thread.sleep(300 / CanvasControl.f);

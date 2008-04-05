@@ -28,13 +28,12 @@ public class EffectCommandMoon extends Effect {
 	 * m.use(); // 読み込み effect = m.getImage(); } catch (Exception e) { } }
 	 */
 
-	public void start() {
+	public void start(Graphics g) {
 		// TODO 自動生成されたメソッド・スタブ
-
-		Graphics g = field.getGame().getCanvas().getGraphics();
 
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
 		for (int i = 17; i >= 0; i--) {
+			g.lock();
 			field.setOrignAster(g, aster);
 			g.setClip(0, 0, GameCanvas.measure, GameCanvas.measure);
 			g.fillArc(i, 0, 17, 17, 0, 360);
@@ -43,6 +42,7 @@ public class EffectCommandMoon extends Effect {
 			g.setClip(0, 0, GameCanvas.measure, GameCanvas.measure);
 			g.fillArc(i, 0, 17, 17, 0, 360);
 			g.clearClip();
+			g.unlock(true);
 
 			try {
 				Thread.sleep(1000 / CanvasControl.f);
@@ -53,6 +53,7 @@ public class EffectCommandMoon extends Effect {
 		}
 
 		for (int i = 0; i >= -17; i--) {
+			g.lock();
 			field.setOrignAster(g, aster);
 			g.setClip(0, 0, GameCanvas.measure, GameCanvas.measure);
 			g.setColor(Graphics.getColorOfRGB(255, 255, 255));
@@ -60,6 +61,7 @@ public class EffectCommandMoon extends Effect {
 			g.setColor(Graphics.getColorOfRGB(0, 0, 0));
 			g.fillArc(i, 0, 17, 17, 0, 360);
 			g.clearClip();
+			g.unlock(true);
 
 			try {
 				Thread.sleep(1000 / CanvasControl.f);

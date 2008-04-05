@@ -144,7 +144,7 @@ public class VenusClass extends AsterClass {
 				.getAsterClass();
 
 		Effect effect = new EffectCommandVenus(getAster().getField(), target1);
-		effect.start();
+		getAster().getField().getScreen().paintEffect(effect);
 
 		asterClass.setPlayer(this.getPlayer());
 		// s“®Ïó‘Ô‚É

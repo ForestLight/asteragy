@@ -25,7 +25,11 @@ public class Command implements PaintItem {
 	}
 
 	public void paint(Graphics g) {
-		System.out.println("paintCommand ; " + command);
+		if (commandImage == null)
+			return;
+		if (point == null)
+			return;
+		System.out.println("paintCommand : " + command);
 		setPosition(g);
 		g.drawImage(commandImage, 0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 196, 100));
@@ -40,8 +44,8 @@ public class Command implements PaintItem {
 		final int leftMargin = canvas.getLeftMargin();
 		final int imageHeight = commandImage.getHeight();
 		final int imageWidth = commandImage.getWidth();
-		int top = GameCanvas.playerheight
-				+ (canvas.getHeight() - imageHeight - GameCanvas.playerheight * 2)
+		int top = Player.playerheight
+				+ (canvas.getHeight() - imageHeight - Player.playerheight * 2)
 				* point.y / canvas.getField().getY();
 		int left = leftMargin + m * (point.x + 1);
 		// if (top >= canvas.getHeight() - imageHeight - topMargin)

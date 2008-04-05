@@ -23,8 +23,8 @@ public class SunCommand extends Command {
 	}
 
 	private void paintClassData(Graphics g) {
-		int top = GameCanvas.playerheight
-				+ (canvas.getHeight() - commandImage.getHeight() - GameCanvas.playerheight * 2)
+		int top = Player.playerheight
+				+ (canvas.getHeight() - commandImage.getHeight() - Player.playerheight * 2)
 				* point.y / canvas.getField().getY();
 		g.setOrigin(0, top);
 		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
@@ -34,8 +34,10 @@ public class SunCommand extends Command {
 				* (command + 2));
 		g.setOrigin(0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 255));
-		g.drawString("クラス " + AsterClass.classCost[command+1], 75, 224 + Font.getDefaultFont().getAscent());
-		g.drawString("コマンド " + AsterClass.commandCost[command+1], 155, 224 + Font.getDefaultFont().getAscent());
+		g.drawString("クラス " + AsterClass.classCost[command + 1], 75, 224 + Font
+				.getDefaultFont().getAscent());
+		g.drawString("コマンド " + AsterClass.commandCost[command + 1], 155,
+				224 + Font.getDefaultFont().getAscent());
 	}
 
 	private void loadImage() {

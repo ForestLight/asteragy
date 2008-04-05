@@ -34,11 +34,10 @@ public class EffectCommandVenus extends Effect {
 
 	}
 
-	public void start() {
-		if(!isEffect)
+	public void start(Graphics g) {
+		if (!isEffect)
 			return;
 		// TODO 自動生成されたメソッド・スタブ
-		Graphics g = field.getGame().getCanvas().getGraphics();
 
 		final BackImage back = field.getGame().getCanvas().getBackImage();
 

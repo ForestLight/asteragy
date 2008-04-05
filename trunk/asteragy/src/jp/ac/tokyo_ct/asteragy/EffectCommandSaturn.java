@@ -62,11 +62,10 @@ public class EffectCommandSaturn extends Effect {
 
 	}
 
-	public void start() {
-		if(!isEffect)
+	public void start(Graphics g) {
+		if (!isEffect)
 			return;
 		// TODO 自動生成されたメソッド・スタブ
-		Graphics g = field.getGame().getCanvas().getGraphics();
 
 		int[] matrix = new int[6];
 
@@ -90,7 +89,9 @@ public class EffectCommandSaturn extends Effect {
 			matrix[3] = (int) (-4096 * Math.sin(theta * i));
 			matrix[4] = (int) (4096 * Math.cos(theta * i));
 
+			g.lock();
 			g.drawImage(effect, matrix, x, y, width, height);
+			g.unlock(true);
 
 			try {
 				Thread.sleep(1000 / CanvasControl.f);
@@ -100,8 +101,8 @@ public class EffectCommandSaturn extends Effect {
 			}
 		}
 
-		field.repaintAsterRect(new Point(aster.x - 1, aster.y - 1), new Point(
-				aster.x + 1, aster.y + 1));
+		field.repaintAsterRect(g, new Point(aster.x - 1, aster.y - 1),
+				new Point(aster.x + 1, aster.y + 1));
 
 		for (int i = 0; i < GameCanvas.measure - 1; i++) {
 

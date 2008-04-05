@@ -34,12 +34,10 @@ public class EffectCommandEarth extends Effect {
 
 	}
 
-	public void start() {
+	public void start(Graphics g) {
 		// TODO 自動生成されたメソッド・スタブ
 		if (!isEffect)
 			return;
-
-		Graphics g = field.getGame().getCanvas().getGraphics();
 
 		for (int i = 0; i < 10; i++) {
 

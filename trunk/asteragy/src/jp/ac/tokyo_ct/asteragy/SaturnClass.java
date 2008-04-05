@@ -96,7 +96,7 @@ public class SaturnClass extends AsterClass {
 		}
 		
 		Effect effect = new  EffectCommandSaturn(field, this, queue);
-		effect.start();
+		getAster().getField().getScreen().paintEffect(effect);
 		
 		// pt.x =
 		// getAster().getField().asterToPoint(getAster()).x-(defaultRange[0].length/2);

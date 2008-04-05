@@ -130,7 +130,7 @@ public class JupiterClass extends AsterClass {
 		final Field field = getAster().getField();
 		
 		Effect effect = new EffectCommandJupiter(field, target1);
-		effect.start();
+		getAster().getField().getScreen().paintEffect(effect);
 
 		field.setDeleteFlag(target1);
 		field.delete(target1.x, target1.y);

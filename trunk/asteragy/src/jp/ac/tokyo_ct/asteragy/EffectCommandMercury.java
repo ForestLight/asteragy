@@ -44,15 +44,15 @@ public class EffectCommandMercury extends Effect implements PaintAsterItem {
 
 	}
 
-	public void start() {
-		if(!isEffect)
+	public void start(Graphics g) {
+		if (!isEffect)
 			return;
 		// TODO 自動生成されたメソッド・スタブ
 
 		aster.setPaint(this);
 
 		for (time = 0; time < 170 - GameCanvas.measure; time += 3) {
-			field.repaintAster(point);
+			field.repaintAster(g, point);
 
 			try {
 				Thread.sleep(300 / CanvasControl.f);
@@ -63,6 +63,7 @@ public class EffectCommandMercury extends Effect implements PaintAsterItem {
 		}
 
 		aster.setPaint(paint);
+		field.repaintAster(g, point);
 	}
 
 	public int getHeight() {

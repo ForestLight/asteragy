@@ -16,6 +16,8 @@ public class EffectCommandUranus extends Effect implements Runnable {
 
 	private boolean end;
 
+	private Graphics g;
+
 	public EffectCommandUranus(Field field, Point target1, Point target2) {
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.field = field;
@@ -41,11 +43,11 @@ public class EffectCommandUranus extends Effect implements Runnable {
 
 	}
 
-	public void start() {
-		if(!isEffect)
+	public void start(Graphics g) {
+		if (!isEffect)
 			return;
 		// TODO 自動生成されたメソッド・スタブ
-		Graphics g = field.getGame().getCanvas().getGraphics();
+		this.g = g;
 
 		Thread over = new Thread(this);
 		over.start();
@@ -66,8 +68,6 @@ public class EffectCommandUranus extends Effect implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		
-		
 
 		try {
 			Thread.sleep(1000 / CanvasControl.f * 30);
@@ -120,7 +120,6 @@ public class EffectCommandUranus extends Effect implements Runnable {
 	}
 
 	private void animationOver() {
-		Graphics g = field.getGame().getCanvas().getGraphics();
 
 		Point over1 = target1.clone();
 		Point over2 = target2.clone();
@@ -135,19 +134,20 @@ public class EffectCommandUranus extends Effect implements Runnable {
 		end = false;
 
 		while (!end) {
+			synchronized (g) {
+				g.lock();
+				field.repaintAster(g, over1);
+				field.repaintAster(g, over2);
 
-			g.lock();
-			field.repaintAster(over1);
-			field.repaintAster(over2);
+				field.setOrignAster(g, target1, 0, -1 * height);
+				g.drawImage(effect, 0, 0, 0, i * height,
+						GameCanvas.measure - 1, height);
+				field.setOrignAster(g, target2, 0, -1 * height);
+				g.drawImage(effect, 0, 0, 0, i * height,
+						GameCanvas.measure - 1, height);
 
-			field.setOrignAster(g, target1, 0, -1 * height);
-			g.drawImage(effect, 0, 0, 0, i * height, GameCanvas.measure - 1,
-					height);
-			field.setOrignAster(g, target2, 0, -1 * height);
-			g.drawImage(effect, 0, 0, 0, i * height, GameCanvas.measure - 1,
-					height);
-
-			g.unlock(true);
+				g.unlock(true);
+			}
 
 			if (i < 9)
 				i++;

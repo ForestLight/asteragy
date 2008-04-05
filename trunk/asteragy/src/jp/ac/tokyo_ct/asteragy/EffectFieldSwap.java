@@ -24,45 +24,39 @@ public class EffectFieldSwap extends Effect {
 		// checkSmall();
 	}
 
-	public void start() {
-		if(!isEffect)
+	public void start(Graphics g) {
+		if (!isEffect)
 			return;
-
-
-		Graphics g = canvas.getGraphics();
 
 		PaintAsterItem aa = field.getAster(b).getPaint();
 		PaintAsterItem ab = field.getAster(a).getPaint();
-
-		int lax = canvas.getLeftMargin() + GameCanvas.measure * a.x;
-		int lay = canvas.getTopMargin() + GameCanvas.measure * a.y;
-		int lbx = canvas.getLeftMargin() + GameCanvas.measure * b.x;
-		int lby = canvas.getTopMargin() + GameCanvas.measure * b.y;
 
 		int s = GameCanvas.measure - 1;
 		int l = 0;
 
 		for (int i = 0; i < (GameCanvas.measure - 1) * 3 / 2; i++) {
 
+			g.lock();
 			canvas.getBackImage().paintAsterBack(g, a);
-			g.setOrigin(lax + (GameCanvas.measure - s - 1) / 2, lay
-					+ (GameCanvas.measure - s - 1) / 2);
+			field.setOrignAster(g, a, (GameCanvas.measure - s - 1) / 2,
+					(GameCanvas.measure - s - 1) / 2);
 			aa.setSize(s, s);
 			aa.paint(g);
-			g.setOrigin(lax + (GameCanvas.measure - l - 1) / 2, lay
-					+ (GameCanvas.measure - l - 1) / 2);
+			field.setOrignAster(g, a, (GameCanvas.measure - l - 1) / 2,
+					(GameCanvas.measure - l - 1) / 2);
 			ab.setSize(l, l);
 			ab.paint(g);
 
 			canvas.getBackImage().paintAsterBack(g, b);
-			g.setOrigin(lbx + (GameCanvas.measure - s - 1) / 2, lby
-					+ (GameCanvas.measure - s - 1) / 2);
+			field.setOrignAster(g, b, (GameCanvas.measure - s - 1) / 2,
+					(GameCanvas.measure - s - 1) / 2);
 			ab.setSize(s, s);
 			ab.paint(g);
-			g.setOrigin(lbx + (GameCanvas.measure - l - 1) / 2, lby
-					+ (GameCanvas.measure - l - 1) / 2);
+			field.setOrignAster(g, b, (GameCanvas.measure - l - 1) / 2,
+					(GameCanvas.measure - l - 1) / 2);
 			aa.setSize(l, l);
 			aa.paint(g);
+			g.unlock(true);
 
 			if (s > 0)
 				s--;
@@ -81,9 +75,9 @@ public class EffectFieldSwap extends Effect {
 		aa.resetSize();
 		ab.resetSize();
 
-		field.repaintAster(a);
-		field.repaintAster(b);
-
+		field.repaintAster(g, a);
+		field.repaintAster(g, b);
+		canvas.getScreen().flipScreen();
 
 	}
 

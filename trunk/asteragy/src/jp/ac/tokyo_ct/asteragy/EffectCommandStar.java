@@ -65,13 +65,10 @@ public class EffectCommandStar extends Effect {
 
 	final double theta = Math.PI * 2 / 30;
 
-	public void start() {
+	public void start(Graphics g) {
 		if(!isEffect)
 			return;
 		// TODO 自動生成されたメソッド・スタブ
-		final Graphics g = field.getGame().getCanvas().getGraphics();
-
-		field.setOrignAster(g, point);
 
 		int[] matrix = new int[6];
 		final int define = 4096;
@@ -89,8 +86,8 @@ public class EffectCommandStar extends Effect {
 					* (-effect.getWidth() / 2) + Math.cos(theta * i)
 					* (-effect.getHeight() / 2) + effect.getWidth() / 2 + 1));
 
-			field.getGame().getCanvas().getBackImage().paintAsterBack(g, to);
 			g.lock();
+			field.getGame().getCanvas().getBackImage().paintAsterBack(g, to);
 			field.setOrignAster(g, to);
 
 			g.drawImage(effect, matrix);

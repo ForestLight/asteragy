@@ -42,7 +42,7 @@ public class StarClass extends AsterClass {
 
 	public void executeSpecialCommand() {
 		Effect effect = new EffectCommandStar(getAster().getField(), this, target1, target2);
-		effect.start();
+		getAster().getField().getScreen().paintEffect(effect);
 
 		getAster().getField().swap(target1, target2);
 		logAction(target1, target2);
