@@ -24,7 +24,7 @@ public class AIPlayer extends Player {
 	/**
 	 * 試行回数
 	 */
-	private final static int TRIAL = 1; 
+	private final static int TRIAL = 3; 
 	
 	private final static int WAIT = 1000;
 	
@@ -147,7 +147,7 @@ public class AIPlayer extends Player {
 
 					int ev = evaluation(field);
 					if(ev > eMax){
-						ev = eMax;
+						eMax = ev;
 						maxNum = t;
 					}
 					t++;
@@ -156,9 +156,9 @@ public class AIPlayer extends Player {
 					if(t < TRIAL){
 						System.out.println("->state1");
 						state = 1;
-						System.out.println("t = "+t);
+						System.out.println((t+1)+"回目の試行に入ります");
 					}else{
-						System.out.println("execute");
+						System.out.println("execute : maxNum = "+maxNum+" , eMax = "+eMax);
 						Effect.setEffect(true);
 						if(execute())return null;
 						state = 0;
@@ -168,6 +168,7 @@ public class AIPlayer extends Player {
 			return null;
 		} finally {
 			canvas.resetEventProcesser();
+			Effect.setEffect(true);
 		}
 	}
 
@@ -219,7 +220,7 @@ public class AIPlayer extends Player {
 		Point pt = myUnit[n].getPoint();
 	//	canvas.getCursor().setCursor(pt, Cursor.CURSOR_1);
 //		try {
-//			Thread.sleep(1000);
+//			Thread.sleep(1-000);
 //		} catch (Exception e) {
 //		}
 		return pt;
@@ -232,8 +233,8 @@ public class AIPlayer extends Player {
 			return 0;
 		} else {
 			int cmd = Game.random.nextInt(2);
-			//return cmd;
-			return 0;
+			return cmd;
+			//return 0;
 
 		}
 	}
@@ -362,9 +363,9 @@ public class AIPlayer extends Player {
 				a.setNum(i*f.getX()+j);
 				final AsterClass ac = a.getAsterClass();
 				if(ac == null){
-				//	acBackUp[i][j] = null;
+					acBackUp[i][j] = null;
 				}else{
-				//	acBackUp[i][j] = ac.clone();
+					acBackUp[i][j] = ac.clone();
 				}
 			}
 		}
@@ -384,10 +385,10 @@ public class AIPlayer extends Player {
 				}
 				f.getField()[i][j].setColor(colorBackUp[i][j]);
 				if(acBackUp[i][j] == null){
-					System.out.println("setnull"+i+","+j);
-				//	f.getField()[i][j].setAsterClass(null);
+					f.getField()[i][j].setAsterClass(null);
 				}else{
-			//		f.getField()[i][j].setAsterClass(acBackUp[i][j].clone());
+					f.getField()[i][j].setAsterClass(acBackUp[i][j]);
+					f.getField()[i][j].getAsterClass().setAster(f.getField()[i][j]);
 				}
 				f.getField()[i][j].init();
 			}
@@ -404,16 +405,20 @@ public class AIPlayer extends Player {
 		final AsterClass ac = field.getAster(pt).getAsterClass();
 		final Range canvasRange = game.getCanvas().getRange();
 		int[][] range = ac.getRange();
-		
+		Effect.setEffect(true);
 		canvas.getCursor().setCursor(pt, Cursor.CURSOR_1);
 		try {
+			System.out.println("wait1");
 			Thread.sleep(WAIT);
 		} catch (Exception e) {
 		}
 		canvasRange.setRange(pt, range);
 		canvas.getCommonCommand().setCommand(cmd[maxNum], pt);
 		canvas.getCommonCommand().setAsterClass(ac);
+		
+		ac.setCommand(cmd[maxNum]);
 		try {
+			System.out.println("wait2");
 			Thread.sleep(WAIT);
 		} catch (Exception e) {
 		}
@@ -421,26 +426,35 @@ public class AIPlayer extends Player {
 		canvas.getCommonCommand().setCommand(-1, null);
 		int i = 0;
 		while (i < 2 && target[i][maxNum] != null) {
+			if(ac.getNumber() == 1 && cmd[maxNum]==1 && i == 1){
+				ac.setPointAndNext(target[1][maxNum]);
+				break;
+			}
 			range = ac.getRange();
 			canvasRange.setRange(pt, range);
 			ac.setPointAndNext(target[i][maxNum]);
 			
 			canvas.getCursor().setCursor(target[i][maxNum], Cursor.CURSOR_1);
 			try {
+				System.out.println("wait3");
 				Thread.sleep(WAIT);
 			} catch (Exception e) {
 			}
 			i++;
 		}
 		canvasRange.setRange(null, null);
-		
+
 		if (cmd[maxNum] == 1) {
-			this.addAP(-ac.getCommandCost());
+			if(ac.getNumber() == 1){
+				this.addAP(-AsterClass.classCost[target[1][maxNum].x + 1]);
+			}else{
+				this.addAP(-ac.getCommandCost());
+			}
 		}
 		System.out.println("実行開始");
 		ac.execute();
 		System.out.println("実行完了");
-//				field.repaintField();
+		field.repaintField();
 
 		Player p = field.checkGameOver();
 		// ゲームオーバー判定
