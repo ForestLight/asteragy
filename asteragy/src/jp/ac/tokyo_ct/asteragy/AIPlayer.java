@@ -232,8 +232,8 @@ public class AIPlayer extends Player {
 			return 0;
 		} else {
 			int cmd = Game.random.nextInt(2);
-			return cmd;
-			//return 0;
+			//return cmd;
+			return 0;
 
 		}
 	}
@@ -357,12 +357,14 @@ public class AIPlayer extends Player {
 
 		for(int i = 0;i < f.getY();i++){
 			for(int j = 0;j < f.getX();j++){
-				colorBackUp[i][j] = f.getField()[i][j].getColor();
-				final AsterClass ac = f.getField()[i][j].getAsterClass();
+				final Aster a = f.getField()[i][j];
+				colorBackUp[i][j] = a.getColor();
+				a.setNum(i*f.getX()+j);
+				final AsterClass ac = a.getAsterClass();
 				if(ac == null){
-					acBackUp[i][j] = null;
+				//	acBackUp[i][j] = null;
 				}else{
-					acBackUp[i][j] = ac.clone();
+				//	acBackUp[i][j] = ac.clone();
 				}
 			}
 		}
@@ -372,11 +374,20 @@ public class AIPlayer extends Player {
 		
 		for(int i = 0;i < f.getY();i++){
 			for(int j = 0;j < f.getX();j++){
+				Aster a = f.getField()[i][j];
+				int n = a.getNum();
+				while((i * f.getX() + j) != n){//ƒAƒXƒeƒ‹‚Ì‡”Ô‚ª“ü‚ê‘Ö‚í‚Á‚Ä‚½ê‡
+					System.out.println("swap-");
+					f.swap(new Point(j,i),new Point(n%f.getX(),n/f.getX()));
+					a = f.getField()[i][j];
+					n = a.getNum();
+				}
 				f.getField()[i][j].setColor(colorBackUp[i][j]);
 				if(acBackUp[i][j] == null){
-					f.getField()[i][j].setAsterClass(null);
+					System.out.println("setnull"+i+","+j);
+				//	f.getField()[i][j].setAsterClass(null);
 				}else{
-					f.getField()[i][j].setAsterClass(acBackUp[i][j].clone());
+			//		f.getField()[i][j].setAsterClass(acBackUp[i][j].clone());
 				}
 				f.getField()[i][j].init();
 			}
