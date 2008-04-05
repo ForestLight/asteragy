@@ -114,6 +114,7 @@ public class SunClass extends AsterClass {
 		final Aster a = field.getAster(target1);
 		AsterClass ac = new StarClass(a, getPlayer());
 		logAction(new int[] {target1.x, target1.y, asterClassSelect});
+		System.out.println("acs = "+asterClassSelect);
 		switch (asterClassSelect) {
 		case 0:
 			ac = new StarClass(a, getPlayer());

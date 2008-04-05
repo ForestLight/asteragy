@@ -59,7 +59,10 @@ public class Aster {
 	public void init(){
 		deleteFlag = false;
 		judgeFlag = false;
+		
 		paint = new AsterPaint();
+		paint.setColor(color);
+		paint.setClass(asterClass);
 	}
 
 	public void setNum(int i){
@@ -129,7 +132,7 @@ public class Aster {
 	}
 
 	public void setAsterClass(AsterClass ac) {
-		System.out.println("Aster.setAsterClass");
+//		System.out.println("Aster.setAsterClass");
 		asterClass = ac;
 		paint.setClass(ac);
 	}
