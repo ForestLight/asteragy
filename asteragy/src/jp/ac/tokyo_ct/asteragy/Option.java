@@ -5,7 +5,7 @@ public class Option {
 	public int fieldYSize;
 	public int numOfColors;
 	public int gameType;
-	public int[] initialAP = {0, 30, 50, 100, 999};
+	public int[] initialAP = {0, 10, 20, 30, 50, 100, 999};
 	public int AP_Pointer;
 	public int connection;
 
@@ -23,7 +23,7 @@ public class Option {
 		fieldYSize = 9;
 		numOfColors = 5;
 		gameType = -1;
-		AP_Pointer = 1;
+		AP_Pointer = 2;
 		connection = 4;		
 	}
 }
