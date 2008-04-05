@@ -26,7 +26,7 @@ public class BackImage implements PaintItem {
 		Graphics g = backimage.getGraphics();
 		// 背景描画
 		paintBackGround(g);
-		//paintPlayerBack(g);
+		// paintPlayerBack(g);
 		// グラフィクス廃棄
 		g.dispose();
 	}
@@ -53,21 +53,14 @@ public class BackImage implements PaintItem {
 		if (back != null)
 			g.drawImage(back, 0, 0);
 	}
-/*
-	private void paintPlayerBack(Graphics g) {
-		Image back = null;
-		try {
-			// 背景画像リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///player_back.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			back = m.getImage();
-		} catch (Exception e) {
-		}
-		if (back != null)
-			g.drawImage(back, 0, 0);
-	}*/
+
+	/*
+	 * private void paintPlayerBack(Graphics g) { Image back = null; try { //
+	 * 背景画像リソースから読み込み MediaImage m =
+	 * MediaManager.getImage("resource:///player_back.gif"); // メディアの使用開始
+	 * m.use(); // 読み込み back = m.getImage(); } catch (Exception e) { } if (back !=
+	 * null) g.drawImage(back, 0, 0); }
+	 */
 
 	/**
 	 * 描画
@@ -77,6 +70,7 @@ public class BackImage implements PaintItem {
 	 */
 	public void paint(Graphics g) {
 		System.out.println("paintBackImage");
+		g.setOrigin(0, 0);
 		g.drawImage(backimage, 0, 0);
 	}
 
@@ -85,7 +79,7 @@ public class BackImage implements PaintItem {
 		final int topMargin = canvas.getTopMargin();
 		g.setOrigin(0, 0);
 		g.drawImage(backimage, leftMargin, topMargin, leftMargin, topMargin,
-				canvas.fieldWidth() + 1, canvas.fieldHeight() + 1);
+				canvas.getField().getWidth(), canvas.getField().getHeight());
 	}
 
 	public void paintAsterBack(Graphics g, Point point) {
@@ -94,10 +88,14 @@ public class BackImage implements PaintItem {
 		int x = canvas.getLeftMargin() + point.x * m;
 		int y = canvas.getTopMargin() + point.y * m;
 		g.drawImage(backimage, x, y, x, y, m + 1, m + 1);
-		if (y < GameCanvas.playerheight)
+		if (y < Player.playerheight) {
+			paintPlayerBack(g, 2);
+			canvas.getPlayers()[1].paint(g);
+		}
+		if (y > canvas.getHeight() - Player.playerheight) {
 			paintPlayerBack(g, 1);
-		if (y > canvas.getHeight() - GameCanvas.playerheight)
-			paintPlayerBack(g, 0);
+			canvas.getPlayers()[0].paint(g);
+		}
 	}
 
 	public void paintAsterBackRect(Graphics g, Point lt, Point rb) {
@@ -108,11 +106,11 @@ public class BackImage implements PaintItem {
 		int width = (rb.x - lt.x + 1) * m;
 		int height = (rb.y - lt.y + 1) * m;
 		g.drawImage(backimage, x, y, x, y, width + 1, height + 1);
-		if (y < GameCanvas.playerheight) {
+		if (y < Player.playerheight) {
 			paintPlayerBack(g, 2);
 			canvas.getPlayers()[1].paint(g);
 		}
-		if (y + height > canvas.getHeight() - GameCanvas.playerheight) {
+		if (y + height > canvas.getHeight() - Player.playerheight) {
 			paintPlayerBack(g, 1);
 			canvas.getPlayers()[0].paint(g);
 		}
@@ -121,10 +119,10 @@ public class BackImage implements PaintItem {
 	public void paintPlayerBack(Graphics g, int player) {
 		int y = 0;
 		if (player == 1) {
-			y = canvas.getHeight() - GameCanvas.playerheight;
+			y = canvas.getHeight() - Player.playerheight;
 		}
 		g.drawImage(backimage, 0, y, 0, y, canvas.getWidth(),
-				GameCanvas.playerheight);
+				Player.playerheight);
 	}
 
 }

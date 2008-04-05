@@ -5,7 +5,7 @@ import com.nttdocomo.ui.*;
 /**
  * 
  * @author Kazuto
- *
+ * 
  */
 public class CanvasControl {
 
@@ -24,8 +24,10 @@ public class CanvasControl {
 	private final SunCommand suncommand;
 
 	private final Range range;
-	
+
 	private final EffectAsterDisappearControl disappearcontrol;
+
+	private final Screen screen;
 
 	private int topmargin;
 
@@ -38,14 +40,12 @@ public class CanvasControl {
 		cursor = new Cursor(this);
 		range = new Range(this);
 		disappearcontrol = new EffectAsterDisappearControl(this);
-		
+		screen = new Screen(canvas);
+
 		commoncommand = new CommonCommand(this);
 		suncommand = new SunCommand(this);
 		Display.setCurrent(canvas);
-	}
-
-	public Graphics getGraphics() {
-		return canvas.getGraphics();
+		canvas.repaint();
 	}
 
 	private void setFieldMargin() {
@@ -81,13 +81,13 @@ public class CanvasControl {
 	public PaintItem[] getPlayers() {
 		return game.getPlayers();
 	}
-	
-	public EffectAsterDisappearControl getDisappearControl(){
+
+	public EffectAsterDisappearControl getDisappearControl() {
 		return disappearcontrol;
 	}
 
-	public void repaint() {
-		canvas.repaint();
+	public Screen getScreen() {
+		return screen;
 	}
 
 	/**
@@ -107,13 +107,17 @@ public class CanvasControl {
 		return suncommand;
 	}
 
-	public PaintItem getCommand() {
+	private PaintItem getCommand() {
 		if (suncommand.visible()) {
 			System.out.println("return suncommand");
 			return suncommand;
 		}
 		System.out.println("return commoncommand");
 		return commoncommand;
+	}
+
+	public boolean isInit() {
+		return game.isInit();
 	}
 
 	/**
@@ -125,10 +129,6 @@ public class CanvasControl {
 		return canvas.getHeight();
 	}
 
-	public int fieldHeight() {
-		return game.getField().getY() * GameCanvas.measure;
-	}
-
 	/**
 	 * 幅を取得
 	 * 
@@ -136,10 +136,6 @@ public class CanvasControl {
 	 */
 	public int getWidth() {
 		return canvas.getWidth();
-	}
-
-	public int fieldWidth() {
-		return game.getField().getX() * GameCanvas.measure;
 	}
 
 	private volatile EventProcesser eventProcesser;
@@ -180,24 +176,15 @@ public class CanvasControl {
 		}
 	}
 
-	public void setCurrent() {
-		Display.setCurrent(canvas);
-	}
-
 	public void onTurnStart(Player player) {
 		// TODO 自動生成されたメソッド・スタブ
 		System.out.println("onTurnStart");
 		game.getPlayer1().repaint();
 		game.getPlayer2().repaint();
 
+		Effect turnon = new EffectTurnon(this, player);
+		screen.paintEffect(turnon);
 
-		EffectTurnon turnon = new EffectTurnon(this, player);
-		turnon.start();
-
-	}
-
-	public boolean isInit() {
-		return game.isInit();
 	}
 
 	public void paintNowloading(Graphics g) {
@@ -207,6 +194,11 @@ public class CanvasControl {
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
 		g.drawString("Now Loading...", 78, 126);
 
+	}
+
+	public void repaint() {
+		Graphics g = screen.getGraphics();
+		paint(g);
 	}
 
 	public void gameOver() {
@@ -219,7 +211,7 @@ public class CanvasControl {
 			spaint = new PaintString(this, string);
 		else
 			spaint = null;
-		paintString(getGraphics());
+		paintString(screen.getGraphics());
 	}
 
 	private void paintString(Graphics g) {
@@ -227,15 +219,59 @@ public class CanvasControl {
 			spaint.paint(g);
 	}
 
-	public void paintOver(Graphics g) {
+	private void paintOver(Graphics g) {
 		// TODO 自動生成されたメソッド・スタブ
 		paintString(g);
 	}
 
-	public void repaint(int x, int y, int width, int height) {
-		// TODO 自動生成されたメソッド・スタブ
-		canvas.repaint(x, y, width, height);
+	private void paint(Graphics g) {
+		// 描画
+		paintBackGround(g);
+		paintFieldSpace(g);
+		paintPlayerInfo(g);
 
+		paintOver(g);
+	}
+
+	/**
+	 * 背景描画
+	 * 
+	 * @param g
+	 *            描画先グラフィクス
+	 */
+	private void paintBackGround(Graphics g) {
+		System.out.println("paintBackGround");
+		back.paint(g);
+	}
+
+	/**
+	 * フィールド領域の描画
+	 * 
+	 * @param g
+	 *            描画先グラフィクス
+	 */
+	private void paintFieldSpace(Graphics g) {
+		System.out.println("paintFieldSpace");
+
+		getField().paint(g);
+
+		cursor.paint(g);
+
+		getCommand().paint(g);
+	}
+
+	/**
+	 * プレイヤー情報描画
+	 * 
+	 * @param g
+	 *            描画先グラフィクス
+	 */
+	private void paintPlayerInfo(Graphics g) {
+		System.out.println("paintPlayerInfo");
+		PaintItem[] players = getPlayers();
+		for (int i = 0; i < players.length; i++) {
+			players[i].paint(g);
+		}
 	}
 
 }

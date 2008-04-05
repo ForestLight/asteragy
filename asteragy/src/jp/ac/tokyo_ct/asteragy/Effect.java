@@ -1,10 +1,12 @@
 package jp.ac.tokyo_ct.asteragy;
 
+import com.nttdocomo.ui.Graphics;
+
 public abstract class Effect {
 
 	protected static boolean isEffect = true;
 	
-	public abstract void start();
+	public abstract void start(Graphics g);
 	
 	public static void setEffect(){
 		isEffect = !isEffect;

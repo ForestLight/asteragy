@@ -111,7 +111,7 @@ public class UranusClass extends AsterClass {
 
 		Effect effect = new EffectCommandUranus(getAster().getField(), target1,
 				target2);
-		effect.start();
+		getAster().getField().getScreen().paintEffect(effect);
 
 		getAster().getField().swap(target1, target2);
 		logAction(target1, target2);

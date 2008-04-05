@@ -30,26 +30,26 @@ public class CommonCommand extends Command {
 	 * @param g
 	 */
 	private void PaintCommandName(Graphics g) {
-		if (command < 0 || point == null)
+		if (command < 0 || point == null || asterClass == null)
 			return;
 		g.setOrigin(0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 255));
 		if (command == 0) {
 			g.drawString("ƒXƒƒbƒv 0", 85, 235);
 		} else {
-			int top = GameCanvas.playerheight
-				+ (canvas.getHeight() - commandImage.getHeight() - GameCanvas.playerheight * 2)
-				* point.y / canvas.getField().getY();
+			int top = Player.playerheight
+					+ (canvas.getHeight() - commandImage.getHeight() - Player.playerheight * 2)
+					* point.y / canvas.getField().getY();
 			g.setOrigin(0, top);
 			g.setColor(Graphics.getColorOfRGB(255, 255, 255));
-			g.fillRect(6, height*2, canvas.getWidth() - 12, 14);
+			g.fillRect(6, height * 2, canvas.getWidth() - 12, 14);
 			g.setColor(Graphics.getColorOfRGB(0, 0, 255));
-			g.drawString(AsterClass.commandExplain[asterClass.getNumber()-1], 10, height
-			* (command + 2));
+			g.drawString(AsterClass.commandExplain[asterClass.getNumber() - 1],
+					10, height * (command + 2));
 			g.setOrigin(0, 0);
 			g.drawString(asterClass.getCommandName() + " "
-					+ AsterClass.commandCost[asterClass.getNumber() - 1],
-					85, 235);
+					+ AsterClass.commandCost[asterClass.getNumber() - 1], 85,
+					235);
 		}
 	}
 

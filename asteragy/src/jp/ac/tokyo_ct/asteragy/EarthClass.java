@@ -119,7 +119,7 @@ public class EarthClass extends AsterClass {
 		 */
 		Effect effect = new EffectCommandEarth(this.getAster().getField(),
 				target1);
-		effect.start();
+		getAster().getField().getScreen().paintEffect(effect);
 
 		final Aster a = getAster().getField().getAster(target1);
 		new MoonClass(a, getPlayer());

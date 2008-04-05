@@ -109,7 +109,7 @@ public class MercuryClass extends AsterClass {
 	public void executeSpecialCommand() {
 
 		Effect effect = new EffectCommandMercury(getAster().getField(), target1);
-		effect.start();
+		getAster().getField().getScreen().paintEffect(effect);
 
 		// ‘ÎÛ‚Ìs“®‰Â”\‰ñ”‚ğ1‰ñ‘‚â‚·
 		getAster().getField().getAster(target1).getAsterClass()

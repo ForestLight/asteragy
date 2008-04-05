@@ -74,11 +74,10 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 
 	}
 
-	public void start() {
-		if(!isEffect)
+	public void start(Graphics g) {
+		if (!isEffect)
 			return;
 		// TODO 自動生成されたメソッド・スタブ
-		Graphics g = field.getGame().getCanvas().getGraphics();
 
 		for (time = 0; time < 17; time++) {
 
@@ -104,7 +103,7 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 		time--;
 
 		field.getAster(point).setPaint(this);
-		field.repaintAster(point);
+		field.repaintAster(g, point);
 
 		try {
 			Thread.sleep(1000 / CanvasControl.f * 10);
@@ -114,7 +113,7 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 		}
 
 		field.getAster(point).setPaint(paint);
-		field.repaintAster(point);
+		field.repaintAster(g, point);
 
 	}
 

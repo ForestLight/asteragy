@@ -75,9 +75,6 @@ public class PlutoClass extends AsterClass {
 		final int rangeY = defaultRange.length;
 		final int rangeX = defaultRange[0].length;
 
-		Effect effect = new EffectCommandPluto(field, me);
-		effect.start();
-
 		for (int i = 0; i < rangeY; i++) {
 			for (int j = 0; j < rangeX; j++) {
 				// ƒŒƒ“ƒW“à‚Å‚ ‚è
@@ -112,6 +109,8 @@ public class PlutoClass extends AsterClass {
 				return;
 			}
 		} else {
+			Effect effect = new EffectCommandPluto(field, me);
+			getAster().getField().getScreen().paintEffect(effect);
 			field.deleteAll();
 			logAction();
 		}

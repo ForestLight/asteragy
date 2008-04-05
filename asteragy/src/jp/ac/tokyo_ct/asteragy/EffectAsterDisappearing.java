@@ -50,13 +50,13 @@ public class EffectAsterDisappearing extends Effect implements PaintAsterItem {
 		return time >= frame;
 	}
 
-	synchronized public void endEffect() {
+	synchronized public void endEffect(Graphics g) {
 		parent.setPaint(paint);
-		repaint();
+		repaint(g);
 	}
 
-	synchronized public void repaint() {
-		parent.getField().repaintAster(location);
+	synchronized public void repaint(Graphics g) {
+		parent.getField().repaintAster(g, location);
 	}
 
 	/*
@@ -105,9 +105,9 @@ public class EffectAsterDisappearing extends Effect implements PaintAsterItem {
 
 	}
 
-	public void start() {
+	public void start(Graphics g) {
 		// TODO 自動生成されたメソッド・スタブ
-
+		paint(g);
 	}
 
 }

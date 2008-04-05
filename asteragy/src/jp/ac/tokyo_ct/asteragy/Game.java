@@ -17,58 +17,43 @@ final class Game implements Runnable {
 	public void start(Option op) {
 		System.out.println("Game.start()");
 		option = op;
-		
+
 		Thread init = new Thread(this);
 		init.start();
 		try {
 			init.join();
 		} catch (InterruptedException e) {
 			// TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
-		
+
 		/*
-		// canvas = new GameCanvas(this);
-		// Display.setCurrent(canvas);
-		field = new Field(this);
-		field.setFieldSize(9, 9);
-		field.setAster();
-
-		player[0] = new KeyInputPlayer(this, "æU");
-		
-		switch (gameType) {
-		case 1:
-			//player[1] = new AIPlayer(this, "—”");
-			break;
-		case 2:
-			httpLogger = new HTTPPlayer(this, "ŒãU (N)");
-			player[1] = httpLogger;
-			break;
-		default:
-			player[1] = new KeyInputPlayer(this, "ŒãU");
-		}
-
-		canvas = new CanvasControl(this);
-
-		// ‰Šúİ’è(‰¼)
-		Aster a = field.getField()[field.getY() - 1][field.getX() / 2];
-		a.setAsterClass(new SunClass(a, player[0]));
-		a = field.getField()[0][field.getX() / 2];
-		a.setAsterClass(new SunClass(a, player[1]));
-
-		player[0].addSP(30);
-		player[1].addSP(30);
-
-		System.out.println("Game.start()");
-		try {
-			Thread.sleep(300);
-		} catch (Exception e) {
-		}
-		
-		canvas.setCurrent();
-		*/
+		 * // canvas = new GameCanvas(this); // Display.setCurrent(canvas);
+		 * field = new Field(this); field.setFieldSize(9, 9); field.setAster();
+		 * 
+		 * player[0] = new KeyInputPlayer(this, "æU");
+		 * 
+		 * switch (gameType) { case 1: //player[1] = new AIPlayer(this, "—”");
+		 * break; case 2: httpLogger = new HTTPPlayer(this, "ŒãU (N)"); player[1] =
+		 * httpLogger; break; default: player[1] = new KeyInputPlayer(this,
+		 * "ŒãU"); }
+		 * 
+		 * canvas = new CanvasControl(this); // ‰Šúİ’è(‰¼) Aster a =
+		 * field.getField()[field.getY() - 1][field.getX() / 2];
+		 * a.setAsterClass(new SunClass(a, player[0])); a =
+		 * field.getField()[0][field.getX() / 2]; a.setAsterClass(new
+		 * SunClass(a, player[1]));
+		 * 
+		 * player[0].addSP(30); player[1].addSP(30);
+		 * 
+		 * System.out.println("Game.start()"); try { Thread.sleep(300); } catch
+		 * (Exception e) { }
+		 * 
+		 * canvas.setCurrent();
+		 */
 		System.out.println("Game.start()");
 		canvas.repaint();
+		canvas.getScreen().flipScreen();
 		for (;;) // ƒ‹[ƒv1‰ñ‚ÅƒvƒŒƒCƒ„[2l‚ª‚»‚ê‚¼‚ê1ƒ^[ƒ“‚ğ‚±‚È‚·B
 		{
 			boolean gameover;
@@ -81,22 +66,22 @@ final class Game implements Runnable {
 			System.gc();
 		}
 	}
-	
-	private void initialize(){
+
+	private void initialize() {
 		System.out.println("initialize start");
 		canvas = new CanvasControl(this);
-		canvas.repaint();
+		// canvas.repaint();
 		// Display.setCurrent(canvas);
-		
+
 		Aster.COLOR_MAX = option.numOfColors;
 		Field.CONNECTION = option.connection;
-		
+
 		field = new Field(this);
 		field.setFieldSize(option.fieldXSize, option.fieldYSize);
 		field.setAster();
 
 		player[0] = new KeyInputPlayer(this, "æU");
-		
+
 		switch (option.gameType) {
 		case 1:
 			player[1] = new AIPlayer(this, "—”");
@@ -108,7 +93,6 @@ final class Game implements Runnable {
 		default:
 			player[1] = new KeyInputPlayer(this, "ŒãU");
 		}
-		
 
 		// ‰Šúİ’è(‰¼)
 		Aster a = field.getField()[field.getY() - 1][field.getX() / 2];
@@ -118,11 +102,11 @@ final class Game implements Runnable {
 
 		player[0].addAP(option.initialAP[option.AP_Pointer]);
 		player[1].addAP(option.initialAP[option.AP_Pointer]);
-		
+
 		System.out.println("initialize end");
 	}
-	
-	public void run(){
+
+	public void run() {
 		init = true;
 		initialize();
 		init = false;
@@ -144,7 +128,6 @@ final class Game implements Runnable {
 			while ((a = player.getAction()) != null) {
 				a.run();
 			}
-			
 
 			Player goPlayer = field.checkGameOver();
 			if (goPlayer != null) {
@@ -152,12 +135,12 @@ final class Game implements Runnable {
 					Thread.sleep(1500);
 				} catch (Exception e) {
 				}
-				canvas.paintString(goPlayer+"‚Ì•‰‚¯",true);
+				canvas.paintString(goPlayer + "‚Ì•‰‚¯", true);
 				try {
 					Thread.sleep(1500);
 				} catch (Exception e) {
 				}
-				canvas.paintString("",false);
+				canvas.paintString("", false);
 				System.out.println(goPlayer + "‚Ì•‰‚¯");
 				return false;
 			}
@@ -220,8 +203,8 @@ final class Game implements Runnable {
 	Field getField() {
 		return field;
 	}
-	
-	void setField(Field f){
+
+	void setField(Field f) {
 		field = f;
 	}
 
@@ -241,7 +224,7 @@ final class Game implements Runnable {
 		System.out.print("Game.logAction: ");
 		try {
 			a.printToStream(System.out);
-		} catch(IOException e) {
+		} catch (IOException e) {
 		}
 		System.out.println();
 		if (httpLogger != null) {
@@ -276,11 +259,11 @@ final class Game implements Runnable {
 	}
 
 	private HTTPPlayer httpLogger = null;
-	
-	//private int gameType;
+
+	// private int gameType;
 	private Option option;
-	
-	public boolean isInit(){
+
+	public boolean isInit() {
 		return init;
 	}
 

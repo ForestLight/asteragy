@@ -1,15 +1,16 @@
 package jp.ac.tokyo_ct.asteragy;
+
 //現在カオスってるので動かさないで．見ないで＞＜
 public class AIPlayer extends Player {
 
 	public AIPlayer(Game game, String playerName) {
 		super(game, playerName);
 		System.out.println("AIPlayer");
-		
+
 		backup = new Field(game);
-		backup.setFieldSize(game.getField().getX(),game.getField().getY());
+		backup.setFieldSize(game.getField().getX(), game.getField().getY());
 		backup.setAster();
-		
+
 		final Field f = game.getField();
 		colorBackUp = new int[f.getY()][f.getX()];
 		acBackUp = new AsterClass[f.getY()][f.getX()];
@@ -18,31 +19,31 @@ public class AIPlayer extends Player {
 	private CanvasControl canvas;
 
 	private Aster[] myUnit;
-	
+
 	private int pNum;
-	
+
 	/**
 	 * 試行回数
 	 */
-	private final static int TRIAL = 3; 
-	
+	private final static int TRIAL = 3;
+
 	private final static int WAIT = 1000;
-	
+
 	private Field backup;
-	
-//	private Point[] pt = new Point[TRIAL];
-	
-	private Point pt; //操作中のユニット位置
-	
-	private int[] cmd = new int[TRIAL]; //選択したコマンド
-	
-	private Point[][] target = new Point[2][TRIAL]; //選択したターゲット
-	
+
+	// private Point[] pt = new Point[TRIAL];
+
+	private Point pt; // 操作中のユニット位置
+
+	private int[] cmd = new int[TRIAL]; // 選択したコマンド
+
+	private Point[][] target = new Point[2][TRIAL]; // 選択したターゲット
+
 	private int[] ap = new int[2];
-	
-	private int eMax; //評価値の最大
-	
-	private int maxNum; //何回目の試行でeMaxが更新されたか
+
+	private int eMax; // 評価値の最大
+
+	private int maxNum; // 何回目の試行でeMaxが更新されたか
 
 	public Action getAction() {
 		System.out.println("\n\nAIplayer.getAction()");
@@ -51,7 +52,7 @@ public class AIPlayer extends Player {
 		}
 		if (game.getCurrentPlayer() == game.getPlayer1()) {
 			pNum = 0;
-		}else{
+		} else {
 			pNum = 1;
 		}
 		try {
@@ -64,7 +65,7 @@ public class AIPlayer extends Player {
 					getMyUnit();
 					System.out.println("AIPlayer state0");
 					pt = selectAster();
-					t=0;
+					t = 0;
 					eMax = -1;
 
 					if (pt == null)
@@ -73,9 +74,9 @@ public class AIPlayer extends Player {
 					break;
 				case 1: // スワップか特殊コマンドかを選択
 					System.out.println("AIPlayer state1");
-					//fieldClone(backup,game.getField()); //フィールドをコピー
+					// fieldClone(backup,game.getField()); //フィールドをコピー
 					backUpField();
-					Effect.setEffect(false);//エフェクト非表示
+					Effect.setEffect(false);// エフェクト非表示
 					cmd[t] = selectCommand(pt);
 					if (cmd[t] == -1) // キャンセルされた
 						state--;
@@ -134,9 +135,9 @@ public class AIPlayer extends Player {
 					Field field = game.getField();
 					final AsterClass ac = field.getAster(pt).getAsterClass();
 					if (cmd[t] == 1) {
-						if(ac.getNumber() == 1){
+						if (ac.getNumber() == 1) {
 							ap[pNum] -= AsterClass.classCost[target[1][t].x + 1];
-						}else{
+						} else {
 							ap[pNum] -= ac.getCommandCost();
 						}
 					}
@@ -146,21 +147,23 @@ public class AIPlayer extends Player {
 					ap[pNum] += field.deleteAll();
 
 					int ev = evaluation(field);
-					if(ev > eMax){
+					if (ev > eMax) {
 						eMax = ev;
 						maxNum = t;
 					}
 					t++;
-					//fieldClone(field,backup); //フィールド復元
+					// fieldClone(field,backup); //フィールド復元
 					restoreField();
-					if(t < TRIAL){
+					if (t < TRIAL) {
 						System.out.println("->state1");
 						state = 1;
-						System.out.println((t+1)+"回目の試行に入ります");
-					}else{
-						System.out.println("execute : maxNum = "+maxNum+" , eMax = "+eMax);
+						System.out.println((t + 1) + "回目の試行に入ります");
+					} else {
+						System.out.println("execute : maxNum = " + maxNum
+								+ " , eMax = " + eMax);
 						Effect.setEffect(true);
-						if(execute())return null;
+						if (execute())
+							return null;
 						state = 0;
 					}
 				}
@@ -218,11 +221,11 @@ public class AIPlayer extends Player {
 			return null;
 		int n = Game.random.nextInt(myUnit.length);
 		Point pt = myUnit[n].getPoint();
-	//	canvas.getCursor().setCursor(pt, Cursor.CURSOR_1);
-//		try {
-//			Thread.sleep(1-000);
-//		} catch (Exception e) {
-//		}
+		// canvas.getCursor().setCursor(pt, Cursor.CURSOR_1);
+		// try {
+		// Thread.sleep(1-000);
+		// } catch (Exception e) {
+		// }
 		return pt;
 	}
 
@@ -234,7 +237,7 @@ public class AIPlayer extends Player {
 		} else {
 			int cmd = Game.random.nextInt(2);
 			return cmd;
-			//return 0;
+			// return 0;
 
 		}
 	}
@@ -277,7 +280,7 @@ public class AIPlayer extends Player {
 		}
 
 		Point p = targetlist[Game.random.nextInt(c)];
-		//p = targetlist[0];
+		// p = targetlist[0];
 
 		return p;
 	}
@@ -316,12 +319,12 @@ public class AIPlayer extends Player {
 				final AsterClass ac = f[i][j].getAsterClass();
 				if (ac != null) {
 					if (ac.getPlayer() == game.getCurrentPlayer()) {
-						p += AsterClass.classCost[ac.getNumber() - 1]*1.5;
+						p += AsterClass.classCost[ac.getNumber() - 1] * 1.5;
 						if (ac.getNumber() == 1) {
 							p += 500;
 						}
 					} else {
-						p -= AsterClass.classCost[ac.getNumber() - 1]*1.5;
+						p -= AsterClass.classCost[ac.getNumber() - 1] * 1.5;
 						if (ac.getNumber() == 1) {
 							p -= 500;
 						}
@@ -330,10 +333,10 @@ public class AIPlayer extends Player {
 			}
 		}
 
-		if(pNum == 0){
+		if (pNum == 0) {
 			p += ap[0];
 			p -= ap[1];
-		}else{
+		} else {
 			p += ap[1];
 			p -= ap[0];
 		}
@@ -341,66 +344,74 @@ public class AIPlayer extends Player {
 		System.out.println("AIPlayer.evaluation return" + p);
 		return p;
 	}
-	private void fieldClone(Field f1,Field f2){
-//		Field f = new Field(game);
-//		f.setFieldSize(field.getX(), field.getY());
-//		f.setAster();
-		//System.out.println("clone");
-		for(int i = 0;i < f1.getY();i++){
-			for(int j = 0;j < f1.getX();j++){
+
+	private void fieldClone(Field f1, Field f2) {
+		// Field f = new Field(game);
+		// f.setFieldSize(field.getX(), field.getY());
+		// f.setAster();
+		// System.out.println("clone");
+		for (int i = 0; i < f1.getY(); i++) {
+			for (int j = 0; j < f1.getX(); j++) {
 
 				f1.getField()[i][j] = f2.getField()[i][j].clone();
 			}
 		}
 	}
-	private void backUpField(){
+
+	private void backUpField() {
 		final Field f = game.getField();
 
-		for(int i = 0;i < f.getY();i++){
-			for(int j = 0;j < f.getX();j++){
+		for (int i = 0; i < f.getY(); i++) {
+			for (int j = 0; j < f.getX(); j++) {
 				final Aster a = f.getField()[i][j];
 				colorBackUp[i][j] = a.getColor();
-				a.setNum(i*f.getX()+j);
+				a.setNum(i * f.getX() + j);
 				final AsterClass ac = a.getAsterClass();
-				if(ac == null){
+				if (ac == null) {
 					acBackUp[i][j] = null;
-				}else{
+				} else {
 					acBackUp[i][j] = ac.clone();
 				}
 			}
 		}
 	}
-	private void restoreField(){
+
+	private void restoreField() {
 		final Field f = game.getField();
-		
-		for(int i = 0;i < f.getY();i++){
-			for(int j = 0;j < f.getX();j++){
+
+		for (int i = 0; i < f.getY(); i++) {
+			for (int j = 0; j < f.getX(); j++) {
 				Aster a = f.getField()[i][j];
 				int n = a.getNum();
-				while((i * f.getX() + j) != n){//アステルの順番が入れ替わってた場合
+				while ((i * f.getX() + j) != n) {// アステルの順番が入れ替わってた場合
 					System.out.println("swap-");
-					f.swap(new Point(j,i),new Point(n%f.getX(),n/f.getX()));
+					f.swap(new Point(j, i), new Point(n % f.getX(), n
+							/ f.getX()));
 					a = f.getField()[i][j];
 					n = a.getNum();
 				}
 				f.getField()[i][j].setColor(colorBackUp[i][j]);
-				if(acBackUp[i][j] == null){
+				if (acBackUp[i][j] == null) {
 					f.getField()[i][j].setAsterClass(null);
-				}else{
+				} else {
 					f.getField()[i][j].setAsterClass(acBackUp[i][j]);
-					f.getField()[i][j].getAsterClass().setAster(f.getField()[i][j]);
+					f.getField()[i][j].getAsterClass().setAster(
+							f.getField()[i][j]);
 				}
 				f.getField()[i][j].init();
 			}
 		}
 	}
+
 	private int[][] colorBackUp;
+
 	private AsterClass[][] acBackUp;
+
 	/**
 	 * 一番良さそうな行動を実行
-	 *
+	 * 
 	 */
-	private boolean execute(){
+	private boolean execute() {
 		final Field field = game.getField();
 		final AsterClass ac = field.getAster(pt).getAsterClass();
 		final Range canvasRange = game.getCanvas().getRange();
@@ -415,7 +426,7 @@ public class AIPlayer extends Player {
 		canvasRange.setRange(pt, range);
 		canvas.getCommonCommand().setCommand(cmd[maxNum], pt);
 		canvas.getCommonCommand().setAsterClass(ac);
-		
+
 		ac.setCommand(cmd[maxNum]);
 		try {
 			System.out.println("wait2");
@@ -426,14 +437,14 @@ public class AIPlayer extends Player {
 		canvas.getCommonCommand().setCommand(-1, null);
 		int i = 0;
 		while (i < 2 && target[i][maxNum] != null) {
-			if(ac.getNumber() == 1 && cmd[maxNum]==1 && i == 1){
+			if (ac.getNumber() == 1 && cmd[maxNum] == 1 && i == 1) {
 				ac.setPointAndNext(target[1][maxNum]);
 				break;
 			}
 			range = ac.getRange();
 			canvasRange.setRange(pt, range);
 			ac.setPointAndNext(target[i][maxNum]);
-			
+
 			canvas.getCursor().setCursor(target[i][maxNum], Cursor.CURSOR_1);
 			try {
 				System.out.println("wait3");
@@ -445,16 +456,16 @@ public class AIPlayer extends Player {
 		canvasRange.setRange(null, null);
 
 		if (cmd[maxNum] == 1) {
-			if(ac.getNumber() == 1){
+			if (ac.getNumber() == 1) {
 				this.addAP(-AsterClass.classCost[target[1][maxNum].x + 1]);
-			}else{
+			} else {
 				this.addAP(-ac.getCommandCost());
 			}
 		}
 		System.out.println("実行開始");
 		ac.execute();
 		System.out.println("実行完了");
-		field.repaintField();
+		field.repaintField(canvas.getScreen().getGraphics());
 
 		Player p = field.checkGameOver();
 		// ゲームオーバー判定
@@ -475,5 +486,3 @@ public class AIPlayer extends Player {
 		return false;
 	}
 }
-
-

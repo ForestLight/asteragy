@@ -73,7 +73,7 @@ public class MoonClass extends AsterClass {
 					Point pt = new Point(j, i);
 					
 					Effect effect = new EffectCommandMoon(f, me, pt);
-					effect.start();
+					getAster().getField().getScreen().paintEffect(effect);
 					
 					f.swap(pt, me);
 					f.setDeleteFlag(pt);

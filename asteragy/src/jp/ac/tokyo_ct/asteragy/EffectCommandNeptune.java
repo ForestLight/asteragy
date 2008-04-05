@@ -34,11 +34,10 @@ public class EffectCommandNeptune extends Effect {
 
 	}
 
-	public void start() {
+	public void start(Graphics g) {
 		if(!isEffect)
 			return;
 		// TODO 自動生成されたメソッド・スタブ
-		Graphics g = field.getGame().getCanvas().getGraphics();
 
 		field.setOrignAster(g, point, 0, GameCanvas.measure / 2);
 

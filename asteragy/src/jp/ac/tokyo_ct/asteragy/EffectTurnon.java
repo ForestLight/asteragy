@@ -2,23 +2,26 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.Font;
 import com.nttdocomo.ui.Graphics;
+import com.nttdocomo.ui.Image;
 
 public class EffectTurnon extends Effect {
-	
+
 	final private CanvasControl canvas;
-	
+
 	final private Player player;
-	
-	public EffectTurnon(CanvasControl canvas, Player player){
+
+	public EffectTurnon(CanvasControl canvas, Player player) {
 		this.canvas = canvas;
 		this.player = player;
 	}
 
-	public void start() {
-		if(!isEffect)
+	public void start(Graphics g) {
+		if (!isEffect)
 			return;
 		// TODO é©ìÆê∂ê¨Ç≥ÇÍÇΩÉÅÉ\ÉbÉhÅEÉXÉ^Éu
-		Graphics g = canvas.getGraphics();
+
+		Image back = canvas.getScreen().getScreen(0, 0, canvas.getWidth(),
+				canvas.getHeight());
 
 		// îwåiIn
 		int x = canvas.getWidth();
@@ -28,7 +31,7 @@ public class EffectTurnon extends Effect {
 
 			g.drawImage(player.getTurnOnBack(), x, y);
 
-			g.unlock(false);
+			g.unlock(true);
 
 			x -= 24;
 
@@ -52,7 +55,7 @@ public class EffectTurnon extends Effect {
 			g.drawImage(player.getTurnOnBack(), x, y);
 			g.drawString(string, wx, wy);
 
-			g.unlock(false);
+			g.unlock(true);
 
 			wx -= 24;
 
@@ -79,7 +82,7 @@ public class EffectTurnon extends Effect {
 			g.drawImage(player.getTurnOnBack(), x, y);
 			g.drawString(string, wx, wy);
 
-			g.unlock(false);
+			g.unlock(true);
 
 			wx -= 24;
 
@@ -94,10 +97,10 @@ public class EffectTurnon extends Effect {
 		// îwåiOut
 		while (-x < canvas.getWidth()) {
 			g.lock();
-			canvas.repaint(x + canvas.getWidth(), y, canvas.getWidth() - x, canvas.getHeight() / 2);
+			g.drawImage(back, 0, 0);
 			g.drawImage(player.getTurnOnBack(), x, y);
 
-			g.unlock(false);
+			g.unlock(true);
 
 			x -= 24;
 
@@ -109,7 +112,5 @@ public class EffectTurnon extends Effect {
 			}
 		}
 	}
-	
-	
 
 }

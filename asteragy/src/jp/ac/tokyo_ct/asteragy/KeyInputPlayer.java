@@ -14,8 +14,9 @@ public class KeyInputPlayer extends Player {
 	}
 
 	private CanvasControl canvas;
-	
+
 	private Point cursorPoint;
+
 	/*
 	 * (非 Javadoc)
 	 * 
@@ -48,17 +49,18 @@ public class KeyInputPlayer extends Player {
 					AsterClass ac = a.getAsterClass();
 					final Range canvasRange = game.getCanvas().getRange();
 					int[][] range = ac.getRange();
-					
+
 					canvasRange.setRange(pt, range);
-					
+
 					cmd = selectCommand(pt);
-					
-				//	canvasRange.setRange(null, null);
-					
-					if (cmd == -1){ // キャンセルされた
+
+					// canvasRange.setRange(null, null);
+
+					if (cmd == -1) { // キャンセルされた
 						state--;
 						canvasRange.setRange(null, null);
-					}else
+						canvas.getScreen().flipScreen();
+					} else
 						state++;
 					break;
 				}
@@ -70,7 +72,7 @@ public class KeyInputPlayer extends Player {
 
 					System.out.println("ターゲット選択");
 					final Range canvasRange = game.getCanvas().getRange();
-					
+
 					while (ac.hasNext()) {
 						int[][] range = ac.getRange();
 						canvasRange.setRange(pt, range);
@@ -88,6 +90,7 @@ public class KeyInputPlayer extends Player {
 						ac.setPointAndNext(target);
 					}
 					canvasRange.setRange(null, null);
+					canvas.getScreen().flipScreen();
 
 					// サン専用
 					if (ac.getNumber() == 1 && cmd == 1) {
@@ -115,7 +118,7 @@ public class KeyInputPlayer extends Player {
 					System.out.println("実行開始");
 					ac.execute();
 					System.out.println("実行完了");
-					field.repaintField();
+					field.repaintField(canvas.getScreen().getGraphics());
 
 					Player p = field.checkGameOver();
 					// ゲームオーバー判定仮
@@ -136,9 +139,9 @@ public class KeyInputPlayer extends Player {
 					System.out.println("消去開始");
 					this.addAP(field.deleteAll());
 					System.out.println("消去完了");
-					field.repaintField();
-					
-					canvas.getDisappearControl().start();
+
+					canvas.getScreen()
+							.paintEffect(canvas.getDisappearControl());
 
 					p = field.checkGameOver();
 
@@ -253,6 +256,7 @@ public class KeyInputPlayer extends Player {
 			private void applyPosition() {
 
 				canvas.getCursor().setCursor(new Point(x, y), Cursor.CURSOR_1);
+				canvas.getScreen().flipScreen();
 			}
 
 			private Point pt = new Point();
@@ -263,6 +267,7 @@ public class KeyInputPlayer extends Player {
 		}
 
 		canvas.getCommonCommand().setCommand(-1, null);
+		canvas.getScreen().flipScreen();
 		System.out.println("KeyInputPlayer.selectAster()");
 		EventProcesserForSelectAster ep = new EventProcesserForSelectAster();
 		canvas.setEventProcesser(ep);
@@ -294,21 +299,22 @@ public class KeyInputPlayer extends Player {
 				case Display.KEY_UP:
 					if (command > 0) {
 						command--;
-					}else{
+					} else {
 						command = 1;
 					}
 					break;
 				case Display.KEY_DOWN:
 					if (command < 1) {
 						command++;
-					}else{
+					} else {
 						command = 0;
 					}
 					break;
 				}
 				System.out.println("selectCommand.processKeyEvent");
-				canvas.getCommonCommand().setCommand(command, pt);
 				canvas.getCommonCommand().setAsterClass(ac);
+				canvas.getCommonCommand().setCommand(command, pt);
+				canvas.getScreen().flipScreen();
 			}
 
 			protected boolean onCancel() {
@@ -348,6 +354,7 @@ public class KeyInputPlayer extends Player {
 		System.out.println("KeyInputPlayer.selectCommand()");
 
 		canvas.getCommonCommand().setCommand(0, pt);
+		canvas.getScreen().flipScreen();
 		EventProcesserForSelectCommand ep = new EventProcesserForSelectCommand();
 		return ep.selectCommand(canvas);
 	}
@@ -449,6 +456,7 @@ public class KeyInputPlayer extends Player {
 
 			private void applyPosition() {
 				canvas.getCursor().setCursor(new Point(x, y), Cursor.CURSOR_1);
+				canvas.getScreen().flipScreen();
 			}
 
 			private volatile Point target = new Point(0, 0);
@@ -461,6 +469,7 @@ public class KeyInputPlayer extends Player {
 		}
 
 		canvas.getCommonCommand().setCommand(-1, null);
+		canvas.getScreen().flipScreen();
 		EventProcesserForSelectTarget ep = new EventProcesserForSelectTarget();
 		canvas.setEventProcesser(ep);
 		System.out.println("canvas.setEventProcesser() after");
@@ -482,14 +491,14 @@ public class KeyInputPlayer extends Player {
 				case Display.KEY_UP:
 					if (command > 0) {
 						command--;
-					}else{
+					} else {
 						command = 9;
 					}
 					break;
 				case Display.KEY_DOWN:
 					if (command < 9) {
 						command++;
-					}else{
+					} else {
 						command = 0;
 					}
 					break;
@@ -498,6 +507,7 @@ public class KeyInputPlayer extends Player {
 				System.out.println("select = " + command);
 				sunCommand.setCommand(command, pt);
 				// Command.setAsterClass(ac);
+				canvas.getScreen().flipScreen();
 			}
 
 			protected boolean onCancel() {
@@ -525,10 +535,12 @@ public class KeyInputPlayer extends Player {
 		System.out.println("KeyInputPlayer.selectCommand()");
 
 		sunCommand.setCommand(0, pt);
+		canvas.getScreen().flipScreen();
 		EventProcesserForSelectAsterClass ep = new EventProcesserForSelectAsterClass();
 		Point r = new Point();
 		r.x = ep.selectAsterClass(canvas);
 		sunCommand.setCommand(-1, null);
+		canvas.getScreen().flipScreen();
 		return r;
 	}
 }

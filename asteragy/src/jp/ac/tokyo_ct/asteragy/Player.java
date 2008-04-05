@@ -4,6 +4,11 @@ import com.nttdocomo.ui.*;
 
 public abstract class Player implements PaintItem {
 	/**
+	 * プレイヤー情報領域高さ
+	 */
+	public static final int playerheight = 20;
+
+	/**
 	 * @param playerName
 	 *            プレイヤーの名前
 	 */
@@ -42,11 +47,13 @@ public abstract class Player implements PaintItem {
 	// プレイヤー情報座標
 	private static final int apx = 5;
 
-	private static final int apy = 4;
+	private static final int apy = (playerheight + Font.getDefaultFont()
+			.getAscent()) / 2;
 
 	private static final int namex = 42;
 
-	private static final int namey = 4 + Font.getDefaultFont().getAscent();
+	private static final int namey = (playerheight + Font.getDefaultFont()
+			.getAscent()) / 2;
 
 	/**
 	 * プレイヤー情報描画
@@ -57,22 +64,18 @@ public abstract class Player implements PaintItem {
 	 *            プレイヤー
 	 */
 	public void paint(Graphics g) {
-		int y;
 		if (this.equals(game.getPlayer1())) {
-			g.setOrigin(0, game.getCanvas().getHeight()
-					- GameCanvas.playerheight);
-			y = GameCanvas.playerheight - apy;
+			g.setOrigin(0, game.getCanvas().getHeight() - playerheight);
 		} else {
 			g.setOrigin(0, 0);
-			y = apy + Font.getDefaultFont().getAscent();
 		}
 		if (game.getCurrentPlayer() == this) {
-
+			//ここ募集
 		}
 		g.setColor(Graphics.getColorOfRGB(228, 196, 255));
-		g.drawString("" + ap, apx+1, y+1);
+		g.drawString("" + ap, apx + 1, apy + 1);
 		g.setColor(Graphics.getColorOfRGB(196, 64, 255));
-		g.drawString("" + ap, apx, y);
+		g.drawString("" + ap, apx, apy);
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.drawString(name, namex, namey);
 	}
@@ -81,12 +84,11 @@ public abstract class Player implements PaintItem {
 		if (game.isInit())
 			return;
 		final CanvasControl canvas = game.getCanvas();
-		Graphics g = canvas.getGraphics();
-		g.lock();
+		Graphics g = canvas.getScreen().getGraphics();
 		int player = game.getPlayerIndex(this) + 1;
 		canvas.getBackImage().paintPlayerBack(g, player);
 		paint(g);
-		g.unlock(false);
+		g.dispose();
 	}
 
 	public Image getTurnOnBack() {

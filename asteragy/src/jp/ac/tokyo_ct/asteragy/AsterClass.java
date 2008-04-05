@@ -16,11 +16,15 @@ public abstract class AsterClass {
 		player = a.player;
 		actionCount = a.actionCount;
 		mode = a.mode;
-//		aster = a.getAster();
-		if(a.target1 == null) target1 = null;
-		else target1 = a.target1.clone();
-		if(a.target2 == null) target2 = null;
-		else target2 = a.target2.clone();
+		// aster = a.getAster();
+		if (a.target1 == null)
+			target1 = null;
+		else
+			target1 = a.target1.clone();
+		if (a.target2 == null)
+			target2 = null;
+		else
+			target2 = a.target2.clone();
 		isProtected = a.isProtected;
 	}
 
@@ -66,8 +70,8 @@ public abstract class AsterClass {
 	public int getCommand() {
 		return mode;
 	}
-	
-	public void setAster(Aster a){
+
+	public void setAster(Aster a) {
 		aster = a;
 	}
 
@@ -177,10 +181,10 @@ public abstract class AsterClass {
 		case 0:
 			// field.backupField();
 			field.swap(target1, target2);
-			
+
 			// スワップエフェクト。
 			Effect swap = new EffectFieldSwap(field, target1, target2);
-			swap.start();
+			field.getScreen().paintEffect(swap);
 			/*
 			 * // サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください） if
 			 * (field.judgeSelfDestruction() == true) { Dialog d = new
@@ -217,7 +221,8 @@ public abstract class AsterClass {
 		// フラグ消去
 		isProtected = false;
 
-		aster.getField().repaintAster(aster.getPoint());
+		aster.getField().repaintAster(
+				aster.getField().getScreen().getGraphics(), aster.getPoint());
 	}
 
 	public int getActionNum() {
@@ -397,10 +402,9 @@ public abstract class AsterClass {
 	public final static String[] className = { "ｻﾝ", "ｽﾀｰ", "ﾏｰｷｭﾘｰ", "ｳﾞｨｰﾅｽ",
 			"ｱｰｽ", "ﾏｰｽﾞ", "ｼﾞｭﾋﾟﾀｰ", "ｻﾀｰﾝ", "ｳﾗﾇｽ", "ﾈﾌﾟﾁｭｰﾝ", "ﾌﾟﾙｰﾄ",
 			"ﾑｰﾝ", };
-	
+
 	public final static String[] classNameB = { "サン", "スター", "マーキュリー", "ヴィーナス",
-		"アース", "マーズ", "ジュピター", "サターン", "ウラヌス", "ネプチューン", "プルート",
-		"ムーン", };
+			"アース", "マーズ", "ジュピター", "サターン", "ウラヌス", "ネプチューン", "プルート", "ムーン", };
 
 	public final static String[] commandName = { "クラスチェンジ", "スワップ", "クイックタイム",
 			"テンプテーション", "サモンムーン", "フレアスター", "プロテクションシステム", "ローテーション",
