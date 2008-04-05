@@ -9,6 +9,10 @@ public class AIPlayer extends Player {
 		backup = new Field(game);
 		backup.setFieldSize(game.getField().getX(),game.getField().getY());
 		backup.setAster();
+		
+		final Field f = game.getField();
+		colorBackUp = new int[f.getY()][f.getX()];
+		acBackUp = new AsterClass[f.getY()][f.getX()];
 	}
 
 	private CanvasControl canvas;
@@ -20,7 +24,7 @@ public class AIPlayer extends Player {
 	/**
 	 * 試行回数
 	 */
-	private final static int TRIAL = 3; 
+	private final static int TRIAL = 1; 
 	
 	private final static int WAIT = 1000;
 	
@@ -69,7 +73,8 @@ public class AIPlayer extends Player {
 					break;
 				case 1: // スワップか特殊コマンドかを選択
 					System.out.println("AIPlayer state1");
-					fieldClone(backup,game.getField()); //フィールドをコピー
+					//fieldClone(backup,game.getField()); //フィールドをコピー
+					backUpField();
 					Effect.setEffect(false);//エフェクト非表示
 					cmd[t] = selectCommand(pt);
 					if (cmd[t] == -1) // キャンセルされた
@@ -146,7 +151,8 @@ public class AIPlayer extends Player {
 						maxNum = t;
 					}
 					t++;
-					fieldClone(field,backup); //フィールド復元
+					//fieldClone(field,backup); //フィールド復元
+					restoreField();
 					if(t < TRIAL){
 						System.out.println("->state1");
 						state = 1;
@@ -346,7 +352,38 @@ public class AIPlayer extends Player {
 			}
 		}
 	}
-	
+	private void backUpField(){
+		final Field f = game.getField();
+
+		for(int i = 0;i < f.getY();i++){
+			for(int j = 0;j < f.getX();j++){
+				colorBackUp[i][j] = f.getField()[i][j].getColor();
+				final AsterClass ac = f.getField()[i][j].getAsterClass();
+				if(ac == null){
+					acBackUp[i][j] = null;
+				}else{
+					acBackUp[i][j] = ac.clone();
+				}
+			}
+		}
+	}
+	private void restoreField(){
+		final Field f = game.getField();
+		
+		for(int i = 0;i < f.getY();i++){
+			for(int j = 0;j < f.getX();j++){
+				f.getField()[i][j].setColor(colorBackUp[i][j]);
+				if(acBackUp[i][j] == null){
+					f.getField()[i][j].setAsterClass(null);
+				}else{
+					f.getField()[i][j].setAsterClass(acBackUp[i][j].clone());
+				}
+				f.getField()[i][j].init();
+			}
+		}
+	}
+	private int[][] colorBackUp;
+	private AsterClass[][] acBackUp;
 	/**
 	 * 一番良さそうな行動を実行
 	 *

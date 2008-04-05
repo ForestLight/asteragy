@@ -55,7 +55,21 @@ public class Aster {
 //		a.judgeFlag = false;
 		return a;
 	}
+	
+	public void init(){
+		deleteFlag = false;
+		judgeFlag = false;
+		paint = new AsterPaint();
+	}
 
+	public void setNum(int i){
+		num = i;
+	}
+	public int getNum(){
+		return num;
+	}
+	
+	public int num;
 	/*
 	 * public void swap(int x1, int y1, int x2, int y2) { field.swap(x1, y1, x2,
 	 * y2); }
