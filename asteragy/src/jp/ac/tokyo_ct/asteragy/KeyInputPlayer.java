@@ -55,9 +55,10 @@ public class KeyInputPlayer extends Player {
 					
 				//	canvasRange.setRange(null, null);
 					
-					if (cmd == -1) // キャンセルされた
+					if (cmd == -1){ // キャンセルされた
 						state--;
-					else
+						canvasRange.setRange(null, null);
+					}else
 						state++;
 					break;
 				}

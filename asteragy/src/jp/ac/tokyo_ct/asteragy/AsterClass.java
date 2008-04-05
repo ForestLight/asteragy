@@ -419,5 +419,4 @@ public abstract class AsterClass {
 			4 };
 
 	public final static int[] actionNum = { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3 };
-
 }
