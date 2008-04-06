@@ -25,7 +25,7 @@ public class AIPlayer extends Player {
 	/**
 	 * 試行回数
 	 */
-	private final static int TRIAL = 3;
+	private final static int TRIAL = 10;
 
 	private final static int WAIT = 1000;
 
@@ -39,7 +39,7 @@ public class AIPlayer extends Player {
 
 	private Point[][] target = new Point[2][TRIAL]; // 選択したターゲット
 
-	private int[] ap = new int[2];
+	private int[] ap = new int[2]; //仮想AP
 
 	private int eMax; // 評価値の最大
 
@@ -87,7 +87,8 @@ public class AIPlayer extends Player {
 				{
 					System.out.println("AIPlayer state2");
 					int i = 0;
-					Aster a = game.getField().getAster(pt);
+					final Field f = game.getField();
+					Aster a = f.getAster(pt);
 					AsterClass ac = a.getAsterClass();
 					ac.setCommand(cmd[t]);
 					target[0][t] = null;
@@ -111,6 +112,16 @@ public class AIPlayer extends Player {
 						ac.setPointAndNext(target[i][t]);
 						i++;
 					}
+					if(i == 2 
+						&& f.getAster(target[0][t]).getColor() == f.getAster(target[1][t]).getColor()
+						&& f.getAster(target[0][t]).getAsterClass() != null
+						&& f.getAster(target[1][t]).getAsterClass() != null){
+						ac.moveAstern();
+						ac.moveAstern();
+						state = 1;
+						
+					}
+					
 
 					// サン専用
 					if (ac.getNumber() == 1 && cmd[t] == 1) {
@@ -170,6 +181,10 @@ public class AIPlayer extends Player {
 			}
 			return null;
 		} finally {
+			try {
+				Thread.sleep(WAIT);
+			} catch (Exception e) {
+			}
 			canvas.resetEventProcesser();
 			Effect.setEffect(true);
 		}
@@ -232,7 +247,7 @@ public class AIPlayer extends Player {
 	private int selectCommand(Point pt) {
 		final AsterClass ac = game.getField().getAster(pt).getAsterClass();
 		System.out.println("AIPlayer selectCommand()");
-		if (AsterClass.commandCost[ac.getNumber() - 1] > this.getAP()) {
+		if (AsterClass.commandCost[ac.getNumber() - 1] > ap[pNum]) {
 			return 0;
 		} else {
 			int cmd = Game.random.nextInt(2);
@@ -289,9 +304,8 @@ public class AIPlayer extends Player {
 		int cmdMax = 0;
 
 		for (int i = 0; i <= 9; i++) {
-			if (AsterClass.classCost[i + 1] > this.getAP())
+			if (AsterClass.classCost[i + 1] > ap[pNum])
 				break;
-
 			cmdMax++;
 		}
 
@@ -319,12 +333,12 @@ public class AIPlayer extends Player {
 				final AsterClass ac = f[i][j].getAsterClass();
 				if (ac != null) {
 					if (ac.getPlayer() == game.getCurrentPlayer()) {
-						p += AsterClass.classCost[ac.getNumber() - 1] * 1.5;
+						p += AsterClass.classCost[ac.getNumber() - 1] + 2;
 						if (ac.getNumber() == 1) {
 							p += 500;
 						}
 					} else {
-						p -= AsterClass.classCost[ac.getNumber() - 1] * 1.5;
+						p -= AsterClass.classCost[ac.getNumber() - 1] + 2;
 						if (ac.getNumber() == 1) {
 							p -= 500;
 						}
@@ -417,15 +431,19 @@ public class AIPlayer extends Player {
 		final Range canvasRange = game.getCanvas().getRange();
 		int[][] range = ac.getRange();
 		Effect.setEffect(true);
+		
 		canvas.getCursor().setCursor(pt, Cursor.CURSOR_1);
+		canvas.getScreen().flipScreen();
 		try {
 			System.out.println("wait1");
 			Thread.sleep(WAIT);
 		} catch (Exception e) {
 		}
+		
 		canvasRange.setRange(pt, range);
 		canvas.getCommonCommand().setCommand(cmd[maxNum], pt);
 		canvas.getCommonCommand().setAsterClass(ac);
+		canvas.getScreen().flipScreen();
 
 		ac.setCommand(cmd[maxNum]);
 		try {
@@ -435,6 +453,7 @@ public class AIPlayer extends Player {
 		}
 
 		canvas.getCommonCommand().setCommand(-1, null);
+		canvas.getScreen().flipScreen();
 		int i = 0;
 		while (i < 2 && target[i][maxNum] != null) {
 			if (ac.getNumber() == 1 && cmd[maxNum] == 1 && i == 1) {
@@ -443,6 +462,7 @@ public class AIPlayer extends Player {
 			}
 			range = ac.getRange();
 			canvasRange.setRange(pt, range);
+			canvas.getScreen().flipScreen();
 			ac.setPointAndNext(target[i][maxNum]);
 
 			canvas.getCursor().setCursor(target[i][maxNum], Cursor.CURSOR_1);
@@ -454,7 +474,7 @@ public class AIPlayer extends Player {
 			i++;
 		}
 		canvasRange.setRange(null, null);
-
+		canvas.getScreen().flipScreen();
 		if (cmd[maxNum] == 1) {
 			if (ac.getNumber() == 1) {
 				this.addAP(-AsterClass.classCost[target[1][maxNum].x + 1]);
@@ -475,8 +495,18 @@ public class AIPlayer extends Player {
 
 		// 消滅判定
 		System.out.println("消去開始");
-		this.addAP(field.deleteAll());
+		int n = field.deleteAll();
+		if(n > 0){
+			this.addAP(n);
+			canvas.getScreen().paintEffect(canvas.getDisappearControl());
+			try {
+				Thread.sleep(WAIT);
+			} catch (Exception e) {
+			}
+		}
 		System.out.println("消去完了");
+		
+
 
 		p = field.checkGameOver();
 		if (p != null) {
