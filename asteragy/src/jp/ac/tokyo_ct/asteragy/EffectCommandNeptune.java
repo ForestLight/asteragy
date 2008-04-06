@@ -1,5 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
+import java.util.Random;
+
 import com.nttdocomo.ui.*;
 
 public class EffectCommandNeptune extends Effect {
@@ -14,50 +16,52 @@ public class EffectCommandNeptune extends Effect {
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.field = field;
 		this.point = point;
-		loadImage();
+		// loadImage();
 	}
 
-	private void loadImage() {
-
-		if (effect != null)
-			return;
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager
-					.getImage("resource:///neptune_effect.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			effect = m.getImage();
-		} catch (Exception e) {
-		}
-
-	}
+	/*
+	 * private void loadImage() {
+	 * 
+	 * if (effect != null) return; try { // リソースから読み込み MediaImage m =
+	 * MediaManager .getImage("resource:///neptune_effect.gif"); // メディアの使用開始
+	 * m.use(); // 読み込み effect = m.getImage(); } catch (Exception e) { } }
+	 */
 
 	public void start(Graphics g) {
-		if(!isEffect)
+		if (!isEffect)
 			return;
 		// TODO 自動生成されたメソッド・スタブ
 
-		field.setOrignAster(g, point, 0, GameCanvas.measure / 2);
+		g.setOrigin(0, 0);
 
-		for (int i = 0; i < 30; i++) {
-			g.lock();
+		Point from = new Point(field.getGame().getCanvas().getLeftMargin()
+				+ point.x * GameCanvas.measure + GameCanvas.measure / 2, 0);
+		Point to = new Point(field.getGame().getCanvas().getLeftMargin()
+				+ point.x * GameCanvas.measure + GameCanvas.measure / 2, field
+				.getGame().getCanvas().getTopMargin()
+				+ point.y * GameCanvas.measure + GameCanvas.measure / 2);
+		Thunder thunder = new Thunder(from, to);
+		thunder.paint(g);
+		/*
+		 * for (int i = 0; i < 30; i++) { g.lock();
+		 * 
+		 * g.drawImage(effect, 0, -1 * effect.getHeight(), 0, 0, effect
+		 * .getWidth(), effect.getHeight() / 10 * i);
+		 * 
+		 * g.unlock(true);
+		 * 
+		 * try { Thread.sleep(300 / CanvasControl.f); } catch
+		 * (InterruptedException e) { // TODO 自動生成された catch ブロック
+		 * e.printStackTrace(); } }
+		 */
 
-			g.drawImage(effect, 0, -1 * effect.getHeight(), 0, 0, effect
-					.getWidth(), effect.getHeight() / 10 * i);
-
-			g.unlock(true);
-
-			try {
-				Thread.sleep(300 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+		try {
+			Thread.sleep(30000 / CanvasControl.f);
+		} catch (InterruptedException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
 
-		g.setOrigin(0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
 		g.fillRect(0, 0, field.getGame().getCanvas().getWidth(), field
 				.getGame().getCanvas().getHeight());
@@ -70,5 +74,6 @@ public class EffectCommandNeptune extends Effect {
 		}
 
 		field.getGame().getCanvas().repaint();
+		field.getScreen().flipScreen();
 	}
 }
