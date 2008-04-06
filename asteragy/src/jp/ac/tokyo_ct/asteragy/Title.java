@@ -19,11 +19,15 @@ public class Title extends Canvas {
 
 	private boolean optionMenuFlag = false;
 
-	private boolean explainFlag = false;
+	private boolean explainAsterClassFlag = false;
+
+	private boolean explainRuleFlag = false;
 
 	private Option option = new Option();
 
-	private ExplainAsterClass explain = new ExplainAsterClass();
+	private ExplainAsterClass eac = new ExplainAsterClass();
+
+	private ExplainRules er = new ExplainRules();
 
 	// private static int highScore;
 
@@ -48,7 +52,7 @@ public class Title extends Canvas {
 	/**
 	 * タイトル画面の描画
 	 * 
-	 * @return gameType 0:一機対戦 1:AI対戦 2:ネットワーク対戦
+	 * @return option.gameType 0:一機対戦 1:AI対戦 2:ネットワーク対戦
 	 */
 	public Option start() {
 		startThread = Thread.currentThread();
@@ -83,7 +87,7 @@ public class Title extends Canvas {
 		if (type == Display.KEY_PRESSED_EVENT) {
 			switch (param) {
 			case Display.KEY_UP:
-				if (!explainFlag) {
+				if (!explainAsterClassFlag && !explainRuleFlag) {
 					if (!optionMenuFlag) {
 						if (cursor > 0)
 							cursor--;
@@ -97,12 +101,12 @@ public class Title extends Canvas {
 						if (cursor > 0)
 							cursor--;
 						else
-							cursor = 6;
+							cursor = 5;
 						break;
 					}
 				}
 			case Display.KEY_DOWN:
-				if (!explainFlag) {
+				if (!explainAsterClassFlag && !explainRuleFlag) {
 					if (!optionMenuFlag) {
 						if ((depth == 0 && cursor < 4) || (depth != 0 && cursor < 2))
 							cursor++;
@@ -111,7 +115,7 @@ public class Title extends Canvas {
 						break;
 					}
 					else {
-						if (cursor < 6)
+						if (cursor < 5)
 							cursor++;
 						else
 							cursor = 0;
@@ -119,7 +123,7 @@ public class Title extends Canvas {
 					}
 				}
 			case Display.KEY_SELECT:
-				if (!explainFlag) {
+				if (!explainAsterClassFlag && !explainRuleFlag) {
 					if (!optionMenuFlag) {
 						if (depth == 0) {
 							switch (cursor) {
@@ -157,8 +161,11 @@ public class Title extends Canvas {
 						}
 						else {
 							switch (cursor) {
+							case 0:
+								explainRuleFlag = true;
+								break;
 							case 1:
-								explainFlag = true;
+								explainAsterClassFlag = true;
 								break;
 							case 2:
 								depth -= 2;
@@ -168,15 +175,12 @@ public class Title extends Canvas {
 						}
 					}
 					else {
-						if (cursor == 6) {
+						if (cursor == 5) {
 							optionMenuFlag = false;
 							cursor = 0;
 						}
-						else if (cursor == 5) {
-							explainFlag = true;
-						}
 						else {
-							cursor = 6;
+							cursor = 5;
 						}
 					}
 				}
@@ -206,12 +210,15 @@ public class Title extends Canvas {
 						break;
 					}
 				}
-				if (explainFlag) {
-					explain.number--;
-					if (explain.number < 1) {
-						explain.number = 12;
+				else if (explainAsterClassFlag && !explainRuleFlag) {
+					eac.number--;
+					if (eac.number < 1) {
+						eac.number = 12;
 					}
-					explain.renew();
+					eac.renew();
+				}
+				else if (explainRuleFlag) {
+					
 				}
 				break;
 			case Display.KEY_RIGHT:
@@ -239,18 +246,23 @@ public class Title extends Canvas {
 						break;
 					}
 				}
-				if (explainFlag) {
-					explain.number++;
-					if (explain.number > 12) {
-						explain.number = 1;
+				else if (explainAsterClassFlag && !explainRuleFlag) {
+					eac.number++;
+					if (eac.number > 12) {
+						eac.number = 1;
 					}
-					explain.renew();
+					eac.renew();
+				}
+				else if (explainRuleFlag) {
+					
 				}
 				break;
 			case Display.KEY_0:
-				explainFlag = false;
-				explain.number = 1;
-				explain.renew();
+				explainAsterClassFlag = false;
+				eac.number = 1;
+				eac.renew();
+				explainRuleFlag = false;
+				
 				break;
 			}
 			repaint();
@@ -259,8 +271,11 @@ public class Title extends Canvas {
 
 	public void paint(Graphics g) {
 
-		if (explainFlag) {
-			explain.paint(g);
+		if (explainAsterClassFlag) {
+			eac.paint(g);
+		}
+		else if (explainRuleFlag) {
+			er.paint(g);
 		}
 		else {
 			if (!optionMenuFlag) {
@@ -321,7 +336,6 @@ public class Title extends Canvas {
 				g.drawString("色の数", 0, 45);
 				g.drawString("消える数", 0, 60);
 				g.drawString("初期AP", 0, 75);
-				g.drawString("クラスの能力を見る", 0, 220);
 				g.drawString("もどる", 0, 237);
 
 				g.drawString("" + option.fieldYSize, 120, 15);
@@ -398,9 +412,6 @@ public class Title extends Canvas {
 						g.drawString("|", 138 + 7 * (cursor / 4), cursor * 15 + 14);
 						g.drawString("|", 139 + 7 * (cursor / 4), cursor * 15 + 14);
 					}
-				}
-				else if(cursor == 5) {
-					g.drawRect(0, 208, 108, 15);
 				}
 				else {
 					g.drawRect(0, 224, 35, 15);
