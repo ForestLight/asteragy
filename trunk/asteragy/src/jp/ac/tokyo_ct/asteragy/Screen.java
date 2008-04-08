@@ -14,16 +14,16 @@ public class Screen implements PaintItem {
 		display = Image.createImage(canvas.getWidth(), canvas.getHeight());
 	}
 
-	public void flipScreen() {
+	synchronized public void flipScreen() {
 		canvas.repaint();
 	}
 
-	public void paintEffect(Effect effect) {
+	synchronized public void paintEffect(Effect effect) {
 		Graphics g = canvas.getGraphics();
 		effect.start(g);
 	}
 
-	public Graphics getGraphics() {
+	synchronized public Graphics getGraphics() {
 		return display.getGraphics();
 	}
 
@@ -32,9 +32,17 @@ public class Screen implements PaintItem {
 		g.drawImage(display, 0, 0);
 	}
 
-	public Image getScreen(int x, int y, int width, int height) {
+	synchronized public Image getScreen(int x, int y, int width, int height) {
 		Image screen = Image.createImage(width, height);
 		screen.getGraphics().drawImage(display, 0, 0, x, y, width, height);
+		return screen;
+	}
+
+	synchronized public Image getScreen(Point location, Point size) {
+		// TODO 自動生成されたメソッド・スタブ
+		Image screen = Image.createImage(size.x, size.y);
+		screen.getGraphics().drawImage(display, 0, 0, location.x, location.y,
+				size.x, size.y);
 		return screen;
 	}
 

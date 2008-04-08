@@ -45,7 +45,7 @@ public class Range {
 
 	public void paint(Graphics g, Point point) {
 		// TODO 自動生成されたメソッド・スタブ
-		if (!visible || aster == null)
+		if (!visible || aster == null || range == null)
 			return;
 		final int rx = point.x - aster.x + (range[0].length / 2);
 		final int ry = point.y - aster.y + (range.length / 2);
@@ -65,5 +65,4 @@ public class Range {
 			g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		}
 	}
-
 }
