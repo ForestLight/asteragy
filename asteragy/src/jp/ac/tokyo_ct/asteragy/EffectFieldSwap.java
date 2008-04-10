@@ -64,7 +64,7 @@ public class EffectFieldSwap extends Effect {
 				l++;
 
 			try {
-				Thread.sleep(1000 / CanvasControl.f);
+				Thread.sleep(200 / CanvasControl.f);
 			} catch (InterruptedException e) {
 				// TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
 				e.printStackTrace();
