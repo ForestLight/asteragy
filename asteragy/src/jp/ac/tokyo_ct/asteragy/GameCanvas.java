@@ -8,7 +8,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 * 18Å~18
 	 */
 	public static final int measure = 18;
-
+	
 	private final CanvasControl canvas;
 
 	public GameCanvas(CanvasControl canvas) {

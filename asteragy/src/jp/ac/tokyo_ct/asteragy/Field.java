@@ -632,6 +632,12 @@ class Field implements PaintItem {
 				* aster.y, GameCanvas.measure, GameCanvas.measure);
 	}
 
+	public Point getAsterLocation(Point aster) {
+		return new Point(game.getCanvas().getLeftMargin() + GameCanvas.measure
+				* aster.x + 1, game.getCanvas().getTopMargin()
+				+ GameCanvas.measure * aster.y + 1);
+	}
+
 	public int getWidth() {
 		return X * GameCanvas.measure + 1;
 	}
