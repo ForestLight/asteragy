@@ -136,6 +136,7 @@ final class Game implements Runnable {
 				} catch (Exception e) {
 				}
 				canvas.paintString(goPlayer + "‚Ì•‰‚¯", true);
+				canvas.getScreen().flipScreen();
 				try {
 					Thread.sleep(1500);
 				} catch (Exception e) {
