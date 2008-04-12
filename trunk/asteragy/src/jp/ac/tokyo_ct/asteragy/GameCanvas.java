@@ -8,7 +8,7 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 * 18×18
 	 */
 	public static final int measure = 18;
-	
+
 	private final CanvasControl canvas;
 
 	public GameCanvas(CanvasControl canvas) {
@@ -18,19 +18,16 @@ public class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	public void paint(Graphics g) {
 		System.out.println("repaint()");
-		// ダブルバッファ開始
-		g.lock();
+		final Screen screen = canvas.getScreen();
+		synchronized (screen) {
+			// ダブルバッファ開始
+			g.lock();
 
-		// Now Loading...
-		if (canvas.isInit()) {
-			canvas.paintNowloading(g);
+			screen.paint(g);
+
+			// ダブルバッファ終了
 			g.unlock(false);
-			return;
 		}
-		canvas.getScreen().paint(g);
-
-		// ダブルバッファ終了
-		g.unlock(false);
 	}
 
 	/*

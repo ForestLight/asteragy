@@ -116,10 +116,6 @@ public class CanvasControl {
 		return commoncommand;
 	}
 
-	public boolean isInit() {
-		return game.isInit();
-	}
-
 	/**
 	 * ‚‚³‚ğæ“¾
 	 * 
@@ -196,9 +192,11 @@ public class CanvasControl {
 
 	}
 
-	public void repaint() {
-		Graphics g = screen.getGraphics();
-		paint(g);
+	synchronized public void repaint() {
+		synchronized (screen) {
+			Graphics g = screen.getGraphics();
+			paint(g);
+		}
 	}
 
 	public void gameOver() {

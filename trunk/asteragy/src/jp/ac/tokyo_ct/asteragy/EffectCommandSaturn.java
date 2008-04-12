@@ -69,25 +69,26 @@ public class EffectCommandSaturn extends Effect {
 
 		int[] matrix = new int[6];
 
-		double theta = Math.PI * 2 / 8;
+		int theta = SimpleMath.cycle / 8;
 
-		double r = ((GameCanvas.measure - 1) * 3 / 2) * Math.cos(theta);
+		int r = ((GameCanvas.measure - 1) * 3 / 2) * SimpleMath.cos(theta);
 
-		int x = (int) (effect.getWidth() / 2 + r);
+		int x = effect.getWidth() / 2 + r / SimpleMath.divide;
 		int y = effect.getHeight() / 2;
-		int width = (int) ((effect.getWidth()) / 2 + r);
-		int height = (int) ((effect.getHeight() / 2) * Math.sin(theta));
+		int width = effect.getWidth() / 2 + r / SimpleMath.divide;
+		int height = (effect.getHeight() / 2) * SimpleMath.sin(theta)
+				/ SimpleMath.divide;
 
 		field.setOrignAster(g, aster, GameCanvas.measure / 2,
 				GameCanvas.measure / 2);
 
 		for (int i = 0; i < 9; i++) {
-			matrix[2] = (int) (4096 * r * Math.cos(theta * i));
-			matrix[5] = (int) (-4096 * r * Math.sin(theta * i));
-			matrix[0] = (int) (4096 * Math.cos(theta * i));
-			matrix[1] = (int) (4096 * Math.sin(theta * i));
-			matrix[3] = (int) (-4096 * Math.sin(theta * i));
-			matrix[4] = (int) (4096 * Math.cos(theta * i));
+			matrix[2] = r * SimpleMath.cos(theta * i) / SimpleMath.divide;
+			matrix[5] = -1 * r * SimpleMath.sin(theta * i) / SimpleMath.divide;
+			matrix[0] = SimpleMath.cos(theta * i);
+			matrix[1] = SimpleMath.sin(theta * i);
+			matrix[3] = -1 * SimpleMath.sin(theta * i);
+			matrix[4] = SimpleMath.cos(theta * i);
 
 			g.lock();
 			g.drawImage(effect, matrix, x, y, width, height);

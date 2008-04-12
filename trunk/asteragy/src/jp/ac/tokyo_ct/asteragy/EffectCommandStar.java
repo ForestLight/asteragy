@@ -63,28 +63,27 @@ public class EffectCommandStar extends Effect {
 
 	}
 
-	final double theta = Math.PI * 2 / 30;
+	final int theta = SimpleMath.cycle / 30;
 
 	public void start(Graphics g) {
-		if(!isEffect)
+		if (!isEffect)
 			return;
 		// TODO 自動生成されたメソッド・スタブ
 
 		int[] matrix = new int[6];
-		final int define = 4096;
 
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 15; i++) {
 
-			matrix[0] = (int) (define * (Math.cos(theta * i)));
-			matrix[1] = (int) (define * (-Math.sin(theta * i)));
-			matrix[2] = (int) (define * (Math.cos(theta * i)
-					* (-effect.getWidth() / 2) - Math.sin(theta * i)
-					* (-effect.getHeight() / 2) + effect.getWidth() / 2 + 1));
-			matrix[3] = (int) (define * (Math.sin(theta * i)));
-			matrix[4] = (int) (define * (Math.cos(theta * i)));
-			matrix[5] = (int) (define * (Math.sin(theta * i)
-					* (-effect.getWidth() / 2) + Math.cos(theta * i)
-					* (-effect.getHeight() / 2) + effect.getWidth() / 2 + 1));
+			matrix[0] = SimpleMath.cos(theta * i);
+			matrix[1] = -SimpleMath.sin(theta * i);
+			matrix[2] = SimpleMath.cos(theta * i) * (-effect.getWidth() / 2)
+					- SimpleMath.sin(theta * i) * (-effect.getHeight() / 2)
+					+ (effect.getWidth() / 2 + 1) * SimpleMath.divide;
+			matrix[3] = SimpleMath.sin(theta * i);
+			matrix[4] = SimpleMath.cos(theta * i);
+			matrix[5] = SimpleMath.sin(theta * i) * (-effect.getWidth() / 2)
+					+ SimpleMath.cos(theta * i) * (-effect.getHeight() / 2)
+					+ (effect.getWidth() / 2 + 1) * SimpleMath.divide;
 
 			g.lock();
 			field.getGame().getCanvas().getBackImage().paintAsterBack(g, to);
