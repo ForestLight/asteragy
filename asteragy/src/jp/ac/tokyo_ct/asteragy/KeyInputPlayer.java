@@ -115,10 +115,12 @@ public class KeyInputPlayer extends Player {
 						this.addAP(-ac.getCommandCost());
 					}
 					// game.getField().fieldBackUp();
+					canvas.getCursor().setCursor(null, -1);
+					canvas.repaint();
 					System.out.println("実行開始");
 					ac.execute();
 					System.out.println("実行完了");
-					field.repaintField(canvas.getScreen().getGraphics());
+					canvas.repaint();
 
 					Player p = field.checkGameOver();
 					// ゲームオーバー判定仮

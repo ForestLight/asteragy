@@ -70,6 +70,8 @@ final class Game implements Runnable {
 	private void initialize() {
 		System.out.println("initialize start");
 		canvas = new CanvasControl(this);
+		canvas.paintNowloading(canvas.getScreen().getGraphics());
+		canvas.getScreen().flipScreen();
 		// canvas.repaint();
 		// Display.setCurrent(canvas);
 

@@ -15,12 +15,16 @@ public class Screen implements PaintItem {
 	}
 
 	synchronized public void flipScreen() {
-		canvas.repaint();
+			canvas.repaint();
 	}
 
 	synchronized public void paintEffect(Effect effect) {
 		Graphics g = canvas.getGraphics();
-		effect.start(g);
+		synchronized (this) {
+			synchronized (g) {
+				effect.start(g);
+			}
+		}
 	}
 
 	synchronized public Graphics getGraphics() {

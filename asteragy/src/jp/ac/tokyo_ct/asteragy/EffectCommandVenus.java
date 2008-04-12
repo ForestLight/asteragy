@@ -44,7 +44,7 @@ public class EffectCommandVenus extends Effect {
 		final int w = GameCanvas.measure / 2;
 		final int h = 8;
 
-		final double theta = Math.PI * 2 / 12;
+		final int theta = SimpleMath.cycle / 12;
 
 		for (int i = 0; i < 100; i++) {
 
@@ -57,8 +57,9 @@ public class EffectCommandVenus extends Effect {
 
 			field.setOrignAster(g, point, w, w);
 
-			g.drawImage(effect, (int) (w * Math.cos(theta * (i + 1))),
-					(int) (h * Math.sin(theta * (i + 1))));
+			g.drawImage(effect, w * SimpleMath.cos(theta * (i + 1))
+					/ SimpleMath.divide, h * SimpleMath.sin(theta * (i + 1))
+					/ SimpleMath.divide);
 
 			if (i % 12 >= 7)
 				field.repaintAster(g, point);

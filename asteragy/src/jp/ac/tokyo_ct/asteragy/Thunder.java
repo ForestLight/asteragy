@@ -17,7 +17,7 @@ public class Thunder implements PaintItem {
 	private static final int BACKCOLOR = Graphics.getColorOfRGB(255, 255, 240);
 
 	private static final int FORECOLOR = Graphics.getColorOfRGB(255, 255, 200);
-	
+
 	private final Random random;
 
 	private final Point begin;
@@ -35,8 +35,7 @@ public class Thunder implements PaintItem {
 
 	private void initializeLocation() {
 		thunder = new Vector[(random.nextInt() >>> 1) % MAXTHUNDER + 1];
-		int lenght = (int) Math.sqrt((begin.x - end.x) * (begin.x - end.x)
-				+ (begin.y - end.y) * (begin.y - end.y));
+		int lenght = Math.abs(begin.y - end.y);
 		for (int i = 0; i < thunder.length; i++) {
 			thunder[i] = new Vector(lenght / MINSPACE);
 			createThunder(thunder[i], lenght);

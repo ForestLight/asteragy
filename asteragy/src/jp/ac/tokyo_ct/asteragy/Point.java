@@ -17,9 +17,16 @@ public final class Point {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	public Point clone() {
 		return new Point(x, y);
+	}
+
+	public Point add(Point point) {
+		Point p = this.clone();
+		p.x += point.x;
+		p.y += point.y;
+		return p;
 	}
 
 	/*
