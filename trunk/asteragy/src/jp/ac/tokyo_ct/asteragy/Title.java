@@ -126,10 +126,11 @@ public class Title extends Canvas {
 						if (depth == 0) {
 							switch (cursor) {
 							case 0:
-								depth++;
+								option.gameType = 0;
 								break;
 							case 1:
-								option.gameType = 0;
+								depth++;
+								cursor = 0;
 								break;
 							case 2:
 								depth += 2;
@@ -216,7 +217,10 @@ public class Title extends Canvas {
 					eac.renew();
 				}
 				else if (explainRuleFlag) {
-					
+					er.page--;
+					if (er.page < 0) {
+						er.page = 2;
+					}
 				}
 				break;
 			case Display.KEY_RIGHT:
@@ -252,7 +256,10 @@ public class Title extends Canvas {
 					eac.renew();
 				}
 				else if (explainRuleFlag) {
-					
+					er.page++;
+					if (er.page > 2) {
+						er.page = 0;
+					}
 				}
 				break;
 			case Display.KEY_0:
