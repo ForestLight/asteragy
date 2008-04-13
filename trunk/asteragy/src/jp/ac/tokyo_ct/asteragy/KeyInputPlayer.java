@@ -122,6 +122,9 @@ public class KeyInputPlayer extends Player {
 					System.out.println("実行完了");
 					canvas.repaint();
 
+					canvas.getScreen()
+					.paintEffect(canvas.getDisappearControl());
+
 					Player p = field.checkGameOver();
 					// ゲームオーバー判定仮
 					if (p != null) {
@@ -142,6 +145,7 @@ public class KeyInputPlayer extends Player {
 					this.addAP(field.deleteAll());
 					System.out.println("消去完了");
 
+					field.repaintField(canvas.getScreen().getGraphics());
 					canvas.getScreen()
 							.paintEffect(canvas.getDisappearControl());
 

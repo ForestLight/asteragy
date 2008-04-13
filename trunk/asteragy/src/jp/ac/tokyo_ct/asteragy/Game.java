@@ -86,7 +86,7 @@ final class Game implements Runnable {
 
 		switch (option.gameType) {
 		case 1:
-			player[1] = new AIPlayer(this, "—”");
+			player[1] = new AIPlayer(this, "COM (Very Hard)");
 			break;
 		case 2:
 			httpLogger = new HTTPPlayer(this, "ŒãU (N)");

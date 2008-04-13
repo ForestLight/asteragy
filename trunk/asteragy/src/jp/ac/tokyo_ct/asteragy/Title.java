@@ -31,8 +31,6 @@ public class Title extends Canvas {
 
 	// private static int highScore;
 
-	private AudioPresenter ap;
-
 	public Title() {
 		if (title == null) {
 			title = loadImage("title.jpg");
