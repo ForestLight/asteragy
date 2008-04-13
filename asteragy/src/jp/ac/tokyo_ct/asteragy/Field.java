@@ -600,7 +600,12 @@ class Field implements PaintItem {
 					return new Point(j, i);
 			}
 		}
+		System.out.println("getSunPosition - not found");
 		return null;
+	}
+	
+	public int getDistance(Point a,Point b){
+		return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 	}
 
 	public void setOrginField(Graphics g) {
