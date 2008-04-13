@@ -23,9 +23,6 @@ public class SunCommand extends Command {
 	}
 
 	private void paintClassData(Graphics g) {
-		int top = Player.playerheight
-				+ (canvas.getHeight() - commandImage.getHeight() - Player.playerheight * 2)
-				* point.y / canvas.getField().getY();
 		g.setOrigin(0, top);
 		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
 		g.fillRect(6, height * (command + 1), canvas.getWidth() - 12, 14);

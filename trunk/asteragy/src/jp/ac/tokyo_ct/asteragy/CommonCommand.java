@@ -37,9 +37,6 @@ public class CommonCommand extends Command {
 		if (command == 0) {
 			g.drawString("ÉXÉèÉbÉv 0", 85, 235);
 		} else {
-			int top = Player.playerheight
-					+ (canvas.getHeight() - commandImage.getHeight() - Player.playerheight * 2)
-					* point.y / canvas.getField().getY();
 			g.setOrigin(0, top);
 			g.setColor(Graphics.getColorOfRGB(255, 255, 255));
 			g.fillRect(6, height * 2, canvas.getWidth() - 12, 14);

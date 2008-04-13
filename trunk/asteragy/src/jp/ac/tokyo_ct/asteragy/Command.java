@@ -14,6 +14,8 @@ public class Command implements PaintItem {
 
 	protected final CanvasControl canvas;
 
+	protected int top;
+
 	public Command(CanvasControl canvas) {
 		this.canvas = canvas;
 	}
@@ -30,27 +32,29 @@ public class Command implements PaintItem {
 		if (point == null)
 			return;
 		System.out.println("paintCommand : " + command);
+		g.setOrigin(0, 0);
+		g.setClip(0, Player.playerheight, canvas.getWidth(), canvas.getHeight()
+				- Player.playerheight * 2);
 		setPosition(g);
 		g.drawImage(commandImage, 0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 196, 100));
 		System.out.println("command = " + command);
 		g.fillRect(0, command * height, height * 4 + 2, height);
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		g.clearClip();
 	}
 
 	private void setPosition(Graphics g) {
 		final int m = GameCanvas.measure;
-		// final int topMargin = canvas.getTopMargin();
+		final int topMargin = canvas.getTopMargin();
 		final int leftMargin = canvas.getLeftMargin();
 		final int imageHeight = commandImage.getHeight();
 		final int imageWidth = commandImage.getWidth();
-		int top = Player.playerheight
-				+ (canvas.getHeight() - imageHeight - Player.playerheight * 2)
-				* point.y / canvas.getField().getY();
+		top = topMargin + m * (point.y + 1);
 		int left = leftMargin + m * (point.x + 1);
-		// if (top >= canvas.getHeight() - imageHeight - topMargin)
-		// top -= imageHeight + m;
-		if (left >= canvas.getWidth() - imageWidth - leftMargin)
+		if (top >= canvas.getHeight() - imageHeight - Player.playerheight)
+			top -= imageHeight;
+		if (left >= canvas.getWidth() - imageWidth)
 			left -= imageWidth + m;
 		g.setOrigin(left, top);
 		System.out.println("top:" + top + " left:" + left + "y:" + point.y);
