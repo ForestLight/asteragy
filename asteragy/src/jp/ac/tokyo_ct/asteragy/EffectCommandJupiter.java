@@ -98,39 +98,67 @@ public class EffectCommandJupiter extends Effect {
 		// field.setOrignAster(g, point, GameCanvas.measure / 2,
 		// GameCanvas.measure / 2);
 
-		for (int i = 0; i < circle.length + 1; i++) {
+		for (int i = 0; i < circle.length; i++) {
 
 			g.lock();
 
 			g.drawImage(back, l.x, l.y);
 
-			if (i < circle.length) {
-				matrix[2] = circle[i].x + SimpleMath.cos(theta * i) * -e.x / 2
-						+ SimpleMath.sin(theta * i) * -e.y / 2;
-				matrix[5] = circle[i].y - SimpleMath.sin(theta * i) * -e.x / 2
-						+ SimpleMath.cos(theta * i) * -e.y / 2;
-				matrix[0] = SimpleMath.cos(theta * i);
-				matrix[1] = SimpleMath.sin(theta * i);
-				matrix[3] = -1 * SimpleMath.sin(theta * i);
-				matrix[4] = SimpleMath.cos(theta * i);
+			matrix[2] = circle[i].x + SimpleMath.cos(theta * i) * -e.x / 2
+					+ SimpleMath.sin(theta * i) * -e.y / 2;
+			matrix[5] = circle[i].y - SimpleMath.sin(theta * i) * -e.x / 2
+					+ SimpleMath.cos(theta * i) * -e.y / 2;
+			matrix[0] = SimpleMath.cos(theta * i);
+			matrix[1] = SimpleMath.sin(theta * i);
+			matrix[3] = -1 * SimpleMath.sin(theta * i);
+			matrix[4] = SimpleMath.cos(theta * i);
 
-				g.drawImage(effect, matrix);
+			g.drawImage(effect, matrix);
+
+			g.unlock(true);
+
+			try {
+				Thread.sleep(600 / CanvasControl.f);
+			} catch (InterruptedException e1) {
+				// TODO 自動生成された catch ブロック
+				e1.printStackTrace();
 			}
 
-			if (i > 0) {
-				matrix[2] = center.x + SimpleMath.cos(theta * (i - 1)) * -e.x
-						* 3 / 5 + SimpleMath.sin(theta * (i - 1)) * -e.y * 3
-						/ 5;
-				matrix[5] = center.y - SimpleMath.sin(theta * (i - 1)) * -e.x
-						* 3 / 5 + SimpleMath.cos(theta * (i - 1)) * -e.y * 3
-						/ 5;
-				matrix[0] = SimpleMath.cos(theta * (i - 1)) * 6 / 5;
-				matrix[1] = SimpleMath.sin(theta * (i - 1)) * 6 / 5;
-				matrix[3] = -1 * SimpleMath.sin(theta * (i - 1)) * 6 / 5;
-				matrix[4] = SimpleMath.cos(theta * (i - 1)) * 6 / 5;
+			g.lock();
 
-				g.drawImage(effect, matrix);
+			g.drawImage(back, l.x, l.y);
+
+			g.unlock(true);
+			try {
+				Thread.sleep(100 / CanvasControl.f);
+			} catch (InterruptedException e1) {
+				// TODO 自動生成された catch ブロック
+				e1.printStackTrace();
 			}
+			g.lock();
+
+			matrix[2] = center.x + SimpleMath.cos(theta * i) * -e.x * 3 / 5
+					+ SimpleMath.sin(theta * i) * -e.y * 3 / 5;
+			matrix[5] = center.y - SimpleMath.sin(theta * i) * -e.x * 3 / 5
+					+ SimpleMath.cos(theta * i) * -e.y * 3 / 5;
+			matrix[0] = SimpleMath.cos(theta * i) * 6 / 5;
+			matrix[1] = SimpleMath.sin(theta * i) * 6 / 5;
+			matrix[3] = -1 * SimpleMath.sin(theta * i) * 6 / 5;
+			matrix[4] = SimpleMath.cos(theta * i) * 6 / 5;
+
+			g.drawImage(effect, matrix);
+
+			g.unlock(true);
+			try {
+				Thread.sleep(100 / CanvasControl.f);
+			} catch (InterruptedException e1) {
+				// TODO 自動生成された catch ブロック
+				e1.printStackTrace();
+			}
+
+			g.lock();
+
+			g.drawImage(back, l.x, l.y);
 
 			g.unlock(true);
 			try {
