@@ -20,28 +20,20 @@ public class EffectCommandSaturn extends Effect {
 		this.queue = queue;
 
 		location = new Point[queue.length];
-		location[0] = field.asterToPoint(queue[0]);
-
-		for (int i = 1, j = 0; j < 16; j++) {
-			if (queue[i] == null)
-				break;
-			if (location[i] == null)
-				location[i] = location[i - 1].clone();
-
-			if (j < 4)
-				location[i].x++;
-			else if (j < 8)
-				location[i].y++;
-			else if (j < 12)
-				location[i].x--;
-			else
-				location[i].y--;
-
-			if (field.isXInFieldBound(location[i].x)
-					&& field.isYInFieldBound(location[i].y)) {
-				i++;
-			}
+		for (int i = 0; i < location.length; i++) {
+			location[i] = field.asterToPoint(queue[i]);
 		}
+
+		/*
+		 * for (int i = 1, j = 0; j < 16; j++) { if (queue[i] == null) break; if
+		 * (location[i] == null) location[i] = location[i - 1].clone();
+		 * 
+		 * if (j < 4) location[i].x++; else if (j < 8) location[i].y++; else if
+		 * (j < 12) location[i].x--; else location[i].y--;
+		 * 
+		 * if (field.isXInFieldBound(location[i].x) &&
+		 * field.isYInFieldBound(location[i].y)) { i++; } }
+		 */
 		loadImage();
 	}
 
