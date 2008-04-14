@@ -2,8 +2,6 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.Graphics;
 import com.nttdocomo.ui.Image;
-import com.nttdocomo.ui.MediaImage;
-import com.nttdocomo.ui.MediaManager;
 
 public class EffectCommandMercury extends Effect {
 

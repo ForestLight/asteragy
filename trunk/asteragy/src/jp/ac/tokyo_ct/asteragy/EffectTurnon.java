@@ -36,7 +36,7 @@ public class EffectTurnon extends Effect {
 			x -= 24;
 
 			try {
-				Thread.sleep(1000 / CanvasControl.f);
+				Thread.sleep(300 / CanvasControl.f);
 			} catch (InterruptedException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
@@ -60,7 +60,7 @@ public class EffectTurnon extends Effect {
 			wx -= 24;
 
 			try {
-				Thread.sleep(1000 / CanvasControl.f);
+				Thread.sleep(300 / CanvasControl.f);
 			} catch (InterruptedException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
@@ -87,7 +87,7 @@ public class EffectTurnon extends Effect {
 			wx -= 24;
 
 			try {
-				Thread.sleep(1000 / CanvasControl.f);
+				Thread.sleep(300 / CanvasControl.f);
 			} catch (InterruptedException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
@@ -105,7 +105,7 @@ public class EffectTurnon extends Effect {
 			x -= 24;
 
 			try {
-				Thread.sleep(1000 / CanvasControl.f);
+				Thread.sleep(300 / CanvasControl.f);
 			} catch (InterruptedException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();

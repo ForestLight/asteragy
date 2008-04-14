@@ -1,12 +1,10 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import java.util.Random;
-
 import com.nttdocomo.ui.*;
 
 public class EffectCommandNeptune extends Effect {
 
-	private static Image effect;
+	//private static Image effect;
 
 	private final Field field;
 

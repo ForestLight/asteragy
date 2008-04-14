@@ -1,7 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import java.io.*;
-import javax.microedition.io.*;
 import com.nttdocomo.ui.*;
 
 public class BackImage implements PaintItem {

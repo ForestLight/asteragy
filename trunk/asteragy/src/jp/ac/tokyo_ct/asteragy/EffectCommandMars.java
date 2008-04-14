@@ -92,7 +92,7 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 			g.unlock(true);
 
 			try {
-				Thread.sleep(1000 / CanvasControl.f);
+				Thread.sleep(300 / CanvasControl.f);
 			} catch (InterruptedException e) {
 				// TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
 				e.printStackTrace();
