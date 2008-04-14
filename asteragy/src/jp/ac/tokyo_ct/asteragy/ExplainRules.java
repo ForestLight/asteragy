@@ -57,17 +57,41 @@ public class ExplainRules extends Canvas {
 		g.drawString("プレイヤーが操作することのできる", 15, 165);
 		g.drawString("アステルです。サンは互いに最初から", 15, 180);
 		g.drawString("所有しているユニットです。", 15, 195);
+		g.drawScaledImage(image, 20, 210, 17, 17, 0, 0, 17, 17);
+		g.setFlipMode(Graphics.FLIP_VERTICAL);
+		g.drawScaledImage(image, 45, 210, 17, 17, 34, 0, 17, 17);
+		g.drawString("向きは所有者を表わします。", 70, 220);
 		
 		g = pageImage[2].getGraphics();
 		image = AsterClass.loadImage(0);
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
-		g.drawString("\"アステル\"は4つ繋がると消える", 20, 25);
-		g.drawScaledImage(image, 20, 50, 17, 17, 0, 0, 17, 17);
-		g.drawScaledImage(image, 37, 50, 17, 17, 0, 0, 17, 17);
-		g.drawScaledImage(image, 54, 50, 17, 17, 0, 0, 17, 17);
-		g.drawScaledImage(image, 71, 50, 17, 17, 0, 0, 17, 17);
+		g.drawString("３．アステル", 15, 25);
+		g.drawString("同じ色のアステルは４つ以上くっつく", 15, 70);
+		g.drawString("ことで消滅します。", 15, 85);
+		g.drawString("消滅したあとには、どこからともなく", 15, 100);
+		g.drawString("ランダムにアステルが補充されます。", 15, 115);
+		g.drawScaledImage(image, 20, 130, 17, 17, 17, 0, 17, 17);
+		g.drawScaledImage(image, 20, 147, 17, 17, 17, 0, 17, 17);
+		g.drawScaledImage(image, 37, 147, 17, 17, 17, 0, 17, 17);
+		g.drawScaledImage(image, 37, 164, 17, 17, 17, 0, 17, 17);
+		g.drawString("→", 66, 160);
+		image = loadImage("disappear.gif");
+		g.drawScaledImage(image, 90, 130, 17, 17, 0, 153, 17, 17);
+		g.drawScaledImage(image, 90, 147, 17, 17, 0, 153, 17, 17);
+		g.drawScaledImage(image, 107, 147, 17, 17, 0, 153, 17, 17);
+		g.drawScaledImage(image, 107, 164, 17, 17, 0, 153, 17, 17);
+		g.drawString("→", 136, 160);
+		image = AsterClass.loadImage(0);
+		g.drawScaledImage(image, 160, 130, 17, 17, 0, 0, 17, 17);
+		g.drawScaledImage(image, 160, 147, 17, 17, 34, 0, 17, 17);
+		g.drawScaledImage(image, 177, 147, 17, 17, 51, 0, 17, 17);
+		g.drawScaledImage(image, 177, 164, 17, 17, 68, 0, 17, 17);
+		g.drawString("また、消滅させたアステルの数だけ、", 15, 210);
+		g.drawString("AP(アスターパワー)がたまります。", 15, 225);
+		g.setColor(Graphics.getColorOfName(Graphics.RED));
+		g.drawString("AP(アスターパワー)", 15, 225);
 	}
 
 	public void paint(Graphics g) {
@@ -77,6 +101,19 @@ public class ExplainRules extends Canvas {
 		g.drawImage(pageImage[page], 0, 0);
 
 		g.unlock(true);
+	}
+
+	private static Image loadImage(String s) {
+		try {
+			// リソースから読み込み
+			MediaImage m = MediaManager.getImage("resource:///" + s);
+			// メディアの使用開始
+			m.use();
+			// 読み込み
+			return m.getImage();
+		} catch (Exception e) {
+		}
+		return null;
 	}
 
 }
