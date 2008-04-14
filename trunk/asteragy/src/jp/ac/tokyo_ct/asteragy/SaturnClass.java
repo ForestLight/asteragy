@@ -69,6 +69,7 @@ public class SaturnClass extends AsterClass {
 		// 左回り
 		//修正@2/25 右回りに
 		int i, j;
+		int num, flag = 0;
 		final Aster a = getAster();
 		final Field field = a.getField();
 		final Point me = field.asterToPoint(a);
@@ -97,21 +98,20 @@ public class SaturnClass extends AsterClass {
 		
 		Effect effect = new  EffectCommandSaturn(field, this, queue);
 		getAster().getField().getScreen().paintEffect(effect);
-		
-		// pt.x =
-		// getAster().getField().asterToPoint(getAster()).x-(defaultRange[0].length/2);
-		// pt.y =
-		// getAster().getField().asterToPoint(getAster()).y-(defaultRange.length/2);
-		
-		//最後の要素を最初の位置に
-		f[pt.y][pt.x] = queue[i];
-		pt.x++;
-		
-		for (i = 0, j = 1;; j++) {
+
+		num = --i;
+				
+		for (i = 0, j = 0; j < 16; j++) {
 			// 右回りに戻していく
 			if (field.isXInFieldBound(pt.x) && field.isYInFieldBound(pt.y)) {
-				f[pt.y][pt.x] = queue[i];
-				i++;
+				if (flag == 0) {
+					f[pt.y][pt.x] = queue[num];
+					flag++;
+				}
+				else {
+					f[pt.y][pt.x] = queue[i];
+					i++;
+				}
 			}
 
 			if (j < 4)
@@ -123,13 +123,7 @@ public class SaturnClass extends AsterClass {
 			else
 				pt.y--;
 
-			// キュー（のようなもの）が空になったらループを抜ける
-			if (queue[i] == null) {
-	//			f[pt.y][pt.x] = queue[0];
-				break;
-			}
 		}
-		/* 左回りか右回りをプレイヤーに選択させるのはどこになるのか */
 
 		logAction();
 	}
