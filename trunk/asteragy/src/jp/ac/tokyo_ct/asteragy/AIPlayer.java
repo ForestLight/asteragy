@@ -81,6 +81,9 @@ public class AIPlayer extends Player {
 					backUpField();
 					Effect.setEffect(false);// エフェクト非表示
 					
+					ap[0] = game.getPlayer1().getAP();
+					ap[1] = game.getPlayer2().getAP();
+					
 					if(cancelFlag){ //レンジ指定から1回戻った場合
 						cmd[t] = 0;
 						state++;
@@ -130,8 +133,8 @@ public class AIPlayer extends Player {
 					}
 					if(i == 2 
 						&& f.getAster(target[0][t]).getColor() == f.getAster(target[1][t]).getColor()
-						&& f.getAster(target[0][t]).getAsterClass() != null
-						&& f.getAster(target[1][t]).getAsterClass() != null){
+						&& f.getAster(target[0][t]).getAsterClass() == null
+						&& f.getAster(target[1][t]).getAsterClass() == null){
 						ac.moveAstern();
 						ac.moveAstern();
 						state = 1;
@@ -144,11 +147,13 @@ public class AIPlayer extends Player {
 						Point acs = selectAsterClass(pt);
 						if (acs.x == -1) {
 							ac.moveAstern();
+							ac.moveAstern();
+							cancelFlag = true;
 							state = 0;
 						} else {
 							ac.setPointAndNext(acs);
+							target[i][t] = acs;
 						}
-						target[i][t] = acs;
 					}
 
 					state++;
@@ -157,8 +162,6 @@ public class AIPlayer extends Player {
 
 				case 3:
 					System.out.println("AIPlayer state3");
-					ap[0] = game.getPlayer1().getAP();
-					ap[1] = game.getPlayer2().getAP();
 					Field field = game.getField();
 					final AsterClass ac = field.getAster(pt).getAsterClass();
 					if (cmd[t] == 1) {
@@ -199,6 +202,9 @@ public class AIPlayer extends Player {
 			}
 			return null;
 		} finally {
+			game.getField().repaintField(canvas.getScreen().getGraphics());
+			canvas.getScreen()
+					.paintEffect(canvas.getDisappearControl());
 			try {
 				Thread.sleep(WAIT);
 			} catch (Exception e) {
@@ -498,6 +504,18 @@ public class AIPlayer extends Player {
 			}
 			i++;
 		}
+		
+		if(ac.getNumber() == 1 && ac.getCommand() == 1){//サンコマンド専用
+			canvas.getSunCommand().setCommand(target[1][maxNum].x,pt);
+			canvas.getScreen().flipScreen();
+			try {
+				Thread.sleep(WAIT);
+			} catch (Exception e) {
+			}
+			canvas.getSunCommand().setCommand(-1,null);
+			canvas.getScreen().flipScreen();
+		}
+		
 		canvasRange.setRange(null, null);
 		canvas.getScreen().flipScreen();
 		if (cmd[maxNum] == 1) {
