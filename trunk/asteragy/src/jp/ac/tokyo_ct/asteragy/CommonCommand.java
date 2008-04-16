@@ -3,7 +3,7 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.Graphics;
 import com.nttdocomo.ui.Image;
 
-public class CommonCommand extends Command {
+public final class CommonCommand extends Command {
 
 	private AsterClass asterClass;
 

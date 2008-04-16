@@ -29,7 +29,7 @@ final class HTTPPlayer extends Player implements Runnable {
 	 */
 	public Action getAction() {
 		try {
-			HttpConnection con = (HttpConnection)Connector.open("http://localhost/?cmd=getaction",
+			HttpConnection con = (HttpConnection)Connector.open("http://localhost/?cmd=getaction&id=0&turn=1",
 					Connector.READ);
 			try {
 				con.setRequestMethod(HttpConnection.GET);
@@ -74,7 +74,7 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	private void sendLog(Action a) {
 		try {
-			HttpConnection con = (HttpConnection)Connector.open("http://localhost/?cmd=postaction",
+			HttpConnection con = (HttpConnection)Connector.open("http://localhost/?cmd=postaction&id=0&turn=0",
 					Connector.WRITE);
 			try {
 				con.setRequestProperty("Content-Type", "text/plain");

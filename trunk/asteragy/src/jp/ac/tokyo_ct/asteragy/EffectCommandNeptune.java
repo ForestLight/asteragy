@@ -49,14 +49,13 @@ public class EffectCommandNeptune extends Effect {
 		 * g.unlock(true);
 		 * 
 		 * try { Thread.sleep(300 / CanvasControl.f); } catch
-		 * (InterruptedException e) { // TODO 自動生成された catch ブロック
+		 * (InterruptedException e) {
 		 * e.printStackTrace(); } }
 		 */
 
 		try {
 			Thread.sleep(30000 / CanvasControl.f);
 		} catch (InterruptedException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
@@ -67,7 +66,6 @@ public class EffectCommandNeptune extends Effect {
 		try {
 			Thread.sleep(300 / CanvasControl.f);
 		} catch (InterruptedException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 

@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class Cursor implements PaintItem {
+public final class Cursor implements PaintItem {
 
 	public static final int CURSOR_CLEAR = 0; // ƒJ[ƒ\ƒ‹‚ÌÁ‹
 

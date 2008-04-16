@@ -41,15 +41,15 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="P:\Librarys\Boost"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				AdditionalIncludeDirectories=""
+				PreprocessorDefinitions="USE_BOOST_POSIX_TIME"
 				StringPooling="true"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
-				WarningLevel="4"
-				DebugInformationFormat="4"
+				WarningLevel="3"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -116,13 +116,13 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="P:\Librarys\Boost"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				AdditionalIncludeDirectories=""
+				PreprocessorDefinitions="USE_BOOST_POSIX_TIME"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="2"
-				WarningLevel="4"
+				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -177,6 +177,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\game.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\server.cpp"
 				>
 			</File>
@@ -210,6 +214,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\game.h"
+				>
+			</File>
 			<File
 				RelativePath=".\server.h"
 				>

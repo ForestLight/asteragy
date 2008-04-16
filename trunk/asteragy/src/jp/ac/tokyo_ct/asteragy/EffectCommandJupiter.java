@@ -21,7 +21,6 @@ public class EffectCommandJupiter extends Effect {
 	// private Point rightbottom;
 
 	public EffectCommandJupiter(Field field, Point point) {
-		// TODO 自動生成されたコンストラクター・スタブ
 		this.field = field;
 		this.point = point;
 		// setLocation();
@@ -120,7 +119,6 @@ public class EffectCommandJupiter extends Effect {
 			try {
 				Thread.sleep(600 / CanvasControl.f);
 			} catch (InterruptedException e1) {
-				// TODO 自動生成された catch ブロック
 				e1.printStackTrace();
 			}
 
@@ -152,7 +150,6 @@ public class EffectCommandJupiter extends Effect {
 			try {
 				Thread.sleep(100 / CanvasControl.f);
 			} catch (InterruptedException e1) {
-				// TODO 自動生成された catch ブロック
 				e1.printStackTrace();
 			}
 
@@ -164,7 +161,6 @@ public class EffectCommandJupiter extends Effect {
 			try {
 				Thread.sleep(1000 / CanvasControl.f);
 			} catch (InterruptedException e1) {
-				// TODO 自動生成された catch ブロック
 				e1.printStackTrace();
 			}
 		}

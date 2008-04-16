@@ -7,7 +7,7 @@ import com.nttdocomo.ui.*;
  * @author Kazuto
  * 
  */
-public class CanvasControl {
+public final class CanvasControl {
 
 	public static final int f = 40;
 

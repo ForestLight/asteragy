@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class GameCanvas extends com.nttdocomo.ui.Canvas {
+public final class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	/**
 	 * 18Å~18

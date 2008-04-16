@@ -24,7 +24,6 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 	private int time;
 
 	public EffectCommandMars(Field field, AsterClass cls, Point point) {
-		// TODO 自動生成されたコンストラクター・スタブ
 		this.field = field;
 		this.point = point;
 		this.aster = field.asterToPoint(cls.getAster());
@@ -77,7 +76,6 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 	public void start(Graphics g) {
 		if (!isEffect)
 			return;
-		// TODO 自動生成されたメソッド・スタブ
 
 		for (time = 0; time < 17; time++) {
 
@@ -94,7 +92,6 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 			try {
 				Thread.sleep(300 / CanvasControl.f);
 			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 
@@ -108,7 +105,6 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 		try {
 			Thread.sleep(1000 / CanvasControl.f * 10);
 		} catch (InterruptedException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
@@ -118,37 +114,30 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 	}
 
 	public int getHeight() {
-		// TODO 自動生成されたメソッド・スタブ
 		return paint.getHeight();
 	}
 
 	public int getWidth() {
-		// TODO 自動生成されたメソッド・スタブ
 		return paint.getWidth();
 	}
 
 	public void resetSize() {
-		// TODO 自動生成されたメソッド・スタブ
 		paint.resetSize();
 	}
 
 	public void setClass(AsterClass aster) {
-		// TODO 自動生成されたメソッド・スタブ
 		paint.setClass(aster);
 	}
 
 	public void setColor(int color) {
-		// TODO 自動生成されたメソッド・スタブ
 		paint.setColor(color);
 	}
 
 	public void setSize(int width, int height) {
-		// TODO 自動生成されたメソッド・スタブ
 		paint.setSize(width, height);
 	}
 
 	public void paint(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
 		g.drawImage(effect, 0, 0, 0, (GameCanvas.measure - 1) * time,
 				GameCanvas.measure - 1, GameCanvas.measure - 1);
 	}

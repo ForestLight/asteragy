@@ -4,8 +4,8 @@ package jp.ac.tokyo_ct.asteragy;
  * @author kurix
  * 
  */
-public class Aster {
-	public static int COLOR_MAX = 5;
+public final class Aster {
+	static int COLOR_MAX = 5;
 
 	public final static int RED = 1;
 
@@ -137,11 +137,11 @@ public class Aster {
 		paint.setClass(ac);
 	}
 
-	public int getNumber() {
+	public final int getNumber() {
 		return asterClass != null ? asterClass.getNumber() : 0;
 	}
 
-	public Field getField() {
+	public final Field getField() {
 		return field;
 	}
 

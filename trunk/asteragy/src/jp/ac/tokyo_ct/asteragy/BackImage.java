@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class BackImage implements PaintItem {
+public final class BackImage implements PaintItem {
 
 	private Image backimage;
 

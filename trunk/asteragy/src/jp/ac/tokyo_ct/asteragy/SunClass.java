@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.Image;
 
-public class SunClass extends AsterClass {
+public final class SunClass extends AsterClass {
 	private static int[][] defaultRange = { { 0, 0, 1, 0, 0 },
 			{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
 			{ 0, 0, 1, 0, 0 } };

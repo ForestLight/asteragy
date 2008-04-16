@@ -13,7 +13,6 @@ public class EffectCommandMoon extends Effect {
 	private final Point point;
 
 	public EffectCommandMoon(Field f, Point me, Point pt) {
-		// TODO 自動生成されたコンストラクター・スタブ
 		field = f;
 		aster = me;
 		point = pt;
@@ -29,8 +28,6 @@ public class EffectCommandMoon extends Effect {
 	 */
 
 	public void start(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
-
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
 		for (int i = 17; i >= 0; i--) {
 			g.lock();
@@ -47,7 +44,6 @@ public class EffectCommandMoon extends Effect {
 			try {
 				Thread.sleep(1000 / CanvasControl.f);
 			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 		}
@@ -66,7 +62,6 @@ public class EffectCommandMoon extends Effect {
 			try {
 				Thread.sleep(1000 / CanvasControl.f);
 			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 		}

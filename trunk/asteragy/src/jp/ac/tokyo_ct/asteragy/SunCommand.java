@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class SunCommand extends Command {
+public final class SunCommand extends Command {
 	final static int CLASSNUM = 10;
 
 	public SunCommand(CanvasControl canvas) {

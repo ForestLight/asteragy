@@ -6,7 +6,7 @@ import com.nttdocomo.ui.*;
  * @author Okubo
  * 
  */
-public class Title extends Canvas {
+public final class Title extends Canvas {
 	private static Image title;
 
 	private static Image[] menu;

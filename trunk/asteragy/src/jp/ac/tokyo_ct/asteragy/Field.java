@@ -5,7 +5,7 @@ import com.nttdocomo.ui.Graphics;
 /**
  * @author Okubo
  */
-class Field implements PaintItem {
+final class Field implements PaintItem {
 
 	private Aster[][] field;
 

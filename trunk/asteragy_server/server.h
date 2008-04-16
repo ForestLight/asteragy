@@ -3,11 +3,21 @@
 
 #include "stdafx.h"
 
-#ifdef _MSC_VER
+#include <locale>
+#include <iosfwd>
+#include <string>
+#include <map>
+#include <boost/asio.hpp>
+#include <boost/mpl/identity.hpp>
+#include <boost/tr1/memory.hpp>
+
+#if defined _MSC_VER && _MSC_VER >= 1020
 #	pragma once
 #endif
 
-class Connection : public boost::enable_shared_from_this<Connection>
+typedef std::map<std::string, std::string> map_t;
+
+class Connection : public std::tr1::enable_shared_from_this<Connection>
 {
 private:
 	typedef boost::asio::ip::tcp tcp;
@@ -26,7 +36,6 @@ private:
 	void handleWrite(boost::system::error_code const& e, std::size_t bytesTransferred);
 
 	void handleReadPostAction(boost::system::error_code const& e, std::size_t bytesTransferred);
-
 	void returnResponse(std::string const& s);
 	void returnEmptyResponse(int stetusCode);
 
@@ -36,18 +45,19 @@ private:
 	void asyncWrite(handler_type hander);
 
 	void getAction();
+	void getActionFromConsole();
 
 	tcp::socket socket;
 	boost::asio::streambuf request; //受信用バッファ
 	boost::asio::streambuf response; //送信用バッファ
-	std::map<std::string, std::string> args; //URL末尾の?以降で渡される引数
-	std::map<std::string, std::string> header; //HTTPリクエストヘッダ
+	map_t args; //URL末尾の?以降で渡される引数
+	map_t header; //HTTPリクエストヘッダ
 
 	Connection(Connection const&);
 	Connection& operator =(Connection const&);
 };
 
-typedef boost::shared_ptr<Connection> ConnectionPtr;
+typedef std::tr1::shared_ptr<Connection> ConnectionPtr;
 
 class Server
 {
@@ -81,7 +91,12 @@ void output_error(std::ostream& os, int code);
 
 namespace utility
 {
-	extern boost::function<bool (char)> isSpace;
+	extern std::ctype<char> const& cacheCType;
+
+	inline bool isSpace(char c)
+	{
+		return cacheCType.is(std::ctype<char>::space, c);
+	}
 }
 
 #endif //HTTPREQUEST_H

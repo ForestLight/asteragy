@@ -9,7 +9,7 @@ import com.nttdocomo.ui.*;
  * Title.javaに統合した方がいい気がしないでもない
  *
  */
-public class ExplainAsterClass extends Canvas {
+public final class ExplainAsterClass extends Canvas {
 
 	public int number;
 
@@ -24,7 +24,6 @@ public class ExplainAsterClass extends Canvas {
 	}
 
 	public void paint(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
 		g.lock();
 
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
