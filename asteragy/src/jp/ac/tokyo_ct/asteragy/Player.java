@@ -70,7 +70,7 @@ public abstract class Player implements PaintItem {
 			g.setOrigin(0, 0);
 		}
 		if (game.getCurrentPlayer() == this) {
-			//ここ募集
+			// ここ募集
 		}
 		g.setColor(Graphics.getColorOfRGB(228, 196, 255));
 		g.drawString("" + ap, apx + 1, apy + 1);
@@ -98,9 +98,16 @@ public abstract class Player implements PaintItem {
 	}
 
 	private void loadTurnOnBack() {
-		final CanvasControl canvas = game.getCanvas();
-		turnonback = Image.createImage(canvas.getWidth(),
-				canvas.getHeight() / 2);
+		try {
+			// リソースから読み込み
+			MediaImage m = MediaManager
+					.getImage("resource:///turnon_effect.gif");
+			// メディアの使用開始
+			m.use();
+			// 読み込み
+			turnonback = m.getImage();
+		} catch (Exception e) {
+		}
 	}
 
 	private static Image turnonback;
