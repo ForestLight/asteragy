@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class ExplainRules extends Canvas {
+public final class ExplainRules extends Canvas {
 
 	public int page;
 

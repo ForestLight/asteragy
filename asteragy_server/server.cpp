@@ -1,8 +1,28 @@
 #include "stdafx.h"
 #include "server.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <boost/bind.hpp>
+#include <boost/range.hpp>
+#include <boost/algorithm/string/find.hpp>
+#include <boost/algorithm/string/split.hpp>
+#include <boost/asio.hpp>
+#include <boost/lexical_cast.hpp>
+#include "game.h"
 
 namespace as = boost::asio;
 namespace algo = boost::algorithm;
+
+using boost::system::error_code;
+using std::string;
+
+namespace
+{
+	Game game; //暫定
+	int player = 0;
+}
 
 /*
 @brief クライアントの接続を待つ。
@@ -19,7 +39,7 @@ void Server::nextAccept()
 @brief 接続が来た。
 connection->Start()へ行くと共に、次の接続待ちに入る。
 */
-void Server::AcceptHandler(boost::system::error_code const& e)
+void Server::AcceptHandler(error_code const& e)
 {
 	if (!e)
 	{
@@ -45,14 +65,14 @@ URL引数とHTTPヘッダの解析を行い、適切なメンバ関数へ振り分けたり、
 
 postaction: さらにコンテントを読み込んでからConnection::handleReadPostActionへ。
 getaction: Connection::getActionへ。
-
-
 */
-void Connection::handleRead(boost::system::error_code const& e, std::size_t)
+void Connection::handleRead(error_code const& e, std::size_t)
 {
 	using std::clog;
 	using std::endl;
 	using std::string;
+	using boost::begin;
+	using boost::size;
 
 	if (e)
 	{
@@ -68,7 +88,6 @@ void Connection::handleRead(boost::system::error_code const& e, std::size_t)
 		std::vector<string> requestElements;
 		requestElements.reserve(3);
 		enum {method, path, version}; //上の各要素の内容を表す
-		using std::ctype;
 		algo::split(requestElements, requestLine, utility::isSpace);
 		if (requestElements.empty())
 		{
@@ -82,9 +101,9 @@ void Connection::handleRead(boost::system::error_code const& e, std::size_t)
 
 		string const& requestPath = requestElements[path];
 		boost::iterator_range<char const*> my_url = boost::as_literal("/?");
-		if (!boost::equal(my_url, boost::begin(requestPath)))
+		if (!std::equal(begin(my_url), end(my_url), begin(requestPath)))
 		{
-			if (boost::size(requestPath) > 0 && requestPath[0] != '/')
+			if (size(requestPath) > 0 && requestPath[0] != '/')
 			{
 				returnEmptyResponse(400);
 			}
@@ -94,11 +113,29 @@ void Connection::handleRead(boost::system::error_code const& e, std::size_t)
 			}
 			return;
 		}
-		string::const_iterator it = boost::begin(requestPath) + boost::size(my_url);
+		string::const_iterator it = begin(requestPath) + size(my_url);
 		parseArgs(args, boost::make_iterator_range(it, boost::end(requestPath)));
 		perseHeader(header, is);
 
 		//TODO: クライアントがHTTP/1.1を指定しているとき、Hostフィールドの確認。
+
+		map_t::const_iterator scmd = args.find("scmd");
+		if (scmd != args.end())
+		{
+			if (scmd->second == "querygame")
+			{
+				//queryNewGame();
+			}
+		}
+
+		map_t::const_iterator posId = args.find("id");
+		if (posId == args.end())
+		{
+			returnEmptyResponse(400);
+			return;
+		}
+		int gameId = boost::lexical_cast<int>(posId->second);
+		int player = gameId & 1;
 
 		string const& cmd = args["cmd"];
 		if (cmd == "postaction")
@@ -107,7 +144,11 @@ void Connection::handleRead(boost::system::error_code const& e, std::size_t)
 		}
 		else if (cmd == "getaction")
 		{
-			getAction();
+			getActionFromConsole(); //getAction();
+		}
+		else if (cmd == "endturn")
+		{
+			game.EndTurn(player);
 		}
 		else
 		{
@@ -126,21 +167,25 @@ void Connection::handleRead(boost::system::error_code const& e, std::size_t)
 /*
 @brief postactionで、内容を受信したときに呼ばれる。
 */
-void Connection::handleReadPostAction(boost::system::error_code const& e, std::size_t)
+void Connection::handleReadPostAction(error_code const& e, std::size_t)
 {
 	if (!e)
 	{
 		std::istream is(&request);
-		std::string s; //暫定
-		std::getline(is, s);
+		std::string s;
+		while (std::getline(is, s))
+		{
+			game.PostAction(s, player);
+		}
 		std::cout << "postaction 受領: " << s << std::endl;
+		returnEmptyResponse(200);
 	}
 }
 
 /*
 @brief 書込終了時のハンドラ（応答の必要ないもの用）
 */
-void Connection::handleWrite(boost::system::error_code const& e, std::size_t)
+void Connection::handleWrite(error_code const& e, std::size_t)
 {
 	if (e)
 	{
@@ -148,19 +193,34 @@ void Connection::handleWrite(boost::system::error_code const& e, std::size_t)
 	}
 	else
 	{
-		boost::system::error_code ignored_ec;
+		error_code ignored_ec;
 		socket.shutdown(tcp::socket::shutdown_both, ignored_ec);
 	}
 }
 
 /*
 @brief getactionの応答を行う。
-現在、暫定的にコンソールからアクション文字列の入力を行い、それをクライアントに返すようにしている。
 */
 void Connection::getAction()
 {
+	string s;
+	if (game.GetAction(s, player))
+	{
+		returnResponse(s);
+	}
+	else
+	{
+		returnEmptyResponse(400);
+	}
+}
+
+/*
+@brief コンソールからgetactionの応答を行う。
+*/
+void Connection::getActionFromConsole()
+{
 	std::cout << "get action> ";
-	std::string s;
-	std::getline(std::cin, s);
+	string s;
+	getline(std::cin, s);
 	returnResponse(s);
 }

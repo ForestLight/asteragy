@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class KeyInputPlayer extends Player {
+public final class KeyInputPlayer extends Player {
 
 	/**
 	 * @param playerName
@@ -188,7 +188,6 @@ public class KeyInputPlayer extends Player {
 			 *            Šî‚Æ‚È‚éKeyInputPlayer
 			 */
 			EventProcesserForSelectAster() {
-				final Field field = game.getField();
 				x = cursorPoint.x;
 				y = cursorPoint.y;
 				applyPosition();

@@ -110,7 +110,6 @@ public abstract class Player implements PaintItem {
 	}
 
 	public boolean isPlayer2() {
-		// TODO 自動生成されたメソッド・スタブ
 		return this == game.getPlayer2();
 	}
 

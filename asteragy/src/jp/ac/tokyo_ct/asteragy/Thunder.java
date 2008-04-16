@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import com.nttdocomo.ui.Graphics;
 
-public class Thunder implements PaintItem {
+public final class Thunder implements PaintItem {
 
 	private static final int MAXTHUNDER = 5;
 

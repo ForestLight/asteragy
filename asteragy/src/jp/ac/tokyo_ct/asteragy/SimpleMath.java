@@ -1,6 +1,6 @@
 package jp.ac.tokyo_ct.asteragy;
 
-public class SimpleMath {
+public final class SimpleMath {
 
 	public static final int cycle = 360;
 

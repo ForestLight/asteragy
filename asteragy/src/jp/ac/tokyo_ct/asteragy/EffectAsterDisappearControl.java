@@ -25,7 +25,6 @@ public class EffectAsterDisappearControl extends Effect implements Runnable {
 	}
 
 	public void start(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
 		this.g = g;
 		if (!isEffect) {
 			Enumeration i = disappearing.elements();
@@ -40,7 +39,6 @@ public class EffectAsterDisappearControl extends Effect implements Runnable {
 	}
 
 	public void run() {
-		// TODO 自動生成されたメソッド・スタブ
 		while (disappearing.size() > 0) {
 			Enumeration i = disappearing.elements();
 			while (i.hasMoreElements()) {
@@ -61,7 +59,6 @@ public class EffectAsterDisappearControl extends Effect implements Runnable {
 			try {
 				Thread.sleep(1000 / CanvasControl.f);
 			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 		}

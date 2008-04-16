@@ -1,6 +1,6 @@
 package jp.ac.tokyo_ct.asteragy;
 
-public class Option {
+public final class Option {
 	public int fieldXSize;
 	public int fieldYSize;
 	public int numOfColors;

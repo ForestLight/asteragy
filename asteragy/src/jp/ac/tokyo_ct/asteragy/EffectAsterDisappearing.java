@@ -86,27 +86,22 @@ public class EffectAsterDisappearing extends Effect implements PaintAsterItem {
 	}
 
 	public int getHeight() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 0;
 	}
 
 	public int getWidth() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 0;
 	}
 
 	public void resetSize() {
-		// TODO 自動生成されたメソッド・スタブ
 
 	}
 
 	public void setSize(int width, int height) {
-		// TODO 自動生成されたメソッド・スタブ
 
 	}
 
 	public void start(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
 		paint(g);
 	}
 

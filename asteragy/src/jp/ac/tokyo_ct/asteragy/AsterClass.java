@@ -45,7 +45,7 @@ public abstract class AsterClass {
 	 */
 	public abstract int getNumber();
 
-	public Aster getAster() {
+	public final Aster getAster() {
 		return aster;
 	}
 
@@ -105,7 +105,7 @@ public abstract class AsterClass {
 	/**
 	 * @return クラス名
 	 */
-	public String getName() {
+	public final String getName() {
 		return AsterClass.className[getNumber() - 1];
 	}
 
@@ -119,7 +119,7 @@ public abstract class AsterClass {
 	/**
 	 * @return 特殊コマンドの説明
 	 */
-	public String getExplain() {
+	public final String getExplain() {
 		return AsterClass.commandExplain[getNumber() - 1];
 	}
 
@@ -127,7 +127,7 @@ public abstract class AsterClass {
 	 * 
 	 * @return クラス付与時のコスト
 	 */
-	public int getCost() {
+	public final int getCost() {
 		return AsterClass.classCost[getNumber() - 1];
 	}
 
@@ -135,7 +135,7 @@ public abstract class AsterClass {
 	 * 
 	 * @return 特殊コマンド使用時のコスト
 	 */
-	public int getCommandCost() {
+	public final int getCommandCost() {
 		// switch (mode) {
 		// case 0:
 		// return 0;
@@ -146,7 +146,7 @@ public abstract class AsterClass {
 		return AsterClass.commandCost[getNumber() - 1];
 	}
 
-	private void logAction(int commandType, int[] args) {
+	private final void logAction(int commandType, int[] args) {
 		Action a = new Action();
 		a.aster = aster;
 		a.commandType = commandType;
@@ -154,19 +154,19 @@ public abstract class AsterClass {
 		game.logAction(a);
 	}
 
-	protected void logAction(int[] args) {
+	protected final void logAction(int[] args) {
 		logAction(1, args);
 	}
 
-	protected void logAction() {
+	protected final void logAction() {
 		logAction(1, new int[0]);
 	}
 
-	protected void logAction(Point pt1) {
+	protected final void logAction(Point pt1) {
 		logAction(1, new int[] { pt1.x, pt1.y });
 	}
 
-	protected void logAction(Point pt1, Point pt2) {
+	protected final void logAction(Point pt1, Point pt2) {
 		logAction(1, new int[] { pt1.x, pt1.y, pt2.x, pt2.y });
 	}
 
@@ -225,29 +225,29 @@ public abstract class AsterClass {
 				aster.getField().getScreen().getGraphics(), aster.getPoint());
 	}
 
-	public int getActionNum() {
+	public final int getActionNum() {
 		return AsterClass.actionNum[getNumber() - 1];
 	}
 
 	/**
 	 * 行動可能回数増
 	 */
-	public void incActionCount() {
+	public final void incActionCount() {
 		actionCount++;
 	}
 
 	/**
 	 * 行動可能回数減
 	 */
-	public void decActionCount() {
+	public final void decActionCount() {
 		actionCount--;
 	}
 
-	public void setActionCount(int i) {
+	public final void setActionCount(int i) {
 		actionCount = i;
 	}
 
-	public int getActionCount() {
+	public final int getActionCount() {
 		return actionCount;
 	}
 
@@ -256,11 +256,11 @@ public abstract class AsterClass {
 	 */
 	private int actionCount;
 
-	public void setProtectedFlag(boolean b) {
+	public final void setProtectedFlag(boolean b) {
 		isProtected = b;
 	}
 
-	public boolean getProtectedFlag() {
+	public final boolean getProtectedFlag() {
 		return isProtected;
 	}
 
@@ -274,7 +274,7 @@ public abstract class AsterClass {
 	 * 
 	 * @return 現在の選択範囲
 	 */
-	protected int[][] swapGetRange(int[][] defaultRange) {
+	protected final int[][] swapGetRange(int[][] defaultRange) {
 		int[][] range = new int[defaultRange.length][defaultRange[0].length];
 		// 1個目の対象選択
 		if (target1 == null) {
@@ -320,7 +320,7 @@ public abstract class AsterClass {
 		return range;
 	}
 
-	protected boolean swapMoveAstern() {
+	protected final boolean swapMoveAstern() {
 		// 1個目の対象選択中に呼ばれた場合
 		if (target1 == null) {
 			return true;
@@ -336,7 +336,7 @@ public abstract class AsterClass {
 		return false;
 	}
 
-	protected boolean swapSetPointAndNext(Point pt) {
+	protected final boolean swapSetPointAndNext(Point pt) {
 		if (target1 == null) {
 			target1 = pt;
 		} else {
@@ -345,7 +345,7 @@ public abstract class AsterClass {
 		return true;
 	}
 
-	protected boolean swapHasNext() {
+	protected final boolean swapHasNext() {
 		boolean ret = target1 == null || target2 == null;
 		System.out.println("swapHasNext return " + ret);
 		return ret;

@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * 
- */
-
-/**
  * @author Ichinohe ゲーム進行の管理
  */
 final class Game implements Runnable {
@@ -23,7 +19,6 @@ final class Game implements Runnable {
 		try {
 			init.join();
 		} catch (InterruptedException e) {
-			// TODO 自動生成された catch ブロック
 			// e.printStackTrace();
 		}
 
