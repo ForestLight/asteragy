@@ -545,6 +545,7 @@ public class AIPlayer extends Player {
 		int n = field.deleteAll();
 		if(n > 0){
 			this.addAP(n);
+			field.repaintField(canvas.getScreen().getGraphics());
 			canvas.getScreen().paintEffect(canvas.getDisappearControl());
 			try {
 				Thread.sleep(WAIT);
