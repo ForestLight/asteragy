@@ -8,7 +8,7 @@ public class ExplainRules extends Canvas {
 
 	public Image image;
 
-	public Image[] pageImage = new Image[3];
+	public Image[] pageImage = new Image[11];
 
 	ExplainRules() {
 		page = 0;
@@ -17,7 +17,7 @@ public class ExplainRules extends Canvas {
 		// ページの作成（作成中）
 		//
 		Graphics g;
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 10; i++) {
 			pageImage[i] = Image.createImage(getWidth(), getHeight());
 		}
 
@@ -92,6 +92,127 @@ public class ExplainRules extends Canvas {
 		g.drawString("AP(アスターパワー)がたまります。", 15, 225);
 		g.setColor(Graphics.getColorOfName(Graphics.RED));
 		g.drawString("AP(アスターパワー)", 15, 225);
+
+		g = pageImage[3].getGraphics();
+		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
+		g.drawString("４．クラスとユニット", 15, 25);
+		g.drawString("サンのコマンドでアステルにクラスを", 15, 70);
+		g.drawString("与えることで、自分のユニットとして", 15, 85);
+		g.drawString("操作することができます。", 15, 100);
+		image = AsterClass.loadImage(2);
+		g.drawScaledImage(image, 20, 115, 17, 17, 0, 0, 17, 17);
+		image = AsterClass.loadImage(3);
+		g.drawScaledImage(image, 37, 115, 17, 17, 17, 0, 17, 17);
+		image = AsterClass.loadImage(5);
+		g.drawScaledImage(image, 54, 115, 17, 17, 34, 0, 17, 17);
+		image = AsterClass.loadImage(8);
+		g.drawScaledImage(image, 71, 115, 17, 17, 51, 0, 17, 17);
+		image = AsterClass.loadImage(9);
+		g.drawScaledImage(image, 88, 115, 17, 17, 68, 0, 17, 17);
+		g.drawString("ユニットはスワップとコマンド(特殊", 15, 160);
+		g.drawString("能力)の２つを使えます。", 15, 175);
+		g.drawString("コマンドの種類とレンジ(射程範囲)は", 15, 190);
+		g.drawString("与えたクラスによって異なります。", 15, 205);
+		g.setColor(Graphics.getColorOfName(Graphics.RED));
+		g.drawString("　　　　　スワップ　コマンド(特殊", 15, 160);
+		g.drawString("能力)", 15, 175);
+		g.drawString("　　　　　　　　レンジ(射程範囲)", 15, 190);
+
+		g = pageImage[4].getGraphics();
+		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
+		g.drawString("５．ユニットの能力(スワップ)", 15, 25);
+		g.drawString("ユニットの基本的な行動です。", 15, 70);
+		g.drawString("レンジ内の隣り合った２つのアステル", 15, 85);
+		g.drawString("を入れ替えます。", 15, 100);
+		g.drawString("そのユニット自身も選択できます。", 15, 115);
+		g.drawString("→", 106, 162);
+		image = AsterClass.loadImage(0);
+		g.drawScaledImage(image, 40, 131, 17, 17, 17, 0, 17, 17);
+		g.drawScaledImage(image, 21, 150, 17, 17, 68, 0, 17, 17);
+		g.drawScaledImage(image, 59, 150, 17, 17, 34, 0, 17, 17);
+		g.drawScaledImage(image, 40, 169, 17, 17, 34, 0, 17, 17);
+		image = AsterClass.loadImage(2);
+		g.drawScaledImage(image, 40, 151, 17, 17, 51, 0, 17, 17);
+		g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
+		g.drawRect(20, 149, 19, 19);
+		g.drawRect(58, 149, 19, 19);
+		g.drawRect(39, 168, 19, 19);
+		g.setColor(Graphics.getColorOfName(Graphics.RED));
+		g.drawRect(39, 130, 19, 19);
+		g.drawRect(39, 149, 19, 19);
+		image = AsterClass.loadImage(0);
+		g.drawScaledImage(image, 160, 150, 17, 17, 17, 0, 17, 17);
+		g.drawScaledImage(image, 141, 150, 17, 17, 68, 0, 17, 17);
+		g.drawScaledImage(image, 179, 150, 17, 17, 34, 0, 17, 17);
+		g.drawScaledImage(image, 160, 169, 17, 17, 34, 0, 17, 17);
+		image = AsterClass.loadImage(2);
+		g.drawScaledImage(image, 160, 132, 17, 17, 51, 0, 17, 17);
+		g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
+		g.drawRect(140, 149, 19, 19);
+		g.drawRect(178, 149, 19, 19);
+		g.drawRect(159, 168, 19, 19);
+		g.setColor(Graphics.getColorOfName(Graphics.RED));
+		g.drawRect(159, 130, 19, 19);
+		g.drawRect(159, 149, 19, 19);
+		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
+		g.drawString("斜めやレンジ外のアステルの入れ替え", 15, 210);
+		g.drawString("はできません。", 15, 225);
+
+		g = pageImage[5].getGraphics();
+		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
+		g.drawString("６．ユニットの能力(コマンド)", 15, 25);
+		g.drawString("クラスにより異なる特殊な行動です。", 15, 70);
+		g.drawString("APを消費して使用します。", 15, 85);
+		g.drawString("→", 106, 140);
+		image = AsterClass.loadImage(6);
+		g.setFlipMode(Graphics.FLIP_VERTICAL);
+		g.drawScaledImage(image, 40, 101, 17, 17, 34, 0, 17, 17);
+		image = AsterClass.loadImage(0);
+		g.setFlipMode(Graphics.FLIP_NONE);
+		g.drawScaledImage(image, 21, 120, 17, 17, 0, 0, 17, 17);
+		g.drawScaledImage(image, 40, 120, 17, 17, 51, 0, 17, 17);
+		g.drawScaledImage(image, 59, 120, 17, 17, 34, 0, 17, 17);
+		g.drawScaledImage(image, 21, 139, 17, 17, 0, 0, 17, 17);
+		g.drawScaledImage(image, 59, 139, 17, 17, 51, 0, 17, 17);
+		image = AsterClass.loadImage(4);
+		g.drawScaledImage(image, 40, 139, 17, 17, 68, 0, 17, 17);
+		g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
+		g.drawRect(20, 119, 57, 19);
+		g.drawRect(20, 138, 57, 19);
+		g.drawRect(39, 119, 19, 19);
+		g.setColor(Graphics.getColorOfName(Graphics.RED));
+		g.drawRect(39, 100, 19, 19);
+		g.drawRect(39, 138, 19, 19);
+		image = AsterClass.loadImage(6);
+		g.drawScaledImage(image, 160, 101, 17, 17, 34, 0, 17, 17);
+		image = AsterClass.loadImage(0);
+		g.drawScaledImage(image, 141, 120, 17, 17, 0, 0, 17, 17);
+		g.drawScaledImage(image, 160, 120, 17, 17, 51, 0, 17, 17);
+		g.drawScaledImage(image, 179, 120, 17, 17, 34, 0, 17, 17);
+		g.drawScaledImage(image, 141, 139, 17, 17, 0, 0, 17, 17);
+		g.drawScaledImage(image, 179, 139, 17, 17, 51, 0, 17, 17);
+		image = AsterClass.loadImage(4);
+		g.drawScaledImage(image, 160, 139, 17, 17, 68, 0, 17, 17);
+		g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
+		g.drawRect(140, 119, 57, 19);
+		g.drawRect(140, 138, 57, 19);
+		g.drawRect(159, 119, 19, 19);
+		g.setColor(Graphics.getColorOfName(Graphics.RED));
+		g.drawRect(159, 100, 19, 19);
+		g.drawRect(159, 138, 19, 19);
+		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
+		g.drawString("例: ヴィーナスのコマンド", 15, 180);
+		g.drawString("“テンプテーション”", 80, 195);
+		g.drawString("「" + AsterClass.commandExplain[3] + "」", 40, 215);
+		g.setColor(Graphics.getColorOfName(Graphics.RED));
+		g.drawString("AP", 15, 85);
+		g.drawLine(50, 217, 188, 217);
 	}
 
 	public void paint(Graphics g) {

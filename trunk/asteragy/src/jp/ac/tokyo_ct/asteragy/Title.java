@@ -219,7 +219,7 @@ public class Title extends Canvas {
 				else if (explainRuleFlag) {
 					er.page--;
 					if (er.page < 0) {
-						er.page = 2;
+						er.page = 10;
 					}
 				}
 				break;
@@ -257,7 +257,7 @@ public class Title extends Canvas {
 				}
 				else if (explainRuleFlag) {
 					er.page++;
-					if (er.page > 2) {
+					if (er.page > 10) {
 						er.page = 0;
 					}
 				}
