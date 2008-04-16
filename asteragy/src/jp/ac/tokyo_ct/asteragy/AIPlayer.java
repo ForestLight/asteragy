@@ -25,7 +25,7 @@ public class AIPlayer extends Player {
 	/**
 	 * 試行回数
 	 */
-	private final static int TRIAL = 10;
+	private final static int TRIAL = 20;
 
 	private final static int WAIT = 1000;
 
@@ -119,7 +119,9 @@ public class AIPlayer extends Player {
 						System.out.println("ターゲット選択中");
 
 						if (target[i][t] == null) {
+							System.out.println("target null");
 							if (ac.moveAstern()) {
+								i = -1;
 								state = 0;
 								cmd[t] = 0;
 								cancelFlag = true;
@@ -368,13 +370,13 @@ public class AIPlayer extends Player {
 					if (ac.getPlayer() == game.getCurrentPlayer()) {
 						int dist = field2.getDistance(sunPoint[1-pNum],new Point(j,i));
 						//System.out.println("dist = " +dist+", x = " + j +" y = "+i);
-						ev += AsterClass.classCost[ac.getNumber() - 1] * ((2.0 / dist)+1) * 10;
+						ev += AsterClass.classCost[ac.getNumber() - 1] * ((100 / dist)+1);
 						if (ac.getNumber() == 1) {
 							ev += 500;
 						}
 					} else {
 						int dist = field2.getDistance(sunPoint[pNum],new Point(j,i));
-						ev -= AsterClass.classCost[ac.getNumber() - 1] * ((2.0 / dist)+1) * 10;
+						ev -= AsterClass.classCost[ac.getNumber() - 1] * ((100 / dist)+1);
 						if (ac.getNumber() == 1) {
 							ev -= 500;
 						}
@@ -385,6 +387,8 @@ public class AIPlayer extends Player {
 
 		ev += ap[pNum]*10;
 		ev -= ap[1-pNum]*10;
+		
+		if(ap[pNum] < 5) ev -= (5 - ap[pNum]) * 30;
 
 		System.out.println("AIPlayer.evaluation return" + ev);
 		return ev;
