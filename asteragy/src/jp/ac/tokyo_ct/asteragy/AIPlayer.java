@@ -388,7 +388,7 @@ public class AIPlayer extends Player {
 		ev += ap[pNum]*10;
 		ev -= ap[1-pNum]*10;
 		
-		if(ap[pNum] < 5) ev -= (5 - ap[pNum]) * 30;
+		if(ap[pNum] < 5) ev -= (5 - ap[pNum]) * 20;
 
 		System.out.println("AIPlayer.evaluation return" + ev);
 		return ev;
