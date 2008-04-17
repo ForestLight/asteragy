@@ -6,9 +6,11 @@ public final class ExplainRules extends Canvas {
 
 	public int page;
 
-	public Image image;
+	private Image image;
 
-	public Image[] pageImage = new Image[11];
+	private Image back;
+
+	private Image[] pageImage = new Image[6];
 
 	ExplainRules() {
 		page = 0;
@@ -17,13 +19,13 @@ public final class ExplainRules extends Canvas {
 		// ページの作成（作成中）
 		//
 		Graphics g;
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 6; i++) {
 			pageImage[i] = Image.createImage(getWidth(), getHeight());
 		}
 
 		g = pageImage[0].getGraphics();
-		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
-		g.fillRect(0, 0, getWidth(), getHeight());
+		back = loadImage("back.jpg");
+		g.drawImage(back, 0, 0);
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawString("１．あすてらじぃ☆とは", 15, 25);
 		g.drawString("フィールド上のアステルを動かして", 15, 70);
@@ -41,8 +43,7 @@ public final class ExplainRules extends Canvas {
 
 		g = pageImage[1].getGraphics();
 		image = AsterClass.loadImage(1);
-		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
-		g.fillRect(0, 0, getWidth(), getHeight());
+		g.drawImage(back, 0, 0);
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawString("２．ゲームの流れと目的", 15, 25);
 		g.drawString("プレイヤーは先行から交互にターンを", 15, 70);
@@ -64,8 +65,7 @@ public final class ExplainRules extends Canvas {
 		
 		g = pageImage[2].getGraphics();
 		image = AsterClass.loadImage(0);
-		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
-		g.fillRect(0, 0, getWidth(), getHeight());
+		g.drawImage(back, 0, 0);
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawString("３．アステル", 15, 25);
 		g.drawString("同じ色のアステルは４つ以上くっつく", 15, 70);
@@ -94,8 +94,7 @@ public final class ExplainRules extends Canvas {
 		g.drawString("AP(アスターパワー)", 15, 225);
 
 		g = pageImage[3].getGraphics();
-		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
-		g.fillRect(0, 0, getWidth(), getHeight());
+		g.drawImage(back, 0, 0);
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawString("４．クラスとユニット", 15, 25);
 		g.drawString("サンのコマンドでアステルにクラスを", 15, 70);
@@ -121,8 +120,7 @@ public final class ExplainRules extends Canvas {
 		g.drawString("　　　　　　　　レンジ(射程範囲)", 15, 190);
 
 		g = pageImage[4].getGraphics();
-		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
-		g.fillRect(0, 0, getWidth(), getHeight());
+		g.drawImage(back, 0, 0);
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawString("５．ユニットの能力(スワップ)", 15, 25);
 		g.drawString("ユニットの基本的な行動です。", 15, 70);
@@ -163,8 +161,7 @@ public final class ExplainRules extends Canvas {
 		g.drawString("はできません。", 15, 225);
 
 		g = pageImage[5].getGraphics();
-		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
-		g.fillRect(0, 0, getWidth(), getHeight());
+		g.drawImage(back, 0, 0);
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawString("６．ユニットの能力(コマンド)", 15, 25);
 		g.drawString("クラスにより異なる特殊な行動です。", 15, 70);
