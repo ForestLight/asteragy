@@ -211,15 +211,14 @@ public final class Title extends Canvas {
 				}
 				else if (explainAsterClassFlag && !explainRuleFlag) {
 					eac.number--;
-					if (eac.number < 1) {
-						eac.number = 12;
+					if (eac.number < 0) {
+						eac.number = 11;
 					}
-					eac.renew();
 				}
 				else if (explainRuleFlag) {
 					er.page--;
 					if (er.page < 0) {
-						er.page = 10;
+						er.page = 5;
 					}
 				}
 				break;
@@ -250,23 +249,22 @@ public final class Title extends Canvas {
 				}
 				else if (explainAsterClassFlag && !explainRuleFlag) {
 					eac.number++;
-					if (eac.number > 12) {
-						eac.number = 1;
+					if (eac.number > 11) {
+						eac.number = 0;
 					}
-					eac.renew();
 				}
 				else if (explainRuleFlag) {
 					er.page++;
-					if (er.page > 10) {
+					if (er.page > 5) {
 						er.page = 0;
 					}
 				}
 				break;
 			case Display.KEY_0:
 				explainAsterClassFlag = false;
-				eac.number = 1;
-				eac.renew();
+				eac.number = 0;
 				explainRuleFlag = false;
+				er.page = 0;
 				
 				break;
 			}
