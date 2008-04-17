@@ -11,9 +11,13 @@ public final class GameCanvas extends com.nttdocomo.ui.Canvas {
 
 	private final CanvasControl canvas;
 
+	private final PreKeyProcesser pre;
+
 	public GameCanvas(CanvasControl canvas) {
 		super();
 		this.canvas = canvas;
+		pre = new PreKeyProcesser(canvas);
+		pre.initKey(this);
 	}
 
 	public void paint(Graphics g) {
@@ -36,6 +40,7 @@ public final class GameCanvas extends com.nttdocomo.ui.Canvas {
 	 * @see com.nttdocomo.ui.Canvas#processEvent(int, int)
 	 */
 	public void processEvent(int type, int param) {
+		type = pre.processEvent(type, param);
 		final EventProcesser eventProcesser = canvas.getEventProcesser();
 		if (type == Display.KEY_PRESSED_EVENT && param == Display.KEY_9)
 			Effect.setEffect();
