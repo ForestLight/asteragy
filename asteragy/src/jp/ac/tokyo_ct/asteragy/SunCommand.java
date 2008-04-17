@@ -30,7 +30,7 @@ public final class SunCommand extends Command {
 		g.drawString(AsterClass.commandExplain[command + 1], 10, height
 				* (command + 2));
 		g.setOrigin(0, 0);
-		g.setColor(Graphics.getColorOfRGB(255, 128, 255));
+		g.setColor(Graphics.getColorOfName(Graphics.BLUE));
 		g.drawString("クラス " + AsterClass.classCost[command + 1], 75, 224 + Font
 				.getDefaultFont().getAscent());
 		g.drawString("コマンド " + AsterClass.commandCost[command + 1], 155,

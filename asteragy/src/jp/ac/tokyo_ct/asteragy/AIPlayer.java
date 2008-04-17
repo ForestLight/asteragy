@@ -121,15 +121,17 @@ public class AIPlayer extends Player {
 						if (target[i][t] == null) {
 							System.out.println("target null");
 							if (ac.moveAstern()) {
-								i = -1;
+								System.out.println("ac back");
+								//i = 0;
 								state = 0;
 								cmd[t] = 0;
 								cancelFlag = true;
 								break;
 							}
+							i--;
 						}
-						System.out.println("target - x = " + target[i][t].x + " y = "
-								+ target[i][t].y);
+//						System.out.println("target - x = " + target[i][t].x + " y = "
+//								+ target[i][t].y);
 						ac.setPointAndNext(target[i][t]);
 						i++;
 					}
@@ -359,8 +361,14 @@ public class AIPlayer extends Player {
 		sunPoint[0] = field2.getSunPosition(p[0]);
 		sunPoint[1] = field2.getSunPosition(p[1]);
 		
-		if(sunPoint[pNum] == null) return -10000;
-		if(sunPoint[1-pNum] == null) return 10000;
+		if(sunPoint[pNum] == null){
+			System.out.println("AIPlayer.evaluation return -10000");
+			return -10000;
+		}
+		if(sunPoint[1-pNum] == null){
+			System.out.println("AIPlayer.evaluation return 10000");
+			return 10000;
+		}
 		
 		
 		for (int i = 0; i < y; i++) {
@@ -533,6 +541,7 @@ public class AIPlayer extends Player {
 		ac.execute();
 		System.out.println("実行完了");
 		field.repaintField(canvas.getScreen().getGraphics());
+		canvas.getScreen().flipScreen();
 
 		Player p = field.checkGameOver();
 		// ゲームオーバー判定
