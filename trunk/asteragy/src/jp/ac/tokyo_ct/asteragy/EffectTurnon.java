@@ -43,11 +43,15 @@ public class EffectTurnon extends Effect {
 		final String string = "" + player.getName() + "のターン";
 
 		final int wx = 30;
+		final int late = 3 - string.length() / 10;
 
 		UpDownWord word = new UpDownWord(string, 15, Font.getDefaultFont()
 				.stringWidth(string), Graphics.getColorOfRGB(0, 0, 0));
 		UpDownWord shadow = new UpDownWord(string, 7, Font.getDefaultFont()
 				.stringWidth(string), Graphics.getColorOfRGB(100, 100, 100));
+
+		word.setLate(late);
+		shadow.setLate(late);
 
 		final int wy = (canvas.getHeight() + Font.getDefaultFont().getHeight()) / 2;
 
@@ -58,7 +62,7 @@ public class EffectTurnon extends Effect {
 		do {
 			g.unlock(true);
 			try {
-				Thread.sleep(300 / CanvasControl.f);
+				Thread.sleep(late * 100 / CanvasControl.f);
 			} catch (InterruptedException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();

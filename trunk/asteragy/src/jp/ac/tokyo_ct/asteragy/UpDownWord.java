@@ -1,12 +1,12 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.Graphics;
+import com.nttdocomo.ui.*;
 
 public class UpDownWord {
 
 	private static final int frame = 15;
 
-	private static final int late = 3;
+	private int late = 3;
 
 	private static final int theta = SimpleMath.cycle / (2 * frame);
 
@@ -25,7 +25,7 @@ public class UpDownWord {
 	public UpDownWord(String string, int height, int width, int color) {
 		this.height = height;
 		word = string.charAt(0);
-		this.width = width / string.length();
+		this.width = Font.getDefaultFont().stringWidth(string.substring(0, 1));
 		this.color = color;
 		time = 0;
 		if (string.length() > 1)
@@ -33,6 +33,12 @@ public class UpDownWord {
 					- this.width, color);
 		else
 			next = null;
+	}
+
+	public void setLate(int late) {
+		if (next != null)
+			next.setLate(late);
+		this.late = late;
 	}
 
 	public boolean paint(Graphics g, int x) {
