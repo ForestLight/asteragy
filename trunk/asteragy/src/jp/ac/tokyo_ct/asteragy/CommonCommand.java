@@ -35,6 +35,7 @@ public final class CommonCommand extends Command {
 		g.setOrigin(0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 255));
 		if (command == 0) {
+			g.setColor(Graphics.getColorOfName(Graphics.BLUE));
 			g.drawString("ÉXÉèÉbÉv 0", 85, 235);
 		} else {
 			g.setOrigin(0, top);
