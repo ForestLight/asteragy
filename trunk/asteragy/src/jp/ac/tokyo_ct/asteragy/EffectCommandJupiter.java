@@ -2,9 +2,9 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandJupiter extends Effect {
+public final class EffectCommandJupiter extends Effect {
 
-	private static Image effect;
+	private static final Image effect = Game.loadImage("jupiter_effect.gif");
 
 	// private static Image tranc;
 
@@ -24,7 +24,6 @@ public class EffectCommandJupiter extends Effect {
 		this.field = field;
 		this.point = point;
 		// setLocation();
-		loadImage();
 		// imageTranclucently();
 		setCircle();
 	}
@@ -35,23 +34,6 @@ public class EffectCommandJupiter extends Effect {
 	 * 
 	 * lefttop.x -= 1; lefttop.y -= 6; rightbottom.x += 2; }
 	 */
-
-	private void loadImage() {
-		if (effect != null)
-			return;
-
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager
-					.getImage("resource:///jupiter_effect.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			effect = m.getImage();
-		} catch (Exception e) {
-		}
-
-	}
 
 	/*
 	 * private void imageTranclucently() { // 背景黒で半透明化 tranc =
@@ -116,23 +98,14 @@ public class EffectCommandJupiter extends Effect {
 
 			g.unlock(true);
 
-			try {
-				Thread.sleep(600 / CanvasControl.f);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
+			Game.sleep(600 / CanvasControl.f);
 
 			g.lock();
 
 			g.drawImage(back, l.x, l.y);
 
 			g.unlock(true);
-			try {
-				Thread.sleep(100 / CanvasControl.f);
-			} catch (InterruptedException e1) {
-				// TODO 自動生成された catch ブロック
-				e1.printStackTrace();
-			}
+			Game.sleep(100 / CanvasControl.f);
 			g.lock();
 
 			matrix[2] = center.x + SimpleMath.cos(theta * i) * -e.x * 3 / 5
@@ -147,27 +120,18 @@ public class EffectCommandJupiter extends Effect {
 			g.drawImage(effect, matrix);
 
 			g.unlock(true);
-			try {
-				Thread.sleep(100 / CanvasControl.f);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
+			Game.sleep(100 / CanvasControl.f);
 
 			g.lock();
 
 			g.drawImage(back, l.x, l.y);
 
 			g.unlock(true);
-			try {
-				Thread.sleep(1000 / CanvasControl.f);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
+			Game.sleep(100 / CanvasControl.f);
 		}
 	}
 	/*
-	 * public void start(Graphics g) { if(!isEffect) return; // TODO
-	 * 自動生成されたメソッド・スタブ
+	 * public void start(Graphics g) { if(!isEffect) return;
 	 * 
 	 * final int height = 10;
 	 * 
@@ -182,7 +146,7 @@ public class EffectCommandJupiter extends Effect {
 	 * g.unlock(true);
 	 * 
 	 * try { Thread.sleep(1000 / CanvasControl.f); } catch (InterruptedException
-	 * e) { // TODO 自動生成された catch ブロック e.printStackTrace(); } }
+	 * e) { e.printStackTrace(); } }
 	 * 
 	 * for (int i = 0; i < height; i++) {
 	 * 
@@ -197,7 +161,7 @@ public class EffectCommandJupiter extends Effect {
 	 * g.unlock(true);
 	 * 
 	 * try { Thread.sleep(300 / CanvasControl.f); } catch (InterruptedException
-	 * e) { // TODO 自動生成された catch ブロック e.printStackTrace(); } }
+	 * e) { e.printStackTrace(); } }
 	 * 
 	 * for (int i = 0; i < height; i++) {
 	 * 
@@ -213,10 +177,10 @@ public class EffectCommandJupiter extends Effect {
 	 * g.unlock(true);
 	 * 
 	 * try { Thread.sleep(300 / CanvasControl.f); } catch (InterruptedException
-	 * e) { // TODO 自動生成された catch ブロック e.printStackTrace(); } }
+	 * e) { e.printStackTrace(); } }
 	 * 
 	 * try { Thread.sleep(1000 / CanvasControl.f * 20); } catch
-	 * (InterruptedException e) { // TODO 自動生成された catch ブロック
+	 * (InterruptedException e) {
 	 * e.printStackTrace(); } }
 	 */
 }

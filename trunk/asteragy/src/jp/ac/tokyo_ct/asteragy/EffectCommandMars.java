@@ -2,12 +2,10 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.Graphics;
 import com.nttdocomo.ui.Image;
-import com.nttdocomo.ui.MediaImage;
-import com.nttdocomo.ui.MediaManager;
 
-public class EffectCommandMars extends Effect implements PaintAsterItem {
+public final class EffectCommandMars extends Effect implements PaintAsterItem {
 
-	private static Image effect;
+	private static final Image effect = Game.loadImage("mars_effect.gif");
 
 	private final Field field;
 
@@ -28,7 +26,6 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 		this.point = point;
 		this.aster = field.asterToPoint(cls.getAster());
 		paint = field.getAster(point).getPaint();
-		loadImage();
 		setRect();
 	}
 
@@ -57,22 +54,6 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 		rightbottom = new Point(rx, by);
 	}
 
-	private void loadImage() {
-		if (effect != null)
-			return;
-
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///mars_effect.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			effect = m.getImage();
-		} catch (Exception e) {
-		}
-
-	}
-
 	public void start(Graphics g) {
 		if (!isEffect)
 			return;
@@ -89,11 +70,8 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 
 			g.unlock(true);
 
-			try {
-				Thread.sleep(300 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			Game.sleep(300 / CanvasControl.f);
+
 
 		}
 
@@ -102,11 +80,8 @@ public class EffectCommandMars extends Effect implements PaintAsterItem {
 		field.getAster(point).setPaint(this);
 		field.repaintAster(g, point);
 
-		try {
-			Thread.sleep(1000 / CanvasControl.f * 10);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		Game.sleep(1000 / CanvasControl.f * 10);
+		Game.sleep(10000 / CanvasControl.f);
 
 		field.getAster(point).setPaint(paint);
 		field.repaintAster(g, point);

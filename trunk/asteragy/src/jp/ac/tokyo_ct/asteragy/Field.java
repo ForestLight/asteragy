@@ -525,7 +525,6 @@ final class Field implements PaintItem {
 	}
 
 	public void repaintAsterRect(Graphics g, Point lefttop, Point rightbottom) {
-		// TODO 自動生成されたメソッド・スタブ
 		final CanvasControl canvas = game.getCanvas();
 		if (lefttop == null || rightbottom == null)
 			return;
@@ -562,21 +561,6 @@ final class Field implements PaintItem {
 	public Screen getScreen() {
 		return game.getCanvas().getScreen();
 	}
-
-	/*
-	 * フィールド画像読み込み
-	 * 
-	 * private void loadField() { // 読込先イメージ fieldimage = null; try { //
-	 * リソースから読み込み MediaImage m =
-	 * MediaManager.getImage("resource:///fieldimage.jpg"); // メディアの使用開始
-	 * m.use(); // 読み込み fieldimage = m.getImage(); } catch (Exception e) { }
-	 * fieldimage = Image.createImage(GameCanvas.measure + 1, GameCanvas.measure +
-	 * 1); Graphics g = fieldimage.getGraphics(); // 臨時マス
-	 * g.setColor(Graphics.getColorOfRGB(255, 243, 236)); g.fillRect(0, 0,
-	 * GameCanvas.measure + 1, GameCanvas.measure + 1);
-	 * g.setColor(Graphics.getColorOfName(Graphics.BLACK)); g.drawRect(0, 0,
-	 * GameCanvas.measure, GameCanvas.measure); g.dispose(); }
-	 */
 
 	boolean isYInFieldBound(int y) {
 		return 0 <= y && y < getY();

@@ -20,7 +20,7 @@ public class Command implements PaintItem {
 		this.canvas = canvas;
 	}
 
-	public void setCommand(int cmd, Point pt) {
+	public final void setCommand(int cmd, Point pt) {
 		command = cmd;
 		point = pt;
 		canvas.repaint();
@@ -44,7 +44,7 @@ public class Command implements PaintItem {
 		g.clearClip();
 	}
 
-	private void setPosition(Graphics g) {
+	private final void setPosition(Graphics g) {
 		final int m = GameCanvas.measure;
 		final int topMargin = canvas.getTopMargin();
 		final int leftMargin = canvas.getLeftMargin();
@@ -60,7 +60,7 @@ public class Command implements PaintItem {
 		System.out.println("top:" + top + " left:" + left + "y:" + point.y);
 	}
 
-	protected void setImage(Image image) {
+	protected final void setImage(Image image) {
 		commandImage = image;
 	}
 

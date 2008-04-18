@@ -16,7 +16,6 @@ public class PreKeyProcesser {
 	}
 
 	public int processEvent(int type, int param) {
-		// TODO 自動生成されたメソッド・スタブ
 		if (type == Display.KEY_PRESSED_EVENT) {
 			switch (param) {
 			case Display.KEY_SOFT1:

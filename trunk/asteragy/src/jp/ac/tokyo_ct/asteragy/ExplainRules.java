@@ -85,7 +85,7 @@ public final class ExplainRules extends Canvas implements Runnable {
 		g.drawScaledImage(image, 37, 147, 17, 17, 17, 0, 17, 17);
 		g.drawScaledImage(image, 37, 164, 17, 17, 17, 0, 17, 17);
 		g.drawString("→", 66, 160);
-		image = loadImage("disappear.gif");
+		image = Game.loadImage("disappear.gif");
 		g.drawScaledImage(image, 90, 130, 17, 17, 0, 153, 17, 17);
 		g.drawScaledImage(image, 90, 147, 17, 17, 0, 153, 17, 17);
 		g.drawScaledImage(image, 107, 147, 17, 17, 0, 153, 17, 17);
@@ -224,13 +224,11 @@ public final class ExplainRules extends Canvas implements Runnable {
 	}
 
 	public void paint(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
 		if (thread != null) {
 			if (thread.isAlive()) {
 				try {
 					thread.join();
 				} catch (InterruptedException e) {
-					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				}
 			}
@@ -240,21 +238,7 @@ public final class ExplainRules extends Canvas implements Runnable {
 		thread.start();
 	}
 
-	private static Image loadImage(String s) {
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///" + s);
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			return m.getImage();
-		} catch (Exception e) {
-		}
-		return null;
-	}
-
 	public void run() {
-		// TODO 自動生成されたメソッド・スタブ
 
 		synchronized (this) {
 
@@ -283,12 +267,7 @@ public final class ExplainRules extends Canvas implements Runnable {
 
 				g.unlock(true);
 
-				try {
-					Thread.sleep(300 / CanvasControl.f);
-				} catch (InterruptedException e) {
-					// TODO 自動生成された catch ブロック
-					e.printStackTrace();
-				}
+				Game.sleep(300 / CanvasControl.f);
 			}
 
 			g = null;

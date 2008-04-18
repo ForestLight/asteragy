@@ -3,7 +3,7 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.Graphics;
 import com.nttdocomo.ui.Image;
 
-public class EffectCommandMercury extends Effect {
+public final class EffectCommandMercury extends Effect {
 
 	// private static Image effect;
 
@@ -68,12 +68,7 @@ public class EffectCommandMercury extends Effect {
 			r--;
 			theta += 5;
 
-			try {
-				Thread.sleep(300 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				// TODO é©ìÆê∂ê¨Ç≥ÇÍÇΩ catch ÉuÉçÉbÉN
-				e.printStackTrace();
-			}
+			Game.sleep(300 / CanvasControl.f);
 		}
 	}
 

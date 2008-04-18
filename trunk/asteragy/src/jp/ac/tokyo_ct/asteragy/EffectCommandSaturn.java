@@ -2,9 +2,9 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandSaturn extends Effect {
+public final class EffectCommandSaturn extends Effect {
 
-	private static Image effect;
+	private static Image effect = Game.loadImage("saturn_effect.gif");
 
 	private final Field field;
 
@@ -34,30 +34,11 @@ public class EffectCommandSaturn extends Effect {
 		 * if (field.isXInFieldBound(location[i].x) &&
 		 * field.isYInFieldBound(location[i].y)) { i++; } }
 		 */
-		loadImage();
-	}
-
-	private void loadImage() {
-
-		if (effect != null)
-			return;
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager
-					.getImage("resource:///saturn_effect.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			effect = m.getImage();
-		} catch (Exception e) {
-		}
-
 	}
 
 	public void start(Graphics g) {
 		if (!isEffect)
 			return;
-		// TODO 自動生成されたメソッド・スタブ
 
 		int[] matrix = new int[6];
 
@@ -86,12 +67,7 @@ public class EffectCommandSaturn extends Effect {
 			g.drawImage(effect, matrix, x, y, width, height);
 			g.unlock(true);
 
-			try {
-				Thread.sleep(1000 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+			Game.sleep(1000 / CanvasControl.f);
 		}
 
 		field.repaintAsterRect(g, new Point(aster.x - 1, aster.y - 1),
@@ -132,13 +108,7 @@ public class EffectCommandSaturn extends Effect {
 
 			g.unlock(true);
 
-			try {
-				Thread.sleep(1000 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-
+			Game.sleep(1000 / CanvasControl.f);
 		}
 
 	}

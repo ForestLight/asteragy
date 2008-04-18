@@ -33,19 +33,17 @@ public final class Title extends Canvas {
 
 	public Title() {
 		if (title == null) {
-			title = loadImage("title.jpg");
+			title = Game.loadImage("title.jpg");
 		}
 		if (menu == null) {
 			menu = new Image[10];
 			for (int i = 0; i < 10; i++)
-				menu[i] = loadImage("menu_" + i + ".gif");
+				menu[i] = Game.loadImage("menu_" + i + ".gif");
 		}
 		if (credit == null) {
-			credit = loadImage("credit.gif");
+			credit = Game.loadImage("credit.gif");
 		}
 	}
-
-	private Thread startThread;
 
 	/**
 	 * タイトル画面の描画
@@ -53,32 +51,15 @@ public final class Title extends Canvas {
 	 * @return option.gameType 0:一機対戦 1:AI対戦 2:ネットワーク対戦
 	 */
 	public Option start() {
-		startThread = Thread.currentThread();
 		Display.setCurrent(this);
 		option.gameType = -1;
 
 		for (;;) {
 			// System.out.println("loop");
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}
+			Game.sleep(1000);
 			if (option.gameType != -1)
 				return option;
 		}
-	}
-
-	private static Image loadImage(String s) {
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///" + s);
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			return m.getImage();
-		} catch (Exception e) {
-		}
-		return null;
 	}
 
 	public void processEvent(int type, int param) {

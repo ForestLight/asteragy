@@ -53,25 +53,25 @@ public abstract class AsterClass {
 
 	private final Game game;
 
-	public Player getPlayer() {
+	public final Player getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(Player p) {
+	public final void setPlayer(Player p) {
 		player = p;
 	}
 
 	private Player player;
 
-	public void setCommand(int cmd) {
+	public final void setCommand(int cmd) {
 		mode = cmd;
 	}
 
-	public int getCommand() {
+	public final int getCommand() {
 		return mode;
 	}
 
-	public void setAster(Aster a) {
+	public final void setAster(Aster a) {
 		aster = a;
 	}
 
@@ -112,7 +112,7 @@ public abstract class AsterClass {
 	/**
 	 * @return 特殊コマンド名
 	 */
-	public String getCommandName() {
+	public final String getCommandName() {
 		return AsterClass.commandName[getNumber() - 1];
 	}
 
@@ -174,7 +174,7 @@ public abstract class AsterClass {
 	 * コマンドを実行
 	 * 
 	 */
-	public void execute() {
+	public final void execute() {
 		final Field field = getAster().getField();
 		System.out.println("----AsterClass.execute()");
 		switch (mode) {
@@ -215,7 +215,7 @@ public abstract class AsterClass {
 	/**
 	 * 行動可能回数、フラグ初期化
 	 */
-	public void init() {
+	public final void init() {
 		// 行動回数リセット
 		actionCount = getActionNum();
 		// フラグ消去
@@ -351,7 +351,7 @@ public abstract class AsterClass {
 		return ret;
 	}
 
-	public static int[][] getDefaultRange(int n) {
+	public final static int[][] getDefaultRange(int n) {
 		switch (n) {
 		case 1:
 			return SunClass.getDefaultRange();
@@ -384,17 +384,8 @@ public abstract class AsterClass {
 	public abstract Image getImage();
 
 	static Image loadImage(int n) {
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///aster_" + n
-					+ ".gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			return m.getImage();
-		} catch (Exception e) {
-			return null;
-		}
+		return Game
+				.loadImage("aster_".concat(String.valueOf(n)).concat(".gif"));
 	}
 
 	public static final int MAX_CLASS = 12;

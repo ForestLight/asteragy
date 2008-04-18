@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandUranus extends Effect {
+public final class EffectCommandUranus extends Effect {
 
 	// private static final int number = 3;
 
@@ -23,7 +23,6 @@ public class EffectCommandUranus extends Effect {
 	// private Graphics g;
 
 	public EffectCommandUranus(Field field, Point target1, Point target2) {
-		// TODO 自動生成されたコンストラクター・スタブ
 		this.field = field;
 		this.target1 = target1;
 		this.target2 = target2;
@@ -74,12 +73,7 @@ public class EffectCommandUranus extends Effect {
 			g.drawImage(t2, 0, 0);
 			g.unlock(true);
 
-			try {
-				Thread.sleep(400 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+			Game.sleep(400 / CanvasControl.f);
 
 		}
 	}

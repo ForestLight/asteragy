@@ -2,10 +2,8 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.Graphics;
 import com.nttdocomo.ui.Image;
-import com.nttdocomo.ui.MediaImage;
-import com.nttdocomo.ui.MediaManager;
 
-public class EffectAsterDisappearing extends Effect implements PaintAsterItem {
+public final class EffectAsterDisappearing extends Effect implements PaintAsterItem {
 
 	private static final int frame = 10;
 
@@ -71,18 +69,7 @@ public class EffectAsterDisappearing extends Effect implements PaintAsterItem {
 	 */
 
 	private static void loadImage() {
-		if (image == null) {
-			try {
-				// リソースから読み込み
-				MediaImage m = MediaManager
-						.getImage("resource:///disappear.gif");
-				// メディアの使用開始
-				m.use();
-				// 読み込み
-				image = m.getImage();
-			} catch (Exception e) {
-			}
-		}
+		image = Game.loadImage("disappear.gif");
 	}
 
 	public int getHeight() {

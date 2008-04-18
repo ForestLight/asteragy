@@ -1,7 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 //現在カオスってるので動かさないで．見ないで＞＜
-public class AIPlayer extends Player {
+public final class AIPlayer extends Player {
 
 	public AIPlayer(Game game, String playerName) {
 		super(game, playerName);
@@ -209,10 +209,7 @@ public class AIPlayer extends Player {
 			game.getField().repaintField(canvas.getScreen().getGraphics());
 			canvas.getScreen()
 					.paintEffect(canvas.getDisappearControl());
-			try {
-				Thread.sleep(WAIT);
-			} catch (Exception e) {
-			}
+			Game.sleep(WAIT);
 			canvas.resetEventProcesser();
 			Effect.setEffect(true);
 		}
@@ -477,11 +474,8 @@ public class AIPlayer extends Player {
 		
 		canvas.getCursor().setCursor(pt, Cursor.CURSOR_1);
 		canvas.getScreen().flipScreen();
-		try {
-			System.out.println("wait1");
-			Thread.sleep(WAIT);
-		} catch (Exception e) {
-		}
+		System.out.println("wait1");
+		Game.sleep(WAIT);
 		
 		canvasRange.setRange(pt, range);
 		canvas.getCommonCommand().setCommand(cmd[maxNum], pt);
@@ -489,11 +483,8 @@ public class AIPlayer extends Player {
 		canvas.getScreen().flipScreen();
 
 		ac.setCommand(cmd[maxNum]);
-		try {
-			System.out.println("wait2");
-			Thread.sleep(WAIT);
-		} catch (Exception e) {
-		}
+		System.out.println("wait2");
+		Game.sleep(WAIT);
 
 		canvas.getCommonCommand().setCommand(-1, null);
 		canvas.getScreen().flipScreen();
@@ -509,21 +500,15 @@ public class AIPlayer extends Player {
 			ac.setPointAndNext(target[i][maxNum]);
 
 			canvas.getCursor().setCursor(target[i][maxNum], Cursor.CURSOR_1);
-			try {
-				System.out.println("wait3");
-				Thread.sleep(WAIT);
-			} catch (Exception e) {
-			}
+			System.out.println("wait3");
+			Game.sleep(WAIT);
 			i++;
 		}
 		
 		if(ac.getNumber() == 1 && ac.getCommand() == 1){//サンコマンド専用
 			canvas.getSunCommand().setCommand(target[1][maxNum].x,pt);
 			canvas.getScreen().flipScreen();
-			try {
-				Thread.sleep(WAIT);
-			} catch (Exception e) {
-			}
+			Game.sleep(WAIT);
 			canvas.getSunCommand().setCommand(-1,null);
 			canvas.getScreen().flipScreen();
 		}
@@ -556,10 +541,7 @@ public class AIPlayer extends Player {
 			this.addAP(n);
 			field.repaintField(canvas.getScreen().getGraphics());
 			canvas.getScreen().paintEffect(canvas.getDisappearControl());
-			try {
-				Thread.sleep(WAIT);
-			} catch (Exception e) {
-			}
+			Game.sleep(WAIT);
 		}
 		System.out.println("消去完了");
 		

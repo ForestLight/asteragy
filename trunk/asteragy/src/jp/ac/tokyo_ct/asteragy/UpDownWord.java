@@ -42,7 +42,6 @@ public class UpDownWord {
 	}
 
 	public boolean paint(Graphics g, int x) {
-		// TODO 自動生成されたメソッド・スタブ
 		// g.setColor(Graphics.getColorOfRGB(100, 100, 100));
 		// g.drawChars(new char[] { word }, x - 1, -1 - height
 		// * SimpleMath.sin(time * theta) / SimpleMath.divide, 0, 1);

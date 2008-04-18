@@ -109,11 +109,11 @@ public final class UranusClass extends AsterClass {
 
 	public void executeSpecialCommand() {
 
-		Effect effect = new EffectCommandUranus(getAster().getField(), target1,
-				target2);
-		getAster().getField().getScreen().paintEffect(effect);
+		final Field field = getAster().getField();
+		Effect effect = new EffectCommandUranus(field, target1, target2);
+		field.getScreen().paintEffect(effect);
 
-		getAster().getField().swap(target1, target2);
+		field.swap(target1, target2);
 		logAction(target1, target2);
 	}
 

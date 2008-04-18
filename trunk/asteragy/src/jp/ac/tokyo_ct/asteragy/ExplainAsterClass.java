@@ -40,12 +40,15 @@ public final class ExplainAsterClass extends Canvas implements Runnable {
 			g.drawImage(asterClassImage, 20, 20);
 			g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 			g.drawString(AsterClass.classNameB[number], 20, 60);
-			g.drawString("コマンド: " + AsterClass.commandName[number], 20, 80);
+			g.drawString("コマンド: ".concat(AsterClass.commandName[number]), 20,
+					80);
 			g.drawString(AsterClass.commandExplain[number], 20, 100);
-			g.drawString("クラスコスト: " + AsterClass.classCost[number], 20, 120);
-			g.drawString("コマンドコスト: " + AsterClass.commandCost[number], 20, 140);
-			g.drawString("行動回数： " + AsterClass.actionNum[number], 20, 160);
-
+			g.drawString("クラスコスト: ".concat(String
+					.valueOf(AsterClass.classCost[number])), 20, 120);
+			g.drawString("コマンドコスト: ".concat(String
+					.valueOf(AsterClass.commandCost[number])), 20, 140);
+			g.drawString("行動回数： ".concat(String
+					.valueOf(AsterClass.actionNum[number])), 20, 160);
 			g.drawString("0: もどる", 20, 237);
 
 			for (int i = 0; i < range.length; i++) {
@@ -80,10 +83,8 @@ public final class ExplainAsterClass extends Canvas implements Runnable {
 		thread = new Thread(this);
 		thread.start();
 	}
-
 	public void run() {
 		// TODO 自動生成されたメソッド・スタブ
-
 		synchronized (this) {
 
 			if (number == temp) {
@@ -124,16 +125,5 @@ public final class ExplainAsterClass extends Canvas implements Runnable {
 		}
 	}
 
-	private static Image loadImage(String s) {
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///" + s);
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			return m.getImage();
-		} catch (Exception e) {
-		}
-		return null;
-	}
+	// loadImageはGameクラスへ移動
 }

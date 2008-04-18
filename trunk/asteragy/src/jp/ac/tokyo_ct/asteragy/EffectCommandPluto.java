@@ -2,14 +2,14 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandPluto extends Effect {
+public final class EffectCommandPluto extends Effect {
 
 	private static final int frame = 6;
 
-	private static Image effect;
+	private static final Image effect = Game.loadImage("pluto_effect.gif");
 
-	private final Field field;
-
+	private Field field;
+	
 	private final Point aster;
 
 	private Point size;
@@ -23,10 +23,8 @@ public class EffectCommandPluto extends Effect {
 	// private Graphics g;
 
 	public EffectCommandPluto(Field field, Point aster) {
-		// TODO 自動生成されたコンストラクター・スタブ
 		this.field = field;
 		this.aster = aster;
-		loadImage();
 		setBounds();
 	}
 
@@ -40,23 +38,6 @@ public class EffectCommandPluto extends Effect {
 		location.y -= size.y / 2;
 		System.out.println("size(" + size.x + "," + size.y + ")");
 		System.out.println("location(" + location.x + "," + location.y + ")");
-	}
-
-	private void loadImage() {
-
-		if (effect != null)
-			return;
-
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager
-					.getImage("resource:///pluto_effect.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			effect = m.getImage();
-		} catch (Exception e) {
-		}
 	}
 
 	public void start(Graphics g) {
@@ -84,24 +65,14 @@ public class EffectCommandPluto extends Effect {
 			if (r <= size.x)
 				r += frame;
 
-			try {
-				Thread.sleep(300 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+			Game.sleep(300 / CanvasControl.f);
 		}
 
 		// g.clearClip();
 
 		g.drawImage(effect, 0, 0);
 
-		try {
-			Thread.sleep(1000 / CanvasControl.f);
-		} catch (InterruptedException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+		Game.sleep(1000 / CanvasControl.f);
 
 		g.setOrigin(0, 0);
 
@@ -115,12 +86,7 @@ public class EffectCommandPluto extends Effect {
 
 			g.unlock(true);
 
-			try {
-				Thread.sleep(1000 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+			Game.sleep(1000 / CanvasControl.f);
 		}
 
 		field.getGame().getCanvas().repaint();

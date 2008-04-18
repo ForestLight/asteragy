@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EarthClass extends AsterClass {
+public final class EarthClass extends AsterClass {
 	private static int[][] defaultRange = { { 1, 1, 1 }, { 1, 1, 1 },
 			{ 1, 1, 1 } };
 
@@ -101,22 +101,6 @@ public class EarthClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
-		/*
-		 * イージス Point me = getAster().getField().asterToPoint(getAster()); Point
-		 * pt = new Point(); for (int i = 0; i < defaultRange.length; i++) { for
-		 * (int j = 0; j < defaultRange[0].length; j++) { // レンジ内であり if
-		 * (defaultRange[i][j] == 1) { pt.x = me.x - defaultRange.length + j;
-		 * pt.y = me.y - defaultRange[0].length + i; // フィールドの外にはみ出してたら処理しない if
-		 * (pt.x < 0 || pt.x >= getAster().getField().getField()[0].length)
-		 * continue; if (pt.y < 0 || pt.y >=
-		 * getAster().getField().getField().length) continue; // クラス持ちであり if
-		 * (getAster().getField().getAster(pt).getAsterClass() != null) { //
-		 * このユニットと同一のプレイヤーが所持しているのなら if
-		 * (getAster().getField().getAster(pt).getAsterClass() .getPlayer() ==
-		 * this.getPlayer()) { // 対象不可フラグを建てる
-		 * getAster().getField().getAster(pt).getAsterClass()
-		 * .setProtectedFlag(true); } } } } }
-		 */
 		Effect effect = new EffectCommandEarth(this.getAster().getField(),
 				target1);
 		getAster().getField().getScreen().paintEffect(effect);

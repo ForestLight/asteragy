@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandNeptune extends Effect {
+public final class EffectCommandNeptune extends Effect {
 
 	//private static Image effect;
 
@@ -11,7 +11,6 @@ public class EffectCommandNeptune extends Effect {
 	private final Point point;
 
 	public EffectCommandNeptune(Field field, Point point) {
-		// TODO 自動生成されたコンストラクター・スタブ
 		this.field = field;
 		this.point = point;
 		// loadImage();
@@ -28,7 +27,6 @@ public class EffectCommandNeptune extends Effect {
 	public void start(Graphics g) {
 		if (!isEffect)
 			return;
-		// TODO 自動生成されたメソッド・スタブ
 
 		g.setOrigin(0, 0);
 
@@ -53,21 +51,13 @@ public class EffectCommandNeptune extends Effect {
 		 * e.printStackTrace(); } }
 		 */
 
-		try {
-			Thread.sleep(30000 / CanvasControl.f);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Game.sleep(30000 / CanvasControl.f);
 
 		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
 		g.fillRect(0, 0, field.getGame().getCanvas().getWidth(), field
 				.getGame().getCanvas().getHeight());
 
-		try {
-			Thread.sleep(300 / CanvasControl.f);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Game.sleep(300 / CanvasControl.f);
 
 		field.getGame().getCanvas().repaint();
 		field.getScreen().flipScreen();

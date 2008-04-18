@@ -16,7 +16,7 @@ abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
 		if (selected) {
 			return;
 		}
-		System.out.println("param = "+param);
+		System.out.println("param = " + param);
 		switch (param) {
 		case Display.KEY_0:
 		case Display.KEY_IAPP:
