@@ -35,22 +35,13 @@ public final class BackImage implements PaintItem {
 	 * @param g
 	 *            描画先グラフィクス
 	 */
-	private void paintBackGround(Graphics g) {
-		// 読込先イメージ
-		Image back = null;
-		try {
-			// 背景画像リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///back.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			back = m.getImage();
-		} catch (Exception e) {
-		}
+	private static void paintBackGround(Graphics g) {
 		// 描画
-		if (back != null)
-			g.drawImage(back, 0, 0);
+		if (backGround != null)
+			g.drawImage(backGround, 0, 0);
 	}
+
+	static final Image backGround = Game.loadImage("back.gif");
 
 	/*
 	 * private void paintPlayerBack(Graphics g) { Image back = null; try { //

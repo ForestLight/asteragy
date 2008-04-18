@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandMoon extends Effect {
+public final class EffectCommandMoon extends Effect {
 
 	// private static Image effect;
 
@@ -41,11 +41,7 @@ public class EffectCommandMoon extends Effect {
 			g.clearClip();
 			g.unlock(true);
 
-			try {
-				Thread.sleep(1000 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			Game.sleep(1000 / CanvasControl.f);
 		}
 
 		for (int i = 0; i >= -17; i--) {
@@ -59,11 +55,7 @@ public class EffectCommandMoon extends Effect {
 			g.clearClip();
 			g.unlock(true);
 
-			try {
-				Thread.sleep(1000 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			Game.sleep(1000 / CanvasControl.f);
 		}
 	}
 

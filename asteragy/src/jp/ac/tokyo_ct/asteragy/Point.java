@@ -34,6 +34,7 @@ public final class Point {
 	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+/*
 	public boolean equals(Object rhs) {
 		if (this == rhs)
 			return true;
@@ -43,7 +44,7 @@ public final class Point {
 			return false;
 		}
 	}
-
+*/
 	public boolean equals(Point rhs) {
 		return x == rhs.x && y == rhs.y;
 	}
@@ -53,9 +54,9 @@ public final class Point {
 	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
-	public int hashCode() {
-		return x ^ ~y;
-	}
+//	public int hashCode() {
+//		return x ^ ~y;
+//	}
 
 	/*
 	 * (”ñ Javadoc)

@@ -173,7 +173,6 @@ public final class CanvasControl {
 	}
 
 	public void onTurnStart(Player player) {
-		// TODO 自動生成されたメソッド・スタブ
 		System.out.println("onTurnStart");
 		game.getPlayer1().repaint();
 		game.getPlayer2().repaint();
@@ -184,7 +183,6 @@ public final class CanvasControl {
 	}
 
 	public void paintNowloading(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
 		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
 		g.drawRect(0, getHeight() / 4, getWidth(), getHeight() * 3 / 4);
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));

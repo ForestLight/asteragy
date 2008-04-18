@@ -1,6 +1,6 @@
 UseNetwork = http
-LastModified = Fri, 18 Apr 2008 21:27:01
+LastModified = Sat, 19 Apr 2008 03:58:07
 AppClass = jp.ac.tokyo_ct.asteragy.Main
 AppName = Main
 PackageURL = http://localhost/
-AppSize = 274370
+AppSize = 221472

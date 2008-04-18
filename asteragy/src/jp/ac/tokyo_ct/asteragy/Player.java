@@ -23,11 +23,11 @@ public abstract class Player implements PaintItem {
 	 * @return 選択した行動。または、ターン終了ならnullを返す。
 	 */
 	public abstract Action getAction();
-
+/*
 	public final String getName() {
 		return name;
 	}
-
+*/
 	public final int getAP() {
 		return ap;
 	}
@@ -91,26 +91,7 @@ public abstract class Player implements PaintItem {
 		g.dispose();
 	}
 
-	public Image getTurnOnBack() {
-		if (turnonback == null)
-			loadTurnOnBack();
-		return turnonback;
-	}
-
-	private void loadTurnOnBack() {
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager
-					.getImage("resource:///turnon_effect.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			turnonback = m.getImage();
-		} catch (Exception e) {
-		}
-	}
-
-	private static Image turnonback;
+	static final Image turnOnBack = Game.loadImage("turnon_effect.gif");
 
 	public String toString() {
 		return name;

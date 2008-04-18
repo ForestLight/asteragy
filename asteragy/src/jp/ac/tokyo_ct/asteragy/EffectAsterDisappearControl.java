@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import com.nttdocomo.ui.Graphics;
 
-public class EffectAsterDisappearControl extends Effect implements Runnable {
+public final class EffectAsterDisappearControl extends Effect implements Runnable {
 
 	private static final int capacity = 20;
 
@@ -56,11 +56,7 @@ public class EffectAsterDisappearControl extends Effect implements Runnable {
 				}
 			}
 
-			try {
-				Thread.sleep(1000 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			Game.sleep(1000 / CanvasControl.f);
 		}
 		canvas.getField().repaintField(canvas.getScreen().getGraphics());
 		canvas.getScreen().flipScreen();

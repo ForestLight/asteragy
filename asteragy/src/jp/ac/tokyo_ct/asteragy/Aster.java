@@ -36,43 +36,44 @@ public final class Aster {
 		field = f;
 		paint = new AsterPaint();
 	}
-	
+
 	Aster clone() {
-		//Aster a = new Aster(field);
+		// Aster a = new Aster(field);
 		Aster a = this;
 		a.color = color;
-		if(asterClass != null){
+		if (asterClass != null) {
 			a.asterClass = asterClass.clone();
 			a.asterClass.setAster(this);
-		}
-		else
+		} else
 			a.asterClass = null;
 		a.paint = paint;
 		a.deleteFlag = deleteFlag;
 		a.judgeFlag = judgeFlag;
-//		a.paint = new AsterPaint();
-//		a.deleteFlag = false;
-//		a.judgeFlag = false;
+		// a.paint = new AsterPaint();
+		// a.deleteFlag = false;
+		// a.judgeFlag = false;
 		return a;
 	}
-	
-	public void init(){
+
+	public void init() {
 		deleteFlag = false;
 		judgeFlag = false;
-		
+
 		paint = new AsterPaint();
 		paint.setColor(color);
 		paint.setClass(asterClass);
 	}
 
-	public void setNum(int i){
+	public void setNum(int i) {
 		num = i;
 	}
-	public int getNum(){
+
+	public int getNum() {
 		return num;
 	}
-	
+
 	public int num;
+
 	/*
 	 * public void swap(int x1, int y1, int x2, int y2) { field.swap(x1, y1, x2,
 	 * y2); }
@@ -102,8 +103,8 @@ public final class Aster {
 		return judgeFlag;
 	}
 
-	public void setColor(int c){
-		if(c != 0){
+	public void setColor(int c) {
+		if (c != 0) {
 			color = c;
 		}
 	}
@@ -132,7 +133,7 @@ public final class Aster {
 	}
 
 	public void setAsterClass(AsterClass ac) {
-//		System.out.println("Aster.setAsterClass");
+		// System.out.println("Aster.setAsterClass");
 		asterClass = ac;
 		paint.setClass(ac);
 	}
@@ -155,7 +156,7 @@ public final class Aster {
 	}
 
 	public void setPaint(PaintAsterItem paint) {
-		//System.out.println("setPaint:" + this.toString());
+		// System.out.println("setPaint:" + this.toString());
 		this.paint = paint;
 	}
 
@@ -163,7 +164,7 @@ public final class Aster {
 		// 消失エフェクト処理
 		EffectAsterDisappearing disappear = new EffectAsterDisappearing(this);
 		paint = disappear;
-		//disappear.start();
+		// disappear.start();
 	}
 
 }

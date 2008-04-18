@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class MercuryClass extends AsterClass {
+public final class MercuryClass extends AsterClass {
 
 	private static int[][] defaultRange = { { 0, 0, 0, 0, 0 },
 			{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
@@ -23,12 +23,10 @@ public class MercuryClass extends AsterClass {
 	}
 
 	public int getNumber() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 3;
 	}
 
 	public int[][] getRange() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
@@ -70,7 +68,6 @@ public class MercuryClass extends AsterClass {
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -82,7 +79,6 @@ public class MercuryClass extends AsterClass {
 	}
 
 	public boolean hasNext() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -96,7 +92,6 @@ public class MercuryClass extends AsterClass {
 	}
 
 	public boolean moveAstern() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();

@@ -18,8 +18,6 @@ public final class Thunder implements PaintItem {
 
 	private static final int FORECOLOR = Graphics.getColorOfRGB(255, 255, 200);
 
-	private final Random random;
-
 	private final Point begin;
 
 	private final Point end;
@@ -27,14 +25,13 @@ public final class Thunder implements PaintItem {
 	private Vector[] thunder;
 
 	public Thunder(Point begin, Point end) {
-		random = new Random();
 		this.begin = begin;
 		this.end = end;
 		initializeLocation();
 	}
 
 	private void initializeLocation() {
-		thunder = new Vector[(random.nextInt() >>> 1) % MAXTHUNDER + 1];
+		thunder = new Vector[(Game.random.nextInt() >>> 1) % MAXTHUNDER + 1];
 		int lenght = Math.abs(begin.y - end.y);
 		for (int i = 0; i < thunder.length; i++) {
 			thunder[i] = new Vector(lenght / MINSPACE);
@@ -43,7 +40,7 @@ public final class Thunder implements PaintItem {
 	}
 
 	private void createThunder(Vector point, int lenght) {
-		int size = (random.nextInt() >>> 1) % (lenght / MINSPACE) + 1;
+		int size = (Game.random.nextInt() >>> 1) % (lenght / MINSPACE) + 1;
 		Point interval = new Point(Math.abs(begin.x - end.x) / (size + 1), Math
 				.abs(begin.y - end.y)
 				/ (size + 1));
@@ -56,14 +53,13 @@ public final class Thunder implements PaintItem {
 	}
 
 	private void movePoint(Point point, int interval) {
-		point.y += (random.nextInt() >>> 1) % interval - (interval / 2);
-		point.x += (random.nextInt() >>> 1) % MAXWIDTH - (MAXWIDTH / 2);
+		point.y += (Game.random.nextInt() >>> 1) % interval - (interval / 2);
+		point.x += (Game.random.nextInt() >>> 1) % MAXWIDTH - (MAXWIDTH / 2);
 	}
 
 	public void paint(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
-		Enumeration[] enumer = new Enumeration[thunder.length];
-		Point[] before = new Point[thunder.length];
+		final Enumeration[] enumer = new Enumeration[thunder.length];
+		final Point[] before = new Point[thunder.length];
 		boolean not = true;
 		while (not) {
 			not = false;
@@ -96,12 +92,7 @@ public final class Thunder implements PaintItem {
 				}
 			}
 			g.unlock(true);
-			try {
-				Thread.sleep(300 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+			Game.sleep(300 / CanvasControl.f);
 		}
 	}
 

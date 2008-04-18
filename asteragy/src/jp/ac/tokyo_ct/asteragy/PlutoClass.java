@@ -2,8 +2,8 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class PlutoClass extends AsterClass {
-	private static int[][] defaultRange = { { 1, 1, 0, 1, 1 },
+public final class PlutoClass extends AsterClass {
+	private static final int[][] defaultRange = { { 1, 1, 0, 1, 1 },
 			{ 1, 0, 1, 0, 1 }, { 0, 1, 1, 1, 0 }, { 1, 0, 1, 0, 1 },
 			{ 1, 1, 0, 1, 1 } };
 

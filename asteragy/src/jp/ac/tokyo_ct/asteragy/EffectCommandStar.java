@@ -2,9 +2,9 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandStar extends Effect {
+public final class EffectCommandStar extends Effect {
 
-	private static Image effect;
+	private static final Image effect = Game.loadImage("star_effect.gif");
 
 	private final Point point;
 
@@ -32,35 +32,6 @@ public class EffectCommandStar extends Effect {
 			direction = 1;
 		else
 			direction = 3;
-		loadImage();
-	}
-
-	private void loadImage() {
-		/*
-		 * effect = Image.createImage(GameCanvas.measure, GameCanvas.measure);
-		 * 
-		 * Graphics g = effect.getGraphics();
-		 * 
-		 * g.setColor(Graphics.getColorOfRGB(0, 0, 0)); g.fillRect(0, 0,
-		 * GameCanvas.measure, GameCanvas.measure);
-		 * g.setColor(Graphics.getColorOfRGB(255, 255, 128)); g.drawRect(0, 0,
-		 * GameCanvas.measure - 1, GameCanvas.measure - 1);
-		 * 
-		 * g.dispose();
-		 */
-
-		if (effect != null)
-			return;
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///star_effect.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			effect = m.getImage();
-		} catch (Exception e) {
-		}
-
 	}
 
 	final int theta = SimpleMath.cycle / 30;
@@ -68,7 +39,6 @@ public class EffectCommandStar extends Effect {
 	public void start(Graphics g) {
 		if (!isEffect)
 			return;
-		// TODO 自動生成されたメソッド・スタブ
 
 		int[] matrix = new int[6];
 
@@ -93,12 +63,7 @@ public class EffectCommandStar extends Effect {
 
 			g.unlock(true);
 
-			try {
-				Thread.sleep(1000 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+			Game.sleep(1000 / CanvasControl.f);
 		}
 
 		PaintAsterItem paint = field.getAster(point).getPaint();
@@ -122,12 +87,7 @@ public class EffectCommandStar extends Effect {
 				ay += (direction - 2);
 			}
 
-			try {
-				Thread.sleep(150 / CanvasControl.f);
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+			Game.sleep(50 / CanvasControl.f);
 		}
 	}
 }

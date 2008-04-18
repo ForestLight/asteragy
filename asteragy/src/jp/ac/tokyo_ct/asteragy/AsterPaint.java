@@ -5,7 +5,7 @@ import com.nttdocomo.ui.Image;
 import com.nttdocomo.ui.MediaImage;
 import com.nttdocomo.ui.MediaManager;
 
-public class AsterPaint implements PaintAsterItem {
+public final class AsterPaint implements PaintAsterItem {
 
 	private int color;
 
@@ -25,12 +25,12 @@ public class AsterPaint implements PaintAsterItem {
 	public void setColor(int color) {
 		this.color = color;
 	}
-	
-	public int getWidth(){
+
+	public int getWidth() {
 		return width;
 	}
-	
-	public int getHeight(){
+
+	public int getHeight() {
 		return height;
 	}
 
@@ -52,8 +52,9 @@ public class AsterPaint implements PaintAsterItem {
 		} else {
 			g.setFlipMode(Graphics.FLIP_NONE);
 		}
-		
-		g.drawScaledImage(getImage(), 1, 1, width, height, m * (color - 1), 0, m, m);
+
+		g.drawScaledImage(getImage(), 1, 1, width, height, m * (color - 1), 0,
+				m, m);
 		// 行動済みユニットを識別
 		if (aster != null && aster.getActionCount() == 0) {
 			g.setColor(Graphics.getColorOfRGB(0, 0, 0, 100));
@@ -72,15 +73,7 @@ public class AsterPaint implements PaintAsterItem {
 	}
 
 	private static void loadImage() {
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///aster_0.gif");
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			asterImage = m.getImage();
-		} catch (Exception e) {
-		}
+		asterImage = Game.loadImage("aster_0.gif");
 	}
 
 	private static Image asterImage;

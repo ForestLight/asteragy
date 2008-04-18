@@ -6,7 +6,7 @@ public final class Screen implements PaintItem {
 
 	private final GameCanvas canvas;
 
-	private Image display;
+	private final Image display;
 
 	public Screen(GameCanvas canvas) {
 		this.canvas = canvas;
@@ -14,7 +14,7 @@ public final class Screen implements PaintItem {
 	}
 
 	synchronized public void flipScreen() {
-			canvas.repaint();
+		canvas.repaint();
 	}
 
 	synchronized public void paintEffect(Effect effect) {

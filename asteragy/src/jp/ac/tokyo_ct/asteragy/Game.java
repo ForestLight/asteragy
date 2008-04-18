@@ -3,6 +3,10 @@ package jp.ac.tokyo_ct.asteragy;
 import java.io.IOException;
 import java.util.Random;
 
+import com.nttdocomo.ui.Image;
+import com.nttdocomo.ui.MediaImage;
+import com.nttdocomo.ui.MediaManager;
+
 /**
  * @author Ichinohe ゲーム進行の管理
  */
@@ -129,18 +133,13 @@ final class Game implements Runnable {
 
 			Player goPlayer = field.checkGameOver();
 			if (goPlayer != null) {
-				try {
-					Thread.sleep(1500);
-				} catch (Exception e) {
-				}
-				canvas.paintString(goPlayer + "の負け", true);
+				Game.sleep(1500);
+				String msg = goPlayer.toString().concat("の負け");
+				canvas.paintString(msg, true);
 				canvas.getScreen().flipScreen();
-				try {
-					Thread.sleep(1500);
-				} catch (Exception e) {
-				}
+				Game.sleep(1500);
 				canvas.paintString("", false);
-				System.out.println(goPlayer + "の負け");
+				System.out.println(msg);
 				return false;
 			}
 
@@ -273,4 +272,26 @@ final class Game implements Runnable {
 	private boolean init;
 
 	static final Random random = new Random(System.currentTimeMillis());
+
+	static Image loadImage(String s) {
+		try {
+			// リソースから読み込み
+			MediaImage m = MediaManager.getImage("resource:///".concat(s));
+			// メディアの使用開始
+			m.use();
+			// 読み込み
+			return m.getImage();
+		} catch (Exception e) {
+		}
+		return null;
+	}
+	
+	static void sleep(int ms)
+	{
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
+	}
 }
