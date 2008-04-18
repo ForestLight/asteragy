@@ -17,20 +17,18 @@ public final class ExplainAsterClass extends Canvas {
 
 	private Image[] pageImage = new Image[12];
 
-	private Image back;
-
 	private int[][] range;
 
 	ExplainAsterClass() {
 		Graphics g;
-		back = loadImage("back.jpg");
 
 		for (number = 0; number < 12; number++) {
 			pageImage[number] = Image.createImage(getWidth(), getHeight());
 			g = pageImage[number].getGraphics();
 			asterClassImage = AsterClass.loadImage(number + 1);
 			range = AsterClass.getDefaultRange(number + 1);
-			g.drawImage(back, 0, 0);
+			g.setColor(Graphics.getColorOfName(Graphics.BLACK));
+			g.fillRect(0, 0, getWidth(), getHeight());
 			g.drawImage(asterClassImage, 20, 20);
 			g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 			g.drawString(AsterClass.classNameB[number], 20, 60);
