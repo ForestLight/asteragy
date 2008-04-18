@@ -2,9 +2,17 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class ExplainRules extends Canvas {
+public final class ExplainRules extends Canvas implements Runnable {
+
+	private static final int frame = 5;
 
 	public int page;
+
+	private int temp;
+
+	private Graphics g;
+
+	private Thread thread;
 
 	private Image image;
 
@@ -12,6 +20,7 @@ public final class ExplainRules extends Canvas {
 
 	ExplainRules() {
 		page = 0;
+		temp = 0;
 		image = AsterClass.loadImage(0);
 
 		// ページの作成（作成中）
@@ -37,7 +46,6 @@ public final class ExplainRules extends Canvas {
 		g.drawString("フィールドの全マスに配置されている", 15, 135);
 		g.drawString("物体で、それぞれに色があります。", 15, 150);
 		g.drawImage(image, 20, 160);
-		
 
 		g = pageImage[1].getGraphics();
 		image = AsterClass.loadImage(1);
@@ -61,7 +69,7 @@ public final class ExplainRules extends Canvas {
 		g.setFlipMode(Graphics.FLIP_VERTICAL);
 		g.drawScaledImage(image, 45, 210, 17, 17, 34, 0, 17, 17);
 		g.drawString("向きは所有者を表わします。", 70, 220);
-		
+
 		g = pageImage[2].getGraphics();
 		image = AsterClass.loadImage(0);
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
@@ -217,11 +225,19 @@ public final class ExplainRules extends Canvas {
 
 	public void paint(Graphics g) {
 		// TODO 自動生成されたメソッド・スタブ
-		g.lock();
-
-		g.drawImage(pageImage[page], 0, 0);
-
-		g.unlock(true);
+		if (thread != null) {
+			if (thread.isAlive()) {
+				try {
+					thread.join();
+				} catch (InterruptedException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+			}
+		}
+		this.g = g;
+		thread = new Thread(this);
+		thread.start();
 	}
 
 	private static Image loadImage(String s) {
@@ -237,4 +253,46 @@ public final class ExplainRules extends Canvas {
 		return null;
 	}
 
+	public void run() {
+		// TODO 自動生成されたメソッド・スタブ
+
+		synchronized (this) {
+
+			if (page == temp) {
+				g.lock();
+				g.drawImage(pageImage[page], 0, 0);
+				g.unlock(true);
+				return;
+			}
+
+			final int width = getWidth();
+			int dx = (temp - page) / Math.abs(temp - page);
+			final int s = width / frame;
+
+			if (temp == 0 && page == 5)
+				dx *= -1;
+			if (temp == 5 && page == 0)
+				dx *= -1;
+
+			for (int i = 0; i < frame + 1; i++) {
+
+				g.lock();
+
+				g.drawImage(pageImage[temp], i * dx * s, 0);
+				g.drawImage(pageImage[page], i * dx * s - dx * width, 0);
+
+				g.unlock(true);
+
+				try {
+					Thread.sleep(300 / CanvasControl.f);
+				} catch (InterruptedException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+			}
+
+			g = null;
+			temp = page;
+		}
+	}
 }
