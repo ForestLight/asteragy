@@ -24,11 +24,22 @@ public final class SunCommand extends Command {
 
 	private void paintClassData(Graphics g) {
 		g.setOrigin(0, top);
-		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
-		g.fillRect(6, height * (command + 1), canvas.getWidth() - 12, 14);
-		g.setColor(Graphics.getColorOfRGB(0, 0, 255));
-		g.drawString(AsterClass.commandExplain[command + 1], 10, height
-				* (command + 2));
+		g.setColor(back);
+		g
+				.fillRect(6, height * (command + 1), canvas.getWidth() - 12,
+						height + 4);
+		g.setColor(line);
+		g.drawLine(5, height * (command + 1), canvas.getWidth() - 6, height
+				* (command + 1));
+		g.drawLine(5, height * (command + 1) + 1, canvas.getWidth() - 6, height
+				* (command + 1) + 1);
+		g.drawLine(5, height * (command + 2) + 4, canvas.getWidth() - 6, height
+				* (command + 2) + 4);
+		g.drawLine(5, height * (command + 2) + 5, canvas.getWidth() - 6, height
+				* (command + 2) + 5);
+		g.setColor(word);
+		g.drawString(AsterClass.commandExplain[command + 1], 8, height
+				* (command + 2) + 2);
 		g.setOrigin(0, 0);
 		g.setColor(Graphics.getColorOfName(Graphics.BLUE));
 		g.drawString("ƒNƒ‰ƒX " + AsterClass.classCost[command + 1], 75, 224 + Font
@@ -38,12 +49,15 @@ public final class SunCommand extends Command {
 	}
 
 	private void loadImage() {
-		Image commandImage = Image.createImage(height * 4 + 2, height
+		Image commandImage = Image.createImage(height * 4 + 4, height
 				* CLASSNUM + 1);
 		Graphics g = commandImage.getGraphics();
-		g.setColor(Graphics.getColorOfRGB(196, 196, 255));
-		g.fillRect(0, 0, height * 4 + 2, height * CLASSNUM + 2);
-		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		g.setColor(back);
+		g.fillRect(0, 0, height * 4 + 4, height * CLASSNUM + 2);
+		g.setColor(line);
+		g.drawRect(0, -1, height * 4 + 3, height * CLASSNUM + 4);
+		g.drawRect(1, -1, height * 4 + 1, height * CLASSNUM + 4);
+		g.setColor(word);
 		for (int i = 1; i < CLASSNUM + 1; i++) {
 			g.drawString(AsterClass.className[i], 1, height * i - 1);
 		}

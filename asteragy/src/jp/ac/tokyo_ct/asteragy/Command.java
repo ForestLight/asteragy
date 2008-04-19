@@ -12,6 +12,12 @@ public class Command implements PaintItem {
 
 	protected static final int height = Font.getDefaultFont().getHeight();
 
+	protected static final int back = Graphics.getColorOfRGB(0xd5, 0xe6, 0xd5);
+
+	protected static final int line = Graphics.getColorOfRGB(0x55, 0x1a, 0x8b);
+
+	protected static final int word = Graphics.getColorOfRGB(0x5e, 0x40, 0x2c);
+
 	protected final CanvasControl canvas;
 
 	protected int top;
@@ -33,13 +39,14 @@ public class Command implements PaintItem {
 			return;
 		System.out.println("paintCommand : " + command);
 		g.setOrigin(0, 0);
-		g.setClip(0, Player.playerheight, canvas.getWidth(), canvas.getHeight()
-				- Player.playerheight * 2);
+		// g.setClip(0, Player.playerheight, canvas.getWidth(),
+		// canvas.getHeight()
+		// - Player.playerheight * 2);
 		setPosition(g);
 		g.drawImage(commandImage, 0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 196, 100));
 		System.out.println("command = " + command);
-		g.fillRect(0, command * height, height * 4 + 2, height);
+		g.fillRect(1, command * height, height * 4 + 2, height);
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
 		g.clearClip();
 	}
