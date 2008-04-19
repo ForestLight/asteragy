@@ -39,12 +39,24 @@ public final class CommonCommand extends Command {
 			g.drawString("ÉXÉèÉbÉv 0", 85, 235);
 		} else {
 			g.setOrigin(0, top);
-			g.setColor(Graphics.getColorOfRGB(255, 255, 255));
-			g.fillRect(6, height * 2, canvas.getWidth() - 12, 14);
-			g.setColor(Graphics.getColorOfRGB(0, 0, 255));
+			g.setColor(back);
+			g.fillRect(6, height * 2, canvas.getWidth() - 12, height + 4);
+			g.setColor(line);
+			g.drawLine(5, height * 2, canvas.getWidth() - 6, height * 2);
+			g
+					.drawLine(5, height * 2 + 1, canvas.getWidth() - 6,
+							height * 2 + 1);
+			g
+					.drawLine(5, height * 3 + 4, canvas.getWidth() - 6,
+							height * 3 + 4);
+			g
+					.drawLine(5, height * 3 + 5, canvas.getWidth() - 6,
+							height * 3 + 5);
+			g.setColor(word);
 			g.drawString(AsterClass.commandExplain[asterClass.getNumber() - 1],
-					10, height * (command + 2));
+					10, height * (command + 2) + 2);
 			g.setOrigin(0, 0);
+			g.setColor(Graphics.getColorOfName(Graphics.BLUE));
 			g.drawString(asterClass.getCommandName() + " "
 					+ AsterClass.commandCost[asterClass.getNumber() - 1], 85,
 					235);
@@ -52,13 +64,16 @@ public final class CommonCommand extends Command {
 	}
 
 	private void loadImage() {
-		Image commandImage = Image.createImage(height * 4 + 2, height * 2 + 1);
+		Image commandImage = Image.createImage(height * 4 + 4, height * 2 + 1);
 		Graphics g = commandImage.getGraphics();
-		g.setColor(Graphics.getColorOfRGB(196, 196, 255));
-		g.fillRect(0, 0, height * 4 + 2, height * 2 + 2);
-		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		g.setColor(back);
+		g.fillRect(0, 0, height * 4 + 4, height * 2 + 2);
+		g.setColor(line);
+		g.drawRect(0, -1, height * 4 + 3, height * 2 + 4);
+		g.drawRect(1, -1, height * 4 + 1, height * 2 + 4);
+		g.setColor(word);
 		for (int i = 0; i < 2; i++) {
-			g.drawString(commands[i], 1, height * (i + 1) - 1);
+			g.drawString(commands[i], 2, height * (i + 1) - 1);
 		}
 		setImage(commandImage);
 	}
