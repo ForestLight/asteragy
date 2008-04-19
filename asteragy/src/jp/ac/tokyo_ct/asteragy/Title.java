@@ -1,13 +1,17 @@
 package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
+import com.nttdocomo.util.Timer;
+import com.nttdocomo.util.TimerListener;
 
 /**
  * @author Okubo
  * 
  */
-public final class Title extends Canvas {
+public final class Title extends Canvas implements TimerListener {
 	private static Image title;
+
+	private static Image back;
 
 	private static Image[] menu;
 
@@ -29,11 +33,18 @@ public final class Title extends Canvas {
 
 	private ExplainRules er = new ExplainRules();
 
+	private ShootingStar star;
+
+	private Timer timer;
+
 	// private static int highScore;
 
 	public Title() {
 		if (title == null) {
-			title = Game.loadImage("title.jpg");
+			title = Game.loadImage("title.gif");
+		}
+		if (back == null) {
+			back = Game.loadImage("titleback.gif");
 		}
 		if (menu == null) {
 			menu = new Image[10];
@@ -42,6 +53,15 @@ public final class Title extends Canvas {
 		}
 		if (credit == null) {
 			credit = Game.loadImage("credit.gif");
+		}
+		if (timer == null) {
+			timer = new Timer();
+			timer.setListener(this);
+			timer.setTime(5);
+			timer.setRepeat(true);
+		}
+		if (star == null) {
+			star = new ShootingStar(this, null);
 		}
 	}
 
@@ -53,12 +73,15 @@ public final class Title extends Canvas {
 	public Option start() {
 		Display.setCurrent(this);
 		option.gameType = -1;
+		timer.start();
 
 		for (;;) {
 			// System.out.println("loop");
 			Game.sleep(1000);
-			if (option.gameType != -1)
+			if (option.gameType != -1) {
+				timer.stop();
 				return option;
+			}
 		}
 	}
 
@@ -73,10 +96,9 @@ public final class Title extends Canvas {
 						else if (depth == 0)
 							cursor = 4;
 						else
-							cursor = 2; 
+							cursor = 2;
 						break;
-					}
-					else {
+					} else {
 						if (cursor > 0)
 							cursor--;
 						else
@@ -87,13 +109,13 @@ public final class Title extends Canvas {
 			case Display.KEY_DOWN:
 				if (!explainAsterClassFlag && !explainRuleFlag) {
 					if (!optionMenuFlag) {
-						if ((depth == 0 && cursor < 4) || (depth != 0 && cursor < 2))
+						if ((depth == 0 && cursor < 4)
+								|| (depth != 0 && cursor < 2))
 							cursor++;
 						else
 							cursor = 0;
 						break;
-					}
-					else {
+					} else {
 						if (cursor < 5)
 							cursor++;
 						else
@@ -120,12 +142,11 @@ public final class Title extends Canvas {
 							case 3:
 								optionMenuFlag = true;
 								cursor = 0;
-								break;			
+								break;
 							case 4:
 								IApplication.getCurrentApp().terminate();
 							}
-						}
-						else if (depth == 1) {
+						} else if (depth == 1) {
 							switch (cursor) {
 							case 0:
 								option.gameType = 1;
@@ -136,10 +157,9 @@ public final class Title extends Canvas {
 							case 2:
 								depth--;
 								cursor = 0;
-								break;	
+								break;
 							}
-						}
-						else {
+						} else {
 							switch (cursor) {
 							case 0:
 								explainRuleFlag = true;
@@ -150,16 +170,14 @@ public final class Title extends Canvas {
 							case 2:
 								depth -= 2;
 								cursor = 0;
-								break;	
+								break;
 							}
 						}
-					}
-					else {
+					} else {
 						if (cursor == 5) {
 							optionMenuFlag = false;
 							cursor = 0;
-						}
-						else {
+						} else {
 							cursor = 5;
 						}
 					}
@@ -189,14 +207,12 @@ public final class Title extends Canvas {
 							option.AP_Pointer--;
 						break;
 					}
-				}
-				else if (explainAsterClassFlag && !explainRuleFlag) {
+				} else if (explainAsterClassFlag && !explainRuleFlag) {
 					eac.number--;
 					if (eac.number < 0) {
 						eac.number = 11;
 					}
-				}
-				else if (explainRuleFlag) {
+				} else if (explainRuleFlag) {
 					er.page--;
 					if (er.page < 0) {
 						er.page = 5;
@@ -227,14 +243,12 @@ public final class Title extends Canvas {
 							option.AP_Pointer++;
 						break;
 					}
-				}
-				else if (explainAsterClassFlag && !explainRuleFlag) {
+				} else if (explainAsterClassFlag && !explainRuleFlag) {
 					eac.number++;
 					if (eac.number > 11) {
 						eac.number = 0;
 					}
-				}
-				else if (explainRuleFlag) {
+				} else if (explainRuleFlag) {
 					er.page++;
 					if (er.page > 5) {
 						er.page = 0;
@@ -246,7 +260,7 @@ public final class Title extends Canvas {
 				eac.number = 0;
 				explainRuleFlag = false;
 				er.page = 0;
-				
+
 				break;
 			}
 			repaint();
@@ -257,54 +271,60 @@ public final class Title extends Canvas {
 
 		if (explainAsterClassFlag) {
 			eac.paint(g);
-		}
-		else if (explainRuleFlag) {
+		} else if (explainRuleFlag) {
 			er.paint(g);
-		}
-		else {
+		} else {
 			if (!optionMenuFlag) {
 				g.lock();
 
-				g.drawImage(title, 0, 0);
+				g.drawImage(back, 0, 0);
+
+				star.paint(g);
+
+				g.drawImage(title, 10, 0);
 
 				if (depth == 0) {
-					g.drawImage(menu[0], getWidth() / 2 - menu[0].getWidth() / 2,
-						127);
-					g.drawImage(menu[1], getWidth() / 2 - menu[1].getWidth() / 2,
-						127 + menu[1].getHeight());
-					g.drawImage(menu[2], getWidth() / 2 - menu[2].getWidth() / 2,
-						127 + menu[1].getHeight() + menu[2].getHeight());
-					g.drawImage(menu[3], getWidth() / 2 - menu[3].getWidth() / 2,
-						127 + menu[1].getHeight() + menu[2].getHeight() + menu[3].getHeight());
-					g.drawImage(menu[4], getWidth() / 2 - menu[4].getWidth() / 2,
-						127 + menu[1].getHeight() + menu[2].getHeight() + menu[3].getHeight() + menu[4].getHeight());
-				}
-				else if (depth == 1) {
-					g.drawImage(menu[5], getWidth() / 2 - menu[5].getWidth() / 2,
-						127);
-					g.drawImage(menu[6], getWidth() / 2 - menu[6].getWidth() / 2,
-						127 + menu[6].getHeight());
-					g.drawImage(menu[7], getWidth() / 2 - menu[7].getWidth() / 2,
-						127 + menu[6].getHeight() + menu[7].getHeight());
-				}
-				else {
-					g.drawImage(menu[8], getWidth() / 2 - menu[8].getWidth() / 2,
-						127);
-					g.drawImage(menu[9], getWidth() / 2 - menu[9].getWidth() / 2,
-						127 + menu[9].getHeight());
-					g.drawImage(menu[7], getWidth() / 2 - menu[7].getWidth() / 2,
-						127 + menu[9].getHeight() + menu[7].getHeight());
+					g.drawImage(menu[0], getWidth() / 2 - menu[0].getWidth()
+							/ 2, 127);
+					g.drawImage(menu[1], getWidth() / 2 - menu[1].getWidth()
+							/ 2, 127 + menu[1].getHeight());
+					g.drawImage(menu[2], getWidth() / 2 - menu[2].getWidth()
+							/ 2, 127 + menu[1].getHeight()
+							+ menu[2].getHeight());
+					g.drawImage(menu[3], getWidth() / 2 - menu[3].getWidth()
+							/ 2, 127 + menu[1].getHeight()
+							+ menu[2].getHeight() + menu[3].getHeight());
+					g.drawImage(menu[4], getWidth() / 2 - menu[4].getWidth()
+							/ 2, 127 + menu[1].getHeight()
+							+ menu[2].getHeight() + menu[3].getHeight()
+							+ menu[4].getHeight());
+				} else if (depth == 1) {
+					g.drawImage(menu[5], getWidth() / 2 - menu[5].getWidth()
+							/ 2, 127);
+					g.drawImage(menu[6], getWidth() / 2 - menu[6].getWidth()
+							/ 2, 127 + menu[6].getHeight());
+					g.drawImage(menu[7], getWidth() / 2 - menu[7].getWidth()
+							/ 2, 127 + menu[6].getHeight()
+							+ menu[7].getHeight());
+				} else {
+					g.drawImage(menu[8], getWidth() / 2 - menu[8].getWidth()
+							/ 2, 127);
+					g.drawImage(menu[9], getWidth() / 2 - menu[9].getWidth()
+							/ 2, 127 + menu[9].getHeight());
+					g.drawImage(menu[7], getWidth() / 2 - menu[7].getWidth()
+							/ 2, 127 + menu[9].getHeight()
+							+ menu[7].getHeight());
 				}
 				g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 				g.drawRect(getWidth() / 2 - menu[0].getWidth() / 2, 127
-					+ menu[0].getHeight() * cursor, menu[0].getWidth(), menu[0].getHeight());
+						+ menu[0].getHeight() * cursor, menu[0].getWidth(),
+						menu[0].getHeight());
 
 				g.drawImage(credit, getWidth() / 2 - credit.getWidth() / 2,
 						getHeight() - credit.getHeight());
 
 				g.unlock(true);
-			}
-			else {
+			} else {
 				boolean leftTriangle = false;
 				boolean rightTriangle = false;
 
@@ -357,7 +377,7 @@ public final class Title extends Canvas {
 						if (option.numOfColors > 4)
 							leftTriangle = true;
 						else
-						leftTriangle = false;
+							leftTriangle = false;
 						if (option.numOfColors < 5)
 							rightTriangle = true;
 						else
@@ -391,13 +411,16 @@ public final class Title extends Canvas {
 						g.drawString("|", 109, cursor * 15 + 14);
 					}
 					if (rightTriangle) {
-						g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 14);
-						g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 15);
-						g.drawString("|", 138 + 7 * (cursor / 4), cursor * 15 + 14);
-						g.drawString("|", 139 + 7 * (cursor / 4), cursor * 15 + 14);
+						g.drawString(">", 142 + 7 * (cursor / 4),
+								cursor * 15 + 14);
+						g.drawString(">", 142 + 7 * (cursor / 4),
+								cursor * 15 + 15);
+						g.drawString("|", 138 + 7 * (cursor / 4),
+								cursor * 15 + 14);
+						g.drawString("|", 139 + 7 * (cursor / 4),
+								cursor * 15 + 14);
 					}
-				}
-				else {
+				} else {
 					g.drawRect(0, 224, 35, 15);
 				}
 
@@ -405,5 +428,10 @@ public final class Title extends Canvas {
 
 			}
 		}
+	}
+
+	public void timerExpired(Timer timer) {
+		// TODO 自動生成されたメソッド・スタブ
+		repaint();
 	}
 }
