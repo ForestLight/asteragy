@@ -282,16 +282,18 @@ public abstract class AsterClass {
 			for (int i = 0; i < defaultRange.length; i++) {
 				for (int j = 0; j < defaultRange[0].length; j++) {
 					// 上下左右に隣接レンジが無い孤立したレンジを除外
-					if(i + 1 >= defaultRange.length || defaultRange[i+1][j] == 0){
-						if(i - 1 < 0 || defaultRange[i-1][j] == 0){
-							if(j + 1 >= defaultRange[0].length || defaultRange[i][j+1] == 0){
-								if(j - 1 < 0|| defaultRange[i][j-1] == 0){
+					int fi = i + (f.asterToPoint(aster).y - range.length / 2);
+					int fj = j + (f.asterToPoint(aster).x - range[0].length / 2);
+					
+					if(i + 1 >= defaultRange.length || defaultRange[i+1][j] == 0 || !f.isYInFieldBound(fi+1)){
+						if(i - 1 < 0 || defaultRange[i-1][j] == 0 || !f.isYInFieldBound(fi-1)){
+							if(j + 1 >= defaultRange[0].length || defaultRange[i][j+1] == 0 || !f.isXInFieldBound(fj+1)){
+								if(j - 1 < 0|| defaultRange[i][j-1] == 0 || !f.isXInFieldBound(fj-1)){
 									continue;
 								}
 							}
 						}
-					}					                          
-					
+					}
 					// if (defaultRange[i + 1][j] + defaultRange[i - 1][j]
 					// + defaultRange[i][j + 1] + defaultRange[i][j - 1] != 0) {
 					range[i][j] = defaultRange[i][j];
