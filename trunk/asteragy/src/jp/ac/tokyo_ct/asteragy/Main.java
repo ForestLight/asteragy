@@ -17,13 +17,18 @@ public final class Main extends IApplication {
 		// GameCanvas c = new GameCanvas();
 		// Display.setCurrent(c);
 
-		Title t = new Title();
 		while (true) {
-			Option op = t.start();
+			Option op = title.start();
 			game.start(op);
 			System.out.println("Game over");
 		}
 	}
-	
+
+	public void resume() {
+		title.resume();
+	}
+
+	private static final Title title = new Title();
+
 	public static final Game game = new Game();
 }

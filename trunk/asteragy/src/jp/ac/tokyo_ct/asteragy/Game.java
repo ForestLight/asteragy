@@ -51,8 +51,6 @@ final class Game implements Runnable {
 		 * canvas.setCurrent();
 		 */
 		System.out.println("Game.start()");
-		canvas.repaint();
-		canvas.getScreen().flipScreen();
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
 		{
 			boolean gameover;
@@ -105,6 +103,8 @@ final class Game implements Runnable {
 		player[0].addAP(option.initialAP[option.AP_Pointer]);
 		player[1].addAP(option.initialAP[option.AP_Pointer]);
 
+		canvas.repaint();
+		canvas.getScreen().flipScreen();
 		System.out.println("initialize end");
 	}
 
@@ -285,9 +285,8 @@ final class Game implements Runnable {
 		}
 		return null;
 	}
-	
-	static void sleep(int ms)
-	{
+
+	static void sleep(int ms) {
 		try {
 			Thread.sleep(ms);
 		} catch (InterruptedException e) {
