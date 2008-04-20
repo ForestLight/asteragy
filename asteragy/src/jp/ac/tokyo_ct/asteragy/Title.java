@@ -85,6 +85,12 @@ public final class Title extends Canvas implements TimerListener {
 		}
 	}
 
+	public void resume() {
+		if (option.gameType == -1) {
+			timer.start();
+		}
+	}
+
 	public void processEvent(int type, int param) {
 		if (type == Display.KEY_PRESSED_EVENT) {
 			switch (param) {
@@ -265,6 +271,7 @@ public final class Title extends Canvas implements TimerListener {
 			}
 			repaint();
 		}
+		System.out.println(type + "," + param);
 	}
 
 	public void paint(Graphics g) {
