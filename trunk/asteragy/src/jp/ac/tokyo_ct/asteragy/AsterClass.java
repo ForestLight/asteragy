@@ -276,19 +276,30 @@ public abstract class AsterClass {
 	 */
 	protected final int[][] swapGetRange(int[][] defaultRange) {
 		int[][] range = new int[defaultRange.length][defaultRange[0].length];
+		final Field f = aster.getField();
 		// 1個目の対象選択
 		if (target1 == null) {
-
 			for (int i = 0; i < defaultRange.length; i++) {
 				for (int j = 0; j < defaultRange[0].length; j++) {
 					// 上下左右に隣接レンジが無い孤立したレンジを除外
+					if(i + 1 >= defaultRange.length || defaultRange[i+1][j] == 0){
+						if(i - 1 < 0 || defaultRange[i-1][j] == 0){
+							if(j + 1 >= defaultRange[0].length || defaultRange[i][j+1] == 0){
+								if(j - 1 < 0|| defaultRange[i][j-1] == 0){
+									continue;
+								}
+							}
+						}
+					}					                          
+					
 					// if (defaultRange[i + 1][j] + defaultRange[i - 1][j]
 					// + defaultRange[i][j + 1] + defaultRange[i][j - 1] != 0) {
 					range[i][j] = defaultRange[i][j];
 					// }
 				}
 			}
-
+			
+			
 		}
 		// 2個目の対象選択
 		else {
