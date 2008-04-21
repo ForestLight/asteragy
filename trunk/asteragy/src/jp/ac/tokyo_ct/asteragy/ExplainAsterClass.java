@@ -49,7 +49,7 @@ public final class ExplainAsterClass extends Canvas implements Runnable {
 					.valueOf(AsterClass.commandCost[number])), 20, 140);
 			g.drawString("s“®‰ñ”F ".concat(String
 					.valueOf(AsterClass.actionNum[number])), 20, 160);
-			g.drawString("0: ‚à‚Ç‚é", 20, 237);
+			//g.drawString("±ÌßØ·°/¸Ø±·°/[2]/[0]: ‚à‚Ç‚é", 20, 237);
 
 			for (int i = 0; i < range.length; i++) {
 				for (int j = 0; j < range[0].length; j++) {

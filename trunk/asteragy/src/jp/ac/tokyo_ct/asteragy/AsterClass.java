@@ -423,7 +423,7 @@ public abstract class AsterClass {
 	public final static int[] classCost = { 0, 2, 6, 5, 4, 8, 7, 11, 10, 11,
 			12, 0 };
 
-	public final static int[] commandCost = { 0, 0, 3, 7, 4, 4, 1, 4, 5, 4, 18,
+	public final static int[] commandCost = { 0, 0, 3, 7, 4, 5, 1, 4, 5, 4, 18,
 			4 };
 
 	public final static int[] actionNum = { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3 };
