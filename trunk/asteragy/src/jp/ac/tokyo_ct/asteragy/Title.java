@@ -262,6 +262,9 @@ public final class Title extends Canvas implements TimerListener {
 				}
 				break;
 			case Display.KEY_0:
+			case Display.KEY_2:
+			case Display.KEY_IAPP:
+			case Display.KEY_CLEAR:
 				explainAsterClassFlag = false;
 				eac.number = 0;
 				explainRuleFlag = false;
