@@ -68,7 +68,7 @@ public final class AIPlayer extends Player {
 					System.out.println("AIPlayer state0");
 					pt = selectAster();
 					t = 0;
-					eMax = -1;
+					eMax = -15000;
 
 					if (pt == null)
 						return null;
