@@ -340,7 +340,11 @@ public final class Title extends Canvas implements TimerListener {
 
 				g.lock();
 
-				g.drawImage(title, 0, 0);
+				g.drawImage(back, 0, 0);
+
+				star.paint(g);
+
+				g.drawImage(title, 10, 0);
 				g.setColor(Graphics.getColorOfRGB(0, 0, 0, 160));
 				g.fillRect(0, 0, getWidth(), getHeight());
 
