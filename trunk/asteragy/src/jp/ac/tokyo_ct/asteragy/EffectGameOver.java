@@ -22,6 +22,14 @@ public class EffectGameOver extends Effect {
 			return;
 		Image back = canvas.getScreen(new Point(0, 0), new Point(canvas
 				.getWidth(), canvas.getHeight()));
+		Graphics b = back.getGraphics();
+		b.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		b.fillRect(0, canvas.getHeight() / 4, canvas.getWidth(), canvas
+				.getHeight() / 2);
+		b.setColor(Graphics.getColorOfRGB(255, 255, 255));
+		b.drawRect(-1, canvas.getHeight() / 4 - 1, canvas.getWidth() + 1,
+				canvas.getHeight() / 2);
+		b.dispose();
 
 		String win = winner.toString() + "ÇÃèüóò!!";
 		final int height = Font.getDefaultFont().getHeight();
@@ -47,7 +55,7 @@ public class EffectGameOver extends Effect {
 			paint.paint(g);
 
 			g.unlock(true);
-			Game.sleep(300 / CanvasControl.f);
+			Game.sleep(30000 / CanvasControl.f);
 		}
 
 		Game.sleep(500);
