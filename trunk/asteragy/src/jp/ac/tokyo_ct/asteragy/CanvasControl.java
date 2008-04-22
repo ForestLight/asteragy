@@ -96,6 +96,7 @@ public final class CanvasControl extends Canvas {
 	public void onTurnStart(Player player) {
 		turnOn.player = player;
 		System.out.println("onTurnStart");
+		repaint();
 		paintEffect(turnOn);
 	}
 
@@ -203,10 +204,19 @@ public final class CanvasControl extends Canvas {
 			eventProcesser.processEvent(type, param);
 	}
 
+	Image getScreen() {
+		Image screen = Image.createImage(getWidth(), getHeight());
+		Graphics g = screen.getGraphics();
+		paint(g);
+		g.dispose();
+		return screen;
+	}
+
 	Image getScreen(Point location, Point size) {
 		Image screen = Image.createImage(size.x, size.y);
 		Graphics g = screen.getGraphics();
-		paint(g);
+		g.drawImage(getScreen(), 0, 0, location.x, location.y,
+				size.x, size.y);
 		g.dispose();
 		return screen;
 	}
@@ -220,5 +230,6 @@ public final class CanvasControl extends Canvas {
 		paint(g);
 		g.dispose();
 	}
+	
 
 }

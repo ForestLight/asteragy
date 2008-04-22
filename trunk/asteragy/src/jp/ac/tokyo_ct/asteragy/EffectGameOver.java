@@ -11,17 +11,12 @@ public class EffectGameOver extends Effect {
 	private final Player winner;
 
 	public EffectGameOver(CanvasControl canvas, Player winner) {
-		// TODO 自動生成されたコンストラクター・スタブ
 		this.canvas = canvas;
 		this.winner = winner;
 	}
 
 	public void start(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
-		if (!isEffect)
-			return;
-		Image back = canvas.getScreen(new Point(0, 0), new Point(canvas
-				.getWidth(), canvas.getHeight()));
+		Image back = canvas.getScreen();
 		Graphics b = back.getGraphics();
 		b.setColor(Graphics.getColorOfRGB(0, 0, 0));
 		b.fillRect(0, canvas.getHeight() / 4, canvas.getWidth(), canvas
