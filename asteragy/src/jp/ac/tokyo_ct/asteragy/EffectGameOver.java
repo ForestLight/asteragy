@@ -55,7 +55,7 @@ public class EffectGameOver extends Effect {
 			paint.paint(g);
 
 			g.unlock(true);
-			Game.sleep(30000 / CanvasControl.f);
+			Game.sleep(300 / CanvasControl.f);
 		}
 
 		Game.sleep(500);
