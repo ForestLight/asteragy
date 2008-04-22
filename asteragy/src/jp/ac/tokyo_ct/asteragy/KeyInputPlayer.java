@@ -36,6 +36,10 @@ public final class KeyInputPlayer extends Player {
 
 				switch (state) {
 				case 0: // ‘€ìƒNƒ‰ƒX‚Ì‘I‘ğ
+					game.getField().repaintField(canvas.getScreen().getGraphics());
+					canvas.getScreen()
+							.paintEffect(canvas.getDisappearControl());
+					
 					pt = selectAster();
 
 					if (pt == null)
@@ -49,7 +53,7 @@ public final class KeyInputPlayer extends Player {
 					AsterClass ac = a.getAsterClass();
 					final Range canvasRange = game.getCanvas().getRange();
 					int[][] range = ac.getRange();
-
+					
 					canvasRange.setRange(pt, range);
 
 					cmd = selectCommand(pt);

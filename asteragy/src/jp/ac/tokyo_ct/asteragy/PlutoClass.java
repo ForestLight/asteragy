@@ -99,21 +99,21 @@ public final class PlutoClass extends AsterClass {
 			}
 		}
 		// サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください）
-		if (field.judgeSelfDestruction() == true) {
-			Dialog d = new Dialog(Dialog.DIALOG_YESNO, "注意");
-			d.setText("サンが消えます");
-			if (d.show() == Dialog.BUTTON_NO) {
-				// field.removeDeleteFlagAll();
-				incActionCount();
-				getPlayer().addAP(getCommandCost());
-				return;
-			}
-		} else {
+//		if (field.judgeSelfDestruction() == true) {
+//			Dialog d = new Dialog(Dialog.DIALOG_YESNO, "注意");
+//			d.setText("サンが消えます");
+//			if (d.show() == Dialog.BUTTON_NO) {
+//				// field.removeDeleteFlagAll();
+//				incActionCount();
+//				getPlayer().addAP(getCommandCost());
+//				return;
+//			}
+//		} else {
 			Effect effect = new EffectCommandPluto(field, me);
 			getAster().getField().getScreen().paintEffect(effect);
 			field.deleteAll();
 			logAction();
-		}
+	//	}
 	}
 
 	static int[][] getDefaultRange() {
