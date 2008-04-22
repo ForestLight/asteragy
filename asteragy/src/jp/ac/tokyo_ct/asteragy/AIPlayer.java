@@ -457,12 +457,12 @@ public final class AIPlayer extends Player {
 					a = f.field[i][j];
 					n = a.getNum();
 				}
-				cur.setColor(colorBackUp[i][j]);
+				a.setColor(colorBackUp[i][j]);
 				if (acBackUp[i][j] == null) {
-					cur.setAsterClass(null);
+					a.setAsterClass(null);
 				} else {
-					cur.setAsterClass(acBackUp[i][j]);
-					cur.getAsterClass().setAster(cur);
+					a.setAsterClass(acBackUp[i][j]);
+					a.getAsterClass().setAster(cur);
 				}
 				cur.init();
 			}
