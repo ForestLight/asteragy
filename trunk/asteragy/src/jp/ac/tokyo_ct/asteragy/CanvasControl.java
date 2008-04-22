@@ -8,11 +8,11 @@ import com.nttdocomo.ui.*;
  * 
  */
 public final class CanvasControl extends Canvas {
-	
+
 	static final int measure = 18;
 
 	public static final int f = 40;
-	
+
 	static final Image backgroundImage = createBackground();
 
 	final Game game;
@@ -43,7 +43,7 @@ public final class CanvasControl extends Canvas {
 		setBackground(Graphics.getColorOfName(Graphics.BLACK));
 		repaint();
 	}
-	
+
 	Canvas getCanvas() {
 		return this;
 	}
@@ -106,7 +106,9 @@ public final class CanvasControl extends Canvas {
 		g.drawString("Now Loading...", 78, 126);
 	}
 
-	public void gameOver() {
+	public void gameOver(Player winner) {
+		Effect effect = new EffectGameOver(this, winner);
+		paintEffect(effect);
 	}
 
 	private PaintString spaint;
@@ -136,7 +138,7 @@ public final class CanvasControl extends Canvas {
 			paintString(g);
 			System.out.println("end paint");
 		}
-		g.unlock(true); //trueÇ…ÇµÇΩÇÃÇÕà¿ëSë[íuÅB
+		g.unlock(true); // trueÇ…ÇµÇΩÇÃÇÕà¿ëSë[íuÅB
 	}
 
 	/**
@@ -164,7 +166,7 @@ public final class CanvasControl extends Canvas {
 		player[0].paint(g);
 		player[1].paint(g);
 	}
-	
+
 	/**
 	 * å≈íËîwåiçÏê¨
 	 * 
@@ -183,7 +185,7 @@ public final class CanvasControl extends Canvas {
 		g.dispose();
 		return background;
 	}
-	
+
 	static void paintAsterBack(Graphics g, Point pt) {
 		final int m = CanvasControl.measure;
 		CanvasControl canvas = Main.game.getCanvas();
@@ -200,7 +202,7 @@ public final class CanvasControl extends Canvas {
 		if (eventProcesser != null)
 			eventProcesser.processEvent(type, param);
 	}
-	
+
 	Image getScreen(Point location, Point size) {
 		Image screen = Image.createImage(size.x, size.y);
 		Graphics g = screen.getGraphics();
@@ -208,7 +210,7 @@ public final class CanvasControl extends Canvas {
 		g.dispose();
 		return screen;
 	}
-	
+
 	void paintEffect(Effect effect) {
 		if (!Effect.isEffect)
 			return;
