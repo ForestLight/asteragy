@@ -65,6 +65,7 @@ public final class AIPlayer extends Player {
 				switch (state) {
 				case 0: // 操作クラスの選択
 					getMyUnit();
+					game.getCanvas().setPaintFlag(false);
 					System.out.println("AIPlayer state0");
 					pt = selectAster();
 					t = 0;
@@ -78,6 +79,7 @@ public final class AIPlayer extends Player {
 					break;
 				case 1: // スワップか特殊コマンドかを選択
 					System.out.println("AIPlayer state1");
+					game.getCanvas().setPaintFlag(false);
 					// fieldClone(backup,game.getField()); //フィールドをコピー
 					backUpField();
 					Effect.setEffect(false);// エフェクト非表示
@@ -200,14 +202,17 @@ public final class AIPlayer extends Player {
 						System.out.println("execute : maxNum = " + maxNum
 								+ " , eMax = " + eMax);
 						Effect.setEffect(true);
+						game.getCanvas().setPaintFlag(true);
 						if (execute())
 							return null;
+						game.getCanvas().setPaintFlag(false);
 						state = 0;
 					}
 				}
 			}
 			return null;
 		} finally {
+			game.getCanvas().setPaintFlag(true);
 			game.getField().repaintField();
 			canvas.paintEffect(canvas.disappearControl);
 			Game.sleep(WAIT);

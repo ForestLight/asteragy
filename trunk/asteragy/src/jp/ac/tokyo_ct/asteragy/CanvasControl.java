@@ -34,6 +34,8 @@ public final class CanvasControl extends Canvas {
 	private int topmargin;
 
 	private int leftmargin;
+	
+	private boolean paintFlag = true;
 
 	public CanvasControl(Game game) {
 		this.game = game;
@@ -64,6 +66,10 @@ public final class CanvasControl extends Canvas {
 		if (leftmargin <= 0)
 			setFieldMargin();
 		return leftmargin;
+	}
+	
+	public void setPaintFlag(boolean b){
+		paintFlag = b;
 	}
 
 	public EffectAsterDisappearControl getDisappearControl() {
@@ -128,18 +134,20 @@ public final class CanvasControl extends Canvas {
 	}
 
 	public void paint(Graphics g) {
-		g.lock();
-		if (game.initializing) {
-			paintNowloading(g);
-		} else {
-			g.drawImage(backgroundImage, 0, 0);
-			paintPlayerInfo(g);
-			paintFieldSpace(g);
-
-			paintString(g);
-			System.out.println("end paint");
+		if(paintFlag){
+			g.lock();
+			if (game.initializing) {
+				paintNowloading(g);
+			} else {
+				g.drawImage(backgroundImage, 0, 0);
+				paintPlayerInfo(g);
+				paintFieldSpace(g);
+	
+				paintString(g);
+				System.out.println("end paint");
+			}
+			g.unlock(true); // trueにしたのは安全措置。
 		}
-		g.unlock(true); // trueにしたのは安全措置。
 	}
 
 	/**
