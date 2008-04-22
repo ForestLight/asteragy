@@ -25,8 +25,8 @@ public final class AIPlayer extends Player {
 	/**
 	 * ééçsâÒêî
 	 */
-	private final static int TRIAL = 20;
-
+	private final static int TRIAL = 15;
+	
 	private final static int WAIT = 1000;
 
 	private Field backup;
@@ -367,6 +367,10 @@ public final class AIPlayer extends Player {
 			return 10000;
 		}
 		
+		if(sunPoint[pNum].x < 3) ev -= (3-sunPoint[pNum].x)*150;
+		else if(sunPoint[pNum].x > x - 4) ev -= (sunPoint[pNum].x - (x-4)) * 200;
+		if(sunPoint[pNum].y < 2) ev -= (2-sunPoint[pNum].y)*100;
+		else if(sunPoint[pNum].y > y - 3) ev -= (sunPoint[pNum].y - (x-3)) * 100;
 		
 		for (int i = 0; i < y; i++) {
 			for (int j = 0; j < x; j++) {
