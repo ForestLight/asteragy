@@ -16,8 +16,12 @@ public final class EffectAsterDisappearControl extends Effect {
 	void Add(Point pt) {
 		disappearing.addElement(pt);
 	}
+	void Clear(){
+		disappearing.removeAllElements();
+	}
 
 	public void start(Graphics g) {
+
 		if (disappearing.size() == 0)
 			return;
 		Field f = Main.game.getField();

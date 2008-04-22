@@ -445,6 +445,7 @@ public final class AIPlayer extends Player {
 	private void restoreField() {
 		final Field f = game.getField();
 
+		game.getCanvas().disappearControl.Clear();
 		for (int i = 0; i < f.Y; i++) {
 			for (int j = 0; j < f.X; j++) {
 				final Aster cur = f.field[i][j];
