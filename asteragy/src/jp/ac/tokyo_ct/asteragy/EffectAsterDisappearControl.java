@@ -4,62 +4,39 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import com.nttdocomo.ui.Graphics;
+import com.nttdocomo.ui.Image;
 
-public final class EffectAsterDisappearControl extends Effect implements Runnable {
+public final class EffectAsterDisappearControl extends Effect {
+	private static final int frame = 10;
 
-	private static final int capacity = 20;
+	private static final Image image = Game.loadImage("disappear");
 
-	final private CanvasControl canvas;
+	private final Vector disappearing = new Vector(20);
 
-	private Vector disappearing;
-
-	private Graphics g;
-
-	public EffectAsterDisappearControl(CanvasControl canvas) {
-		this.canvas = canvas;
-		this.disappearing = new Vector(capacity);
-	}
-
-	public void Add(EffectAsterDisappearing aster) {
-		disappearing.addElement(aster);
+	void Add(Point pt) {
+		disappearing.addElement(pt);
 	}
 
 	public void start(Graphics g) {
-		this.g = g;
-		if (!isEffect) {
-			Enumeration i = disappearing.elements();
-			Graphics scr = canvas.getScreen().getGraphics();
-			while (i.hasMoreElements()) {
-				((EffectAsterDisappearing) i.nextElement()).endEffect(scr);
-			}
+		if (disappearing.size() == 0)
 			return;
-		}
-		Thread thread = new Thread(this);
-		thread.start();
-	}
-
-	public void run() {
-		while (disappearing.size() > 0) {
-			Enumeration i = disappearing.elements();
-			while (i.hasMoreElements()) {
-				synchronized (g) {
-					g.lock();
-					EffectAsterDisappearing aster = (EffectAsterDisappearing) i
-							.nextElement();
-					if (aster.increaseTime()) {
-						aster.endEffect(g);
-						disappearing.removeElement(aster);
-						continue;
-					}
-					aster.repaint(g);
-					g.unlock(false);
-				}
+		Field f = Main.game.getField();
+		for (int i = 0; i < frame; ++i) {
+			g.lock();
+			Enumeration en = disappearing.elements();
+			while (en.hasMoreElements()) {
+				paintAster(f, g, (Point) en.nextElement(), i);
 			}
-
+			g.unlock(false);
 			Game.sleep(1000 / CanvasControl.f);
 		}
-		canvas.getField().repaintField(canvas.getScreen().getGraphics());
-		canvas.getScreen().flipScreen();
+		disappearing.removeAllElements();
 	}
 
+	void paintAster(Field f, Graphics g, Point pt, int time) {
+		CanvasControl.paintAsterBack(g, pt);
+		f.setOrignAster(g, pt);
+		g.drawImage(image, 1, 1, 0, time * (CanvasControl.measure - 1),
+				CanvasControl.measure - 1, CanvasControl.measure - 1);
+	}
 }

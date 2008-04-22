@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class Command implements PaintItem {
+public class Command /*implements PaintItem*/ {
 
 	protected int command;
 
@@ -29,7 +29,6 @@ public class Command implements PaintItem {
 	public final void setCommand(int cmd, Point pt) {
 		command = cmd;
 		point = pt;
-		canvas.repaint();
 	}
 
 	public void paint(Graphics g) {
@@ -47,12 +46,12 @@ public class Command implements PaintItem {
 		g.setColor(Graphics.getColorOfRGB(255, 128, 196, 100));
 		System.out.println("command = " + command);
 		g.fillRect(1, command * height, height * 4 + 2, height);
-		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.clearClip();
 	}
 
 	private final void setPosition(Graphics g) {
-		final int m = GameCanvas.measure;
+		final int m = CanvasControl.measure;
 		final int topMargin = canvas.getTopMargin();
 		final int leftMargin = canvas.getLeftMargin();
 		final int imageHeight = commandImage.getHeight();

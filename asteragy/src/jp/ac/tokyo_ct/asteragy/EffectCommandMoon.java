@@ -16,27 +16,18 @@ public final class EffectCommandMoon extends Effect {
 		field = f;
 		aster = me;
 		point = pt;
-		// loadImage();
 	}
 
-	/*
-	 * private void loadImage() { if (effect != null) return;
-	 * 
-	 * try { // リソースから読み込み MediaImage m =
-	 * MediaManager.getImage("resource:///moon_effect.gif"); // メディアの使用開始
-	 * m.use(); // 読み込み effect = m.getImage(); } catch (Exception e) { } }
-	 */
-
 	public void start(Graphics g) {
-		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
-		for (int i = 17; i >= 0; i--) {
+		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
+		for (int i = 17; i != 0; i--) {
 			g.lock();
 			field.setOrignAster(g, aster);
-			g.setClip(0, 0, GameCanvas.measure, GameCanvas.measure);
+			g.setClip(0, 0, CanvasControl.measure, CanvasControl.measure);
 			g.fillArc(i, 0, 17, 17, 0, 360);
 			g.clearClip();
 			field.setOrignAster(g, point);
-			g.setClip(0, 0, GameCanvas.measure, GameCanvas.measure);
+			g.setClip(0, 0, CanvasControl.measure, CanvasControl.measure);
 			g.fillArc(i, 0, 17, 17, 0, 360);
 			g.clearClip();
 			g.unlock(true);
@@ -47,10 +38,10 @@ public final class EffectCommandMoon extends Effect {
 		for (int i = 0; i >= -17; i--) {
 			g.lock();
 			field.setOrignAster(g, aster);
-			g.setClip(0, 0, GameCanvas.measure, GameCanvas.measure);
-			g.setColor(Graphics.getColorOfRGB(255, 255, 255));
+			g.setClip(0, 0, CanvasControl.measure, CanvasControl.measure);
+			g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 			g.fillArc(0, 0, 17, 17, 0, 360);
-			g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+			g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 			g.fillArc(i, 0, 17, 17, 0, 360);
 			g.clearClip();
 			g.unlock(true);

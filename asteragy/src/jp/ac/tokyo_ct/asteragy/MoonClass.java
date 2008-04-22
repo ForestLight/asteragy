@@ -64,17 +64,16 @@ public final class MoonClass extends AsterClass {
 	public void executeSpecialCommand() {
 		final Field f = getAster().getField();
 		Point me = f.asterToPoint(getAster());
-		for (int i = 0; i < f.getY(); i++) {
-			for (int j = 0; j < f.getX(); j++) {
+		for (int i = 0; i < f.Y; i++) {
+			for (int j = 0; j < f.X; j++) {
 				// Ž©•ª‚ÌƒTƒ“‚ð‚Ý‚Â‚¯‚é
-				final Aster a = f.getField()[i][j];
+				final Aster a = f.field[i][j];
 				if (a.getNumber() == 1
 						&& a.getAsterClass().getPlayer() == getPlayer()) {
 					Point pt = new Point(j, i);
 					
 					Effect effect = new EffectCommandMoon(f, me, pt);
-					getAster().getField().getScreen().paintEffect(effect);
-					
+					f.getCanvas().paintEffect(effect);
 					f.swap(pt, me);
 					f.setDeleteFlag(pt);
 					f.delete(pt.x, pt.y);

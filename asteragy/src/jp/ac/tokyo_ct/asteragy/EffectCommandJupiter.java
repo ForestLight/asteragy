@@ -4,7 +4,7 @@ import com.nttdocomo.ui.*;
 
 public final class EffectCommandJupiter extends Effect {
 
-	private static final Image effect = Game.loadImage("jupiter_effect.gif");
+	private static final Image effect = Game.loadImage("jupiter_effect");
 
 	// private static Image tranc;
 
@@ -28,27 +28,10 @@ public final class EffectCommandJupiter extends Effect {
 		setCircle();
 	}
 
-	/*
-	 * private void setLocation() { lefttop = point.clone(); rightbottom =
-	 * point.clone();
-	 * 
-	 * lefttop.x -= 1; lefttop.y -= 6; rightbottom.x += 2; }
-	 */
-
-	/*
-	 * private void imageTranclucently() { // îwåiçïÇ≈îºìßñæâª tranc =
-	 * Image.createImage(effect.getWidth(), effect.getHeight()); Graphics f =
-	 * effect.getGraphics(); Graphics t = tranc.getGraphics(); int[] pixels =
-	 * f.getRGBPixels(0, 0, effect.getWidth(), effect .getHeight(), null, 0);
-	 * for (int i = 0; i < pixels.length; i++) { pixels[i] = (pixels[i] >>> 1) &
-	 * 0x7f7f7f; } t.setRGBPixels(0, 0, effect.getWidth(), effect.getHeight(),
-	 * pixels, 0); t.dispose(); f.dispose(); }
-	 */
-
 	private void setCircle() {
 		center = field.getAsterLocation(point);
-		center.x += GameCanvas.measure / 2;
-		center.y += GameCanvas.measure / 2;
+		center.x += CanvasControl.measure / 2;
+		center.y += CanvasControl.measure / 2;
 		final int r = effect.getWidth() * 2;
 		final int theta = SimpleMath.cycle / 8;
 		circle = new Point[8];
@@ -62,12 +45,9 @@ public final class EffectCommandJupiter extends Effect {
 	}
 
 	public void start(Graphics g) {
-		if (!isEffect)
-			return;
-
 		Point l = field.getAsterLocation(point.add(new Point(-1, -1)));
-		Point s = new Point(GameCanvas.measure * 3, GameCanvas.measure * 3);
-		Image back = field.getScreen().getScreen(l, s);
+		Point s = new Point(CanvasControl.measure * 3, CanvasControl.measure * 3);
+		Image back = field.getCanvas().getScreen(l, s);
 
 		int[] matrix = new int[6];
 		final int theta = -SimpleMath.cycle / 8;
@@ -130,57 +110,4 @@ public final class EffectCommandJupiter extends Effect {
 			Game.sleep(100 / CanvasControl.f);
 		}
 	}
-	/*
-	 * public void start(Graphics g) { if(!isEffect) return;
-	 * 
-	 * final int height = 10;
-	 * 
-	 * for (int i = 0; i < effect.getHeight(); i++) { g.lock();
-	 * 
-	 * field.repaintAsterRect(g, lefttop, rightbottom); field.setOrignAster(g,
-	 * point, (GameCanvas.measure - effect .getWidth()) / 2, GameCanvas.measure /
-	 * 2 - effect.getHeight());
-	 * 
-	 * g.drawImage(effect, 0, -height, 0, 0, effect.getWidth(), i);
-	 * 
-	 * g.unlock(true);
-	 * 
-	 * try { Thread.sleep(1000 / CanvasControl.f); } catch (InterruptedException
-	 * e) { e.printStackTrace(); } }
-	 * 
-	 * for (int i = 0; i < height; i++) {
-	 * 
-	 * g.lock();
-	 * 
-	 * field.repaintAsterRect(g, lefttop, rightbottom); field.setOrignAster(g,
-	 * point, (GameCanvas.measure - effect .getWidth()) / 2, GameCanvas.measure /
-	 * 2 - effect.getHeight());
-	 * 
-	 * g.drawImage(effect, 0, i - height);
-	 * 
-	 * g.unlock(true);
-	 * 
-	 * try { Thread.sleep(300 / CanvasControl.f); } catch (InterruptedException
-	 * e) { e.printStackTrace(); } }
-	 * 
-	 * for (int i = 0; i < height; i++) {
-	 * 
-	 * g.lock();
-	 * 
-	 * field.repaintAsterRect(g, lefttop, rightbottom); field.setOrignAster(g,
-	 * point, (GameCanvas.measure - effect .getWidth()) / 2, GameCanvas.measure /
-	 * 2 - effect.getHeight());
-	 * 
-	 * g.drawImage(effect, 0, i, 0, 0, effect.getWidth(), effect .getHeight() -
-	 * i);
-	 * 
-	 * g.unlock(true);
-	 * 
-	 * try { Thread.sleep(300 / CanvasControl.f); } catch (InterruptedException
-	 * e) { e.printStackTrace(); } }
-	 * 
-	 * try { Thread.sleep(1000 / CanvasControl.f * 20); } catch
-	 * (InterruptedException e) {
-	 * e.printStackTrace(); } }
-	 */
 }

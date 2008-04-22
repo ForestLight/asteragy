@@ -85,7 +85,7 @@ public final class ExplainRules extends Canvas implements Runnable {
 		g.drawScaledImage(image, 37, 147, 17, 17, 17, 0, 17, 17);
 		g.drawScaledImage(image, 37, 164, 17, 17, 17, 0, 17, 17);
 		g.drawString("Å®", 66, 160);
-		image = Game.loadImage("disappear.gif");
+		image = Game.loadImage("disappear");
 		g.drawScaledImage(image, 90, 130, 17, 17, 0, 153, 17, 17);
 		g.drawScaledImage(image, 90, 147, 17, 17, 0, 153, 17, 17);
 		g.drawScaledImage(image, 107, 147, 17, 17, 0, 153, 17, 17);
@@ -239,39 +239,35 @@ public final class ExplainRules extends Canvas implements Runnable {
 	}
 
 	public void run() {
-
-		synchronized (this) {
-
-			if (page == temp) {
-				g.lock();
-				g.drawImage(pageImage[page], 0, 0);
-				g.unlock(true);
-				return;
-			}
-
-			final int width = getWidth();
-			int dx = (temp - page) / Math.abs(temp - page);
-			final int s = width / frame;
-
-			if (temp == 0 && page == 5)
-				dx *= -1;
-			if (temp == 5 && page == 0)
-				dx *= -1;
-
-			for (int i = 0; i < frame + 1; i++) {
-
-				g.lock();
-
-				g.drawImage(pageImage[temp], i * dx * s, 0);
-				g.drawImage(pageImage[page], i * dx * s - dx * width, 0);
-
-				g.unlock(true);
-
-				Game.sleep(300 / CanvasControl.f);
-			}
-
-			g = null;
-			temp = page;
+		if (page == temp) {
+			g.lock();
+			g.drawImage(pageImage[page], 0, 0);
+			g.unlock(true);
+			return;
 		}
+
+		final int width = getWidth();
+		int dx = (temp - page) / Math.abs(temp - page);
+		final int s = width / frame;
+
+		if (temp == 0 && page == 5)
+			dx *= -1;
+		if (temp == 5 && page == 0)
+			dx *= -1;
+
+		for (int i = 0; i < frame + 1; i++) {
+
+			g.lock();
+
+			g.drawImage(pageImage[temp], i * dx * s, 0);
+			g.drawImage(pageImage[page], i * dx * s - dx * width, 0);
+
+			g.unlock(true);
+
+			Game.sleep(300 / CanvasControl.f);
+		}
+
+		g = null;
+		temp = page;
 	}
 }

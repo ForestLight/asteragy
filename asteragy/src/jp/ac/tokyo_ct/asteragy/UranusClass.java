@@ -35,7 +35,7 @@ public final class UranusClass extends AsterClass {
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
-			final Aster[][] f = field.getField();
+			final Aster[][] f = field.field;
 			Point pt = new Point(field.asterToPoint(a).x
 					- (range[0].length / 2), field.asterToPoint(a).y
 					- (range.length / 2));
@@ -108,12 +108,10 @@ public final class UranusClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
+		final Field f = getAster().getField();
+		f.getCanvas().paintEffect(new EffectCommandUranus(f, target1, target2));
 
-		final Field field = getAster().getField();
-		Effect effect = new EffectCommandUranus(field, target1, target2);
-		field.getScreen().paintEffect(effect);
-
-		field.swap(target1, target2);
+		f.swap(target1, target2);
 		logAction(target1, target2);
 	}
 

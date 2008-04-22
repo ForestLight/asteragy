@@ -1,12 +1,11 @@
 package jp.ac.tokyo_ct.asteragy;
 
 import java.util.Enumeration;
-import java.util.Random;
 import java.util.Vector;
 
 import com.nttdocomo.ui.Graphics;
 
-public final class Thunder implements PaintItem {
+public final class Thunder /*implements PaintItem*/ {
 
 	private static final int MAXTHUNDER = 5;
 

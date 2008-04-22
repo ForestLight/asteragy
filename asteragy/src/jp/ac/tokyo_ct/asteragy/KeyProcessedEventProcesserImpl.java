@@ -82,7 +82,7 @@ abstract class KeyProcessedEventProcesserImpl implements EventProcesser {
 				}
 			}
 		} finally {
-			c.removeEventProcesser(this);
+			c.resetEventProcesser();
 		}
 	}
 

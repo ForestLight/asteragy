@@ -33,25 +33,19 @@ public final class CommonCommand extends Command {
 		if (command < 0 || point == null || asterClass == null)
 			return;
 		g.setOrigin(0, 0);
-		g.setColor(Graphics.getColorOfRGB(255, 128, 255));
 		if (command == 0) {
 			g.setColor(Graphics.getColorOfName(Graphics.BLUE));
 			g.drawString("ƒXƒƒbƒv 0", 85, 235);
 		} else {
+			final int width = canvas.getWidth();
 			g.setOrigin(0, top);
 			g.setColor(back);
-			g.fillRect(6, height * 2, canvas.getWidth() - 12, height + 4);
+			g.fillRect(6, height * 2, width - 12, height + 4);
 			g.setColor(line);
-			g.drawLine(5, height * 2, canvas.getWidth() - 6, height * 2);
-			g
-					.drawLine(5, height * 2 + 1, canvas.getWidth() - 6,
-							height * 2 + 1);
-			g
-					.drawLine(5, height * 3 + 4, canvas.getWidth() - 6,
-							height * 3 + 4);
-			g
-					.drawLine(5, height * 3 + 5, canvas.getWidth() - 6,
-							height * 3 + 5);
+			g.drawLine(5, height * 2, width - 6, height * 2);
+			g.drawLine(5, height * 2 + 1, width - 6, height * 2 + 1);
+			g.drawLine(5, height * 3 + 4, width - 6, height * 3 + 4);
+			g.drawLine(5, height * 3 + 5, width - 6, height * 3 + 5);
 			g.setColor(word);
 			g.drawString(AsterClass.commandExplain[asterClass.getNumber() - 1],
 					10, height * (command + 2) + 2);
@@ -75,6 +69,7 @@ public final class CommonCommand extends Command {
 		for (int i = 0; i < 2; i++) {
 			g.drawString(commands[i], 2, height * (i + 1) - 1);
 		}
+		g.dispose();
 		setImage(commandImage);
 	}
 

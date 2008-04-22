@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public abstract class Player implements PaintItem {
+public abstract class Player /*implements PaintItem*/ {
 	/**
 	 * プレイヤー情報領域高さ
 	 */
@@ -23,11 +23,7 @@ public abstract class Player implements PaintItem {
 	 * @return 選択した行動。または、ターン終了ならnullを返す。
 	 */
 	public abstract Action getAction();
-/*
-	public final String getName() {
-		return name;
-	}
-*/
+
 	public final int getAP() {
 		return ap;
 	}
@@ -63,8 +59,9 @@ public abstract class Player implements PaintItem {
 	 * @param playernumber
 	 *            プレイヤー
 	 */
-	public void paint(Graphics g) {
-		if (this.equals(game.getPlayer1())) {
+	public final void paint(Graphics g) {
+		System.out.println("Player.paint");
+		if (this.equals(game.player[0])) {
 			g.setOrigin(0, game.getCanvas().getHeight() - playerheight);
 		} else {
 			g.setOrigin(0, 0);
@@ -80,25 +77,21 @@ public abstract class Player implements PaintItem {
 		g.drawString(name, namex, namey);
 	}
 
-	public void repaint() {
-		if (game.isInit())
-			return;
+	public final void repaint() {
+		//game.getCanvas().getScreen().repaint();
+/*
 		final CanvasControl canvas = game.getCanvas();
-		Graphics g = canvas.getScreen().getGraphics();
+		Graphics g = canvas.getScreen().getBufferGraphics();
 		int player = game.getPlayerIndex(this) + 1;
 		canvas.getBackImage().paintPlayerBack(g, player);
 		paint(g);
 		g.dispose();
+*/
 	}
 
-	static final Image turnOnBack = Game.loadImage("turnon_effect.gif");
+	static final Image turnOnBack = Game.loadImage("turnon_effect");
 
 	public String toString() {
 		return name;
 	}
-
-	public boolean isPlayer2() {
-		return this == game.getPlayer2();
-	}
-
 }

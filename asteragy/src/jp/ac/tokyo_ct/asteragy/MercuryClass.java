@@ -39,22 +39,22 @@ public final class MercuryClass extends AsterClass {
 					- (range.length / 2));
 
 			for (int i = 0; i < defaultRange.length; i++) {
-				if (pt.y + i < 0 || pt.y + i >= field.getY())
+				if (pt.y + i < 0 || pt.y + i >= field.Y)
 					continue;
 				for (int j = 0; j < defaultRange[0].length; j++) {
-					if (pt.x + j < 0 || pt.x + j >= field.getX())
+					if (pt.x + j < 0 || pt.x + j >= field.X)
 						continue;
 
 					// レンジ内であり
 					if (defaultRange[i][j] == 1) {
 						// その位置のアステルにクラスがあり
-						final AsterClass asterClass = field.getField()[pt.y + i][pt.x
-								+ j].getAsterClass();
-						if (asterClass != null) {
+						final AsterClass ac = field.field[pt.y + i][pt.x + j]
+								.getAsterClass();
+						if (ac != null) {
 							// そのクラスの所持者が自分であり
-							if (asterClass.getPlayer() == getPlayer()) {
+							if (ac.getPlayer() == getPlayer()) {
 								// 行動可能回数が0ならば選択可能
-								if (asterClass.getActionCount() == 0) {
+								if (ac.getActionCount() == 0) {
 									range[i][j] = 1;
 								}
 							}
@@ -102,13 +102,10 @@ public final class MercuryClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
-
-		Effect effect = new EffectCommandMercury(getAster().getField(), target1);
-		getAster().getField().getScreen().paintEffect(effect);
-
+		final Field f = getAster().getField();
+		f.getCanvas().paintEffect(new EffectCommandMercury(f, target1));
 		// 対象の行動可能回数を1回増やす
-		getAster().getField().getAster(target1).getAsterClass()
-				.incActionCount();
+		f.at(target1).getAsterClass().incActionCount();
 		logAction(target1);
 	}
 

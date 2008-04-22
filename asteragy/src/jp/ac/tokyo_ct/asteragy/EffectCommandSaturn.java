@@ -4,7 +4,7 @@ import com.nttdocomo.ui.*;
 
 public final class EffectCommandSaturn extends Effect {
 
-	private static Image effect = Game.loadImage("saturn_effect.gif");
+	private static final Image effect = Game.loadImage("saturn_effect");
 
 	private final Field field;
 
@@ -23,37 +23,28 @@ public final class EffectCommandSaturn extends Effect {
 		for (int i = 0; i < location.length; i++) {
 			location[i] = field.asterToPoint(queue[i]);
 		}
-
-		/*
-		 * for (int i = 1, j = 0; j < 16; j++) { if (queue[i] == null) break; if
-		 * (location[i] == null) location[i] = location[i - 1].clone();
-		 * 
-		 * if (j < 4) location[i].x++; else if (j < 8) location[i].y++; else if
-		 * (j < 12) location[i].x--; else location[i].y--;
-		 * 
-		 * if (field.isXInFieldBound(location[i].x) &&
-		 * field.isYInFieldBound(location[i].y)) { i++; } }
-		 */
 	}
 
 	public void start(Graphics g) {
-		if (!isEffect)
-			return;
+		final int width2 = effect.getWidth() / 2;
+		final int height2 = effect.getHeight() / 2;
+		final int width2m = -width2;
+		final int height2m = -height2;
 
 		int[] matrix = new int[6];
 
 		int theta = SimpleMath.cycle / 8;
 
-		int r = ((GameCanvas.measure - 1) * 3 / 2) * SimpleMath.cos(theta);
+		int r = ((CanvasControl.measure - 1) * 3 / 2) * SimpleMath.cos(theta);
 
-		int x = effect.getWidth() / 2 + r / SimpleMath.divide;
-		int y = effect.getHeight() / 2;
-		int width = effect.getWidth() / 2 + r / SimpleMath.divide;
-		int height = (effect.getHeight() / 2) * SimpleMath.sin(theta)
+		int x = width2 + r / SimpleMath.divide;
+		int y = height2 / 2;
+		int width = width2 + r / SimpleMath.divide;
+		int height = height2 * SimpleMath.sin(theta)
 				/ SimpleMath.divide;
 
-		field.setOrignAster(g, aster, GameCanvas.measure / 2,
-				GameCanvas.measure / 2);
+		field.setOrignAster(g, aster, CanvasControl.measure / 2,
+				CanvasControl.measure / 2);
 
 		for (int i = 0; i < 9; i++) {
 			matrix[2] = r * SimpleMath.cos(theta * i) / SimpleMath.divide;
@@ -73,19 +64,17 @@ public final class EffectCommandSaturn extends Effect {
 		field.repaintAsterRect(g, new Point(aster.x - 1, aster.y - 1),
 				new Point(aster.x + 1, aster.y + 1));
 
-		for (int i = 0; i < GameCanvas.measure - 1; i++) {
+		for (int i = 0; i < CanvasControl.measure - 1; i++) {
 
 			g.lock();
 
-			field.getGame().getCanvas().getBackImage().paintAsterBack(g,
-					location[0]);
+			CanvasControl.paintAsterBack(g, location[0]);
 			for (int j = 0; j < location.length; j++) {
 				if (location[j] == null)
 					break;
 
 				if (location[j + 1] != null) {
-					field.getGame().getCanvas().getBackImage().paintAsterBack(
-							g, location[j + 1]);
+					CanvasControl.paintAsterBack(g, location[j + 1]);
 
 					field.setOrignAster(g, location[j], i
 							* (location[j + 1].x - location[j].x), i
@@ -96,15 +85,13 @@ public final class EffectCommandSaturn extends Effect {
 							* (location[0].y - location[j].y));
 				}
 
-				queue[j].getPaint().paint(g);
+				queue[j].paint(g);
 
 			}
 
-			field.setOrignAster(g, aster, GameCanvas.measure / 2,
-					GameCanvas.measure / 2);
-			g
-					.drawImage(effect, -effect.getWidth() / 2, -effect
-							.getHeight() / 2);
+			field.setOrignAster(g, aster, CanvasControl.measure / 2,
+					CanvasControl.measure / 2);
+			g.drawImage(effect, width2m, height2m);
 
 			g.unlock(true);
 

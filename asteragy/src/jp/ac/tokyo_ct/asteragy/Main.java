@@ -16,7 +16,7 @@ public final class Main extends IApplication {
 	public void start() {
 		// GameCanvas c = new GameCanvas();
 		// Display.setCurrent(c);
-
+//		final Title t = new Title();
 		while (true) {
 			Option op = title.start();
 			game.start(op);

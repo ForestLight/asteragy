@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class PaintString implements PaintItem {
+public final class PaintString {
 
 	final private String string;
 
@@ -14,10 +14,10 @@ public final class PaintString implements PaintItem {
 	}
 
 	public void paint(Graphics g) {
-		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
+		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.fillRect(10, canvas.getHeight() / 3, canvas.getWidth() - 20, canvas
 				.getHeight() / 3);
-		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.drawString(string, (canvas.getWidth() - Font.getDefaultFont()
 				.stringWidth(string)) / 2, (canvas.getHeight() + Font
 				.getDefaultFont().getHeight()) / 2);

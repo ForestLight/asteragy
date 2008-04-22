@@ -10,7 +10,7 @@ import com.nttdocomo.ui.MediaManager;
 /**
  * @author Ichinohe ゲーム進行の管理
  */
-final class Game implements Runnable {
+final class Game {
 	/**
 	 * ゲームを開始する
 	 */
@@ -18,38 +18,10 @@ final class Game implements Runnable {
 		System.out.println("Game.start()");
 		option = op;
 
-		Thread init = new Thread(this);
-		init.start();
-		try {
-			init.join();
-		} catch (InterruptedException e) {
-			// e.printStackTrace();
-		}
+		initializing = true;
+		initialize();
+		initializing = false;
 
-		/*
-		 * // canvas = new GameCanvas(this); // Display.setCurrent(canvas);
-		 * field = new Field(this); field.setFieldSize(9, 9); field.setAster();
-		 * 
-		 * player[0] = new KeyInputPlayer(this, "先攻");
-		 * 
-		 * switch (gameType) { case 1: //player[1] = new AIPlayer(this, "乱数");
-		 * break; case 2: httpLogger = new HTTPPlayer(this, "後攻 (N)"); player[1] =
-		 * httpLogger; break; default: player[1] = new KeyInputPlayer(this,
-		 * "後攻"); }
-		 * 
-		 * canvas = new CanvasControl(this); // 初期設定(仮) Aster a =
-		 * field.getField()[field.getY() - 1][field.getX() / 2];
-		 * a.setAsterClass(new SunClass(a, player[0])); a =
-		 * field.getField()[0][field.getX() / 2]; a.setAsterClass(new
-		 * SunClass(a, player[1]));
-		 * 
-		 * player[0].addSP(30); player[1].addSP(30);
-		 * 
-		 * System.out.println("Game.start()"); try { Thread.sleep(300); } catch
-		 * (Exception e) { }
-		 * 
-		 * canvas.setCurrent();
-		 */
 		System.out.println("Game.start()");
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
 		{
@@ -66,17 +38,17 @@ final class Game implements Runnable {
 
 	private void initialize() {
 		System.out.println("initialize start");
+		if (option.gameType == 2) {
+			httpLogger = new HTTPPlayer(this, "後攻 (N)");
+			httpLogger.initialize(option);
+		}
 		canvas = new CanvasControl(this);
-		canvas.paintNowloading(canvas.getScreen().getGraphics());
-		canvas.getScreen().flipScreen();
-		// canvas.repaint();
-		// Display.setCurrent(canvas);
+		canvas.repaint(); // now loadingを表示させる
 
 		Aster.COLOR_MAX = option.numOfColors;
 		Field.CONNECTION = option.connection;
 
-		field = new Field(this);
-		field.setFieldSize(option.fieldXSize, option.fieldYSize);
+		field = new Field(this, option.fieldXSize, option.fieldYSize);
 		field.setAster();
 
 		player[0] = new KeyInputPlayer(this, "先攻");
@@ -87,7 +59,6 @@ final class Game implements Runnable {
 			player[1] = new AIPlayer(this, "COM (Very Easy)");
 			break;
 		case 2:
-			httpLogger = new HTTPPlayer(this, "後攻 (N)");
 			player[1] = httpLogger;
 			break;
 		default:
@@ -95,23 +66,17 @@ final class Game implements Runnable {
 		}
 
 		// 初期設定(仮)
-		Aster a = field.getField()[field.getY() - 1][field.getX() / 2];
+		Aster a = field.field[field.Y - 1][field.X / 2];
 		new SunClass(a, player[0]);
-		a = field.getField()[0][field.getX() / 2];
+		a = field.field[0][field.X / 2];
 		new SunClass(a, player[1]);
 
-		player[0].addAP(option.initialAP[option.AP_Pointer]);
-		player[1].addAP(option.initialAP[option.AP_Pointer]);
+		player[0].addAP(Option.initialAP[option.AP_Pointer]);
+		player[1].addAP(Option.initialAP[option.AP_Pointer]);
 
-		canvas.repaint();
-		canvas.getScreen().flipScreen();
-		System.out.println("initialize end");
-	}
-
-	public void run() {
-		init = true;
-		initialize();
-		init = false;
+		if (option.gameType == 2) {
+			httpLogger.sendInitField(field);
+		}
 	}
 
 	/**
@@ -136,7 +101,7 @@ final class Game implements Runnable {
 				Game.sleep(1500);
 				String msg = goPlayer.toString().concat("の負け");
 				canvas.paintString(msg, true);
-				canvas.getScreen().flipScreen();
+				canvas.repaint();
 				Game.sleep(1500);
 				canvas.paintString("", false);
 				System.out.println(msg);
@@ -150,35 +115,8 @@ final class Game implements Runnable {
 		}
 	}
 
-	/**
-	 * 先攻プレイヤーの取得
-	 * 
-	 * @return 先攻プレイヤー
-	 */
-	Player getPlayer1() {
-		return player[0];
-	}
-
-	/**
-	 * 後攻プレイヤーの取得
-	 * 
-	 * @return 後攻プレイヤー
-	 */
-	Player getPlayer2() {
-		return player[1];
-	}
-
 	Player getCurrentPlayer() {
 		return currentPlayer;
-	}
-
-	/**
-	 * プレイヤー配列の取得
-	 * 
-	 * @return プレイヤー
-	 */
-	Player[] getPlayers() {
-		return player;
 	}
 
 	int getPlayerIndex(Player p) {
@@ -202,10 +140,6 @@ final class Game implements Runnable {
 		return field;
 	}
 
-	void setField(Field f) {
-		field = f;
-	}
-
 	/**
 	 * 描画キャンバスの取得
 	 * 
@@ -221,7 +155,7 @@ final class Game implements Runnable {
 	void logAction(Action a) {
 		System.out.print("Game.logAction: ");
 		try {
-			a.printToStream(System.out);
+			a.outputToStream(System.out);
 		} catch (IOException e) {
 		}
 		System.out.println();
@@ -233,7 +167,7 @@ final class Game implements Runnable {
 	/**
 	 * プレイヤー
 	 */
-	private Player[] player = new Player[2];
+	final Player[] player = new Player[2];
 
 	/**
 	 * ターン進行中のプレイヤー
@@ -261,22 +195,19 @@ final class Game implements Runnable {
 	// private int gameType;
 	private Option option;
 
-	public boolean isInit() {
-		return init;
-	}
-
 	public Option getOption() {
 		return option;
 	}
 
-	private boolean init;
+	boolean initializing;
 
 	static final Random random = new Random(System.currentTimeMillis());
 
 	static Image loadImage(String s) {
 		try {
 			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///".concat(s));
+			MediaImage m = MediaManager.getImage("resource:///".concat(s)
+					.concat(".gif"));
 			// メディアの使用開始
 			m.use();
 			// 読み込み
