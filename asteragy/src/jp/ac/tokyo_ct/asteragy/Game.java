@@ -102,9 +102,9 @@ final class Game {
 				 * Game.sleep(1500);
 				 */
 				if(goPlayer.equals(this.player[0])){
-					canvas.gameOver(this.player[0]);
-				}else{
 					canvas.gameOver(this.player[1]);
+				}else{
+					canvas.gameOver(this.player[0]);
 				}
 
 				String msg = goPlayer.toString().concat("‚Ì•‰‚¯");
