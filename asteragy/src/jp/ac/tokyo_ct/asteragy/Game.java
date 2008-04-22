@@ -55,8 +55,8 @@ final class Game {
 
 		switch (option.gameType) {
 		case 1:
-			player[0] = new AIPlayer(this, "COM (Very Easy)");
-			player[1] = new AIPlayer(this, "COM (Very Easy)");
+		//	player[0] = new AIPlayer(this, "COM");
+			player[1] = new AIPlayer(this, "COM");
 			break;
 		case 2:
 			player[1] = httpLogger;
