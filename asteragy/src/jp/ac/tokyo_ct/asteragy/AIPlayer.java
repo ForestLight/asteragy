@@ -452,9 +452,9 @@ public final class AIPlayer extends Player {
 				int n = a.getNum();
 				final int x = f.X;
 				while ((i * x + j) != n) {// ƒAƒXƒeƒ‹‚Ì‡”Ô‚ª“ü‚ê‘Ö‚í‚Á‚Ä‚½ê‡
-					System.out.println("swap-");
+					//System.out.println("swap-"+i*x+j+"-"+n+"i="+i+"j="+j);
 					f.swap(new Point(j, i), new Point(n % x, n / x));
-					a = cur;
+					a = f.field[i][j];
 					n = a.getNum();
 				}
 				cur.setColor(colorBackUp[i][j]);
