@@ -98,13 +98,23 @@ final class Game {
 
 			Player goPlayer = field.checkGameOver();
 			if (goPlayer != null) {
-				Game.sleep(1500);
+				/*
+				 * Game.sleep(1500);
+				 */
+				if(goPlayer.equals(this.player[0])){
+					canvas.gameOver(this.player[0]);
+				}else{
+					canvas.gameOver(this.player[1]);
+				}
+
 				String msg = goPlayer.toString().concat("‚Ì•‰‚¯");
-				canvas.paintString(msg, true);
-				canvas.repaint();
-				Game.sleep(1500);
-				canvas.paintString("", false);
+				/*
+				 * canvas.paintString(msg, true);
+				 * canvas.getScreen().flipScreen(); Game.sleep(1500);
+				 * canvas.paintString("", false);
+				 */
 				System.out.println(msg);
+
 				return false;
 			}
 
