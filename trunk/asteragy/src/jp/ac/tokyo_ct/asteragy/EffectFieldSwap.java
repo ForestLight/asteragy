@@ -6,8 +6,6 @@ public final class EffectFieldSwap extends Effect {
 
 	private final Field field;
 
-	private final CanvasControl canvas;
-
 	private final Point a;
 
 	private final Point b;
@@ -18,28 +16,24 @@ public final class EffectFieldSwap extends Effect {
 
 	public EffectFieldSwap(Field field, Point a, Point b) {
 		this.field = field;
-		this.canvas = field.getGame().getCanvas();
 		this.a = a;
 		this.b = b;
 		// checkSmall();
 	}
 
 	public void start(Graphics g) {
-		if (!isEffect)
-			return;
+		Aster aa = field.at(b);
+		Aster ab = field.at(a);
 
-		PaintAsterItem aa = field.getAster(b).getPaint();
-		PaintAsterItem ab = field.getAster(a).getPaint();
-
-		int s = GameCanvas.measure - 1;
+		int s = CanvasControl.measure - 1;
 		int l = 0;
 
-		for (int i = 0; i < (GameCanvas.measure - 1) * 3 / 2; i++) {
+		for (int i = 0; i < (CanvasControl.measure - 1) * 3 / 2; i++) {
 
 			g.lock();
-			canvas.getBackImage().paintAsterBack(g, a);
-			final int t = (GameCanvas.measure - s - 1) / 2;
-			final int u = (GameCanvas.measure - l - 1) / 2;
+			CanvasControl.paintAsterBack(g, a);
+			final int t = (CanvasControl.measure - s - 1) / 2;
+			final int u = (CanvasControl.measure - l - 1) / 2;
 			field.setOrignAster(g, a, t, t);
 			aa.setSize(s, s);
 			aa.paint(g);
@@ -47,7 +41,7 @@ public final class EffectFieldSwap extends Effect {
 			ab.setSize(l, l);
 			ab.paint(g);
 
-			canvas.getBackImage().paintAsterBack(g, b);
+			CanvasControl.paintAsterBack(g, b);
 			field.setOrignAster(g, b, t, t);
 			ab.setSize(s, s);
 			ab.paint(g);
@@ -58,10 +52,10 @@ public final class EffectFieldSwap extends Effect {
 
 			if (s > 0)
 				s--;
-			if (i > (GameCanvas.measure - 1) / 2)
+			if (i > (CanvasControl.measure - 1) / 2)
 				l++;
 
-			Game.sleep(200 / CanvasControl.f);
+			Game.sleep(100 / CanvasControl.f);
 
 		}
 
@@ -70,6 +64,5 @@ public final class EffectFieldSwap extends Effect {
 
 		field.repaintAster(g, a);
 		field.repaintAster(g, b);
-		canvas.getScreen().flipScreen();
 	}
 }

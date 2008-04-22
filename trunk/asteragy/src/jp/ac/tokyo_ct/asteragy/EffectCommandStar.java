@@ -4,7 +4,7 @@ import com.nttdocomo.ui.*;
 
 public final class EffectCommandStar extends Effect {
 
-	private static final Image effect = Game.loadImage("star_effect.gif");
+	private static final Image effect = Game.loadImage("star_effect");
 
 	private final Point point;
 
@@ -37,9 +37,6 @@ public final class EffectCommandStar extends Effect {
 	final int theta = SimpleMath.cycle / 30;
 
 	public void start(Graphics g) {
-		if (!isEffect)
-			return;
-
 		int[] matrix = new int[6];
 
 		for (int i = 0; i < 15; i++) {
@@ -56,7 +53,7 @@ public final class EffectCommandStar extends Effect {
 					+ (effect.getWidth() / 2 + 1) * SimpleMath.divide;
 
 			g.lock();
-			field.getGame().getCanvas().getBackImage().paintAsterBack(g, to);
+			CanvasControl.paintAsterBack(g, to);
 			field.setOrignAster(g, to);
 
 			g.drawImage(effect, matrix);
@@ -66,14 +63,14 @@ public final class EffectCommandStar extends Effect {
 			Game.sleep(1000 / CanvasControl.f);
 		}
 
-		PaintAsterItem paint = field.getAster(point).getPaint();
+		Aster paint = field.at(point);
 
 		int ax = 0;
 		int ay = 0;
 
-		for (int i = 0; i < GameCanvas.measure; i++) {
-			field.getGame().getCanvas().getBackImage().paintAsterBack(g, to);
-			field.getGame().getCanvas().getBackImage().paintAsterBack(g, point);
+		for (int i = 0; i < CanvasControl.measure; i++) {
+			CanvasControl.paintAsterBack(g, to);
+			CanvasControl.paintAsterBack(g, point);
 			g.lock();
 
 			field.setOrignAster(g, point, ax, ay);

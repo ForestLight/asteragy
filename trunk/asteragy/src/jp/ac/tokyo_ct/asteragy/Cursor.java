@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class Cursor implements PaintItem {
+public final class Cursor /*implements PaintItem*/ {
 
 	public static final int CURSOR_CLEAR = 0; // ÉJÅ[É\ÉãÇÃè¡ãé
 
@@ -23,12 +23,17 @@ public final class Cursor implements PaintItem {
 	// ï`âÊ
 
 	public void setCursor(Point p, int cursorType) {
-		Point temp = point;
+//		Point temp = point;
 		point = p;
 		type = cursorType;
-		Graphics g = canvas.getScreen().getGraphics();
-		canvas.getField().repaintAster(g, temp);
-		canvas.getField().repaintAster(g, p);
+		Main.game.getCanvas().repaint();
+/*
+		final Graphics g = canvas.getScreen().getBufferGraphics();
+		final Field field = canvas.getField();
+		field.repaintAster(g, temp);
+		field.repaintAster(g, p);
+		g.dispose();
+*/
 	}
 
 	public boolean isCursor(Point p) {
@@ -43,11 +48,11 @@ public final class Cursor implements PaintItem {
 			break;
 		case CURSOR_1:
 			g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
-			g.setColor(Graphics.getColorOfRGB(255, 0, 0));
-			g.drawRect(point.x * GameCanvas.measure, point.y
-					* GameCanvas.measure, GameCanvas.measure,
-					GameCanvas.measure);
-			g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+			g.setColor(Graphics.getColorOfName(Graphics.RED));
+			g.drawRect(point.x * CanvasControl.measure, point.y
+					* CanvasControl.measure, CanvasControl.measure,
+					CanvasControl.measure);
+			g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 			break;
 		}
 	}

@@ -25,28 +25,17 @@ public final class EffectCommandMercury extends Effect {
 		// loadImage();
 	}
 
-	/*
-	 * private void loadImage() {
-	 * 
-	 * if (effect != null) return; try { // リソースから読み込み MediaImage m =
-	 * MediaManager .getImage("resource:///mercury_effect.gif"); // メディアの使用開始
-	 * m.use(); // 読み込み effect = m.getImage(); } catch (Exception e) { } }
-	 */
-
 	public void start(Graphics g) {
-		if (!isEffect)
-			return;
-
 		int r = 24;
 
-		Image back = field.getScreen().getScreen(
+		Image back = field.getCanvas().getScreen(
 				field.getAsterLocation(point.add(new Point(-1, -1))),
-				new Point(GameCanvas.measure * 3, GameCanvas.measure * 3));
+				new Point(CanvasControl.measure * 3, CanvasControl.measure * 3));
 
-		field.setOrignAster(g, point, GameCanvas.measure / 2 - 1,
-				GameCanvas.measure / 2 - 1);
+		field.setOrignAster(g, point, CanvasControl.measure / 2 - 1,
+				CanvasControl.measure / 2 - 1);
 
-		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
+		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 
 		int theta = 0;
 
@@ -71,36 +60,4 @@ public final class EffectCommandMercury extends Effect {
 			Game.sleep(300 / CanvasControl.f);
 		}
 	}
-
-	/*
-	 * public void start(Graphics g) { if (!isEffect) return; // TODO
-	 * 自動生成されたメソッド・スタブ //aster.setPaint(this);
-	 * 
-	 * for (time = 0; time < 170 - GameCanvas.measure; time += 3) {
-	 * field.repaintAster(g, point);
-	 * 
-	 * try { Thread.sleep(300 / CanvasControl.f); } catch (InterruptedException
-	 * e) { // TODO 自動生成された catch ブロック e.printStackTrace(); } }
-	 * 
-	 * //aster.setPaint(paint); //field.repaintAster(g, point); } public int
-	 * getHeight() { // TODO 自動生成されたメソッド・スタブ return paint.getHeight(); }
-	 * 
-	 * public int getWidth() { // TODO 自動生成されたメソッド・スタブ return paint.getWidth(); }
-	 * 
-	 * public void resetSize() { // TODO 自動生成されたメソッド・スタブ paint.resetSize(); }
-	 * 
-	 * public void setClass(AsterClass aster) { // TODO 自動生成されたメソッド・スタブ
-	 * paint.setClass(aster); }
-	 * 
-	 * public void setColor(int color) { // TODO 自動生成されたメソッド・スタブ
-	 * paint.setColor(color); }
-	 * 
-	 * public void setSize(int width, int height) { // TODO 自動生成されたメソッド・スタブ
-	 * paint.setSize(width, height); }
-	 * 
-	 * public void paint(Graphics g) { // TODO 自動生成されたメソッド・スタブ
-	 * System.out.println("Mercury Effect"); paint.paint(g); g.drawImage(effect,
-	 * 0, 0, 0, time, GameCanvas.measure, GameCanvas.measure); }
-	 */
-
 }

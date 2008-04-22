@@ -35,7 +35,7 @@ public final class MarsClass extends AsterClass {
 		final Aster a = getAster();
 		switch (mode) {
 		case 0:
-			if (getPlayer() == getPlayer().game.getPlayer2()) {
+			if (getPlayer() == getPlayer().game.player[1]) {
 				return swapGetRange(defaultRangeP2);
 			} else {
 				return swapGetRange(defaultRange);
@@ -48,7 +48,7 @@ public final class MarsClass extends AsterClass {
 			pt.x = f.asterToPoint(a).x - (range[0].length / 2);
 			pt.y = f.asterToPoint(a).y - (range.length / 2);
 
-			if (getPlayer() == getPlayer().game.getPlayer2()) {
+			if (getPlayer() == getPlayer().game.player[1]) {
 				for (int i = 0; i < defaultRange.length; i++) {
 					if (!f.isYInFieldBound(pt.y + i))
 						continue;
@@ -83,8 +83,7 @@ public final class MarsClass extends AsterClass {
 
 						if (defaultRange[i][j] == 1) {
 							// レンジ内で自身かサン以外なら選択可
-							final Aster aster2 = a.getField().getField()[pt.y
-									+ i][pt.x + j];
+							final Aster aster2 = f.field[pt.y + i][pt.x + j];
 							if (aster2.getNumber() != 1 && aster2 != a) {
 								range[i][j] = 1;
 							}
@@ -140,13 +139,10 @@ public final class MarsClass extends AsterClass {
 	}
 
 	public void executeSpecialCommand() {
-		final Field field = getAster().getField();
-
-		Effect effect = new EffectCommandMars(field, this, target1);
-		getAster().getField().getScreen().paintEffect(effect);
-
-		field.setDeleteFlag(target1);
-		field.delete(target1.x, target1.y);
+		final Field f = getAster().getField();
+		f.getCanvas().paintEffect(new EffectCommandMars(f, this, target1));
+		f.setDeleteFlag(target1);
+		f.delete(target1.x, target1.y);
 	}
 
 	static int[][] getDefaultRange() {

@@ -33,7 +33,7 @@ public final class VenusClass extends AsterClass {
 		final Game game = getPlayer().game;
 		switch (mode) {
 		case 0:
-			if (getPlayer() == game.getPlayer2()) {
+			if (getPlayer() == game.player[1]) {
 				return swapGetRange(defaultRangeP2);
 			} else {
 				return swapGetRange(defaultRange);
@@ -41,13 +41,14 @@ public final class VenusClass extends AsterClass {
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			final Field field = getAster().getField();
+			final Aster[][] f = field.field;
 			final Point thisPoint = field.asterToPoint(getAster());
 			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point();
 			pt.x = thisPoint.x - (range[0].length / 2);
 			pt.y = thisPoint.y - (range.length / 2);
 
-			if (getPlayer() == game.getPlayer2()) {
+			if (getPlayer() == game.player[1]) {
 				for (int i = 0; i < defaultRange.length; i++) {
 					if (!field.isYInFieldBound(pt.y + i))
 						continue;
@@ -58,7 +59,7 @@ public final class VenusClass extends AsterClass {
 						// レンジ内であり
 						if (defaultRangeP2[i][j] == 1) {
 							// その位置のアステルにクラスがあり
-							final Aster a = field.getField()[pt.y + i][pt.x + j];
+							final Aster a = f[pt.y + i][pt.x + j];
 							final AsterClass asterClass = a.getAsterClass();
 							if (asterClass != null) {
 								// そのクラスの所持者が相手であり
@@ -82,13 +83,13 @@ public final class VenusClass extends AsterClass {
 						// レンジ内であり
 						if (defaultRange[i][j] == 1) {
 							// その位置のアステルにクラスがあり
-							final Aster f = field.getField()[pt.y + i][pt.x + j];
-							final AsterClass asterClass = f.getAsterClass();
+							final Aster a = f[pt.y + i][pt.x + j];
+							final AsterClass asterClass = a.getAsterClass();
 							if (asterClass != null) {
 								// そのクラスの所持者が相手であり
 								if (asterClass.getPlayer() != getPlayer()) {
 									// サンでなければ対象に選択可能
-									if (f.getNumber() != 1)
+									if (a.getNumber() != 1)
 										range[i][j] = 1;
 								}
 							}
@@ -102,7 +103,6 @@ public final class VenusClass extends AsterClass {
 	}
 
 	public boolean setPointAndNext(Point pt) {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -114,7 +114,6 @@ public final class VenusClass extends AsterClass {
 	}
 
 	public boolean hasNext() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -128,7 +127,6 @@ public final class VenusClass extends AsterClass {
 	}
 
 	public boolean moveAstern() {
-		// TODO 自動生成されたメソッド・スタブ
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -140,15 +138,12 @@ public final class VenusClass extends AsterClass {
 
 	public void executeSpecialCommand() {
 		// 対象の所持者を変更
-		final AsterClass asterClass = getAster().getField().getAster(target1)
-				.getAsterClass();
-
-		Effect effect = new EffectCommandVenus(getAster().getField(), target1);
-		getAster().getField().getScreen().paintEffect(effect);
-
-		asterClass.setPlayer(this.getPlayer());
+		final Field f = getAster().getField();
+		final AsterClass ac = f.at(target1).getAsterClass();
+		f.getCanvas().paintEffect(new EffectCommandVenus(f, target1));
+		ac.setPlayer(this.getPlayer());
 		// 行動済状態に
-		asterClass.setActionCount(0);
+		ac.setActionCount(0);
 		logAction(target1);
 	}
 

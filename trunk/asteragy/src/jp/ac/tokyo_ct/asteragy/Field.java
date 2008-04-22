@@ -5,55 +5,42 @@ import com.nttdocomo.ui.Graphics;
 /**
  * @author Okubo
  */
-final class Field implements PaintItem {
+final class Field /* implements PaintItem */{
 
-	private Aster[][] field;
+	final Aster[][] field;
 
-	private Aster[][] backup;
+	private final Aster[][] backup;
 
-	private int X, Y;
+	final int X, Y;
 
 	private int countAster;
 
-	private final Game game;
+	final Game game;
 
 	private boolean fieldinit;
 
 	public static int CONNECTION;
 
-	public Field(Game g) {
+	public Field(Game g, int x, int y) {
 		super();
 		game = g;
+		X = x;
+		Y = y;
+		field = new Aster[Y][X];
+		backup = new Aster[Y][X];
 	}
 
 	Field clone() {
-		Field f = new Field(game);
-		f.field = new Aster[Y][X];
-		f.backup = new Aster[Y][X];
+		Field f = new Field(game, X, Y);
 		for (int i = 0; i < Y; i++)
 			for (int j = 0; j < X; ++j)
 				f.field[i][j] = field[i][j];
 		for (int i = 0; i < Y; i++)
 			for (int j = 0; j < X; ++j)
 				f.backup[i][j] = backup[i][j];
-		f.X = X;
-		f.Y = Y;
 		f.countAster = countAster;
 		f.fieldinit = fieldinit;
 		return f;
-	}
-
-	/**
-	 * フィールドのサイズを決める
-	 * 
-	 * @param x
-	 *            フィールドの横マス数
-	 * @param y
-	 *            フィールドの縦マス数
-	 */
-	public void setFieldSize(int x, int y) {
-		X = x;
-		Y = y;
 	}
 
 	public boolean isFieldInit() {
@@ -66,8 +53,6 @@ final class Field implements PaintItem {
 	 */
 	public void setAster() {
 		fieldinit = true;
-		field = new Aster[Y][X];
-		backup = new Aster[Y][X];
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
 				field[i][j] = new Aster(this);
@@ -79,26 +64,6 @@ final class Field implements PaintItem {
 			}
 		}
 		fieldinit = false;
-	}
-
-	/**
-	 * ターン開始処理
-	 * 
-	 * @param player
-	 */
-	public void beginTurn(Player player) {
-		for (int i = 0; i < Y; i++) {
-			for (int j = 0; j < X; j++) {
-				// クラス持ちで
-				final AsterClass asterClass = field[i][j].getAsterClass();
-				if (asterClass != null) {
-					// 現在ターン進行中のプレイヤーのユニットなら初期化
-					if (asterClass.getPlayer() == player) {
-						asterClass.init();
-					}
-				}
-			}
-		}
 	}
 
 	/**
@@ -242,40 +207,22 @@ final class Field implements PaintItem {
 	 *            注目するマスのx座標
 	 * @param y
 	 *            注目するマスのy座標
-	 */
-	public int delete(int x, int y) {
-		return delete(x, y, 0, null);
-	}
-
-	/**
-	 * deleteFlagが立っているアステルを全て消す
-	 * 
-	 * @param x
-	 *            注目するマスのx座標
-	 * @param y
-	 *            注目するマスのy座標
-	 * @param count
-	 *            消したアステル数をカウント（最初は0を入れる）
-	 * @param pt
-	 *            前回注目していた座標
 	 * @return 消したアステル数
 	 */
-	private int delete(int x, int y, int count, Point pt) {
+	int delete(int x, int y) {
 		final Aster target = field[y][x];
-		final int AsterColor = target.getColor();
-		final Point currentPt = new Point(x, y);
-
 		if (target.getDeleteFlag() == true) {
+			int count = 1;
 			target.delete(0);
-			count++;
+			game.getCanvas().disappearControl.Add(new Point(x, y));
 			if (y > 0)
-				count = delete(x, y - 1, count, currentPt);
+				count += delete(x, y - 1);
 			if (x > 0)
-				count = delete(x - 1, y, count, currentPt);
+				count += delete(x - 1, y);
 			if (y < Y - 1)
-				count = delete(x, y + 1, count, currentPt);
+				count += delete(x, y + 1);
 			if (x < X - 1)
-				count = delete(x + 1, y, count, currentPt);
+				count += delete(x + 1, y);
 
 			// ランダムで決定した色で問題ない場合
 			if (judge(x, y) == false) {
@@ -291,20 +238,13 @@ final class Field implements PaintItem {
 
 			// 全色試しても置けないときは、削除前の色に決定
 			if (judge(x, y) == true) {
-				System.out.println("special_delete:AsterColor=" + AsterColor);
+				final int AsterColor = target.getColor();
+				System.out.println("special_delete:AsterColor = " + AsterColor);
 				target.setColor(AsterColor);
 				return count;
 			}
-			/*
-			 * // 全色試しても置けない場合、つまり周りを3つ繋がった4色のアステルで囲まれている //
-			 * その場合、このマスは最初にランダムで決定した色に戻し、前回のdeleteのマスは別の色に変更 // （4色ゲームの際の特別措置）
-			 * if (judge(x, y) == true) { System.out.println("special_delete");
-			 * target.setColor(AsterColor); for (int i = 0; i < Aster.COLOR_MAX;
-			 * i++) { field[pt.y][pt.x].setColor(i); if (judge(pt.x, pt.y) ==
-			 * false) break; } }
-			 */
 		}
-		return count;
+		return 0;
 	}
 
 	/**
@@ -388,17 +328,6 @@ final class Field implements PaintItem {
 		Aster tmp = field[a.y][a.x];
 		field[a.y][a.x] = field[b.y][b.x];
 		field[b.y][b.x] = tmp;
-
-		// EffectFieldSwap swap = new EffectFieldSwap(this, a, b);
-		// swap.start();
-	}
-
-	public Aster[][] getField() {
-		return field;
-	}
-
-	public Aster getAster(Point pt) {
-		return field[pt.y][pt.x];
 	}
 
 	public Aster at(Point pt) {
@@ -407,14 +336,6 @@ final class Field implements PaintItem {
 
 	public Aster at(int y, int x) {
 		return field[y][x];
-	}
-
-	public int getX() {
-		return X;
-	}
-
-	public int getY() {
-		return Y;
 	}
 
 	public Point asterToPoint(Aster a) {
@@ -442,25 +363,25 @@ final class Field implements PaintItem {
 
 	public Player checkGameOver() {
 		boolean p1 = false, p2 = false;
-		final Player player1 = game.getPlayer1();
-		final Player player2 = game.getPlayer2();
+		final Player player[] = game.player;
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
 				final AsterClass ac = field[i][j].getAsterClass();
 				if (ac != null && ac.getNumber() == 1) {
-					if (ac.getPlayer() == player1)
+					final Player sunPlayer = ac.getPlayer();
+					if (sunPlayer == player[0])
 						p1 = true;
-					if (ac.getPlayer() == player2)
+					if (sunPlayer == player[1])
 						p2 = true;
 				}
 			}
 		}
 		if (!p1)
-			return player1;
-		if (!p2)
-			return player2;
-
-		return null;
+			return player[0];
+		else if (!p2)
+			return player[1];
+		else
+			return null;
 	}
 
 	// public void fieldBackUp(){
@@ -476,98 +397,64 @@ final class Field implements PaintItem {
 	 *            描画先グラフィクス
 	 */
 	public void paint(Graphics g) {
-		Point point = new Point();
+		final Point pt = new Point();
 		// フィールド，アステル描画
-		for (point.y = 0; point.y < Y; point.y++) {
-			for (point.x = 0; point.x < X; point.x++) {
-				if (field[point.y][point.x] == null)
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
+				if (field[i][j] == null)
 					continue;
-				repaintAsterNoBack(g, point);
+				pt.y = i;
+				pt.x = j;
+				repaintAsterNoBack(g, pt);
 			}
 		}
 	}
 
-	public void repaintField(Graphics g) {
+	void repaintField() {
 		final CanvasControl canvas = game.getCanvas();
-		canvas.getBackImage().paintFieldBack(g);
-		paint(g);
-		canvas.getCursor().paint(g);
+		canvas.repaint(canvas.getLeftMargin(), canvas.getTopMargin(),
+				CanvasControl.measure * X, CanvasControl.measure * Y);
 	}
 
 	public void repaintAster(Graphics g, Point point) {
-		// TODO 自動生成されたメソッド・スタブ
-		if (point == null)
-			return;
 		if (point.x < 0 || point.x >= X || point.y < 0 || point.y >= Y)
 			return;
-		final CanvasControl canvas = game.getCanvas();
-		synchronized (g) {
-			canvas.getBackImage().paintAsterBack(g, point);
-			repaintAsterNoBack(g, point);
-		}
+		CanvasControl.paintAsterBack(g, point);
+		repaintAsterNoBack(g, point);
 	}
 
 	public void repaintAsterNoBack(Graphics g, Point point) {
-		if (point == null)
-			return;
 		if (point.x < 0 || point.x >= X || point.y < 0 || point.y >= Y)
 			return;
 		final CanvasControl canvas = game.getCanvas();
-		synchronized (g) {
-			Aster aster = field[point.y][point.x];
-			this.setOrignAster(g, point);
-			aster.getPaint().paint(g);
-			canvas.getRange().paint(g, point);
-			final Cursor cursor = canvas.getCursor();
-			if (cursor.isCursor(point))
-				cursor.paint(g);
-		}
+		final Aster aster = field[point.y][point.x];
+		this.setOrignAster(g, point);
+		aster.paint(g);
+		canvas.range.paint(g, point);
+		final Cursor cursor = canvas.cursor;
+		if (cursor.isCursor(point))
+			cursor.paint(g);
 	}
 
-	public void repaintAsterRect(Graphics g, Point lefttop, Point rightbottom) {
-		final CanvasControl canvas = game.getCanvas();
-		if (lefttop == null || rightbottom == null)
-			return;
-		synchronized (g) {
-			canvas.getBackImage().paintAsterBackRect(g, lefttop, rightbottom);
-			repaintAsterRectNoBack(g, lefttop, rightbottom);
-		}
-	}
-
-	public void repaintAsterRectNoBack(Graphics g, Point lefttop,
-			Point rightbottom) {
-		if (lefttop == null || rightbottom == null)
-			return;
-		final CanvasControl canvas = game.getCanvas();
-		synchronized (g) {
-			Point point = new Point();
-			final Cursor cursor = canvas.getCursor();
-			for (point.y = lefttop.y; point.y < rightbottom.y + 1; point.y++) {
-				for (point.x = lefttop.x; point.x < rightbottom.x + 1; point.x++) {
-					if (point.x >= 0 && point.x < X && point.y >= 0
-							&& point.y < Y)
-						repaintAsterNoBack(g, point);
-					if (cursor.isCursor(point))
-						cursor.paint(g);
-				}
+	public void repaintAsterRect(Graphics g, Point leftTop, Point rightBottom) {
+		final Point pt = new Point();
+		for (int i = Math.max(leftTop.y, 0); i <= Math
+				.min(rightBottom.y, Y - 1); i++) {
+			for (int j = Math.max(leftTop.x, 0); j <= Math.min(rightBottom.x,
+					X - 1); j++) {
+				pt.y = i;
+				pt.x = j;
+				repaintAsterNoBack(g, pt);
 			}
 		}
 	}
 
-	Game getGame() {
-		return game;
-	}
-
-	public Screen getScreen() {
-		return game.getCanvas().getScreen();
-	}
-
 	boolean isYInFieldBound(int y) {
-		return 0 <= y && y < getY();
+		return 0 <= y && y < Y;
 	}
 
 	boolean isXInFieldBound(int x) {
-		return 0 <= x && x < getX();
+		return 0 <= x && x < X;
 	}
 
 	/**
@@ -587,8 +474,8 @@ final class Field implements PaintItem {
 		System.out.println("getSunPosition - not found");
 		return null;
 	}
-	
-	public int getDistance(Point a,Point b){
+
+	public int getDistance(Point a, Point b) {
 		return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 	}
 
@@ -598,41 +485,39 @@ final class Field implements PaintItem {
 	}
 
 	public void setOrignAster(Graphics g, Point aster) {
-		g.setOrigin(game.getCanvas().getLeftMargin() + GameCanvas.measure
-				* aster.x, game.getCanvas().getTopMargin() + GameCanvas.measure
-				* aster.y);
+		g.setOrigin(game.getCanvas().getLeftMargin() + CanvasControl.measure
+				* aster.x, game.getCanvas().getTopMargin()
+				+ CanvasControl.measure * aster.y);
 	}
 
-	public void setOrignAster(Graphics g, Point aster, int x, int y) {
-		g.setOrigin(game.getCanvas().getLeftMargin() + GameCanvas.measure
-				* aster.x + x, game.getCanvas().getTopMargin()
-				+ GameCanvas.measure * aster.y + y);
+	public void setOrignAster(Graphics g, Point aster, int dx, int dy) {
+		g.setOrigin(game.getCanvas().getLeftMargin() + CanvasControl.measure
+				* aster.x + dx, game.getCanvas().getTopMargin()
+				+ CanvasControl.measure * aster.y + dy);
 	}
-
+	/*
 	public void setClipRectField(Graphics g) {
 		g.setClip(game.getCanvas().getLeftMargin(), game.getCanvas()
-				.getTopMargin(), GameCanvas.measure * X + 1, GameCanvas.measure
-				* Y + 1);
+				.getTopMargin(), CanvasControl.measure * X + 1,
+				CanvasControl.measure * Y + 1);
 	}
 
 	public void setClipRectAster(Graphics g, Point aster) {
-		g.setClip(game.getCanvas().getLeftMargin() + GameCanvas.measure
-				* aster.x, game.getCanvas().getTopMargin() + GameCanvas.measure
-				* aster.y, GameCanvas.measure, GameCanvas.measure);
+		g.setClip(game.getCanvas().getLeftMargin() + CanvasControl.measure
+				* aster.x, game.getCanvas().getTopMargin()
+				+ CanvasControl.measure * aster.y, CanvasControl.measure,
+				CanvasControl.measure);
 	}
-
+*/
 	public Point getAsterLocation(Point aster) {
-		return new Point(game.getCanvas().getLeftMargin() + GameCanvas.measure
-				* aster.x + 1, game.getCanvas().getTopMargin()
-				+ GameCanvas.measure * aster.y + 1);
+		return new Point(game.getCanvas().getLeftMargin()
+				+ CanvasControl.measure * aster.x + 1, game.getCanvas()
+				.getTopMargin()
+				+ CanvasControl.measure * aster.y + 1);
 	}
 
-	public int getWidth() {
-		return X * GameCanvas.measure + 1;
-	}
-
-	public int getHeight() {
-		return Y * GameCanvas.measure + 1;
+	CanvasControl getCanvas() {
+		return game.getCanvas();
 	}
 
 }

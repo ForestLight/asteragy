@@ -9,13 +9,13 @@ import com.nttdocomo.util.TimerListener;
  * 
  */
 public final class Title extends Canvas implements TimerListener {
-	private static Image title;
+	private static Image title = Game.loadImage("title");
 
-	private static Image back;
+	private static Image back = Game.loadImage("titleback");
 
 	private static Image[] menu;
 
-	private static Image credit;
+	private static Image credit = Game.loadImage("credit");
 
 	private int depth = 0;
 
@@ -29,7 +29,7 @@ public final class Title extends Canvas implements TimerListener {
 
 	private Option option = new Option();
 
-	private ExplainAsterClass eac = new ExplainAsterClass();
+	private ExplainAsterClass eac;
 
 	private ExplainRules er = new ExplainRules();
 
@@ -40,19 +40,10 @@ public final class Title extends Canvas implements TimerListener {
 	// private static int highScore;
 
 	public Title() {
-		if (title == null) {
-			title = Game.loadImage("title.gif");
-		}
-		if (back == null) {
-			back = Game.loadImage("titleback.gif");
-		}
 		if (menu == null) {
 			menu = new Image[10];
 			for (int i = 0; i < 10; i++)
-				menu[i] = Game.loadImage("menu_" + i + ".gif");
-		}
-		if (credit == null) {
-			credit = Game.loadImage("credit.gif");
+				menu[i] = Game.loadImage("menu_".concat(String.valueOf(i)));
 		}
 		if (timer == null) {
 			timer = new Timer();
@@ -60,9 +51,8 @@ public final class Title extends Canvas implements TimerListener {
 			timer.setTime(5);
 			timer.setRepeat(true);
 		}
-		if (star == null) {
-			star = new ShootingStar(this, null);
-		}
+		star = new ShootingStar(this, null);
+		eac = new ExplainAsterClass(this);
 	}
 
 	/**
@@ -293,45 +283,39 @@ public final class Title extends Canvas implements TimerListener {
 
 				g.drawImage(title, 10, 0);
 
+				final int w = getWidth() / 2;
 				if (depth == 0) {
-					g.drawImage(menu[0], getWidth() / 2 - menu[0].getWidth()
-							/ 2, 127);
-					g.drawImage(menu[1], getWidth() / 2 - menu[1].getWidth()
-							/ 2, 127 + menu[1].getHeight());
-					g.drawImage(menu[2], getWidth() / 2 - menu[2].getWidth()
-							/ 2, 127 + menu[1].getHeight()
-							+ menu[2].getHeight());
-					g.drawImage(menu[3], getWidth() / 2 - menu[3].getWidth()
-							/ 2, 127 + menu[1].getHeight()
-							+ menu[2].getHeight() + menu[3].getHeight());
-					g.drawImage(menu[4], getWidth() / 2 - menu[4].getWidth()
-							/ 2, 127 + menu[1].getHeight()
-							+ menu[2].getHeight() + menu[3].getHeight()
-							+ menu[4].getHeight());
+					g.drawImage(menu[0], w - menu[0].getWidth() / 2, 127);
+					g.drawImage(menu[1], w - menu[1].getWidth() / 2,
+							127 + menu[1].getHeight());
+					g.drawImage(menu[2], w - menu[2].getWidth() / 2, 127
+							+ menu[1].getHeight() + menu[2].getHeight());
+					g.drawImage(menu[3], w - menu[3].getWidth() / 2, 127
+							+ menu[1].getHeight() + menu[2].getHeight()
+							+ menu[3].getHeight());
+					g.drawImage(menu[4], w - menu[4].getWidth() / 2, 127
+							+ menu[1].getHeight() + menu[2].getHeight()
+							+ menu[3].getHeight() + menu[4].getHeight());
 				} else if (depth == 1) {
-					g.drawImage(menu[5], getWidth() / 2 - menu[5].getWidth()
-							/ 2, 127);
-					g.drawImage(menu[6], getWidth() / 2 - menu[6].getWidth()
-							/ 2, 127 + menu[6].getHeight());
-					g.drawImage(menu[7], getWidth() / 2 - menu[7].getWidth()
-							/ 2, 127 + menu[6].getHeight()
-							+ menu[7].getHeight());
+					g.drawImage(menu[5], w - menu[5].getWidth() / 2, 127);
+					g.drawImage(menu[6], w - menu[6].getWidth() / 2,
+							127 + menu[6].getHeight());
+					g.drawImage(menu[7], w - menu[7].getWidth() / 2, 127
+							+ menu[6].getHeight() + menu[7].getHeight());
 				} else {
-					g.drawImage(menu[8], getWidth() / 2 - menu[8].getWidth()
-							/ 2, 127);
-					g.drawImage(menu[9], getWidth() / 2 - menu[9].getWidth()
-							/ 2, 127 + menu[9].getHeight());
-					g.drawImage(menu[7], getWidth() / 2 - menu[7].getWidth()
-							/ 2, 127 + menu[9].getHeight()
-							+ menu[7].getHeight());
+					g.drawImage(menu[8], w - menu[8].getWidth() / 2, 127);
+					g.drawImage(menu[9], w - menu[9].getWidth() / 2,
+							127 + menu[9].getHeight());
+					g.drawImage(menu[7], w - menu[7].getWidth() / 2, 127
+							+ menu[9].getHeight() + menu[7].getHeight());
 				}
 				g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
-				g.drawRect(getWidth() / 2 - menu[0].getWidth() / 2, 127
+				g.drawRect(w - menu[0].getWidth() / 2, 127
 						+ menu[0].getHeight() * cursor, menu[0].getWidth(),
 						menu[0].getHeight());
 
-				g.drawImage(credit, getWidth() / 2 - credit.getWidth() / 2,
-						getHeight() - credit.getHeight());
+				g.drawImage(credit, w - credit.getWidth() / 2, getHeight()
+						- credit.getHeight());
 
 				g.unlock(true);
 			} else {
@@ -356,11 +340,11 @@ public final class Title extends Canvas implements TimerListener {
 				g.drawString("初期AP", 0, 75);
 				g.drawString("もどる", 0, 237);
 
-				g.drawString("" + option.fieldYSize, 120, 15);
-				g.drawString("" + option.fieldXSize, 120, 30);
-				g.drawString("" + option.numOfColors, 120, 45);
-				g.drawString("" + option.connection, 120, 60);
-				g.drawString("" + option.initialAP[option.AP_Pointer], 120, 75);
+				g.drawString(String.valueOf(option.fieldYSize), 120, 15);
+				g.drawString(String.valueOf(option.fieldXSize), 120, 30);
+				g.drawString(String.valueOf(option.numOfColors), 120, 45);
+				g.drawString(String.valueOf(option.connection), 120, 60);
+				g.drawString(String.valueOf(Option.initialAP[option.AP_Pointer]), 120, 75);
 
 				g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 
@@ -368,54 +352,24 @@ public final class Title extends Canvas implements TimerListener {
 					g.drawRect(118, cursor * 15 + 2, 15 + 7 * (cursor / 4), 15);
 					switch (cursor) {
 					case 0:
-						if (option.fieldYSize > 3)
-							leftTriangle = true;
-						else
-							leftTriangle = false;
-						if (option.fieldYSize < 11)
-							rightTriangle = true;
-						else
-							rightTriangle = false;
+						leftTriangle = option.fieldYSize > 3;
+						rightTriangle = option.fieldYSize < 11;
 						break;
 					case 1:
-						if (option.fieldXSize > 3)
-							leftTriangle = true;
-						else
-							leftTriangle = false;
-						if (option.fieldXSize < 11)
-							rightTriangle = true;
-						else
-							rightTriangle = false;
+						leftTriangle = option.fieldXSize > 3;
+						rightTriangle = option.fieldXSize < 11;
 						break;
 					case 2:
-						if (option.numOfColors > 4)
-							leftTriangle = true;
-						else
-							leftTriangle = false;
-						if (option.numOfColors < 5)
-							rightTriangle = true;
-						else
-							rightTriangle = false;
+						leftTriangle = option.numOfColors > 4;
+						rightTriangle = option.numOfColors < 5;
 						break;
 					case 3:
-						if (option.connection > 3)
-							leftTriangle = true;
-						else
-							leftTriangle = false;
-						if (option.connection < 5)
-							rightTriangle = true;
-						else
-							rightTriangle = false;
+						leftTriangle = option.connection > 3;
+						rightTriangle = option.connection < 5;
 						break;
 					case 4:
-						if (option.AP_Pointer > 0)
-							leftTriangle = true;
-						else
-							leftTriangle = false;
-						if (option.AP_Pointer < option.initialAP.length - 1)
-							rightTriangle = true;
-						else
-							rightTriangle = false;
+						leftTriangle = option.AP_Pointer > 0;
+						rightTriangle = option.AP_Pointer < option.initialAP.length - 1;
 						break;
 					}
 					if (leftTriangle) {
@@ -445,7 +399,6 @@ public final class Title extends Canvas implements TimerListener {
 	}
 
 	public void timerExpired(Timer timer) {
-		// TODO 自動生成されたメソッド・スタブ
 		repaint();
 	}
 }

@@ -109,8 +109,7 @@ public final class PlutoClass extends AsterClass {
 //				return;
 //			}
 //		} else {
-			Effect effect = new EffectCommandPluto(field, me);
-			getAster().getField().getScreen().paintEffect(effect);
+			field.getCanvas().paintEffect(new EffectCommandPluto(field, me));
 			field.deleteAll();
 			logAction();
 	//	}

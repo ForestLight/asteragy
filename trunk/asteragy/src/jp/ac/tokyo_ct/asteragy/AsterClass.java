@@ -34,7 +34,7 @@ public abstract class AsterClass {
 		aster = a;
 		player = p;
 		actionCount = getActionNum();
-		game = a.getField().getGame();
+		game = a.getField().game;
 		a.setAsterClass(this);
 	}
 
@@ -184,7 +184,7 @@ public abstract class AsterClass {
 
 			// スワップエフェクト。
 			Effect swap = new EffectFieldSwap(field, target1, target2);
-			field.getScreen().paintEffect(swap);
+			field.getCanvas().paintEffect(swap);
 			/*
 			 * // サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください） if
 			 * (field.judgeSelfDestruction() == true) { Dialog d = new
@@ -215,14 +215,11 @@ public abstract class AsterClass {
 	/**
 	 * 行動可能回数、フラグ初期化
 	 */
-	public final void init() {
+	final void init() {
 		// 行動回数リセット
 		actionCount = getActionNum();
 		// フラグ消去
 		isProtected = false;
-
-		aster.getField().repaintAster(
-				aster.getField().getScreen().getGraphics(), aster.getPoint());
 	}
 
 	public final int getActionNum() {
@@ -398,7 +395,7 @@ public abstract class AsterClass {
 
 	static Image loadImage(int n) {
 		return Game
-				.loadImage("aster_".concat(String.valueOf(n)).concat(".gif"));
+				.loadImage("aster_".concat(String.valueOf(n)));
 	}
 
 	public static final int MAX_CLASS = 12;

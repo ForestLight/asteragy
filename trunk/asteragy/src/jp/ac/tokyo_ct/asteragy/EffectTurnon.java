@@ -8,34 +8,13 @@ public class EffectTurnon extends Effect {
 
 	final private CanvasControl canvas;
 
-	final private Player player;
+	Player player;
 
-	public EffectTurnon(CanvasControl canvas, Player player) {
+	public EffectTurnon(CanvasControl canvas) {
 		this.canvas = canvas;
-		this.player = player;
 	}
 
 	public void start(Graphics g) {
-		if (!isEffect)
-			return;
-
-		// Image back = canvas.getScreen().getScreen(0, 0, canvas.getWidth(),
-		// canvas.getHeight());
-		/*
-		 * // îwåiIn int x = canvas.getWidth(); int y = canvas.getHeight() / 4;
-		 * while (x > 0) { g.lock();
-		 * 
-		 * g.drawImage(player.getTurnOnBack(), x, y);
-		 * 
-		 * g.unlock(true);
-		 * 
-		 * x -= 24;
-		 * 
-		 * try { Thread.sleep(300 / CanvasControl.f); } catch
-		 * (InterruptedException e) { // TODO é©ìÆê∂ê¨Ç≥ÇÍÇΩ catch ÉuÉçÉbÉN
-		 * e.printStackTrace(); } }
-		 */
-
 		final Image back = Player.turnOnBack;
 		final int x = (canvas.getWidth() - back.getWidth()) / 2;
 		final int y = (canvas.getHeight() - back.getHeight()) / 2;
@@ -45,7 +24,7 @@ public class EffectTurnon extends Effect {
 		final int late = 3 - string.length() / 10;
 
 		UpDownWord word = new UpDownWord(string, 15, Font.getDefaultFont()
-				.stringWidth(string), Graphics.getColorOfRGB(0, 0, 0));
+				.stringWidth(string), Graphics.getColorOfName(Graphics.BLACK));
 		UpDownWord shadow = new UpDownWord(string, 7, Font.getDefaultFont()
 				.stringWidth(string), Graphics.getColorOfRGB(100, 100, 100));
 

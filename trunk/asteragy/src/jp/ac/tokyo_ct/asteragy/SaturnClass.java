@@ -67,7 +67,7 @@ public final class SaturnClass extends AsterClass {
 
 	public void executeSpecialCommand() {
 		// 左回り
-		//修正@2/25 右回りに
+		// 修正@2/25 右回りに
 		int i, j;
 		int num, flag = 0;
 		final Aster a = getAster();
@@ -78,7 +78,7 @@ public final class SaturnClass extends AsterClass {
 		pt.y = me.y - (defaultRange.length / 2);
 		Aster[] queue = new Aster[17];
 
-		final Aster[][] f = field.getField();
+		final Aster[][] f = field.field;
 		for (i = 0, j = 0; j < 16; j++) {
 			// 外周レンジのアステルを右回りにキュー（のようなもの）に入れていく
 			if (field.isXInFieldBound(pt.x) && field.isYInFieldBound(pt.y)) {
@@ -95,20 +95,19 @@ public final class SaturnClass extends AsterClass {
 			else
 				pt.y--;
 		}
-		
-		Effect effect = new  EffectCommandSaturn(field, this, queue);
-		getAster().getField().getScreen().paintEffect(effect);
+
+		field.getCanvas().paintEffect(
+				new EffectCommandSaturn(field, this, queue));
 
 		num = --i;
-				
+
 		for (i = 0, j = 0; j < 16; j++) {
 			// 右回りに戻していく
 			if (field.isXInFieldBound(pt.x) && field.isYInFieldBound(pt.y)) {
 				if (flag == 0) {
 					f[pt.y][pt.x] = queue[num];
 					flag++;
-				}
-				else {
+				} else {
 					f[pt.y][pt.x] = queue[i];
 					i++;
 				}

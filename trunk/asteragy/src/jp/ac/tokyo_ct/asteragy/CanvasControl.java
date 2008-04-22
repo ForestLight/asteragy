@@ -7,27 +7,29 @@ import com.nttdocomo.ui.*;
  * @author Kazuto
  * 
  */
-public final class CanvasControl {
+public final class CanvasControl extends Canvas {
+	
+	static final int measure = 18;
 
 	public static final int f = 40;
+	
+	static final Image backgroundImage = createBackground();
 
-	private final Game game;
+	final Game game;
 
-	private final GameCanvas canvas;
+	final Cursor cursor = new Cursor(this);
 
-	private final BackImage back;
+	final CommonCommand commonCommand = new CommonCommand(this);
 
-	private final Cursor cursor;
+	final SunCommand sunCommand = new SunCommand(this);
 
-	private final CommonCommand commoncommand;
+	final Range range = new Range(this);
 
-	private final SunCommand suncommand;
+	final EffectAsterDisappearControl disappearControl = new EffectAsterDisappearControl();
 
-	private final Range range;
+	private final PreKeyProcesser pre;
 
-	private final EffectAsterDisappearControl disappearcontrol;
-
-	private final Screen screen;
+	EffectTurnon turnOn = new EffectTurnon(this);
 
 	private int topmargin;
 
@@ -35,23 +37,21 @@ public final class CanvasControl {
 
 	public CanvasControl(Game game) {
 		this.game = game;
-		canvas = new GameCanvas(this);
-		back = new BackImage(this);
-		cursor = new Cursor(this);
-		range = new Range(this);
-		disappearcontrol = new EffectAsterDisappearControl(this);
-		screen = new Screen(canvas);
-
-		commoncommand = new CommonCommand(this);
-		suncommand = new SunCommand(this);
-		Display.setCurrent(canvas);
-		canvas.repaint();
+		pre = new PreKeyProcesser(this);
+		pre.initKey(this);
+		Display.setCurrent(this);
+		setBackground(Graphics.getColorOfName(Graphics.BLACK));
+		repaint();
+	}
+	
+	Canvas getCanvas() {
+		return this;
 	}
 
 	private void setFieldMargin() {
 		final Field field = game.getField();
-		topmargin = (getHeight() - field.getY() * GameCanvas.measure) / 2;
-		leftmargin = (getWidth() - field.getX() * GameCanvas.measure) / 2;
+		topmargin = (getHeight() - field.Y * measure) / 2;
+		leftmargin = (getWidth() - field.X * measure) / 2;
 	}
 
 	public int getTopMargin() {
@@ -66,135 +66,44 @@ public final class CanvasControl {
 		return leftmargin;
 	}
 
-	public BackImage getBackImage() {
-		return back;
-	}
-
-	public Range getRange() {
-		return range;
-	}
-
-	public Field getField() {
-		return game.getField();
-	}
-
-	public PaintItem[] getPlayers() {
-		return game.getPlayers();
-	}
-
 	public EffectAsterDisappearControl getDisappearControl() {
-		return disappearcontrol;
+		return disappearControl;
 	}
 
-	public Screen getScreen() {
-		return screen;
-	}
-
-	/**
-	 * カーソルを取得
-	 * 
-	 * @return カーソル
-	 */
-	public Cursor getCursor() {
-		return cursor;
-	}
-
-	public CommonCommand getCommonCommand() {
-		return commoncommand;
-	}
-
-	public SunCommand getSunCommand() {
-		return suncommand;
-	}
-
-	private PaintItem getCommand() {
-		if (suncommand.visible()) {
+	private Command getCommand() {
+		if (sunCommand.visible()) {
 			System.out.println("return suncommand");
-			return suncommand;
+			return sunCommand;
+		} else {
+			System.out.println("return commoncommand");
+			return commonCommand;
 		}
-		System.out.println("return commoncommand");
-		return commoncommand;
-	}
-
-	/**
-	 * 高さを取得
-	 * 
-	 * @return 高さ
-	 */
-	public int getHeight() {
-		return canvas.getHeight();
-	}
-
-	/**
-	 * 幅を取得
-	 * 
-	 * @return 幅
-	 */
-	public int getWidth() {
-		return canvas.getWidth();
 	}
 
 	private volatile EventProcesser eventProcesser;
 
-	public void setEventProcesser(EventProcesser e) {
+	void setEventProcesser(EventProcesser e) {
 		eventProcesser = e;
 	}
 
 	/**
-	 * 現在のイベントプロセッサを取得する。
-	 * 
-	 * @return 設定されているイベントプロセッサ。なければnull。
-	 */
-	public EventProcesser getEventProcesser() {
-		return eventProcesser;
-	}
-
-	/**
 	 * イベントプロセッサを削除する。
 	 */
-	public void resetEventProcesser() {
+	void resetEventProcesser() {
 		eventProcesser = null;
 	}
 
-	/**
-	 * イベントプロセッサを削除する。
-	 * 
-	 * @param e
-	 *            削除するイベントプロセッサ
-	 * @return 削除したらtrue、しなければfalse; 一致したら削除する。
-	 */
-	public boolean removeEventProcesser(EventProcesser e) {
-		if (e == eventProcesser) {
-			eventProcesser = null;
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public void onTurnStart(Player player) {
+		turnOn.player = player;
 		System.out.println("onTurnStart");
-		game.getPlayer1().repaint();
-		game.getPlayer2().repaint();
-
-		Effect turnon = new EffectTurnon(this, player);
-		screen.paintEffect(turnon);
-
+		paintEffect(turnOn);
 	}
 
-	public void paintNowloading(Graphics g) {
-		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
+	private void paintNowloading(Graphics g) {
+		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawRect(0, getHeight() / 4, getWidth(), getHeight() * 3 / 4);
-		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.drawString("Now Loading...", 78, 126);
-
-	}
-
-	synchronized public void repaint() {
-		synchronized (screen) {
-			Graphics g = screen.getGraphics();
-			paint(g);
-		}
 	}
 
 	public void gameOver() {
@@ -207,7 +116,7 @@ public final class CanvasControl {
 			spaint = new PaintString(this, string);
 		else
 			spaint = null;
-		paintString(screen.getGraphics());
+		repaint();
 	}
 
 	private void paintString(Graphics g) {
@@ -215,29 +124,19 @@ public final class CanvasControl {
 			spaint.paint(g);
 	}
 
-	private void paintOver(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
-		paintString(g);
-	}
+	public void paint(Graphics g) {
+		g.lock();
+		if (game.initializing) {
+			paintNowloading(g);
+		} else {
+			g.drawImage(backgroundImage, 0, 0);
+			paintPlayerInfo(g);
+			paintFieldSpace(g);
 
-	private void paint(Graphics g) {
-		// 描画
-		paintBackGround(g);
-		paintFieldSpace(g);
-		paintPlayerInfo(g);
-
-		paintOver(g);
-	}
-
-	/**
-	 * 背景描画
-	 * 
-	 * @param g
-	 *            描画先グラフィクス
-	 */
-	private void paintBackGround(Graphics g) {
-		System.out.println("paintBackGround");
-		back.paint(g);
+			paintString(g);
+			System.out.println("end paint");
+		}
+		g.unlock(true); //trueにしたのは安全措置。
 	}
 
 	/**
@@ -248,11 +147,8 @@ public final class CanvasControl {
 	 */
 	private void paintFieldSpace(Graphics g) {
 		System.out.println("paintFieldSpace");
-
-		getField().paint(g);
-
+		game.getField().paint(g);
 		cursor.paint(g);
-
 		getCommand().paint(g);
 	}
 
@@ -264,10 +160,63 @@ public final class CanvasControl {
 	 */
 	private void paintPlayerInfo(Graphics g) {
 		System.out.println("paintPlayerInfo");
-		PaintItem[] players = getPlayers();
-		for (int i = 0; i < players.length; i++) {
-			players[i].paint(g);
-		}
+		Player[] player = game.player;
+		player[0].paint(g);
+		player[1].paint(g);
+	}
+	
+	/**
+	 * 固定背景作成
+	 * 
+	 */
+	private static Image createBackground() {
+		final Image base = Game.loadImage("back");
+		if (base == null)
+			return null;
+		// 背景画像作成
+		Image background = Image.createImage(base.getWidth(), base.getHeight());
+		// グラフィクス作成
+		Graphics g = background.getGraphics();
+		// 背景描画
+		g.drawImage(base, 0, 0);
+		// グラフィクス廃棄
+		g.dispose();
+		return background;
+	}
+	
+	static void paintAsterBack(Graphics g, Point pt) {
+		final int m = CanvasControl.measure;
+		CanvasControl canvas = Main.game.getCanvas();
+		g.setOrigin(0, 0);
+		int x = canvas.getLeftMargin() + pt.x * m;
+		int y = canvas.getTopMargin() + pt.y * m;
+		g.drawImage(backgroundImage, x, y, x, y, m + 1, m + 1);
+	}
+
+	public void processEvent(int type, int param) {
+		type = pre.processEvent(type, param);
+		if (type == Display.KEY_PRESSED_EVENT && param == Display.KEY_9)
+			Effect.setEffect();
+		if (eventProcesser != null)
+			eventProcesser.processEvent(type, param);
+	}
+	
+	Image getScreen(Point location, Point size) {
+		Image screen = Image.createImage(size.x, size.y);
+		Graphics g = screen.getGraphics();
+		paint(g);
+		g.dispose();
+		return screen;
+	}
+	
+	void paintEffect(Effect effect) {
+		if (!Effect.isEffect)
+			return;
+		Graphics g = getGraphics();
+		effect.start(g);
+		g.setOrigin(0, 0);
+		paint(g);
+		g.dispose();
 	}
 
 }

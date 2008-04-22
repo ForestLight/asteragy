@@ -1,5 +1,8 @@
 package jp.ac.tokyo_ct.asteragy;
 
+import com.nttdocomo.ui.Graphics;
+import com.nttdocomo.ui.Image;
+
 /**
  * @author kurix
  * 
@@ -23,18 +26,17 @@ public final class Aster {
 
 	private AsterClass asterClass = null;
 
-	private PaintAsterItem paint;
+	private boolean deleteFlag = false;
 
-	private boolean deleteFlag;
+	private boolean judgeFlag = false;
 
-	private boolean judgeFlag;
+	private int drawHeight = CanvasControl.measure - 1;
+
+	private int drawWidth = CanvasControl.measure - 1;
 
 	Aster(Field f) {
 		color = Game.random.nextInt(COLOR_MAX) + 1;
-		deleteFlag = false;
-		judgeFlag = false;
 		field = f;
-		paint = new AsterPaint();
 	}
 
 	Aster clone() {
@@ -46,10 +48,8 @@ public final class Aster {
 			a.asterClass.setAster(this);
 		} else
 			a.asterClass = null;
-		a.paint = paint;
 		a.deleteFlag = deleteFlag;
 		a.judgeFlag = judgeFlag;
-		// a.paint = new AsterPaint();
 		// a.deleteFlag = false;
 		// a.judgeFlag = false;
 		return a;
@@ -58,10 +58,6 @@ public final class Aster {
 	public void init() {
 		deleteFlag = false;
 		judgeFlag = false;
-
-		paint = new AsterPaint();
-		paint.setColor(color);
-		paint.setClass(asterClass);
 	}
 
 	public void setNum(int i) {
@@ -73,11 +69,6 @@ public final class Aster {
 	}
 
 	public int num;
-
-	/*
-	 * public void swap(int x1, int y1, int x2, int y2) { field.swap(x1, y1, x2,
-	 * y2); }
-	 */
 
 	public int getColor() {
 		return color;
@@ -119,12 +110,6 @@ public final class Aster {
 			asterClass = null;
 			deleteFlag = false;
 			judgeFlag = false;
-
-			paint.setClass(null);
-			// 初期の生成時に実行しないようなことをしてほしい。
-			// とりあえず。
-			if (!field.isFieldInit())
-				disappearingAster();
 		}
 
 		if (c != 0) {
@@ -133,9 +118,7 @@ public final class Aster {
 	}
 
 	public void setAsterClass(AsterClass ac) {
-		// System.out.println("Aster.setAsterClass");
 		asterClass = ac;
-		paint.setClass(ac);
 	}
 
 	public final int getNumber() {
@@ -150,21 +133,38 @@ public final class Aster {
 		return getField().asterToPoint(this);
 	}
 
-	synchronized public PaintAsterItem getPaint() {
-		paint.setColor(color);
-		return paint;
+	void setSize(int width, int height) {
+		drawWidth = width;
+		drawHeight = height;
 	}
 
-	public void setPaint(PaintAsterItem paint) {
-		// System.out.println("setPaint:" + this.toString());
-		this.paint = paint;
+	void resetSize() {
+		setSize(CanvasControl.measure - 1, CanvasControl.measure - 1);
 	}
 
-	private void disappearingAster() {
-		// 消失エフェクト処理
-		EffectAsterDisappearing disappear = new EffectAsterDisappearing(this);
-		paint = disappear;
-		// disappear.start();
+	private Image getImage() {
+		return asterClass != null ? asterClass.getImage() : asterImage;
+	}
+
+	static final Image asterImage = Game.loadImage("aster_0");
+
+	public void paint(Graphics g) {
+		final int m = CanvasControl.measure - 1;
+
+		// プレイヤー2のユニットは反転
+		if (asterClass != null && asterClass.getPlayer() == Main.game.player[1]) {
+			g.setFlipMode(Graphics.FLIP_VERTICAL);
+		} else {
+			g.setFlipMode(Graphics.FLIP_NONE);
+		}
+
+		g.drawScaledImage(getImage(), 1, 1, drawWidth, drawHeight, m
+				* (color - 1), 0, m, m);
+		// 行動済みユニットを識別
+		if (asterClass != null && asterClass.getActionCount() == 0) {
+			g.setColor(Graphics.getColorOfRGB(0, 0, 0, 100));
+			g.fillRect(1, 1, drawWidth, drawHeight);
+		}
 	}
 
 }

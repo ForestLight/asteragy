@@ -35,7 +35,7 @@ public final class JupiterClass extends AsterClass {
 		final Point asterPoint = field.asterToPoint(a);
 		switch (mode) {
 		case 0:
-			if (getPlayer() == getPlayer().game.getPlayer2()) {
+			if (getPlayer() == getPlayer().game.player[1]) {
 				return swapGetRange(defaultRangeP2);
 			} else {
 				return swapGetRange(defaultRange);
@@ -48,7 +48,7 @@ public final class JupiterClass extends AsterClass {
 			pt.y = asterPoint.y - (range.length / 2);
 			
 			// プレイヤー2の場合レンジP2を使用
-			final int[][] def = getPlayer() == getPlayer().game.getPlayer1()
+			final int[][] def = getPlayer() == getPlayer().game.player[0]
 				? defaultRange
 				: defaultRangeP2;
 
@@ -130,7 +130,7 @@ public final class JupiterClass extends AsterClass {
 		final Field field = getAster().getField();
 		
 		Effect effect = new EffectCommandJupiter(field, target1);
-		getAster().getField().getScreen().paintEffect(effect);
+		getAster().getField().getCanvas().paintEffect(effect);
 
 		field.setDeleteFlag(target1);
 		field.delete(target1.x, target1.y);

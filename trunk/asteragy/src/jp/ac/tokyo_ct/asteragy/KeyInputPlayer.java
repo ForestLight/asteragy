@@ -49,9 +49,9 @@ public final class KeyInputPlayer extends Player {
 					break;
 				case 1: // スワップか特殊コマンドかを選択
 				{
-					Aster a = game.getField().getAster(pt);
+					Aster a = game.getField().at(pt);
 					AsterClass ac = a.getAsterClass();
-					final Range canvasRange = game.getCanvas().getRange();
+					final Range canvasRange = game.getCanvas().range;
 					int[][] range = ac.getRange();
 					
 					canvasRange.setRange(pt, range);
@@ -63,19 +63,19 @@ public final class KeyInputPlayer extends Player {
 					if (cmd == -1) { // キャンセルされた
 						state--;
 						canvasRange.setRange(null, null);
-						canvas.getScreen().flipScreen();
+						canvas.repaint();
 					} else
 						state++;
 					break;
 				}
 				case 2: // レンジ選択
 				{
-					Aster a = game.getField().getAster(pt);
+					Aster a = game.getField().at(pt);
 					AsterClass ac = a.getAsterClass();
 					ac.setCommand(cmd);
 
 					System.out.println("ターゲット選択");
-					final Range canvasRange = game.getCanvas().getRange();
+					final Range canvasRange = game.getCanvas().range;
 
 					while (ac.hasNext()) {
 						int[][] range = ac.getRange();
@@ -94,7 +94,7 @@ public final class KeyInputPlayer extends Player {
 						ac.setPointAndNext(target);
 					}
 					canvasRange.setRange(null, null);
-					canvas.getScreen().flipScreen();
+					canvas.repaint();
 
 					// サン専用
 					if (ac.getNumber() == 1 && cmd == 1) {
@@ -114,20 +114,19 @@ public final class KeyInputPlayer extends Player {
 
 				case 3:
 					final Field field = game.getField();
-					final AsterClass ac = field.getAster(pt).getAsterClass();
+					final AsterClass ac = field.at(pt).getAsterClass();
 					if (cmd == 1) {
 						this.addAP(-ac.getCommandCost());
 					}
 					// game.getField().fieldBackUp();
-					canvas.getCursor().setCursor(null, -1);
+					canvas.cursor.setCursor(null, -1);
 					canvas.repaint();
 					System.out.println("実行開始");
 					ac.execute();
 					System.out.println("実行完了");
 					canvas.repaint();
 
-					canvas.getScreen()
-					.paintEffect(canvas.getDisappearControl());
+					canvas.paintEffect(canvas.disappearControl);
 
 					Player p = field.checkGameOver();
 					// ゲームオーバー判定仮
@@ -149,9 +148,7 @@ public final class KeyInputPlayer extends Player {
 					this.addAP(field.deleteAll());
 					System.out.println("消去完了");
 
-					field.repaintField(canvas.getScreen().getGraphics());
-					canvas.getScreen()
-							.paintEffect(canvas.getDisappearControl());
+					canvas.paintEffect(canvas.disappearControl);
 
 					p = field.checkGameOver();
 
@@ -211,7 +208,7 @@ public final class KeyInputPlayer extends Player {
 					}
 					break;
 				case Display.KEY_DOWN:
-					if (y < game.getField().getY() - 1) {
+					if (y < game.getField().Y - 1) {
 						y++;
 					}
 					break;
@@ -221,7 +218,7 @@ public final class KeyInputPlayer extends Player {
 					}
 					break;
 				case Display.KEY_RIGHT:
-					if (x < game.getField().getX() - 1) {
+					if (x < game.getField().X - 1) {
 						x++;
 					}
 					break;
@@ -263,9 +260,8 @@ public final class KeyInputPlayer extends Player {
 			}
 
 			private void applyPosition() {
-
-				canvas.getCursor().setCursor(new Point(x, y), Cursor.CURSOR_1);
-				canvas.getScreen().flipScreen();
+				canvas.cursor.setCursor(new Point(x, y), Cursor.CURSOR_1);
+				canvas.repaint();
 			}
 
 			private Point pt = new Point();
@@ -275,16 +271,14 @@ public final class KeyInputPlayer extends Player {
 			private int y;
 		}
 
-		canvas.getCommonCommand().setCommand(-1, null);
-		canvas.getScreen().flipScreen();
+		canvas.commonCommand.setCommand(-1, null);
+		canvas.repaint();
 		System.out.println("KeyInputPlayer.selectAster()");
 		EventProcesserForSelectAster ep = new EventProcesserForSelectAster();
 		canvas.setEventProcesser(ep);
 		System.out.println("canvas.setEventProcesser() after");
 		Point pt = ep.getPoint(canvas);
-		canvas.removeEventProcesser(ep);
-		// System.out.println("KeyInputPlayer.selectAster() - x = " + pt.x
-		// + ", y = " + pt.y);
+		canvas.resetEventProcesser();
 		return pt;
 	}
 
@@ -299,7 +293,7 @@ public final class KeyInputPlayer extends Player {
 		final class EventProcesserForSelectCommand extends
 				KeyProcessedEventProcesserImpl {
 			EventProcesserForSelectCommand() {
-				ac = game.getField().getAster(pt).getAsterClass();
+				ac = game.getField().at(pt).getAsterClass();
 			}
 
 			protected void processKeyEvent(int key) {
@@ -321,9 +315,10 @@ public final class KeyInputPlayer extends Player {
 					break;
 				}
 				System.out.println("selectCommand.processKeyEvent");
-				canvas.getCommonCommand().setAsterClass(ac);
-				canvas.getCommonCommand().setCommand(command, pt);
-				canvas.getScreen().flipScreen();
+				final CommonCommand cc = canvas.commonCommand;
+				cc.setAsterClass(ac);
+				cc.setCommand(command, pt);
+				canvas.repaint();
 			}
 
 			protected boolean onCancel() {
@@ -333,7 +328,7 @@ public final class KeyInputPlayer extends Player {
 
 			public int selectCommand(CanvasControl c) {
 				System.out
-						.println("EventProcesserForSelectCommand.selectCommand()");
+						.println("EventProcesserForSelectCommand.selectCommand");
 				do {
 					resetSelected();
 					waitForSelect(c);
@@ -362,8 +357,8 @@ public final class KeyInputPlayer extends Player {
 
 		System.out.println("KeyInputPlayer.selectCommand()");
 
-		canvas.getCommonCommand().setCommand(0, pt);
-		canvas.getScreen().flipScreen();
+		canvas.commonCommand.setCommand(0, pt);
+		canvas.repaint();
 		EventProcesserForSelectCommand ep = new EventProcesserForSelectCommand();
 		return ep.selectCommand(canvas);
 	}
@@ -385,8 +380,8 @@ public final class KeyInputPlayer extends Player {
 				x = pt.x;
 				y = pt.y;
 				final Field field = game.getField();
-				final int fieldY = field.getY();
-				final int fieldX = field.getX();
+				final int fieldY = field.Y;
+				final int fieldX = field.X;
 				frange = new int[fieldY][fieldX];
 				for (int i = 0; i < fieldY; i++) {
 					for (int j = 0; j < fieldX; j++) {
@@ -423,7 +418,7 @@ public final class KeyInputPlayer extends Player {
 					}
 					break;
 				case Display.KEY_DOWN:
-					if (y < game.getField().getY() - 1
+					if (y < game.getField().Y - 1
 							&& frange[y + 1][x] != -1) {
 						y++;
 					}
@@ -434,7 +429,7 @@ public final class KeyInputPlayer extends Player {
 					}
 					break;
 				case Display.KEY_RIGHT:
-					if (x < game.getField().getX() - 1
+					if (x < game.getField().X - 1
 							&& frange[y][x + 1] != -1) {
 						x++;
 					}
@@ -464,8 +459,8 @@ public final class KeyInputPlayer extends Player {
 			}
 
 			private void applyPosition() {
-				canvas.getCursor().setCursor(new Point(x, y), Cursor.CURSOR_1);
-				canvas.getScreen().flipScreen();
+				canvas.cursor.setCursor(new Point(x, y), Cursor.CURSOR_1);
+				canvas.repaint();
 			}
 
 			private volatile Point target = new Point(0, 0);
@@ -477,8 +472,8 @@ public final class KeyInputPlayer extends Player {
 			private int[][] frange;
 		}
 
-		canvas.getCommonCommand().setCommand(-1, null);
-		canvas.getScreen().flipScreen();
+		canvas.commonCommand.setCommand(-1, null);
+		canvas.repaint();
 		EventProcesserForSelectTarget ep = new EventProcesserForSelectTarget();
 		canvas.setEventProcesser(ep);
 		System.out.println("canvas.setEventProcesser() after");
@@ -491,7 +486,7 @@ public final class KeyInputPlayer extends Player {
 	 * @return 対象 非常にアレだけど都合によりPoint型
 	 */
 	private Point selectAsterClass(final Point pt) {
-		final SunCommand sunCommand = canvas.getSunCommand();
+		final SunCommand sunCommand = canvas.sunCommand;
 		final class EventProcesserForSelectAsterClass extends
 				KeyProcessedEventProcesserImpl {
 
@@ -516,7 +511,7 @@ public final class KeyInputPlayer extends Player {
 				System.out.println("select = " + command);
 				sunCommand.setCommand(command, pt);
 				// Command.setAsterClass(ac);
-				canvas.getScreen().flipScreen();
+				canvas.repaint();
 			}
 
 			protected boolean onCancel() {
@@ -544,12 +539,12 @@ public final class KeyInputPlayer extends Player {
 		System.out.println("KeyInputPlayer.selectCommand()");
 
 		sunCommand.setCommand(0, pt);
-		canvas.getScreen().flipScreen();
+		canvas.repaint();
 		EventProcesserForSelectAsterClass ep = new EventProcesserForSelectAsterClass();
 		Point r = new Point();
 		r.x = ep.selectAsterClass(canvas);
 		sunCommand.setCommand(-1, null);
-		canvas.getScreen().flipScreen();
+		canvas.repaint();
 		return r;
 	}
 }
