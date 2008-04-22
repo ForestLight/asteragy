@@ -1,6 +1,6 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import java.util.Random;
+//import java.util.Random;
 
 import com.nttdocomo.ui.*;
 
@@ -55,8 +55,12 @@ public class StarWord {
 
 		// g.drawImage(star, point.x, point.y);
 		// g.drawImage(star, matrix);
-		g.setColor(Graphics.getColorOfRGB(255, 255, 255));
-		g.fillArc(point.x, point.y, space, space, 0, 360);
+		//g.setColor(Graphics.getColorOfRGB(255, 255, 100));
+		//g.fillArc(point.x - 2, point.y - 2, space + 4, space + 4, 0, 360);
+		g.setColor(Graphics.getColorOfRGB(255, 240, 0));
+		g.fillArc(point.x - 1, point.y - 1, space + 2, space + 2, 0, 360);
+		//g.setColor(Graphics.getColorOfRGB(155, 155, 0));
+		//g.fillArc(point.x, point.y, space, space, 0, 360);
 
 		// time++;
 
