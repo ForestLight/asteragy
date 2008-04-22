@@ -32,7 +32,7 @@ public class EffectCommandVenus extends Effect {
 			g.drawImage(image, 1, 1);
 			g.unlock(true);
 
-			Game.sleep(10000 / CanvasControl.f);
+			Game.sleep(100 / CanvasControl.f);
 		}
 	}
 

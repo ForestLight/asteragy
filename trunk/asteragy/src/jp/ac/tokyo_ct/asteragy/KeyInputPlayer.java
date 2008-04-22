@@ -36,9 +36,9 @@ public final class KeyInputPlayer extends Player {
 
 				switch (state) {
 				case 0: // ‘€ìƒNƒ‰ƒX‚Ì‘I‘ğ
-					game.getField().repaintField(canvas.getScreen().getGraphics());
-					canvas.getScreen()
-							.paintEffect(canvas.getDisappearControl());
+					//game.getField().repaintField(canvas.getScreen().getGraphics());
+					//canvas.getScreen()
+					//		.paintEffect(canvas.getDisappearControl());
 					
 					pt = selectAster();
 

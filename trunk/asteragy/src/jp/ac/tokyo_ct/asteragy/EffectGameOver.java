@@ -1,0 +1,56 @@
+package jp.ac.tokyo_ct.asteragy;
+
+import com.nttdocomo.ui.*;
+
+public class EffectGameOver extends Effect {
+
+	private static final int frame = 15;
+
+	private final CanvasControl canvas;
+
+	private final Player winner;
+
+	public EffectGameOver(CanvasControl canvas, Player winner) {
+		// TODO 自動生成されたコンストラクター・スタブ
+		this.canvas = canvas;
+		this.winner = winner;
+	}
+
+	public void start(Graphics g) {
+		// TODO 自動生成されたメソッド・スタブ
+		if (!isEffect)
+			return;
+		Image back = canvas.getScreen(new Point(0, 0), new Point(canvas
+				.getWidth(), canvas.getHeight()));
+
+		String win = winner.toString() + "の勝利!!";
+		final int height = Font.getDefaultFont().getHeight();
+		Image winner = Image.createImage(Font.getDefaultFont()
+				.getBBoxWidth(win), height + 1);
+		Graphics w = winner.getGraphics();
+		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		w.drawString(win, 0, height);
+		w.dispose();
+		ImagePixels pixels = new ImagePixels(winner);
+
+		Point l = new Point((canvas.getWidth() - winner.getWidth() * 3) / 2,
+				(canvas.getHeight() - height * 3) / 2);
+
+		Point start = new Point(0, 0);
+		StarWord paint = new StarWord(pixels, 3, start);
+		for (int i = 0; i < frame; i++) {
+			g.lock();
+			g.setOrigin(0, 0);
+			g.drawImage(back, 0, 0);
+
+			g.setOrigin(l.x, l.y);
+			paint.paint(g);
+
+			g.unlock(true);
+			Game.sleep(300 / CanvasControl.f);
+		}
+
+		Game.sleep(500);
+	}
+
+}
