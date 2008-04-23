@@ -210,8 +210,10 @@ public final class CanvasControl extends Canvas {
 
 	public void processEvent(int type, int param) {
 		type = pre.processEvent(type, param);
-		if (type == Display.KEY_PRESSED_EVENT && param == Display.KEY_9)
-			Effect.setEffect();
+	/*	if (type == Display.KEY_PRESSED_EVENT && param == Display.KEY_9)
+			Effect.setEffect();*/
+//		if (type == Display.KEY_PRESSED_EVENT && param == Display.KEY_SOFT1 )
+//			game.titleBack();
 		if (eventProcesser != null)
 			eventProcesser.processEvent(type, param);
 	}

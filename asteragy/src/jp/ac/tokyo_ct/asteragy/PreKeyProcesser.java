@@ -11,8 +11,8 @@ public final class PreKeyProcesser {
 	}
 
 	public void initKey(Canvas set) {
-		set.setSoftLabel(Frame.SOFT_KEY_1, "TITLE");
-		set.setSoftLabel(Frame.SOFT_KEY_2, "");
+//		set.setSoftLabel(Frame.SOFT_KEY_1, "TITLE");
+//		set.setSoftLabel(Frame.SOFT_KEY_2, "");
 	}
 
 	public int processEvent(int type, int param) {

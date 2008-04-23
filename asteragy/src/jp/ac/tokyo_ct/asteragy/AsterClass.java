@@ -220,6 +220,8 @@ public abstract class AsterClass {
 		actionCount = getActionNum();
 		// ƒtƒ‰ƒOÁ‹
 		isProtected = false;
+		
+		mode = 0;
 	}
 
 	public final int getActionNum() {

@@ -29,15 +29,18 @@ final class Game {
 			gameover = turn(player[0]);
 			if (!gameover)
 				break;
+			if(titleBack) break;
 			gameover = turn(player[1]);
 			if (!gameover)
 				break;
+			if(titleBack) break;
 			System.gc();
 		}
 	}
 
 	private void initialize() {
 		System.out.println("initialize start");
+		titleBack = false;
 		if (option.gameType == 2) {
 			httpLogger = new HTTPPlayer(this, "å„çU (N)");
 			httpLogger.initialize(option);
@@ -128,7 +131,7 @@ final class Game {
 	Player getCurrentPlayer() {
 		return currentPlayer;
 	}
-
+	
 	int getPlayerIndex(Player p) {
 		if (p == player[0])
 			return 0;
@@ -234,4 +237,9 @@ final class Game {
 			Thread.currentThread().interrupt();
 		}
 	}
+	
+	public void titleBack(){
+		titleBack=true;
+	}
+	private boolean titleBack;
 }
