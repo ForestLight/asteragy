@@ -29,8 +29,6 @@ public final class AIPlayer extends Player {
 	
 	private final static int WAIT = 1000;
 
-	private Field backup;
-
 	// private Point[] pt = new Point[TRIAL];
 
 	private Point pt; // 操作中のユニット位置
@@ -60,6 +58,7 @@ public final class AIPlayer extends Player {
 			pt = null;
 			int t = 0;
 			boolean cancelFlag = false;
+			final Field f = game.getField();
 
 			while (state < 4) {
 				switch (state) {
@@ -107,7 +106,6 @@ public final class AIPlayer extends Player {
 				{
 					System.out.println("AIPlayer state2");
 					int i = 0;
-					final Field f = game.getField();
 					Aster a = f.at(pt);
 					AsterClass ac = a.getAsterClass();
 					ac.setCommand(cmd[t]);
@@ -214,6 +212,10 @@ public final class AIPlayer extends Player {
 					}
 				}
 			}
+			return null;
+		} catch(Exception e) {
+			System.out.print("AIPlayer.getAction: ");
+			System.out.println(e.getMessage());
 			return null;
 		} finally {
 			
@@ -421,20 +423,15 @@ public final class AIPlayer extends Player {
 		System.out.println("AIPlayer.evaluation return" + ev);
 		return ev;
 	}
-
-	private void fieldClone(Field f1, Field f2) {
-		// Field f = new Field(game);
-		// f.setFieldSize(field.getX(), field.getY());
-		// f.setAster();
-		// System.out.println("clone");
-		for (int i = 0; i < f1.Y; i++) {
-			for (int j = 0; j < f1.X; j++) {
-
-				f1.field[i][j] = f2.field[i][j].clone();
+/*
+	private void filedClone(Aster[][] dst, Aster[][] src) {
+		for (int i = 0; i < src.length; i++) {
+			for (int j = 0; j < src[0].length; j++) {
+				dst[i][j] = src[i][j].clone();
 			}
 		}
 	}
-
+*/
 	private void backUpField() {
 		final Field f = game.getField();
 

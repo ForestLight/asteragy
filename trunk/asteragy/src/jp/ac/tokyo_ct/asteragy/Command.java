@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class Command /*implements PaintItem*/ {
+public class Command {
 
 	protected int command;
 

@@ -1,5 +1,8 @@
 package jp.ac.tokyo_ct.asteragy;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import com.nttdocomo.ui.Graphics;
 
 /**
@@ -46,7 +49,7 @@ final class Field /* implements PaintItem */{
 	public boolean isFieldInit() {
 		return fieldinit;
 	}
-
+	
 	/**
 	 * フィールドの初期化
 	 * 
@@ -266,7 +269,6 @@ final class Field /* implements PaintItem */{
 				}
 			}
 		}
-
 		return count;
 	}
 
@@ -518,6 +520,24 @@ final class Field /* implements PaintItem */{
 
 	CanvasControl getCanvas() {
 		return game.getCanvas();
+	}
+	
+	String toStringForInit() {
+		StringBuffer buf = new StringBuffer(200);
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
+				buf.append(field[i][j].getColor());
+			}
+		}
+		return buf.toString();
+	}
+	
+	void inputFromStream(InputStream is) throws IOException {
+		for (int i = 0; i < Y; i++) {
+			for (int j = 0; j < X; j++) {
+				field[i][j] = new Aster(this, HTTPPlayer.readIntChar(is));
+			}
+		}		
 	}
 
 }

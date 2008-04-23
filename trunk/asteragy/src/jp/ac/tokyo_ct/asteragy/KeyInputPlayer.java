@@ -33,13 +33,8 @@ public final class KeyInputPlayer extends Player {
 			cursorPoint = game.getField().getSunPosition(this);
 			int cmd = -1; // 0 = swap, 1 = 特殊コマンド
 			while (state < 4) {
-
 				switch (state) {
 				case 0: // 操作クラスの選択
-					//game.getField().repaintField(canvas.getScreen().getGraphics());
-					//canvas.getScreen()
-					//		.paintEffect(canvas.getDisappearControl());
-					
 					pt = selectAster();
 
 					if (pt == null)
