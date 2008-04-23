@@ -118,8 +118,9 @@ public final class AIPlayer extends Player {
 
 					while (ac.hasNext() && i <= 1) {
 						int[][] range = ac.getRange();
+						System.out.println("selectTarget in");
 						target[i][t] = selectTarget(range, pt);
-						System.out.println("ターゲット選択中");
+						System.out.println("selectTarget out");
 
 						if (target[i][t] == null) {
 							System.out.println("target null");
@@ -130,25 +131,28 @@ public final class AIPlayer extends Player {
 								cmd[t] = 0;
 								cancelFlag = true;
 								break;
+							}else{
+								System.out.println("ac noback");
+								Game.sleep(1000);
 							}
-							i--;
+							//i--;
+						}else{
+							 System.out.println("target - x = " + target[i][t].x +
+							 " y = " + target[i][t].y);			
 						}
-						// System.out.println("target - x = " + target[i][t].x +
-						// " y = "
-						// + target[i][t].y);
+
 						ac.setPointAndNext(target[i][t]);
 						i++;
 					}
-					if (i == 2
-							&& f.at(target[0][t]).getColor() == f.at(
-									target[1][t]).getColor()
-							&& f.at(target[0][t]).getAsterClass() == null
-							&& f.at(target[1][t]).getAsterClass() == null) {
-						ac.moveAstern();
-						ac.moveAstern();
-						state = 1;
-
-					}
+//					if (i == 2
+//							&& f.at(target[0][t]).getColor() == f.at(
+//									target[1][t]).getColor()
+//							&& f.at(target[0][t]).getAsterClass() == null
+//							&& f.at(target[1][t]).getAsterClass() == null) {
+//						ac.moveAstern();
+//						ac.moveAstern();
+//						state = 1;
+//					}
 
 					// サン専用
 					if (ac.getNumber() == 1 && cmd[t] == 1) {
@@ -212,12 +216,13 @@ public final class AIPlayer extends Player {
 			}
 			return null;
 		} finally {
-			game.getCanvas().setPaintFlag(true);
+			
 			game.getField().repaintField();
 			canvas.paintEffect(canvas.disappearControl);
 			Game.sleep(WAIT);
 			canvas.resetEventProcesser();
 			Effect.setEffect(true);
+			game.getCanvas().setPaintFlag(true);
 		}
 	}
 
@@ -302,6 +307,7 @@ public final class AIPlayer extends Player {
 						&& j <= pt.x + range[0].length / 2) {
 					frange[i][j] = range[i - (pt.y - range.length / 2)][j
 							- (pt.x - range[0].length / 2)];
+					//System.out.println("target - "+frange[i][j]+" pt.x,y = "+pt.x+"/"+pt.y+"j(x),i(y)="+j+"/"+i);
 					if (frange[i][j] == 1) {
 						c++;
 					}
@@ -450,11 +456,11 @@ public final class AIPlayer extends Player {
 	private void restoreField() {
 		final Field f = game.getField();
 
+		System.out.println("restor Field in");
 		game.getCanvas().disappearControl.Clear();
 		for (int i = 0; i < f.Y; i++) {
 			for (int j = 0; j < f.X; j++) {
-				final Aster cur = f.field[i][j];
-				Aster a = cur;
+				Aster a = f.field[i][j];
 				int n = a.getNum();
 				final int x = f.X;
 				while ((i * x + j) != n) {// アステルの順番が入れ替わってた場合
@@ -468,11 +474,12 @@ public final class AIPlayer extends Player {
 					a.setAsterClass(null);
 				} else {
 					a.setAsterClass(acBackUp[i][j]);
-					a.getAsterClass().setAster(cur);
+					a.getAsterClass().setAster(a);
 				}
-				cur.init();
+				a.init();
 			}
 		}
+		System.out.println("restor Field out");
 	}
 
 	private int[][] colorBackUp;
@@ -489,6 +496,8 @@ public final class AIPlayer extends Player {
 		final Range canvasRange = game.getCanvas().range;
 		int[][] range = ac.getRange();
 		Effect.setEffect(true);
+		
+		System.out.println("execute - class = " + ac.getNumber());
 
 		canvas.cursor.setCursor(pt, Cursor.CURSOR_1);
 		canvas.repaint();
@@ -528,6 +537,7 @@ public final class AIPlayer extends Player {
 			final SunCommand sc = canvas.sunCommand;
 			sc.setCommand(target[1][maxNum].x, pt);
 			canvas.repaint();
+			System.out.println("wait4");
 			Game.sleep(WAIT);
 			sc.setCommand(-1, null);
 			canvas.repaint();
