@@ -51,8 +51,6 @@ public class StarWord {
 	}
 
 	public void paint(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
-
 		// g.drawImage(star, point.x, point.y);
 		// g.drawImage(star, matrix);
 		//g.setColor(Graphics.getColorOfRGB(255, 255, 100));

@@ -11,7 +11,7 @@ public final class EffectAsterDisappearControl extends Effect {
 
 	private static final Image image = Game.loadImage("disappear");
 
-	private final Vector disappearing = new Vector(20);
+	final Vector disappearing = new Vector(20);
 
 	void Add(Point pt) {
 		disappearing.addElement(pt);

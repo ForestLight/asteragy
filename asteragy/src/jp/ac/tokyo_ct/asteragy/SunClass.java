@@ -9,7 +9,7 @@ public final class SunClass extends AsterClass {
 
 	private static Image asterImage;
 
-	private int asterClassSelect;
+	int asterClassSelect;
 
 	public SunClass(SunClass a) {
 		super(a);

@@ -4,15 +4,14 @@
 package jp.ac.tokyo_ct.asteragy;
 
 import java.io.*;
-
 import javax.microedition.io.*;
 import com.nttdocomo.io.*;
+import com.nttdocomo.ui.Dialog;
 
 /**
  * @author Yusuke 現在、1P, 2Pの両方がHTTPPlayerになることはできない。
  */
 final class HTTPPlayer extends Player implements Runnable {
-
 	/**
 	 * @param game
 	 * @param playerName
@@ -23,145 +22,198 @@ final class HTTPPlayer extends Player implements Runnable {
 		loggingThread.start();
 	}
 
-	boolean initialize(Option opt) {
+	// こっちの人間プレイヤが先攻ならtrueを返す。
+	boolean initialize(Option opt) throws IOException {
+		System.out.println("querygame");
+		HttpConnection con = (HttpConnection) Connector.open(
+				"http://localhost/?scmd=querygame", Connector.READ);
 		try {
-			HttpConnection con = (HttpConnection) Connector.open(
-					"http://localhost/?scmd=querygame", Connector.READ);
+			con.setRequestMethod(HttpConnection.GET);
+			con.connect();
+			InputStream is = con.openInputStream();
+			try {
+				id = Integer.parseInt(readLine(is));
+				if (readLine(is).equals("0")) {
+					isLocalFirst = true;
+				} else {
+					isLocalFirst = false;
+				}
+				System.out.println("id: " + id + " first: " + isLocalFirst);
+			} finally {
+				is.close();
+			}
+		} finally {
+			con.close();
+		}
+		if (isLocalFirst) {
+			postOption(opt);
+		} else {
+			getOption(opt);
+		}
+		return isLocalFirst;
+	}
+
+	// 先攻になったとき、こっちの設定を送る。
+	private void postOption(Option opt) throws IOException {
+		String url = getUrl("postoption", isLocalFirst).concat("&opt=").concat(
+				opt.toString());
+		System.out.println("postoption: " + url);
+		HttpConnection con = (HttpConnection) Connector.open(url,
+				Connector.READ);
+		try {
+			con.setRequestMethod(HttpConnection.GET);
+			con.connect();
+			con.openInputStream().close(); // ダミー：念のため
+		} finally {
+			con.close();
+		}
+	}
+
+	private void getOption(Option opt) throws IOException {
+		for (;;) {
+			System.out.println("getoption");
+			HttpConnection con = (HttpConnection) Connector.open(getUrl(
+					"getoption", isLocalFirst), Connector.READ);
+			try {
+				con.setRequestMethod(HttpConnection.GET);
+				con.connect();
+				if (con.getLength() != 0) {
+					InputStream is = con.openInputStream();
+					try {
+						opt.inputFromStream(is);
+						return;
+					} finally {
+						is.close();
+					}
+				}
+				Game.sleep(2000);
+			} finally {
+				con.close();
+			}
+		}
+	}
+
+	// 先攻になったとき、後攻が現れるまで待機する。
+	void waitForAnotherPlayer() throws IOException {
+		System.out.println("querystart");
+		for (;;) {
+			HttpConnection con = (HttpConnection) Connector.open(getUrl(
+					"querystart", isLocalFirst), Connector.READ);
 			try {
 				con.setRequestMethod(HttpConnection.GET);
 				con.connect();
 				InputStream is = con.openInputStream();
 				try {
-					id = Integer.parseInt(readLine(is));
-					if (readLine(is) == "0") {
-						isFirst = true;
-						postOption(opt);
-						return true;
-					} else {
-						getOption(opt);
-						return false;
-					}
+					String s = readLine(is);
+					if (s.equals("ok"))
+						return;
 				} finally {
 					is.close();
 				}
 			} finally {
 				con.close();
 			}
-		} catch (IOException e) {
-			System.out.println(e.toString());
-			return false; // 暫定
+			Game.sleep(2000);
 		}
 	}
 
-	// 先攻になったとき、こっちの設定を送る。
-	private void postOption(Option opt) {
+	void sendInitField(Field f) throws IOException {
+		String url = getUrl("sendinitfield", isLocalFirst).concat("&field=").concat(
+				f.toStringForInit());
+		System.out.println("sendinifield: " + url);
+		HttpConnection con = (HttpConnection) Connector.open(url,
+				Connector.READ);
 		try {
+			con.setRequestMethod(HttpConnection.GET);
+			con.connect();
+			con.openInputStream().close(); // ダミー：念のため
+		} finally {
+			con.close();
+		}
+	}
+
+	void getField(Field f) throws IOException {
+		for (;;) {
+			System.out.println("getinitfield");
 			HttpConnection con = (HttpConnection) Connector.open(getUrl(
-					"postoption", isFirst).concat("&opt=").concat(opt.toString()),
-					Connector.WRITE);
+					"getinitfield", isLocalFirst), Connector.READ);
 			try {
 				con.setRequestMethod(HttpConnection.GET);
 				con.connect();
-			} finally {
-				con.close();
-			}
-		} catch (IOException e) {
-			System.out.println(e.toString());
-		}
-	}
-
-	private void getOption(Option opt) {
-		try {
-			for (;;) {
-				HttpConnection con = (HttpConnection) Connector.open(getUrl(
-						"getoption", isFirst), Connector.READ);
-				try {
-					con.setRequestMethod(HttpConnection.GET);
-					con.connect();
-					if (con.getResponseCode() == HttpConnection.HTTP_NO_CONTENT) {
-						Game.sleep(5000);
-						continue;
-					}
+				if (con.getLength() != 0) {
 					InputStream is = con.openInputStream();
 					try {
-						opt.inputFromStream(is);
+						f.inputFromStream(is);
+						return;
 					} finally {
 						is.close();
 					}
-				} finally {
-					con.close();
 				}
-			}
-		} catch (IOException e) {
-			System.out.println(e.toString());
-		}
-	}
-
-	// 先攻になったとき、後攻が現れるまで待機する。
-	void waitForAnotherPlayer() {
-		try {
-			for (;;) {
-				HttpConnection con = (HttpConnection) Connector.open(getUrl(
-						"querystart", isFirst), Connector.READ);
-				try {
-					con.setRequestMethod(HttpConnection.GET);
-					con.connect();
-					InputStream is = con.openInputStream();
-					try {
-						if (readLine(is) == "ok")
-							return;
-					} finally {
-						is.close();
-					}
-				} finally {
-					con.close();
-				}
-			}
-		} catch (IOException e) {
-			System.out.println(e.toString());
-		}
-	}
-
-	void sendInitField(Field f) {
-		try {
-			HttpConnection con = (HttpConnection) Connector.open(getUrl(
-					"sendinitfield", isFirst).concat("&field=0"),
-					Connector.READ);
-			try {
-				con.setRequestMethod(HttpConnection.GET);
-				con.connect();
+				Game.sleep(2000);
 			} finally {
 				con.close();
 			}
-		} catch (IOException e) {
-			System.out.println(e.toString());
 		}
 	}
-
+	
 	/*
 	 * (非 Javadoc)
 	 * 
 	 * @see jp.ac.tokyo_ct.asteragy.Player#getAction()
 	 */
 	public Action getAction() {
+		System.out.println("getaction");
 		try {
-			HttpConnection con = (HttpConnection) Connector.open(getUrl(
-					"getaction", isFirst), Connector.READ);
-			try {
-				con.setRequestMethod(HttpConnection.GET);
-				con.connect();
-				InputStream is = con.openInputStream();
+			for (;;) {
+				HttpConnection con = (HttpConnection) Connector.open(getUrl(
+						"getaction", isLocalFirst), Connector.READ);
 				try {
-					return Action.readFromStream(game, is);
+					con.setRequestMethod(HttpConnection.GET);
+					con.connect();
+					if (con.getLength() != 0) {
+						InputStream is = con.openInputStream();
+						try {
+							String s = readLine(is);
+							if (s.equals("end"))
+								return null;
+							Action a = Action.readFromString(game, s);//Action.readFromStream(game, is);
+							if (a != null) {
+								System.out.print("getaction: ");
+								System.out.println(a.toString());
+								return a;
+							}
+						} finally {
+							is.close();
+						}
+					}
 				} finally {
-					is.close();
+					con.close();
 				}
-			} finally {
-				con.close();
+				Game.sleep(3000);
 			}
 		} catch (IOException e) {
 			System.out.println(e.toString());
 			return null; // 暫定
+		}
+	}
+
+	void endTurn(int player) {
+		try {
+			String url = getUrl("endturn", player != 0);
+			HttpConnection con = (HttpConnection) Connector.open(url,
+					Connector.READ);
+			try {
+				con.setRequestMethod(HttpConnection.GET);
+				con.connect();
+				con.openInputStream().close(); // ダミー：念のため
+			} finally {
+				con.close();
+			}
+		} catch (IOException e) {
+			Dialog d = new Dialog(Dialog.BUTTON_OK, e.toString());
+			d.setText("申し訳ありません。接続ができませんでした。ゲームを続行できない可能性があります。");
+			d.show();
+			System.out.println(e.toString());
 		}
 	}
 
@@ -190,29 +242,27 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	private String getUrl(String cmd, boolean first) {
 		return "http://localhost/?cmd=".concat(cmd).concat("&id=").concat(
-				String.valueOf(id)).concat("&turn=0");
+				String.valueOf(id)).concat("&turn=").concat(first ? "1" : "0");
 	}
 
 	private void sendLog(Action a) {
 		try {
-			HttpConnection con = (HttpConnection) Connector.open(getUrl(
-					"postaction", !isFirst), Connector.WRITE);
+			String url = getUrl("sendaction", !isLocalFirst).concat("&action=")
+					.concat(a.toString());
+			System.out.println(url);
+			HttpConnection con = (HttpConnection) Connector.open(url,
+					Connector.READ);
 			try {
-				con.setRequestProperty("Content-Type", "text/plain");
-				con.setRequestMethod(HttpConnection.POST);
-				OutputStream os = con.openOutputStream();
-				try {
-					a.outputToStream(os);
-					os.write('\r');
-					os.write('\n');
-				} finally {
-					os.close();
-				}
+				con.setRequestMethod(HttpConnection.GET);
 				con.connect();
+				con.openInputStream().close(); // ダミー：念のため
 			} finally {
 				con.close();
 			}
 		} catch (IOException e) {
+			Dialog d = new Dialog(Dialog.BUTTON_OK, e.toString());
+			d.setText("申し訳ありません。接続ができませんでした。ゲームを続行できません。");
+			d.show();
 			System.out.println(e.toString());
 		}
 	}
@@ -254,10 +304,11 @@ final class HTTPPlayer extends Player implements Runnable {
 	static int parseIntChar(int c) {
 		if (c < 0)
 			return -1;
-		else if (c - '0' < 10)
+		if (Character.isDigit((char)c))
 			return c - '0';
-		else if (c - 'A' < 6)
-			return c - 'A' + 10;
+		int t = c - 'A';
+		if (0 <= t && t < 6)
+			return t + 10;
 		else
 			return -1;
 	}
@@ -268,5 +319,5 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	private int id;
 
-	private boolean isFirst = false;
+	private boolean isLocalFirst = false;
 }

@@ -39,6 +39,11 @@ public final class Aster {
 		field = f;
 	}
 
+	Aster(Field f, int c) {
+		color = c;
+		field = f;
+	}
+
 	Aster clone() {
 		// Aster a = new Aster(field);
 		Aster a = this;
@@ -68,7 +73,7 @@ public final class Aster {
 		return num;
 	}
 
-	public int num;
+	private int num;
 
 	public int getColor() {
 		return color;
