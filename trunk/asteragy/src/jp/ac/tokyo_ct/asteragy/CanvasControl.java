@@ -35,7 +35,7 @@ public final class CanvasControl extends Canvas {
 
 	private int leftmargin;
 	
-	private boolean paintFlag = true;
+	private boolean paintFlag;
 
 	public CanvasControl(Game game) {
 		this.game = game;
@@ -43,6 +43,7 @@ public final class CanvasControl extends Canvas {
 		pre.initKey(this);
 		Display.setCurrent(this);
 		setBackground(Graphics.getColorOfName(Graphics.BLACK));
+		paintFlag = true;
 		repaint();
 	}
 
@@ -139,6 +140,7 @@ public final class CanvasControl extends Canvas {
 			if (game.initializing) {
 				paintNowloading(g);
 			} else {
+				System.out.println("paintFlag "+ paintFlag);
 				g.drawImage(backgroundImage, 0, 0);
 				paintPlayerInfo(g);
 				paintFieldSpace(g);
@@ -147,6 +149,8 @@ public final class CanvasControl extends Canvas {
 				System.out.println("end paint");
 			}
 			g.unlock(true); // trueÇ…ÇµÇΩÇÃÇÕà¿ëSë[íuÅB
+		}else{
+			System.out.println("paintFlag false");
 		}
 	}
 
