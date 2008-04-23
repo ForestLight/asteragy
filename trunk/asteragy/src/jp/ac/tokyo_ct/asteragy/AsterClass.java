@@ -304,7 +304,7 @@ public abstract class AsterClass {
 		else {
 			range = new int[defaultRange.length][defaultRange[0].length];
 			// target1の座標をレンジ内に修正したもの
-			Point selftPoint = getAster().getPoint();
+			Point selftPoint = aster.getPoint();
 			Point pt = new Point();
 			System.out.println("tx:" + target1.x + "ty:" + target1.y + "spx:"
 					+ selftPoint.x + "spy:" + selftPoint.y);
@@ -319,20 +319,24 @@ public abstract class AsterClass {
 						if (i == pt.y - 1 && j == pt.x || i == pt.y + 1
 								&& j == pt.x || i == pt.y && j == pt.x + 1
 								|| i == pt.y && j == pt.x - 1) {
+							System.out.println("range-"+i+"-j-"+j);
 							range[i][j] = 1;
 						}
 					}
 				}
 			}
+			System.out.println("test");
 			// 1個目の対象の位置を移動可・選択不可
 			range[pt.y][pt.x] = 0;
 		}
+		System.out.println("SwapGetRange end");
 		return range;
 	}
 
 	protected final boolean swapMoveAstern() {
 		// 1個目の対象選択中に呼ばれた場合
 		if (target1 == null) {
+			System.out.println("swapMoveAstern return true");
 			return true;
 		}
 		// 2個目の対象選択中に呼ばれた場合
@@ -343,6 +347,7 @@ public abstract class AsterClass {
 		else {
 			target2 = null;
 		}
+		System.out.println("swapMoveAstern return false");
 		return false;
 	}
 
