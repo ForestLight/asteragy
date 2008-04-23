@@ -144,15 +144,15 @@ public final class AIPlayer extends Player {
 						ac.setPointAndNext(target[i][t]);
 						i++;
 					}
-//					if (i == 2
-//							&& f.at(target[0][t]).getColor() == f.at(
-//									target[1][t]).getColor()
-//							&& f.at(target[0][t]).getAsterClass() == null
-//							&& f.at(target[1][t]).getAsterClass() == null) {
-//						ac.moveAstern();
-//						ac.moveAstern();
-//						state = 1;
-//					}
+					if (i == 2 && cmd[t] == 0 
+							&& f.at(target[0][t]).getColor() == f.at(
+									target[1][t]).getColor()
+							&& f.at(target[0][t]).getAsterClass() == null
+							&& f.at(target[1][t]).getAsterClass() == null) {
+						ac.moveAstern();
+						ac.moveAstern();
+						state = 1;
+					}
 
 					// ÉTÉìêÍóp
 					if (ac.getNumber() == 1 && cmd[t] == 1) {
@@ -508,9 +508,11 @@ public final class AIPlayer extends Player {
 		final CommonCommand cc = canvas.commonCommand;
 		cc.setCommand(cmd[maxNum], pt);
 		cc.setAsterClass(ac);
-		canvas.repaint();
-
 		ac.setCommand(cmd[maxNum]);
+		range = ac.getRange();
+		canvasRange.setRange(pt, range);
+		canvas.repaint();
+		
 		System.out.println("wait2");
 		Game.sleep(WAIT);
 

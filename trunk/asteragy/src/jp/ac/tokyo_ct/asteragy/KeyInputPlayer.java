@@ -318,6 +318,10 @@ public final class KeyInputPlayer extends Player {
 				final CommonCommand cc = canvas.commonCommand;
 				cc.setAsterClass(ac);
 				cc.setCommand(command, pt);
+				final Range canvasRange = game.getCanvas().range;
+				ac.setCommand(command);
+				int[][] range = ac.getRange();
+				canvasRange.setRange(pt, range);
 				canvas.repaint();
 			}
 

@@ -30,7 +30,7 @@ public final class SaturnClass extends AsterClass {
 		case 0:
 			return swapGetRange(defaultRange);
 		case 1:
-			return null;
+			return defaultRange;
 		}
 		return null;
 	}
