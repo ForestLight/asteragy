@@ -20,7 +20,7 @@ public final class EffectCommandJupiter extends Effect {
 
 	// private Point rightbottom;
 
-	public EffectCommandJupiter(Field field, Point point) {
+	EffectCommandJupiter(Field field, Point point) {
 		this.field = field;
 		this.point = point;
 		// setLocation();
@@ -58,7 +58,6 @@ public final class EffectCommandJupiter extends Effect {
 
 		// field.setOrignAster(g, point, GameCanvas.measure / 2,
 		// GameCanvas.measure / 2);
-
 		for (int i = 0; i < circle.length; i++) {
 
 			g.lock();
@@ -71,7 +70,7 @@ public final class EffectCommandJupiter extends Effect {
 					+ SimpleMath.cos(theta * i) * -e.y / 2;
 			matrix[0] = SimpleMath.cos(theta * i);
 			matrix[1] = SimpleMath.sin(theta * i);
-			matrix[3] = -1 * SimpleMath.sin(theta * i);
+			matrix[3] = -SimpleMath.sin(theta * i);
 			matrix[4] = SimpleMath.cos(theta * i);
 
 			g.drawImage(effect, matrix);
@@ -94,7 +93,7 @@ public final class EffectCommandJupiter extends Effect {
 					+ SimpleMath.cos(theta * i) * -e.y * 3 / 5;
 			matrix[0] = SimpleMath.cos(theta * i) * 6 / 5;
 			matrix[1] = SimpleMath.sin(theta * i) * 6 / 5;
-			matrix[3] = -1 * SimpleMath.sin(theta * i) * 6 / 5;
+			matrix[3] = -SimpleMath.sin(theta * i) * 6 / 5;
 			matrix[4] = SimpleMath.cos(theta * i) * 6 / 5;
 
 			g.drawImage(effect, matrix);

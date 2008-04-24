@@ -8,30 +8,23 @@ public final class Range {
 
 	private int[][] range;
 
-	private boolean visible;
-
 	private CanvasControl canvas;
 
-	public Range(CanvasControl canvas) {
+	Range(CanvasControl canvas) {
 		this.canvas = canvas;
-		visible = true;
 	}
 
-	public void setVisible(boolean v) {
-		visible = v;
-	}
-
-	public void setRange(Point point, int[][] r) {
+	void setRange(Point point, int[][] r) {
 		aster = point;
 		range = r;
 		canvas.game.getField().repaintField();
 	}
 
-	public void paint(Graphics g, Point point) {
-		if (!visible || aster == null || range == null)
+	void paint(Graphics g, int x, int y) {
+		if (aster == null || range == null)
 			return;
-		final int rx = point.x - aster.x + (range[0].length / 2);
-		final int ry = point.y - aster.y + (range.length / 2);
+		final int rx = x - aster.x + (range[0].length / 2);
+		final int ry = y - aster.y + (range.length / 2);
 		final int m = CanvasControl.measure;
 		if (rx < 0 || rx >= range[0].length || ry < 0 || ry >= range.length
 				|| range[rx][ry] == -1) {

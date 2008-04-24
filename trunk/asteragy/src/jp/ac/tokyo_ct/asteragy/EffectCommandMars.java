@@ -19,7 +19,7 @@ public final class EffectCommandMars extends Effect {
 
 	private int time;
 
-	public EffectCommandMars(Field field, AsterClass cls, Point point) {
+	EffectCommandMars(Field field, AsterClass cls, Point point) {
 		this.field = field;
 		this.point = point;
 		this.aster = field.asterToPoint(cls.getAster());
@@ -53,7 +53,6 @@ public final class EffectCommandMars extends Effect {
 
 	public void start(Graphics g) {
 		for (time = 0; time < 17; time++) {
-
 			g.lock();
 			field.repaintAsterRect(g, lefttop, rightbottom);
 			field.setOrignAster(g, aster);
@@ -65,8 +64,6 @@ public final class EffectCommandMars extends Effect {
 			g.unlock(true);
 
 			Game.sleep(300 / CanvasControl.f);
-
-
 		}
 
 		time--;
@@ -81,7 +78,6 @@ public final class EffectCommandMars extends Effect {
 		Game.sleep(10000 / CanvasControl.f);
 
 		field.repaintAster(g, point);
-
 	}
 
 	public void paint(Graphics g) {

@@ -26,7 +26,7 @@ public final class AIPlayer extends Player {
 	 * 試行回数
 	 */
 	private final static int TRIAL = 15;
-	
+
 	private final static int WAIT = 1000;
 
 	// private Point[] pt = new Point[TRIAL];
@@ -129,20 +129,21 @@ public final class AIPlayer extends Player {
 								cmd[t] = 0;
 								cancelFlag = true;
 								break;
-							}else{
+							} else {
 								System.out.println("ac noback");
 								Game.sleep(1000);
 							}
-							//i--;
-						}else{
-							 System.out.println("target - x = " + target[i][t].x +
-							 " y = " + target[i][t].y);			
+							// i--;
+						} else {
+							System.out.println("target - x = " + target[i][t].x
+									+ " y = " + target[i][t].y);
 						}
 
 						ac.setPointAndNext(target[i][t]);
 						i++;
 					}
-					if (i == 2 && cmd[t] == 0 
+					if (i == 2
+							&& cmd[t] == 0
 							&& f.at(target[0][t]).getColor() == f.at(
 									target[1][t]).getColor()
 							&& f.at(target[0][t]).getAsterClass() == null
@@ -213,12 +214,12 @@ public final class AIPlayer extends Player {
 				}
 			}
 			return null;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.print("AIPlayer.getAction: ");
 			System.out.println(e.getMessage());
 			return null;
 		} finally {
-			
+
 			game.getField().repaintField();
 			canvas.paintEffect(canvas.disappearControl);
 			Game.sleep(WAIT);
@@ -309,7 +310,8 @@ public final class AIPlayer extends Player {
 						&& j <= pt.x + range[0].length / 2) {
 					frange[i][j] = range[i - (pt.y - range.length / 2)][j
 							- (pt.x - range[0].length / 2)];
-					//System.out.println("target - "+frange[i][j]+" pt.x,y = "+pt.x+"/"+pt.y+"j(x),i(y)="+j+"/"+i);
+					// System.out.println("target - "+frange[i][j]+" pt.x,y =
+					// "+pt.x+"/"+pt.y+"j(x),i(y)="+j+"/"+i);
 					if (frange[i][j] == 1) {
 						c++;
 					}
@@ -368,9 +370,10 @@ public final class AIPlayer extends Player {
 		final Aster[][] f = field2.field;
 		final Player[] p = game.player;
 
-		Point[] sunPoint = new Point[2];
-		sunPoint[0] = field2.getSunPosition(p[0]);
-		sunPoint[1] = field2.getSunPosition(p[1]);
+		Point[] sunPoint = {
+			field2.getSunPosition(p[0]),
+			field2.getSunPosition(p[1]),
+		};
 
 		if (sunPoint[pNum] == null) {
 			System.out.println("AIPlayer.evaluation return -10000");
@@ -381,19 +384,21 @@ public final class AIPlayer extends Player {
 			return 10000;
 		}
 
-		
-		if(sunPoint[pNum].x < 3) ev -= (3-sunPoint[pNum].x)*150;
-		else if(sunPoint[pNum].x > x - 4) ev -= (sunPoint[pNum].x - (x-4)) * 200;
-		if(sunPoint[pNum].y < 2) ev -= (2-sunPoint[pNum].y)*100;
-		else if(sunPoint[pNum].y > y - 3) ev -= (sunPoint[pNum].y - (x-3)) * 100;
+		if (sunPoint[pNum].x < 3)
+			ev -= (3 - sunPoint[pNum].x) * 150;
+		else if (sunPoint[pNum].x > x - 4)
+			ev -= (sunPoint[pNum].x - (x - 4)) * 200;
+		if (sunPoint[pNum].y < 2)
+			ev -= (2 - sunPoint[pNum].y) * 100;
+		else if (sunPoint[pNum].y > y - 3)
+			ev -= (sunPoint[pNum].y - (x - 3)) * 100;
 
 		for (int i = 0; i < y; i++) {
 			for (int j = 0; j < x; j++) {
 				final AsterClass ac = f[i][j].getAsterClass();
 				if (ac != null) {
 					if (ac.getPlayer() == game.getCurrentPlayer()) {
-						int dist = field2.getDistance(sunPoint[1 - pNum],
-								new Point(j, i));
+						int dist = getDistance(sunPoint[1 - pNum], j, i);
 						// System.out.println("dist = " +dist+", x = " + j +" y
 						// = "+i);
 						ev += AsterClass.classCost[ac.getNumber() - 1]
@@ -402,8 +407,7 @@ public final class AIPlayer extends Player {
 							ev += 500;
 						}
 					} else {
-						int dist = field2.getDistance(sunPoint[pNum],
-								new Point(j, i));
+						int dist = getDistance(sunPoint[pNum], j, i);
 						ev -= AsterClass.classCost[ac.getNumber() - 1]
 								* ((100 / dist) + 1);
 						if (ac.getNumber() == 1) {
@@ -423,15 +427,16 @@ public final class AIPlayer extends Player {
 		System.out.println("AIPlayer.evaluation return" + ev);
 		return ev;
 	}
-/*
-	private void filedClone(Aster[][] dst, Aster[][] src) {
-		for (int i = 0; i < src.length; i++) {
-			for (int j = 0; j < src[0].length; j++) {
-				dst[i][j] = src[i][j].clone();
-			}
-		}
+
+	static int getDistance(Point a, int x2, int y2) {
+		return Math.abs(a.x - x2) + Math.abs(a.y - y2);
 	}
-*/
+
+	/*
+	 * private void filedClone(Aster[][] dst, Aster[][] src) { for (int i = 0; i <
+	 * src.length; i++) { for (int j = 0; j < src[0].length; j++) { dst[i][j] =
+	 * src[i][j].clone(); } } }
+	 */
 	private void backUpField() {
 		final Field f = game.getField();
 
@@ -461,7 +466,7 @@ public final class AIPlayer extends Player {
 				int n = a.getNum();
 				final int x = f.X;
 				while ((i * x + j) != n) {// アステルの順番が入れ替わってた場合
-					//System.out.println("swap-"+i*x+j+"-"+n+"i="+i+"j="+j);
+					// System.out.println("swap-"+i*x+j+"-"+n+"i="+i+"j="+j);
 					f.swap(new Point(j, i), new Point(n % x, n / x));
 					a = f.field[i][j];
 					n = a.getNum();
@@ -493,7 +498,7 @@ public final class AIPlayer extends Player {
 		final Range canvasRange = game.getCanvas().range;
 		int[][] range = ac.getRange();
 		Effect.setEffect(true);
-		
+
 		System.out.println("execute - class = " + ac.getNumber());
 
 		canvas.cursor.setCursor(pt, Cursor.CURSOR_1);
@@ -509,7 +514,7 @@ public final class AIPlayer extends Player {
 		range = ac.getRange();
 		canvasRange.setRange(pt, range);
 		canvas.repaint();
-		
+
 		System.out.println("wait2");
 		Game.sleep(WAIT);
 

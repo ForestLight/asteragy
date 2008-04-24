@@ -34,7 +34,7 @@ public final class CanvasControl extends Canvas {
 	private int topmargin;
 
 	private int leftmargin;
-	
+
 	private boolean paintFlag;
 
 	public CanvasControl(Game game) {
@@ -45,10 +45,6 @@ public final class CanvasControl extends Canvas {
 		setBackground(Graphics.getColorOfName(Graphics.BLACK));
 		paintFlag = true;
 		repaint();
-	}
-
-	Canvas getCanvas() {
-		return this;
 	}
 
 	private void setFieldMargin() {
@@ -68,8 +64,8 @@ public final class CanvasControl extends Canvas {
 			setFieldMargin();
 		return leftmargin;
 	}
-	
-	public void setPaintFlag(boolean b){
+
+	public void setPaintFlag(boolean b) {
 		paintFlag = b;
 	}
 
@@ -79,10 +75,8 @@ public final class CanvasControl extends Canvas {
 
 	private Command getCommand() {
 		if (sunCommand.visible()) {
-			System.out.println("return suncommand");
 			return sunCommand;
 		} else {
-			System.out.println("return commoncommand");
 			return commonCommand;
 		}
 	}
@@ -108,24 +102,21 @@ public final class CanvasControl extends Canvas {
 	}
 
 	private void paintNowloading(Graphics g) {
-		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
-		g.drawRect(0, getHeight() / 4, getWidth(), getHeight() * 3 / 4);
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
+		g.drawRect(0, getHeight() / 4, getWidth(), getHeight() * 3 / 4);
+		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.drawString("Now Loading...", 78, 126);
 	}
 
 	public void gameOver(Player winner) {
-		Effect effect = new EffectGameOver(this, winner);
-		paintEffect(effect);
+		paintEffect(new EffectGameOver(this, winner));
 	}
 
 	private PaintString spaint;
 
 	public void paintString(String string, boolean visible) {
-		if (visible)
-			spaint = new PaintString(this, string);
-		else
-			spaint = null;
+		spaint = visible ? new PaintString(this, string)
+		                 : null;
 		repaint();
 	}
 
@@ -135,21 +126,21 @@ public final class CanvasControl extends Canvas {
 	}
 
 	public void paint(Graphics g) {
-		if(paintFlag){
+		if (paintFlag) {
 			g.lock();
 			if (game.initializing) {
 				paintNowloading(g);
 			} else {
-				System.out.println("paintFlag "+ paintFlag);
+				System.out.println("paintFlag " + paintFlag);
 				g.drawImage(backgroundImage, 0, 0);
 				paintPlayerInfo(g);
 				paintFieldSpace(g);
-	
+
 				paintString(g);
 				System.out.println("end paint");
 			}
 			g.unlock(true); // trueÇ…ÇµÇΩÇÃÇÕà¿ëSë[íuÅB
-		}else{
+		} else {
 			System.out.println("paintFlag false");
 		}
 	}
@@ -210,10 +201,12 @@ public final class CanvasControl extends Canvas {
 
 	public void processEvent(int type, int param) {
 		type = pre.processEvent(type, param);
-	/*	if (type == Display.KEY_PRESSED_EVENT && param == Display.KEY_9)
-			Effect.setEffect();*/
-//		if (type == Display.KEY_PRESSED_EVENT && param == Display.KEY_SOFT1 )
-//			game.titleBack();
+		/*
+		 * if (type == Display.KEY_PRESSED_EVENT && param == Display.KEY_9)
+		 * Effect.setEffect();
+		 */
+		// if (type == Display.KEY_PRESSED_EVENT && param == Display.KEY_SOFT1 )
+		// game.titleBack();
 		if (eventProcesser != null)
 			eventProcesser.processEvent(type, param);
 	}
@@ -229,8 +222,7 @@ public final class CanvasControl extends Canvas {
 	Image getScreen(Point location, Point size) {
 		Image screen = Image.createImage(size.x, size.y);
 		Graphics g = screen.getGraphics();
-		g.drawImage(getScreen(), 0, 0, location.x, location.y,
-				size.x, size.y);
+		g.drawImage(getScreen(), 0, 0, location.x, location.y, size.x, size.y);
 		g.dispose();
 		return screen;
 	}
@@ -244,6 +236,5 @@ public final class CanvasControl extends Canvas {
 		paint(g);
 		g.dispose();
 	}
-	
 
 }
