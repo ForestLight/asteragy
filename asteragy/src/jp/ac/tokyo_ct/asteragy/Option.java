@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+//import java.io.OutputStream;
 
 public final class Option {
 	public int fieldXSize;
@@ -13,7 +13,7 @@ public final class Option {
 	public int connection;
 	public static final int[] initialAP = {0, 10, 20, 30, 50, 100, 999};
 
-	public Option(int XSize, int YSize, int color, int ap, int cn) {
+	Option(int XSize, int YSize, int color, int ap, int cn) {
 		fieldXSize = XSize;
 		fieldYSize = YSize;
 		numOfColors = color;
@@ -22,7 +22,7 @@ public final class Option {
 		connection = cn;
 	}
 
-	public Option() {
+	Option() {
 		fieldXSize = 9;
 		fieldYSize = 9;
 		numOfColors = 5;

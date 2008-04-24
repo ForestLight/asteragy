@@ -10,7 +10,7 @@ public class EffectGameOver extends Effect {
 
 	private final Player winner;
 
-	public EffectGameOver(CanvasControl canvas, Player winner) {
+	EffectGameOver(CanvasControl canvas, Player winner) {
 		this.canvas = canvas;
 		this.winner = winner;
 	}
@@ -34,13 +34,12 @@ public class EffectGameOver extends Effect {
 		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
 		w.drawString(win, 0, height);
 		w.dispose();
-		ImagePixels pixels = new ImagePixels(winner);
 
 		Point l = new Point((canvas.getWidth() - winner.getWidth() * 3) / 2,
 				(canvas.getHeight() - height * 3) / 2);
 
 		Point start = new Point(0, 0);
-		StarWord paint = new StarWord(pixels, 3, start);
+		StarWord paint = new StarWord(new ImagePixels(winner), 3, start);
 		for (int i = 0; i < frame; i++) {
 			g.lock();
 			g.setOrigin(0, 0);

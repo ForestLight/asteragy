@@ -39,7 +39,7 @@ public final class Title extends Canvas implements TimerListener {
 
 	// private static int highScore;
 
-	public Title() {
+	Title() {
 		if (menu == null) {
 			menu = new Image[10];
 			for (int i = 0; i < 10; i++)
@@ -235,7 +235,7 @@ public final class Title extends Canvas implements TimerListener {
 							option.connection++;
 						break;
 					case 4:
-						if (option.AP_Pointer < option.initialAP.length - 1)
+						if (option.AP_Pointer < Option.initialAP.length - 1)
 							option.AP_Pointer++;
 						break;
 					}
@@ -369,7 +369,7 @@ public final class Title extends Canvas implements TimerListener {
 						break;
 					case 4:
 						leftTriangle = option.AP_Pointer > 0;
-						rightTriangle = option.AP_Pointer < option.initialAP.length - 1;
+						rightTriangle = option.AP_Pointer < Option.initialAP.length - 1;
 						break;
 					}
 					if (leftTriangle) {
@@ -393,7 +393,6 @@ public final class Title extends Canvas implements TimerListener {
 				}
 
 				g.unlock(true);
-
 			}
 		}
 	}

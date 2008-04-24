@@ -22,7 +22,7 @@ public class StarWord {
 
 	// private int time;
 
-	public StarWord(ImagePixels pixels, int space, Point point) {
+	StarWord(ImagePixels pixels, int space, Point point) {
 		// this.canvas = canvas;
 		this.point = point;
 		this.space = space;
@@ -31,8 +31,8 @@ public class StarWord {
 		Point nextpoint = point.clone();
 		nextPoint(pixels, nextpoint);
 		while (pixels.hasMoreElements()) {
-			Integer i = (Integer) pixels.nextElement();
-			if (i.intValue() == 0x0) {
+			int i = pixels.nextElement();
+			if (i == 0x0) {
 				next = new StarWord(pixels, space, nextpoint);
 				break;
 			} else {
@@ -50,7 +50,7 @@ public class StarWord {
 		}
 	}
 
-	public void paint(Graphics g) {
+	void paint(Graphics g) {
 		// g.drawImage(star, point.x, point.y);
 		// g.drawImage(star, matrix);
 		//g.setColor(Graphics.getColorOfRGB(255, 255, 100));
