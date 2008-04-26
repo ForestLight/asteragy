@@ -88,8 +88,8 @@ final class Game {
 			a = field.field[0][field.X / 2];
 			new SunClass(a, player[1]);
 	
-			player[0].addAP(Option.initialAP[option.AP_Pointer]);
-			player[1].addAP(Option.initialAP[option.AP_Pointer]);
+			player[0].addAP(option.asterPower);
+			player[1].addAP(option.asterPower);
 	
 			if (option.gameType == 2) {
 				httpLogger.sendInitField(field);
