@@ -16,7 +16,7 @@ public final class Cursor /* implements PaintItem */{
 
 	// ƒJ[ƒ\ƒ‹î•ñ
 
-	private Point point;
+	private Point point = new Point();
 
 	private int type;
 
