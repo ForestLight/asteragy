@@ -21,11 +21,15 @@ public final class Title extends Canvas implements TimerListener {
 
 	private int cursor = 0;
 
+	private int key;
+
 	private boolean optionMenuFlag = false;
 
 	private boolean explainAsterClassFlag = false;
 
 	private boolean explainRuleFlag = false;
+
+	private boolean unlimit = false;
 
 	private Option option = new Option();
 
@@ -199,8 +203,21 @@ public final class Title extends Canvas implements TimerListener {
 							option.connection--;
 						break;
 					case 4:
-						if (option.AP_Pointer > 0)
+						if (!(((key >> Display.KEY_1) & 0x1) == 1) && !(((key >> Display.KEY_3) & 0x1) == 1)) {
+							unlimit = false;
+							if (option.asterPower > Option.initialAP[option.AP_Pointer]) {
+								option.AP_Pointer++;
+							}
+						}
+						if (unlimit) {
+							option.asterPower--;
+							if (option.AP_Pointer > 0 && option.asterPower <= Option.initialAP[option.AP_Pointer-1])
+								option.AP_Pointer--;
+						}
+						else if (option.AP_Pointer > 0) {
 							option.AP_Pointer--;
+							option.asterPower = Option.initialAP[option.AP_Pointer];
+						}
 						break;
 					}
 				} else if (explainAsterClassFlag && !explainRuleFlag) {
@@ -235,8 +252,21 @@ public final class Title extends Canvas implements TimerListener {
 							option.connection++;
 						break;
 					case 4:
-						if (option.AP_Pointer < Option.initialAP.length - 1)
+						if (!(((key >> Display.KEY_1) & 0x1) == 1) && !(((key >> Display.KEY_3) & 0x1) == 1)) {
+							unlimit = false;
+							if (option.asterPower < Option.initialAP[option.AP_Pointer]) {
+								option.AP_Pointer--;
+							}
+						}	
+						if (unlimit) {
+							option.asterPower++;
+							if (option.AP_Pointer < Option.initialAP.length - 1 && option.asterPower >= Option.initialAP[option.AP_Pointer+1])
+								option.AP_Pointer++;
+						}
+						else if (option.AP_Pointer < Option.initialAP.length - 1) {
 							option.AP_Pointer++;
+							option.asterPower = Option.initialAP[option.AP_Pointer];
+						}
 						break;
 					}
 				} else if (explainAsterClassFlag && !explainRuleFlag) {
@@ -268,6 +298,7 @@ public final class Title extends Canvas implements TimerListener {
 	}
 
 	public void paint(Graphics g) {
+		key = getKeypadState();
 
 		if (explainAsterClassFlag) {
 			eac.paint(g);
@@ -344,7 +375,7 @@ public final class Title extends Canvas implements TimerListener {
 				g.drawString(String.valueOf(option.fieldXSize), 120, 30);
 				g.drawString(String.valueOf(option.numOfColors), 120, 45);
 				g.drawString(String.valueOf(option.connection), 120, 60);
-				g.drawString(String.valueOf(Option.initialAP[option.AP_Pointer]), 120, 75);
+				g.drawString(String.valueOf(option.asterPower), 120, 75);
 
 				g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 
@@ -387,6 +418,20 @@ public final class Title extends Canvas implements TimerListener {
 								cursor * 15 + 14);
 						g.drawString("|", 139 + 7 * (cursor / 4),
 								cursor * 15 + 14);
+					}
+					if(cursor == 4 && ((key >> Display.KEY_1) & 0x1) == 1 && ((key >> Display.KEY_3) & 0x1) == 1){
+						unlimit = true;
+						g.setColor(Graphics.getColorOfName(Graphics.LIME));
+						g.drawRect(118, cursor * 15 + 2, 15 + 7 * (cursor / 4), 15);
+						g.drawString("<", 105, cursor * 15 + 14);
+						g.drawString("<", 105, cursor * 15 + 15);
+						g.drawString("|", 108, cursor * 15 + 14);
+						g.drawString("|", 109, cursor * 15 + 14);
+						g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 14);
+						g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 15);
+						g.drawString("|", 138 + 7 * (cursor / 4), cursor * 15 + 14);
+						g.drawString("|", 139 + 7 * (cursor / 4), cursor * 15 + 14);
+						g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 					}
 				} else {
 					g.drawRect(0, 224, 35, 15);
