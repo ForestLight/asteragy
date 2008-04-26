@@ -428,11 +428,12 @@ final class Field /* implements PaintItem */{
 		final CanvasControl canvas = game.getCanvas();
 		final Aster aster = field[y][x];
 		this.setOrignAster(g, x, y);
-		aster.paint(g);
+		aster.paint(g);		
 		canvas.range.paint(g, x, y);
 		final Cursor cursor = canvas.cursor;
-		if (cursor.isCursor(x, y))
+		if (cursor.isCursor(x, y)){
 			cursor.paint(g);
+		}
 	}
 
 	void repaintAsterRect(Graphics g, Point leftTop, Point rightBottom) {
