@@ -11,6 +11,7 @@ public final class Option {
 	public int gameType;
 	public int AP_Pointer; //initialAPへのインデックス
 	public int connection;
+	public int asterPower;
 	public static final int[] initialAP = {0, 10, 20, 30, 50, 100, 999};
 
 	Option(int XSize, int YSize, int color, int ap, int cn) {
@@ -20,6 +21,7 @@ public final class Option {
 		gameType = -1;
 		AP_Pointer = ap;
 		connection = cn;
+		asterPower = initialAP[AP_Pointer];
 	}
 
 	Option() {
@@ -28,7 +30,8 @@ public final class Option {
 		numOfColors = 5;
 		gameType = -1;
 		AP_Pointer = 2;
-		connection = 4;		
+		connection = 4;
+		asterPower = initialAP[AP_Pointer];
 	}
 	
 	public String toString() {
