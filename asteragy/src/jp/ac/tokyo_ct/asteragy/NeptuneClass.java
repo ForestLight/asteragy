@@ -37,8 +37,38 @@ public final class NeptuneClass extends AsterClass {
 		case 0:
 			return swapGetRange(defaultRange);
 		case 1:
-			return defaultRange;
+			int[][] range = new int[defaultRange.length][defaultRange[0].length];
+			final Field field = getAster().getField();
+			final Point thisPoint = field.asterToPoint(getAster());
+			// レンジの左上の座標のフィールド内での位置
+			Point pt = new Point();
+			pt.x = thisPoint.x - (range[0].length / 2);
+			pt.y = thisPoint.y - (range.length / 2);
+
+			for (int i = 0; i < defaultRange.length; i++) {
+				if (!field.isYInFieldBound(pt.y + i))
+					continue;
+				for (int j = 0; j < defaultRange[0].length; j++) {
+					if (!field.isXInFieldBound(pt.x + j))
+						continue;
+
+					// レンジ内であり
+					if (defaultRange[i][j] == 1) {
+						range[i][j] = 1;
+						// その位置のアステルにクラスがあり
+						final Aster a = field.at(pt.y + i, pt.x + j);
+						final AsterClass c = a.getAsterClass();
+						if (c != null) {
+							if (c.getNumber() == 1) {
+								range[i][j] = 0;
+							}
+						}
+					}
+				}
+			}
+			return range;
 		}
+		
 		return null;
 	}
 
