@@ -59,7 +59,7 @@ public final class Option {
 		fieldYSize = HTTPPlayer.readIntChar(is);
 		numOfColors = HTTPPlayer.readIntChar(is);
 		gameType = HTTPPlayer.readIntChar(is);
-		AP_Pointer = HTTPPlayer.readIntChar(is);
+		asterPower = HTTPPlayer.readIntChar(is);
 		connection = HTTPPlayer.readIntChar(is);
 	}
 }
