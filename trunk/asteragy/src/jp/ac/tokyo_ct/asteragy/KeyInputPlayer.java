@@ -144,7 +144,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 				selectTarget(param);
 				return;
 			case 3:
-				if (action.aster.getAsterClass() instanceof SunClass) {
+				if (action.aster.getAsterClass() instanceof SunClass && action.commandType == 1) {
 					selectSunTarget(param);
 				} else {
 					selectTarget(param);
@@ -247,6 +247,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		final CommonCommand cc = canvas.commonCommand;
 		cc.setAsterClass(ac);
 		cc.setCommand(action.commandType, pt);
+		ac.setCommand(action.commandType);
 		final Range canvasRange = canvas.range;
 		int[][] range = ac.getRange();
 		canvasRange.setRange(pt, range);
