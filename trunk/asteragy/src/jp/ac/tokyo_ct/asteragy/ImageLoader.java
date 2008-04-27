@@ -122,10 +122,11 @@ public class ImageLoader {
 						.concat(String.valueOf(position)));
 				// filename
 				int lenght = input.readInt();
-				if (lenght == 0)
-					return false;
-				else if (lenght <= 0)
+				if (lenght <= 0) {
+					if (images.size() > 0)
+						return false;
 					return true;
+				}
 				System.out.println(lenght);
 				byte[] buffer = new byte[lenght];
 				if (input.read(buffer) < 0)
