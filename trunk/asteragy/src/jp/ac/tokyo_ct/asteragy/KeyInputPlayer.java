@@ -158,11 +158,17 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		case 0:
 			canvas.commonCommand.setCommand(-1, null);
 			break;
-		case 1:
+		case 1:{
+			action.commandType=0;
+			ac.setCommand(action.commandType);
+			final Range canvasRange = canvas.range;
+			int[][] range = ac.getRange();
+			canvasRange.setRange(pt, range);
 			canvas.commonCommand.setCommand(0, pt);
-			break;
+			break;}
 		case 2:
 		case 3:
+			ac.setCommand(action.commandType);
 			final int[][] range = ac.getRange();
 			System.out.println("processEvent: range.length / 2 = " + range.length / 2);
 			canvasRange.setRange(ptAster, range);
