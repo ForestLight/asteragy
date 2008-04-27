@@ -81,6 +81,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 				break;
 			case 2: // ‚±‚±break‚È‚µ
 			case 3:
+				canvas.sunCommand.setCommand(-1, null);
 				pt = ptAster.clone();
 				ac.moveAstern();
 				break;
@@ -93,7 +94,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 					return;
 				}
 				if (action.aster.getAsterClass() instanceof SunClass) {
-					if (phase == 2) {
+					if (phase == 2 && action.commandType==1) {
 						canvas.sunCommand.setCommand(0, ptAster);
 					} else {
 						canvas.sunCommand.setCommand(-1, null);
@@ -109,7 +110,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 			case 0:
 				final Aster a = field.at(pt);
 				ac = a.getAsterClass();
-				if (ac == null || ac.getPlayer() != this) {
+				if (ac == null || ac.getPlayer() != this || ac.getActionCount()==0) {
 					return;
 				}
 				action.aster = a;
