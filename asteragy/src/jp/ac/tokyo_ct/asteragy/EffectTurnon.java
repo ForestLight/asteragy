@@ -4,17 +4,17 @@ import com.nttdocomo.ui.Font;
 import com.nttdocomo.ui.Graphics;
 import com.nttdocomo.ui.Image;
 
-public class EffectTurnon extends Effect {
+final class EffectTurnon extends Effect {
 
 	final private CanvasControl canvas;
 
 	Player player;
 
-	public EffectTurnon(CanvasControl canvas) {
+	EffectTurnon(CanvasControl canvas) {
 		this.canvas = canvas;
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		final Image back = Player.turnOnBack;
 		final int x = (canvas.getWidth() - back.getWidth()) / 2;
 		final int y = (canvas.getHeight() - back.getHeight()) / 2;

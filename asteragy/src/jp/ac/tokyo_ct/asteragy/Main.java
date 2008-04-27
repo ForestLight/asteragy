@@ -30,5 +30,5 @@ public final class Main extends IApplication {
 
 	private static final Title title = new Title();
 
-	public static final Game game = new Game();
+	static final Game game = new Game();
 }

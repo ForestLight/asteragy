@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class JupiterClass extends AsterClass {
+final class JupiterClass extends AsterClass {
 	private static int[][] defaultRange = { { 0, 0, 0, 0, 0 },
 			{ 0, 0, 1, 0, 0 }, { 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 },
 			{ 0, 1, 1, 1, 0 } };
@@ -13,25 +13,25 @@ public final class JupiterClass extends AsterClass {
 
 	private static Image asterImage;
 
-	public JupiterClass(Aster a, Player p) {
+	JupiterClass(Aster a, Player p) {
 		super(a, p);
 	}
 
-	public JupiterClass(JupiterClass a) {
+	JupiterClass(JupiterClass a) {
 		super(a);
 	}
 
-	public AsterClass clone() {
+	AsterClass clone() {
 		return new JupiterClass(this);
 	}
 	
-	public int getNumber() {
+	int getNumber() {
 		return 7;
 	}
 
-	public int[][] getRange() {
+	int[][] getRange() {
 		final Aster a = getAster();
-		final Field field = a.getField();
+		final Field field = a.field;
 		final Point asterPoint = field.asterToPoint(a);
 		switch (mode) {
 		case 0:
@@ -97,7 +97,7 @@ public final class JupiterClass extends AsterClass {
 		return null;
 	}
 
-	public boolean setPointAndNext(Point pt) {
+	boolean setPointAndNext(Point pt) {
 		// スワップの場合もコマンドの場合も同じ
 		switch (mode) {
 		case 0:
@@ -109,7 +109,7 @@ public final class JupiterClass extends AsterClass {
 		return false;
 	}
 
-	public boolean hasNext() {
+	boolean hasNext() {
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -122,15 +122,15 @@ public final class JupiterClass extends AsterClass {
 		return false;
 	}
 
-	public boolean moveAstern() {
+	boolean moveAstern() {
 		return swapMoveAstern();
 	}
 
-	public void executeSpecialCommand() {
-		final Field field = getAster().getField();
+	void executeSpecialCommand() {
+		final Field field = getAster().field;
 		
 		Effect effect = new EffectCommandJupiter(field, target1);
-		getAster().getField().getCanvas().paintEffect(effect);
+		Main.game.getCanvas().paintEffect(effect);
 
 		field.setDeleteFlag(target1);
 		field.delete(target1.x, target1.y);
@@ -140,7 +140,7 @@ public final class JupiterClass extends AsterClass {
 		return defaultRange;
 	}
 
-	public Image getImage() {
+	Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(7);
 		}

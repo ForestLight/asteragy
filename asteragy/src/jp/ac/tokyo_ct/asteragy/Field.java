@@ -8,7 +8,7 @@ import com.nttdocomo.ui.Graphics;
 /**
  * @author Okubo
  */
-final class Field /* implements PaintItem */{
+final class Field {
 
 	final Aster[][] field;
 
@@ -42,12 +42,7 @@ final class Field /* implements PaintItem */{
 			for (int j = 0; j < X; ++j)
 				f.backup[i][j] = backup[i][j];
 		f.countAster = countAster;
-		f.fieldinit = fieldinit;
 		return f;
-	}
-
-	boolean isFieldInit() {
-		return fieldinit;
 	}
 	
 	/**
@@ -55,7 +50,6 @@ final class Field /* implements PaintItem */{
 	 * 
 	 */
 	void setAster() {
-		fieldinit = true;
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
 				field[i][j] = new Aster(this);
@@ -66,7 +60,6 @@ final class Field /* implements PaintItem */{
 				}
 			}
 		}
-		fieldinit = false;
 	}
 
 	/**
@@ -386,10 +379,10 @@ final class Field /* implements PaintItem */{
 			return null;
 	}
 
-	// public void fieldBackUp(){
+	// void fieldBackUp(){
 	//
 	// }
-	// public void restoreField(){
+	// void restoreField(){
 	//
 	// }
 	/**
@@ -398,7 +391,7 @@ final class Field /* implements PaintItem */{
 	 * @param g
 	 *            描画先グラフィクス
 	 */
-	public void paint(Graphics g) {
+	void paint(Graphics g) {
 		// フィールド，アステル描画
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
@@ -521,7 +514,7 @@ final class Field /* implements PaintItem */{
 	}
 	
 	String toStringForInit() {
-		StringBuffer buf = new StringBuffer(200);
+		final StringBuffer buf = new StringBuffer(200);
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
 				buf.append(field[i][j].getColor());

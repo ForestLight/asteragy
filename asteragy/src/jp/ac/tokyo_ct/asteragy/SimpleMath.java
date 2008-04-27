@@ -1,10 +1,10 @@
 package jp.ac.tokyo_ct.asteragy;
 
-public final class SimpleMath {
+final class SimpleMath {
 
-	public static final int cycle = 360;
+	static final int cycle = 360;
 
-	public static final int divide = 4096;
+	static final int divide = 4096;
 
 	private static final int[] value = { 0, 71, 142, 214, 285, 356, 428, 499,
 			570, 640, 711, 781, 851, 921, 990, 1060, 1129, 1197, 1265, 1333,
@@ -23,7 +23,7 @@ public final class SimpleMath {
 	 *            度数法
 	 * @return sin(theta)*4096
 	 */
-	public static int sin(int theta) {
+	static int sin(int theta) {
 		int x;
 		int minus;
 		theta = (theta % cycle + cycle) % cycle;
@@ -49,7 +49,7 @@ public final class SimpleMath {
 	 *            度数法
 	 * @return sin(theta)*4096
 	 */
-	public static int cos(int theta) {
+	static int cos(int theta) {
 		return sin(theta + cycle / 4);
 	}
 }

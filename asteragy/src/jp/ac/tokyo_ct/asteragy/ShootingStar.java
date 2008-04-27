@@ -3,7 +3,7 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.Canvas;
 import com.nttdocomo.ui.Graphics;
 
-public class ShootingStar /*implements PaintItem*/ {
+final class ShootingStar {
 
 	private static final int color = Graphics.getColorOfRGB(0x00, 0x80, 0x8c);
 
@@ -19,22 +19,22 @@ public class ShootingStar /*implements PaintItem*/ {
 
 	private int time;
 
-	public ShootingStar(Canvas canvas, ShootingStar parent) {
+	ShootingStar(Canvas canvas, ShootingStar parent) {
 		this.canvas = canvas;
 		this.parent = parent;
 		child = null;
 		newStar();
 	}
 
-	public void setParent(ShootingStar parent) {
+	void setParent(ShootingStar parent) {
 		this.parent = parent;
 	}
 
-	public void setChild(ShootingStar child) {
+	void setChild(ShootingStar child) {
 		this.child = child;
 	}
 
-	private void newStar() {
+	void newStar() {
 		if (parent != null) {
 			if ((Game.random.nextInt() >>> 1) % 2 == 0) {
 				if (child != null)
@@ -54,7 +54,7 @@ public class ShootingStar /*implements PaintItem*/ {
 		}
 	}
 
-	public void paint(Graphics g) {
+	void paint(Graphics g) {
 		if (point == null)
 			return;
 		point.x -= 3;

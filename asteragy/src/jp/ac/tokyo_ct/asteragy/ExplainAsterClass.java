@@ -9,17 +9,17 @@ import com.nttdocomo.ui.*;
  * Title.javaに統合した方がいい気がしないでもない
  * 
  */
-public final class ExplainAsterClass extends Canvas implements Runnable {
+final class ExplainAsterClass extends Canvas implements Runnable {
 
 	private static final int frame = 5;
 
-	public int number = 0;
+	int number = 0;
 
 	private int temp;
 
-	private Graphics g;
-
 	private Thread thread;
+	
+	private Title title;
 
 	private static Image asterClassImage;
 
@@ -36,7 +36,7 @@ public final class ExplainAsterClass extends Canvas implements Runnable {
 			g.fillRect(0, 0, f.getWidth(), f.getHeight());
 			g.drawImage(asterClassImage, 20, 20);
 			g.setColor(Graphics.getColorOfName(Graphics.WHITE));
-			g.drawString(AsterClass.classNameB[i], 20, 60);
+			g.drawString(AsterClass.classNameF[i], 20, 60);
 			g.drawString("コマンド: ".concat(AsterClass.commandName[i]), 20,
 					80);
 			g.drawString(AsterClass.commandExplain[i], 20, 100);
@@ -65,9 +65,10 @@ public final class ExplainAsterClass extends Canvas implements Runnable {
 		return pageImage;
 	}
 
-	ExplainAsterClass(Frame f) {
+	ExplainAsterClass(Title t) {
+		title = t;
 		if (pageImage == null) {
-			pageImage = pageImageInit(f);
+			pageImage = pageImageInit(t);
 		}
 	}
 
@@ -87,11 +88,11 @@ public final class ExplainAsterClass extends Canvas implements Runnable {
 			g.unlock(true);
 			return;
 		}
-		this.g = g;
 		thread = new Thread(this);
 		thread.start();
 	}
 	public void run() {
+		final Graphics g = title.getGraphics();
 
 		final int width = getWidth();
 		int dx = (temp - number) / Math.abs(temp - number);
@@ -114,7 +115,7 @@ public final class ExplainAsterClass extends Canvas implements Runnable {
 			Game.sleep(300 / CanvasControl.f);
 		}
 
-		g = null;
+		g.dispose();
 		temp = number;
 	}
 }

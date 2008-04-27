@@ -2,18 +2,18 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectCommandVenus extends Effect {
+class EffectCommandVenus extends Effect {
 
 	private final Field field;
 
 	private final Point point;
 
-	public EffectCommandVenus(Field field, Point point) {
+	EffectCommandVenus(Field field, Point point) {
 		this.field = field;
 		this.point = point;
 	}
 	
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		Point size = new Point(CanvasControl.measure, CanvasControl.measure);
 		Image image = field.getCanvas().getScreen(
 				field.getAsterLocation(point), size);

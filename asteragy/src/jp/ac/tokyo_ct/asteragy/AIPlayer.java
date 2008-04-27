@@ -1,9 +1,9 @@
 package jp.ac.tokyo_ct.asteragy;
 
 //現在カオスってるので動かさないで．見ないで＞＜
-public final class AIPlayer extends Player {
+final class AIPlayer extends Player {
 
-	public AIPlayer(Game game, String playerName) {
+	AIPlayer(Game game, String playerName) {
 		super(game, playerName);
 		System.out.println("AIPlayer");
 
@@ -43,7 +43,7 @@ public final class AIPlayer extends Player {
 
 	private int maxNum; // 何回目の試行でeMaxが更新されたか
 
-	public Action getAction() {
+	Action getAction() {
 		System.out.println("\n\nAIplayer.getAction()");
 		if (canvas == null) {
 			canvas = game.getCanvas();
@@ -223,7 +223,6 @@ public final class AIPlayer extends Player {
 			game.getField().repaintField();
 			canvas.paintEffect(canvas.disappearControl);
 			Game.sleep(WAIT);
-			canvas.resetEventProcesser();
 			Effect.setEffect(true);
 			game.getCanvas().setPaintFlag(true);
 		}

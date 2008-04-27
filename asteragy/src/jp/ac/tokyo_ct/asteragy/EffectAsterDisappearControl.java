@@ -6,7 +6,7 @@ import java.util.Vector;
 import com.nttdocomo.ui.Graphics;
 import com.nttdocomo.ui.Image;
 
-public final class EffectAsterDisappearControl extends Effect {
+final class EffectAsterDisappearControl extends Effect {
 	private static final int frame = 10;
 
 	private static final Image image = Game.loadImage("disappear");
@@ -20,7 +20,7 @@ public final class EffectAsterDisappearControl extends Effect {
 		disappearing.removeAllElements();
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 
 		if (disappearing.size() == 0)
 			return;

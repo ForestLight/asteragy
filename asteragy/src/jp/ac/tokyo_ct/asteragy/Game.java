@@ -16,14 +16,14 @@ final class Game {
 	/**
 	 * ゲームを開始する
 	 */
-	public void start(Option op) {
+	void start(Option op) {
 		System.out.println("Game.start()");
 		option = op;
 
 		initializing = true;
 		boolean initSuccess = initialize();
 		initializing = false;
-		
+
 		if (!initSuccess)
 			return;
 
@@ -34,11 +34,13 @@ final class Game {
 			gameover = turn(player[0]);
 			if (!gameover)
 				break;
-			if(titleBack) break;
+			if (titleBack)
+				break;
 			gameover = turn(player[1]);
 			if (!gameover)
 				break;
-			if(titleBack) break;
+			if (titleBack)
+				break;
 			System.gc();
 		}
 	}
@@ -53,14 +55,13 @@ final class Game {
 			}
 			canvas = new CanvasControl(this);
 			canvas.repaint(); // now loadingを表示させる
-	
+
 			Aster.COLOR_MAX = option.numOfColors;
 			Field.CONNECTION = option.connection;
-	
+
 			field = new Field(this, option.fieldXSize, option.fieldYSize);
 			field.setAster();
-	
-	
+
 			switch (option.gameType) {
 			case 1:
 				player[0] = new AIPlayer(this, "COM (Very Easy)");
@@ -81,16 +82,16 @@ final class Game {
 				player[0] = new KeyInputPlayer(this, "先攻");
 				player[1] = new KeyInputPlayer(this, "後攻");
 			}
-	
+
 			// 初期設定(仮)
 			Aster a = field.field[field.Y - 1][field.X / 2];
 			new SunClass(a, player[0]);
 			a = field.field[0][field.X / 2];
 			new SunClass(a, player[1]);
-	
+
 			player[0].addAP(option.asterPower);
 			player[1].addAP(option.asterPower);
-	
+
 			if (option.gameType == 2) {
 				httpLogger.sendInitField(field);
 			}
@@ -102,8 +103,9 @@ final class Game {
 			System.out.println(e.toString());
 			System.out.println(e.getMessage());
 			if (e instanceof ConnectionException) {
-				ConnectionException ce = (ConnectionException)e;
-				System.out.println("ConnectionException status: " + ce.getStatus());
+				ConnectionException ce = (ConnectionException) e;
+				System.out.println("ConnectionException status: "
+						+ ce.getStatus());
 			}
 			return false;
 		}
@@ -132,9 +134,9 @@ final class Game {
 				/*
 				 * Game.sleep(1500);
 				 */
-				if(goPlayer.equals(this.player[0])){
+				if (goPlayer.equals(this.player[0])) {
 					canvas.gameOver(this.player[0]);
-				}else{
+				} else {
 					canvas.gameOver(this.player[1]);
 				}
 
@@ -165,14 +167,14 @@ final class Game {
 	Player getCurrentPlayer() {
 		return currentPlayer;
 	}
-	
+
 	int getPlayerIndex(Player p) {
 		if (p == player[0])
 			return 0;
 		else if (p == player[1])
 			return 1;
 		else {
-			String s = "Game.getPlayerIndex: 引数pは有効なプレイヤーではない。";
+			String s = "Game.getPlayerIndex: 引数pはプレイヤーでない";
 			System.out.println(s);
 			throw new IllegalArgumentException(s);
 		}
@@ -238,7 +240,7 @@ final class Game {
 	// private int gameType;
 	private Option option;
 
-	public Option getOption() {
+	Option getOption() {
 		return option;
 	}
 
@@ -267,9 +269,10 @@ final class Game {
 			Thread.currentThread().interrupt();
 		}
 	}
-	
-	public void titleBack(){
-		titleBack=true;
+
+	void titleBack() {
+		titleBack = true;
 	}
+
 	private boolean titleBack;
 }

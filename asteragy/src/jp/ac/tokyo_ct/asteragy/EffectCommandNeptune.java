@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class EffectCommandNeptune extends Effect {
+final class EffectCommandNeptune extends Effect {
 
 	//private static Image effect;
 
@@ -10,13 +10,13 @@ public final class EffectCommandNeptune extends Effect {
 
 	private final Point point;
 
-	public EffectCommandNeptune(Field field, Point point) {
+	EffectCommandNeptune(Field field, Point point) {
 		this.field = field;
 		this.point = point;
 		// loadImage();
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		g.setOrigin(0, 0);
 
 		final CanvasControl canvas = field.game.getCanvas();

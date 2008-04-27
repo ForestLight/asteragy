@@ -3,7 +3,7 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.Graphics;
 import com.nttdocomo.ui.Image;
 
-public final class EffectCommandMercury extends Effect {
+final class EffectCommandMercury extends Effect {
 
 	// private static Image effect;
 
@@ -17,7 +17,7 @@ public final class EffectCommandMercury extends Effect {
 
 	// private int time;
 
-	public EffectCommandMercury(Field field, Point point) {
+	EffectCommandMercury(Field field, Point point) {
 		this.field = field;
 		this.point = point;
 		// aster = field.getAster(point);
@@ -25,7 +25,7 @@ public final class EffectCommandMercury extends Effect {
 		// loadImage();
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		int r = 24;
 
 		Image back = field.getCanvas().getScreen(

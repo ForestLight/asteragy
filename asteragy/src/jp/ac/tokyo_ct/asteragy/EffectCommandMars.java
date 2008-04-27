@@ -3,7 +3,7 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.Graphics;
 import com.nttdocomo.ui.Image;
 
-public final class EffectCommandMars extends Effect {
+final class EffectCommandMars extends Effect {
 
 	private static final Image effect = Game.loadImage("mars_effect");
 
@@ -51,7 +51,7 @@ public final class EffectCommandMars extends Effect {
 		rightbottom = new Point(rx, by);
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		for (time = 0; time < 17; time++) {
 			g.lock();
 			field.repaintAsterRect(g, lefttop, rightbottom);
@@ -79,10 +79,4 @@ public final class EffectCommandMars extends Effect {
 
 		field.repaintAster(g, point);
 	}
-
-	public void paint(Graphics g) {
-		g.drawImage(effect, 0, 0, 0, (CanvasControl.measure - 1) * time,
-				CanvasControl.measure - 1, CanvasControl.measure - 1);
-	}
-
 }

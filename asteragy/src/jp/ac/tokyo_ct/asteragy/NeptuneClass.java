@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class NeptuneClass extends AsterClass {
+final class NeptuneClass extends AsterClass {
 	private static final int[][] defaultRange = { 
 			{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
@@ -16,29 +16,29 @@ public final class NeptuneClass extends AsterClass {
 
 	private static Image asterImage;
 
-	public NeptuneClass(Aster a, Player p) {
+	NeptuneClass(Aster a, Player p) {
 		super(a, p);
 	}
 
-	public NeptuneClass(NeptuneClass a) {
+	NeptuneClass(NeptuneClass a) {
 		super(a);
 	}
 
-	public AsterClass clone() {
+	AsterClass clone() {
 		return new NeptuneClass(this);
 	}
 
-	public int getNumber() {
+	int getNumber() {
 		return 10;
 	}
 
-	public int[][] getRange() {
+	int[][] getRange() {
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			final Field field = getAster().getField();
+			final Field field = getAster().field;
 			final Point thisPoint = field.asterToPoint(getAster());
 			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point();
@@ -72,7 +72,7 @@ public final class NeptuneClass extends AsterClass {
 		return null;
 	}
 
-	public boolean setPointAndNext(Point pt) {
+	boolean setPointAndNext(Point pt) {
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -83,7 +83,7 @@ public final class NeptuneClass extends AsterClass {
 		return false;
 	}
 
-	public boolean hasNext() {
+	boolean hasNext() {
 
 		switch (mode) {
 		case 0:
@@ -97,7 +97,7 @@ public final class NeptuneClass extends AsterClass {
 		return false;
 	}
 
-	public boolean moveAstern() {
+	boolean moveAstern() {
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -107,9 +107,9 @@ public final class NeptuneClass extends AsterClass {
 		return false;
 	}
 
-	public void executeSpecialCommand() {
+	void executeSpecialCommand() {
 		// ターゲットと自分をswap
-		final Field f = getAster().getField();
+		final Field f = getAster().field;
 		f.getCanvas().paintEffect(new EffectCommandNeptune(f, target1));
 
 		f.swap(target1, f.asterToPoint(getAster()));
@@ -121,7 +121,7 @@ public final class NeptuneClass extends AsterClass {
 		return defaultRange;
 	}
 
-	public Image getImage() {
+	Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(10);
 		}

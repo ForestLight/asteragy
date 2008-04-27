@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class MarsClass extends AsterClass {
+final class MarsClass extends AsterClass {
 	private static int[][] defaultRange = { { 0, 0, 0, 1, 0, 0, 0 },
 			{ 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
 			{ 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 },
@@ -15,23 +15,23 @@ public final class MarsClass extends AsterClass {
 
 	private static Image asterImage;
 
-	public MarsClass(Aster a, Player p) {
+	MarsClass(Aster a, Player p) {
 		super(a, p);
 	}
 
-	public MarsClass(MarsClass a) {
+	MarsClass(MarsClass a) {
 		super(a);
 	}
 
-	public AsterClass clone() {
+	AsterClass clone() {
 		return new MarsClass(this);
 	}
 
-	public int getNumber() {
+	int getNumber() {
 		return 6;
 	}
 
-	public int[][] getRange() {
+	int[][] getRange() {
 		final Aster a = getAster();
 		switch (mode) {
 		case 0:
@@ -43,7 +43,7 @@ public final class MarsClass extends AsterClass {
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
-			Field f = a.getField();
+			Field f = a.field;
 			Point pt = new Point();
 			pt.x = f.asterToPoint(a).x - (range[0].length / 2);
 			pt.y = f.asterToPoint(a).y - (range.length / 2);
@@ -102,7 +102,7 @@ public final class MarsClass extends AsterClass {
 		return null;
 	}
 
-	public boolean setPointAndNext(Point pt) {
+	boolean setPointAndNext(Point pt) {
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -113,7 +113,7 @@ public final class MarsClass extends AsterClass {
 		return false;
 	}
 
-	public boolean hasNext() {
+	boolean hasNext() {
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -126,7 +126,7 @@ public final class MarsClass extends AsterClass {
 		return false;
 	}
 
-	public boolean moveAstern() {
+	boolean moveAstern() {
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -138,8 +138,8 @@ public final class MarsClass extends AsterClass {
 		return false;
 	}
 
-	public void executeSpecialCommand() {
-		final Field f = getAster().getField();
+	void executeSpecialCommand() {
+		final Field f = getAster().field;
 		f.getCanvas().paintEffect(new EffectCommandMars(f, this, target1));
 		f.setDeleteFlag(target1);
 		f.delete(target1.x, target1.y);
@@ -149,7 +149,7 @@ public final class MarsClass extends AsterClass {
 		return defaultRange;
 	}
 
-	public Image getImage() {
+	Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(6);
 		}

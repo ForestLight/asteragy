@@ -7,13 +7,13 @@ import com.nttdocomo.ui.*;
  * @author Kazuto
  * 
  */
-public final class CanvasControl extends Canvas {
+final class CanvasControl extends Canvas {
 
 	static final int measure = 18;
 
-	public static final int f = 40;
+	static final int f = 40;
 
-	static final Image backgroundImage = createBackground();
+	static final Image backgroundImage = Game.loadImage("back");
 
 	final Game game;
 
@@ -23,7 +23,7 @@ public final class CanvasControl extends Canvas {
 
 	final SunCommand sunCommand = new SunCommand(this);
 
-	final Range range = new Range(this);
+	final Range range = new Range();
 
 	final EffectAsterDisappearControl disappearControl = new EffectAsterDisappearControl();
 
@@ -37,7 +37,7 @@ public final class CanvasControl extends Canvas {
 
 	private boolean paintFlag;
 
-	public CanvasControl(Game game) {
+	CanvasControl(Game game) {
 		this.game = game;
 		pre = new PreKeyProcesser(this);
 		pre.initKey(this);
@@ -53,48 +53,25 @@ public final class CanvasControl extends Canvas {
 		leftmargin = (getWidth() - field.X * measure) / 2;
 	}
 
-	public int getTopMargin() {
+	int getTopMargin() {
 		if (topmargin <= 0)
 			setFieldMargin();
 		return topmargin;
 	}
 
-	public int getLeftMargin() {
+	int getLeftMargin() {
 		if (leftmargin <= 0)
 			setFieldMargin();
 		return leftmargin;
 	}
 
-	public void setPaintFlag(boolean b) {
+	void setPaintFlag(boolean b) {
 		paintFlag = b;
 	}
+	
+	volatile EventProcesser eventProcesser;
 
-	public EffectAsterDisappearControl getDisappearControl() {
-		return disappearControl;
-	}
-
-	private Command getCommand() {
-		if (sunCommand.visible()) {
-			return sunCommand;
-		} else {
-			return commonCommand;
-		}
-	}
-
-	private volatile EventProcesser eventProcesser;
-
-	void setEventProcesser(EventProcesser e) {
-		eventProcesser = e;
-	}
-
-	/**
-	 * イベントプロセッサを削除する。
-	 */
-	void resetEventProcesser() {
-		eventProcesser = null;
-	}
-
-	public void onTurnStart(Player player) {
+	void onTurnStart(Player player) {
 		turnOn.player = player;
 		System.out.println("onTurnStart");
 		repaint();
@@ -108,21 +85,16 @@ public final class CanvasControl extends Canvas {
 		g.drawString("Now Loading...", 78, 126);
 	}
 
-	public void gameOver(Player winner) {
+	void gameOver(Player winner) {
 		paintEffect(new EffectGameOver(this, winner));
 	}
 
 	private PaintString spaint;
 
-	public void paintString(String string, boolean visible) {
+	void paintString(String string, boolean visible) {
 		spaint = visible ? new PaintString(this, string)
 		                 : null;
 		repaint();
-	}
-
-	private void paintString(Graphics g) {
-		if (spaint != null)
-			spaint.paint(g);
 	}
 
 	public void paint(Graphics g) {
@@ -131,63 +103,28 @@ public final class CanvasControl extends Canvas {
 			if (game.initializing) {
 				paintNowloading(g);
 			} else {
-				System.out.println("paintFlag " + paintFlag);
+//				System.out.println("paintFlag " + paintFlag);
 				g.drawImage(backgroundImage, 0, 0);
-				paintPlayerInfo(g);
-				paintFieldSpace(g);
+//				System.out.println("paintPlayerInfo");
+				game.player[0].paint(g);
+				game.player[1].paint(g);
+//				System.out.println("paintFieldSpace");
+				game.getField().paint(g);
+				cursor.paint(g);
+				if (sunCommand.visible()) {
+					sunCommand.paint(g);
+				} else {
+					commonCommand.paint(g);
+				}
 
-				paintString(g);
+				if (spaint != null)
+					spaint.paint(g);
 				System.out.println("end paint");
 			}
 			g.unlock(true); // trueにしたのは安全措置。
 		} else {
-			System.out.println("paintFlag false");
+//			System.out.println("paintFlag false");
 		}
-	}
-
-	/**
-	 * フィールド領域の描画
-	 * 
-	 * @param g
-	 *            描画先グラフィクス
-	 */
-	private void paintFieldSpace(Graphics g) {
-		System.out.println("paintFieldSpace");
-		game.getField().paint(g);
-		cursor.paint(g);
-		getCommand().paint(g);
-	}
-
-	/**
-	 * プレイヤー情報描画
-	 * 
-	 * @param g
-	 *            描画先グラフィクス
-	 */
-	private void paintPlayerInfo(Graphics g) {
-		System.out.println("paintPlayerInfo");
-		Player[] player = game.player;
-		player[0].paint(g);
-		player[1].paint(g);
-	}
-
-	/**
-	 * 固定背景作成
-	 * 
-	 */
-	private static Image createBackground() {
-		final Image base = Game.loadImage("back");
-		if (base == null)
-			return null;
-		// 背景画像作成
-		Image background = Image.createImage(base.getWidth(), base.getHeight());
-		// グラフィクス作成
-		Graphics g = background.getGraphics();
-		// 背景描画
-		g.drawImage(base, 0, 0);
-		// グラフィクス廃棄
-		g.dispose();
-		return background;
 	}
 
 	static void paintAsterBack(Graphics g, Point pt) {

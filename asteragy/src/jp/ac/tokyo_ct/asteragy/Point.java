@@ -3,26 +3,26 @@ package jp.ac.tokyo_ct.asteragy;
 /**
  * @author Yusuke x, y‚ÌÀ•W‚ğ•Û‚·‚éƒNƒ‰ƒX
  */
-public final class Point {
-	public int x;
+final class Point {
+	int x;
 
-	public int y;
+	int y;
 
-	public Point() {
+	Point() {
 		x = 0;
 		y = 0;
 	}
 
-	public Point(int x, int y) {
+	Point(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	public Point clone() {
+	Point clone() {
 		return new Point(x, y);
 	}
 
-	public Point add(Point point) {
+	Point add(Point point) {
 		Point p = this.clone();
 		p.x += point.x;
 		p.y += point.y;
@@ -35,7 +35,7 @@ public final class Point {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 /*
-	public boolean equals(Object rhs) {
+	boolean equals(Object rhs) {
 		if (this == rhs)
 			return true;
 		try {
@@ -45,7 +45,7 @@ public final class Point {
 		}
 	}
 */
-	public boolean equals(Point rhs) {
+	boolean equals(Point rhs) {
 		return x == rhs.x && y == rhs.y;
 	}
 
@@ -54,7 +54,7 @@ public final class Point {
 	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
-//	public int hashCode() {
+//	int hashCode() {
 //		return x ^ ~y;
 //	}
 

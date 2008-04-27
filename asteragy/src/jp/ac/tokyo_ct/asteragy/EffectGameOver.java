@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class EffectGameOver extends Effect {
+class EffectGameOver extends Effect {
 
 	private static final int frame = 15;
 
@@ -15,13 +15,13 @@ public class EffectGameOver extends Effect {
 		this.winner = winner;
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		Image back = canvas.getScreen();
 		Graphics b = back.getGraphics();
-		b.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		b.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		b.fillRect(0, canvas.getHeight() / 4, canvas.getWidth(), canvas
 				.getHeight() / 2);
-		b.setColor(Graphics.getColorOfRGB(255, 255, 255));
+		b.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		b.drawRect(-1, canvas.getHeight() / 4 - 1, canvas.getWidth() + 1,
 				canvas.getHeight() / 2);
 		b.dispose();
@@ -31,7 +31,7 @@ public class EffectGameOver extends Effect {
 		Image winner = Image.createImage(Font.getDefaultFont()
 				.getBBoxWidth(win), height + 1);
 		Graphics w = winner.getGraphics();
-		g.setColor(Graphics.getColorOfRGB(0, 0, 0));
+		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		w.drawString(win, 0, height);
 		w.dispose();
 

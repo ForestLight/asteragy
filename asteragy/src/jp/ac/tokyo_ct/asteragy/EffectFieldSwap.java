@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.Graphics;
 
-public final class EffectFieldSwap extends Effect {
+final class EffectFieldSwap extends Effect {
 
 	private final Field field;
 
@@ -14,14 +14,14 @@ public final class EffectFieldSwap extends Effect {
 
 	// private boolean h;
 
-	public EffectFieldSwap(Field field, Point a, Point b) {
+	EffectFieldSwap(Field field, Point a, Point b) {
 		this.field = field;
 		this.a = a;
 		this.b = b;
 		// checkSmall();
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		Aster aa = field.at(b);
 		Aster ab = field.at(a);
 

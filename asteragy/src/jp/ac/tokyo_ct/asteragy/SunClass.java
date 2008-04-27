@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.Image;
 
-public final class SunClass extends AsterClass {
+final class SunClass extends AsterClass {
 	private static int[][] defaultRange = { { 0, 0, 1, 0, 0 },
 			{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
 			{ 0, 0, 1, 0, 0 } };
@@ -11,30 +11,30 @@ public final class SunClass extends AsterClass {
 
 	int asterClassSelect;
 
-	public SunClass(SunClass a) {
+	SunClass(SunClass a) {
 		super(a);
 		//asterClassSelect = a.asterClassSelect;
 	}
 
-	public AsterClass clone() {
+	AsterClass clone() {
 		return new SunClass(this);
 	}
 
-	public SunClass(Aster a, Player p) {
+	SunClass(Aster a, Player p) {
 		super(a, p);
 	}
 
-	public int getNumber() {
+	int getNumber() {
 		return 1;
 	}
 
-	public int[][] getRange() {
+	int[][] getRange() {
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			final Field field = getAster().getField();
+			final Field field = getAster().field;
 			final Point thisPoint = field.asterToPoint(getAster());
 			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point();
@@ -72,7 +72,7 @@ public final class SunClass extends AsterClass {
 		return null;
 	}
 
-	public boolean setPointAndNext(Point pt) {
+	boolean setPointAndNext(Point pt) {
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -86,7 +86,7 @@ public final class SunClass extends AsterClass {
 		return false;
 	}
 
-	public boolean hasNext() {
+	boolean hasNext() {
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -99,7 +99,7 @@ public final class SunClass extends AsterClass {
 		return false;
 	}
 
-	public boolean moveAstern() {
+	boolean moveAstern() {
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -109,8 +109,8 @@ public final class SunClass extends AsterClass {
 		return false;
 	}
 
-	public void executeSpecialCommand() {
-		final Field field = getAster().getField();
+	void executeSpecialCommand() {
+		final Field field = getAster().field;
 		final Aster a = field.at(target1);
 		AsterClass ac = new StarClass(a, getPlayer());
 		logAction(new int[] {target1.x, target1.y, asterClassSelect});
@@ -157,7 +157,7 @@ public final class SunClass extends AsterClass {
 		return defaultRange;
 	}
 
-	public Image getImage() {
+	Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(1);
 		}

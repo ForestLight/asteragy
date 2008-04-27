@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class MercuryClass extends AsterClass {
+final class MercuryClass extends AsterClass {
 
 	private static int[][] defaultRange = { { 0, 0, 0, 0, 0 },
 			{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
@@ -10,23 +10,23 @@ public final class MercuryClass extends AsterClass {
 
 	private static Image asterImage;
 
-	public MercuryClass(Aster a, Player p) {
+	MercuryClass(Aster a, Player p) {
 		super(a, p);
 	}
 
-	public MercuryClass(MercuryClass a) {
+	MercuryClass(MercuryClass a) {
 		super(a);
 	}
 
-	public AsterClass clone() {
+	AsterClass clone() {
 		return new MercuryClass(this);
 	}
 
-	public int getNumber() {
+	int getNumber() {
 		return 3;
 	}
 
-	public int[][] getRange() {
+	int[][] getRange() {
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
@@ -34,7 +34,7 @@ public final class MercuryClass extends AsterClass {
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
 			final Point tmp = getAster().getPoint();
-			final Field field = getAster().getField();
+			final Field field = getAster().field;
 			Point pt = new Point(tmp.x - (range[0].length / 2), tmp.y
 					- (range.length / 2));
 
@@ -67,7 +67,7 @@ public final class MercuryClass extends AsterClass {
 		return null;
 	}
 
-	public boolean setPointAndNext(Point pt) {
+	boolean setPointAndNext(Point pt) {
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -78,7 +78,7 @@ public final class MercuryClass extends AsterClass {
 		return false;
 	}
 
-	public boolean hasNext() {
+	boolean hasNext() {
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -91,7 +91,7 @@ public final class MercuryClass extends AsterClass {
 		return false;
 	}
 
-	public boolean moveAstern() {
+	boolean moveAstern() {
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -101,8 +101,8 @@ public final class MercuryClass extends AsterClass {
 		return false;
 	}
 
-	public void executeSpecialCommand() {
-		final Field f = getAster().getField();
+	void executeSpecialCommand() {
+		final Field f = getAster().field;
 		f.getCanvas().paintEffect(new EffectCommandMercury(f, target1));
 		// 対象の行動可能回数を1回増やす
 		f.at(target1).getAsterClass().incActionCount();
@@ -113,7 +113,7 @@ public final class MercuryClass extends AsterClass {
 		return defaultRange;
 	}
 
-	public Image getImage() {
+	Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(3);
 		}
