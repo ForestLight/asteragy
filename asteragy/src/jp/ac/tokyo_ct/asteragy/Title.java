@@ -9,13 +9,13 @@ import com.nttdocomo.util.TimerListener;
  * 
  */
 final class Title extends Canvas implements TimerListener {
-	private static Image title = Game.loadImage("title");
+	private static Image title;
 
-	private static Image back = Game.loadImage("titleback");
+	private static Image back;
 
 	private static Image[] menu;
 
-	private static Image credit = Game.loadImage("credit");
+	private static Image credit;
 
 	private int depth = 0;
 
@@ -35,7 +35,7 @@ final class Title extends Canvas implements TimerListener {
 
 	private ExplainAsterClass eac;
 
-	private ExplainRules er = new ExplainRules();
+	private final ExplainRules er;
 
 	private ShootingStar star;
 
@@ -44,6 +44,12 @@ final class Title extends Canvas implements TimerListener {
 	// private static int highScore;
 
 	Title() {
+		if (title == null)
+			title = Game.loadImage("title");
+		if (back == null)
+			back = Game.loadImage("titleback");
+		if (credit == null)
+			credit = Game.loadImage("credit");
 		if (menu == null) {
 			menu = new Image[10];
 			for (int i = 0; i < 10; i++)
@@ -57,6 +63,7 @@ final class Title extends Canvas implements TimerListener {
 		}
 		star = new ShootingStar(this, null);
 		eac = new ExplainAsterClass(this);
+		er = new ExplainRules();
 	}
 
 	/**
@@ -152,7 +159,7 @@ final class Title extends Canvas implements TimerListener {
 								option.gameType = 1;
 								break;
 							case 1:
-								//option.gameType = 2;
+								// option.gameType = 2;
 								break;
 							case 2:
 								depth--;
@@ -203,7 +210,8 @@ final class Title extends Canvas implements TimerListener {
 							option.connection--;
 						break;
 					case 4:
-						if (!(((key >> Display.KEY_1) & 0x1) == 1) && !(((key >> Display.KEY_3) & 0x1) == 1)) {
+						if (!(((key >> Display.KEY_1) & 0x1) == 1)
+								&& !(((key >> Display.KEY_3) & 0x1) == 1)) {
 							unlimit = false;
 							if (option.asterPower > Option.initialAP[option.AP_Pointer]) {
 								option.AP_Pointer++;
@@ -211,10 +219,10 @@ final class Title extends Canvas implements TimerListener {
 						}
 						if (unlimit) {
 							option.asterPower--;
-							if (option.AP_Pointer > 0 && option.asterPower <= Option.initialAP[option.AP_Pointer-1])
+							if (option.AP_Pointer > 0
+									&& option.asterPower <= Option.initialAP[option.AP_Pointer - 1])
 								option.AP_Pointer--;
-						}
-						else if (option.AP_Pointer > 0) {
+						} else if (option.AP_Pointer > 0) {
 							option.AP_Pointer--;
 							option.asterPower = Option.initialAP[option.AP_Pointer];
 						}
@@ -252,18 +260,19 @@ final class Title extends Canvas implements TimerListener {
 							option.connection++;
 						break;
 					case 4:
-						if (!(((key >> Display.KEY_1) & 0x1) == 1) && !(((key >> Display.KEY_3) & 0x1) == 1)) {
+						if (!(((key >> Display.KEY_1) & 0x1) == 1)
+								&& !(((key >> Display.KEY_3) & 0x1) == 1)) {
 							unlimit = false;
 							if (option.asterPower < Option.initialAP[option.AP_Pointer]) {
 								option.AP_Pointer--;
 							}
-						}	
+						}
 						if (unlimit) {
 							option.asterPower++;
-							if (option.AP_Pointer < Option.initialAP.length - 1 && option.asterPower >= Option.initialAP[option.AP_Pointer+1])
+							if (option.AP_Pointer < Option.initialAP.length - 1
+									&& option.asterPower >= Option.initialAP[option.AP_Pointer + 1])
 								option.AP_Pointer++;
-						}
-						else if (option.AP_Pointer < Option.initialAP.length - 1) {
+						} else if (option.AP_Pointer < Option.initialAP.length - 1) {
 							option.AP_Pointer++;
 							option.asterPower = Option.initialAP[option.AP_Pointer];
 						}
@@ -419,18 +428,24 @@ final class Title extends Canvas implements TimerListener {
 						g.drawString("|", 139 + 7 * (cursor / 4),
 								cursor * 15 + 14);
 					}
-					if(cursor == 4 && ((key >> Display.KEY_1) & 0x1) == 1 && ((key >> Display.KEY_3) & 0x1) == 1){
+					if (cursor == 4 && ((key >> Display.KEY_1) & 0x1) == 1
+							&& ((key >> Display.KEY_3) & 0x1) == 1) {
 						unlimit = true;
 						g.setColor(Graphics.getColorOfName(Graphics.LIME));
-						g.drawRect(118, cursor * 15 + 2, 15 + 7 * (cursor / 4), 15);
+						g.drawRect(118, cursor * 15 + 2, 15 + 7 * (cursor / 4),
+								15);
 						g.drawString("<", 105, cursor * 15 + 14);
 						g.drawString("<", 105, cursor * 15 + 15);
 						g.drawString("|", 108, cursor * 15 + 14);
 						g.drawString("|", 109, cursor * 15 + 14);
-						g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 14);
-						g.drawString(">", 142 + 7 * (cursor / 4), cursor * 15 + 15);
-						g.drawString("|", 138 + 7 * (cursor / 4), cursor * 15 + 14);
-						g.drawString("|", 139 + 7 * (cursor / 4), cursor * 15 + 14);
+						g.drawString(">", 142 + 7 * (cursor / 4),
+								cursor * 15 + 14);
+						g.drawString(">", 142 + 7 * (cursor / 4),
+								cursor * 15 + 15);
+						g.drawString("|", 138 + 7 * (cursor / 4),
+								cursor * 15 + 14);
+						g.drawString("|", 139 + 7 * (cursor / 4),
+								cursor * 15 + 14);
 						g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 					}
 				} else {

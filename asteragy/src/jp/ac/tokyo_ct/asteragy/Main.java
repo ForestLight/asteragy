@@ -16,7 +16,9 @@ public final class Main extends IApplication {
 	public void start() {
 		// GameCanvas c = new GameCanvas();
 		// Display.setCurrent(c);
-//		final Title t = new Title();
+		// final Title t = new Title();
+		InitializeAppli init = new InitializeAppli();
+		init.start();
 		while (true) {
 			Option op = title.start();
 			game.start(op);
@@ -28,7 +30,7 @@ public final class Main extends IApplication {
 		title.resume();
 	}
 
-	private static final Title title = new Title();
+	static Title title;
 
-	static final Game game = new Game();
+	static Game game;
 }

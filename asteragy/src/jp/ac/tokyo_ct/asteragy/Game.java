@@ -248,16 +248,17 @@ final class Game {
 
 	static final Random random = new Random(System.currentTimeMillis());
 
+	static ImageLoader loader;
+
 	static Image loadImage(String s) {
-		try {
-			// リソースから読み込み
-			MediaImage m = MediaManager.getImage("resource:///".concat(s)
-					.concat(".gif"));
-			// メディアの使用開始
-			m.use();
-			// 読み込み
-			return m.getImage();
-		} catch (Exception e) {
+		/*
+		 * try { // リソースから読み込み MediaImage m =
+		 * MediaManager.getImage("resource:///".concat(s) .concat(".gif")); //
+		 * メディアの使用開始 m.use(); // 読み込み return m.getImage(); } catch (Exception e) { }
+		 * return null;
+		 */
+		if (loader.getImages().containsKey(s.concat(".gif"))) {
+			return (Image) loader.getImages().get(s.concat(".gif"));
 		}
 		return null;
 	}
