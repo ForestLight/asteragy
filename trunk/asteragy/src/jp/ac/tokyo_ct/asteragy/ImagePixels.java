@@ -3,7 +3,7 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.Graphics;
 import com.nttdocomo.ui.Image;
 
-public class ImagePixels {
+class ImagePixels {
 
 	private final int width;
 

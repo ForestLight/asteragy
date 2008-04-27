@@ -2,42 +2,41 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class EarthClass extends AsterClass {
+final class EarthClass extends AsterClass {
 	private static int[][] defaultRange = { { 1, 1, 1 }, { 1, 1, 1 },
 			{ 1, 1, 1 } };
 
 	private static Image asterImage;
 
-	public EarthClass(Aster a, Player p) {
+	EarthClass(Aster a, Player p) {
 		super(a, p);
 	}
 
-	public EarthClass(EarthClass a) {
+	EarthClass(EarthClass a) {
 		super(a);
 	}
 
-	public AsterClass clone() {
+	AsterClass clone() {
 		return new EarthClass(this);
 	}
 
-	public int getNumber() {
+	int getNumber() {
 		return 5;
 	}
 
-	public int[][] getRange() {
+	int[][] getRange() {
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
 		case 1:
 			// SunClassから拝借
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			final Point thisPoint = getAster().getField().asterToPoint(
+			final Field field = getAster().field;
+			final Point thisPoint = field.asterToPoint(
 					getAster());
-			final Field field = getAster().getField();
 			// レンジの左上の座標のフィールド内での位置
-			Point pt = new Point();
-			pt.x = thisPoint.x - (range[0].length / 2);
-			pt.y = thisPoint.y - (range.length / 2);
+			Point pt = new Point(thisPoint.x - (range[0].length / 2),
+					thisPoint.y - (range.length / 2));
 
 			for (int i = 0; i < defaultRange.length; i++) {
 				if (!field.isYInFieldBound(pt.y + i))
@@ -62,7 +61,7 @@ public final class EarthClass extends AsterClass {
 		return null;
 	}
 
-	public boolean setPointAndNext(Point pt) {
+	boolean setPointAndNext(Point pt) {
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -74,7 +73,7 @@ public final class EarthClass extends AsterClass {
 		return false;
 	}
 
-	public boolean hasNext() {
+	boolean hasNext() {
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -87,7 +86,7 @@ public final class EarthClass extends AsterClass {
 		return false;
 	}
 
-	public boolean moveAstern() {
+	boolean moveAstern() {
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -100,12 +99,12 @@ public final class EarthClass extends AsterClass {
 
 	}
 
-	public void executeSpecialCommand() {
-		final Aster as = getAster();
-		Effect effect = new EffectCommandEarth(as.getField(), target1);
-		as.getField().getCanvas().paintEffect(effect);
+	void executeSpecialCommand() {
+		final Field f = getAster().field;
+		Effect effect = new EffectCommandEarth(f, target1);
+		f.getCanvas().paintEffect(effect);
 
-		final Aster a = as.getField().at(target1);
+		final Aster a = f.at(target1);
 		new MoonClass(a, getPlayer());
 		a.getAsterClass().setActionCount(0);
 		logAction(target1);
@@ -115,7 +114,7 @@ public final class EarthClass extends AsterClass {
 		return defaultRange;
 	}
 
-	public Image getImage() {
+	Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(5);
 		}

@@ -8,7 +8,7 @@ import com.nttdocomo.util.TimerListener;
  * @author Okubo
  * 
  */
-public final class Title extends Canvas implements TimerListener {
+final class Title extends Canvas implements TimerListener {
 	private static Image title = Game.loadImage("title");
 
 	private static Image back = Game.loadImage("titleback");
@@ -64,7 +64,7 @@ public final class Title extends Canvas implements TimerListener {
 	 * 
 	 * @return option.gameType 0:一機対戦 1:AI対戦 2:ネットワーク対戦
 	 */
-	public Option start() {
+	Option start() {
 		Display.setCurrent(this);
 		option.gameType = -1;
 		timer.start();
@@ -79,7 +79,7 @@ public final class Title extends Canvas implements TimerListener {
 		}
 	}
 
-	public void resume() {
+	void resume() {
 		if (option.gameType == -1) {
 			timer.start();
 		}

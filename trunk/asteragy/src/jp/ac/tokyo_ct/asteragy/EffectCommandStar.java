@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class EffectCommandStar extends Effect {
+final class EffectCommandStar extends Effect {
 
 	private static final Image effect = Game.loadImage("star_effect");
 
@@ -15,7 +15,7 @@ public final class EffectCommandStar extends Effect {
 	// 0:ç∂ 2:âE 1:è„ 3:â∫
 	private final int direction;
 
-	public EffectCommandStar(Field field, AsterClass cls, Point a, Point b) {
+	EffectCommandStar(Field field, AsterClass cls, Point a, Point b) {
 		this.field = field;
 		if (field.asterToPoint(cls.getAster()).equals(a)) {
 			point = a;
@@ -36,7 +36,7 @@ public final class EffectCommandStar extends Effect {
 
 	final int theta = SimpleMath.cycle / 30;
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		int[] matrix = new int[6];
 
 		for (int i = 0; i < 15; i++) {

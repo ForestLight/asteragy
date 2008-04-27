@@ -2,11 +2,11 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class ExplainRules extends Canvas implements Runnable {
+final class ExplainRules extends Canvas implements Runnable {
 
 	private static final int frame = 5;
 
-	public int page;
+	int page;
 
 	private int temp;
 
@@ -25,12 +25,11 @@ public final class ExplainRules extends Canvas implements Runnable {
 
 		// ページの作成（作成中）
 		//
-		Graphics g;
 		for (int i = 0; i < 6; i++) {
 			pageImage[i] = Image.createImage(getWidth(), getHeight());
 		}
 
-		g = pageImage[0].getGraphics();
+		Graphics g = pageImage[0].getGraphics();
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
@@ -251,9 +250,9 @@ public final class ExplainRules extends Canvas implements Runnable {
 		final int s = width / frame;
 
 		if (temp == 0 && page == 5)
-			dx *= -1;
+			dx = -dx;
 		if (temp == 5 && page == 0)
-			dx *= -1;
+			dx = -dx;
 
 		for (int i = 0; i < frame + 1; i++) {
 

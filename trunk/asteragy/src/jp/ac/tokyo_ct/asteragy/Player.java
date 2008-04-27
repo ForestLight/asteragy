@@ -2,17 +2,17 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public abstract class Player /*implements PaintItem*/ {
+abstract class Player {
 	/**
 	 * プレイヤー情報領域高さ
 	 */
-	public static final int playerheight = 20;
+	static final int playerheight = 20;
 
 	/**
 	 * @param playerName
 	 *            プレイヤーの名前
 	 */
-	public Player(Game game, String playerName) {
+	Player(Game game, String playerName) {
 		this.name = playerName;
 		this.game = game;
 	}
@@ -22,16 +22,15 @@ public abstract class Player /*implements PaintItem*/ {
 	 * 
 	 * @return 選択した行動。または、ターン終了ならnullを返す。
 	 */
-	public abstract Action getAction();
+	abstract Action getAction();
 
-	public final int getAP() {
+	final int getAP() {
 		return ap;
 	}
 
-	public final void addAP(int n) {
+	final void addAP(int n) {
 		ap += n;
 		System.out.println("AP+" + n);
-		repaint();
 	}
 
 	protected final String name;
@@ -59,8 +58,8 @@ public abstract class Player /*implements PaintItem*/ {
 	 * @param playernumber
 	 *            プレイヤー
 	 */
-	public final void paint(Graphics g) {
-		System.out.println("Player.paint");
+	final void paint(Graphics g) {
+//		System.out.println("Player.paint");
 		if (this.equals(game.player[0])) {
 			g.setOrigin(0, game.getCanvas().getHeight() - playerheight);
 		} else {
@@ -75,18 +74,6 @@ public abstract class Player /*implements PaintItem*/ {
 		g.drawString("" + ap, apx, apy);
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.drawString(name, namex, namey);
-	}
-
-	public final void repaint() {
-		//game.getCanvas().getScreen().repaint();
-/*
-		final CanvasControl canvas = game.getCanvas();
-		Graphics g = canvas.getScreen().getBufferGraphics();
-		int player = game.getPlayerIndex(this) + 1;
-		canvas.getBackImage().paintPlayerBack(g, player);
-		paint(g);
-		g.dispose();
-*/
 	}
 
 	static final Image turnOnBack = Game.loadImage("turnon_effect");

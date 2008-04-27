@@ -9,7 +9,7 @@ import com.nttdocomo.ui.*;
  * @author Yusuke
  * 
  */
-public abstract class AsterClass {
+abstract class AsterClass {
 	// asterだけはあえてコピーしていない。
 	protected AsterClass(AsterClass a) {
 		game = a.game;
@@ -28,13 +28,13 @@ public abstract class AsterClass {
 		isProtected = a.isProtected;
 	}
 
-	public abstract AsterClass clone();
+	abstract AsterClass clone();
 
-	public AsterClass(Aster a, Player p) {
+	AsterClass(Aster a, Player p) {
 		aster = a;
 		player = p;
 		actionCount = getActionNum();
-		game = a.getField().game;
+		game = a.field.game;
 		a.setAsterClass(this);
 	}
 
@@ -43,9 +43,9 @@ public abstract class AsterClass {
 	 * 
 	 * @return クラス固有の番号
 	 */
-	public abstract int getNumber();
+	abstract int getNumber();
 
-	public final Aster getAster() {
+	final Aster getAster() {
 		return aster;
 	}
 
@@ -53,25 +53,25 @@ public abstract class AsterClass {
 
 	private final Game game;
 
-	public final Player getPlayer() {
+	final Player getPlayer() {
 		return player;
 	}
 
-	public final void setPlayer(Player p) {
+	final void setPlayer(Player p) {
 		player = p;
 	}
 
 	private Player player;
 
-	public final void setCommand(int cmd) {
+	final void setCommand(int cmd) {
 		mode = cmd;
 	}
 
-	public final int getCommand() {
+	final int getCommand() {
 		return mode;
 	}
 
-	public final void setAster(Aster a) {
+	final void setAster(Aster a) {
 		aster = a;
 	}
 
@@ -86,40 +86,40 @@ public abstract class AsterClass {
 	 * 
 	 * @return 現在の選択範囲
 	 */
-	public abstract int[][] getRange();
+	abstract int[][] getRange();
 
 	/**
 	 * @return 範囲に問題がなければtrue、そうでなければfalse
 	 */
-	public abstract boolean setPointAndNext(Point pt);
+	abstract boolean setPointAndNext(Point pt);
 
-	public abstract boolean hasNext();
+	abstract boolean hasNext();
 
 	/**
 	 * 1つ前の選択に戻る。
 	 * 
 	 * @return 一つ目の対象選択中に呼ばれた場合true
 	 */
-	public abstract boolean moveAstern();
+	abstract boolean moveAstern();
 
 	/**
 	 * @return クラス名
 	 */
-	public final String getName() {
+	final String getName() {
 		return AsterClass.className[getNumber() - 1];
 	}
 
 	/**
 	 * @return 特殊コマンド名
 	 */
-	public final String getCommandName() {
+	final String getCommandName() {
 		return AsterClass.commandName[getNumber() - 1];
 	}
 
 	/**
 	 * @return 特殊コマンドの説明
 	 */
-	public final String getExplain() {
+	final String getExplain() {
 		return AsterClass.commandExplain[getNumber() - 1];
 	}
 
@@ -127,7 +127,7 @@ public abstract class AsterClass {
 	 * 
 	 * @return クラス付与時のコスト
 	 */
-	public final int getCost() {
+	final int getCost() {
 		return AsterClass.classCost[getNumber() - 1];
 	}
 
@@ -135,7 +135,7 @@ public abstract class AsterClass {
 	 * 
 	 * @return 特殊コマンド使用時のコスト
 	 */
-	public final int getCommandCost() {
+	final int getCommandCost() {
 		// switch (mode) {
 		// case 0:
 		// return 0;
@@ -174,8 +174,8 @@ public abstract class AsterClass {
 	 * コマンドを実行
 	 * 
 	 */
-	public final void execute() {
-		final Field field = getAster().getField();
+	final void execute() {
+		final Field field = getAster().field;
 		System.out.println("----AsterClass.execute()");
 		switch (mode) {
 		case 0:
@@ -183,8 +183,7 @@ public abstract class AsterClass {
 			field.swap(target1, target2);
 
 			// スワップエフェクト。
-			Effect swap = new EffectFieldSwap(field, target1, target2);
-			field.getCanvas().paintEffect(swap);
+			field.getCanvas().paintEffect(new EffectFieldSwap(field, target1, target2));
 			/*
 			 * // サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください） if
 			 * (field.judgeSelfDestruction() == true) { Dialog d = new
@@ -201,6 +200,15 @@ public abstract class AsterClass {
 		}
 		// 行動可能回数を減らす
 		decActionCount();
+		final CanvasControl canvas = field.getCanvas();
+		canvas.paintEffect(canvas.disappearControl);
+
+		// 消滅判定
+		System.out.println("消去開始");
+		player.addAP(field.deleteAll());
+		System.out.println("消去完了");
+		canvas.paintEffect(canvas.disappearControl);
+
 		// ターゲット初期化
 		target1 = null;
 		target2 = null;
@@ -210,7 +218,7 @@ public abstract class AsterClass {
 	 * 特殊コマンドを実行
 	 * 
 	 */
-	public abstract void executeSpecialCommand();
+	abstract void executeSpecialCommand();
 
 	/**
 	 * 行動可能回数、フラグ初期化
@@ -220,33 +228,33 @@ public abstract class AsterClass {
 		actionCount = getActionNum();
 		// フラグ消去
 		isProtected = false;
-		
+
 		mode = 0;
 	}
 
-	public final int getActionNum() {
+	final int getActionNum() {
 		return AsterClass.actionNum[getNumber() - 1];
 	}
 
 	/**
 	 * 行動可能回数増
 	 */
-	public final void incActionCount() {
+	final void incActionCount() {
 		actionCount++;
 	}
 
 	/**
 	 * 行動可能回数減
 	 */
-	public final void decActionCount() {
+	final void decActionCount() {
 		actionCount--;
 	}
 
-	public final void setActionCount(int i) {
+	final void setActionCount(int i) {
 		actionCount = i;
 	}
 
-	public final int getActionCount() {
+	final int getActionCount() {
 		return actionCount;
 	}
 
@@ -255,11 +263,11 @@ public abstract class AsterClass {
 	 */
 	private int actionCount;
 
-	public final void setProtectedFlag(boolean b) {
+	final void setProtectedFlag(boolean b) {
 		isProtected = b;
 	}
 
-	public final boolean getProtectedFlag() {
+	final boolean getProtectedFlag() {
 		return isProtected;
 	}
 
@@ -275,19 +283,26 @@ public abstract class AsterClass {
 	 */
 	protected final int[][] swapGetRange(int[][] defaultRange) {
 		int[][] range = new int[defaultRange.length][defaultRange[0].length];
-		final Field f = aster.getField();
+		final Field f = aster.field;
 		// 1個目の対象選択
 		if (target1 == null) {
 			for (int i = 0; i < defaultRange.length; i++) {
 				for (int j = 0; j < defaultRange[0].length; j++) {
 					// 上下左右に隣接レンジが無い孤立したレンジを除外
 					int fi = i + (f.asterToPoint(aster).y - range.length / 2);
-					int fj = j + (f.asterToPoint(aster).x - range[0].length / 2);
-					
-					if(i + 1 >= defaultRange.length || defaultRange[i+1][j] == 0 || !f.isYInFieldBound(fi+1)){
-						if(i - 1 < 0 || defaultRange[i-1][j] == 0 || !f.isYInFieldBound(fi-1)){
-							if(j + 1 >= defaultRange[0].length || defaultRange[i][j+1] == 0 || !f.isXInFieldBound(fj+1)){
-								if(j - 1 < 0|| defaultRange[i][j-1] == 0 || !f.isXInFieldBound(fj-1)){
+					int fj = j
+							+ (f.asterToPoint(aster).x - range[0].length / 2);
+
+					if (i + 1 >= defaultRange.length
+							|| defaultRange[i + 1][j] == 0
+							|| !f.isYInFieldBound(fi + 1)) {
+						if (i - 1 < 0 || defaultRange[i - 1][j] == 0
+								|| !f.isYInFieldBound(fi - 1)) {
+							if (j + 1 >= defaultRange[0].length
+									|| defaultRange[i][j + 1] == 0
+									|| !f.isXInFieldBound(fj + 1)) {
+								if (j - 1 < 0 || defaultRange[i][j - 1] == 0
+										|| !f.isXInFieldBound(fj - 1)) {
 									continue;
 								}
 							}
@@ -299,19 +314,17 @@ public abstract class AsterClass {
 					// }
 				}
 			}
-			
-			
+
 		}
 		// 2個目の対象選択
 		else {
-			range = new int[defaultRange.length][defaultRange[0].length];
 			// target1の座標をレンジ内に修正したもの
-			Point selftPoint = aster.getPoint();
-			Point pt = new Point();
+			final Point selftPoint = aster.getPoint();
+			Point pt = new Point(target1.x
+					- (selftPoint.x - range[0].length / 2), target1.y
+					- (selftPoint.y - range.length / 2));
 			System.out.println("tx:" + target1.x + "ty:" + target1.y + "spx:"
 					+ selftPoint.x + "spy:" + selftPoint.y);
-			pt.x = target1.x - (selftPoint.x - range[0].length / 2);
-			pt.y = target1.y - (selftPoint.y - range.length / 2);
 			System.out.println("px:" + pt.x + "py:" + pt.y);
 
 			for (int i = 0; i < range.length; i++) {
@@ -321,7 +334,7 @@ public abstract class AsterClass {
 						if (i == pt.y - 1 && j == pt.x || i == pt.y + 1
 								&& j == pt.x || i == pt.y && j == pt.x + 1
 								|| i == pt.y && j == pt.x - 1) {
-							System.out.println("range-"+i+"-j-"+j);
+							System.out.println("range-" + i + "-j-" + j);
 							range[i][j] = 1;
 						}
 					}
@@ -368,7 +381,7 @@ public abstract class AsterClass {
 		return ret;
 	}
 
-	public final static int[][] getDefaultRange(int n) {
+	final static int[][] getDefaultRange(int n) {
 		switch (n) {
 		case 1:
 			return SunClass.getDefaultRange();
@@ -398,37 +411,33 @@ public abstract class AsterClass {
 		return null;
 	}
 
-	public abstract Image getImage();
+	abstract Image getImage();
 
 	static Image loadImage(int n) {
-		return Game
-				.loadImage("aster_".concat(String.valueOf(n)));
+		return Game.loadImage("aster_".concat(String.valueOf(n)));
 	}
 
-	public static final int MAX_CLASS = 12;
+	static final int MAX_CLASS = 12;
 
-	public final static String[] className = { "ｻﾝ", "ｽﾀｰ", "ﾏｰｷｭﾘｰ", "ｳﾞｨｰﾅｽ",
-			"ｱｰｽ", "ﾏｰｽﾞ", "ｼﾞｭﾋﾟﾀｰ", "ｻﾀｰﾝ", "ｳﾗﾇｽ", "ﾈﾌﾟﾁｭｰﾝ", "ﾌﾟﾙｰﾄ",
-			"ﾑｰﾝ", };
+	final static String[] className = { "ｻﾝ", "ｽﾀｰ", "ﾏｰｷｭﾘｰ", "ｳﾞｨｰﾅｽ", "ｱｰｽ",
+			"ﾏｰｽﾞ", "ｼﾞｭﾋﾟﾀｰ", "ｻﾀｰﾝ", "ｳﾗﾇｽ", "ﾈﾌﾟﾁｭｰﾝ", "ﾌﾟﾙｰﾄ", "ﾑｰﾝ", };
 
-	public final static String[] classNameB = { "サン", "スター", "マーキュリー", "ヴィーナス",
-			"アース", "マーズ", "ジュピター", "サターン", "ウラヌス", "ネプチューン", "プルート", "ムーン", };
+	final static String[] classNameF = { "サン", "スター", "マーキュリー", "ヴィーナス", "アース",
+			"マーズ", "ジュピター", "サターン", "ウラヌス", "ネプチューン", "プルート", "ムーン", };
 
-	public final static String[] commandName = { "サモンプラネット", "スワップ", "クイックタイム",
+	final static String[] commandName = { "サモンプラネット", "スワップ", "クイックタイム",
 			"テンプテーション", "サモンムーン", "アスターフレア", "プロテクションシステム", "ローテーション",
 			"トランスポート", "ソニックムーブ", "ディザスター", "トータルイクリプス", };
 
-	public final static String[] commandExplain = { "アステル1個にクラスを与える",
-			"二つの隣り合ったアステルを入れ替える", "行動済ユニット1体を行動可能状態にする", "敵ユニット1体を奪い取る",
-			"アステル1個にムーンクラスを与える", "アステル1個を破壊する(サンは選べない)", "敵ユニット1体を破壊する(サンは選べない)",
-			"リング部分を右回りにローテーション", "二つのアステルを入れ替える", "自分とアステル1個を入れ替える",
+	final static String[] commandExplain = { "アステル1個にクラスを与える",
+			"2つの隣り合ったアステルを入れ替える", "行動済ユニット1体を行動可能状態にする", "敵ユニット1体を奪い取る",
+			"アステル1個にムーンクラスを与える", "アステル1個を破壊する(サンは不可)", "敵ﾕﾆｯﾄ1体を破壊する(サンは不可)",
+			"リング部分を右回りにローテーション", "2つのアステルを入れ替える", "自分とアステル1個を入れ替える",
 			"レンジ内のアステルを全て破壊する", "自身を破壊して自分のサンを移動", };
 
-	public final static int[] classCost = { 0, 2, 6, 5, 4, 8, 7, 11, 10, 11,
-			12, 0 };
+	final static int[] classCost = { 0, 2, 6, 5, 4, 8, 7, 11, 10, 11, 12, 0 };
 
-	public final static int[] commandCost = { 0, 0, 3, 7, 4, 5, 1, 4, 5, 6, 18,
-			4 };
+	final static int[] commandCost = { 0, 0, 3, 7, 4, 5, 1, 4, 5, 6, 18, 4 };
 
-	public final static int[] actionNum = { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3 };
+	final static int[] actionNum = { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3 };
 }

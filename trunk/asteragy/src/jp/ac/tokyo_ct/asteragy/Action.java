@@ -14,7 +14,7 @@ final class Action {
 
 	int[] args;
 /*
-	public void outputToStream(OutputStream os) throws IOException {
+	void outputToStream(OutputStream os) throws IOException {
 		try {
 			Point pt = aster.getPoint();
 			HTTPPlayer.writeIntChar(os, pt.x);
@@ -40,7 +40,7 @@ final class Action {
 		return buf.toString();
 	}
 
-	public void run() {
+	void run() {
 		final AsterClass ac = aster.getAsterClass();
 		int len = args.length;
 		if (len > 0) {
@@ -67,7 +67,6 @@ final class Action {
 		} else {
 			ac.execute();
 		}
-		aster.getField();
 	}
 
 	static final int MAX_PARAM_SIZE = 4;
@@ -81,7 +80,7 @@ final class Action {
 		int y = HTTPPlayer.readIntChar(is);
 		if (y < 0 || y >= field.Y)
 			return null;
-		a.aster = field.at(y, x);
+		a.aster = field.field[y][x];
 		int n = HTTPPlayer.readIntChar(is);
 		if (n != 0 && n != 1)
 			return null;
@@ -111,7 +110,7 @@ final class Action {
 		int y = HTTPPlayer.parseIntChar(s.indexOf(1));
 		if (y < 0 || y >= field.Y)
 			return null;
-		a.aster = field.at(y, x);
+		a.aster = field.field[y][x];
 		int n = HTTPPlayer.parseIntChar(s.indexOf(2));
 		if (n != 0 && n != 1)
 			return null;

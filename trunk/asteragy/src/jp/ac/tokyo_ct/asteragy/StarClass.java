@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class StarClass extends AsterClass {
+final class StarClass extends AsterClass {
 	private static int[][] defaultRange = { { 0, 1, 0 }, { 1, 1, 1 },
 			{ 0, 1, 0 } };
 
@@ -12,36 +12,36 @@ public final class StarClass extends AsterClass {
 		super(a, p);
 	}
 
-	public StarClass(StarClass a) {
+	StarClass(StarClass a) {
 		super(a);
 	}
 
-	public AsterClass clone() {
+	AsterClass clone() {
 		return new StarClass(this);
 	}
 
-	public int getNumber() {
+	int getNumber() {
 		return 2;
 	}
 
-	public int[][] getRange() {
+	int[][] getRange() {
 		return swapGetRange(defaultRange);
 	}
 
-	public boolean setPointAndNext(Point pt) {
+	boolean setPointAndNext(Point pt) {
 		return swapSetPointAndNext(pt);
 	}
 
-	public boolean hasNext() {
+	boolean hasNext() {
 		return swapHasNext();
 	}
 
-	public boolean moveAstern() {
+	boolean moveAstern() {
 		return swapMoveAstern();
 	}
 
-	public void executeSpecialCommand() {
-		final Field f = getAster().getField();
+	void executeSpecialCommand() {
+		final Field f = getAster().field;
 		f.getCanvas().paintEffect(new EffectCommandStar(f, this, target1, target2));
 
 		f.swap(target1, target2);
@@ -52,7 +52,7 @@ public final class StarClass extends AsterClass {
 		return defaultRange;
 	}
 
-	public Image getImage() {
+	Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(2);
 		}

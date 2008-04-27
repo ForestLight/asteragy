@@ -2,548 +2,313 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class KeyInputPlayer extends Player {
-
+final class KeyInputPlayer extends Player implements EventProcesser {
 	/**
 	 * @param playerName
 	 *            プレイヤーの名前
 	 */
-	public KeyInputPlayer(Game game, String playerName) {
+	KeyInputPlayer(Game game, String playerName) {
 		super(game, playerName);
-		System.out.println("KeyInputPlayer");
+		field = game.getField();
+		canvas = game.getCanvas();
+		canvasRange = canvas.range;
+		frange = new int[game.getField().Y][game.getField().X];
 	}
 
-	private CanvasControl canvas;
+	private final CanvasControl canvas;
 
-	private Point cursorPoint;
+	private final Field field;
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see jp.ac.tokyo_ct.asteragy.Player#getAction()
-	 */
-	public Action getAction() {
+	private Action action;
+
+	private int phase;
+
+	private volatile boolean selected;
+
+	private final Range canvasRange;
+
+	private AsterClass ac;
+
+	private final int[][] frange;
+
+	private Point pt; // selectAster用
+
+	private Point ptAster;
+
+	synchronized Action getAction() {
 		System.out.println("KeyInputPlayer.getAction()");
-		if (canvas == null) {
-			canvas = game.getCanvas();
-		}
+		phase = 0;
+		selected = false;
+		pt = game.getField().getSunPosition(this);
+		canvas.cursor.setCursor(pt, 1);
+		action = new Action();
+		canvas.eventProcesser = this;
 		try {
-			int state = 0;
-			Point pt = null;
-			cursorPoint = game.getField().getSunPosition(this);
-			int cmd = -1; // 0 = swap, 1 = 特殊コマンド
-			while (state < 4) {
-				switch (state) {
-				case 0: // 操作クラスの選択
-					pt = selectAster();
-
-					if (pt == null)
-						return null;
-					cursorPoint = pt;
-					state++;
-					break;
-				case 1: // スワップか特殊コマンドかを選択
-				{
-					Aster a = game.getField().at(pt);
-					AsterClass ac = a.getAsterClass();
-					final Range canvasRange = game.getCanvas().range;
-					int[][] range = ac.getRange();
-					
-					canvasRange.setRange(pt, range);
-
-					cmd = selectCommand(pt);
-
-					// canvasRange.setRange(null, null);
-
-					if (cmd == -1) { // キャンセルされた
-						state--;
-						canvasRange.setRange(null, null);
-						canvas.repaint();
-					} else
-						state++;
-					break;
-				}
-				case 2: // レンジ選択
-				{
-					Aster a = game.getField().at(pt);
-					AsterClass ac = a.getAsterClass();
-					ac.setCommand(cmd);
-
-					System.out.println("ターゲット選択");
-					final Range canvasRange = game.getCanvas().range;
-
-					while (ac.hasNext()) {
-						int[][] range = ac.getRange();
-						canvasRange.setRange(pt, range);
-						Point target = selectTarget(range, pt);
-						System.out.println("ターゲット選択中");
-						System.out.println("target - x = " + pt.x + " y = "
-								+ pt.y);
-						if (target == null) {
-							if (ac.moveAstern()) {
-								state = -1;
-								cmd = 0;
-								break;
-							}
-						}
-						ac.setPointAndNext(target);
-					}
-					canvasRange.setRange(null, null);
-					canvas.repaint();
-
-					// サン専用
-					if (ac.getNumber() == 1 && cmd == 1) {
-						Point acs = selectAsterClass(pt);
-						if (acs.x == -1) {
-							ac.moveAstern();
-							state = -1;
-						} else {
-							ac.setPointAndNext(acs);
-							this.addAP(-AsterClass.classCost[acs.x + 1]);
-						}
-					}
-
-					state++;
-				}
-					break;
-
-				case 3:
-					final Field field = game.getField();
-					final AsterClass ac = field.at(pt).getAsterClass();
-					if (cmd == 1) {
-						this.addAP(-ac.getCommandCost());
-					}
-					// game.getField().fieldBackUp();
-					canvas.cursor.setCursor(null, -1);
-					canvas.repaint();
-					System.out.println("実行開始");
-					ac.execute();
-					System.out.println("実行完了");
-					canvas.repaint();
-
-					canvas.paintEffect(canvas.disappearControl);
-
-					Player p = field.checkGameOver();
-					// ゲームオーバー判定仮
-					if (p != null) {
-						// if(p == game.getCurrentPlayer()){
-						// game.getField().restoreField();
-						// if (cmd == 1) {
-						// this.addAP(ac.getCommandCost());
-						// }
-						// state=0;
-						// System.out.println("字軍サン消滅 行動キャンセル");
-						// break;
-						// }
-						return null;
-					}
-
-					// 消滅判定
-					System.out.println("消去開始");
-					this.addAP(field.deleteAll());
-					System.out.println("消去完了");
-
-					canvas.paintEffect(canvas.disappearControl);
-
-					p = field.checkGameOver();
-
-					if (p != null) {
-						// if(p == game.getCurrentPlayer()){
-						// game.getField().restoreField();
-						// if (cmd == 1) {
-						// this.addAP(ac.getCommandCost());
-						// }
-						// state=0;
-						// System.out.println("字軍サン消滅 行動キャンセル");
-						// break;
-						// }
-						return null;
-					}
-
-					state = 0;
-				}
-			}
+			wait();
+		} catch (InterruptedException e) {
+			System.out.println("InterruptedException");
+			// Thread.currentThread().interrupt();
 			return null;
 		} finally {
-			canvas.resetEventProcesser();
+			canvas.eventProcesser = null;
 		}
-	}
-
-	/**
-	 * フィールド上にカーソルを上下左右に動かして自クラス持ちのアステルを選択する。
-	 * 
-	 * @return 選択されたアステルの座標
-	 */
-	private Point selectAster() {
-		final class EventProcesserForSelectAster extends
-				KeyProcessedEventProcesserImpl {
-			/**
-			 * コンストラクタ
-			 * 
-			 * @param keyInputPlayer
-			 *            基となるKeyInputPlayer
-			 */
-			EventProcesserForSelectAster() {
-				x = cursorPoint.x;
-				y = cursorPoint.y;
-				applyPosition();
-			}
-
-			/*
-			 * (非 Javadoc) selectAster用にprocessEventを受け取る。
-			 * 
-			 * @see jp.ac.tokyo_ct.asteragy.EventProcesser#processEvent(int,
-			 *      int)
-			 */
-			protected void processKeyEvent(int key) {
-				switch (key) {
-				case Display.KEY_UP:
-					if (y > 0) {
-						y--;
-					}
-					break;
-				case Display.KEY_DOWN:
-					if (y < game.getField().Y - 1) {
-						y++;
-					}
-					break;
-				case Display.KEY_LEFT:
-					if (x > 0) {
-						x--;
-					}
-					break;
-				case Display.KEY_RIGHT:
-					if (x < game.getField().X - 1) {
-						x++;
-					}
-					break;
-				}
-				applyPosition();
-				System.out
-						.println("EventProcesserForSelectAster.processEvent x = "
-								+ x + ", y = " + y);
-			}
-
-			/**
-			 * キャンセル可 キャンセルの場合ターン終了
-			 */
-			protected boolean onCancel() {
-				pt = null;
-				return true;
-			}
-
-			public Point getPoint(CanvasControl c) {
-				System.out.println("EventProcesserForSelectAster.getPoint()");
-				AsterClass ac;
-				final Field field = game.getField();
-				do {
-					resetSelected();
-					waitForSelect(c);
-					ac = field.at(y, x).getAsterClass();
-					System.out
-							.println("EventProcesserForSelectAster.getPoint x = "
-									+ x + ", y = " + y);
-				} while (pt != null
-						&& (ac == null || ac.getPlayer() != KeyInputPlayer.this || ac
-								.getActionCount() == 0));
-
-				// return new Point(x, y);
-				if (pt != null) {
-					pt = new Point(x, y);
-				}
-				return pt;
-			}
-
-			private void applyPosition() {
-				canvas.cursor.setCursor(new Point(x, y), Cursor.CURSOR_1);
-				canvas.repaint();
-			}
-
-			private Point pt = new Point();
-
-			private int x;
-
-			private int y;
-		}
-
-		canvas.commonCommand.setCommand(-1, null);
+		canvasRange.setRange(null, null);
 		canvas.repaint();
-		System.out.println("KeyInputPlayer.selectAster()");
-		EventProcesserForSelectAster ep = new EventProcesserForSelectAster();
-		canvas.setEventProcesser(ep);
-		System.out.println("canvas.setEventProcesser() after");
-		Point pt = ep.getPoint(canvas);
-		canvas.resetEventProcesser();
-		return pt;
+		return action;
 	}
 
-	/**
-	 * コマンド（スワップ・特殊）を選択する
-	 * 
-	 * @param pt
-	 *            クラスの位置
-	 * @return コマンド種別。1は特殊、0はスワップ、-1はキャンセル。
-	 */
-	private int selectCommand(final Point pt) {
-		final class EventProcesserForSelectCommand extends
-				KeyProcessedEventProcesserImpl {
-			EventProcesserForSelectCommand() {
-				ac = game.getField().at(pt).getAsterClass();
+	synchronized public void processEvent(int type, int param) {
+		if (selected || type != Display.KEY_PRESSED_EVENT) {
+			return;
+		}
+		System.out.println("phase = " + phase +", param = " + param);
+		switch (param) {
+		case Display.KEY_0:
+		case Display.KEY_2:
+		case Display.KEY_IAPP:
+		case Display.KEY_CLEAR:
+			System.out.println("Cancel " + phase);
+			switch (phase--) {
+			case 0:
+				action = null;
+				notifyAll();
+				break;
+			case 1:
+				pt = ptAster;
+				ptAster = null;
+				ac = null;
+				canvasRange.setRange(null, null);
+				break;
+			case 2: // ここbreakなし
+			case 3:
+				pt = ptAster.clone();
+				ac.moveAstern();
+				break;
 			}
-
-			protected void processKeyEvent(int key) {
-				System.out.println("selectCommand.processKeyEvent");
-				switch (key) {
-				case Display.KEY_UP:
-					if (command > 0) {
-						command--;
+			break;
+		case Display.KEY_SELECT:
+			System.out.println("Select " + phase);
+			if (phase == 2 || phase == 3) {
+				if (frange[pt.y][pt.x] != 1) {
+					return;
+				}
+				if (action.aster.getAsterClass() instanceof SunClass) {
+					if (phase == 2) {
+						canvas.sunCommand.setCommand(0, ptAster);
 					} else {
-						command = 1;
+						canvas.sunCommand.setCommand(-1, null);
+						notifyAll();
+						return;
 					}
-					break;
-				case Display.KEY_DOWN:
-					if (command < 1) {
-						command++;
-					} else {
-						command = 0;
-					}
-					break;
 				}
-				System.out.println("selectCommand.processKeyEvent");
-				final CommonCommand cc = canvas.commonCommand;
-				cc.setAsterClass(ac);
-				cc.setCommand(command, pt);
-				final Range canvasRange = game.getCanvas().range;
-				ac.setCommand(command);
-				int[][] range = ac.getRange();
-				canvasRange.setRange(pt, range);
-				canvas.repaint();
+				action.args[(phase - 2) * 2] = pt.x;
+				action.args[(phase - 2) * 2 + 1] = pt.y;
+				ac.setPointAndNext(pt.clone());
 			}
-
-			protected boolean onCancel() {
-				command = -1;
-				return true;
-			}
-
-			public int selectCommand(CanvasControl c) {
-				System.out
-						.println("EventProcesserForSelectCommand.selectCommand");
-				do {
-					resetSelected();
-					waitForSelect(c);
-					// AP足らないのにコマンド選んでる場合のみ受け付けない
-				} while (command == 1
-						&& AsterClass.commandCost[ac.getNumber() - 1] > KeyInputPlayer.this
-								.getAP());
-				switch (command) {
-				case -1:
-					System.out.println("selectCommand - キャンセル");
-					break;
-				case 0:
-					System.out.println("selectCommand - スワップ");
-					break;
-				case 1:
-					System.out.println("selectCommand - 特殊");
-					break;
+			switch (phase) {
+			case 0:
+				final Aster a = field.at(pt);
+				ac = a.getAsterClass();
+				if (ac == null || ac.getPlayer() != this) {
+					return;
 				}
-				return command;
+				action.aster = a;
+				canvasRange.setRange(pt, ac.getRange());
+				ptAster = pt.clone();
+				break;
+			case 1:
+				ac.setCommand(action.commandType);
+				canvas.commonCommand.setCommand(-1, null);
+				action.args = new int[4];
+			// ここbreakなし
+			case 2:
+			case 3:
+				if (!(action.aster.getAsterClass() instanceof SunClass) && !ac.hasNext()) {
+					notifyAll();
+					return;
+				}
+				break;
 			}
-
-			private final AsterClass ac;
-
-			private volatile int command = 0;
+			phase++;
+			break;
+		default:
+			switch (phase) {
+			case 0:
+				selectAster(param);
+				return;
+			case 1:
+				selectCommand(param);
+				return;
+			case 2:
+				selectTarget(param);
+				return;
+			case 3:
+				if (action.aster.getAsterClass() instanceof SunClass) {
+					selectSunTarget(param);
+				} else {
+					selectTarget(param);
+				}
+				return;
+			}
+			return;
 		}
-
-		System.out.println("KeyInputPlayer.selectCommand()");
-
-		canvas.commonCommand.setCommand(0, pt);
+		// この下はphaseが増えたとき減ったとき両方で行う処理。
+		switch (phase) {
+		case 0:
+			canvas.commonCommand.setCommand(-1, null);
+			break;
+		case 1:
+			canvas.commonCommand.setCommand(0, pt);
+			break;
+		case 2:
+		case 3:
+			final int[][] range = ac.getRange();
+			System.out.println("processEvent: range.length / 2 = " + range.length / 2);
+			canvasRange.setRange(ptAster, range);
+			final int top = ptAster.y - range.length / 2;
+			final int bottom = ptAster.y + range.length / 2;
+			final int left = ptAster.x - range[0].length / 2;
+			final int right = ptAster.x + range[0].length / 2;
+			for (int i = 0; i < field.Y; i++) {
+				for (int j = 0; j < field.X; j++) {
+					if (top <= i && i <= bottom && left <= j && j <= right) {
+						frange[i][j] = range[i - top][j - left];
+					} else {
+						frange[i][j] = -1;
+					}
+					System.out.print(frange[i][j] + 1);
+				}
+				System.out.println();
+			}
+			applyPosition();
+			break;
+		}
+		System.out.println("repaint in processEvent");
 		canvas.repaint();
-		EventProcesserForSelectCommand ep = new EventProcesserForSelectCommand();
-		return ep.selectCommand(canvas);
 	}
 
-	/**
-	 * 対象を選択する
-	 * 
-	 * @param range
-	 *            対象の選択可能範囲
-	 * @param pt
-	 *            クラスの位置
-	 * @return 対象 nullならキャンセル
-	 */
-	private Point selectTarget(final int[][] range, final Point pt) {
-		final class EventProcesserForSelectTarget extends
-				KeyProcessedEventProcesserImpl {
-
-			EventProcesserForSelectTarget() {
-				x = pt.x;
-				y = pt.y;
-				final Field field = game.getField();
-				final int fieldY = field.Y;
-				final int fieldX = field.X;
-				frange = new int[fieldY][fieldX];
-				for (int i = 0; i < fieldY; i++) {
-					for (int j = 0; j < fieldX; j++) {
-						if (i >= pt.y - range.length / 2
-								&& i <= pt.y + range.length / 2
-								&& j >= pt.x - range[0].length / 2
-								&& j <= pt.x + range[0].length / 2) {
-							frange[i][j] = range[i - (pt.y - range.length / 2)][j
-									- (pt.x - range[0].length / 2)];
-							// if(frange[y][x] == -1){
-							// x = j;
-							// y = i;
-							//							
-							// }
-						} else {
-							frange[i][j] = -1;
-						}
-					}
-				}
-				applyPosition();
+	private void selectAster(int key) {
+		switch (key) {
+		case Display.KEY_UP:
+			if (pt.y > 0) {
+				pt.y--;
+				break;
 			}
-
-			/*
-			 * (非 Javadoc) selectAster用にprocessEventを受け取る。
-			 * 
-			 * @see jp.ac.tokyo_ct.asteragy.EventProcesser#processEvent(int,
-			 *      int)
-			 */
-			protected void processKeyEvent(int key) {
-				switch (key) {
-				case Display.KEY_UP:
-					if (y > 0 && frange[y - 1][x] != -1) {
-						y--;
-					}
-					break;
-				case Display.KEY_DOWN:
-					if (y < game.getField().Y - 1
-							&& frange[y + 1][x] != -1) {
-						y++;
-					}
-					break;
-				case Display.KEY_LEFT:
-					if (x > 0 && frange[y][x - 1] != -1) {
-						x--;
-					}
-					break;
-				case Display.KEY_RIGHT:
-					if (x < game.getField().X - 1
-							&& frange[y][x + 1] != -1) {
-						x++;
-					}
-					break;
-				}
-				applyPosition();
-				System.out
-						.println("EventProcesserForSelectTarget.processEvent x = "
-								+ x + ", y = " + y);
+			return;
+		case Display.KEY_DOWN:
+			if (pt.y < field.Y - 1) {
+				pt.y++;
+				break;
 			}
-
-			protected boolean onCancel() {
-				target = null;
-				return true;
+			return;
+		case Display.KEY_LEFT:
+			if (pt.x > 0) {
+				pt.x--;
+				break;
 			}
-
-			public Point getTarget(CanvasControl c) {
-				System.out.println("EventProcesserForSelectAster.getPoint()");
-				do {
-					resetSelected();
-					waitForSelect(c);
-				} while (target != null && frange[y][x] != 1);
-				if (target != null) {
-					target = new Point(x, y);
-				}
-				return target;
+			return;
+		case Display.KEY_RIGHT:
+			if (pt.x < field.X - 1) {
+				pt.x++;
+				break;
 			}
-
-			private void applyPosition() {
-				canvas.cursor.setCursor(new Point(x, y), Cursor.CURSOR_1);
-				canvas.repaint();
-			}
-
-			private volatile Point target = new Point(0, 0);
-
-			private int x;
-
-			private int y;
-
-			private int[][] frange;
+			return;
+		default:
+			return; // 下のrepaintを回避
 		}
-
-		canvas.commonCommand.setCommand(-1, null);
-		canvas.repaint();
-		EventProcesserForSelectTarget ep = new EventProcesserForSelectTarget();
-		canvas.setEventProcesser(ep);
-		System.out.println("canvas.setEventProcesser() after");
-		return ep.getTarget(canvas);
+		applyPosition();
 	}
 
-	/**
-	 * サン専用 クラスを選択する
-	 * 
-	 * @return 対象 非常にアレだけど都合によりPoint型
-	 */
-	private Point selectAsterClass(final Point pt) {
-		final SunCommand sunCommand = canvas.sunCommand;
-		final class EventProcesserForSelectAsterClass extends
-				KeyProcessedEventProcesserImpl {
-
-			protected void processKeyEvent(int key) {
-				switch (key) {
-				case Display.KEY_UP:
-					if (command > 0) {
-						command--;
-					} else {
-						command = 9;
-					}
-					break;
-				case Display.KEY_DOWN:
-					if (command < 9) {
-						command++;
-					} else {
-						command = 0;
-					}
-					break;
-				}
-				System.out.println("selectAsterClass.processKeyEvent");
-				System.out.println("select = " + command);
-				sunCommand.setCommand(command, pt);
-				// Command.setAsterClass(ac);
-				canvas.repaint();
-			}
-
-			protected boolean onCancel() {
-				command = -1;
-				return true;
-			}
-
-			public int selectAsterClass(CanvasControl c) {
-				System.out
-						.println("EventProcesserForSelectCommand.selectCommand()");
-				do {
-					resetSelected();
-					waitForSelect(c);
-					// コスト足らないのにクラスを選んでる場合のみ受け付けない
-				} while (command != -1
-						&& AsterClass.classCost[command + 1] > KeyInputPlayer.this
-								.getAP());
-
-				return command;
-			}
-
-			private volatile int command = 0;
+	private void selectCommand(int key) {
+		switch (key) {
+		// case Display.KEY_UP:
+		// if (command > 0) {
+		// command--;
+		// } else {
+		// command = 1;
+		// }
+		// break;
+		// case Display.KEY_DOWN:
+		// if (command < 1) {
+		// command++;
+		// } else {
+		// command = 0;
+		// }
+		// break;
+		case Display.KEY_UP:
+		case Display.KEY_DOWN:
+			action.commandType++;
+			action.commandType &= 1;
+			break;
+		default:
+			return; // 下のrepaintを回避
 		}
-
-		System.out.println("KeyInputPlayer.selectCommand()");
-
-		sunCommand.setCommand(0, pt);
+		final CommonCommand cc = canvas.commonCommand;
+		cc.setAsterClass(ac);
+		cc.setCommand(action.commandType, pt);
+		final Range canvasRange = canvas.range;
+		int[][] range = ac.getRange();
+		canvasRange.setRange(pt, range);
 		canvas.repaint();
-		EventProcesserForSelectAsterClass ep = new EventProcesserForSelectAsterClass();
-		Point r = new Point();
-		r.x = ep.selectAsterClass(canvas);
-		sunCommand.setCommand(-1, null);
-		canvas.repaint();
-		return r;
 	}
+
+	private void selectTarget(int key) {
+		System.out.println("st: x = " + pt.x + " y = " + pt.y);
+		switch (key) {
+		case Display.KEY_UP:
+			if (pt.y > 0 && frange[pt.y - 1][pt.x] != -1) {
+				pt.y--;
+				break;
+			}
+			return;
+		case Display.KEY_DOWN:
+			if (pt.y < field.Y - 1 && frange[pt.y + 1][pt.x] != -1) {
+				pt.y++;
+				break;
+			}
+			return;
+		case Display.KEY_LEFT:
+			if (pt.x > 0 && frange[pt.y][pt.x - 1] != -1) {
+				pt.x--;
+				break;
+			}
+			return;
+		case Display.KEY_RIGHT:
+			if (pt.x < field.X - 1 && frange[pt.y][pt.x + 1] != -1) {
+				pt.x++;
+				break;
+			}
+			return;
+		default:
+			return; // 下のrepaintを回避
+		}
+		applyPosition();
+	}
+	
+	private void selectSunTarget(int key) {
+		switch (key) {
+		case Display.KEY_UP:
+			if (action.args[2] > 0) {
+				action.args[2]--;
+			} else {
+				action.args[2] = 9;
+			}
+			break;
+		case Display.KEY_DOWN:
+			if (action.args[2] < 9) {
+				action.args[2]++;
+			} else {
+				action.args[2] = 0;
+			}
+			break;
+		}
+		System.out.println("KeyInputPlayer.selectSunTarget: select = " + action.args[2]);
+		canvas.sunCommand.setCommand(action.args[2], ptAster);
+		canvas.repaint();
+	}
+
+	private void applyPosition() {
+		canvas.cursor.setCursor(pt, Cursor.CURSOR_1);
+	}
+
 }

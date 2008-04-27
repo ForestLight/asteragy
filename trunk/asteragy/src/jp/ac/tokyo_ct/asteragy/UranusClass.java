@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class UranusClass extends AsterClass {
+final class UranusClass extends AsterClass {
 	private static int[][] defaultRange = { { 0, 0, 0, 1, 0, 0, 0 },
 			{ 0, 1, 0, 0, 0, 1, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
 			{ 1, 0, 1, 1, 1, 0, 1 }, { 0, 0, 0, 1, 0, 0, 0 },
@@ -10,25 +10,25 @@ public final class UranusClass extends AsterClass {
 
 	private static Image asterImage;
 
-	public UranusClass(Aster a, Player p) {
+	UranusClass(Aster a, Player p) {
 		super(a, p);
 	}
 
-	public UranusClass(UranusClass a) {
+	UranusClass(UranusClass a) {
 		super(a);
 	}
 
-	public AsterClass clone() {
+	AsterClass clone() {
 		return new UranusClass(this);
 	}
 
-	public int getNumber() {
+	int getNumber() {
 		return 9;
 	}
 
-	public int[][] getRange() {
+	int[][] getRange() {
 		final Aster a = getAster();
-		final Field field = a.getField();
+		final Field field = a.field;
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
@@ -94,21 +94,21 @@ public final class UranusClass extends AsterClass {
 		return null;
 	}
 
-	public boolean setPointAndNext(Point pt) {
+	boolean setPointAndNext(Point pt) {
 		// スワップの場合もコマンドの場合も同じ
 		return swapSetPointAndNext(pt);
 	}
 
-	public boolean hasNext() {
+	boolean hasNext() {
 		return swapHasNext();
 	}
 
-	public boolean moveAstern() {
+	boolean moveAstern() {
 		return swapMoveAstern();
 	}
 
-	public void executeSpecialCommand() {
-		final Field f = getAster().getField();
+	void executeSpecialCommand() {
+		final Field f = getAster().field;
 		f.getCanvas().paintEffect(new EffectCommandUranus(f, target1, target2));
 
 		f.swap(target1, target2);
@@ -119,7 +119,7 @@ public final class UranusClass extends AsterClass {
 		return defaultRange;
 	}
 
-	public Image getImage() {
+	Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(9);
 		}

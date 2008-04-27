@@ -4,7 +4,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class StarWord {
+class StarWord {
 
 	// private final CanvasControl canvas;
 

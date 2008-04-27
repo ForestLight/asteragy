@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class EffectCommandPluto extends Effect {
+final class EffectCommandPluto extends Effect {
 
 	private static final int frame = 6;
 
@@ -22,7 +22,7 @@ public final class EffectCommandPluto extends Effect {
 
 	// private Graphics g;
 
-	public EffectCommandPluto(Field field, Point aster) {
+	EffectCommandPluto(Field field, Point aster) {
 		this.field = field;
 		this.aster = aster;
 		setBounds();
@@ -40,7 +40,7 @@ public final class EffectCommandPluto extends Effect {
 		System.out.println("location(" + location.x + "," + location.y + ")");
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		final CanvasControl c = field.getCanvas();
 		// ”wŒiŽæ“¾
 		Image back = c.getScreen(location, size);

@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class EffectCommandJupiter extends Effect {
+final class EffectCommandJupiter extends Effect {
 
 	private static final Image effect = Game.loadImage("jupiter_effect");
 
@@ -44,7 +44,7 @@ public final class EffectCommandJupiter extends Effect {
 		}
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		Point l = field.getAsterLocation(point.add(new Point(-1, -1)));
 		Point s = new Point(CanvasControl.measure * 3, CanvasControl.measure * 3);
 		Image back = field.getCanvas().getScreen(l, s);

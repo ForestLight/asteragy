@@ -2,18 +2,18 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class PaintString {
+final class PaintString {
 
 	final private String string;
 
 	final private CanvasControl canvas;
 
-	public PaintString(CanvasControl canvas, String string) {
+	PaintString(CanvasControl canvas, String string) {
 		this.canvas = canvas;
 		this.string = string;
 	}
 
-	public void paint(Graphics g) {
+	void paint(Graphics g) {
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 		g.fillRect(10, canvas.getHeight() / 3, canvas.getWidth() - 20, canvas
 				.getHeight() / 3);

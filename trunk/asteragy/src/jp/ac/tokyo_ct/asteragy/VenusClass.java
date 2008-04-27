@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class VenusClass extends AsterClass {
+final class VenusClass extends AsterClass {
 	private static int[][] defaultRange = { { 0, 0, 1, 0, 0 },
 			{ 0, 1, 1, 1, 0 }, { 0, 1, 1, 1, 0 }, { 0, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 0 } };
@@ -13,23 +13,23 @@ public final class VenusClass extends AsterClass {
 
 	private static Image asterImage;
 
-	public VenusClass(Aster a, Player p) {
+	VenusClass(Aster a, Player p) {
 		super(a, p);
 	}
 
-	public VenusClass(VenusClass a) {
+	VenusClass(VenusClass a) {
 		super(a);
 	}
 
-	public AsterClass clone() {
+	AsterClass clone() {
 		return new VenusClass(this);
 	}
 
-	public int getNumber() {
+	int getNumber() {
 		return 4;
 	}
 
-	public int[][] getRange() {
+	int[][] getRange() {
 		final Game game = getPlayer().game;
 		switch (mode) {
 		case 0:
@@ -40,7 +40,7 @@ public final class VenusClass extends AsterClass {
 			}
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			final Field field = getAster().getField();
+			final Field field = getAster().field;
 			final Aster[][] f = field.field;
 			final Point thisPoint = field.asterToPoint(getAster());
 			// レンジの左上の座標のフィールド内での位置
@@ -102,7 +102,7 @@ public final class VenusClass extends AsterClass {
 		return null;
 	}
 
-	public boolean setPointAndNext(Point pt) {
+	boolean setPointAndNext(Point pt) {
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -113,7 +113,7 @@ public final class VenusClass extends AsterClass {
 		return false;
 	}
 
-	public boolean hasNext() {
+	boolean hasNext() {
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -126,7 +126,7 @@ public final class VenusClass extends AsterClass {
 		return false;
 	}
 
-	public boolean moveAstern() {
+	boolean moveAstern() {
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -136,9 +136,9 @@ public final class VenusClass extends AsterClass {
 		return false;
 	}
 
-	public void executeSpecialCommand() {
+	void executeSpecialCommand() {
 		// 対象の所持者を変更
-		final Field f = getAster().getField();
+		final Field f = getAster().field;
 		final AsterClass ac = f.at(target1).getAsterClass();
 		f.getCanvas().paintEffect(new EffectCommandVenus(f, target1));
 		ac.setPlayer(this.getPlayer());
@@ -151,7 +151,7 @@ public final class VenusClass extends AsterClass {
 		return defaultRange;
 	}
 
-	public Image getImage() {
+	Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(4);
 		}

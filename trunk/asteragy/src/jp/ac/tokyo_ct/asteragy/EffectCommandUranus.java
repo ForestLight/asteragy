@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class EffectCommandUranus extends Effect {
+final class EffectCommandUranus extends Effect {
 
 	private final Field field;
 
@@ -18,7 +18,7 @@ public final class EffectCommandUranus extends Effect {
 
 	// private Graphics g;
 
-	public EffectCommandUranus(Field field, Point target1, Point target2) {
+	EffectCommandUranus(Field field, Point target1, Point target2) {
 		this.field = field;
 		this.target1 = target1;
 		this.target2 = target2;
@@ -35,11 +35,11 @@ public final class EffectCommandUranus extends Effect {
 		// direct1.x /= Math.abs(direct1.x);
 		// if (direct1.y != 0)
 		// direct1.y /= Math.abs(direct1.y);
-		direct2.x = direct1.x * -1;
-		direct2.y = direct1.y * -1;
+		direct2.x = -direct1.x;
+		direct2.y = -direct1.y;
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		Point size = new Point(CanvasControl.measure - 1, CanvasControl.measure - 1);
 		Image t1 = field.getCanvas().getScreen(field.getAsterLocation(target1),
 				size);

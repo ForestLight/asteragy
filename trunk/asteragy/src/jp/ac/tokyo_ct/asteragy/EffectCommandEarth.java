@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class EffectCommandEarth extends Effect {
+final class EffectCommandEarth extends Effect {
 
 	private static final Image effect = Game.loadImage("earth_effect");
 
@@ -10,12 +10,12 @@ public final class EffectCommandEarth extends Effect {
 
 	private final Point point;
 
-	public EffectCommandEarth(Field field, Point point) {
+	EffectCommandEarth(Field field, Point point) {
 		this.field = field;
 		this.point = point;
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		for (int i = 0; i < 10; i++) {
 			g.lock();
 			field.repaintAster(g, point);

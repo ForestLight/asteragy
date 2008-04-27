@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class Cursor /* implements PaintItem */{
+final class Cursor /* implements PaintItem */{
 
 	static final int CURSOR_CLEAR = 0; // カーソルの消去
 
@@ -16,15 +16,18 @@ public final class Cursor /* implements PaintItem */{
 
 	// カーソル情報
 
-	private Point point = new Point();
+	private int x = 0;
 
-	private int type;
+	private int y = 0;
+
+	private int type = 0;
 
 	// 描画
 
 	void setCursor(Point p, int cursorType) {
 		// Point temp = point;
-		point = p;
+		x = p.x;
+		y = p.y;
 		type = cursorType;
 		Main.game.getCanvas().repaint();
 		/*
@@ -34,20 +37,19 @@ public final class Cursor /* implements PaintItem */{
 		 */
 	}
 
-	boolean isCursor(int x, int y) {
-		return point.x == x && point.y == y;
+	boolean isCursor(int x2, int y2) {
+		return x == x2 && y == y2;
 	}
 
-	public void paint(Graphics g) {
+	void paint(Graphics g) {
 		switch (type) {
 		// case CURSOR_CLEAR:
 		// break;
 		case CURSOR_1:
 			g.setOrigin(canvas.getLeftMargin(), canvas.getTopMargin());
 			g.setColor(Graphics.getColorOfName(Graphics.RED));
-			g.drawRect(point.x * CanvasControl.measure, point.y
-					* CanvasControl.measure, CanvasControl.measure,
-					CanvasControl.measure);
+			g.drawRect(x * CanvasControl.measure, y * CanvasControl.measure,
+					CanvasControl.measure, CanvasControl.measure);
 			g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 			break;
 		}

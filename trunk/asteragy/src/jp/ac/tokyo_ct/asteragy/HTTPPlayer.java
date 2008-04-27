@@ -16,7 +16,7 @@ final class HTTPPlayer extends Player implements Runnable {
 	 * @param game
 	 * @param playerName
 	 */
-	public HTTPPlayer(Game game, String playerName) {
+	HTTPPlayer(Game game, String playerName) {
 		super(game, playerName);
 		loggingThread = new Thread(this);
 		loggingThread.start();
@@ -161,7 +161,7 @@ final class HTTPPlayer extends Player implements Runnable {
 	 * 
 	 * @see jp.ac.tokyo_ct.asteragy.Player#getAction()
 	 */
-	public Action getAction() {
+	Action getAction() {
 		System.out.println("getaction");
 		try {
 			for (;;) {
@@ -227,7 +227,7 @@ final class HTTPPlayer extends Player implements Runnable {
 		notify(); // ’@‚«‹N‚·
 	}
 
-	synchronized public void run() {
+	public synchronized void run() {
 		for (;;) {
 			try {
 				wait();

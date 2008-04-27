@@ -7,20 +7,20 @@ import com.nttdocomo.ui.Image;
  * @author kurix
  * 
  */
-public final class Aster {
+final class Aster {
 	static int COLOR_MAX = 5;
 
-	public final static int RED = 1;
+	final static int RED = 1;
 
-	public final static int BLUE = 2;
+	final static int BLUE = 2;
 
-	public final static int GREEN = 3;
+	final static int GREEN = 3;
 
-	public final static int YELLOW = 4;
+	final static int YELLOW = 4;
 
-	public final static int PINK = 5;
+	final static int PINK = 5;
 
-	private final Field field;
+	final Field field;
 
 	private int color;
 
@@ -60,46 +60,46 @@ public final class Aster {
 		return a;
 	}
 
-	public void init() {
+	void init() {
 		deleteFlag = false;
 		judgeFlag = false;
 	}
 
-	public void setNum(int i) {
+	void setNum(int i) {
 		num = i;
 	}
 
-	public int getNum() {
+	int getNum() {
 		return num;
 	}
 
 	private int num;
 
-	public int getColor() {
+	int getColor() {
 		return color;
 	}
 
-	public AsterClass getAsterClass() {
+	AsterClass getAsterClass() {
 		return asterClass;
 	}
 
-	public void setDeleteFlag(boolean b) {
+	void setDeleteFlag(boolean b) {
 		deleteFlag = b;
 	}
 
-	public boolean getDeleteFlag() {
+	boolean getDeleteFlag() {
 		return deleteFlag;
 	}
 
-	public void setJudgeFlag(boolean b) {
+	void setJudgeFlag(boolean b) {
 		judgeFlag = b;
 	}
 
-	public boolean getJudgeFlag() {
+	boolean getJudgeFlag() {
 		return judgeFlag;
 	}
 
-	public void setColor(int c) {
+	void setColor(int c) {
 		if (c != 0) {
 			color = c;
 		}
@@ -109,7 +109,7 @@ public final class Aster {
 	 * 削除フラグが立っていた場合、削除して生成しなおす
 	 * 
 	 */
-	public void delete(int c) {
+	void delete(int c) {
 		if (deleteFlag) {
 			color = Game.random.nextInt(COLOR_MAX) + 1;
 			asterClass = null;
@@ -122,20 +122,16 @@ public final class Aster {
 		}
 	}
 
-	public void setAsterClass(AsterClass ac) {
+	void setAsterClass(AsterClass ac) {
 		asterClass = ac;
 	}
 
-	public final int getNumber() {
+	final int getNumber() {
 		return asterClass != null ? asterClass.getNumber() : 0;
 	}
 
-	public final Field getField() {
-		return field;
-	}
-
-	public Point getPoint() {
-		return getField().asterToPoint(this);
+	Point getPoint() {
+		return field.asterToPoint(this);
 	}
 
 	void setSize(int width, int height) {
@@ -153,7 +149,7 @@ public final class Aster {
 
 	static final Image asterImage = Game.loadImage("aster_0");
 
-	public void paint(Graphics g) {
+	void paint(Graphics g) {
 		final int m = CanvasControl.measure - 1;
 
 		// プレイヤー2のユニットは反転

@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class UpDownWord {
+final class UpDownWord {
 
 	private static final int frame = 15;
 
@@ -22,7 +22,7 @@ public class UpDownWord {
 
 	private int time;
 
-	public UpDownWord(String string, int height, int width, int color) {
+	UpDownWord(String string, int height, int width, int color) {
 		this.height = height;
 		word = string.charAt(0);
 		this.width = Font.getDefaultFont().stringWidth(string.substring(0, 1));
@@ -35,13 +35,13 @@ public class UpDownWord {
 			next = null;
 	}
 
-	public void setLate(int late) {
+	void setLate(int late) {
 		if (next != null)
 			next.setLate(late);
 		this.late = late;
 	}
 
-	public boolean paint(Graphics g, int x) {
+	boolean paint(Graphics g, int x) {
 		// g.setColor(Graphics.getColorOfRGB(100, 100, 100));
 		// g.drawChars(new char[] { word }, x - 1, -1 - height
 		// * SimpleMath.sin(time * theta) / SimpleMath.divide, 0, 1);

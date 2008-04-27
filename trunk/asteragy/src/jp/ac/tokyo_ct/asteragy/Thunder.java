@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import com.nttdocomo.ui.Graphics;
 
-public final class Thunder /*implements PaintItem*/ {
+final class Thunder {
 
 	private static final int MAXTHUNDER = 5;
 
@@ -23,7 +23,7 @@ public final class Thunder /*implements PaintItem*/ {
 
 	private Vector[] thunder;
 
-	public Thunder(Point begin, Point end) {
+	Thunder(Point begin, Point end) {
 		this.begin = begin;
 		this.end = end;
 		initializeLocation();
@@ -56,7 +56,7 @@ public final class Thunder /*implements PaintItem*/ {
 		point.x += (Game.random.nextInt() >>> 1) % MAXWIDTH - (MAXWIDTH / 2);
 	}
 
-	public void paint(Graphics g) {
+	void paint(Graphics g) {
 		final Enumeration[] enumer = new Enumeration[thunder.length];
 		final Point[] before = new Point[thunder.length];
 		boolean not = true;

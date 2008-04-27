@@ -3,20 +3,20 @@ package jp.ac.tokyo_ct.asteragy;
 import com.nttdocomo.ui.Graphics;
 import com.nttdocomo.ui.Image;
 
-public final class CommonCommand extends Command {
+final class CommonCommand extends Command {
 
 	private AsterClass asterClass;
 
-	public CommonCommand(CanvasControl canvas) {
+	CommonCommand(CanvasControl canvas) {
 		super(canvas);
 		loadImage();
 	}
 
-	public void setAsterClass(AsterClass ac) {
+	void setAsterClass(AsterClass ac) {
 		asterClass = ac;
 	}
 
-	public void paint(Graphics g) {
+	void paint(Graphics g) {
 		if (command < 0 || point == null)
 			return;
 		super.paint(g);
@@ -58,7 +58,7 @@ public final class CommonCommand extends Command {
 	}
 
 	private void loadImage() {
-		Image commandImage = Image.createImage(height * 4 + 4, height * 2 + 1);
+		commandImage = Image.createImage(height * 4 + 4, height * 2 + 1);
 		Graphics g = commandImage.getGraphics();
 		g.setColor(back);
 		g.fillRect(0, 0, height * 4 + 4, height * 2 + 2);
@@ -70,7 +70,6 @@ public final class CommonCommand extends Command {
 			g.drawString(commands[i], 2, height * (i + 1) - 1);
 		}
 		g.dispose();
-		setImage(commandImage);
 	}
 
 	private static final String[] commands = { "スワップ", "コマンド" };

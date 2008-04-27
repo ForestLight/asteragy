@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class EffectCommandMoon extends Effect {
+final class EffectCommandMoon extends Effect {
 
 	// private static Image effect;
 
@@ -12,13 +12,13 @@ public final class EffectCommandMoon extends Effect {
 
 	private final Point point;
 
-	public EffectCommandMoon(Field f, Point me, Point pt) {
+	EffectCommandMoon(Field f, Point me, Point pt) {
 		field = f;
 		aster = me;
 		point = pt;
 	}
 
-	public void start(Graphics g) {
+	void start(Graphics g) {
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		for (int i = 17; i != 0; i--) {
 			g.lock();

@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class Command {
+abstract class Command {
 
 	protected int command;
 
@@ -22,21 +22,22 @@ public class Command {
 
 	protected int top;
 
-	public Command(CanvasControl canvas) {
+	protected Command(CanvasControl canvas) {
 		this.canvas = canvas;
 	}
 
-	public final void setCommand(int cmd, Point pt) {
+	final void setCommand(int cmd, Point pt) {
+		System.out.println("Command.setCommand: cmd = " + cmd + " pt == null: " + (point == null));
 		command = cmd;
 		point = pt;
 	}
 
-	public void paint(Graphics g) {
+	void paint(Graphics g) {
 		if (commandImage == null)
 			return;
 		if (point == null)
 			return;
-		System.out.println("paintCommand : " + command);
+		//System.out.println("paintCommand : " + command + " point == null: " + (point == null));
 		g.setOrigin(0, 0);
 		// g.setClip(0, Player.playerheight, canvas.getWidth(),
 		// canvas.getHeight()
@@ -44,7 +45,6 @@ public class Command {
 		setPosition(g);
 		g.drawImage(commandImage, 0, 0);
 		g.setColor(Graphics.getColorOfRGB(255, 128, 196, 100));
-		System.out.println("command = " + command);
 		g.fillRect(1, command * height, height * 4 + 2, height);
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.clearClip();
@@ -63,11 +63,6 @@ public class Command {
 		if (left >= canvas.getWidth() - imageWidth)
 			left -= imageWidth + m;
 		g.setOrigin(left, top);
-		System.out.println("top:" + top + " left:" + left + "y:" + point.y);
+		//System.out.println("top:" + top + " left:" + left + " y:" + point.y);
 	}
-
-	protected final void setImage(Image image) {
-		commandImage = image;
-	}
-
 }

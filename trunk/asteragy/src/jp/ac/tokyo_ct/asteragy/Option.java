@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.io.InputStream;
 //import java.io.OutputStream;
 
-public final class Option {
-	public int fieldXSize;
-	public int fieldYSize;
-	public int numOfColors;
-	public int gameType;
-	public int AP_Pointer; //initialAPへのインデックス
-	public int connection;
-	public int asterPower;
-	public static final int[] initialAP = {0, 10, 20, 30, 50, 100, 999};
+final class Option {
+	int fieldXSize;
+	int fieldYSize;
+	int numOfColors;
+	int gameType;
+	int AP_Pointer; //initialAPへのインデックス
+	int connection;
+	int asterPower;
+	static final int[] initialAP = {0, 10, 20, 30, 50, 100, 999};
 
 	Option(int XSize, int YSize, int color, int ap, int cn) {
 		fieldXSize = XSize;

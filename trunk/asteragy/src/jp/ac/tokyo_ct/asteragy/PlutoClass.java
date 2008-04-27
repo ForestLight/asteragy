@@ -2,30 +2,30 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public final class PlutoClass extends AsterClass {
+final class PlutoClass extends AsterClass {
 	private static final int[][] defaultRange = { { 1, 1, 0, 1, 1 },
 			{ 1, 0, 1, 0, 1 }, { 0, 1, 1, 1, 0 }, { 1, 0, 1, 0, 1 },
 			{ 1, 1, 0, 1, 1 } };
 
 	private static Image asterImage;
 
-	public PlutoClass(Aster a, Player p) {
+	PlutoClass(Aster a, Player p) {
 		super(a, p);
 	}
 
-	public PlutoClass(PlutoClass a) {
+	PlutoClass(PlutoClass a) {
 		super(a);
 	}
 
-	public AsterClass clone() {
+	AsterClass clone() {
 		return new PlutoClass(this);
 	}
 
-	public int getNumber() {
+	int getNumber() {
 		return 11;
 	}
 
-	public int[][] getRange() {
+	int[][] getRange() {
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
@@ -35,7 +35,7 @@ public final class PlutoClass extends AsterClass {
 		return null;
 	}
 
-	public boolean setPointAndNext(Point pt) {
+	boolean setPointAndNext(Point pt) {
 		switch (mode) {
 		case 0:
 			return swapSetPointAndNext(pt);
@@ -45,8 +45,7 @@ public final class PlutoClass extends AsterClass {
 		return false;
 	}
 
-	public boolean hasNext() {
-		// TODO 自動生成されたメソッド・スタブ
+	boolean hasNext() {
 		switch (mode) {
 		case 0:
 			return swapHasNext();
@@ -56,8 +55,7 @@ public final class PlutoClass extends AsterClass {
 		return false;
 	}
 
-	public boolean moveAstern() {
-		// TODO 自動生成されたメソッド・スタブ
+	boolean moveAstern() {
 		switch (mode) {
 		case 0:
 			return swapMoveAstern();
@@ -67,9 +65,9 @@ public final class PlutoClass extends AsterClass {
 		return false;
 	}
 
-	public void executeSpecialCommand() {
+	void executeSpecialCommand() {
 		System.out.println("るいんくらすと");
-		final Field field = getAster().getField();
+		final Field field = getAster().field;
 		Point me = field.asterToPoint(getAster());
 		Point pt = new Point();
 		final int rangeY = defaultRange.length;
@@ -119,7 +117,7 @@ public final class PlutoClass extends AsterClass {
 		return defaultRange;
 	}
 
-	public Image getImage() {
+	Image getImage() {
 		if (asterImage == null) {
 			asterImage = loadImage(11);
 		}
