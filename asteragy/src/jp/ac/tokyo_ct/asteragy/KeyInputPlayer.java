@@ -61,7 +61,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		if (selected || type != Display.KEY_PRESSED_EVENT) {
 			return;
 		}
-		System.out.println("phase = " + phase +", param = " + param);
+		System.out.println("phase = " + phase + ", param = " + param);
 		switch (param) {
 		case Display.KEY_0:
 		case Display.KEY_2:
@@ -93,8 +93,8 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 				if (frange[pt.y][pt.x] != 1) {
 					return;
 				}
-				if (action.aster.getAsterClass() instanceof SunClass) {
-					if (phase == 2 && action.commandType==1) {
+				if (ac instanceof SunClass && action.commandType == 1) {
+					if (phase == 2) {
 						canvas.sunCommand.setCommand(0, ptAster);
 					} else {
 						canvas.sunCommand.setCommand(-1, null);
@@ -107,24 +107,26 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 				ac.setPointAndNext(pt.clone());
 			}
 			switch (phase) {
-			case 0:
+			case 0: // アステルが選択された
 				final Aster a = field.at(pt);
 				ac = a.getAsterClass();
-				if (ac == null || ac.getPlayer() != this || ac.getActionCount()==0) {
+				if (ac == null || ac.getPlayer() != this
+						|| ac.getActionCount() == 0) {
 					return;
 				}
 				action.aster = a;
 				canvasRange.setRange(pt, ac.getRange());
 				ptAster = pt.clone();
 				break;
-			case 1:
+			case 1: // コマンドが選択された
 				ac.setCommand(action.commandType);
 				canvas.commonCommand.setCommand(-1, null);
 				action.args = new int[4];
 			// ここbreakなし
 			case 2:
 			case 3:
-				if (!(action.aster.getAsterClass() instanceof SunClass) && !ac.hasNext()) {
+				if (!(ac instanceof SunClass && action.commandType == 1)
+						&& !ac.hasNext()) {
 					notifyAll();
 					return;
 				}
@@ -144,7 +146,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 				selectTarget(param);
 				return;
 			case 3:
-				if (action.aster.getAsterClass() instanceof SunClass && action.commandType == 1) {
+				if (ac instanceof SunClass && action.commandType == 1) {
 					selectSunTarget(param);
 				} else {
 					selectTarget(param);
@@ -158,19 +160,20 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		case 0:
 			canvas.commonCommand.setCommand(-1, null);
 			break;
-		case 1:{
-			action.commandType=0;
+		case 1: {
+			action.commandType = 0;
 			ac.setCommand(action.commandType);
 			final Range canvasRange = canvas.range;
 			int[][] range = ac.getRange();
 			canvasRange.setRange(pt, range);
 			canvas.commonCommand.setCommand(0, pt);
-			break;}
+			break;
+		}
 		case 2:
 		case 3:
 			ac.setCommand(action.commandType);
 			final int[][] range = ac.getRange();
-			System.out.println("processEvent: range.length / 2 = " + range.length / 2);
+			System.out.println("processEvent phase 2/3");
 			canvasRange.setRange(ptAster, range);
 			final int top = ptAster.y - range.length / 2;
 			final int bottom = ptAster.y + range.length / 2;
@@ -228,20 +231,6 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 
 	private void selectCommand(int key) {
 		switch (key) {
-		// case Display.KEY_UP:
-		// if (command > 0) {
-		// command--;
-		// } else {
-		// command = 1;
-		// }
-		// break;
-		// case Display.KEY_DOWN:
-		// if (command < 1) {
-		// command++;
-		// } else {
-		// command = 0;
-		// }
-		// break;
 		case Display.KEY_UP:
 		case Display.KEY_DOWN:
 			action.commandType++;
@@ -292,7 +281,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		}
 		applyPosition();
 	}
-	
+
 	private void selectSunTarget(int key) {
 		switch (key) {
 		case Display.KEY_UP:
@@ -310,7 +299,8 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 			}
 			break;
 		}
-		System.out.println("KeyInputPlayer.selectSunTarget: select = " + action.args[2]);
+		System.out.println("KeyInputPlayer.selectSunTarget: select = "
+				+ action.args[2]);
 		canvas.sunCommand.setCommand(action.args[2], ptAster);
 		canvas.repaint();
 	}
