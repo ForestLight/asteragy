@@ -182,14 +182,17 @@ final class AIPlayer extends Player {
 							ap[pNum] -= ac.getCommandCost();
 						}
 					}
+					int apt = this.getAP();
 					System.out.println("仮実行開始");
 					ac.execute();
 					System.out.println("仮実行終了");
-
+					apt = this.getAP()-apt;
+					this.addAP(-apt);
+					ap[pNum] += apt;
 					// 消滅判定
-					System.out.println("仮消去開始");
-					ap[pNum] += field.deleteAll();
-					System.out.println("仮消去完了");
+					//System.out.println("仮消去開始");
+					//ap[pNum] += field.deleteAll();
+					//System.out.println("仮消去完了");
 					int ev = evaluation(field);
 					if (ev > eMax) {
 						eMax = ev;
@@ -568,7 +571,7 @@ final class AIPlayer extends Player {
 		}
 
 		// 消滅判定
-		System.out.println("消去開始");
+		/*System.out.println("消去開始");
 		int n = field.deleteAll();
 		if (n > 0) {
 			this.addAP(n);
@@ -576,7 +579,7 @@ final class AIPlayer extends Player {
 			canvas.paintEffect(canvas.disappearControl);
 			Game.sleep(WAIT);
 		}
-		System.out.println("消去完了");
+		System.out.println("消去完了");*/
 
 		p = field.checkGameOver();
 		if (p != null) {
