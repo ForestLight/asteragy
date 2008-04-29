@@ -64,8 +64,8 @@ final class Game {
 
 			switch (option.gameType) {
 			case 1:
-				player[0] = new AIPlayer(this, "COM (Very Easy)");
-				player[1] = new AIPlayer(this, "COM (Very Easy)");
+				player[0] = new AIPlayer(this, "COM1");
+				player[1] = new AIPlayer(this, "COM2");
 				break;
 			case 2:
 				if (isLocalFirst) {
@@ -135,9 +135,9 @@ final class Game {
 				 * Game.sleep(1500);
 				 */
 				if (goPlayer.equals(this.player[0])) {
-					canvas.gameOver(this.player[0]);
-				} else {
 					canvas.gameOver(this.player[1]);
+				} else {
+					canvas.gameOver(this.player[0]);
 				}
 
 				String msg = goPlayer.toString().concat("‚Ì•‰‚¯");
