@@ -63,7 +63,8 @@ final class Action {
 			ac.target1.x = args[0];
 		}
 		if (commandType == 1) {
-			ac.executeSpecialCommand();
+			//ac.executeSpecialCommand();
+			ac.execute();
 		} else {
 			ac.execute();
 		}
