@@ -125,11 +125,13 @@ final class Game {
 		boolean ret = false;
 		exit: for (;;) {
 			Action a;
+			Player goPlayer = null;
 			while ((a = player.getAction()) != null) {
 				a.run();
+				goPlayer = field.checkGameOver();
+				if(goPlayer != null) break;
 			}
 
-			Player goPlayer = field.checkGameOver();
 			if (goPlayer != null) {
 				/*
 				 * Game.sleep(1500);
