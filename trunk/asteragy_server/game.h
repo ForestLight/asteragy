@@ -8,35 +8,26 @@
 #	pragma once
 #endif
 
-class PlayDataQueue
-{
-public:
-	PlayDataQueue();
-	~PlayDataQueue();
-	bool Put(std::string const& s, int player);
-	bool Get(std::string& s, int player);
-	bool SwitchUser(int lastPlayer);
-	int GetOwner() const {return owner;}
-private:
-	std::queue<std::string> buf;
-	int owner; //その時点でbufへPutしているプレイヤー
-	//（!buf.empty()のとき、中身は全て同一プレイヤーownerのPutしたものである）
-
-	PlayDataQueue(PlayDataQueue const&);
-	PlayDataQueue& operator =(PlayDataQueue const&);
-};
-
 class Game
 {
 public:
 	Game();
 	~Game();
 
-	bool PostAction(std::string const& s, int player);
+	bool SendAction(std::string const& s, int player);
 	bool GetAction(std::string& s, int player);
 	bool EndTurn(int lastPlayer);
+	void PostOption(std::string const& s);
+	std::string const& GetOption() const;
+	void SendInitField(std::string const& s);
+	std::string const& GetInitField() const;
+	void JoinPlayer();
+	bool Ready();
 private:
-	PlayDataQueue queue;
+	std::string option;
+	std::string initField;
+	std::queue<std::string> action[2];
+	int playerCount;
 
 	Game(Game const&);
 	Game& operator =(Game const&);

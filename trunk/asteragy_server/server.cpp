@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "server.h"
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -16,6 +17,7 @@ namespace as = boost::asio;
 namespace algo = boost::algorithm;
 
 using boost::system::error_code;
+using boost::lexical_cast;
 using std::string;
 
 namespace
@@ -81,6 +83,8 @@ void Connection::handleRead(error_code const& e, std::size_t)
 	}
 	try
 	{
+		responsed = false;
+
 		std::istream is(&request);
 		string requestLine;
 		getline(is, requestLine);
@@ -100,20 +104,17 @@ void Connection::handleRead(error_code const& e, std::size_t)
 		}
 
 		string const& requestPath = requestElements[path];
-		boost::iterator_range<char const*> my_url = boost::as_literal("/?");
-		if (!std::equal(begin(my_url), end(my_url), begin(requestPath)))
+		if (requestPath.size() == 0 || requestPath[0] != '/')
 		{
-			if (size(requestPath) > 0 && requestPath[0] != '/')
-			{
-				returnEmptyResponse(400);
-			}
-			else
-			{
-				returnEmptyResponse(404);
-			}
+			returnEmptyResponse(400);
 			return;
 		}
-		string::const_iterator it = begin(requestPath) + size(my_url);
+		else if (requestPath.size() == 1 || requestPath[1] != '?')
+		{
+			returnEmptyResponse(404);
+			return;
+		}
+		string::const_iterator it = begin(requestPath) + 2;
 		parseArgs(args, boost::make_iterator_range(it, boost::end(requestPath)));
 		perseHeader(header, is);
 
@@ -122,29 +123,90 @@ void Connection::handleRead(error_code const& e, std::size_t)
 		map_t::const_iterator scmd = args.find("scmd");
 		if (scmd != args.end())
 		{
+			std::clog << scmd->second << std::endl;
 			if (scmd->second == "querygame")
 			{
-				//queryNewGame();
+				queryNewGame();
 			}
+			else
+			{
+				returnEmptyResponse(400);
+			}
+			return;
 		}
 
-		map_t::const_iterator posId = args.find("id");
-		if (posId == args.end())
+		map_t::const_iterator itId = args.find("id");
+		if (itId == args.end())
 		{
 			returnEmptyResponse(400);
 			return;
 		}
-		int gameId = boost::lexical_cast<int>(posId->second);
-		int player = gameId & 1;
+		int gameId = boost::lexical_cast<int>(itId->second);
+		map_t::const_iterator itPlayer = args.find("turn");
+		if (itPlayer == args.end())
+		{
+			returnEmptyResponse(400);
+			return;
+		}
+		int player = boost::lexical_cast<int>(itPlayer->second);
 
 		string const& cmd = args["cmd"];
-		if (cmd == "postaction")
+		std::clog << cmd << "\tturn:" << player << std::endl;
+		if (cmd == "sendaction")
 		{
-			asyncReadUntil(&Connection::handleReadPostAction, "\r\n");
+			game.SendAction(args["action"] + "\r\n" + args["delete"], player);
+			returnEmptyResponse(200);
+			std::clog << " action: " << args["action"] << "delete: " << args["delete"] << std::endl;
 		}
 		else if (cmd == "getaction")
 		{
-			getActionFromConsole(); //getAction();
+			//getActionFromConsole();
+			string s;
+			game.GetAction(s, player);
+			returnResponse(s);
+			std::clog << s << std::endl;
+		}
+		else if (cmd == "endturn")
+		{
+			game.EndTurn(player);
+			returnEmptyResponse(200);
+		}
+		else if (cmd == "postoption")
+		{
+			game.PostOption(args["opt"]);
+			returnEmptyResponse(200);
+		}
+		else if (cmd == "getoption")
+		{
+			std::string const& opt = game.GetOption();
+			if (opt.empty())
+				returnEmptyResponse(200);
+			else
+				returnResponse(opt);
+		}
+		else if (cmd == "sendinitfield")
+		{
+			game.SendInitField(args["field"]);
+			returnEmptyResponse(200);
+		}
+		else if (cmd == "getinitfield")
+		{
+			std::string const& opt = game.GetInitField();
+			if (opt.empty())
+				returnEmptyResponse(200);
+			else
+				returnResponse(opt);
+		}
+		else if (cmd == "querystart")
+		{
+			if (game.Ready())
+			{
+				returnResponse("ok\r\n");
+			}
+			else
+			{
+				returnEmptyResponse(200);
+			}
 		}
 		else if (cmd == "endturn")
 		{
@@ -154,6 +216,12 @@ void Connection::handleRead(error_code const& e, std::size_t)
 		{
 			returnEmptyResponse(400);
 		}
+		//念のため
+		assert(responsed);
+		if (!responsed)
+		{
+			returnEmptyResponse(500);
+		}
 	}
 	catch(std::exception const& e)
 	{
@@ -162,23 +230,12 @@ void Connection::handleRead(error_code const& e, std::size_t)
 		response.consume(response.size() * sizeof(as::streambuf::char_type));
 		returnEmptyResponse(500);
 	}
-}
-
-/*
-@brief postactionで、内容を受信したときに呼ばれる。
-*/
-void Connection::handleReadPostAction(error_code const& e, std::size_t)
-{
-	if (!e)
+	catch(...)
 	{
-		std::istream is(&request);
-		std::string s;
-		while (std::getline(is, s))
-		{
-			game.PostAction(s, player);
-		}
-		std::cout << "postaction 受領: " << s << std::endl;
-		returnEmptyResponse(200);
+		clog << "Unknown exception" << endl;
+		//バッファの消去
+		response.consume(response.size() * sizeof(as::streambuf::char_type));
+		returnEmptyResponse(500);
 	}
 }
 
@@ -223,4 +280,14 @@ void Connection::getActionFromConsole()
 	string s;
 	getline(std::cin, s);
 	returnResponse(s);
+}
+
+void Connection::queryNewGame()
+{
+	static int player = 0;
+	std::ostringstream os;
+	os << "0\r\n" << player << "\r\n";
+	returnResponse(os.str());
+	game.JoinPlayer();
+	player = !player;
 }
