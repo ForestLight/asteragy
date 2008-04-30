@@ -44,25 +44,25 @@ final class Aster {
 		field = f;
 	}
 
-	Aster clone() {
-		// Aster a = new Aster(field);
-		Aster a = this;
+	Aster clone(Field f) {
+		Aster a = new Aster(f);
 		a.color = color;
 		if (asterClass != null) {
 			a.asterClass = asterClass.clone();
 			a.asterClass.setAster(this);
-		} else
+		} else {
 			a.asterClass = null;
-		a.deleteFlag = deleteFlag;
-		a.judgeFlag = judgeFlag;
-		// a.deleteFlag = false;
-		// a.judgeFlag = false;
+		}
+//		a.deleteFlag = deleteFlag;
+//		a.judgeFlag = judgeFlag;
+		a.deleteFlag = false;
+		a.judgeFlag = false;
 		return a;
 	}
 
 	void init() {
 		deleteFlag = false;
-		judgeFlag = false;
+//		judgeFlag = false;
 	}
 
 	void setNum(int i) {
@@ -111,10 +111,11 @@ final class Aster {
 	 */
 	void delete(int c) {
 		if (deleteFlag) {
+			System.out.println("delete " + field.asterToPoint(this));
 			color = Game.random.nextInt(COLOR_MAX) + 1;
 			asterClass = null;
 			deleteFlag = false;
-			judgeFlag = false;
+//			judgeFlag = false;
 		}
 
 		if (c != 0) {
@@ -153,7 +154,7 @@ final class Aster {
 		final int m = CanvasControl.measure - 1;
 
 		// プレイヤー2のユニットは反転
-		if (asterClass != null && asterClass.getPlayer() == Main.game.player[1]) {
+		if (asterClass != null && asterClass.getPlayer() == field.game.player[1]) {
 			g.setFlipMode(Graphics.FLIP_VERTICAL);
 		} else {
 			g.setFlipMode(Graphics.FLIP_NONE);

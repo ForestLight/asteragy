@@ -21,7 +21,7 @@ final class EffectFieldSwap extends Effect {
 		// checkSmall();
 	}
 
-	void start(Graphics g) {
+	void start(Graphics g, CanvasControl c) {
 		Aster aa = field.at(b);
 		Aster ab = field.at(a);
 
@@ -31,7 +31,7 @@ final class EffectFieldSwap extends Effect {
 		for (int i = 0; i < (CanvasControl.measure - 1) * 3 / 2; i++) {
 
 			g.lock();
-			CanvasControl.paintAsterBack(g, a);
+			c.paintAsterBack(g, a);
 			final int t = (CanvasControl.measure - s - 1) / 2;
 			final int u = (CanvasControl.measure - l - 1) / 2;
 			field.setOrignAster(g, a, t, t);
@@ -41,7 +41,7 @@ final class EffectFieldSwap extends Effect {
 			ab.setSize(l, l);
 			ab.paint(g);
 
-			CanvasControl.paintAsterBack(g, b);
+			c.paintAsterBack(g, b);
 			field.setOrignAster(g, b, t, t);
 			ab.setSize(s, s);
 			ab.paint(g);
@@ -62,7 +62,7 @@ final class EffectFieldSwap extends Effect {
 		aa.resetSize();
 		ab.resetSize();
 
-		field.repaintAster(g, a);
-		field.repaintAster(g, b);
+		field.repaintAster(g, c, a);
+		field.repaintAster(g, c, b);
 	}
 }

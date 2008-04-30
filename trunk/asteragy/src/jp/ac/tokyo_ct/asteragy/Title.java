@@ -159,7 +159,7 @@ final class Title extends Canvas implements TimerListener {
 								option.gameType = 1;
 								break;
 							case 1:
-								// option.gameType = 2;
+								option.gameType = 2;
 								break;
 							case 2:
 								depth--;

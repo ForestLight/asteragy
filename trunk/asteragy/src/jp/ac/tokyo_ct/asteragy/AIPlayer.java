@@ -14,6 +14,7 @@ final class AIPlayer extends Player {
 		final Field f = game.getField();
 		colorBackUp = new int[f.Y][f.X];
 		acBackUp = new AsterClass[f.Y][f.X];
+		canvas = game.getCanvas();
 	}
 
 	private CanvasControl canvas;
@@ -45,10 +46,7 @@ final class AIPlayer extends Player {
 
 	Action getAction() {
 		System.out.println("\n\nAIplayer.getAction()");
-		if (canvas == null) {
-			canvas = game.getCanvas();
-		}
-		if (game.getCurrentPlayer() == game.player[0]) {
+		if (game.player[0] == this) {
 			pNum = 0;
 		} else {
 			pNum = 1;
@@ -184,15 +182,15 @@ final class AIPlayer extends Player {
 					}
 					int apt = this.getAP();
 					System.out.println("仮実行開始");
-					ac.execute();
+					ac.execute(null);
 					System.out.println("仮実行終了");
-					apt = this.getAP()-apt;
+					apt = this.getAP() - apt;
 					this.addAP(-apt);
 					ap[pNum] += apt;
 					// 消滅判定
-					//System.out.println("仮消去開始");
-					//ap[pNum] += field.deleteAll();
-					//System.out.println("仮消去完了");
+					// System.out.println("仮消去開始");
+					// ap[pNum] += field.deleteAll();
+					// System.out.println("仮消去完了");
 					int ev = evaluation(field);
 					if (ev > eMax) {
 						eMax = ev;
@@ -243,13 +241,11 @@ final class AIPlayer extends Player {
 		final Aster[][] field = f.field;
 		int c = 0;
 
-		final Player currentPlayer = game.getCurrentPlayer();
 		for (int i = 0; i < y; i++) {
 			for (int j = 0; j < x; j++) {
 				final AsterClass ac = field[i][j].getAsterClass();
 				if (ac != null) {
-					if (ac.getPlayer() == currentPlayer
-							&& ac.getActionCount() != 0) {
+					if (ac.getPlayer() == this && ac.getActionCount() != 0) {
 						a[c] = field[i][j];
 						c++;
 					}
@@ -372,10 +368,8 @@ final class AIPlayer extends Player {
 		final Aster[][] f = field2.field;
 		final Player[] p = game.player;
 
-		Point[] sunPoint = {
-			field2.getSunPosition(p[0]),
-			field2.getSunPosition(p[1]),
-		};
+		Point[] sunPoint = { field2.getSunPosition(p[0]),
+				field2.getSunPosition(p[1]), };
 
 		if (sunPoint[pNum] == null) {
 			System.out.println("AIPlayer.evaluation return -10000");
@@ -399,7 +393,7 @@ final class AIPlayer extends Player {
 			for (int j = 0; j < x; j++) {
 				final AsterClass ac = f[i][j].getAsterClass();
 				if (ac != null) {
-					if (ac.getPlayer() == game.getCurrentPlayer()) {
+					if (ac.getPlayer() == this) {
 						int dist = getDistance(sunPoint[1 - pNum], j, i);
 						// System.out.println("dist = " +dist+", x = " + j +" y
 						// = "+i);
@@ -461,7 +455,7 @@ final class AIPlayer extends Player {
 		final Field f = game.getField();
 
 		System.out.println("restor Field in");
-		game.getCanvas().disappearControl.Clear();
+		game.getCanvas().disappearControl.disappearing.removeAllElements();
 		for (int i = 0; i < f.Y; i++) {
 			for (int j = 0; j < f.X; j++) {
 				Aster a = f.field[i][j];
@@ -469,7 +463,7 @@ final class AIPlayer extends Player {
 				final int x = f.X;
 				while ((i * x + j) != n) {// アステルの順番が入れ替わってた場合
 					// System.out.println("swap-"+i*x+j+"-"+n+"i="+i+"j="+j);
-					f.swap(new Point(j, i), new Point(n % x, n / x));
+					f.swap(j, i, n % x, n / x);
 					a = f.field[i][j];
 					n = a.getNum();
 				}
@@ -559,7 +553,7 @@ final class AIPlayer extends Player {
 			}
 		}
 		System.out.println("実行開始");
-		ac.execute();
+		ac.execute(null);
 		System.out.println("実行完了");
 		field.repaintField();
 		canvas.repaint();
@@ -571,15 +565,12 @@ final class AIPlayer extends Player {
 		}
 
 		// 消滅判定
-		/*System.out.println("消去開始");
-		int n = field.deleteAll();
-		if (n > 0) {
-			this.addAP(n);
-			field.repaintField();
-			canvas.paintEffect(canvas.disappearControl);
-			Game.sleep(WAIT);
-		}
-		System.out.println("消去完了");*/
+		/*
+		 * System.out.println("消去開始"); int n = field.deleteAll(); if (n > 0) {
+		 * this.addAP(n); field.repaintField();
+		 * canvas.paintEffect(canvas.disappearControl); Game.sleep(WAIT); }
+		 * System.out.println("消去完了");
+		 */
 
 		p = field.checkGameOver();
 		if (p != null) {

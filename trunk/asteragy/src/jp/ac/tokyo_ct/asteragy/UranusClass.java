@@ -109,10 +109,10 @@ final class UranusClass extends AsterClass {
 
 	void executeSpecialCommand() {
 		final Field f = getAster().field;
-		f.getCanvas().paintEffect(new EffectCommandUranus(f, target1, target2));
-
-		f.swap(target1, target2);
+		f.getCanvas().paintEffect(new EffectCommandUranus(target1, target2));
 		logAction(target1, target2);
+
+		f.swap(target1.x, target1.y, target2.x, target2.y);
 	}
 
 	static int[][] getDefaultRange() {

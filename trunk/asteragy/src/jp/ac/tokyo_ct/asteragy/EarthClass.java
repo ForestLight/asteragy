@@ -101,13 +101,12 @@ final class EarthClass extends AsterClass {
 
 	void executeSpecialCommand() {
 		final Field f = getAster().field;
-		Effect effect = new EffectCommandEarth(f, target1);
+		Effect effect = new EffectCommandEarth(target1);
 		f.getCanvas().paintEffect(effect);
-
+		logAction(target1);
 		final Aster a = f.at(target1);
 		new MoonClass(a, getPlayer());
 		a.getAsterClass().setActionCount(0);
-		logAction(target1);
 	}
 
 	static int[][] getDefaultRange() {

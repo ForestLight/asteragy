@@ -2,6 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import java.io.IOException;
 import java.util.Random;
+import java.util.Vector;
 
 import com.nttdocomo.io.ConnectionException;
 import com.nttdocomo.ui.Dialog;
@@ -53,14 +54,17 @@ final class Game {
 				httpLogger = new HTTPPlayer(this, "ネットワーク");
 				isLocalFirst = httpLogger.initialize(option);
 			}
+
+			field = new Field(this, option.fieldXSize, option.fieldYSize,
+					option.connection);
+			Aster.COLOR_MAX = option.numOfColors;
+			field.setAster();
+			System.out.println("initialize");
+
 			canvas = new CanvasControl(this);
 			canvas.repaint(); // now loadingを表示させる
 
-			Aster.COLOR_MAX = option.numOfColors;
-			Field.CONNECTION = option.connection;
-
-			field = new Field(this, option.fieldXSize, option.fieldYSize);
-			field.setAster();
+			System.out.println("initialize");
 
 			switch (option.gameType) {
 			case 1:
@@ -82,6 +86,7 @@ final class Game {
 				player[0] = new KeyInputPlayer(this, "先攻");
 				player[1] = new KeyInputPlayer(this, "後攻");
 			}
+			System.out.println("initialize");
 
 			// 初期設定(仮)
 			Aster a = field.field[field.Y - 1][field.X / 2];
@@ -91,6 +96,7 @@ final class Game {
 
 			player[0].addAP(option.asterPower);
 			player[1].addAP(option.asterPower);
+			System.out.println("initialize");
 
 			if (option.gameType == 2) {
 				httpLogger.sendInitField(field);
@@ -211,6 +217,17 @@ final class Game {
 		}
 	}
 
+	void logDeleteInfo(Field f, Vector deletedList) {
+		if (httpLogger != null) {
+			System.out.print("Game.logDeleteInfo");
+			if (deletedList.size() == 0) {
+				httpLogger.logDeletedList(null, null);
+			} else {
+				httpLogger.logDeletedList(f, deletedList);
+			}
+		}
+	}
+	
 	/**
 	 * プレイヤー
 	 */
@@ -253,22 +270,22 @@ final class Game {
 	static ImageLoader loader;
 
 	static Image loadImage(String s) {
-		/*
-		 * try { // リソースから読み込み MediaImage m =
-		 * MediaManager.getImage("resource:///".concat(s) .concat(".gif")); //
-		 * メディアの使用開始 m.use(); // 読み込み return m.getImage(); } catch (Exception e) { }
-		 * return null;
-		 */
-		if (loader.getImages().containsKey(s.concat(".gif"))) {
-			return (Image) loader.getImages().get(s.concat(".gif"));
+		try {
+			MediaImage m = MediaManager.getImage("resource:///".concat(s)
+					.concat(".gif"));
+			m.use();
+			return m.getImage();
+		} catch (Exception e) {
 		}
 		return null;
+		// return (Image) loader.getImages().get(s.concat(".gif"));
 	}
 
 	static void sleep(int ms) {
 		try {
 			Thread.sleep(ms);
 		} catch (InterruptedException e) {
+			System.out.println("InterruptedException");
 			Thread.currentThread().interrupt();
 		}
 	}

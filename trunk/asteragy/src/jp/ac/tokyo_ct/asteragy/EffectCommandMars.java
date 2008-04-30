@@ -7,8 +7,6 @@ final class EffectCommandMars extends Effect {
 
 	private static final Image effect = Game.loadImage("mars_effect");
 
-	private final Field field;
-
 	private final Point point;
 
 	private final Point aster;
@@ -20,7 +18,6 @@ final class EffectCommandMars extends Effect {
 	private int time;
 
 	EffectCommandMars(Field field, AsterClass cls, Point point) {
-		this.field = field;
 		this.point = point;
 		this.aster = field.asterToPoint(cls.getAster());
 		setRect();
@@ -51,11 +48,11 @@ final class EffectCommandMars extends Effect {
 		rightbottom = new Point(rx, by);
 	}
 
-	void start(Graphics g) {
+	void start(Graphics g, CanvasControl c) {
 		for (time = 0; time < 17; time++) {
 			g.lock();
-			field.repaintAsterRect(g, lefttop, rightbottom);
-			field.setOrignAster(g, aster);
+			c.field.repaintAsterRect(g, lefttop, rightbottom);
+			c.field.setOrignAster(g, aster);
 
 			g.drawImage(effect, time * (point.x - aster.x), time
 					* (point.y - aster.y), 0, (CanvasControl.measure - 1) * time,
@@ -69,14 +66,14 @@ final class EffectCommandMars extends Effect {
 		time--;
 
 		g.lock();
-		CanvasControl.paintAsterBack(g, point);
-		field.setOrignAster(g, point);
+		c.paintAsterBack(g, point);
+		c.field.setOrignAster(g, point);
 		g.drawImage(effect, 0, 0, 0, (CanvasControl.measure - 1) * time,
 				CanvasControl.measure - 1, CanvasControl.measure - 1);
 		g.unlock(false);
 
 		Game.sleep(10000 / CanvasControl.f);
 
-		field.repaintAster(g, point);
+		c.field.repaintAster(g, c, point);
 	}
 }

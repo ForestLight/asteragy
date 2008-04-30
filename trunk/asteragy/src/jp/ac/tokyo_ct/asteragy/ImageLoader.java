@@ -8,17 +8,13 @@ import javax.microedition.io.Connector;
 import com.nttdocomo.io.*;
 import com.nttdocomo.ui.*;
 
-public class ImageLoader {
+final class ImageLoader {
 
 	private static final String filelisturl = "filelist.txt";
 
 	private static final String imageurl = "image/";
 
-	private final Hashtable images;
-
-	public ImageLoader() {
-		images = new Hashtable(30);
-	}
+	private final Hashtable images = new Hashtable(30);
 
 	private Vector loadFileList() {
 		HttpConnection connection = null;
@@ -33,7 +29,7 @@ public class ImageLoader {
 			// ヘッダ
 			connection = (HttpConnection) Connector.open(url);
 			connection.setRequestMethod("GET");
-			connection.setRequestProperty("Accept", "plane/text, */*");
+			connection.setRequestProperty("Accept", "text/plain, */*");
 
 			// 接続
 			connection.connect();
@@ -50,7 +46,6 @@ public class ImageLoader {
 			}
 
 		} catch (IOException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		} finally {
 			try {
@@ -59,7 +54,6 @@ public class ImageLoader {
 				if (reader != null)
 					reader.close();
 			} catch (IOException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 		}
@@ -107,7 +101,6 @@ public class ImageLoader {
 				if (connection != null)
 					connection.close();
 			} catch (IOException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 		}
@@ -184,20 +177,18 @@ public class ImageLoader {
 			output.write(image);
 
 		} catch (IOException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		} finally {
 			try {
 				if (output != null)
 					output.close();
 			} catch (IOException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public void load() {
+	void load() {
 		// System.out.println("loading");
 		if (loadImage()) {
 			Vector filelist = loadFileList();
@@ -205,7 +196,7 @@ public class ImageLoader {
 		}
 	}
 
-	public Hashtable getImages() {
+	Hashtable getImages() {
 		return images;
 	}
 

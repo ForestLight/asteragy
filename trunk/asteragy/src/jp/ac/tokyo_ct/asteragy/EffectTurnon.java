@@ -14,7 +14,7 @@ final class EffectTurnon extends Effect {
 		this.canvas = canvas;
 	}
 
-	void start(Graphics g) {
+	void start(Graphics g, CanvasControl c) {
 		final Image back = Player.turnOnBack;
 		final int x = (canvas.getWidth() - back.getWidth()) / 2;
 		final int y = (canvas.getHeight() - back.getHeight()) / 2;
@@ -39,7 +39,7 @@ final class EffectTurnon extends Effect {
 
 		do {
 			g.unlock(true);
-			Game.sleep(late * 100 / CanvasControl.f);
+			Game.sleep(770 / (string.length() * CanvasControl.f));
 
 			g.lock();
 			g.setOrigin(0, 0);
@@ -52,6 +52,6 @@ final class EffectTurnon extends Effect {
 		} while (!end);
 		g.unlock(true);
 
-		Game.sleep(100 / CanvasControl.f);
+		Game.sleep(150 / CanvasControl.f);
 	}
 }

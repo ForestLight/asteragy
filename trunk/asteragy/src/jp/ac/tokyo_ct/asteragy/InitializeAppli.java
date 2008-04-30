@@ -2,10 +2,9 @@ package jp.ac.tokyo_ct.asteragy;
 
 import com.nttdocomo.ui.*;
 
-public class InitializeAppli extends Canvas {
+final class InitializeAppli extends Canvas {
 
 	public void paint(Graphics g) {
-		// TODO 自動生成されたメソッド・スタブ
 		final String nowloading = "nowloading";
 		g.lock();
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
@@ -17,14 +16,13 @@ public class InitializeAppli extends Canvas {
 		g.unlock(true);
 	}
 
-	public void start() {
+	void start() {
 		Display.setCurrent(this);
 		repaint();
 		init();
 	}
 
-	private void init() {
-		// TODO 自動生成されたメソッド・スタブ
+	void init() {
 		//System.out.println("init");
 		Game.loader = new ImageLoader();
 		Game.loader.load();

@@ -29,7 +29,7 @@ final class Cursor /* implements PaintItem */{
 		x = p.x;
 		y = p.y;
 		type = cursorType;
-		Main.game.getCanvas().repaint();
+		canvas.game.getCanvas().repaint();
 		/*
 		 * final Graphics g = canvas.getScreen().getBufferGraphics(); final
 		 * Field field = canvas.getField(); field.repaintAster(g, temp);

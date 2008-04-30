@@ -4,9 +4,12 @@
 package jp.ac.tokyo_ct.asteragy;
 
 import java.io.*;
+import java.util.Enumeration;
+import java.util.Vector;
 import javax.microedition.io.*;
 import com.nttdocomo.io.*;
 import com.nttdocomo.ui.Dialog;
+import com.nttdocomo.ui.IApplication;
 
 /**
  * @author Yusuke 現在、1P, 2Pの両方がHTTPPlayerになることはできない。
@@ -24,9 +27,10 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	// こっちの人間プレイヤが先攻ならtrueを返す。
 	boolean initialize(Option opt) throws IOException {
-		System.out.println("querygame");
-		HttpConnection con = (HttpConnection) Connector.open(
-				"http://localhost/?scmd=querygame", Connector.READ);
+		String url = sourceURL.concat("?scmd=querygame");
+		System.out.println("querygame: ".concat(url));
+		HttpConnection con = (HttpConnection) Connector.open(url,
+				Connector.READ);
 		try {
 			con.setRequestMethod(HttpConnection.GET);
 			con.connect();
@@ -63,7 +67,6 @@ final class HTTPPlayer extends Player implements Runnable {
 		try {
 			con.setRequestMethod(HttpConnection.GET);
 			con.connect();
-			con.openInputStream().close(); // ダミー：念のため
 		} finally {
 			con.close();
 		}
@@ -118,15 +121,14 @@ final class HTTPPlayer extends Player implements Runnable {
 	}
 
 	void sendInitField(Field f) throws IOException {
-		String url = getUrl("sendinitfield", isLocalFirst).concat("&field=").concat(
-				f.toStringForInit());
-		System.out.println("sendinifield: " + url);
+		String url = getUrl("sendinitfield", isLocalFirst).concat("&field=")
+				.concat(f.toStringForInit());
+		System.out.println(url);
 		HttpConnection con = (HttpConnection) Connector.open(url,
 				Connector.READ);
 		try {
 			con.setRequestMethod(HttpConnection.GET);
 			con.connect();
-			con.openInputStream().close(); // ダミー：念のため
 		} finally {
 			con.close();
 		}
@@ -155,7 +157,7 @@ final class HTTPPlayer extends Player implements Runnable {
 			}
 		}
 	}
-	
+
 	/*
 	 * (非 Javadoc)
 	 * 
@@ -165,31 +167,41 @@ final class HTTPPlayer extends Player implements Runnable {
 		System.out.println("getaction");
 		try {
 			for (;;) {
+				Game.sleep(3000);
 				HttpConnection con = (HttpConnection) Connector.open(getUrl(
 						"getaction", isLocalFirst), Connector.READ);
 				try {
 					con.setRequestMethod(HttpConnection.GET);
 					con.connect();
-					if (con.getLength() != 0) {
-						InputStream is = con.openInputStream();
-						try {
-							String s = readLine(is);
-							if (s.equals("end"))
-								return null;
-							Action a = Action.readFromString(game, s);//Action.readFromStream(game, is);
-							if (a != null) {
-								System.out.print("getaction: ");
-								System.out.println(a.toString());
-								return a;
-							}
-						} finally {
-							is.close();
+					if (con.getLength() == 0) {
+						continue;
+					}
+					InputStream is = con.openInputStream();
+					try {
+						String s = readLine(is);
+						if (s.equals("end"))
+							return null;
+						System.out.println(s);
+						Action a = Action.readFromString(game, s);
+						// Action.readFromStream(game, is);
+						System.out.println("getaction2");
+						if (a == null) {
+							a = Action.readFromString(game, s);
 						}
+						a.deleteList = readLine(is);
+						System.out.println("getaction3");
+						System.out.println(a.deleteList);
+						if (a != null) {
+							System.out.print("getaction: ");
+							System.out.println(a.toString());
+							return a;
+						}
+					} finally {
+						is.close();
 					}
 				} finally {
 					con.close();
 				}
-				Game.sleep(3000);
 			}
 		} catch (IOException e) {
 			System.out.println(e.toString());
@@ -198,14 +210,18 @@ final class HTTPPlayer extends Player implements Runnable {
 	}
 
 	void endTurn(int player) {
+		if (game.getPlayerIndex(game.getCurrentPlayer()) != (isLocalFirst ? 0
+				: 1)) {
+			return;
+		}
 		try {
+			System.out.println("endTurn");
 			String url = getUrl("endturn", player != 0);
 			HttpConnection con = (HttpConnection) Connector.open(url,
 					Connector.READ);
 			try {
 				con.setRequestMethod(HttpConnection.GET);
 				con.connect();
-				con.openInputStream().close(); // ダミー：念のため
 			} finally {
 				con.close();
 			}
@@ -223,7 +239,37 @@ final class HTTPPlayer extends Player implements Runnable {
 	 *            送信する行動を記したActionのインスタンス
 	 */
 	synchronized void log(Action a) {
-		action = a;
+		if (game.getPlayerIndex(game.getCurrentPlayer()) != (isLocalFirst ? 0
+				: 1)) {
+			return;
+		}
+		System.out.println("log");
+		async = a.toString();
+	}
+
+	synchronized void logDeletedList(Field f, Vector deletedList) {
+		System.out.println("logDeletedList");
+		if (game.getPlayerIndex(game.getCurrentPlayer()) != (isLocalFirst ? 0
+				: 1)) {
+			return;
+		}
+		StringBuffer buf = new StringBuffer();
+		buf.append(getUrl("sendaction", !isLocalFirst));
+		buf.append("&action=");
+		buf.append(async);
+		if (deletedList != null) {
+			buf.append("&delete=");
+			Enumeration en = deletedList.elements();
+			while (en.hasMoreElements()) {
+				Point pt = (Point) en.nextElement();
+				buf.append(pt.x);
+				buf.append(pt.y);
+				buf.append(f.at(pt).getColor());
+			}
+		}
+		async = buf.toString();
+		System.out.print("logDeletedList: ");
+		System.out.println(async);
 		notify(); // 叩き起す
 	}
 
@@ -231,9 +277,9 @@ final class HTTPPlayer extends Player implements Runnable {
 		for (;;) {
 			try {
 				wait();
-				if (action != null) {
-					sendLog(action);
-					action = null;
+				if (async != null) {
+					sendLog();
+					async = null;
 				}
 			} catch (InterruptedException e) {
 			}
@@ -241,21 +287,19 @@ final class HTTPPlayer extends Player implements Runnable {
 	}
 
 	private String getUrl(String cmd, boolean first) {
-		return "http://localhost/?cmd=".concat(cmd).concat("&id=").concat(
+		return sourceURL.concat("?cmd=").concat(cmd).concat("&id=").concat(
 				String.valueOf(id)).concat("&turn=").concat(first ? "1" : "0");
 	}
 
-	private void sendLog(Action a) {
+	private void sendLog() {
 		try {
-			String url = getUrl("sendaction", !isLocalFirst).concat("&action=")
-					.concat(a.toString());
-			System.out.println(url);
-			HttpConnection con = (HttpConnection) Connector.open(url,
+			System.out.println(async);
+			HttpConnection con = (HttpConnection) Connector.open(async,
 					Connector.READ);
+			async = null;
 			try {
 				con.setRequestMethod(HttpConnection.GET);
 				con.connect();
-				con.openInputStream().close(); // ダミー：念のため
 			} finally {
 				con.close();
 			}
@@ -268,7 +312,7 @@ final class HTTPPlayer extends Player implements Runnable {
 	}
 
 	static String readLine(InputStream is) throws IOException {
-		StringBuffer buf = new StringBuffer(16);
+		final StringBuffer buf = new StringBuffer(16);
 		for (;;) {
 			int c = is.read();
 			if (c == -1 || c == '\n')
@@ -276,7 +320,11 @@ final class HTTPPlayer extends Player implements Runnable {
 			if (c != '\r') // 手抜き
 				buf.append((char) c);
 		}
-		return buf.toString();
+		if (buf.length() != 0) {
+			return buf.toString();
+		} else {
+			return "";
+		}
 	}
 
 	/**
@@ -304,7 +352,7 @@ final class HTTPPlayer extends Player implements Runnable {
 	static int parseIntChar(int c) {
 		if (c < 0)
 			return -1;
-		if (Character.isDigit((char)c))
+		if (Character.isDigit((char) c))
 			return c - '0';
 		int t = c - 'A';
 		if (0 <= t && t < 6)
@@ -315,9 +363,13 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	private Thread loggingThread;
 
-	private volatile Action action;
+	// runとsendLogで使う
+	private volatile String async;
 
 	private int id;
 
 	private boolean isLocalFirst = false;
+
+	private static String sourceURL = IApplication.getCurrentApp()
+			.getSourceURL();
 }

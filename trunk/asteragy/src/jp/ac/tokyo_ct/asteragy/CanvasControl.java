@@ -24,6 +24,8 @@ final class CanvasControl extends Canvas {
 	final SunCommand sunCommand = new SunCommand(this);
 
 	final Range range = new Range();
+	
+	final Field field;
 
 	final EffectAsterDisappearControl disappearControl = new EffectAsterDisappearControl();
 
@@ -39,6 +41,7 @@ final class CanvasControl extends Canvas {
 
 	CanvasControl(Game game) {
 		this.game = game;
+		this.field = game.getField();
 		pre = new PreKeyProcesser(this);
 		pre.initKey(this);
 		Display.setCurrent(this);
@@ -48,9 +51,8 @@ final class CanvasControl extends Canvas {
 	}
 
 	private void setFieldMargin() {
-		final Field field = game.getField();
-		topmargin = (getHeight() - field.Y * measure) / 2;
-		leftmargin = (getWidth() - field.X * measure) / 2;
+		topmargin = (Display.getHeight() - field.Y * measure) / 2;
+		leftmargin = (Display.getWidth() - field.X * measure) / 2;
 	}
 
 	int getTopMargin() {
@@ -127,9 +129,9 @@ final class CanvasControl extends Canvas {
 		}
 	}
 
-	static void paintAsterBack(Graphics g, Point pt) {
+	void paintAsterBack(Graphics g, Point pt) {
 		final int m = CanvasControl.measure;
-		CanvasControl canvas = Main.game.getCanvas();
+		CanvasControl canvas = game.getCanvas();
 		g.setOrigin(0, 0);
 		int x = canvas.getLeftMargin() + pt.x * m;
 		int y = canvas.getTopMargin() + pt.y * m;
@@ -168,7 +170,7 @@ final class CanvasControl extends Canvas {
 		if (!Effect.isEffect)
 			return;
 		Graphics g = getGraphics();
-		effect.start(g);
+		effect.start(g, this);
 		g.setOrigin(0, 0);
 		paint(g);
 		g.dispose();

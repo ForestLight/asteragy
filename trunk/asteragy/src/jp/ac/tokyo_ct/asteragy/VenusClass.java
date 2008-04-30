@@ -140,11 +140,11 @@ final class VenusClass extends AsterClass {
 		// ‘ÎÛ‚ÌŠÒ‚ğ•ÏX
 		final Field f = getAster().field;
 		final AsterClass ac = f.at(target1).getAsterClass();
-		f.getCanvas().paintEffect(new EffectCommandVenus(f, target1));
+		f.getCanvas().paintEffect(new EffectCommandVenus(target1));
 		ac.setPlayer(this.getPlayer());
+		logAction(target1);
 		// s“®Ïó‘Ô‚É
 		ac.setActionCount(0);
-		logAction(target1);
 	}
 
 	static int[][] getDefaultRange() {
