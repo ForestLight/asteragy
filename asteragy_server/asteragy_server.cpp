@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "server.h"
 #include <memory>
-#include <boost/tr1/memory.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/enable_shared_from_this.hpp>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -22,19 +23,17 @@ namespace
 	{
 		switch (ctrl_type)
 		{
-		case CTRL_C_EVENT:
-		case CTRL_BREAK_EVENT:
-		case CTRL_CLOSE_EVENT:
+//		case CTRL_C_EVENT:
+//		case CTRL_BREAK_EVENT:
+//		case CTRL_CLOSE_EVENT:
 		case CTRL_SHUTDOWN_EVENT:
-			if (!pios.get())
+			if (as::io_service* p = pios.get())
 			{
-				pios->stop();
-				pios.reset(0);
+				p->stop();
+				return TRUE;
 			}
-			return TRUE;
-		default:
-			return FALSE;
 		}
+		return FALSE;
 	}
 #else
 	void sig_handler(int)
@@ -69,6 +68,7 @@ namespace
 		Server s(*pios);
 
 		pios->run();
+		abs(0);
 	}
 } // end of anonymous namespace
 

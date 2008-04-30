@@ -1,63 +1,9 @@
 #include "stdafx.h"
 #include <string>
+#include <queue>
 #include "game.h"
 
-PlayDataQueue::PlayDataQueue() : owner(-1)
-{
-}
-
-PlayDataQueue::~PlayDataQueue()
-{
-}
-
-bool PlayDataQueue::Put(std::string const& s, int player)
-{
-	if (owner == player)
-	{
-		buf.push(s);
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-bool PlayDataQueue::Get(std::string& s, int player)
-{
-	if (buf.empty())
-	{
-		return false;
-	}
-	else if (player == owner)
-	{
-		return false;
-	}
-	else
-	{
-		s.swap(buf.front());
-		buf.pop();
-		return true;
-	}
-}
-
-/*
-@brief ƒ^[ƒ“‚ªŠ®—¹‚µ‚½‚±‚Æ‚ðŽ¦‚·B
-*/
-bool PlayDataQueue::SwitchUser(int lastPlayer)
-{
-	if (owner == lastPlayer)
-	{
-		owner = !owner;
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-Game::Game()
+Game::Game() : playerCount()
 {
 }
 
@@ -67,16 +13,53 @@ Game::~Game()
 
 bool Game::EndTurn(int lastPlayer)
 {
-	return queue.SwitchUser(lastPlayer);
+	SendAction("end", lastPlayer);
+	return true;
 }
 
-bool Game::PostAction(std::string const& s, int player)
+bool Game::SendAction(std::string const& s, int player)
 {
-	return queue.Put(s, player);
+	if (action[player].empty() || action[player].front() != s)
+		action[player].push(s);
+	return true;
 }
-
 
 bool Game::GetAction(std::string& s, int player)
 {
-	return queue.Get(s, player);
+	if (!action[player].empty())
+	{
+		s.swap(action[player].front());
+		action[player].pop();
+	}
+	return true;
+}
+
+void Game::PostOption(std::string const& s)
+{
+	option = s;
+}
+
+std::string const& Game::GetOption() const
+{
+	return option;
+}
+
+void Game::SendInitField(std::string const& s)
+{
+	initField = s;
+}
+
+std::string const& Game::GetInitField() const
+{
+	return initField;
+}
+
+void Game::JoinPlayer()
+{
+	++playerCount;
+}
+
+bool Game::Ready()
+{
+	return playerCount >= 2;
 }

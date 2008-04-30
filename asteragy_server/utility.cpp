@@ -1,33 +1,36 @@
 #include "stdafx.h"
 #include <locale>
 #include <ostream>
+#include <iterator>
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <ctime>
 #include <boost/foreach.hpp>
 #include <boost/lambda/lambda.hpp>
-#include <boost/tr1/functional.hpp> //ref
+#include <boost/ref.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include "server.h"
 
-#ifdef USE_BOOST_POSIX_TIME
-#include <boost/date_time/posix_time/posix_time.hpp>
-namespace ptime = boost::posix_time;
-#else
+//#ifdef USE_BOOST_POSIX_TIME
+//#include <boost/date_time/posix_time/posix_time.hpp>
+//namespace ptime = boost::posix_time;
+//#else
 #include <ctime>
-#endif
+//#endif
 
 namespace algo = boost::algorithm;
 namespace as = boost::asio;
 
 using std::string;
+using std::ctype;
 using boost::begin;
 using boost::end;
-using std::ctype;
+using boost::as_literal;
 using boost::bind;
 using boost::iterator_range;
-using std::tr1::ref;
+using boost::ref;
 
 typedef ctype<char> ctypec_t;
 
@@ -42,19 +45,23 @@ namespace utility
 */
 void output_http_date_header(std::ostream& os)
 {
-	char const* const format = "Date: %a, %d %b %Y %H:%M:%S GMT\r\n";
-#ifdef USE_BOOST_POSIX_TIME
+	static char const format[] = "Date: %a, %d %b %Y %H:%M:%S GMT\r\n";
 	using std::locale;
-	locale prev = os.getloc();
-	os.imbue(locale(locale::classic(), new ptime::time_facet(format)));
-	os << ptime::second_clock::universal_time();
-	os.imbue(prev);
-#else
-	char buf[80];
+
+	//locale prev = os.getloc();
+	//os.imbue(locale(locale::classic(), new ptime::time_facet(format)));
+	//os << ptime::second_clock::universal_time();
+	//os.imbue(prev);
+
 	std::time_t t = std::time(0);
-	std::strftime(buf, sizeof buf, format, std::gmtime(&t));
-	os << buf << std::endl;
-#endif
+	std::use_facet<std::time_put<char> >(locale::classic())
+		.put(std::ostreambuf_iterator<char>(os),
+			os, ' ', std::gmtime(&t), begin(as_literal(format)), end(as_literal(format)));
+
+	//char buf[80];
+	//std::time_t t = std::time(0);
+	//std::strftime(buf, sizeof buf, format, std::gmtime(&t));
+	//os << buf << std::endl;
 }
 
 /*
@@ -141,12 +148,20 @@ codeが変な値（有り得ない値、対応していない値）の場合、
 void Connection::returnEmptyResponse(int code)
 {
 	std::ostream os(&response);
-	os << "HTTP/1.1 ";
+	os << "HTTP/1.0 ";
 	switch (code)
 	{
 	case 200:
 		os << "200 OK";
 		break;
+/*
+	case 202:
+		os << "202 Accepted";
+		break;
+	case 204:
+		os << "204 No Content";
+		break;
+*/
 	case 400:
 		os << "400 Bad Request";
 		break;
@@ -164,6 +179,7 @@ void Connection::returnEmptyResponse(int code)
 	os << "Content-Length: 0\r\n"
 		"\r\n";
 	asyncWrite(&Connection::handleWrite);
+	responsed = true;
 }
 
 /*
@@ -181,6 +197,7 @@ void Connection::returnResponse(string const& s)
 		"\r\n"
 		<< s;
 	asyncWrite(&Connection::handleWrite);
+	responsed = true;
 }
 
 /*

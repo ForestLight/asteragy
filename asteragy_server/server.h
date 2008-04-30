@@ -8,16 +8,18 @@
 #include <string>
 #include <map>
 #include <boost/asio.hpp>
+#include <boost/range.hpp>
 #include <boost/mpl/identity.hpp>
-#include <boost/tr1/memory.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/enable_shared_from_this.hpp>
 
 #if defined _MSC_VER && _MSC_VER >= 1020
-#	pragma once
+#pragma once
 #endif
 
 typedef std::map<std::string, std::string> map_t;
 
-class Connection : public std::tr1::enable_shared_from_this<Connection>
+class Connection : public boost::enable_shared_from_this<Connection>
 {
 private:
 	typedef boost::asio::ip::tcp tcp;
@@ -44,6 +46,7 @@ private:
 	void asyncReadUntil(handler_type hander, char const* s);
 	void asyncWrite(handler_type hander);
 
+	void queryNewGame();
 	void getAction();
 	void getActionFromConsole();
 
@@ -52,12 +55,13 @@ private:
 	boost::asio::streambuf response; //送信用バッファ
 	map_t args; //URL末尾の?以降で渡される引数
 	map_t header; //HTTPリクエストヘッダ
+	bool responsed;
 
 	Connection(Connection const&);
 	Connection& operator =(Connection const&);
 };
 
-typedef std::tr1::shared_ptr<Connection> ConnectionPtr;
+typedef boost::shared_ptr<Connection> ConnectionPtr;
 
 class Server
 {
