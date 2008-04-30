@@ -1,6 +1,6 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import java.io.*;
+//import java.io.*;
 
 /**
  * @author Yusuke
@@ -28,6 +28,7 @@ final class Action {
 		}
 	}
 */
+	
 	public String toString() {
 		final Point pt = aster.getPoint();
 		final StringBuffer buf = new StringBuffer(8);
@@ -62,16 +63,20 @@ final class Action {
 		case 1:
 			ac.target1.x = args[0];
 		}
-		if (commandType == 1) {
+		ac.setCommand(commandType);
+		ac.execute(deleteList);
+		//if (commandType == 1) {
 			//ac.executeSpecialCommand();
-			ac.execute();
-		} else {
-			ac.execute();
-		}
+		//	ac.execute(deleteList);
+		//} else {
+		//	ac.execute(deleteList);
+		//}
 	}
+	
+	String deleteList; 
 
 	static final int MAX_PARAM_SIZE = 4;
-
+/*
 	static Action readFromStream(Game game, InputStream is) throws IOException {
 		final Action a = new Action();
 		final Field field = game.getField();
@@ -101,18 +106,18 @@ final class Action {
 		}
 		return a;
 	}
-	
-	static Action readFromString(Game game, String s) throws IOException {
+*/
+	static Action readFromString(Game game, String s) {
 		final Action a = new Action();
 		final Field field = game.getField();
-		int x = HTTPPlayer.parseIntChar(s.indexOf(0));
-		if (x < 0 || x >= field.X)
+		int x = HTTPPlayer.parseIntChar(s.charAt(0));
+		if (!field.isXInFieldBound(x))
 			return null;
-		int y = HTTPPlayer.parseIntChar(s.indexOf(1));
-		if (y < 0 || y >= field.Y)
+		int y = HTTPPlayer.parseIntChar(s.charAt(1));
+		if (!field.isYInFieldBound(y))
 			return null;
 		a.aster = field.field[y][x];
-		int n = HTTPPlayer.parseIntChar(s.indexOf(2));
+		int n = HTTPPlayer.parseIntChar(s.charAt(2));
 		if (n != 0 && n != 1)
 			return null;
 		a.commandType = n;
@@ -122,7 +127,7 @@ final class Action {
 			len = 0;
 		a.args = new int[len];
 		for (int i = 0; i < len; i++) {
-			a.args[i] = HTTPPlayer.parseIntChar(s.indexOf(i + 3));
+			a.args[i] = HTTPPlayer.parseIntChar(s.charAt(i + 3));
 			if (a.args[i] < 0)
 				return null;
 		}

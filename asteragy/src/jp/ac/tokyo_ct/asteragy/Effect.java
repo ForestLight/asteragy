@@ -6,7 +6,7 @@ abstract class Effect {
 
 	static boolean isEffect = true;
 
-	abstract void start(Graphics g);
+	abstract void start(Graphics g, CanvasControl c);
 
 	static void setEffect() {
 		isEffect = !isEffect;

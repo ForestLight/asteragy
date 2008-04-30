@@ -78,6 +78,8 @@ final class SaturnClass extends AsterClass {
 		final Aster[] queue = new Aster[17];
 
 		final Aster[][] f = field.field;
+		
+		logAction();
 		for (i = 0, j = 0; j < 16; j++) {
 			// 外周レンジのアステルを右回りにキュー（のようなもの）に入れていく
 			if (field.isXInFieldBound(pt.x) && field.isYInFieldBound(pt.y)) {

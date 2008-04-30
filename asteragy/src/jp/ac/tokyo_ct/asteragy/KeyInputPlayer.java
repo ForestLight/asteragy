@@ -40,7 +40,8 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		phase = 0;
 		selected = false;
 		pt = game.getField().getSunPosition(this);
-		if(pt==null) return null;
+		if (pt == null)
+			return null;
 		canvas.cursor.setCursor(pt, 1);
 		action = new Action();
 		canvas.eventProcesser = this;
@@ -187,9 +188,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 					} else {
 						frange[i][j] = -1;
 					}
-					System.out.print(frange[i][j] + 1);
 				}
-				System.out.println();
 			}
 			applyPosition();
 			break;

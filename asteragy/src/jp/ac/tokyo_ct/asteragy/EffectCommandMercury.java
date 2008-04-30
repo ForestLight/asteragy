@@ -7,8 +7,6 @@ final class EffectCommandMercury extends Effect {
 
 	// private static Image effect;
 
-	private final Field field;
-
 	private final Point point;
 
 	// private final Aster aster;
@@ -18,21 +16,20 @@ final class EffectCommandMercury extends Effect {
 	// private int time;
 
 	EffectCommandMercury(Field field, Point point) {
-		this.field = field;
 		this.point = point;
 		// aster = field.getAster(point);
 		// paint = aster.getPaint();
 		// loadImage();
 	}
 
-	void start(Graphics g) {
+	void start(Graphics g, CanvasControl c) {
 		int r = 24;
 
-		Image back = field.getCanvas().getScreen(
-				field.getAsterLocation(point.add(new Point(-1, -1))),
+		Image back = c.getScreen(
+				c.field.getAsterLocation(point.add(new Point(-1, -1))),
 				new Point(CanvasControl.measure * 3, CanvasControl.measure * 3));
 
-		field.setOrignAster(g, point, CanvasControl.measure / 2 - 1,
+		c.field.setOrignAster(g, point, CanvasControl.measure / 2 - 1,
 				CanvasControl.measure / 2 - 1);
 
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));

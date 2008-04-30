@@ -11,25 +11,16 @@ final class EffectAsterDisappearControl extends Effect {
 
 	private static final Image image = Game.loadImage("disappear");
 
-	final Vector disappearing = new Vector(20);
+	Vector disappearing = new Vector(20);
 
-	void Add(Point pt) {
-		disappearing.addElement(pt);
-	}
-	void Clear(){
-		disappearing.removeAllElements();
-	}
-
-	void start(Graphics g) {
-
+	void start(Graphics g, CanvasControl c) {
 		if (disappearing.size() == 0)
 			return;
-		Field f = Main.game.getField();
 		for (int i = 0; i < frame; ++i) {
 			g.lock();
 			Enumeration en = disappearing.elements();
 			while (en.hasMoreElements()) {
-				paintAster(f, g, (Point) en.nextElement(), i);
+				paintAster(c, g, (Point) en.nextElement(), i);
 			}
 			g.unlock(false);
 			Game.sleep(1000 / CanvasControl.f);
@@ -37,9 +28,9 @@ final class EffectAsterDisappearControl extends Effect {
 		disappearing.removeAllElements();
 	}
 
-	void paintAster(Field f, Graphics g, Point pt, int time) {
-		CanvasControl.paintAsterBack(g, pt);
-		f.setOrignAster(g, pt);
+	void paintAster(CanvasControl c, Graphics g, Point pt, int time) {
+		c.paintAsterBack(g, pt);
+		c.field.setOrignAster(g, pt);
 		g.drawImage(image, 1, 1, 0, time * (CanvasControl.measure - 1),
 				CanvasControl.measure - 1, CanvasControl.measure - 1);
 	}

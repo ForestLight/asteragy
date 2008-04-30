@@ -3,6 +3,8 @@
  */
 package jp.ac.tokyo_ct.asteragy;
 
+import java.util.Vector;
+
 import com.nttdocomo.ui.*;
 
 /**
@@ -51,7 +53,7 @@ abstract class AsterClass {
 
 	private Aster aster;
 
-	private final Game game;
+	final Game game;
 
 	final Player getPlayer() {
 		return player;
@@ -174,16 +176,18 @@ abstract class AsterClass {
 	 * コマンドを実行
 	 * 
 	 */
-	final void execute() {
+	final void execute(String deleteList) {
 		final Field field = getAster().field;
-		System.out.println("----AsterClass.execute()");
+		System.out.println("AsterClass.execute()");
 		switch (mode) {
 		case 0:
-			// field.backupField();
-			field.swap(target1, target2);
+			logAction(0,
+					new int[] { target1.x, target1.y, target2.x, target2.y });
+			field.swap(target1.x, target1.y, target2.x, target2.y);
 
 			// スワップエフェクト。
-			field.getCanvas().paintEffect(new EffectFieldSwap(field, target1, target2));
+			field.getCanvas().paintEffect(
+					new EffectFieldSwap(field, target1, target2));
 			/*
 			 * // サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください） if
 			 * (field.judgeSelfDestruction() == true) { Dialog d = new
@@ -191,8 +195,6 @@ abstract class AsterClass {
 			 * if(d.show() == Dialog.BUTTON_NO){ field.restoreField();
 			 * incActionCount(); break; } }
 			 */
-			logAction(0,
-					new int[] { target1.x, target1.y, target2.x, target2.y });
 			break;
 		case 1:
 			executeSpecialCommand();
@@ -200,12 +202,23 @@ abstract class AsterClass {
 		}
 		// 行動可能回数を減らす
 		decActionCount();
-		final CanvasControl canvas = field.getCanvas();
-		canvas.paintEffect(canvas.disappearControl);
 
 		// 消滅判定
 		System.out.println("消去開始");
-		player.addAP(field.deleteAll());
+		final CanvasControl canvas = field.getCanvas();
+		player.addAP(field.deleteAll(canvas.disappearControl.disappearing));
+		if (deleteList != null && deleteList.length() != 0) {
+			Vector v = new Vector();
+			for (int i = 0; i + 2 < deleteList.length();) {
+				int x = HTTPPlayer.parseIntChar(deleteList.charAt(i++));
+				int y = HTTPPlayer.parseIntChar(deleteList.charAt(i++));
+				v.addElement(new Point(x, y));
+				field.field[y][x].setColor(HTTPPlayer.parseIntChar(deleteList
+						.charAt(i++)));
+			}
+			canvas.disappearControl.disappearing = v;
+		}
+		game.logDeleteInfo(field, canvas.disappearControl.disappearing);
 		System.out.println("消去完了");
 		canvas.paintEffect(canvas.disappearControl);
 
@@ -323,9 +336,9 @@ abstract class AsterClass {
 			Point pt = new Point(target1.x
 					- (selftPoint.x - range[0].length / 2), target1.y
 					- (selftPoint.y - range.length / 2));
-			System.out.println("tx:" + target1.x + "ty:" + target1.y + "spx:"
-					+ selftPoint.x + "spy:" + selftPoint.y);
-			System.out.println("px:" + pt.x + "py:" + pt.y);
+			System.out.println("tx:" + target1.x + " ty:" + target1.y + " spx:"
+					+ selftPoint.x + " spy:" + selftPoint.y);
+			System.out.println("px:" + pt.x + " py:" + pt.y);
 
 			for (int i = 0; i < range.length; i++) {
 				for (int j = 0; j < range[0].length; j++) {
@@ -334,7 +347,7 @@ abstract class AsterClass {
 						if (i == pt.y - 1 && j == pt.x || i == pt.y + 1
 								&& j == pt.x || i == pt.y && j == pt.x + 1
 								|| i == pt.y && j == pt.x - 1) {
-							System.out.println("range-" + i + "-j-" + j);
+							System.out.println("range i:" + i + " j:" + j);
 							range[i][j] = 1;
 						}
 					}

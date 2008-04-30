@@ -2,6 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Vector;
 
 import com.nttdocomo.ui.Graphics;
 
@@ -20,21 +21,20 @@ final class Field {
 
 	final Game game;
 
-	private boolean fieldinit;
+	final int connection;
 
-	static int CONNECTION;
-
-	Field(Game g, int x, int y) {
+	Field(Game g, int x, int y, int c) {
 		super();
 		game = g;
 		X = x;
 		Y = y;
+		connection = c;
 		field = new Aster[Y][X];
 		backup = new Aster[Y][X];
 	}
 
 	Field clone() {
-		Field f = new Field(game, X, Y);
+		Field f = new Field(game, X, Y, connection);
 		for (int i = 0; i < Y; i++)
 			for (int j = 0; j < X; ++j)
 				f.field[i][j] = field[i][j];
@@ -86,7 +86,7 @@ final class Field {
 		if (x < X - 1)
 			judgeMain(x + 1, y, AsterColor);
 
-		if (countAster < CONNECTION - 1) {
+		if (countAster < connection - 1) {
 			countAster = 0;
 			removeJudgeFlagAll();
 			return false;
@@ -109,7 +109,7 @@ final class Field {
 	 */
 	private void judgeMain(int x, int y, int AsterColor) {
 
-		if (x < 0 || y < 0 || x >= X || y >= Y || countAster == CONNECTION - 1) {
+		if (x < 0 || y < 0 || x >= X || y >= Y || countAster == connection - 1) {
 			return;
 		}
 		if (field[y][x] == null)
@@ -205,20 +205,20 @@ final class Field {
 	 *            注目するマスのy座標
 	 * @return 消したアステル数
 	 */
-	int delete(int x, int y) {
+	int delete(int x, int y, Vector disapperList) {
 		final Aster target = field[y][x];
 		if (target.getDeleteFlag() == true) {
 			int count = 1;
 			target.delete(0);
-			game.getCanvas().disappearControl.Add(new Point(x, y));
+			disapperList.addElement(new Point(x, y));
 			if (y > 0)
-				count += delete(x, y - 1);
+				count += delete(x, y - 1, disapperList);
 			if (x > 0)
-				count += delete(x - 1, y);
+				count += delete(x - 1, y, disapperList);
 			if (y < Y - 1)
-				count += delete(x, y + 1);
+				count += delete(x, y + 1, disapperList);
 			if (x < X - 1)
-				count += delete(x + 1, y);
+				count += delete(x + 1, y, disapperList);
 
 			// ランダムで決定した色で問題ない場合
 			if (judge(x, y) == false) {
@@ -248,7 +248,7 @@ final class Field {
 	 * 
 	 * @return 消したアステル数
 	 */
-	int deleteAll() {
+	int deleteAll(Vector disapperList) {
 		int i, j;
 		int count = 0;
 
@@ -256,9 +256,9 @@ final class Field {
 			for (j = 0; j < X; j++) {
 				if (judge(j, i) == true) {
 					setDeleteFlagSameColor(j, i, field[i][j].getColor());
-					count += delete(j, i);
+					count += delete(j, i, disapperList);
 				} else if (field[i][j].getDeleteFlag() == true) {
-					count += delete(j, i);
+					count += delete(j, i, disapperList);
 				}
 			}
 		}
@@ -313,16 +313,11 @@ final class Field {
 
 	/**
 	 * スワップ
-	 * 
-	 * @param a
-	 *            bと入れ替える
-	 * @param b
-	 *            aと入れ替える
 	 */
-	void swap(Point a, Point b) {
-		Aster tmp = field[a.y][a.x];
-		field[a.y][a.x] = field[b.y][b.x];
-		field[b.y][b.x] = tmp;
+	void swap(int x1, int y1, int x2, int y2) {
+		Aster tmp = field[y1][x1];
+		field[y1][x1] = field[y2][x2];
+		field[y2][x2] = tmp;
 	}
 
 	Aster at(Point pt) {
@@ -408,10 +403,10 @@ final class Field {
 				CanvasControl.measure * X, CanvasControl.measure * Y);
 	}
 
-	void repaintAster(Graphics g, Point point) {
+	void repaintAster(Graphics g, CanvasControl c, Point point) {
 		if (point.x < 0 || point.x >= X || point.y < 0 || point.y >= Y)
 			return;
-		CanvasControl.paintAsterBack(g, point);
+		c.paintAsterBack(g, point);
 		repaintAsterNoBack(g, point.x, point.y);
 	}
 

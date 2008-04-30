@@ -15,7 +15,7 @@ class EffectGameOver extends Effect {
 		this.winner = winner;
 	}
 
-	void start(Graphics g) {
+	void start(Graphics g, CanvasControl c) {
 		Image back = canvas.getScreen();
 		Graphics b = back.getGraphics();
 		b.setColor(Graphics.getColorOfName(Graphics.BLACK));

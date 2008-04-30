@@ -14,11 +14,10 @@ public final class Main extends IApplication {
 	 * プログラムを開始するエントリポイント
 	 */
 	public void start() {
-		// GameCanvas c = new GameCanvas();
-		// Display.setCurrent(c);
-		// final Title t = new Title();
-		InitializeAppli init = new InitializeAppli();
-		init.start();
+		//InitializeAppli init = new InitializeAppli();
+		//init.start();
+		title = new Title();
+		final Game game = new Game();
 		while (true) {
 			Option op = title.start();
 			game.start(op);

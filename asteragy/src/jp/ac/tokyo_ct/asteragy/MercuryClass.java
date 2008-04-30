@@ -104,6 +104,7 @@ final class MercuryClass extends AsterClass {
 	void executeSpecialCommand() {
 		final Field f = getAster().field;
 		f.getCanvas().paintEffect(new EffectCommandMercury(f, target1));
+		logAction(target1);
 		// ‘ÎÛ‚Ìs“®‰Â”\‰ñ”‚ğ1‰ñ‘‚â‚·
 		f.at(target1).getAsterClass().incActionCount();
 		logAction(target1);

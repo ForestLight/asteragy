@@ -25,7 +25,7 @@ final class EffectCommandSaturn extends Effect {
 		}
 	}
 
-	void start(Graphics g) {
+	void start(Graphics g, CanvasControl c) {
 		final int width2 = effect.getWidth() / 2;
 		final int height2 = effect.getHeight() / 2;
 		final int width2m = -width2;
@@ -68,13 +68,13 @@ final class EffectCommandSaturn extends Effect {
 
 			g.lock();
 
-			CanvasControl.paintAsterBack(g, location[0]);
+			c.paintAsterBack(g, location[0]);
 			for (int j = 0; j < location.length; j++) {
 				if (location[j] == null)
 					break;
 
 				if (location[j + 1] != null) {
-					CanvasControl.paintAsterBack(g, location[j + 1]);
+					c.paintAsterBack(g, location[j + 1]);
 
 					field.setOrignAster(g, location[j], i
 							* (location[j + 1].x - location[j].x), i

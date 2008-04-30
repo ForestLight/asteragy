@@ -8,8 +8,6 @@ final class EffectCommandJupiter extends Effect {
 
 	// private static Image tranc;
 
-	private final Field field;
-
 	private final Point point;
 
 	private Point center;
@@ -20,34 +18,31 @@ final class EffectCommandJupiter extends Effect {
 
 	// private Point rightbottom;
 
-	EffectCommandJupiter(Field field, Point point) {
-		this.field = field;
+	EffectCommandJupiter(Point point) {
 		this.point = point;
 		// setLocation();
 		// imageTranclucently();
-		setCircle();
 	}
 
-	private void setCircle() {
-		center = field.getAsterLocation(point);
-		center.x += CanvasControl.measure / 2;
-		center.y += CanvasControl.measure / 2;
-		final int r = effect.getWidth() * 2;
-		final int theta = SimpleMath.cycle / 8;
-		circle = new Point[8];
-		for (int i = 0; i < circle.length; i++) {
-			circle[i] = center.clone();
-			circle[i].x *= SimpleMath.divide;
-			circle[i].y *= SimpleMath.divide;
-			circle[i].x += r * SimpleMath.cos(i * theta);
-			circle[i].y += r * SimpleMath.sin(i * theta);
+	void start(Graphics g, CanvasControl c) {
+		{
+			center = c.field.getAsterLocation(point);
+			center.x += CanvasControl.measure / 2;
+			center.y += CanvasControl.measure / 2;
+			final int r = effect.getWidth() * 2;
+			final int theta = SimpleMath.cycle / 8;
+			circle = new Point[8];
+			for (int i = 0; i < circle.length; i++) {
+				circle[i] = center.clone();
+				circle[i].x *= SimpleMath.divide;
+				circle[i].y *= SimpleMath.divide;
+				circle[i].x += r * SimpleMath.cos(i * theta);
+				circle[i].y += r * SimpleMath.sin(i * theta);
+			}
 		}
-	}
-
-	void start(Graphics g) {
-		Point l = field.getAsterLocation(point.add(new Point(-1, -1)));
+		Point l = c.field.getAsterLocation(point.add(new Point(-1, -1)));
 		Point s = new Point(CanvasControl.measure * 3, CanvasControl.measure * 3);
-		Image back = field.getCanvas().getScreen(l, s);
+		Image back = c.field.getCanvas().getScreen(l, s);
 
 		int[] matrix = new int[6];
 		final int theta = -SimpleMath.cycle / 8;

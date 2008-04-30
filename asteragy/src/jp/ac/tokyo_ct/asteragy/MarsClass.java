@@ -141,8 +141,9 @@ final class MarsClass extends AsterClass {
 	void executeSpecialCommand() {
 		final Field f = getAster().field;
 		f.getCanvas().paintEffect(new EffectCommandMars(f, this, target1));
+		logAction(target1);
 		f.setDeleteFlag(target1);
-		f.delete(target1.x, target1.y);
+		f.delete(target1.x, target1.y, game.getCanvas().disappearControl.disappearing);
 	}
 
 	static int[][] getDefaultRange() {

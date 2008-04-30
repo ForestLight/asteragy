@@ -129,11 +129,11 @@ final class JupiterClass extends AsterClass {
 	void executeSpecialCommand() {
 		final Field field = getAster().field;
 		
-		Effect effect = new EffectCommandJupiter(field, target1);
-		Main.game.getCanvas().paintEffect(effect);
-
+		Effect effect = new EffectCommandJupiter(target1);
+		game.getCanvas().paintEffect(effect);
+		logAction(target1);
 		field.setDeleteFlag(target1);
-		field.delete(target1.x, target1.y);
+		field.delete(target1.x, target1.y, game.getCanvas().disappearControl.disappearing);
 	}
 
 	static int[][] getDefaultRange() {

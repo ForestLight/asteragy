@@ -72,6 +72,7 @@ final class PlutoClass extends AsterClass {
 		Point pt = new Point();
 		final int rangeY = defaultRange.length;
 		final int rangeX = defaultRange[0].length;
+		logAction();
 
 		for (int i = 0; i < rangeY; i++) {
 			for (int j = 0; j < rangeX; j++) {
@@ -107,8 +108,8 @@ final class PlutoClass extends AsterClass {
 //				return;
 //			}
 //		} else {
-			field.getCanvas().paintEffect(new EffectCommandPluto(field, me));
-			field.deleteAll();
+			game.getCanvas().paintEffect(new EffectCommandPluto(field, me));
+			field.deleteAll(game.getCanvas().disappearControl.disappearing);
 			logAction();
 	//	}
 	}

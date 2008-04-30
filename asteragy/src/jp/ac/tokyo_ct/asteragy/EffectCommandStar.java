@@ -10,13 +10,10 @@ final class EffectCommandStar extends Effect {
 
 	private final Point to;
 
-	private final Field field;
-
 	// 0:ç∂ 2:âE 1:è„ 3:â∫
 	private final int direction;
 
 	EffectCommandStar(Field field, AsterClass cls, Point a, Point b) {
-		this.field = field;
 		if (field.asterToPoint(cls.getAster()).equals(a)) {
 			point = a;
 			to = b;
@@ -36,7 +33,7 @@ final class EffectCommandStar extends Effect {
 
 	final int theta = SimpleMath.cycle / 30;
 
-	void start(Graphics g) {
+	void start(Graphics g, CanvasControl c) {
 		int[] matrix = new int[6];
 
 		for (int i = 0; i < 15; i++) {
@@ -53,8 +50,8 @@ final class EffectCommandStar extends Effect {
 					+ (effect.getWidth() / 2 + 1) * SimpleMath.divide;
 
 			g.lock();
-			CanvasControl.paintAsterBack(g, to);
-			field.setOrignAster(g, to);
+			c.paintAsterBack(g, to);
+			c.field.setOrignAster(g, to);
 
 			g.drawImage(effect, matrix);
 
@@ -63,17 +60,17 @@ final class EffectCommandStar extends Effect {
 			Game.sleep(1000 / CanvasControl.f);
 		}
 
-		Aster paint = field.at(point);
+		Aster paint = c.field.at(point);
 
 		int ax = 0;
 		int ay = 0;
 
 		for (int i = 0; i < CanvasControl.measure; i++) {
-			CanvasControl.paintAsterBack(g, to);
-			CanvasControl.paintAsterBack(g, point);
+			c.paintAsterBack(g, to);
+			c.paintAsterBack(g, point);
 			g.lock();
 
-			field.setOrignAster(g, point, ax, ay);
+			c.field.setOrignAster(g, point, ax, ay);
 			paint.paint(g);
 
 			g.unlock(true);

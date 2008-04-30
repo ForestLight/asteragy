@@ -110,11 +110,10 @@ final class NeptuneClass extends AsterClass {
 	void executeSpecialCommand() {
 		// ターゲットと自分をswap
 		final Field f = getAster().field;
-		f.getCanvas().paintEffect(new EffectCommandNeptune(f, target1));
-
-		f.swap(target1, f.asterToPoint(getAster()));
+		f.getCanvas().paintEffect(new EffectCommandNeptune(target1));
 		logAction(target1);
-
+		Point self = f.asterToPoint(getAster());
+		f.swap(target1.x, target1.y, self.x, self.y);
 	}
 
 	static int[][] getDefaultRange() {

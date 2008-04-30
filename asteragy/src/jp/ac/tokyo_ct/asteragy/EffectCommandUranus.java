@@ -4,7 +4,7 @@ import com.nttdocomo.ui.*;
 
 final class EffectCommandUranus extends Effect {
 
-	private final Field field;
+	// private final Field field;
 
 	private final Point target1;
 
@@ -14,12 +14,7 @@ final class EffectCommandUranus extends Effect {
 
 	private Point direct2;
 
-	// private boolean end;
-
-	// private Graphics g;
-
-	EffectCommandUranus(Field field, Point target1, Point target2) {
-		this.field = field;
+	EffectCommandUranus(Point target1, Point target2) {
 		this.target1 = target1;
 		this.target2 = target2;
 		setDirect();
@@ -39,12 +34,11 @@ final class EffectCommandUranus extends Effect {
 		direct2.y = -direct1.y;
 	}
 
-	void start(Graphics g) {
-		Point size = new Point(CanvasControl.measure - 1, CanvasControl.measure - 1);
-		Image t1 = field.getCanvas().getScreen(field.getAsterLocation(target1),
-				size);
-		Image t2 = field.getCanvas().getScreen(field.getAsterLocation(target2),
-				size);
+	void start(Graphics g, CanvasControl c) {
+		Point size = new Point(CanvasControl.measure - 1,
+				CanvasControl.measure - 1);
+		Image t1 = c.getScreen(c.field.getAsterLocation(target1), size);
+		Image t2 = c.getScreen(c.field.getAsterLocation(target2), size);
 
 		for (int i = 0; i < 10; i++) {
 			filt(t1, direct1);
@@ -52,9 +46,9 @@ final class EffectCommandUranus extends Effect {
 			// ave(t1);
 			// ave(t2);
 			g.lock();
-			field.setOrignAster(g, target1);
+			c.field.setOrignAster(g, target1);
 			g.drawImage(t1, 0, 0);
-			field.setOrignAster(g, target2);
+			c.field.setOrignAster(g, target2);
 			g.drawImage(t2, 0, 0);
 			g.unlock(true);
 
