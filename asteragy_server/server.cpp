@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "server.h"
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -22,6 +23,7 @@ using std::string;
 
 namespace
 {
+	char const contentRoot[] = "C:\\Users\\SPCmembers\\Documents\\asteragy\\asteragy\\web";
 	Game game; //暫定
 	int player = 0;
 }
@@ -111,7 +113,7 @@ void Connection::handleRead(error_code const& e, std::size_t)
 		}
 		else if (requestPath.size() == 1 || requestPath[1] != '?')
 		{
-			returnEmptyResponse(404);
+			downloadStaticContents(requestPath);
 			return;
 		}
 		string::const_iterator it = begin(requestPath) + 2;
@@ -160,7 +162,6 @@ void Connection::handleRead(error_code const& e, std::size_t)
 		}
 		else if (cmd == "getaction")
 		{
-			//getActionFromConsole();
 			string s;
 			game.GetAction(s, player);
 			returnResponse(s);
@@ -236,6 +237,47 @@ void Connection::handleRead(error_code const& e, std::size_t)
 		//バッファの消去
 		response.consume(response.size() * sizeof(as::streambuf::char_type));
 		returnEmptyResponse(500);
+	}
+}
+
+void Connection::downloadStaticContents(std::string const& requestPath)
+{
+	string localPath = contentRoot + requestPath;
+
+	//ToDo: 怪しいパスを弾く
+	
+	const char* type;
+	string::size_type pos = requestPath.rfind('.');
+	if (pos == string::npos)
+	{
+		type = "application/octet-stream";
+	}
+	else
+	{
+		string::const_iterator it = requestPath.begin() + pos + 1;
+		if (std::equal(it, requestPath.end(), "txt"))
+		{
+			type = "text/plain";
+		}
+		else if (std::equal(it, requestPath.end(), "gif"))
+		{
+			type = "image/gif";
+		}
+		else
+		{
+			type = "application/octet-stream";
+		}
+	}
+	std::clog << "request: " << requestPath << ' ' << type << std::endl;
+
+	std::ifstream is(localPath.c_str(), std::ios::binary);
+	if (!is)
+	{
+		returnEmptyResponse(404);
+	}
+	else
+	{
+		returnStreamResponse(is, type);
 	}
 }
 

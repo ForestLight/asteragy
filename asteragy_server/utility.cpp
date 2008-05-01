@@ -192,10 +192,28 @@ void Connection::returnResponse(string const& s)
 	os << "HTTP/1.1 200 OK\r\n"
 			"Connection: Close\r\n";
 	output_http_date_header(os);
-	os << "Content-Length: "<< s.size() << "\r\n"
+	os << "Content-Length: " << s.size() << "\r\n"
 		"Content-Type: text/plain\r\n"
 		"\r\n"
 		<< s;
+	asyncWrite(&Connection::handleWrite);
+	responsed = true;
+}
+
+void Connection::returnStreamResponse(std::istream& is, char const* type)
+{
+	typedef std::istreambuf_iterator<char> isbufit_t;
+	std::vector<char> buf;
+	buf.reserve(2048);
+	buf.assign(isbufit_t(is), isbufit_t());
+	std::ostream os(&response);
+	os << "HTTP/1.1 200 OK\r\n"
+			"Connection: Close\r\n";
+	output_http_date_header(os);
+	os << "Content-Length: " << buf.size() << "\r\n"
+		"Content-Type: " << type << "\r\n"
+		"\r\n";
+	std::copy(buf.begin(), buf.end(), std::ostreambuf_iterator<char>(os));
 	asyncWrite(&Connection::handleWrite);
 	responsed = true;
 }
