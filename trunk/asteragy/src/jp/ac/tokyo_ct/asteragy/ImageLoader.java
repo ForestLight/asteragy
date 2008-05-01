@@ -114,31 +114,31 @@ final class ImageLoader {
 				input = Connector.openDataInputStream("scratchpad:///0;pos="
 						.concat(String.valueOf(position)));
 				// filename
-				int lenght = input.readInt();
-				if (lenght <= 0) {
+				int length = input.readInt();
+				if (length <= 0) {
 					if (images.size() > 0)
 						return false;
 					return true;
 				}
-				System.out.println(lenght);
-				byte[] buffer = new byte[lenght];
+				System.out.println(length);
+				byte[] buffer = new byte[length];
 				if (input.read(buffer) < 0)
 					return true;
 				String filename = new String(buffer);
 				System.out.println(filename);
-				position += 4 + lenght;
+				position += 4 + length;
 				// image
-				lenght = input.readInt();
-				System.out.println(lenght);
-				if (lenght <= 0)
+				length = input.readInt();
+				System.out.println(length);
+				if (length <= 0)
 					return true;
-				buffer = new byte[lenght];
+				buffer = new byte[length];
 				if (input.read(buffer) < 0)
 					return true;
 				MediaImage media = MediaManager.getImage(buffer);
 				media.use();
 				images.put(filename, media.getImage());
-				position += 4 + lenght;
+				position += 4 + length;
 			}
 		} catch (EOFException e) {
 			return false;

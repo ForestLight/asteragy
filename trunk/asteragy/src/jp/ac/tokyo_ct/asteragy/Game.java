@@ -270,15 +270,15 @@ final class Game {
 	static ImageLoader loader;
 
 	static Image loadImage(String s) {
-		try {
-			MediaImage m = MediaManager.getImage("resource:///".concat(s)
-					.concat(".gif"));
-			m.use();
-			return m.getImage();
-		} catch (Exception e) {
-		}
-		return null;
-		// return (Image) loader.getImages().get(s.concat(".gif"));
+		//try {
+		//	MediaImage m = MediaManager.getImage("resource:///".concat(s)
+		//			.concat(".gif"));
+		//	m.use();
+		//	return m.getImage();
+		//} catch (Exception e) {
+		//}
+		//return null;
+		return (Image) loader.getImages().get(s.concat(".gif"));
 	}
 
 	static void sleep(int ms) {
