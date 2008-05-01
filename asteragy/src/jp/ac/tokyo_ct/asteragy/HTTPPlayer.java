@@ -36,7 +36,7 @@ final class HTTPPlayer extends Player implements Runnable {
 			con.connect();
 			InputStream is = con.openInputStream();
 			try {
-				id = Integer.parseInt(readLine(is));
+				id = readLine(is);
 				if (readLine(is).equals("0")) {
 					isLocalFirst = true;
 				} else {
@@ -61,7 +61,8 @@ final class HTTPPlayer extends Player implements Runnable {
 	private void postOption(Option opt) throws IOException {
 		String url = getUrl("postoption", isLocalFirst).concat("&opt=").concat(
 				opt.toString());
-		System.out.println("postoption: " + url);
+		System.out.print("postoption: ");
+		System.out.println(url);
 		HttpConnection con = (HttpConnection) Connector.open(url,
 				Connector.READ);
 		try {
@@ -288,7 +289,7 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	private String getUrl(String cmd, boolean first) {
 		return sourceURL.concat("?cmd=").concat(cmd).concat("&id=").concat(
-				String.valueOf(id)).concat("&turn=").concat(first ? "1" : "0");
+				id).concat("&turn=").concat(first ? "1" : "0");
 	}
 
 	private void sendLog() {
@@ -366,7 +367,7 @@ final class HTTPPlayer extends Player implements Runnable {
 	// run‚ÆsendLog‚ÅŽg‚¤
 	private volatile String async;
 
-	private int id;
+	private String id;
 
 	private boolean isLocalFirst = false;
 

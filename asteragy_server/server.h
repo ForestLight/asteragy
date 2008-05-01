@@ -12,6 +12,7 @@
 #include <boost/mpl/identity.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
+#include <boost/noncopyable.hpp>
 
 #if defined _MSC_VER && _MSC_VER >= 1020
 #pragma once
@@ -19,7 +20,9 @@
 
 typedef std::map<std::string, std::string> map_t;
 
-class Connection : public boost::enable_shared_from_this<Connection>
+extern char const* contentRoot;
+
+class Connection : public boost::enable_shared_from_this<Connection>, boost::noncopyable
 {
 private:
 	typedef boost::asio::ip::tcp tcp;
@@ -66,7 +69,7 @@ private:
 
 typedef boost::shared_ptr<Connection> ConnectionPtr;
 
-class Server
+class Server : boost::noncopyable
 {
 private:
 	typedef boost::asio::ip::tcp tcp;

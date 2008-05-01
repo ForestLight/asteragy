@@ -6,12 +6,14 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <cstdlib>
 #include <boost/bind.hpp>
 #include <boost/range.hpp>
 #include <boost/algorithm/string/find.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/asio.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/ptr_container/ptr_map.hpp>
 #include "game.h"
 
 namespace as = boost::asio;
@@ -21,11 +23,11 @@ using boost::system::error_code;
 using boost::lexical_cast;
 using std::string;
 
+char const* contentRoot;
+
 namespace
 {
-	char const contentRoot[] = "C:\\Users\\SPCmembers\\Documents\\asteragy\\asteragy\\web";
-	Game game; //暫定
-	int player = 0;
+	boost::ptr_map<int, Game> gameMap;
 }
 
 /*
@@ -144,6 +146,7 @@ void Connection::handleRead(error_code const& e, std::size_t)
 			return;
 		}
 		int gameId = boost::lexical_cast<int>(itId->second);
+		Game& game = gameMap[gameId];
 		map_t::const_iterator itPlayer = args.find("turn");
 		if (itPlayer == args.end())
 		{
@@ -153,7 +156,7 @@ void Connection::handleRead(error_code const& e, std::size_t)
 		int player = boost::lexical_cast<int>(itPlayer->second);
 
 		string const& cmd = args["cmd"];
-		std::clog << cmd << "\tturn:" << player << std::endl;
+		std::clog << game.GetPlayerCount() << ' ' << cmd << "\t id: " << gameId << "\tturn: " << player << std::endl;
 		if (cmd == "sendaction")
 		{
 			game.SendAction(args["action"] + "\r\n" + args["delete"], player);
@@ -297,39 +300,22 @@ void Connection::handleWrite(error_code const& e, std::size_t)
 	}
 }
 
-/*
-@brief getactionの応答を行う。
-*/
-void Connection::getAction()
-{
-	string s;
-	if (game.GetAction(s, player))
-	{
-		returnResponse(s);
-	}
-	else
-	{
-		returnEmptyResponse(400);
-	}
-}
-
-/*
-@brief コンソールからgetactionの応答を行う。
-*/
-void Connection::getActionFromConsole()
-{
-	std::cout << "get action> ";
-	string s;
-	getline(std::cin, s);
-	returnResponse(s);
-}
-
 void Connection::queryNewGame()
 {
-	static int player = 0;
+	static int playId = -1;
 	std::ostringstream os;
-	os << "0\r\n" << player << "\r\n";
+	if (playId < 0)
+	{
+		playId = std::rand();
+		gameMap.insert(playId, new Game);
+	}
+	Game& g = gameMap[playId];
+	int turnId = g.JoinPlayer();
+	os << playId << "\r\n" << turnId << "\r\n";
 	returnResponse(os.str());
-	game.JoinPlayer();
-	player = !player;
+	std::clog << os.str() << std::endl;
+	if (turnId >= 1)
+	{
+		playId = -1;
+	}
 }
