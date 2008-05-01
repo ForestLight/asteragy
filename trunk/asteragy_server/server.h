@@ -40,6 +40,7 @@ private:
 	void handleReadPostAction(boost::system::error_code const& e, std::size_t bytesTransferred);
 	void returnResponse(std::string const& s);
 	void returnEmptyResponse(int stetusCode);
+	void returnStreamResponse(std::istream& is, char const*);
 
 	typedef boost::mpl::identity<void (Connection::*)(
 		boost::system::error_code const& e, std::size_t bytesTransferred)>::type handler_type;
@@ -49,6 +50,8 @@ private:
 	void queryNewGame();
 	void getAction();
 	void getActionFromConsole();
+
+	void downloadStaticContents(std::string const& requestPath);
 
 	tcp::socket socket;
 	boost::asio::streambuf request; //受信用バッファ
