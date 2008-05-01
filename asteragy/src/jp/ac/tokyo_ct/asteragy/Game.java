@@ -137,7 +137,7 @@ final class Game {
 				goPlayer = field.checkGameOver();
 				if(goPlayer != null) break;
 			}
-
+			goPlayer = field.checkGameOver(); //AIópÇ…Ç±Ç±Ç…Ç‡ÅBÇªÇÃÇ§ÇøäOÇ∑
 			if (goPlayer != null) {
 				/*
 				 * Game.sleep(1500);
