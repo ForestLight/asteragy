@@ -31,12 +31,14 @@ using boost::as_literal;
 using boost::bind;
 using boost::iterator_range;
 using boost::ref;
+using std::locale;
 
 typedef ctype<char> ctypec_t;
 
 namespace utility
 {
-	ctypec_t const& cacheCType = std::use_facet<ctypec_t>(std::locale::classic());
+	ctypec_t const& cacheCType = std::use_facet<ctypec_t>(locale::classic());
+	std::time_put<char> const& tp = std::use_facet<std::time_put<char> >(locale::classic());
 }
 
 /*
@@ -46,7 +48,6 @@ namespace utility
 void output_http_date_header(std::ostream& os)
 {
 	static char const format[] = "Date: %a, %d %b %Y %H:%M:%S GMT\r\n";
-	using std::locale;
 
 	//locale prev = os.getloc();
 	//os.imbue(locale(locale::classic(), new ptime::time_facet(format)));
@@ -54,9 +55,8 @@ void output_http_date_header(std::ostream& os)
 	//os.imbue(prev);
 
 	std::time_t t = std::time(0);
-	std::use_facet<std::time_put<char> >(locale::classic())
-		.put(std::ostreambuf_iterator<char>(os),
-			os, ' ', std::gmtime(&t), begin(as_literal(format)), end(as_literal(format)));
+	utility::tp.put(std::ostreambuf_iterator<char>(os),
+		os, ' ', std::gmtime(&t), begin(as_literal(format)), end(as_literal(format)));
 
 	//char buf[80];
 	//std::time_t t = std::time(0);
@@ -142,7 +142,7 @@ void perseHeader(map_t& out, std::istream& is)
 /*
 @brief ようするにContent-Length = 0の出力を行う関数。
 @param[in] code ステータスコード
-codeが変な値（有り得ない値、対応していない値）の場合、
+codeが変な値（有り得ない値、この関数が対応していない値）の場合、
 500 Internal Server Errorとして扱う。
 */
 void Connection::returnEmptyResponse(int code)
@@ -174,7 +174,10 @@ void Connection::returnEmptyResponse(int code)
 		break;
 	}
 	os << "\r\n"
-		"Connection: Close\r\n";
+		"Connection: close\r\n"
+		"Cache-Control: private, no-store, no-cache, must-revalidate\r\n"
+		"Pragma: no-cache\r\n"
+		;
 	output_http_date_header(os);
 	os << "Content-Length: 0\r\n"
 		"\r\n";
@@ -190,16 +193,23 @@ void Connection::returnResponse(string const& s)
 {
 	std::ostream os(&response);
 	os << "HTTP/1.1 200 OK\r\n"
-			"Connection: Close\r\n";
+			"Connection: close\r\n";
 	output_http_date_header(os);
 	os << "Content-Length: " << s.size() << "\r\n"
 		"Content-Type: text/plain\r\n"
+		"Cache-Control: private, no-store, no-cache, must-revalidate\r\n"
+		"Pragma: no-cache\r\n"
 		"\r\n"
 		<< s;
 	asyncWrite(&Connection::handleWrite);
 	responsed = true;
 }
 
+/*
+@brief ストリームの内容を読み取って、それをレスポンスの内容にする。
+@param[in] is ストリーム
+@param[in] type MIMEタイプ
+*/
 void Connection::returnStreamResponse(std::istream& is, char const* type)
 {
 	typedef std::istreambuf_iterator<char> isbufit_t;
@@ -208,7 +218,8 @@ void Connection::returnStreamResponse(std::istream& is, char const* type)
 	buf.assign(isbufit_t(is), isbufit_t());
 	std::ostream os(&response);
 	os << "HTTP/1.1 200 OK\r\n"
-			"Connection: Close\r\n";
+			"Connection: close\r\n"
+			;
 	output_http_date_header(os);
 	os << "Content-Length: " << buf.size() << "\r\n"
 		"Content-Type: " << type << "\r\n"

@@ -3,12 +3,13 @@
 
 #include <string>
 #include <queue>
+#include <boost/noncopyable.hpp>
 
 #if defined _MSC_VER && _MSC_VER >= 1020
 #	pragma once
 #endif
 
-class Game
+class Game : boost::noncopyable
 {
 public:
 	Game();
@@ -21,8 +22,13 @@ public:
 	std::string const& GetOption() const;
 	void SendInitField(std::string const& s);
 	std::string const& GetInitField() const;
-	void JoinPlayer();
+	int JoinPlayer();
 	bool Ready();
+
+	int GetPlayerCount() const
+	{
+		return playerCount;
+	}
 private:
 	std::string option;
 	std::string initField;

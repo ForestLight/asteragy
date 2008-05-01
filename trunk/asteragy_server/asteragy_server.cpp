@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "server.h"
 #include <memory>
+#include <cstdlib> //srand
+#include <ctime> //time
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
@@ -76,6 +78,8 @@ int main()
 {
 	try
 	{
+		std::srand(static_cast<unsigned>(std::time(0)));
+		contentRoot = std::getenv("ASTERAGY_SERVER_CONTENT_ROOT");
 		server_main();
 	}
 	catch (std::exception const& e)
@@ -85,15 +89,3 @@ int main()
 	}
 	return 0;
 }
-/*
-HTTP/1.1 200 OK
-Date: Mon, 04 Feb 2008 16:01:14 GMT
-Server: Apache
-Accept-Ranges: bytes
-Content-Length: 46754
-Cache-Control: no-store,no-cache,must-revalidate
-Pragma: no-cache
-Expires: -1
-Connection: close
-Content-Type: text/html
-*/

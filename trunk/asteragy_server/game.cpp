@@ -54,12 +54,12 @@ std::string const& Game::GetInitField() const
 	return initField;
 }
 
-void Game::JoinPlayer()
+int Game::JoinPlayer()
 {
-	++playerCount;
+	return playerCount++;
 }
 
 bool Game::Ready()
 {
-	return playerCount >= 2;
+	return playerCount == 2;
 }
