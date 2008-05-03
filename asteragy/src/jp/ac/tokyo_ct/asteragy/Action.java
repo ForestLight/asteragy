@@ -64,7 +64,16 @@ final class Action {
 			ac.target1.x = args[0];
 		}
 		ac.setCommand(commandType);
+		if(commandType == 1){
+			final Player p = ac.getPlayer();
+			if (ac instanceof SunClass) {
+				p.addAP(-AsterClass.classCost[args[2] + 1]);
+			} else {
+				p.addAP(-ac.getCommandCost());
+			}
+		}
 		ac.execute(deleteList);
+		
 		//if (commandType == 1) {
 			//ac.executeSpecialCommand();
 		//	ac.execute(deleteList);
