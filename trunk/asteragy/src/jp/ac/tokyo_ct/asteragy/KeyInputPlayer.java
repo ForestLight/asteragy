@@ -104,6 +104,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 						return;
 					}
 				}
+				
 				action.args[(phase - 2) * 2] = pt.x;
 				action.args[(phase - 2) * 2 + 1] = pt.y;
 				ac.setPointAndNext(pt.clone());
@@ -124,13 +125,14 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 				ac.setCommand(action.commandType);
 				canvas.commonCommand.setCommand(-1, null);
 				if(action.commandType == 1 && (this.getAP() < ac.getCommandCost())){
-					phase--;
+					phase--; //ƒRƒXƒg‘«‚è‚È‚¢ê‡
 					break;
 				}
 				action.args = new int[4];
 			// ‚±‚±break‚È‚µ
 			case 2:
 			case 3:
+
 				if (!(ac instanceof SunClass && action.commandType == 1)
 						&& !ac.hasNext()) {
 					notifyAll();
