@@ -68,8 +68,8 @@ final class Game {
 
 			switch (option.gameType) {
 			case 1:
-				player[0] = new AIPlayer(this, "COM1");
-				player[1] = new AIPlayer(this, "COM2");
+				player[0] = new KeyInputPlayer(this, "êÊçU");
+				player[1] = new AIPlayer(this, "COM");
 				break;
 			case 2:
 				if (isLocalFirst) {
