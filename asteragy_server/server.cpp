@@ -7,6 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
+#include <ctime>
 #include <boost/bind.hpp>
 #include <boost/range.hpp>
 #include <boost/algorithm/string/find.hpp>
@@ -27,7 +28,10 @@ char const* contentRoot;
 
 namespace
 {
-	boost::ptr_map<int, Game> gameMap;
+	typedef boost::ptr_map<int, Game> game_map_t;
+	game_map_t gameMap;
+
+	double lifeLimit = 5 * 60; //単位：秒、この時間以上経過するとGame削除の対象になる。
 }
 
 /*
@@ -76,7 +80,6 @@ void Connection::handleRead(error_code const& e, std::size_t)
 {
 	using std::clog;
 	using std::endl;
-	using std::string;
 	using boost::begin;
 	using boost::size;
 
@@ -156,12 +159,12 @@ void Connection::handleRead(error_code const& e, std::size_t)
 		int player = boost::lexical_cast<int>(itPlayer->second);
 
 		string const& cmd = args["cmd"];
-		std::clog << game.GetPlayerCount() << ' ' << cmd << "\t id: " << gameId << "\tturn: " << player << std::endl;
+		clog << game.GetPlayerCount() << ' ' << cmd << "\t id: " << gameId << "\tturn: " << player << endl;
 		if (cmd == "sendaction")
 		{
 			game.SendAction(args["action"] + "\r\n" + args["delete"], player);
 			returnEmptyResponse(200);
-			std::clog << " action: " << args["action"] << "delete: " << args["delete"] << std::endl;
+			clog << " action: " << args["action"] << "delete: " << args["delete"] << endl;
 		}
 		else if (cmd == "getaction")
 		{
@@ -242,9 +245,9 @@ void Connection::handleRead(error_code const& e, std::size_t)
 		returnEmptyResponse(500);
 	}
 }
-
 void Connection::downloadStaticContents(std::string const& requestPath)
 {
+#ifdef USE_IMGAE_DOWNLOADING
 	string localPath = contentRoot + requestPath;
 
 	//ToDo: 怪しいパスを弾く
@@ -282,6 +285,9 @@ void Connection::downloadStaticContents(std::string const& requestPath)
 	{
 		returnStreamResponse(is, type);
 	}
+#else
+	returnEmptyResponse(404);
+#endif
 }
 
 /*
@@ -317,5 +323,20 @@ void Connection::queryNewGame()
 	if (turnId >= 1)
 	{
 		playId = -1;
+	}
+}
+
+void RemoveGame()
+{
+	for (game_map_t::iterator it = gameMap.begin(); it != gameMap.end(); )
+	{
+		if (std::fabs(std::difftime(std::time(0), it->second->LastAccessTime())) > lifeLimit)
+		{
+			gameMap.erase(it++);
+		}
+		else
+		{
+			++it;
+		}
 	}
 }

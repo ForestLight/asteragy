@@ -3,6 +3,7 @@
 
 #include <string>
 #include <queue>
+#include <ctime>
 #include <boost/noncopyable.hpp>
 
 #if defined _MSC_VER && _MSC_VER >= 1020
@@ -29,10 +30,16 @@ public:
 	{
 		return playerCount;
 	}
+
+	time_t LastAccessTime() const
+	{
+		return lastAccessTime;
+	}
 private:
 	std::string option;
 	std::string initField;
 	std::queue<std::string> action[2];
+	mutable time_t lastAccessTime;
 	int playerCount;
 
 	Game(Game const&);

@@ -5,6 +5,7 @@
 #include <ctime> //time
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
+#include <boost/date_time/posix_time/posix_time_types.hpp>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -48,6 +49,23 @@ namespace
 		_exit(0);
 	}
 #endif
+	void NextTimer();
+
+	void RemoveGameEntry(const boost::system::error_code&)
+	{
+		RemoveGame();
+		NextTimer();
+	}
+
+	void NextTimer()
+	{
+		if (pios.get())
+		{
+			as::deadline_timer t(*pios, boost::posix_time::seconds(6 * 60));
+			t.async_wait(RemoveGameEntry);
+		}
+	}
+
 	void server_main()
 	{
 		pios.reset(new as::io_service);
@@ -68,6 +86,7 @@ namespace
 		sigaction(SIGTERM, &sa, 0);
 #endif
 		Server s(*pios);
+		NextTimer();
 
 		pios->run();
 		abs(0);
