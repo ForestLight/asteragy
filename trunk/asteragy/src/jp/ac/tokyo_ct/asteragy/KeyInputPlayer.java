@@ -123,6 +123,10 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 			case 1: // コマンドが選択された
 				ac.setCommand(action.commandType);
 				canvas.commonCommand.setCommand(-1, null);
+				if(action.commandType == 1 && (this.getAP() < ac.getCommandCost())){
+					phase--;
+					break;
+				}
 				action.args = new int[4];
 			// ここbreakなし
 			case 2:
