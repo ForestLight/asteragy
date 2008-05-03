@@ -44,7 +44,6 @@ private:
 	void returnResponse(std::string const& s);
 	void returnEmptyResponse(int stetusCode);
 	void returnStreamResponse(std::istream& is, char const*);
-
 	typedef boost::mpl::identity<void (Connection::*)(
 		boost::system::error_code const& e, std::size_t bytesTransferred)>::type handler_type;
 	void asyncReadUntil(handler_type hander, char const* s);
@@ -52,7 +51,6 @@ private:
 
 	void queryNewGame();
 	void getAction();
-	void getActionFromConsole();
 
 	void downloadStaticContents(std::string const& requestPath);
 
@@ -98,6 +96,8 @@ void parseArgs(std::map<std::string, std::string>& m,
 	boost::iterator_range<std::string::const_iterator> const& r);
 void perseHeader(std::map<std::string, std::string>& header, std::istream& is);
 void output_error(std::ostream& os, int code);
+
+void RemoveGame();
 
 namespace utility
 {
