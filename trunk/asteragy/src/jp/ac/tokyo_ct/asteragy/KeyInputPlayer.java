@@ -92,6 +92,9 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		case Display.KEY_SELECT:
 			System.out.println("Select " + phase);
 			if (phase == 2 || phase == 3) {
+				if(ac instanceof SunClass && phase == 3 && AsterClass.classCost[action.args[2] + 1] > this.getAP()){
+					break; //コストたらない場合ぶれーく
+				}
 				if (frange[pt.y][pt.x] != 1) {
 					return;
 				}
@@ -196,6 +199,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 					}
 				}
 			}
+			if(ac instanceof SunClass) action.args[2] = 0; //バグ回避
 			applyPosition();
 			break;
 		}
