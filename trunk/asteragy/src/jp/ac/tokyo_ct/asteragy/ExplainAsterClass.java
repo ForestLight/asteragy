@@ -38,14 +38,19 @@ final class ExplainAsterClass extends Canvas implements Runnable {
 			g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 			g.drawString(AsterClass.classNameF[i], 20, 60);
 			g.drawString("コマンド: ".concat(AsterClass.commandName[i]), 20,
-					80);
-			g.drawString(AsterClass.commandExplain[i], 20, 100);
-			g.drawString("クラスコスト: ".concat(String
-					.valueOf(AsterClass.classCost[i])), 20, 120);
+					90);
+			g.drawString(AsterClass.commandExplain[i], 20, 110);
+			if (i != 0 && i != 11) {
+				g.drawString("クラスコスト: ".concat(String
+					.valueOf(AsterClass.classCost[i])), 20, 130);
+			}
+			else {
+				g.drawString("クラスコスト: -", 20, 130);
+			}
 			g.drawString("コマンドコスト: ".concat(String
-					.valueOf(AsterClass.commandCost[i])), 20, 140);
+					.valueOf(AsterClass.commandCost[i])), 20, 150);
 			g.drawString("行動回数： ".concat(String
-					.valueOf(AsterClass.actionNum[i])), 20, 160);
+					.valueOf(AsterClass.actionNum[i])), 20, 170);
 			//g.drawString("ｱﾌﾟﾘｷｰ/ｸﾘｱｷｰ/[2]/[0]: もどる", 20, 237);
 
 			for (int j = 0; j < range.length; j++) {
