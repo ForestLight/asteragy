@@ -5,7 +5,9 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <set>
 #include <algorithm>
+#include <stdexcept>
 #include <cstdlib>
 #include <ctime>
 #include <boost/bind.hpp>
@@ -14,14 +16,18 @@
 #include <boost/algorithm/string/split.hpp>
 #include <boost/asio.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/implicit_cast.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
 #include "game.h"
+
+#define USE_IMGAE_DOWNLOADING
 
 namespace as = boost::asio;
 namespace algo = boost::algorithm;
 
 using boost::system::error_code;
 using boost::lexical_cast;
+using boost::implicit_cast;
 using std::string;
 
 char const* contentRoot;
@@ -32,7 +38,47 @@ namespace
 	game_map_t gameMap;
 
 	double lifeLimit = 5 * 60; //単位：秒、この時間以上経過するとGame削除の対象になる。
+
+	template<typename Map, typename Key>
+	inline typename Map::mapped_type const& map_at(Map const& m, Key key)
+	{
+		typename Map::const_iterator it = m.find(key);
+		if (it == m.end())
+			throw std::out_of_range("Key not found");
+		else
+			return it->second;
+	}
+
+	template<typename Map, typename Key>
+	inline typename Map::mapped_type& map_at(Map& m, Key key)
+	{
+		return const_cast<Map::mapped_type&>(
+			map_at(implicit_cast<Map const&>(m), key));
+	}
+
+	template<typename Key, typename T, typename Com, typename CA, typename Al>
+	inline typename boost::ptr_map<Key, T, Com, CA, Al>::const_mapped_reference
+	map_at(boost::ptr_map<Key, T, Com, CA, Al> const& m, Key key)
+	{
+		typedef boost::ptr_map<Key, T, Com, CA, Al> map_t;
+		typename map_t::const_iterator it = m.find(key);
+		if (it == m.end())
+			throw std::out_of_range("Key not found");
+		else
+			return *it->second;
+	}
+
+	template<typename Key, typename T, typename Com, typename CA, typename Al>
+	inline typename boost::ptr_map<Key, T, Com, CA, Al>::mapped_reference
+	map_at(boost::ptr_map<Key, T, Com, CA, Al>& m, Key key)
+	{
+		typedef boost::ptr_map<Key, T, Com, CA, Al> map_t;
+		return const_cast<map_t::mapped_reference>(
+			map_at(implicit_cast<map_t const&>(m), key));
+	}
 }
+
+std::set<string> allowedList;
 
 /*
 @brief クライアントの接続を待つ。
@@ -142,21 +188,9 @@ void Connection::handleRead(error_code const& e, std::size_t)
 			return;
 		}
 
-		map_t::const_iterator itId = args.find("id");
-		if (itId == args.end())
-		{
-			returnEmptyResponse(400);
-			return;
-		}
-		int gameId = boost::lexical_cast<int>(itId->second);
-		Game& game = gameMap[gameId];
-		map_t::const_iterator itPlayer = args.find("turn");
-		if (itPlayer == args.end())
-		{
-			returnEmptyResponse(400);
-			return;
-		}
-		int player = boost::lexical_cast<int>(itPlayer->second);
+		int gameId = lexical_cast<int>(map_at(args, "id"));
+		int player = lexical_cast<int>(map_at(args, "turn"));
+		Game& game = map_at(gameMap, gameId);
 
 		string const& cmd = args["cmd"];
 		clog << game.GetPlayerCount() << ' ' << cmd << "\t id: " << gameId << "\tturn: " << player << endl;
@@ -229,6 +263,11 @@ void Connection::handleRead(error_code const& e, std::size_t)
 		{
 			returnEmptyResponse(500);
 		}
+	}
+	catch(std::out_of_range const&)
+	{
+		//存在しないidを指定されたときを予期
+		returnEmptyResponse(400);
 	}
 	catch(std::exception const& e)
 	{
