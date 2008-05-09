@@ -23,6 +23,8 @@ final class HTTPPlayer extends Player implements Runnable {
 		super(game, playerName);
 		loggingThread = new Thread(this);
 		loggingThread.start();
+		System.out.print("sourceURL: ");
+		System.out.println(sourceURL);
 	}
 
 	// こっちの人間プレイヤが先攻ならtrueを返す。
@@ -124,7 +126,8 @@ final class HTTPPlayer extends Player implements Runnable {
 	void sendInitField(Field f) throws IOException {
 		String url = getUrl("sendinitfield", isLocalFirst).concat("&field=")
 				.concat(f.toStringForInit());
-		System.out.println(url);
+//		System.out.println(url);
+		System.out.println("sendInitField");
 		HttpConnection con = (HttpConnection) Connector.open(url,
 				Connector.READ);
 		try {
@@ -371,6 +374,6 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	private boolean isLocalFirst = false;
 
-	private static String sourceURL = IApplication.getCurrentApp()
-			.getSourceURL();
+	private static String sourceURL = "http://clc2007.infocraft.co.jp/asteragy/";
+		//IApplication.getCurrentApp().getSourceURL();
 }
