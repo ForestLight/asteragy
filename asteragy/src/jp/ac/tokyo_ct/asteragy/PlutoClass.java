@@ -67,8 +67,7 @@ final class PlutoClass extends AsterClass {
 
 	void executeSpecialCommand() {
 		System.out.println("‚é‚¢‚ñ‚­‚ç‚·‚Æ");
-		final Field field = getAster().field;
-		Point me = field.asterToPoint(getAster());
+		Point me = getPoint();
 		Point pt = new Point();
 		final int rangeY = defaultRange.length;
 		final int rangeX = defaultRange[0].length;

@@ -70,9 +70,7 @@ final class SaturnClass extends AsterClass {
 		// C³@2/25 ‰E‰ñ‚è‚É
 		int i, j;
 		int num, flag = 0;
-		final Aster a = getAster();
-		final Field field = a.field;
-		final Point me = field.asterToPoint(a);
+		final Point me = getPoint();
 		Point pt = new Point(me.x - (defaultRange[0].length / 2), me.y
 				- (defaultRange.length / 2));
 		final Aster[] queue = new Aster[17];

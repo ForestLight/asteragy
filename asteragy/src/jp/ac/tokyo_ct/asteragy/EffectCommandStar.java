@@ -14,7 +14,7 @@ final class EffectCommandStar extends Effect {
 	private final int direction;
 
 	EffectCommandStar(Field field, AsterClass cls, Point a, Point b) {
-		if (field.asterToPoint(cls.getAster()).equals(a)) {
+		if (cls.getPoint().equals(a)) {
 			point = a;
 			to = b;
 		} else {

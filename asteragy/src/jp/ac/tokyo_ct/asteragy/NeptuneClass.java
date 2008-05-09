@@ -38,8 +38,7 @@ final class NeptuneClass extends AsterClass {
 			return swapGetRange(defaultRange);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			final Field field = getAster().field;
-			final Point thisPoint = field.asterToPoint(getAster());
+			final Point thisPoint = getPoint();
 			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point();
 			pt.x = thisPoint.x - (range[0].length / 2);
@@ -109,11 +108,10 @@ final class NeptuneClass extends AsterClass {
 
 	void executeSpecialCommand() {
 		// ターゲットと自分をswap
-		final Field f = getAster().field;
-		f.getCanvas().paintEffect(new EffectCommandNeptune(target1));
+		field.getCanvas().paintEffect(new EffectCommandNeptune(target1));
 		logAction(target1);
-		Point self = f.asterToPoint(getAster());
-		f.swap(target1.x, target1.y, self.x, self.y);
+		Point self = getPoint();
+		field.swap(target1.x, target1.y, self.x, self.y);
 	}
 
 	static int[][] getDefaultRange() {

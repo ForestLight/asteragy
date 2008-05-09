@@ -33,8 +33,7 @@ final class MercuryClass extends AsterClass {
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
-			final Point tmp = getAster().getPoint();
-			final Field field = getAster().field;
+			final Point tmp = getPoint();
 			Point pt = new Point(tmp.x - (range[0].length / 2), tmp.y
 					- (range.length / 2));
 
@@ -102,11 +101,10 @@ final class MercuryClass extends AsterClass {
 	}
 
 	void executeSpecialCommand() {
-		final Field f = getAster().field;
-		f.getCanvas().paintEffect(new EffectCommandMercury(f, target1));
+		field.getCanvas().paintEffect(new EffectCommandMercury(field, target1));
 		logAction(target1);
 		// 対象の行動可能回数を1回増やす
-		f.at(target1).getAsterClass().incActionCount();
+		field.at(target1).getAsterClass().incActionCount();
 		logAction(target1);
 	}
 
