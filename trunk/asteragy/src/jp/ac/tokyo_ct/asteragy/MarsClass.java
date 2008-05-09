@@ -43,23 +43,22 @@ final class MarsClass extends AsterClass {
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
-			Field f = a.field;
 			Point pt = new Point();
-			pt.x = f.asterToPoint(a).x - (range[0].length / 2);
-			pt.y = f.asterToPoint(a).y - (range.length / 2);
+			pt.x = field.asterToPoint(a).x - (range[0].length / 2);
+			pt.y = field.asterToPoint(a).y - (range.length / 2);
 
 			if (getPlayer() == getPlayer().game.player[1]) {
 				for (int i = 0; i < defaultRange.length; i++) {
-					if (!f.isYInFieldBound(pt.y + i))
+					if (!field.isYInFieldBound(pt.y + i))
 						continue;
 					for (int j = 0; j < defaultRange[0].length; j++) {
 						// if (pt.x + j < 0 || pt.y + i >= f.getX())
-						if (!f.isXInFieldBound(pt.x + j))
+						if (!field.isXInFieldBound(pt.x + j))
 							continue;
 
 						if (defaultRangeP2[i][j] == 1) {
 							// レンジ内で自身かサン以外なら選択可
-							final Aster aster2 = f.at(pt.y + i, pt.x + j);
+							final Aster aster2 = field.at(pt.y + i, pt.x + j);
 							if (aster2.getNumber() != 1 && aster2 != a) {
 								range[i][j] = 1;
 							}
@@ -74,16 +73,16 @@ final class MarsClass extends AsterClass {
 				}
 			} else {
 				for (int i = 0; i < defaultRange.length; i++) {
-					if (!f.isYInFieldBound(pt.y + i))
+					if (!field.isYInFieldBound(pt.y + i))
 						continue;
 					for (int j = 0; j < defaultRange[0].length; j++) {
 						// if (pt.x + j < 0 || pt.y + i >= f.getX())
-						if (!f.isXInFieldBound(pt.x + j))
+						if (!field.isXInFieldBound(pt.x + j))
 							continue;
 
 						if (defaultRange[i][j] == 1) {
 							// レンジ内で自身かサン以外なら選択可
-							final Aster aster2 = f.field[pt.y + i][pt.x + j];
+							final Aster aster2 = field.field[pt.y + i][pt.x + j];
 							if (aster2.getNumber() != 1 && aster2 != a) {
 								range[i][j] = 1;
 							}
@@ -139,11 +138,10 @@ final class MarsClass extends AsterClass {
 	}
 
 	void executeSpecialCommand() {
-		final Field f = getAster().field;
-		f.getCanvas().paintEffect(new EffectCommandMars(f, this, target1));
+		field.getCanvas().paintEffect(new EffectCommandMars(field, this, target1));
 		logAction(target1);
-		f.setDeleteFlag(target1);
-		f.delete(target1.x, target1.y, game.getCanvas().disappearControl.disappearing);
+		field.setDeleteFlag(target1);
+		field.delete(target1.x, target1.y, game.getCanvas().disappearControl.disappearing);
 	}
 
 	static int[][] getDefaultRange() {

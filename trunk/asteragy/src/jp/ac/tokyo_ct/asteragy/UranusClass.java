@@ -28,7 +28,6 @@ final class UranusClass extends AsterClass {
 
 	int[][] getRange() {
 		final Aster a = getAster();
-		final Field field = a.field;
 		switch (mode) {
 		case 0:
 			return swapGetRange(defaultRange);
@@ -36,9 +35,9 @@ final class UranusClass extends AsterClass {
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
 			final Aster[][] f = field.field;
-			Point pt = new Point(field.asterToPoint(a).x
-					- (range[0].length / 2), field.asterToPoint(a).y
-					- (range.length / 2));
+			Point pt = getPoint().clone();
+			pt.x -= range[0].length / 2;
+			pt.y -= range.length / 2;
 
 			// 1個目
 			if (target1 == null) {
@@ -108,11 +107,10 @@ final class UranusClass extends AsterClass {
 	}
 
 	void executeSpecialCommand() {
-		final Field f = getAster().field;
-		f.getCanvas().paintEffect(new EffectCommandUranus(target1, target2));
+		field.getCanvas().paintEffect(new EffectCommandUranus(target1, target2));
 		logAction(target1, target2);
 
-		f.swap(target1.x, target1.y, target2.x, target2.y);
+		field.swap(target1.x, target1.y, target2.x, target2.y);
 	}
 
 	static int[][] getDefaultRange() {

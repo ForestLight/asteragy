@@ -11,13 +11,14 @@ import com.nttdocomo.ui.*;
  * @author Yusuke
  * 
  */
-abstract class AsterClass {
+class AsterClass {
 	// asterだけはあえてコピーしていない。
 	protected AsterClass(AsterClass a) {
 		game = a.game;
 		player = a.player;
 		actionCount = a.actionCount;
 		mode = a.mode;
+		field = a.field;
 		// aster = a.getAster();
 		if (a.target1 == null)
 			target1 = null;
@@ -30,13 +31,16 @@ abstract class AsterClass {
 		isProtected = a.isProtected;
 	}
 
-	abstract AsterClass clone();
+	AsterClass clone() {
+		return new AsterClass(this);
+	}
 
 	AsterClass(Aster a, Player p) {
 		aster = a;
 		player = p;
 		actionCount = getActionNum();
-		game = a.field.game;
+		field = a.field;
+		game = field.game;
 		a.setAsterClass(this);
 	}
 
@@ -45,7 +49,9 @@ abstract class AsterClass {
 	 * 
 	 * @return クラス固有の番号
 	 */
-	abstract int getNumber();
+	int getNumber() {
+		return 0;
+	}
 
 	final Aster getAster() {
 		return aster;
@@ -54,6 +60,8 @@ abstract class AsterClass {
 	private Aster aster;
 
 	final Game game;
+	
+	Field field;
 
 	final Player getPlayer() {
 		return player;
@@ -76,6 +84,10 @@ abstract class AsterClass {
 	final void setAster(Aster a) {
 		aster = a;
 	}
+	
+	final Point getPoint() {
+		return field.asterToPoint(aster);
+	}
 
 	protected int mode = 0;
 
@@ -88,21 +100,32 @@ abstract class AsterClass {
 	 * 
 	 * @return 現在の選択範囲
 	 */
-	abstract int[][] getRange();
+	int[][] getRange() {
+		System.out.println("ERROR! AsterClass.getRange");
+		return null;
+	}
 
 	/**
 	 * @return 範囲に問題がなければtrue、そうでなければfalse
 	 */
-	abstract boolean setPointAndNext(Point pt);
-
-	abstract boolean hasNext();
-
+	boolean setPointAndNext(Point pt) {
+		System.out.println("ERROR! AsterClass.setPointAndNext");
+		return false;
+	}
+	
+	boolean hasNext() {
+		System.out.println("ERROR! AsterClass.hasNext");
+		return false;
+	}
 	/**
 	 * 1つ前の選択に戻る。
 	 * 
 	 * @return 一つ目の対象選択中に呼ばれた場合true
 	 */
-	abstract boolean moveAstern();
+	boolean moveAstern() {
+		System.out.println("ERROR! AsterClass.hasNext");
+		return false;
+	}
 
 	/**
 	 * @return クラス名
@@ -231,7 +254,9 @@ abstract class AsterClass {
 	 * 特殊コマンドを実行
 	 * 
 	 */
-	abstract void executeSpecialCommand();
+	void executeSpecialCommand() {
+		System.out.println("ERROR! AsterClass.executeSpecialCommand");
+	}
 
 	/**
 	 * 行動可能回数、フラグ初期化
@@ -288,6 +313,20 @@ abstract class AsterClass {
 	 * 対象不可フラグ
 	 */
 	private boolean isProtected;
+
+	static final Image asterImage = Game.loadImage("aster_0");
+
+	final static int PINK = 5;
+
+	final static int YELLOW = 4;
+
+	final static int GREEN = 3;
+
+	final static int BLUE = 2;
+
+	final static int RED = 1;
+
+	static int COLOR_MAX = 5;
 
 	/**
 	 * 現在の選択範囲を返す (スワップ用)
@@ -424,7 +463,9 @@ abstract class AsterClass {
 		return null;
 	}
 
-	abstract Image getImage();
+	Image getImage() {
+		return asterImage;
+	}
 
 	static Image loadImage(int n) {
 		return Game.loadImage("aster_".concat(String.valueOf(n)));

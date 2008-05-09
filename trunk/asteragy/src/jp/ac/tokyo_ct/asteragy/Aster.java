@@ -8,18 +8,6 @@ import com.nttdocomo.ui.Image;
  * 
  */
 final class Aster {
-	static int COLOR_MAX = 5;
-
-	final static int RED = 1;
-
-	final static int BLUE = 2;
-
-	final static int GREEN = 3;
-
-	final static int YELLOW = 4;
-
-	final static int PINK = 5;
-
 	final Field field;
 
 	private int color;
@@ -30,12 +18,12 @@ final class Aster {
 
 	private boolean judgeFlag = false;
 
-	private int drawHeight = CanvasControl.measure - 1;
+	int drawHeight = CanvasControl.measure - 1;
 
-	private int drawWidth = CanvasControl.measure - 1;
+	int drawWidth = CanvasControl.measure - 1;
 
 	Aster(Field f) {
-		color = Game.random.nextInt(COLOR_MAX) + 1;
+		color = Game.random.nextInt(AsterClass.COLOR_MAX) + 1;
 		field = f;
 	}
 
@@ -60,46 +48,46 @@ final class Aster {
 		return a;
 	}
 
-	void init() {
+	final void init() {
 		deleteFlag = false;
 //		judgeFlag = false;
 	}
 
-	void setNum(int i) {
+	final void setNum(int i) {
 		num = i;
 	}
 
-	int getNum() {
+	final int getNum() {
 		return num;
 	}
 
 	private int num;
 
-	int getColor() {
+	final int getColor() {
 		return color;
 	}
 
-	AsterClass getAsterClass() {
+	final AsterClass getAsterClass() {
 		return asterClass;
 	}
 
-	void setDeleteFlag(boolean b) {
+	final void setDeleteFlag(boolean b) {
 		deleteFlag = b;
 	}
 
-	boolean getDeleteFlag() {
+	final boolean getDeleteFlag() {
 		return deleteFlag;
 	}
 
-	void setJudgeFlag(boolean b) {
+	final void setJudgeFlag(boolean b) {
 		judgeFlag = b;
 	}
 
-	boolean getJudgeFlag() {
+	final boolean getJudgeFlag() {
 		return judgeFlag;
 	}
 
-	void setColor(int c) {
+	final void setColor(int c) {
 		if (c != 0) {
 			color = c;
 		}
@@ -109,10 +97,10 @@ final class Aster {
 	 * 削除フラグが立っていた場合、削除して生成しなおす
 	 * 
 	 */
-	void delete(int c) {
+	final void delete(int c) {
 		if (deleteFlag) {
 			System.out.println("delete " + field.asterToPoint(this));
-			color = Game.random.nextInt(COLOR_MAX) + 1;
+			color = Game.random.nextInt(AsterClass.COLOR_MAX) + 1;
 			asterClass = null;
 			deleteFlag = false;
 //			judgeFlag = false;
@@ -123,7 +111,7 @@ final class Aster {
 		}
 	}
 
-	void setAsterClass(AsterClass ac) {
+	final void setAsterClass(AsterClass ac) {
 		asterClass = ac;
 	}
 
@@ -131,26 +119,24 @@ final class Aster {
 		return asterClass != null ? asterClass.getNumber() : 0;
 	}
 
-	Point getPoint() {
+	final Point getPoint() {
 		return field.asterToPoint(this);
 	}
 
-	void setSize(int width, int height) {
+	final void setSize(int width, int height) {
 		drawWidth = width;
 		drawHeight = height;
 	}
 
-	void resetSize() {
+	final void resetSize() {
 		setSize(CanvasControl.measure - 1, CanvasControl.measure - 1);
 	}
 
-	private Image getImage() {
-		return asterClass != null ? asterClass.getImage() : asterImage;
+	private final Image getImage() {
+		return asterClass != null ? asterClass.getImage() : AsterClass.asterImage;
 	}
 
-	static final Image asterImage = Game.loadImage("aster_0");
-
-	void paint(Graphics g) {
+	final void paint(Graphics g) {
 		final int m = CanvasControl.measure - 1;
 
 		// プレイヤー2のユニットは反転

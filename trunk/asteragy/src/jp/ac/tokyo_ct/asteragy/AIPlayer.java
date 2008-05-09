@@ -428,11 +428,6 @@ final class AIPlayer extends Player {
 		return Math.abs(a.x - x2) + Math.abs(a.y - y2);
 	}
 
-	/*
-	 * private void filedClone(Aster[][] dst, Aster[][] src) { for (int i = 0; i <
-	 * src.length; i++) { for (int j = 0; j < src[0].length; j++) { dst[i][j] =
-	 * src[i][j].clone(); } } }
-	 */
 	private void backUpField() {
 		final Field f = game.getField();
 

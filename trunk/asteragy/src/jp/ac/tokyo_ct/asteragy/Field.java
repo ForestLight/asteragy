@@ -226,7 +226,7 @@ final class Field {
 			}
 
 			// 初回にランダムで決定した色が置けなかった場合、全色試す
-			for (int i = 1; i <= Aster.COLOR_MAX; i++) {
+			for (int i = 1; i <= AsterClass.COLOR_MAX; i++) {
 				target.setColor(i);
 				if (judge(x, y) == false)
 					return count;

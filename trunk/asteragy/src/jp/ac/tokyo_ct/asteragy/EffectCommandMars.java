@@ -19,7 +19,7 @@ final class EffectCommandMars extends Effect {
 
 	EffectCommandMars(Field field, AsterClass cls, Point point) {
 		this.point = point;
-		this.aster = field.asterToPoint(cls.getAster());
+		this.aster = cls.getPoint();
 		setRect();
 	}
 

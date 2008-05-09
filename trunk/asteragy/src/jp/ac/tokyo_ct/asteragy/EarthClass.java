@@ -31,9 +31,7 @@ final class EarthClass extends AsterClass {
 		case 1:
 			// SunClassから拝借
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			final Field field = getAster().field;
-			final Point thisPoint = field.asterToPoint(
-					getAster());
+			final Point thisPoint = getPoint();
 			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point(thisPoint.x - (range[0].length / 2),
 					thisPoint.y - (range.length / 2));
@@ -100,11 +98,10 @@ final class EarthClass extends AsterClass {
 	}
 
 	void executeSpecialCommand() {
-		final Field f = getAster().field;
 		Effect effect = new EffectCommandEarth(target1);
-		f.getCanvas().paintEffect(effect);
+		field.getCanvas().paintEffect(effect);
 		logAction(target1);
-		final Aster a = f.at(target1);
+		final Aster a = field.at(target1);
 		new MoonClass(a, getPlayer());
 		a.getAsterClass().setActionCount(0);
 	}

@@ -40,9 +40,8 @@ final class VenusClass extends AsterClass {
 			}
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			final Field field = getAster().field;
 			final Aster[][] f = field.field;
-			final Point thisPoint = field.asterToPoint(getAster());
+			final Point thisPoint = getPoint();
 			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point();
 			pt.x = thisPoint.x - (range[0].length / 2);
@@ -138,9 +137,8 @@ final class VenusClass extends AsterClass {
 
 	void executeSpecialCommand() {
 		// 対象の所持者を変更
-		final Field f = getAster().field;
-		final AsterClass ac = f.at(target1).getAsterClass();
-		f.getCanvas().paintEffect(new EffectCommandVenus(target1));
+		final AsterClass ac = field.at(target1).getAsterClass();
+		field.getCanvas().paintEffect(new EffectCommandVenus(target1));
 		ac.setPlayer(this.getPlayer());
 		logAction(target1);
 		// 行動済状態に

@@ -16,7 +16,7 @@ final class EffectCommandSaturn extends Effect {
 
 	EffectCommandSaturn(Field field, AsterClass cls, Aster[] queue) {
 		this.field = field;
-		this.aster = field.asterToPoint(cls.getAster());
+		this.aster = cls.getPoint();
 		this.queue = queue;
 
 		location = new Point[queue.length];

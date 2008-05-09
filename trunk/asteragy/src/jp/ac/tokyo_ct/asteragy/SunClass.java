@@ -34,8 +34,7 @@ final class SunClass extends AsterClass {
 			return swapGetRange(defaultRange);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
-			final Field field = getAster().field;
-			final Point thisPoint = field.asterToPoint(getAster());
+			final Point thisPoint = getPoint();
 			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point();
 			pt.x = thisPoint.x - (range[0].length / 2);
@@ -110,7 +109,6 @@ final class SunClass extends AsterClass {
 	}
 
 	void executeSpecialCommand() {
-		final Field field = getAster().field;
 		final Aster a = field.at(target1);
 		AsterClass ac = new StarClass(a, getPlayer());
 		logAction(new int[] {target1.x, target1.y, asterClassSelect});

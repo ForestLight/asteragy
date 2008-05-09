@@ -30,12 +30,10 @@ final class JupiterClass extends AsterClass {
 	}
 
 	int[][] getRange() {
-		final Aster a = getAster();
-		final Field field = a.field;
-		final Point asterPoint = field.asterToPoint(a);
+		final Point asterPoint = getPoint();
 		switch (mode) {
 		case 0:
-			if (getPlayer() == getPlayer().game.player[1]) {
+			if (getPlayer() == game.player[1]) {
 				return swapGetRange(defaultRangeP2);
 			} else {
 				return swapGetRange(defaultRange);
@@ -126,9 +124,7 @@ final class JupiterClass extends AsterClass {
 		return swapMoveAstern();
 	}
 
-	void executeSpecialCommand() {
-		final Field field = getAster().field;
-		
+	void executeSpecialCommand() {		
 		Effect effect = new EffectCommandJupiter(target1);
 		game.getCanvas().paintEffect(effect);
 		logAction(target1);
