@@ -14,12 +14,13 @@ public final class Main extends IApplication {
 	 * プログラムを開始するエントリポイント
 	 */
 	public void start() {
+		System.out.println(IApplication.getCurrentApp().getSourceURL());
 		InitializeAppli init = new InitializeAppli();
 		init.start();
-		title = new Title();
 		final Game game = new Game();
+		title = new Title();
 		while (true) {
-			Option op = title.start();
+			final Option op = title.start();
 			game.start(op);
 			System.out.println("Game over");
 		}
@@ -30,6 +31,4 @@ public final class Main extends IApplication {
 	}
 
 	static Title title;
-
-	static Game game;
 }

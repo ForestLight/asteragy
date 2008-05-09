@@ -7,8 +7,6 @@ import java.util.Vector;
 import com.nttdocomo.io.ConnectionException;
 import com.nttdocomo.ui.Dialog;
 import com.nttdocomo.ui.Image;
-import com.nttdocomo.ui.MediaImage;
-import com.nttdocomo.ui.MediaManager;
 
 /**
  * @author Ichinohe ƒQ[ƒ€is‚ÌŠÇ—
@@ -59,12 +57,9 @@ final class Game {
 					option.connection);
 			Aster.COLOR_MAX = option.numOfColors;
 			field.setAster();
-			System.out.println("initialize");
 
 			canvas = new CanvasControl(this);
 			canvas.repaint(); // now loading‚ğ•\¦‚³‚¹‚é
-
-			System.out.println("initialize");
 
 			switch (option.gameType) {
 			case 1:
@@ -86,7 +81,6 @@ final class Game {
 				player[0] = new KeyInputPlayer(this, "æU");
 				player[1] = new KeyInputPlayer(this, "ŒãU");
 			}
-			System.out.println("initialize");
 
 			// ‰Šúİ’è(‰¼)
 			Aster a = field.field[field.Y - 1][field.X / 2];
@@ -270,14 +264,6 @@ final class Game {
 	static ImageLoader loader;
 
 	static Image loadImage(String s) {
-		//try {
-		//	MediaImage m = MediaManager.getImage("resource:///".concat(s)
-		//			.concat(".gif"));
-		//	m.use();
-		//	return m.getImage();
-		//} catch (Exception e) {
-		//}
-		//return null;
 		return (Image) loader.getImages().get(s.concat(".gif"));
 	}
 
