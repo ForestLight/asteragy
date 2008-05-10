@@ -153,7 +153,7 @@ class AsterClass {
 	 * @return クラス付与時のコスト
 	 */
 	final int getCost() {
-		return AsterClass.classCost[getNumber() - 1];
+		return classCost[getNumber() - 1];
 	}
 
 	/**
@@ -314,8 +314,6 @@ class AsterClass {
 	 */
 	private boolean isProtected;
 
-	static final Image asterImage = Game.loadImage("aster_0");
-
 	final static int PINK = 5;
 
 	final static int YELLOW = 4;
@@ -463,12 +461,18 @@ class AsterClass {
 		return null;
 	}
 
-	Image getImage() {
-		return asterImage;
+	static Image getImage(AsterClass ac) {
+		return asterImage[ac == null ? 0 : ac.getNumber()];
 	}
-
-	static Image loadImage(int n) {
-		return Game.loadImage("aster_".concat(String.valueOf(n)));
+	
+	static final Image[] asterImage = initImage();
+	
+	static Image[] initImage() {
+		Image[] img = new Image[MAX_CLASS + 1];
+		for (int i = 0; i < img.length; i++) {
+			img[i] = Game.loadImage("aster_".concat(String.valueOf(i)));
+		}
+		return img;
 	}
 
 	static final int MAX_CLASS = 12;

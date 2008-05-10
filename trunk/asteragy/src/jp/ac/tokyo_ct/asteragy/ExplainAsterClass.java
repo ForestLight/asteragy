@@ -30,7 +30,7 @@ final class ExplainAsterClass extends Canvas implements Runnable {
 		for (int i = 0; i < 12; i++) {
 			pageImage[i] = Image.createImage(f.getWidth(), f.getHeight());
 			Graphics g = pageImage[i].getGraphics();
-			asterClassImage = AsterClass.loadImage(i + 1);
+			asterClassImage = AsterClass.asterImage[i + 1];
 			int[][] range = AsterClass.getDefaultRange(i + 1);
 			g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 			g.fillRect(0, 0, f.getWidth(), f.getHeight());

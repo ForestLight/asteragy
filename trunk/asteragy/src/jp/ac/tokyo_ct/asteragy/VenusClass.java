@@ -1,7 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.*;
-
 final class VenusClass extends AsterClass {
 	private static int[][] defaultRange = { { 0, 0, 1, 0, 0 },
 			{ 0, 1, 1, 1, 0 }, { 0, 1, 1, 1, 0 }, { 0, 0, 0, 0, 0 },
@@ -10,8 +8,6 @@ final class VenusClass extends AsterClass {
 	private static int[][] defaultRangeP2 = { { 0, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 0 }, { 0, 1, 1, 1, 0 }, { 0, 1, 1, 1, 0 },
 			{ 0, 0, 1, 0, 0 } };
-
-	private static Image asterImage;
 
 	VenusClass(Aster a, Player p) {
 		super(a, p);
@@ -147,12 +143,5 @@ final class VenusClass extends AsterClass {
 
 	static int[][] getDefaultRange() {
 		return defaultRange;
-	}
-
-	Image getImage() {
-		if (asterImage == null) {
-			asterImage = loadImage(4);
-		}
-		return asterImage;
 	}
 }

@@ -21,7 +21,7 @@ final class ExplainRules extends Canvas implements Runnable {
 	ExplainRules() {
 		page = 0;
 		temp = 0;
-		image = AsterClass.loadImage(0);
+		image = AsterClass.asterImage[0];
 
 		// ページの作成（作成中）
 		//
@@ -47,7 +47,7 @@ final class ExplainRules extends Canvas implements Runnable {
 		g.drawImage(image, 20, 160);
 
 		g = pageImage[1].getGraphics();
-		image = AsterClass.loadImage(1);
+		image = AsterClass.asterImage[1];
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
@@ -70,7 +70,7 @@ final class ExplainRules extends Canvas implements Runnable {
 		g.drawString("向きは所有者を表わします。", 70, 220);
 
 		g = pageImage[2].getGraphics();
-		image = AsterClass.loadImage(0);
+		image = AsterClass.asterImage[0];
 		g.setColor(Graphics.getColorOfName(Graphics.BLACK));
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Graphics.getColorOfName(Graphics.WHITE));
@@ -90,7 +90,7 @@ final class ExplainRules extends Canvas implements Runnable {
 		g.drawScaledImage(image, 107, 147, 17, 17, 0, 153, 17, 17);
 		g.drawScaledImage(image, 107, 164, 17, 17, 0, 153, 17, 17);
 		g.drawString("→", 136, 160);
-		image = AsterClass.loadImage(0);
+		image = AsterClass.asterImage[0];
 		g.drawScaledImage(image, 160, 130, 17, 17, 0, 0, 17, 17);
 		g.drawScaledImage(image, 160, 147, 17, 17, 34, 0, 17, 17);
 		g.drawScaledImage(image, 177, 147, 17, 17, 51, 0, 17, 17);
@@ -108,15 +108,15 @@ final class ExplainRules extends Canvas implements Runnable {
 		g.drawString("サンのコマンドでアステルにクラスを", 15, 70);
 		g.drawString("与えることで、自分のユニットとして", 15, 85);
 		g.drawString("操作することができます。", 15, 100);
-		image = AsterClass.loadImage(2);
+		image = AsterClass.asterImage[2];
 		g.drawScaledImage(image, 20, 115, 17, 17, 0, 0, 17, 17);
-		image = AsterClass.loadImage(3);
+		image = AsterClass.asterImage[3];
 		g.drawScaledImage(image, 37, 115, 17, 17, 17, 0, 17, 17);
-		image = AsterClass.loadImage(5);
+		image = AsterClass.asterImage[5];
 		g.drawScaledImage(image, 54, 115, 17, 17, 34, 0, 17, 17);
-		image = AsterClass.loadImage(8);
+		image = AsterClass.asterImage[8];
 		g.drawScaledImage(image, 71, 115, 17, 17, 51, 0, 17, 17);
-		image = AsterClass.loadImage(9);
+		image = AsterClass.asterImage[9];
 		g.drawScaledImage(image, 88, 115, 17, 17, 68, 0, 17, 17);
 		g.drawString("ユニットはスワップとコマンド(特殊", 15, 160);
 		g.drawString("能力)の２つを使えます。", 15, 175);
@@ -137,12 +137,12 @@ final class ExplainRules extends Canvas implements Runnable {
 		g.drawString("を入れ替えます。", 15, 100);
 		g.drawString("そのユニット自身も選択できます。", 15, 115);
 		g.drawString("→", 106, 162);
-		image = AsterClass.loadImage(0);
+		image = AsterClass.asterImage[0];
 		g.drawScaledImage(image, 40, 131, 17, 17, 17, 0, 17, 17);
 		g.drawScaledImage(image, 21, 150, 17, 17, 68, 0, 17, 17);
 		g.drawScaledImage(image, 59, 150, 17, 17, 34, 0, 17, 17);
 		g.drawScaledImage(image, 40, 169, 17, 17, 34, 0, 17, 17);
-		image = AsterClass.loadImage(2);
+		image = AsterClass.asterImage[2];
 		g.drawScaledImage(image, 40, 151, 17, 17, 51, 0, 17, 17);
 		g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 		g.drawRect(20, 149, 19, 19);
@@ -151,12 +151,12 @@ final class ExplainRules extends Canvas implements Runnable {
 		g.setColor(Graphics.getColorOfName(Graphics.RED));
 		g.drawRect(39, 130, 19, 19);
 		g.drawRect(39, 149, 19, 19);
-		image = AsterClass.loadImage(0);
+		image = AsterClass.asterImage[0];
 		g.drawScaledImage(image, 160, 150, 17, 17, 17, 0, 17, 17);
 		g.drawScaledImage(image, 141, 150, 17, 17, 68, 0, 17, 17);
 		g.drawScaledImage(image, 179, 150, 17, 17, 34, 0, 17, 17);
 		g.drawScaledImage(image, 160, 169, 17, 17, 34, 0, 17, 17);
-		image = AsterClass.loadImage(2);
+		image = AsterClass.asterImage[2];
 		g.drawScaledImage(image, 160, 132, 17, 17, 51, 0, 17, 17);
 		g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 		g.drawRect(140, 149, 19, 19);
@@ -177,17 +177,17 @@ final class ExplainRules extends Canvas implements Runnable {
 		g.drawString("クラスにより異なる特殊な行動です。", 15, 70);
 		g.drawString("APを消費して使用します。", 15, 85);
 		g.drawString("→", 106, 140);
-		image = AsterClass.loadImage(6);
+		image = AsterClass.asterImage[6];
 		g.setFlipMode(Graphics.FLIP_VERTICAL);
 		g.drawScaledImage(image, 40, 101, 17, 17, 34, 0, 17, 17);
-		image = AsterClass.loadImage(0);
+		image = AsterClass.asterImage[0];
 		g.setFlipMode(Graphics.FLIP_NONE);
 		g.drawScaledImage(image, 21, 120, 17, 17, 0, 0, 17, 17);
 		g.drawScaledImage(image, 40, 120, 17, 17, 51, 0, 17, 17);
 		g.drawScaledImage(image, 59, 120, 17, 17, 34, 0, 17, 17);
 		g.drawScaledImage(image, 21, 139, 17, 17, 0, 0, 17, 17);
 		g.drawScaledImage(image, 59, 139, 17, 17, 51, 0, 17, 17);
-		image = AsterClass.loadImage(4);
+		image = AsterClass.asterImage[4];
 		g.drawScaledImage(image, 40, 139, 17, 17, 68, 0, 17, 17);
 		g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 		g.drawRect(20, 119, 57, 19);
@@ -196,15 +196,15 @@ final class ExplainRules extends Canvas implements Runnable {
 		g.setColor(Graphics.getColorOfName(Graphics.RED));
 		g.drawRect(39, 100, 19, 19);
 		g.drawRect(39, 138, 19, 19);
-		image = AsterClass.loadImage(6);
+		image = AsterClass.asterImage[6];
 		g.drawScaledImage(image, 160, 101, 17, 17, 34, 0, 17, 17);
-		image = AsterClass.loadImage(0);
+		image = AsterClass.asterImage[0];
 		g.drawScaledImage(image, 141, 120, 17, 17, 0, 0, 17, 17);
 		g.drawScaledImage(image, 160, 120, 17, 17, 51, 0, 17, 17);
 		g.drawScaledImage(image, 179, 120, 17, 17, 34, 0, 17, 17);
 		g.drawScaledImage(image, 141, 139, 17, 17, 0, 0, 17, 17);
 		g.drawScaledImage(image, 179, 139, 17, 17, 51, 0, 17, 17);
-		image = AsterClass.loadImage(4);
+		image = AsterClass.asterImage[4];
 		g.drawScaledImage(image, 160, 139, 17, 17, 68, 0, 17, 17);
 		g.setColor(Graphics.getColorOfName(Graphics.YELLOW));
 		g.drawRect(140, 119, 57, 19);

@@ -1,12 +1,8 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.*;
-
 final class EarthClass extends AsterClass {
 	private static int[][] defaultRange = { { 1, 1, 1 }, { 1, 1, 1 },
 			{ 1, 1, 1 } };
-
-	private static Image asterImage;
 
 	EarthClass(Aster a, Player p) {
 		super(a, p);
@@ -108,12 +104,5 @@ final class EarthClass extends AsterClass {
 
 	static int[][] getDefaultRange() {
 		return defaultRange;
-	}
-
-	Image getImage() {
-		if (asterImage == null) {
-			asterImage = loadImage(5);
-		}
-		return asterImage;
 	}
 }

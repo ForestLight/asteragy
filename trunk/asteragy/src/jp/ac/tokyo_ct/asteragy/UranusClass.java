@@ -1,14 +1,10 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.*;
-
 final class UranusClass extends AsterClass {
 	private static int[][] defaultRange = { { 0, 0, 0, 1, 0, 0, 0 },
 			{ 0, 1, 0, 0, 0, 1, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
 			{ 1, 0, 1, 1, 1, 0, 1 }, { 0, 0, 0, 1, 0, 0, 0 },
 			{ 0, 1, 0, 0, 0, 1, 0 }, { 0, 0, 0, 1, 0, 0, 0 } };
-
-	private static Image asterImage;
 
 	UranusClass(Aster a, Player p) {
 		super(a, p);
@@ -115,12 +111,5 @@ final class UranusClass extends AsterClass {
 
 	static int[][] getDefaultRange() {
 		return defaultRange;
-	}
-
-	Image getImage() {
-		if (asterImage == null) {
-			asterImage = loadImage(9);
-		}
-		return asterImage;
 	}
 }

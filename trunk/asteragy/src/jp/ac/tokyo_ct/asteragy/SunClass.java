@@ -1,13 +1,9 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.Image;
-
 final class SunClass extends AsterClass {
 	private static int[][] defaultRange = { { 0, 0, 1, 0, 0 },
 			{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
 			{ 0, 0, 1, 0, 0 } };
-
-	private static Image asterImage;
 
 	int asterClassSelect;
 
@@ -154,12 +150,4 @@ final class SunClass extends AsterClass {
 	static int[][] getDefaultRange() {
 		return defaultRange;
 	}
-
-	Image getImage() {
-		if (asterImage == null) {
-			asterImage = loadImage(1);
-		}
-		return asterImage;
-	}
-
 }

@@ -1,7 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.*;
-
 final class NeptuneClass extends AsterClass {
 	private static final int[][] defaultRange = { 
 			{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
@@ -13,8 +11,6 @@ final class NeptuneClass extends AsterClass {
 			{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 1, 0, 0, 0, 0 }};
-
-	private static Image asterImage;
 
 	NeptuneClass(Aster a, Player p) {
 		super(a, p);
@@ -117,12 +113,4 @@ final class NeptuneClass extends AsterClass {
 	static int[][] getDefaultRange() {
 		return defaultRange;
 	}
-
-	Image getImage() {
-		if (asterImage == null) {
-			asterImage = loadImage(10);
-		}
-		return asterImage;
-	}
-
 }
