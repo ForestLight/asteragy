@@ -1,7 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 final class SaturnClass extends AsterClass {
-	private static final int[][] defaultRange = { { 1, 1, 1, 1, 1 },
+	static final int[][] defaultRange = { { 1, 1, 1, 1, 1 },
 			{ 1, 0, 1, 0, 1 }, { 1, 1, 1, 1, 1 }, { 1, 0, 1, 0, 1 },
 			{ 1, 1, 1, 1, 1 } };
 
@@ -120,9 +120,5 @@ final class SaturnClass extends AsterClass {
 		}
 
 		logAction();
-	}
-
-	static int[][] getDefaultRange() {
-		return defaultRange;
 	}
 }

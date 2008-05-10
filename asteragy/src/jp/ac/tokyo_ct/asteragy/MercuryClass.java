@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 final class MercuryClass extends AsterClass {
 
-	private static int[][] defaultRange = { { 0, 0, 0, 0, 0 },
+	static int[][] defaultRange = { { 0, 0, 0, 0, 0 },
 			{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
 			{ 0, 0, 0, 0, 0 } };
 
@@ -102,9 +102,5 @@ final class MercuryClass extends AsterClass {
 		// ‘ÎÛ‚Ìs“®‰Â”\‰ñ”‚ğ1‰ñ‘‚â‚·
 		field.at(target1).getAsterClass().incActionCount();
 		logAction(target1);
-	}
-
-	static int[][] getDefaultRange() {
-		return defaultRange;
 	}
 }

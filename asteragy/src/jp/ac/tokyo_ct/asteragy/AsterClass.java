@@ -229,19 +229,19 @@ class AsterClass {
 		// Á–Å”»’è
 		System.out.println("Á‹ŠJn");
 		final CanvasControl canvas = field.getCanvas();
-		player.addAP(field.deleteAll(canvas.disappearControl.disappearing));
+		final Vector disappearing = canvas.disappearControl.disappearing;
+		player.addAP(field.deleteAll(disappearing));
 		if (deleteList != null && deleteList.length() != 0) {
-			Vector v = new Vector();
+			disappearing.removeAllElements();
 			for (int i = 0; i + 2 < deleteList.length();) {
 				int x = HTTPPlayer.parseIntChar(deleteList.charAt(i++));
 				int y = HTTPPlayer.parseIntChar(deleteList.charAt(i++));
-				v.addElement(new Point(x, y));
+				disappearing.addElement(new Point(x, y));
 				field.field[y][x].setColor(HTTPPlayer.parseIntChar(deleteList
 						.charAt(i++)));
 			}
-			canvas.disappearControl.disappearing = v;
 		}
-		game.logDeleteInfo(field, canvas.disappearControl.disappearing);
+		game.logDeleteInfo(field, disappearing);
 		System.out.println("Á‹Š®—¹");
 		canvas.paintEffect(canvas.disappearControl);
 
@@ -434,29 +434,29 @@ class AsterClass {
 	final static int[][] getDefaultRange(int n) {
 		switch (n) {
 		case 1:
-			return SunClass.getDefaultRange();
+			return SunClass.defaultRange;
 		case 2:
-			return StarClass.getDefaultRange();
+			return StarClass.defaultRange;
 		case 3:
-			return MercuryClass.getDefaultRange();
+			return MercuryClass.defaultRange;
 		case 4:
-			return VenusClass.getDefaultRange();
+			return VenusClass.defaultRange;
 		case 5:
-			return EarthClass.getDefaultRange();
+			return EarthClass.defaultRange;
 		case 6:
-			return MarsClass.getDefaultRange();
+			return MarsClass.defaultRange;
 		case 7:
-			return JupiterClass.getDefaultRange();
+			return JupiterClass.defaultRange;
 		case 8:
-			return SaturnClass.getDefaultRange();
+			return SaturnClass.defaultRange;
 		case 9:
-			return UranusClass.getDefaultRange();
+			return UranusClass.defaultRange;
 		case 10:
-			return NeptuneClass.getDefaultRange();
+			return NeptuneClass.defaultRange;
 		case 11:
-			return PlutoClass.getDefaultRange();
+			return PlutoClass.defaultRange;
 		case 12:
-			return MoonClass.getDefaultRange();
+			return MoonClass.defaultRange;
 		}
 		return null;
 	}

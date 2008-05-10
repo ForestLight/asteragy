@@ -1,7 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 final class SunClass extends AsterClass {
-	private static int[][] defaultRange = { { 0, 0, 1, 0, 0 },
+	static int[][] defaultRange = { { 0, 0, 1, 0, 0 },
 			{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
 			{ 0, 0, 1, 0, 0 } };
 
@@ -145,9 +145,5 @@ final class SunClass extends AsterClass {
 		// 選択したクラスのユニットを行動不可能状態で召還
 		ac.setActionCount(0);
 		//getPlayer().addAP(-AsterClass.classCost[asterClassSelect + 1]);
-	}
-
-	static int[][] getDefaultRange() {
-		return defaultRange;
 	}
 }

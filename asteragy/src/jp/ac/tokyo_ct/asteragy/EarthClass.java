@@ -1,7 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 final class EarthClass extends AsterClass {
-	private static int[][] defaultRange = { { 1, 1, 1 }, { 1, 1, 1 },
+	static int[][] defaultRange = { { 1, 1, 1 }, { 1, 1, 1 },
 			{ 1, 1, 1 } };
 
 	EarthClass(Aster a, Player p) {
@@ -100,9 +100,5 @@ final class EarthClass extends AsterClass {
 		final Aster a = field.at(target1);
 		new MoonClass(a, getPlayer());
 		a.getAsterClass().setActionCount(0);
-	}
-
-	static int[][] getDefaultRange() {
-		return defaultRange;
 	}
 }

@@ -155,7 +155,7 @@ final class ImageLoader {
 		return false;
 	}
 
-	public static byte[] integerToByte(int value) {
+	static byte[] integerToByte(int value) {
 		byte[] v = new byte[4];
 		v[0] = (byte) ((value >>> 24) & 0xff);
 		v[1] = (byte) ((value >>> 16) & 0xff);

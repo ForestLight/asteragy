@@ -1,7 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 final class MarsClass extends AsterClass {
-	private static int[][] defaultRange = { { 0, 0, 0, 1, 0, 0, 0 },
+	static int[][] defaultRange = { { 0, 0, 0, 1, 0, 0, 0 },
 			{ 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
 			{ 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 } };
@@ -37,58 +37,34 @@ final class MarsClass extends AsterClass {
 				return swapGetRange(defaultRange);
 			}
 		case 1:
-			int[][] range = new int[defaultRange.length][defaultRange[0].length];
+			final int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
-			Point pt = new Point();
-			pt.x = field.asterToPoint(a).x - (range[0].length / 2);
-			pt.y = field.asterToPoint(a).y - (range.length / 2);
-
-			if (getPlayer() == getPlayer().game.player[1]) {
-				for (int i = 0; i < defaultRange.length; i++) {
-					if (!field.isYInFieldBound(pt.y + i))
+			Point pt = field.asterToPoint(a);
+			pt.x -= range[0].length / 2;
+			pt.y -= range.length / 2;
+			final int[][] defRange =
+				getPlayer() == game.player[1]
+					? defaultRangeP2
+					: defaultRange;
+			for (int i = 0; i < defaultRange.length; i++) {
+				if (!field.isYInFieldBound(pt.y + i))
+					continue;
+				for (int j = 0; j < defaultRange[0].length; j++) {
+					// if (pt.x + j < 0 || pt.y + i >= f.getX())
+					if (!field.isXInFieldBound(pt.x + j))
 						continue;
-					for (int j = 0; j < defaultRange[0].length; j++) {
-						// if (pt.x + j < 0 || pt.y + i >= f.getX())
-						if (!field.isXInFieldBound(pt.x + j))
-							continue;
-
-						if (defaultRangeP2[i][j] == 1) {
-							// レンジ内で自身かサン以外なら選択可
-							final Aster aster2 = field.at(pt.y + i, pt.x + j);
-							if (aster2.getNumber() != 1 && aster2 != a) {
-								range[i][j] = 1;
-							}
-							// 自身かサンなら移動のみ可
-							else {
-								range[i][j] = 0;
-							}
-						} else {
+					if (defaultRangeP2[i][j] == 1) {
+						// レンジ内で自身かサン以外なら選択可
+						final Aster aster2 = field.at(pt.y + i, pt.x + j);
+						if (aster2.getNumber() != 1 && aster2 != a) {
+							range[i][j] = 1;
+						}
+						// 自身かサンなら移動のみ可
+						else {
 							range[i][j] = 0;
 						}
-					}
-				}
-			} else {
-				for (int i = 0; i < defaultRange.length; i++) {
-					if (!field.isYInFieldBound(pt.y + i))
-						continue;
-					for (int j = 0; j < defaultRange[0].length; j++) {
-						// if (pt.x + j < 0 || pt.y + i >= f.getX())
-						if (!field.isXInFieldBound(pt.x + j))
-							continue;
-
-						if (defaultRange[i][j] == 1) {
-							// レンジ内で自身かサン以外なら選択可
-							final Aster aster2 = field.field[pt.y + i][pt.x + j];
-							if (aster2.getNumber() != 1 && aster2 != a) {
-								range[i][j] = 1;
-							}
-							// 自身かサンなら移動のみ可
-							else {
-								range[i][j] = 0;
-							}
-						} else {
-							range[i][j] = 0;
-						}
+					} else {
+						range[i][j] = 0;
 					}
 				}
 			}
@@ -138,9 +114,5 @@ final class MarsClass extends AsterClass {
 		logAction(target1);
 		field.setDeleteFlag(target1);
 		field.delete(target1.x, target1.y, game.getCanvas().disappearControl.disappearing);
-	}
-
-	static int[][] getDefaultRange() {
-		return defaultRange;
 	}
 }
