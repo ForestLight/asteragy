@@ -1,7 +1,5 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.*;
-
 final class MarsClass extends AsterClass {
 	private static int[][] defaultRange = { { 0, 0, 0, 1, 0, 0, 0 },
 			{ 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
@@ -12,8 +10,6 @@ final class MarsClass extends AsterClass {
 			{ 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 },
 			{ 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
 			{ 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 } };
-
-	private static Image asterImage;
 
 	MarsClass(Aster a, Player p) {
 		super(a, p);
@@ -146,12 +142,5 @@ final class MarsClass extends AsterClass {
 
 	static int[][] getDefaultRange() {
 		return defaultRange;
-	}
-
-	Image getImage() {
-		if (asterImage == null) {
-			asterImage = loadImage(6);
-		}
-		return asterImage;
 	}
 }

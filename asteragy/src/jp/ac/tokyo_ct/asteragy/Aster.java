@@ -133,7 +133,7 @@ final class Aster {
 	}
 
 	private final Image getImage() {
-		return asterClass != null ? asterClass.getImage() : AsterClass.asterImage;
+		return AsterClass.getImage(asterClass);
 	}
 
 	final void paint(Graphics g) {

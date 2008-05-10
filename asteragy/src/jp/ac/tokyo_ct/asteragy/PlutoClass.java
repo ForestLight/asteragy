@@ -1,13 +1,9 @@
 package jp.ac.tokyo_ct.asteragy;
 
-import com.nttdocomo.ui.*;
-
 final class PlutoClass extends AsterClass {
 	private static final int[][] defaultRange = { { 1, 1, 0, 1, 1 },
 			{ 1, 0, 1, 0, 1 }, { 0, 1, 1, 1, 0 }, { 1, 0, 1, 0, 1 },
 			{ 1, 1, 0, 1, 1 } };
-
-	private static Image asterImage;
 
 	PlutoClass(Aster a, Player p) {
 		super(a, p);
@@ -115,12 +111,5 @@ final class PlutoClass extends AsterClass {
 
 	static int[][] getDefaultRange() {
 		return defaultRange;
-	}
-
-	Image getImage() {
-		if (asterImage == null) {
-			asterImage = loadImage(11);
-		}
-		return asterImage;
 	}
 }

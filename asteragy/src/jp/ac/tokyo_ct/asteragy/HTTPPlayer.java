@@ -4,12 +4,10 @@
 package jp.ac.tokyo_ct.asteragy;
 
 import java.io.*;
-import java.util.Enumeration;
-import java.util.Vector;
+import java.util.*;
 import javax.microedition.io.*;
 import com.nttdocomo.io.*;
-import com.nttdocomo.ui.Dialog;
-import com.nttdocomo.ui.IApplication;
+import com.nttdocomo.ui.*;
 
 /**
  * @author Yusuke Œ»İA1P, 2P‚Ì—¼•û‚ªHTTPPlayer‚É‚È‚é‚±‚Æ‚Í‚Å‚«‚È‚¢B
