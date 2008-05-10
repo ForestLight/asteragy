@@ -1,7 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 final class UranusClass extends AsterClass {
-	private static int[][] defaultRange = { { 0, 0, 0, 1, 0, 0, 0 },
+	static int[][] defaultRange = { { 0, 0, 0, 1, 0, 0, 0 },
 			{ 0, 1, 0, 0, 0, 1, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
 			{ 1, 0, 1, 1, 1, 0, 1 }, { 0, 0, 0, 1, 0, 0, 0 },
 			{ 0, 1, 0, 0, 0, 1, 0 }, { 0, 0, 0, 1, 0, 0, 0 } };
@@ -107,9 +107,5 @@ final class UranusClass extends AsterClass {
 		logAction(target1, target2);
 
 		field.swap(target1.x, target1.y, target2.x, target2.y);
-	}
-
-	static int[][] getDefaultRange() {
-		return defaultRange;
 	}
 }

@@ -1,7 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 final class StarClass extends AsterClass {
-	private static int[][] defaultRange = { { 0, 1, 0 }, { 1, 1, 1 },
+	static int[][] defaultRange = { { 0, 1, 0 }, { 1, 1, 1 },
 			{ 0, 1, 0 } };
 
 	StarClass(Aster a, Player p) {
@@ -41,9 +41,5 @@ final class StarClass extends AsterClass {
 		logAction(target1, target2);
 
 		field.swap(target1.x, target1.y, target2.x, target2.y);
-	}
-
-	static int[][] getDefaultRange() {
-		return defaultRange;
 	}
 }

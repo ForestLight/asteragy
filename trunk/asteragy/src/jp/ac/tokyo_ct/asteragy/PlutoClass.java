@@ -1,7 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 final class PlutoClass extends AsterClass {
-	private static final int[][] defaultRange = { { 1, 1, 0, 1, 1 },
+	static final int[][] defaultRange = { { 1, 1, 0, 1, 1 },
 			{ 1, 0, 1, 0, 1 }, { 0, 1, 1, 1, 0 }, { 1, 0, 1, 0, 1 },
 			{ 1, 1, 0, 1, 1 } };
 
@@ -107,9 +107,5 @@ final class PlutoClass extends AsterClass {
 			field.deleteAll(game.getCanvas().disappearControl.disappearing);
 			logAction();
 	//	}
-	}
-
-	static int[][] getDefaultRange() {
-		return defaultRange;
 	}
 }

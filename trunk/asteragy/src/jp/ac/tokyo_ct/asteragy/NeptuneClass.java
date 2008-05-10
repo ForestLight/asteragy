@@ -1,7 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 final class NeptuneClass extends AsterClass {
-	private static final int[][] defaultRange = { 
+	static final int[][] defaultRange = { 
 			{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 1, 0, 0, 0, 0 }, 
@@ -108,9 +108,5 @@ final class NeptuneClass extends AsterClass {
 		logAction(target1);
 		Point self = getPoint();
 		field.swap(target1.x, target1.y, self.x, self.y);
-	}
-
-	static int[][] getDefaultRange() {
-		return defaultRange;
 	}
 }

@@ -2,7 +2,7 @@ package jp.ac.tokyo_ct.asteragy;
 
 final class MoonClass extends AsterClass {
 
-	private static int[][] defaultRange = { { 0, 1, 0 }, { 1, 1, 1 },
+	static int[][] defaultRange = { { 0, 1, 0 }, { 1, 1, 1 },
 			{ 0, 1, 0 } };
 
 	MoonClass(Aster a, Player p) {
@@ -78,9 +78,5 @@ final class MoonClass extends AsterClass {
 				}
 			}
 		}
-	}
-
-	static int[][] getDefaultRange() {
-		return defaultRange;
 	}
 }

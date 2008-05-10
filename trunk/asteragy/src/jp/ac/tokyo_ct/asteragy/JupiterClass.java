@@ -1,7 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 final class JupiterClass extends AsterClass {
-	private static int[][] defaultRange = { { 0, 0, 0, 0, 0 },
+	static int[][] defaultRange = { { 0, 0, 0, 0, 0 },
 			{ 0, 0, 1, 0, 0 }, { 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 },
 			{ 0, 1, 1, 1, 0 } };
 
@@ -37,9 +37,8 @@ final class JupiterClass extends AsterClass {
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
-			Point pt = new Point();
-			pt.x = asterPoint.x - (range[0].length / 2);
-			pt.y = asterPoint.y - (range.length / 2);
+			Point pt = new Point(asterPoint.x - (range[0].length / 2),
+					asterPoint.y - (range.length / 2));
 			
 			// プレイヤー2の場合レンジP2を使用
 			final int[][] def = getPlayer() == getPlayer().game.player[0]
@@ -126,9 +125,5 @@ final class JupiterClass extends AsterClass {
 		logAction(target1);
 		field.setDeleteFlag(target1);
 		field.delete(target1.x, target1.y, game.getCanvas().disappearControl.disappearing);
-	}
-
-	static int[][] getDefaultRange() {
-		return defaultRange;
 	}
 }
