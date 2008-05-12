@@ -43,8 +43,8 @@ final class Action {
 				ac.target2.y = args[3];
 			case 3:
 				ac.target2.x = args[2];
-				if (ac instanceof SunClass) {
-					((SunClass)ac).asterClassSelect = args[2];
+				if (ac.getNumber() == 1) {
+					ac.asterClassSelect = args[2];
 				}
 			case 2:
 				ac.target1.y = args[1];
@@ -53,7 +53,7 @@ final class Action {
 			}
 			ac.setCommand(commandType);
 			final Player p = ac.getPlayer();
-			if (ac instanceof SunClass) {
+			if (ac.getNumber() == 1) {
 				p.addAP(-AsterClass.classCost[args[2] + 1]);
 			} else {
 				p.addAP(-ac.getCommandCost());

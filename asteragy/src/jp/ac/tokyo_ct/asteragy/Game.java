@@ -84,9 +84,9 @@ final class Game {
 
 			// ‰Šúİ’è(‰¼)
 			Aster a = field.field[field.Y - 1][field.X / 2];
-			new SunClass(a, player[0]);
+			new AsterClass(a, player[0], 1);
 			a = field.field[0][field.X / 2];
-			new SunClass(a, player[1]);
+			new AsterClass(a, player[1], 1);
 
 			player[0].addAP(option.asterPower);
 			player[1].addAP(option.asterPower);
