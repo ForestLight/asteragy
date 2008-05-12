@@ -16,6 +16,7 @@ class AsterClass {
 	protected AsterClass(AsterClass a) {
 		game = a.game;
 		player = a.player;
+		number = a.number;
 		actionCount = a.actionCount;
 		mode = a.mode;
 		field = a.field;
@@ -35,14 +36,17 @@ class AsterClass {
 		return new AsterClass(this);
 	}
 
-	AsterClass(Aster a, Player p) {
+	AsterClass(Aster a, Player p, int classNumber) {
 		aster = a;
 		player = p;
+		number = classNumber;
 		actionCount = getActionNum();
 		field = a.field;
 		game = field.game;
 		a.setAsterClass(this);
 	}
+
+	int asterClassSelect; //サン専用
 
 	/**
 	 * クラスの対応する番号を返す
@@ -50,8 +54,10 @@ class AsterClass {
 	 * @return クラス固有の番号
 	 */
 	int getNumber() {
-		return 0;
+		return number;
 	}
+	
+	private int number;
 
 	final Aster getAster() {
 		return aster;
@@ -421,7 +427,7 @@ class AsterClass {
 				target1 = pt;
 				
 			} else {
-				((SunClass)this).asterClassSelect = pt.x;
+				asterClassSelect = pt.x;
 			}
 			return false;
 		case 3:
@@ -624,41 +630,14 @@ class AsterClass {
 		switch (getNumber()) {
 		case 1: {//サン
 			final Aster a = field.at(target1);
-			AsterClass ac = new StarClass(a, getPlayer());
-			int selected = ((SunClass)this).asterClassSelect;
-			logAction(new int[] {target1.x, target1.y, selected});
-			System.out.println("acs = " + selected);
-			switch (selected) {
-			case 0:
-				ac = new StarClass(a, getPlayer());
-				break;
-			case 1:
-				ac = new MercuryClass(a, getPlayer());
-				break;
-			case 2:
-				ac = new VenusClass(a, getPlayer());
-				break;
-			case 3:
-				ac = new EarthClass(a, getPlayer());
-				break;
-			case 4:
-				ac = new MarsClass(a, getPlayer());
-				break;
-			case 5:
-				ac = new JupiterClass(a, getPlayer());
-				break;
-			case 6:
-				ac = new SaturnClass(a, getPlayer());
-				break;
-			case 7:
-				ac = new UranusClass(a, getPlayer());
-				break;
-			case 8:
-				ac = new NeptuneClass(a, getPlayer());
-				break;
-			case 9:
-				ac = new PlutoClass(a, getPlayer());
-				break;
+			AsterClass ac;
+			logAction(new int[] {target1.x, target1.y, asterClassSelect});
+			System.out.println("acs = " + asterClassSelect);
+			if (0 <= asterClassSelect && asterClassSelect <= 9) {
+				ac = new AsterClass(a, getPlayer(), asterClassSelect + 2);
+			} else {
+				System.out.print("executeSpecialCommand - Sun: Unknown class");
+				throw new RuntimeException("executeSpecialCommand - Sun: Unknown class");
 			}
 			// 選択したクラスのユニットを行動不可能状態で召還
 			ac.setActionCount(0);
@@ -693,7 +672,7 @@ class AsterClass {
 			field.getCanvas().paintEffect(effect);
 			logAction(target1);
 			final Aster a = field.at(target1);
-			new MoonClass(a, getPlayer());
+			new AsterClass(a, player, 12);
 			a.getAsterClass().setActionCount(0);
 			break;
 		}
@@ -717,8 +696,8 @@ class AsterClass {
 			int i, j;
 			int num, flag = 0;
 			final Point me = getPoint();
-			Point pt = new Point(me.x - (SaturnClass.saturnRange[0].length / 2), me.y
-					- (SaturnClass.saturnRange.length / 2));
+			Point pt = new Point(me.x - (saturnRange[0].length / 2), me.y
+					- (saturnRange.length / 2));
 			final Aster[] queue = new Aster[17];
 			final Aster[][] f = field.field;			
 			for (i = 0, j = 0; j < 16; j++) {
@@ -780,14 +759,14 @@ class AsterClass {
 			System.out.println("るいんくらすと");
 			Point me = getPoint();
 			Point pt = new Point();
-			final int rangeY = PlutoClass.plutoRange.length;
-			final int rangeX = PlutoClass.plutoRange[0].length;
+			final int rangeY = plutoRange.length;
+			final int rangeX = plutoRange[0].length;
 			logAction();
 
 			for (int i = 0; i < rangeY; i++) {
 				for (int j = 0; j < rangeX; j++) {
 					// レンジ内であり
-					if (PlutoClass.plutoRange[i][j] == 1) {
+					if (plutoRange[i][j] == 1) {
 						// 自身ではない部分を破壊
 						if (i != rangeY / 2 || j != rangeX / 2) {
 							pt.x = me.x - rangeX / 2 + j;

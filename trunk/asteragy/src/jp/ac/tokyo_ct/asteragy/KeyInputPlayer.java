@@ -92,13 +92,13 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		case Display.KEY_SELECT:
 			System.out.println("Select " + phase);
 			if (phase == 2 || phase == 3) {
-				if(ac instanceof SunClass && action.commandType == 1 && phase == 3 && AsterClass.classCost[action.args[2] + 1] > this.getAP()){
+				if (ac.getNumber() == 1 && action.commandType == 1 && phase == 3 && AsterClass.classCost[action.args[2] + 1] > this.getAP()){
 					break; //コストたらない場合ぶれーく
 				}
 				if (frange[pt.y][pt.x] != 1) {
 					return;
 				}
-				if (ac instanceof SunClass && action.commandType == 1) {
+				if (ac.getNumber() == 1 && action.commandType == 1) {
 					if (phase == 2) {
 						canvas.sunCommand.setCommand(0, ptAster);
 					} else {
@@ -134,7 +134,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 			// ここbreakなし
 			case 2:
 			case 3:
-				if (!(ac instanceof SunClass && action.commandType == 1)
+				if (!(ac.getNumber() == 1 && action.commandType == 1)
 						&& !ac.hasNext()) {
 					notifyAll();
 					return;
@@ -155,7 +155,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 				selectTarget(param);
 				return;
 			case 3:
-				if (ac instanceof SunClass && action.commandType == 1) {
+				if (ac.getNumber() == 1 && action.commandType == 1) {
 					selectSunTarget(param);
 				} else {
 					selectTarget(param);
@@ -197,7 +197,9 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 					}
 				}
 			}
-			if(ac instanceof SunClass) action.args[2] = 0; //バグ回避
+			if (ac.getNumber() == 1) {
+				action.args[2] = 0; //バグ回避
+			}
 			applyPosition();
 			break;
 		}
