@@ -45,7 +45,7 @@ final class AIPlayer extends Player {
 	private int maxNum; // 何回目の試行でeMaxが更新されたか
 
 	Action getAction() {
-		System.out.println("\n\nAIplayer.getAction()");
+		System.out.println("\nAIplayer.getAction()");
 		if (game.player[0] == this) {
 			pNum = 0;
 		} else {
@@ -70,8 +70,8 @@ final class AIPlayer extends Player {
 
 					if (pt == null)
 						return null;
-					System.out.println("ac = "
-							+ game.getField().at(pt).getNumber());
+					System.out.print("ac = ");
+					System.out.println(game.getField().at(pt).getNumber());
 					state++;
 					break;
 				case 1: // スワップか特殊コマンドかを選択
@@ -129,7 +129,7 @@ final class AIPlayer extends Player {
 								break;
 							} else {
 								System.out.println("ac noback");
-								Game.sleep(1000);
+								Game.sleep(WAIT);
 							}
 							// i--;
 						} else {
@@ -207,16 +207,18 @@ final class AIPlayer extends Player {
 								+ " , eMax = " + eMax);
 						Effect.setEffect(true);
 						game.getCanvas().setPaintFlag(true);
-						if (execute())
-							return null;
-						game.getCanvas().setPaintFlag(false);
-						state = 0;
+						return execute();
+						//if (execute())
+						//	return null;
+						//game.getCanvas().setPaintFlag(false);
+						//state = 0;
 					}
 				}
 			}
 			return null;
 		} catch (Exception e) {
-			System.out.print("AIPlayer.getAction: ");
+			System.out.println("AIPlayer.getAction: ");
+			System.out.println(e.toString());
 			System.out.println(e.getMessage());
 			return null;
 		} finally {
@@ -483,7 +485,7 @@ final class AIPlayer extends Player {
 	 * 一番良さそうな行動を実行
 	 * 
 	 */
-	private boolean execute() {
+	private Action execute() {
 		final Field field = game.getField();
 		final AsterClass ac = field.at(pt).getAsterClass();
 		final Range canvasRange = game.getCanvas().range;
@@ -540,24 +542,34 @@ final class AIPlayer extends Player {
 
 		canvasRange.setRange(null, null);
 		canvas.repaint();
-		if (cmd[maxNum] == 1) {
-			if (ac.getNumber() == 1) {
-				this.addAP(-AsterClass.classCost[target[1][maxNum].x + 1]);
-			} else {
-				this.addAP(-ac.getCommandCost());
-			}
-		}
-		System.out.println("実行開始");
-		ac.execute(null);
-		System.out.println("実行完了");
-		field.repaintField();
-		canvas.repaint();
 
-		Player p = field.checkGameOver();
-		// ゲームオーバー判定
-		if (p != null) {
-			return true;
+		System.out.println("実行開始");
+		Action a = new Action();
+		a.aster = field.at(pt);
+		a.commandType = ac.getCommand();
+		if (target[1][maxNum] != null) {
+			if (ac.getNumber() == 1 && a.commandType == 1) {
+				a.args = new int[] {target[0][maxNum].x, target[0][maxNum].y,
+						target[1][maxNum].x};
+			} else {
+				a.args = new int[] {target[0][maxNum].x, target[0][maxNum].y,
+						target[1][maxNum].x, target[1][maxNum].y};
+			}
+		} else if (target[0][maxNum] != null) {
+			a.args = new int[] {target[0][maxNum].x, target[0][maxNum].y};
+		} else {
+			a.args = new int[0];
 		}
+		return a;
+
+//		ac.execute(null);
+//		System.out.println("実行完了");
+//
+//		Player p = field.checkGameOver();
+//		// ゲームオーバー判定
+//		if (p != null) {
+//			return true;
+//		}
 
 		// 消滅判定
 		/*
@@ -567,11 +579,11 @@ final class AIPlayer extends Player {
 		 * System.out.println("消去完了");
 		 */
 
-		p = field.checkGameOver();
-		if (p != null) {
-			return true;
-		}
+//		p = field.checkGameOver();
+//		if (p != null) {
+//			return true;
+//		}
 
-		return false;
+//		return false;
 	}
 }

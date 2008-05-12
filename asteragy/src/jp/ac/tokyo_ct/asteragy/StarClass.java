@@ -1,9 +1,6 @@
 package jp.ac.tokyo_ct.asteragy;
 
 final class StarClass extends AsterClass {
-	static int[][] defaultRange = { { 0, 1, 0 }, { 1, 1, 1 },
-			{ 0, 1, 0 } };
-
 	StarClass(Aster a, Player p) {
 		super(a, p);
 	}
@@ -18,9 +15,5 @@ final class StarClass extends AsterClass {
 
 	int getNumber() {
 		return 2;
-	}
-
-	int[][] getRange() {
-		return swapGetRange(defaultRange);
 	}
 }
