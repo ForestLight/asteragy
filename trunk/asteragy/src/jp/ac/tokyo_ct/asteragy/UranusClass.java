@@ -1,11 +1,6 @@
 package jp.ac.tokyo_ct.asteragy;
 
 final class UranusClass extends AsterClass {
-	static int[][] defaultRange = { { 0, 0, 0, 1, 0, 0, 0 },
-			{ 0, 1, 0, 0, 0, 1, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
-			{ 1, 0, 1, 1, 1, 0, 1 }, { 0, 0, 0, 1, 0, 0, 0 },
-			{ 0, 1, 0, 0, 0, 1, 0 }, { 0, 0, 0, 1, 0, 0, 0 } };
-
 	UranusClass(Aster a, Player p) {
 		super(a, p);
 	}
@@ -26,9 +21,9 @@ final class UranusClass extends AsterClass {
 		final Aster a = getAster();
 		switch (mode) {
 		case 0:
-			return swapGetRange(defaultRange);
+			return swapGetRange(uranusRange);
 		case 1:
-			int[][] range = new int[defaultRange.length][defaultRange[0].length];
+			int[][] range = new int[uranusRange.length][uranusRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
 			final Aster[][] f = field.field;
 			Point pt = getPoint().clone();
@@ -37,14 +32,14 @@ final class UranusClass extends AsterClass {
 
 			// 1個目
 			if (target1 == null) {
-				for (int i = 0; i < defaultRange.length; i++) {
+				for (int i = 0; i < uranusRange.length; i++) {
 					if (pt.y + i < 0 || pt.y + i >= f.length)
 						continue;
-					for (int j = 0; j < defaultRange[0].length; j++) {
+					for (int j = 0; j < uranusRange[0].length; j++) {
 						if (pt.x + j < 0 || pt.x + j >= f[0].length)
 							continue;
 
-						if (defaultRange[i][j] == 1) {
+						if (uranusRange[i][j] == 1) {
 							// レンジ内で自身以外なら選択可
 							if (f[pt.y + i][pt.x + j] != a) {
 								range[i][j] = 1;
@@ -61,14 +56,14 @@ final class UranusClass extends AsterClass {
 			}
 			// 2個目
 			else {
-				for (int i = 0; i < defaultRange.length; i++) {
+				for (int i = 0; i < uranusRange.length; i++) {
 					if (pt.y + i < 0 || pt.y + i >= f.length)
 						continue;
-					for (int j = 0; j < defaultRange[0].length; j++) {
+					for (int j = 0; j < uranusRange[0].length; j++) {
 						if (pt.x + j < 0 || pt.x + j >= f[0].length)
 							continue;
 
-						if (defaultRange[i][j] == 1) {
+						if (uranusRange[i][j] == 1) {
 							// レンジ内で自身と1個目の場所以外なら選択可
 							if (f[pt.y + i][pt.x + j] != a
 									&& field.asterToPoint(a) != target1) {

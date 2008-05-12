@@ -4,26 +4,18 @@ import com.nttdocomo.ui.Graphics;
 
 final class EffectFieldSwap extends Effect {
 
-	private final Field field;
+	private final int[] args;
 
-	private final Point a;
-
-	private final Point b;
-
-	// private boolean sa;
-
-	// private boolean h;
-
-	EffectFieldSwap(Field field, Point a, Point b) {
-		this.field = field;
-		this.a = a;
-		this.b = b;
-		// checkSmall();
+	EffectFieldSwap(int[] args) {
+		this.args = args;
 	}
 
 	void start(Graphics g, CanvasControl c) {
-		Aster aa = field.at(b);
-		Aster ab = field.at(a);
+		final Field field = c.field;
+		final Point a = new Point(args[0], args[1]);
+		final Point b = new Point(args[2], args[3]);
+		final Aster aa = field.at(a);
+		final Aster ab = field.at(b);
 
 		int s = CanvasControl.measure - 1;
 		int l = 0;

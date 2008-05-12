@@ -60,7 +60,7 @@ class AsterClass {
 	private Aster aster;
 
 	final Game game;
-	
+
 	Field field;
 
 	final Player getPlayer() {
@@ -84,7 +84,7 @@ class AsterClass {
 	final void setAster(Aster a) {
 		aster = a;
 	}
-	
+
 	final Point getPoint() {
 		return field.asterToPoint(aster);
 	}
@@ -100,10 +100,310 @@ class AsterClass {
 	 * 
 	 * @return 現在の選択範囲
 	 */
-	int[][] getRange() {
-		System.out.println("ERROR! AsterClass.getRange");
-		return null;
+	final int[][] getRange() {
+		final int[][] def = getDefaultRange(getNumber(), player != game.player[0]);
+		if (mode == 0) {
+			return swapGetRange(def);
+		}
+		final Point thisPoint = getPoint();
+		switch (getNumber()) {
+		case 1: { //サン
+			final int[][] range = new int[sunRange.length][sunRange[0].length];
+			// レンジの左上の座標のフィールド内での位置
+			final Point pt = new Point(thisPoint.x - (range[0].length / 2),
+					thisPoint.y - (range.length / 2));
+
+			for (int i = 0; i < sunRange.length; i++) {
+				if (!field.isYInFieldBound(pt.y + i))
+					continue;
+				for (int j = 0; j < sunRange[0].length; j++) {
+					if (!field.isXInFieldBound(pt.x + j))
+						continue;
+
+					// レンジ内であり
+					if (sunRange[i][j] == 1) {
+						range[i][j] = 1;
+						// その位置のアステルにクラスがあり
+						final Aster a = field.at(pt.y + i, pt.x + j);
+						final AsterClass c = a.getAsterClass();
+						if (c != null) {
+							// そのクラスの所持者が相手である場合選択不可能
+							if (c.getPlayer() != getPlayer()) {
+								range[i][j] = 0;
+							}
+							// サンである場合選択不可能
+							if (c.getNumber() == 1) {
+								range[i][j] = 0;
+							}
+						}
+					}
+				}
+			}
+			return range;
+		}
+		case 2: { //スター
+			return swapGetRange(def);
+		}
+		case 3: {//マーキュリー
+			final int[][] range = new int[mercuryRange.length][mercuryRange[0].length];
+			// レンジの左上の座標のフィールド内での位置
+			final Point pt = new Point(thisPoint.x - (range[0].length / 2), thisPoint.y
+					- (range.length / 2));
+			for (int i = 0; i < mercuryRange.length; i++) {
+				if (pt.y + i < 0 || pt.y + i >= field.Y)
+					continue;
+				for (int j = 0; j < mercuryRange[0].length; j++) {
+					if (pt.x + j < 0 || pt.x + j >= field.X)
+						continue;
+					// レンジ内であり
+					if (mercuryRange[i][j] == 1) {
+						// その位置のアステルにクラスがあり
+						final AsterClass ac = field.field[pt.y + i][pt.x + j]
+								.getAsterClass();
+						if (ac != null) {
+							// そのクラスの所持者が自分であり
+							if (ac.getPlayer() == getPlayer()) {
+								// 行動可能回数が0ならば選択可能
+								if (ac.getActionCount() == 0) {
+									range[i][j] = 1;
+								}
+							}
+						}
+					}
+				}
+			}
+			return range;
+		}
+		case 4: { //ビーナス
+			int[][] range = new int[venusRange.length][venusRange[0].length];
+			final Aster[][] f = field.field;
+			// レンジの左上の座標のフィールド内での位置
+			final Point pt = new Point(thisPoint.x - (range[0].length / 2),
+					thisPoint.y - (range.length / 2));
+			for (int i = 0; i < venusRange.length; i++) {
+				if (!field.isYInFieldBound(pt.y + i))
+					continue;
+				for (int j = 0; j < venusRange[0].length; j++) {
+					if (!field.isXInFieldBound(pt.x + j))
+						continue;
+					// レンジ内であり
+					if (def[i][j] == 1) {
+						final Aster a = f[pt.y + i][pt.x + j];
+						final AsterClass asterClass = a.getAsterClass();
+						// その位置のアステルにクラスがあり
+						// そのクラスの所持者が相手であり
+						// サンでなければ対象に選択可能
+						if (asterClass != null
+								&& asterClass.getPlayer() != getPlayer()
+								&& a.getNumber() != 1) {
+							range[i][j] = 1;
+						}
+					}
+				}
+				return range;
+			}
+		}
+		case 5: { //アース
+			// SunClassから拝借
+			final int[][] range = new int[def.length][def[0].length];
+			// レンジの左上の座標のフィールド内での位置
+			final Point pt = new Point(thisPoint.x - (range[0].length / 2),
+					thisPoint.y - (range.length / 2));
+			for (int i = 0; i < def.length; i++) {
+				if (!field.isYInFieldBound(pt.y + i))
+					continue;
+				for (int j = 0; j < def[0].length; j++) {
+					if (!field.isXInFieldBound(pt.x + j))
+						continue;
+
+					// レンジ内であり
+					if (def[i][j] == 1) {
+						range[i][j] = 1;
+						// その位置のアステルにクラスがあれば選択不能
+						final Aster f = field.at(pt.y + i, pt.x + j);
+						if (f.getAsterClass() != null) {
+							range[i][j] = 0;
+						}
+					}
+				}
+			}
+			return range;
+		}
+		case 6: { //マーズ
+			//final Aster a = getAster();
+			final int[][] range = new int[marsRange.length][marsRange[0].length];
+			// レンジの左上の座標のフィールド内での位置
+			final Point pt = thisPoint;//.clone();
+			pt.x -= range[0].length / 2;
+			pt.y -= range.length / 2;
+			for (int i = 0; i < def.length; i++) {
+				if (!field.isYInFieldBound(pt.y + i))
+					continue;
+				for (int j = 0; j < def[0].length; j++) {
+					if (!field.isXInFieldBound(pt.x + j))
+						continue;
+					if (def[i][j] == 1) {
+						// レンジ内で自身かサン以外なら選択可
+						final Aster aster2 = field.at(pt.y + i, pt.x + j);
+						if (aster2.getNumber() != 1 && aster2 != aster) {
+							range[i][j] = 1;
+						}
+						// 自身かサンなら移動のみ可
+						else {
+							range[i][j] = 0;
+						}
+					} else {
+						range[i][j] = 0;
+					}
+				}
+			}
+			return range;
+		}
+		case 7: { //ジュピター
+			int[][] range = new int[jupiterRange.length][jupiterRange[0].length];
+			// レンジの左上の座標のフィールド内での位置
+			final Point pt = new Point(thisPoint.x - (range[0].length / 2),
+					thisPoint.y - (range.length / 2));
+						// 対象選択1個目(敵ユニットのみ)
+			if (target1 == null) {
+				for (int i = 0; i < def.length; i++) {
+					if (!field.isYInFieldBound(pt.y + i))
+						continue;
+					for (int j = 0; j < def[0].length; j++) {
+						if (!field.isXInFieldBound(pt.x + j))
+							continue;
+
+						// レンジ内であり
+						if (def[i][j] == 1) {
+							// その位置のアステルにクラスがあり
+							final AsterClass asterClass =
+								field.at(pt.y + i, pt.x + j).getAsterClass();
+							if (asterClass != null) {
+								// そのクラスの所持者が自分ではなければ選択可能
+								if (asterClass.getPlayer() != getPlayer()) {
+									range[i][j] = 1;
+								}
+							}
+						}
+					}
+				}
+			}
+			// 対象選択2個目 (アステル)
+			else {
+				// ターゲット1のレンジ内での位置
+				pt.x = target1.x - (thisPoint.x - range[0].length / 2);
+				pt.y = target1.y - (thisPoint.y - range.length / 2);
+
+				for (int i = 0; i < def.length; i++) {
+					for (int j = 0; j < def[0].length; j++) {
+						if (def[i][j] == 1) {
+							if (i != pt.y && j != pt.x) {
+								range[i][j] = 1;
+							}
+						}
+					}
+				}
+			}
+			return range;
+		}
+		case 8: //サターン
+			return null;
+		case 9: { //ウラヌス
+			int[][] range = new int[uranusRange.length][uranusRange[0].length];
+			// レンジの左上の座標のフィールド内での位置
+			final Aster[][] f = field.field;
+			Point pt = thisPoint; //.clone();
+			pt.x -= range[0].length / 2;
+			pt.y -= range.length / 2;
+
+			// 1個目
+			if (target1 == null) {
+				for (int i = 0; i < uranusRange.length; i++) {
+					if (pt.y + i < 0 || pt.y + i >= f.length)
+						continue;
+					for (int j = 0; j < uranusRange[0].length; j++) {
+						if (pt.x + j < 0 || pt.x + j >= f[0].length)
+							continue;
+
+						if (uranusRange[i][j] == 1) {
+							// レンジ内で自身以外なら選択可
+							if (f[pt.y + i][pt.x + j] != aster) {
+								range[i][j] = 1;
+							}
+							// 自身なら移動のみ可
+							else {
+								range[i][j] = 0;
+							}
+						} else {
+							range[i][j] = 0;
+						}
+					}
+				}
+			}
+			// 2個目
+			else {
+				for (int i = 0; i < uranusRange.length; i++) {
+					if (pt.y + i < 0 || pt.y + i >= f.length)
+						continue;
+					for (int j = 0; j < uranusRange[0].length; j++) {
+						if (pt.x + j < 0 || pt.x + j >= f[0].length)
+							continue;
+
+						if (uranusRange[i][j] == 1) {
+							// レンジ内で自身と1個目の場所以外なら選択可
+							if (f[pt.y + i][pt.x + j] != aster
+									&& field.asterToPoint(aster) != target1) {
+								range[i][j] = 1;
+							}
+							// 自身なら移動のみ可
+							else {
+								range[i][j] = 0;
+							}
+						} else {
+							range[i][j] = 0;
+						}
+					}
+				}
+			}
+			return range;
+		}
+		case 10: { //ネプチューン
+			final int[][] range = new int[def.length][def[0].length];
+			// レンジの左上の座標のフィールド内での位置
+			final Point pt = new Point(thisPoint.x - (range[0].length / 2), thisPoint.y - (range.length / 2));
+
+			for (int i = 0; i < def.length; i++) {
+				if (!field.isYInFieldBound(pt.y + i))
+					continue;
+				for (int j = 0; j < def[0].length; j++) {
+					if (!field.isXInFieldBound(pt.x + j))
+						continue;
+
+					// レンジ内であり
+					if (def[i][j] == 1) {
+						range[i][j] = 1;
+						// その位置のアステルにクラスがあり
+						final Aster a = field.at(pt.y + i, pt.x + j);
+						final AsterClass c = a.getAsterClass();
+						if (c != null) {
+							if (c.getNumber() == 1) {
+								range[i][j] = 0;
+							}
+						}
+					}
+				}
+			}
+			return range;
+		}
+		case 11: //プルート
+		case 12: //ムーン
+			return null;
+		default:
+			System.out.println("ERROR! AsterClass.getRange");
+			throw new RuntimeException("hasNext");
+		}
 	}
+
 
 	/**
 	 * @return 範囲に問題がなければtrue、そうでなければfalse
@@ -255,35 +555,26 @@ class AsterClass {
 	protected final void logAction(Point pt1, Point pt2) {
 		logAction(1, new int[] { pt1.x, pt1.y, pt2.x, pt2.y });
 	}
-
+	
 	/**
 	 * コマンドを実行
 	 * 
 	 */
 	final void execute(String deleteList) {
-		final Field field = getAster().field;
 		System.out.println("AsterClass.execute()");
 		switch (mode) {
 		case 0:
-			logAction(0,
-					new int[] { target1.x, target1.y, target2.x, target2.y });
-			field.swap(target1.x, target1.y, target2.x, target2.y);
-
-			// スワップエフェクト。
-			field.getCanvas().paintEffect(
-					new EffectFieldSwap(field, target1, target2));
-			/*
-			 * // サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください） if
-			 * (field.judgeSelfDestruction() == true) { Dialog d = new
-			 * Dialog(Dialog.DIALOG_YESNO, "注意"); d.setText("サンが消えます");
-			 * if(d.show() == Dialog.BUTTON_NO){ field.restoreField();
-			 * incActionCount(); break; } }
-			 */
+			executeSwap(deleteList, new int[] {target1.x, target1.y, target2.x, target2.y});
 			break;
 		case 1:
 			executeSpecialCommand();
+			postExecute(deleteList);
 			break;
 		}
+	}
+	
+	final private void postExecute(String deleteList) {
+		final Field field = getAster().field;
 		// 行動可能回数を減らす
 		decActionCount();
 
@@ -308,7 +599,21 @@ class AsterClass {
 
 		// ターゲット初期化
 		target1 = null;
-		target2 = null;
+		target2 = null;	}
+	
+	final void executeSwap(String deleteList, int[] args) {
+		logAction(0, args);
+		field.swap(args[0], args[1], args[2], args[3]);
+
+		// スワップエフェクト。
+		field.getCanvas().paintEffect(new EffectFieldSwap(args));
+		/*
+		 * // サン自滅判定（ダイアログは仮なので然るべき演出に置き換えておいてください） if
+		 * (field.judgeSelfDestruction() == true) { Dialog d = new
+		 * Dialog(Dialog.DIALOG_YESNO, "注意"); d.setText("サンが消えます"); if(d.show() ==
+		 * Dialog.BUTTON_NO){ field.restoreField(); incActionCount(); break; } }
+		 */
+		postExecute(deleteList);
 	}
 
 	/**
@@ -412,8 +717,8 @@ class AsterClass {
 			int i, j;
 			int num, flag = 0;
 			final Point me = getPoint();
-			Point pt = new Point(me.x - (SaturnClass.defaultRange[0].length / 2), me.y
-					- (SaturnClass.defaultRange.length / 2));
+			Point pt = new Point(me.x - (SaturnClass.saturnRange[0].length / 2), me.y
+					- (SaturnClass.saturnRange.length / 2));
 			final Aster[] queue = new Aster[17];
 			final Aster[][] f = field.field;			
 			for (i = 0, j = 0; j < 16; j++) {
@@ -475,14 +780,14 @@ class AsterClass {
 			System.out.println("るいんくらすと");
 			Point me = getPoint();
 			Point pt = new Point();
-			final int rangeY = PlutoClass.defaultRange.length;
-			final int rangeX = PlutoClass.defaultRange[0].length;
+			final int rangeY = PlutoClass.plutoRange.length;
+			final int rangeX = PlutoClass.plutoRange[0].length;
 			logAction();
 
 			for (int i = 0; i < rangeY; i++) {
 				for (int j = 0; j < rangeX; j++) {
 					// レンジ内であり
-					if (PlutoClass.defaultRange[i][j] == 1) {
+					if (PlutoClass.plutoRange[i][j] == 1) {
 						// 自身ではない部分を破壊
 						if (i != rangeY / 2 || j != rangeX / 2) {
 							pt.x = me.x - rangeX / 2 + j;
@@ -705,43 +1010,109 @@ class AsterClass {
 		return ret;
 	}
 
-	final static int[][] getDefaultRange(int n) {
+	final static int[][] getDefaultRange(int n, boolean player2) {
 		switch (n) {
 		case 1:
-			return SunClass.defaultRange;
+			return sunRange;
 		case 2:
-			return StarClass.defaultRange;
+			return starRange;
 		case 3:
-			return MercuryClass.defaultRange;
+			return mercuryRange;
 		case 4:
-			return VenusClass.defaultRange;
+			return player2 ? venusRangeP2 : venusRange;
 		case 5:
-			return EarthClass.defaultRange;
+			return earthRange;
 		case 6:
-			return MarsClass.defaultRange;
+			return player2 ? marsRangeP2 : marsRange;
 		case 7:
-			return JupiterClass.defaultRange;
+			return player2 ? jupiterRangeP2 : jupiterRange;
 		case 8:
-			return SaturnClass.defaultRange;
+			return saturnRange;
 		case 9:
-			return UranusClass.defaultRange;
+			return uranusRange;
 		case 10:
-			return NeptuneClass.defaultRange;
+			return neptuneRange;
 		case 11:
-			return PlutoClass.defaultRange;
+			return plutoRange;
 		case 12:
-			return MoonClass.defaultRange;
+			return moonRange;
 		}
 		return null;
 	}
 	
+	static final int[][] sunRange = { { 0, 0, 1, 0, 0 },
+		{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
+		{ 0, 0, 1, 0, 0 } };
+
+	static final int[][] starRange = { { 0, 1, 0 }, { 1, 1, 1 },
+		{ 0, 1, 0 } };
+
+	static final int[][] mercuryRange = { { 0, 0, 0, 0, 0 },
+		{ 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 },
+		{ 0, 0, 0, 0, 0 } };
+
+	static final int[][] venusRange = { { 0, 0, 1, 0, 0 }, { 0, 1, 1, 1, 0 },
+		{ 0, 1, 1, 1, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
+
+	static final int[][] venusRangeP2 = { { 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0 }, { 0, 1, 1, 1, 0 }, { 0, 1, 1, 1, 0 },
+		{ 0, 0, 1, 0, 0 } };
+
+	static final int[][] earthRange = { { 1, 1, 1 }, { 1, 1, 1 },
+		{ 1, 1, 1 } };
+
+	static final int[][] marsRange = { { 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 } };
+
+	static final int[][] marsRangeP2 = { { 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 } };
+
+	static final int[][] jupiterRange = { { 0, 0, 0, 0, 0 },
+		{ 0, 0, 1, 0, 0 }, { 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 },
+		{ 0, 1, 1, 1, 0 } };
+
+	static final int[][] jupiterRangeP2 = { { 0, 1, 1, 1, 0 },
+		{ 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 }, { 0, 0, 1, 0, 0 },
+		{ 0, 0, 0, 0, 0 } };
+
+	static final int[][] saturnRange = { { 1, 1, 1, 1, 1 },
+		{ 1, 0, 1, 0, 1 }, { 1, 1, 1, 1, 1 }, { 1, 0, 1, 0, 1 },
+		{ 1, 1, 1, 1, 1 } };
+
+	static final int[][] uranusRange = { { 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 1, 0, 0, 0, 1, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
+		{ 1, 0, 1, 1, 1, 0, 1 }, { 0, 0, 0, 1, 0, 0, 0 },
+		{ 0, 1, 0, 0, 0, 1, 0 }, { 0, 0, 0, 1, 0, 0, 0 } };
+
+	static final int[][] neptuneRange = { 
+		{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 1, 0, 0, 0, 0 }, 
+		{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+		{ 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+		{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 1, 0, 0, 0, 0 }};
+
+	static final int[][] plutoRange = { { 1, 1, 0, 1, 1 },
+		{ 1, 0, 1, 0, 1 }, { 0, 1, 1, 1, 0 }, { 1, 0, 1, 0, 1 },
+		{ 1, 1, 0, 1, 1 } };
+
+	static final int[][] moonRange = { { 0, 1, 0 }, { 1, 1, 1 },
+		{ 0, 1, 0 } };
+
 	static Image getImage(AsterClass ac) {
 		return asterImage[ac == null ? 0 : ac.getNumber()];
 	}
-	
+
 	static final Image[] asterImage = initImage();
-	
-	static Image[] initImage() {
+
+	private static Image[] initImage() {
 		Image[] img = new Image[MAX_CLASS + 1];
 		for (int i = 0; i < img.length; i++) {
 			img[i] = Game.loadImage("aster_".concat(String.valueOf(i)));
