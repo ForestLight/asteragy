@@ -62,51 +62,7 @@ final class NeptuneClass extends AsterClass {
 				}
 			}
 			return range;
-		}
-		
+		}		
 		return null;
-	}
-
-	boolean setPointAndNext(Point pt) {
-		switch (mode) {
-		case 0:
-			return swapSetPointAndNext(pt);
-		case 1:
-			target1 = pt;
-			return true;
-		}
-		return false;
-	}
-
-	boolean hasNext() {
-
-		switch (mode) {
-		case 0:
-			return swapHasNext();
-		case 1:
-			if (target1 == null)
-				return true;
-			else
-				return false;
-		}
-		return false;
-	}
-
-	boolean moveAstern() {
-		switch (mode) {
-		case 0:
-			return swapMoveAstern();
-		case 1:
-			return true;
-		}
-		return false;
-	}
-
-	void executeSpecialCommand() {
-		// ターゲットと自分をswap
-		field.getCanvas().paintEffect(new EffectCommandNeptune(target1));
-		logAction(target1);
-		Point self = getPoint();
-		field.swap(target1.x, target1.y, self.x, self.y);
 	}
 }

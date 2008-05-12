@@ -23,23 +23,4 @@ final class StarClass extends AsterClass {
 	int[][] getRange() {
 		return swapGetRange(defaultRange);
 	}
-
-	boolean setPointAndNext(Point pt) {
-		return swapSetPointAndNext(pt);
-	}
-
-	boolean hasNext() {
-		return swapHasNext();
-	}
-
-	boolean moveAstern() {
-		return swapMoveAstern();
-	}
-
-	void executeSpecialCommand() {
-		field.getCanvas().paintEffect(new EffectCommandStar(field, this, target1, target2));
-		logAction(target1, target2);
-
-		field.swap(target1.x, target1.y, target2.x, target2.y);
-	}
 }

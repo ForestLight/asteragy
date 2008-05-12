@@ -88,24 +88,4 @@ final class UranusClass extends AsterClass {
 		}
 		return null;
 	}
-
-	boolean setPointAndNext(Point pt) {
-		// スワップの場合もコマンドの場合も同じ
-		return swapSetPointAndNext(pt);
-	}
-
-	boolean hasNext() {
-		return swapHasNext();
-	}
-
-	boolean moveAstern() {
-		return swapMoveAstern();
-	}
-
-	void executeSpecialCommand() {
-		field.getCanvas().paintEffect(new EffectCommandUranus(target1, target2));
-		logAction(target1, target2);
-
-		field.swap(target1.x, target1.y, target2.x, target2.y);
-	}
 }
