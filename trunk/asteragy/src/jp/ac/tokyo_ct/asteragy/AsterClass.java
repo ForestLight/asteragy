@@ -108,25 +108,93 @@ class AsterClass {
 	/**
 	 * @return 範囲に問題がなければtrue、そうでなければfalse
 	 */
-	boolean setPointAndNext(Point pt) {
-		System.out.println("ERROR! AsterClass.setPointAndNext");
-		return false;
+	final boolean setPointAndNext(Point pt) {
+		if (mode == 0) {
+			return swapSetPointAndNext(pt);
+		}
+		switch (getNumber()) {
+		case 2:
+		case 9:
+			return swapSetPointAndNext(pt);
+		case 1:
+			if (target1 == null) {
+				target1 = pt;
+				
+			} else {
+				((SunClass)this).asterClassSelect = pt.x;
+			}
+			return false;
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 10:
+			target1 = pt;
+			return true;
+		case 8:
+		case 11:
+		case 12:
+			return false;
+		default:
+			throw new RuntimeException("setPointAndNext");
+		}
+	}
+
+	final boolean hasNext() {
+		if (mode == 0) {
+			return swapHasNext();
+		}
+		switch (getNumber()) {
+		case 2:
+		case 9:
+			return swapHasNext();
+		case 1:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 10:
+			return target1 == null;
+		case 8:
+		case 11:
+		case 12:
+			return false;
+		default:
+			throw new RuntimeException("hasNext");
+		}
 	}
 	
-	boolean hasNext() {
-		System.out.println("ERROR! AsterClass.hasNext");
-		return false;
-	}
 	/**
 	 * 1つ前の選択に戻る。
 	 * 
 	 * @return 一つ目の対象選択中に呼ばれた場合true
 	 */
-	boolean moveAstern() {
-		System.out.println("ERROR! AsterClass.hasNext");
-		return false;
+	final boolean moveAstern() {
+		if (mode == 0) {
+			return swapMoveAstern();
+		}
+		switch (getNumber()) {
+		case 1:
+		case 2:
+		case 9:
+			return swapMoveAstern();
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 10:
+			return true;
+		case 8:
+		case 11:
+		case 12:
+			return false;
+		default:
+			throw new RuntimeException("moveAstern");
+		}
 	}
-
 	/**
 	 * @return クラス名
 	 */
@@ -161,13 +229,6 @@ class AsterClass {
 	 * @return 特殊コマンド使用時のコスト
 	 */
 	final int getCommandCost() {
-		// switch (mode) {
-		// case 0:
-		// return 0;
-		// case 1:
-		// return AsterClass.commandCost[getNumber()-1];
-		// }
-		// return 0;
 		return AsterClass.commandCost[getNumber() - 1];
 	}
 
@@ -254,8 +315,221 @@ class AsterClass {
 	 * 特殊コマンドを実行
 	 * 
 	 */
-	void executeSpecialCommand() {
-		System.out.println("ERROR! AsterClass.executeSpecialCommand");
+	final void executeSpecialCommand() {
+		switch (getNumber()) {
+		case 1: {//サン
+			final Aster a = field.at(target1);
+			AsterClass ac = new StarClass(a, getPlayer());
+			int selected = ((SunClass)this).asterClassSelect;
+			logAction(new int[] {target1.x, target1.y, selected});
+			System.out.println("acs = " + selected);
+			switch (selected) {
+			case 0:
+				ac = new StarClass(a, getPlayer());
+				break;
+			case 1:
+				ac = new MercuryClass(a, getPlayer());
+				break;
+			case 2:
+				ac = new VenusClass(a, getPlayer());
+				break;
+			case 3:
+				ac = new EarthClass(a, getPlayer());
+				break;
+			case 4:
+				ac = new MarsClass(a, getPlayer());
+				break;
+			case 5:
+				ac = new JupiterClass(a, getPlayer());
+				break;
+			case 6:
+				ac = new SaturnClass(a, getPlayer());
+				break;
+			case 7:
+				ac = new UranusClass(a, getPlayer());
+				break;
+			case 8:
+				ac = new NeptuneClass(a, getPlayer());
+				break;
+			case 9:
+				ac = new PlutoClass(a, getPlayer());
+				break;
+			}
+			// 選択したクラスのユニットを行動不可能状態で召還
+			ac.setActionCount(0);
+			break;
+		}
+		case 2: { //スター
+			field.getCanvas().paintEffect(new EffectCommandStar(field, this, target1, target2));
+			logAction(target1, target2);
+			field.swap(target1.x, target1.y, target2.x, target2.y);
+			break;
+		}
+		case 3: { //マーキュリー
+			field.getCanvas().paintEffect(new EffectCommandMercury(field, target1));
+			logAction(target1);
+			// 対象の行動可能回数を1回増やす
+			field.at(target1).getAsterClass().incActionCount();
+			logAction(target1);
+			break;
+		}
+		case 4: { //ビーナス
+			// 対象の所持者を変更
+			final AsterClass ac = field.at(target1).getAsterClass();
+			field.getCanvas().paintEffect(new EffectCommandVenus(target1));
+			ac.setPlayer(this.getPlayer());
+			logAction(target1);
+			// 行動済状態に
+			ac.setActionCount(0);
+			break;
+		}
+		case 5: { //アース
+			Effect effect = new EffectCommandEarth(target1);
+			field.getCanvas().paintEffect(effect);
+			logAction(target1);
+			final Aster a = field.at(target1);
+			new MoonClass(a, getPlayer());
+			a.getAsterClass().setActionCount(0);
+			break;
+		}
+		case 6: { //マーズ
+			field.getCanvas().paintEffect(new EffectCommandMars(field, this, target1));
+			logAction(target1);
+			field.setDeleteFlag(target1);
+			field.delete(target1.x, target1.y, game.getCanvas().disappearControl.disappearing);
+		}
+		case 7: { //ジュピター
+			Effect effect = new EffectCommandJupiter(target1);
+			game.getCanvas().paintEffect(effect);
+			logAction(target1);
+			field.setDeleteFlag(target1);
+			field.delete(target1.x, target1.y, game.getCanvas().disappearControl.disappearing);
+			break;
+		}
+		case 8:{ //サターン
+			// 左回り
+			// 修正@2/25 右回りに
+			int i, j;
+			int num, flag = 0;
+			final Point me = getPoint();
+			Point pt = new Point(me.x - (SaturnClass.defaultRange[0].length / 2), me.y
+					- (SaturnClass.defaultRange.length / 2));
+			final Aster[] queue = new Aster[17];
+			final Aster[][] f = field.field;			
+			for (i = 0, j = 0; j < 16; j++) {
+				// 外周レンジのアステルを右回りにキュー（のようなもの）に入れていく
+				if (field.isXInFieldBound(pt.x) && field.isYInFieldBound(pt.y)) {
+					queue[i] = f[pt.y][pt.x];
+					i++;
+				}
+				if (j < 4)
+					pt.x++;
+				else if (j < 8)
+					pt.y++;
+				else if (j < 12)
+					pt.x--;
+				else
+					pt.y--;
+			}
+			field.getCanvas().paintEffect(
+					new EffectCommandSaturn(field, this, queue));
+			num = --i;
+			for (i = 0, j = 0; j < 16; j++) {
+				// 右回りに戻していく
+				if (field.isXInFieldBound(pt.x) && field.isYInFieldBound(pt.y)) {
+					if (flag == 0) {
+						f[pt.y][pt.x] = queue[num];
+						flag++;
+					} else {
+						f[pt.y][pt.x] = queue[i];
+						i++;
+					}
+				}
+				if (j < 4)
+					pt.x++;
+				else if (j < 8)
+					pt.y++;
+				else if (j < 12)
+					pt.x--;
+				else
+					pt.y--;
+			}
+			logAction();
+			break;
+			}
+		case 9: { //ウラヌス
+			field.getCanvas().paintEffect(new EffectCommandUranus(target1, target2));
+			logAction(target1, target2);
+			field.swap(target1.x, target1.y, target2.x, target2.y);
+			break;
+		}
+		case 10: { //ネプチューン
+			// ターゲットと自分をswap
+			field.getCanvas().paintEffect(new EffectCommandNeptune(target1));
+			logAction(target1);
+			Point self = getPoint();
+			field.swap(target1.x, target1.y, self.x, self.y);
+			break;
+		}
+		case 11: { //プルート
+			System.out.println("るいんくらすと");
+			Point me = getPoint();
+			Point pt = new Point();
+			final int rangeY = PlutoClass.defaultRange.length;
+			final int rangeX = PlutoClass.defaultRange[0].length;
+			logAction();
+
+			for (int i = 0; i < rangeY; i++) {
+				for (int j = 0; j < rangeX; j++) {
+					// レンジ内であり
+					if (PlutoClass.defaultRange[i][j] == 1) {
+						// 自身ではない部分を破壊
+						if (i != rangeY / 2 || j != rangeX / 2) {
+							pt.x = me.x - rangeX / 2 + j;
+							pt.y = me.y - rangeY / 2 + i;
+
+							// フィールドの外にはみ出してたら処理しない
+							if (!field.isXInFieldBound(pt.x))
+								continue;
+							if (!field.isYInFieldBound(pt.y))
+								continue;
+
+							// 破壊対象にdeleteFlag
+							System.out.println("ruincrust target" + pt.x + ","
+									+ pt.y);
+							field.setDeleteFlag(pt);
+						}
+					}
+				}
+			}
+			game.getCanvas().paintEffect(new EffectCommandPluto(field, me));
+			field.deleteAll(game.getCanvas().disappearControl.disappearing);
+			logAction();
+			break;
+			}
+		case 12: {
+				Point me = getPoint();
+				for (int i = 0; i < field.Y; i++) {
+					for (int j = 0; j < field.X; j++) {
+						// 自分のサンをみつける
+						final Aster a = field.field[i][j];
+						if (a.getNumber() == 1
+								&& a.getAsterClass().getPlayer() == getPlayer()) {
+							Point pt = new Point(j, i);
+							
+							Effect eff = new EffectCommandMoon(me, pt);
+							game.getCanvas().paintEffect(eff);
+							field.swap(pt.x, pt.y, me.x, me.y);
+							field.setDeleteFlag(pt);
+							field.delete(pt.x, pt.y, game.getCanvas().disappearControl.disappearing);
+							logAction();
+							return;
+						}
+					}
+				}
+				break;
+			}
+		}
 	}
 
 	/**
@@ -460,7 +734,7 @@ class AsterClass {
 		}
 		return null;
 	}
-
+	
 	static Image getImage(AsterClass ac) {
 		return asterImage[ac == null ? 0 : ac.getNumber()];
 	}

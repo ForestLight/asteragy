@@ -27,25 +27,19 @@ final class JupiterClass extends AsterClass {
 
 	int[][] getRange() {
 		final Point asterPoint = getPoint();
+		// プレイヤー2の場合レンジP2を使用
+		final int[][] def = getPlayer() == game.player[0]
+			? defaultRange
+			: defaultRangeP2;
 		switch (mode) {
 		case 0:
-			if (getPlayer() == game.player[1]) {
-				return swapGetRange(defaultRangeP2);
-			} else {
-				return swapGetRange(defaultRange);
-			}
+			return swapGetRange(def);
 		case 1:
 			int[][] range = new int[defaultRange.length][defaultRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
 			Point pt = new Point(asterPoint.x - (range[0].length / 2),
 					asterPoint.y - (range.length / 2));
-			
-			// プレイヤー2の場合レンジP2を使用
-			final int[][] def = getPlayer() == getPlayer().game.player[0]
-				? defaultRange
-				: defaultRangeP2;
-
-			// 対象選択1個目(敵ユニットのみ)
+						// 対象選択1個目(敵ユニットのみ)
 			if (target1 == null) {
 				for (int i = 0; i < def.length; i++) {
 					if (!field.isYInFieldBound(pt.y + i))
@@ -88,42 +82,5 @@ final class JupiterClass extends AsterClass {
 			return range;
 		}
 		return null;
-	}
-
-	boolean setPointAndNext(Point pt) {
-		// スワップの場合もコマンドの場合も同じ
-		switch (mode) {
-		case 0:
-			return swapSetPointAndNext(pt);
-		case 1:
-			target1 = pt;
-			return true;
-		}
-		return false;
-	}
-
-	boolean hasNext() {
-		switch (mode) {
-		case 0:
-			return swapHasNext();
-		case 1:
-			if (target1 == null)
-				return true;
-			else
-				return false;
-		}
-		return false;
-	}
-
-	boolean moveAstern() {
-		return swapMoveAstern();
-	}
-
-	void executeSpecialCommand() {		
-		Effect effect = new EffectCommandJupiter(target1);
-		game.getCanvas().paintEffect(effect);
-		logAction(target1);
-		field.setDeleteFlag(target1);
-		field.delete(target1.x, target1.y, game.getCanvas().disappearControl.disappearing);
 	}
 }

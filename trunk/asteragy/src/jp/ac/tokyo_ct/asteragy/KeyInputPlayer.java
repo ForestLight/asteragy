@@ -106,8 +106,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 						notifyAll();
 						return;
 					}
-				}
-				
+				}				
 				action.args[(phase - 2) * 2] = pt.x;
 				action.args[(phase - 2) * 2 + 1] = pt.y;
 				ac.setPointAndNext(pt.clone());
@@ -135,7 +134,6 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 			// ‚±‚±break‚È‚µ
 			case 2:
 			case 3:
-
 				if (!(ac instanceof SunClass && action.commandType == 1)
 						&& !ac.hasNext()) {
 					notifyAll();

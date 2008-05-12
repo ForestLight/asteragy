@@ -61,46 +61,4 @@ final class MercuryClass extends AsterClass {
 		}
 		return null;
 	}
-
-	boolean setPointAndNext(Point pt) {
-		switch (mode) {
-		case 0:
-			return swapSetPointAndNext(pt);
-		case 1:
-			target1 = pt;
-			return true;
-		}
-		return false;
-	}
-
-	boolean hasNext() {
-		switch (mode) {
-		case 0:
-			return swapHasNext();
-		case 1:
-			if (target1 == null)
-				return true;
-			else
-				return false;
-		}
-		return false;
-	}
-
-	boolean moveAstern() {
-		switch (mode) {
-		case 0:
-			return swapMoveAstern();
-		case 1:
-			return true;
-		}
-		return false;
-	}
-
-	void executeSpecialCommand() {
-		field.getCanvas().paintEffect(new EffectCommandMercury(field, target1));
-		logAction(target1);
-		// ‘ÎÛ‚Ìs“®‰Â”\‰ñ”‚ğ1‰ñ‘‚â‚·
-		field.at(target1).getAsterClass().incActionCount();
-		logAction(target1);
-	}
 }
