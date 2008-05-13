@@ -117,7 +117,7 @@ final class HTTPPlayer extends Player implements Runnable {
 			} finally {
 				con.close();
 			}
-			Game.sleep(2000);
+			Game.sleep(3000);
 		}
 	}
 
@@ -169,7 +169,7 @@ final class HTTPPlayer extends Player implements Runnable {
 		Game.println("getaction");
 		try {
 			for (;;) {
-				Game.sleep(3000);
+				Game.sleep(4000);
 				HttpConnection con = (HttpConnection) Connector.open(getUrl(
 						"getaction", isLocalFirst), Connector.READ);
 				try {
