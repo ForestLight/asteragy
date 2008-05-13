@@ -2,17 +2,25 @@ package jp.ac.tokyo_ct.asteragy;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 //import java.io.OutputStream;
 
 final class Option {
 	int fieldXSize;
+
 	int fieldYSize;
+
 	int numOfColors;
+
 	int gameType;
-	int AP_Pointer; //initialAPへのインデックス
+
+	int AP_Pointer; // initialAPへのインデックス
+
 	int connection;
+
 	int asterPower;
-	static final int[] initialAP = {0, 10, 20, 30, 50, 100, 999};
+
+	static final int[] initialAP = { 0, 10, 20, 30, 50, 100, 999 };
 
 	Option(int XSize, int YSize, int color, int ap, int cn) {
 		fieldXSize = XSize;
@@ -33,7 +41,7 @@ final class Option {
 		connection = 4;
 		asterPower = initialAP[AP_Pointer];
 	}
-	
+
 	public String toString() {
 		StringBuffer buf = new StringBuffer(6);
 		buf.append(fieldXSize);
@@ -44,16 +52,14 @@ final class Option {
 		buf.append(connection);
 		return buf.toString();
 	}
-/*
-	void outputToStream(OutputStream os) throws IOException {
-		HTTPPlayer.writeIntChar(os, fieldXSize);
-		HTTPPlayer.writeIntChar(os, fieldYSize);
-		HTTPPlayer.writeIntChar(os, numOfColors);
-		HTTPPlayer.writeIntChar(os, gameType);
-		HTTPPlayer.writeIntChar(os, AP_Pointer);
-		HTTPPlayer.writeIntChar(os, connection);
-	}
-*/
+
+	/*
+	 * void outputToStream(OutputStream os) throws IOException {
+	 * HTTPPlayer.writeIntChar(os, fieldXSize); HTTPPlayer.writeIntChar(os,
+	 * fieldYSize); HTTPPlayer.writeIntChar(os, numOfColors);
+	 * HTTPPlayer.writeIntChar(os, gameType); HTTPPlayer.writeIntChar(os,
+	 * AP_Pointer); HTTPPlayer.writeIntChar(os, connection); }
+	 */
 	void inputFromStream(InputStream is) throws IOException {
 		fieldXSize = HTTPPlayer.readIntChar(is);
 		fieldYSize = HTTPPlayer.readIntChar(is);

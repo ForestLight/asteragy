@@ -41,8 +41,8 @@ final class Aster {
 		} else {
 			a.asterClass = null;
 		}
-//		a.deleteFlag = deleteFlag;
-//		a.judgeFlag = judgeFlag;
+		// a.deleteFlag = deleteFlag;
+		// a.judgeFlag = judgeFlag;
 		a.deleteFlag = false;
 		a.judgeFlag = false;
 		return a;
@@ -50,7 +50,7 @@ final class Aster {
 
 	final void init() {
 		deleteFlag = false;
-//		judgeFlag = false;
+		// judgeFlag = false;
 	}
 
 	final void setNum(int i) {
@@ -103,7 +103,7 @@ final class Aster {
 			color = Game.random.nextInt(AsterClass.COLOR_MAX) + 1;
 			asterClass = null;
 			deleteFlag = false;
-//			judgeFlag = false;
+			// judgeFlag = false;
 		}
 
 		if (c != 0) {
@@ -140,7 +140,8 @@ final class Aster {
 		final int m = CanvasControl.measure - 1;
 
 		// プレイヤー2のユニットは反転
-		if (asterClass != null && asterClass.getPlayer() == field.game.player[1]) {
+		if (asterClass != null
+				&& asterClass.getPlayer() == field.game.player[1]) {
 			g.setFlipMode(Graphics.FLIP_VERTICAL);
 		} else {
 			g.setFlipMode(Graphics.FLIP_NONE);

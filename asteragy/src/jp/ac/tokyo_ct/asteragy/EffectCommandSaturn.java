@@ -40,8 +40,7 @@ final class EffectCommandSaturn extends Effect {
 		int x = width2 + r / SimpleMath.divide;
 		int y = height2 / 2;
 		int width = width2 + r / SimpleMath.divide;
-		int height = height2 * SimpleMath.sin(theta)
-				/ SimpleMath.divide;
+		int height = height2 * SimpleMath.sin(theta) / SimpleMath.divide;
 
 		field.setOrignAster(g, aster, CanvasControl.measure / 2,
 				CanvasControl.measure / 2);

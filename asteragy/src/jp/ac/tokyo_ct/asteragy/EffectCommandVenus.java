@@ -9,11 +9,10 @@ class EffectCommandVenus extends Effect {
 	EffectCommandVenus(Point point) {
 		this.point = point;
 	}
-	
+
 	void start(Graphics g, CanvasControl c) {
 		Point size = new Point(CanvasControl.measure, CanvasControl.measure);
-		Image image = c.getScreen(
-				c.field.getAsterLocation(point), size);
+		Image image = c.getScreen(c.field.getAsterLocation(point), size);
 
 		Graphics ig = image.getGraphics();
 		int[] pixels = ig.getPixels(0, 0, size.x, size.y, null, 0);

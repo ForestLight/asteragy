@@ -44,7 +44,7 @@ final class Field {
 		f.countAster = countAster;
 		return f;
 	}
-	
+
 	/**
 	 * フィールドの初期化
 	 * 
@@ -159,16 +159,6 @@ final class Field {
 	 */
 	void setDeleteFlag(Point pt) {
 		field[pt.y][pt.x].setDeleteFlag(true);
-	}
-
-	/**
-	 * deleteFlagを外す
-	 * 
-	 * @param pt
-	 *            注目するマスの座標
-	 */
-	void removeDeleteFlag(Point pt) {
-		field[pt.y][pt.x].setDeleteFlag(false);
 	}
 
 	/**
@@ -416,10 +406,10 @@ final class Field {
 		final CanvasControl canvas = game.getCanvas();
 		final Aster aster = field[y][x];
 		this.setOrignAster(g, x, y);
-		aster.paint(g);		
+		aster.paint(g);
 		canvas.range.paint(g, x, y);
 		final Cursor cursor = canvas.cursor;
-		if (cursor.isCursor(x, y)){
+		if (cursor.isCursor(x, y)) {
 			cursor.paint(g);
 		}
 	}
@@ -473,8 +463,8 @@ final class Field {
 
 	void setOrignAster(Graphics g, int x, int y) {
 		g.setOrigin(game.getCanvas().getLeftMargin() + CanvasControl.measure
-				* x, game.getCanvas().getTopMargin()
-				+ CanvasControl.measure * y);
+				* x, game.getCanvas().getTopMargin() + CanvasControl.measure
+				* y);
 	}
 
 	void setOrignAster(Graphics g, Point aster, int dx, int dy) {
@@ -484,19 +474,16 @@ final class Field {
 	}
 
 	/*
-	void setClipRectField(Graphics g) {
-		g.setClip(game.getCanvas().getLeftMargin(), game.getCanvas()
-				.getTopMargin(), CanvasControl.measure * X + 1,
-				CanvasControl.measure * Y + 1);
-	}
-
-	void setClipRectAster(Graphics g, Point aster) {
-		g.setClip(game.getCanvas().getLeftMargin() + CanvasControl.measure
-				* aster.x, game.getCanvas().getTopMargin()
-				+ CanvasControl.measure * aster.y, CanvasControl.measure,
-				CanvasControl.measure);
-	}
-*/
+	 * void setClipRectField(Graphics g) {
+	 * g.setClip(game.getCanvas().getLeftMargin(), game.getCanvas()
+	 * .getTopMargin(), CanvasControl.measure * X + 1, CanvasControl.measure * Y +
+	 * 1); }
+	 * 
+	 * void setClipRectAster(Graphics g, Point aster) {
+	 * g.setClip(game.getCanvas().getLeftMargin() + CanvasControl.measure
+	 * aster.x, game.getCanvas().getTopMargin() + CanvasControl.measure *
+	 * aster.y, CanvasControl.measure, CanvasControl.measure); }
+	 */
 	Point getAsterLocation(Point aster) {
 		return new Point(game.getCanvas().getLeftMargin()
 				+ CanvasControl.measure * aster.x + 1, game.getCanvas()
@@ -507,7 +494,7 @@ final class Field {
 	CanvasControl getCanvas() {
 		return game.getCanvas();
 	}
-	
+
 	String toStringForInit() {
 		final StringBuffer buf = new StringBuffer(200);
 		for (int i = 0; i < Y; i++) {
@@ -517,13 +504,13 @@ final class Field {
 		}
 		return buf.toString();
 	}
-	
+
 	void inputFromStream(InputStream is) throws IOException {
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
 				field[i][j] = new Aster(this, HTTPPlayer.readIntChar(is));
 			}
-		}		
+		}
 	}
 
 }

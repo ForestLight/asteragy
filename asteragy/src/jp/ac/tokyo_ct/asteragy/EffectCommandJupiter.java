@@ -41,7 +41,8 @@ final class EffectCommandJupiter extends Effect {
 			}
 		}
 		Point l = c.field.getAsterLocation(point.add(new Point(-1, -1)));
-		Point s = new Point(CanvasControl.measure * 3, CanvasControl.measure * 3);
+		Point s = new Point(CanvasControl.measure * 3,
+				CanvasControl.measure * 3);
 		Image back = c.field.getCanvas().getScreen(l, s);
 
 		int[] matrix = new int[6];

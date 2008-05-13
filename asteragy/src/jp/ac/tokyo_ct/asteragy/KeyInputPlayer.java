@@ -92,8 +92,12 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		case Display.KEY_SELECT:
 			System.out.println("Select " + phase);
 			if (phase == 2 || phase == 3) {
-				if (ac.getNumber() == 1 && action.commandType == 1 && phase == 3 && AsterClass.classCost[action.args[2] + 1] > this.getAP()){
-					break; //コストたらない場合ぶれーく
+				if (ac.getNumber() == 1
+						&& action.commandType == 1
+						&& phase == 3
+						&& AsterClass.classCost[action.args[2] + 1] > this
+								.getAP()) {
+					break; // コストたらない場合ぶれーく
 				}
 				if (frange[pt.y][pt.x] != 1) {
 					return;
@@ -106,7 +110,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 						notifyAll();
 						return;
 					}
-				}				
+				}
 				action.args[(phase - 2) * 2] = pt.x;
 				action.args[(phase - 2) * 2 + 1] = pt.y;
 				ac.setPointAndNext(pt.clone());
@@ -126,8 +130,9 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 			case 1: // コマンドが選択された
 				ac.setCommand(action.commandType);
 				canvas.commonCommand.setCommand(-1, null);
-				if(action.commandType == 1 && (this.getAP() < ac.getCommandCost())){
-					phase--; //コスト足りない場合
+				if (action.commandType == 1
+						&& (this.getAP() < ac.getCommandCost())) {
+					phase--; // コスト足りない場合
 					break;
 				}
 				action.args = new int[4];
@@ -198,7 +203,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 				}
 			}
 			if (ac.getNumber() == 1) {
-				action.args[2] = 0; //バグ回避
+				action.args[2] = 0; // バグ回避
 			}
 			applyPosition();
 			break;

@@ -7,7 +7,7 @@ final class EffectCommandPluto extends Effect {
 	private static final int frame = 6;
 
 	private static final Image effect = Game.loadImage("pluto_effect");
-	
+
 	private final Point aster;
 
 	private Point size;
@@ -27,8 +27,10 @@ final class EffectCommandPluto extends Effect {
 	private void setBounds(CanvasControl c) {
 		size = new Point(effect.getWidth(), effect.getHeight());
 		location = new Point(c.getLeftMargin(), c.getTopMargin());
-		location.x += aster.x * CanvasControl.measure + CanvasControl.measure / 2;
-		location.y += aster.y * CanvasControl.measure + CanvasControl.measure / 2;
+		location.x += aster.x * CanvasControl.measure + CanvasControl.measure
+				/ 2;
+		location.y += aster.y * CanvasControl.measure + CanvasControl.measure
+				/ 2;
 		location.x -= size.x / 2;
 		location.y -= size.y / 2;
 		System.out.println("size(" + size.x + "," + size.y + ")");
