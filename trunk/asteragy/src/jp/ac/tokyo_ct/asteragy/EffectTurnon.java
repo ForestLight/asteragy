@@ -33,8 +33,6 @@ final class EffectTurnon extends Effect {
 
 		final int wy = (canvas.getHeight() + Font.getDefaultFont().getHeight()) / 2;
 
-		// int late = 3;
-
 		boolean end = false;
 
 		do {
@@ -52,6 +50,6 @@ final class EffectTurnon extends Effect {
 		} while (!end);
 		g.unlock(true);
 
-		Game.sleep(150 / CanvasControl.f);
+		Game.sleep(270 / CanvasControl.f);
 	}
 }

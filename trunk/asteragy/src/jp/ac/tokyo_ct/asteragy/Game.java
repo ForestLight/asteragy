@@ -48,7 +48,7 @@ final class Game {
 			Game.println("initialize start");
 			boolean isLocalFirst = false;
 			if (option.gameType == 2) {
-				httpLogger = new HTTPPlayer(this, "ネットワーク");
+				httpLogger = new HTTPPlayer(this, "ネットの向こう");
 				isLocalFirst = httpLogger.initialize(option);
 			}
 

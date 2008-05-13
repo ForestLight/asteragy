@@ -53,19 +53,13 @@ final class Option {
 		return buf.toString();
 	}
 
-	/*
-	 * void outputToStream(OutputStream os) throws IOException {
-	 * HTTPPlayer.writeIntChar(os, fieldXSize); HTTPPlayer.writeIntChar(os,
-	 * fieldYSize); HTTPPlayer.writeIntChar(os, numOfColors);
-	 * HTTPPlayer.writeIntChar(os, gameType); HTTPPlayer.writeIntChar(os,
-	 * AP_Pointer); HTTPPlayer.writeIntChar(os, connection); }
-	 */
 	void inputFromStream(InputStream is) throws IOException {
 		fieldXSize = HTTPPlayer.readIntChar(is);
 		fieldYSize = HTTPPlayer.readIntChar(is);
 		numOfColors = HTTPPlayer.readIntChar(is);
 		gameType = HTTPPlayer.readIntChar(is);
-		asterPower = HTTPPlayer.readIntChar(is);
+		AP_Pointer = HTTPPlayer.readIntChar(is);
 		connection = HTTPPlayer.readIntChar(is);
+		asterPower = initialAP[AP_Pointer];
 	}
 }
