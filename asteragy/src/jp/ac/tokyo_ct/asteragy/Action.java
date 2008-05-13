@@ -28,45 +28,17 @@ final class Action {
 
 	void run() {
 		final AsterClass ac = aster.getAsterClass();
-		int len = args.length;
-		if (len > 0) {
-			ac.target1 = new Point();
-			if (len > 2) {
-				ac.target2 = new Point();
-			}
-		}
 		if (commandType == 0) {
 			ac.executeSwap(deleteList, args);
 		} else {
-			switch (len) { // ‚±‚Ìswitch‚Í‚í‚´‚Æbreak”²‚«‚É‚µ‚Ä‚¢‚é
-			case 4:
-				ac.target2.y = args[3];
-			case 3:
-				ac.target2.x = args[2];
-				if (ac.getNumber() == 1) {
-					ac.asterClassSelect = args[2];
-				}
-			case 2:
-				ac.target1.y = args[1];
-			case 1:
-				ac.target1.x = args[0];
-			}
-			ac.setCommand(commandType);
 			final Player p = ac.getPlayer();
 			if (ac.getNumber() == 1) {
 				p.addAP(-AsterClass.classCost[args[2] + 1]);
 			} else {
 				p.addAP(-ac.getCommandCost());
 			}
-			ac.execute(deleteList);
+			ac.executeSpecialCommand(deleteList, args);
 		}
-
-		// if (commandType == 1) {
-		// ac.executeSpecialCommand();
-		// ac.execute(deleteList);
-		// } else {
-		// ac.execute(deleteList);
-		// }
 	}
 
 	String deleteList;

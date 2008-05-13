@@ -217,7 +217,7 @@ final class AIPlayer extends Player {
 			}
 			return null;
 		} catch (Exception e) {
-			Game.println("AIPlayer.getAction: ");
+			Game.println("AIPlayer.getAction - Exception: ");
 			Game.println(e.toString());
 			Game.println(e.getMessage());
 			return null;

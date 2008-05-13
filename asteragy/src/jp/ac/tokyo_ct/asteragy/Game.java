@@ -54,7 +54,7 @@ final class Game {
 
 			field = new Field(this, option.fieldXSize, option.fieldYSize,
 					option.connection);
-			AsterClass.COLOR_MAX = option.numOfColors;
+			AsterClass.colorMax = option.numOfColors;
 			field.setAster();
 
 			canvas = new CanvasControl(this);

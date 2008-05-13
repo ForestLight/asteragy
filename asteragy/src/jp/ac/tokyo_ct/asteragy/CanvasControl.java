@@ -104,12 +104,9 @@ final class CanvasControl extends Canvas {
 			if (game.initializing) {
 				paintNowloading(g);
 			} else {
-				// Game.println("paintFlag " + paintFlag);
 				g.drawImage(backgroundImage, 0, 0);
-				// Game.println("paintPlayerInfo");
 				game.player[0].paint(g);
 				game.player[1].paint(g);
-				// Game.println("paintFieldSpace");
 				game.getField().paint(g);
 				cursor.paint(g);
 				if (sunCommand.visible()) {
@@ -117,10 +114,8 @@ final class CanvasControl extends Canvas {
 				} else {
 					commonCommand.paint(g);
 				}
-
 				if (spaint != null)
 					spaint.paint(g);
-				Game.println("end paint");
 			}
 			g.unlock(true); // trueÇ…ÇµÇΩÇÃÇÕà¿ëSë[íuÅB
 		} else {
