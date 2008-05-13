@@ -23,7 +23,7 @@ final class Aster {
 	int drawWidth = CanvasControl.measure - 1;
 
 	Aster(Field f) {
-		color = Game.random.nextInt(AsterClass.COLOR_MAX) + 1;
+		color = Game.rand(AsterClass.COLOR_MAX) + 1;
 		field = f;
 	}
 
@@ -99,8 +99,8 @@ final class Aster {
 	 */
 	final void delete(int c) {
 		if (deleteFlag) {
-			System.out.println("delete " + field.asterToPoint(this));
-			color = Game.random.nextInt(AsterClass.COLOR_MAX) + 1;
+			Game.println("delete " + field.asterToPoint(this));
+			color = Game.rand(AsterClass.COLOR_MAX) + 1;
 			asterClass = null;
 			deleteFlag = false;
 			// judgeFlag = false;

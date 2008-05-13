@@ -77,7 +77,7 @@ final class Title extends Canvas implements TimerListener {
 		timer.start();
 
 		for (;;) {
-			// System.out.println("loop");
+			// Game.println("loop");
 			Game.sleep(1000);
 			if (option.gameType != -1) {
 				timer.stop();
@@ -303,7 +303,7 @@ final class Title extends Canvas implements TimerListener {
 			}
 			repaint();
 		}
-		System.out.println(type + "," + param);
+		Game.println(type + "," + param);
 	}
 
 	public void paint(Graphics g) {

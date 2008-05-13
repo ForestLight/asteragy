@@ -20,7 +20,7 @@ final class CommonCommand extends Command {
 		if (command < 0 || point == null)
 			return;
 		super.paint(g);
-		System.out.println("paintCommonCommand");
+		Game.println("paintCommonCommand");
 		PaintCommandName(g);
 	}
 

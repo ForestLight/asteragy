@@ -30,7 +30,7 @@ abstract class Player {
 
 	final void addAP(int n) {
 		ap += n;
-		System.out.println("AP+" + n);
+		Game.println("AP+" + n);
 	}
 
 	protected final String name;
@@ -59,7 +59,7 @@ abstract class Player {
 	 *            ƒvƒŒƒCƒ„[
 	 */
 	final void paint(Graphics g) {
-		// System.out.println("Player.paint");
+		// Game.println("Player.paint");
 		if (this.equals(game.player[0])) {
 			g.setOrigin(0, game.getCanvas().getHeight() - playerheight);
 		} else {

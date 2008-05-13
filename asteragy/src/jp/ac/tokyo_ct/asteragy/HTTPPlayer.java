@@ -21,14 +21,14 @@ final class HTTPPlayer extends Player implements Runnable {
 		super(game, playerName);
 		loggingThread = new Thread(this);
 		loggingThread.start();
-		System.out.print("sourceURL: ");
-		System.out.println(sourceURL);
+		Game.print("sourceURL: ");
+		Game.println(sourceURL);
 	}
 
 	// こっちの人間プレイヤが先攻ならtrueを返す。
 	boolean initialize(Option opt) throws IOException {
 		String url = sourceURL.concat("?scmd=querygame");
-		System.out.println("querygame: ".concat(url));
+		Game.println("querygame: ".concat(url));
 		HttpConnection con = (HttpConnection) Connector.open(url,
 				Connector.READ);
 		try {
@@ -42,7 +42,7 @@ final class HTTPPlayer extends Player implements Runnable {
 				} else {
 					isLocalFirst = false;
 				}
-				System.out.println("id: " + id + " first: " + isLocalFirst);
+				Game.println("id: " + id + " first: " + isLocalFirst);
 			} finally {
 				is.close();
 			}
@@ -61,8 +61,8 @@ final class HTTPPlayer extends Player implements Runnable {
 	private void postOption(Option opt) throws IOException {
 		String url = getUrl("postoption", isLocalFirst).concat("&opt=").concat(
 				opt.toString());
-		System.out.print("postoption: ");
-		System.out.println(url);
+		Game.print("postoption: ");
+		Game.println(url);
 		HttpConnection con = (HttpConnection) Connector.open(url,
 				Connector.READ);
 		try {
@@ -75,7 +75,7 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	private void getOption(Option opt) throws IOException {
 		for (;;) {
-			System.out.println("getoption");
+			Game.println("getoption");
 			HttpConnection con = (HttpConnection) Connector.open(getUrl(
 					"getoption", isLocalFirst), Connector.READ);
 			try {
@@ -99,7 +99,7 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	// 先攻になったとき、後攻が現れるまで待機する。
 	void waitForAnotherPlayer() throws IOException {
-		System.out.println("querystart");
+		Game.println("querystart");
 		for (;;) {
 			HttpConnection con = (HttpConnection) Connector.open(getUrl(
 					"querystart", isLocalFirst), Connector.READ);
@@ -124,8 +124,8 @@ final class HTTPPlayer extends Player implements Runnable {
 	void sendInitField(Field f) throws IOException {
 		String url = getUrl("sendinitfield", isLocalFirst).concat("&field=")
 				.concat(f.toStringForInit());
-		// System.out.println(url);
-		System.out.println("sendInitField");
+		// Game.println(url);
+		Game.println("sendInitField");
 		HttpConnection con = (HttpConnection) Connector.open(url,
 				Connector.READ);
 		try {
@@ -138,7 +138,7 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	void getField(Field f) throws IOException {
 		for (;;) {
-			System.out.println("getinitfield");
+			Game.println("getinitfield");
 			HttpConnection con = (HttpConnection) Connector.open(getUrl(
 					"getinitfield", isLocalFirst), Connector.READ);
 			try {
@@ -166,7 +166,7 @@ final class HTTPPlayer extends Player implements Runnable {
 	 * @see jp.ac.tokyo_ct.asteragy.Player#getAction()
 	 */
 	Action getAction() {
-		System.out.println("getaction");
+		Game.println("getaction");
 		try {
 			for (;;) {
 				Game.sleep(3000);
@@ -183,19 +183,19 @@ final class HTTPPlayer extends Player implements Runnable {
 						String s = readLine(is);
 						if (s.equals("end"))
 							return null;
-						System.out.println(s);
+						Game.println(s);
 						Action a = Action.readFromString(game, s);
 						// Action.readFromStream(game, is);
-						System.out.println("getaction2");
+						Game.println("getaction2");
 						if (a == null) {
 							a = Action.readFromString(game, s);
 						}
 						a.deleteList = readLine(is);
-						System.out.println("getaction3");
-						System.out.println(a.deleteList);
+						Game.println("getaction3");
+						Game.println(a.deleteList);
 						if (a != null) {
-							System.out.print("getaction: ");
-							System.out.println(a.toString());
+							Game.print("getaction: ");
+							Game.println(a.toString());
 							return a;
 						}
 					} finally {
@@ -206,7 +206,7 @@ final class HTTPPlayer extends Player implements Runnable {
 				}
 			}
 		} catch (IOException e) {
-			System.out.println(e.toString());
+			Game.println(e.toString());
 			return null; // 暫定
 		}
 	}
@@ -217,7 +217,7 @@ final class HTTPPlayer extends Player implements Runnable {
 			return;
 		}
 		try {
-			System.out.println("endTurn");
+			Game.println("endTurn");
 			String url = getUrl("endturn", player != 0);
 			HttpConnection con = (HttpConnection) Connector.open(url,
 					Connector.READ);
@@ -231,7 +231,7 @@ final class HTTPPlayer extends Player implements Runnable {
 			Dialog d = new Dialog(Dialog.BUTTON_OK, e.toString());
 			d.setText("申し訳ありません。接続ができませんでした。ゲームを続行できない可能性があります。");
 			d.show();
-			System.out.println(e.toString());
+			Game.println(e.toString());
 		}
 	}
 
@@ -245,12 +245,12 @@ final class HTTPPlayer extends Player implements Runnable {
 				: 1)) {
 			return;
 		}
-		System.out.println("log");
+		Game.println("log");
 		async = a.toString();
 	}
 
 	synchronized void logDeletedList(Field f, Vector deletedList) {
-		System.out.println("logDeletedList");
+		Game.println("logDeletedList");
 		if (game.getPlayerIndex(game.getCurrentPlayer()) != (isLocalFirst ? 0
 				: 1)) {
 			return;
@@ -270,8 +270,8 @@ final class HTTPPlayer extends Player implements Runnable {
 			}
 		}
 		async = buf.toString();
-		System.out.print("logDeletedList: ");
-		System.out.println(async);
+		Game.print("logDeletedList: ");
+		Game.println(async);
 		notify(); // 叩き起す
 	}
 
@@ -295,7 +295,7 @@ final class HTTPPlayer extends Player implements Runnable {
 
 	private void sendLog() {
 		try {
-			System.out.println(async);
+			Game.println(async);
 			HttpConnection con = (HttpConnection) Connector.open(async,
 					Connector.READ);
 			async = null;
@@ -309,7 +309,7 @@ final class HTTPPlayer extends Player implements Runnable {
 			Dialog d = new Dialog(Dialog.BUTTON_OK, e.toString());
 			d.setText("申し訳ありません。接続ができませんでした。ゲームを続行できません。");
 			d.show();
-			System.out.println(e.toString());
+			Game.println(e.toString());
 		}
 	}
 

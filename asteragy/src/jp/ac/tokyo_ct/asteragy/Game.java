@@ -1,8 +1,7 @@
 package jp.ac.tokyo_ct.asteragy;
 
 import java.io.IOException;
-import java.util.Random;
-import java.util.Vector;
+import java.util.*;
 
 import com.nttdocomo.io.ConnectionException;
 import com.nttdocomo.ui.Dialog;
@@ -16,7 +15,7 @@ final class Game {
 	 * ゲームを開始する
 	 */
 	void start(Option op) {
-		System.out.println("Game.start()");
+		Game.println("Game.start()");
 		option = op;
 
 		initializing = true;
@@ -26,7 +25,7 @@ final class Game {
 		if (!initSuccess)
 			return;
 
-		System.out.println("Game.start()");
+		Game.println("Game.start()");
 		for (;;) // ループ1回でプレイヤー2人がそれぞれ1ターンをこなす。
 		{
 			boolean gameover;
@@ -46,7 +45,7 @@ final class Game {
 
 	private boolean initialize() {
 		try {
-			System.out.println("initialize start");
+			Game.println("initialize start");
 			boolean isLocalFirst = false;
 			if (option.gameType == 2) {
 				httpLogger = new HTTPPlayer(this, "ネットワーク");
@@ -90,7 +89,7 @@ final class Game {
 
 			player[0].addAP(option.asterPower);
 			player[1].addAP(option.asterPower);
-			System.out.println("initialize");
+			Game.println("initialize");
 
 			if (option.gameType == 2) {
 				httpLogger.sendInitField(field);
@@ -100,11 +99,11 @@ final class Game {
 			Dialog d = new Dialog(Dialog.BUTTON_OK, "");
 			d.setText("申し訳ありません。接続ができませんでした。");
 			d.show();
-			System.out.println(e.toString());
-			System.out.println(e.getMessage());
+			Game.println(e.toString());
+			Game.println(e.getMessage());
 			if (e instanceof ConnectionException) {
 				ConnectionException ce = (ConnectionException) e;
-				System.out.println("ConnectionException status: "
+				Game.println("ConnectionException status: "
 						+ ce.getStatus());
 			}
 			return false;
@@ -117,7 +116,7 @@ final class Game {
 	 * @retval false ゲームが終了した
 	 */
 	private boolean turn(Player player) {
-		System.out.println("Game.turn()");
+		Game.println("Game.turn()");
 		printMemoryStatus();
 		currentPlayer = player;
 		canvas.onTurnStart(player);
@@ -149,7 +148,7 @@ final class Game {
 				 * canvas.getScreen().flipScreen(); Game.sleep(1500);
 				 * canvas.paintString("", false);
 				 */
-				System.out.println(msg);
+				Game.println(msg);
 
 				ret = false;
 				break exit;
@@ -178,7 +177,7 @@ final class Game {
 			return 1;
 		else {
 			String s = "Game.getPlayerIndex: 引数pはプレイヤーでない";
-			System.out.println(s);
+			Game.println(s);
 			throw new IllegalArgumentException(s);
 		}
 	}
@@ -205,8 +204,8 @@ final class Game {
 	}
 
 	void logAction(Action a) {
-		System.out.print("Game.logAction: ");
-		System.out.println(a.toString());
+		Game.print("Game.logAction: ");
+		Game.println(a.toString());
 		if (httpLogger != null) {
 			httpLogger.log(a);
 		}
@@ -214,7 +213,7 @@ final class Game {
 
 	void logDeleteInfo(Field f, Vector deletedList) {
 		if (httpLogger != null) {
-			System.out.print("Game.logDeleteInfo");
+			Game.print("Game.logDeleteInfo");
 			if (deletedList.size() == 0) {
 				httpLogger.logDeletedList(null, null);
 			} else {
@@ -245,7 +244,7 @@ final class Game {
 
 	private static void printMemoryStatus() {
 		Runtime r = Runtime.getRuntime();
-		System.out.println("Total memory: " + r.totalMemory()
+		Game.println("Total memory: " + r.totalMemory()
 				+ ", Free memory: " + r.freeMemory());
 	}
 
@@ -260,7 +259,17 @@ final class Game {
 
 	boolean initializing;
 
-	static final Random random = new Random(System.currentTimeMillis());
+	//static private final Random random = new Random(System.currentTimeMillis());
+	
+	private static int seed = 0x92D68CA2 + new Long(System.currentTimeMillis()).hashCode();
+	
+	static int rand(int m) {
+		// return random.nextInt(m);
+		seed ^= (seed << 13);
+		seed ^= (seed >>> 17);
+		seed ^= (seed << 5);
+		return (seed >>> 1) % m;
+	}
 
 	static ImageLoader loader;
 
@@ -272,9 +281,20 @@ final class Game {
 		try {
 			Thread.sleep(ms);
 		} catch (InterruptedException e) {
-			System.out.println("InterruptedException");
-			Thread.currentThread().interrupt();
+			Game.println("InterruptedException");
 		}
+	}
+	
+	static void println(Object o) {
+		System.out.println(o);
+	}
+	
+	static void println(int i) {
+		System.out.println(i);
+	}
+	
+	static void print(Object o) {
+		System.out.print(o);
 	}
 
 	void titleBack() {

@@ -36,7 +36,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 	private Point ptAster;
 
 	synchronized Action getAction() {
-		System.out.println("KeyInputPlayer.getAction()");
+		Game.println("KeyInputPlayer.getAction()");
 		phase = 0;
 		selected = false;
 		pt = game.getField().getSunPosition(this);
@@ -48,7 +48,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		try {
 			wait();
 		} catch (InterruptedException e) {
-			System.out.println("InterruptedException");
+			Game.println("InterruptedException");
 			// Thread.currentThread().interrupt();
 			return null;
 		} finally {
@@ -63,13 +63,13 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		if (selected || type != Display.KEY_PRESSED_EVENT) {
 			return;
 		}
-		System.out.println("phase = " + phase + ", param = " + param);
+		Game.println("phase = " + phase + ", param = " + param);
 		switch (param) {
 		case Display.KEY_0:
 		case Display.KEY_2:
 		case Display.KEY_IAPP:
 		case Display.KEY_CLEAR:
-			System.out.println("Cancel " + phase);
+			Game.println("Cancel " + phase);
 			switch (phase--) {
 			case 0:
 				action = null;
@@ -90,7 +90,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 			}
 			break;
 		case Display.KEY_SELECT:
-			System.out.println("Select " + phase);
+			Game.println("Select " + phase);
 			if (phase == 2 || phase == 3) {
 				if (ac.getNumber() == 1
 						&& action.commandType == 1
@@ -187,7 +187,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 		case 3:
 			ac.setCommand(action.commandType);
 			final int[][] range = ac.getRange();
-			System.out.println("processEvent phase 2/3");
+			Game.println("processEvent phase 2/3");
 			canvasRange.setRange(ptAster, range);
 			final int top = ptAster.y - range.length / 2;
 			final int bottom = ptAster.y + range.length / 2;
@@ -208,7 +208,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 			applyPosition();
 			break;
 		}
-		System.out.println("repaint in processEvent");
+		Game.println("repaint in processEvent");
 		canvas.repaint();
 	}
 
@@ -265,7 +265,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 	}
 
 	private void selectTarget(int key) {
-		System.out.println("st: x = " + pt.x + " y = " + pt.y);
+		Game.println("st: x = " + pt.x + " y = " + pt.y);
 		switch (key) {
 		case Display.KEY_UP:
 			if (pt.y > 0 && frange[pt.y - 1][pt.x] != -1) {
@@ -314,7 +314,7 @@ final class KeyInputPlayer extends Player implements EventProcesser {
 			}
 			break;
 		}
-		System.out.println("KeyInputPlayer.selectSunTarget: select = "
+		Game.println("KeyInputPlayer.selectSunTarget: select = "
 				+ action.args[2]);
 		canvas.sunCommand.setCommand(action.args[2], ptAster);
 		canvas.repaint();

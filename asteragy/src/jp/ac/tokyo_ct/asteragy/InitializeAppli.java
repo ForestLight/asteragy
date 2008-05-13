@@ -23,7 +23,7 @@ final class InitializeAppli extends Canvas {
 	}
 
 	void init() {
-		// System.out.println("init");
+		// Game.println("init");
 		Game.loader = new ImageLoader();
 		Game.loader.load();
 	}

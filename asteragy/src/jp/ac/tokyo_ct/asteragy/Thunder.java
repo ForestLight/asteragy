@@ -30,7 +30,7 @@ final class Thunder {
 	}
 
 	private void initializeLocation() {
-		thunder = new Vector[(Game.random.nextInt() >>> 1) % MAXTHUNDER + 1];
+		thunder = new Vector[Game.rand(MAXTHUNDER + 1)];
 		int lenght = Math.abs(begin.y - end.y);
 		for (int i = 0; i < thunder.length; i++) {
 			thunder[i] = new Vector(lenght / MINSPACE);
@@ -39,7 +39,7 @@ final class Thunder {
 	}
 
 	private void createThunder(Vector point, int lenght) {
-		int size = (Game.random.nextInt() >>> 1) % (lenght / MINSPACE) + 1;
+		int size = Game.rand((lenght / MINSPACE) + 1);
 		Point interval = new Point(Math.abs(begin.x - end.x) / (size + 1), Math
 				.abs(begin.y - end.y)
 				/ (size + 1));
@@ -52,8 +52,8 @@ final class Thunder {
 	}
 
 	private void movePoint(Point point, int interval) {
-		point.y += (Game.random.nextInt() >>> 1) % interval - (interval / 2);
-		point.x += (Game.random.nextInt() >>> 1) % MAXWIDTH - (MAXWIDTH / 2);
+		point.y += Game.rand(interval - (interval / 2));
+		point.x += Game.rand(MAXWIDTH - (MAXWIDTH / 2));
 	}
 
 	void paint(Graphics g) {

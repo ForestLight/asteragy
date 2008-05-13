@@ -225,7 +225,7 @@ final class Field {
 			// 全色試しても置けないときは、削除前の色に決定
 			if (judge(x, y) == true) {
 				final int AsterColor = target.getColor();
-				System.out.println("special_delete:AsterColor = " + AsterColor);
+				Game.println("special_delete:AsterColor = " + AsterColor);
 				target.setColor(AsterColor);
 				return count;
 			}
@@ -326,7 +326,7 @@ final class Field {
 				}
 			}
 		}
-		System.out.println("Field.asterToPoint() - Not found.");
+		Game.println("Field.asterToPoint() - Not found.");
 		return null;
 	}
 
@@ -446,7 +446,7 @@ final class Field {
 					return new Point(j, i);
 			}
 		}
-		System.out.println("getSunPosition - not found");
+		Game.println("getSunPosition - not found");
 		return null;
 	}
 
