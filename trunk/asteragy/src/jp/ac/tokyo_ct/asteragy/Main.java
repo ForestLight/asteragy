@@ -14,7 +14,7 @@ public final class Main extends IApplication {
 	 * プログラムを開始するエントリポイント
 	 */
 	public void start() {
-		System.out.println(IApplication.getCurrentApp().getSourceURL());
+		Game.println(IApplication.getCurrentApp().getSourceURL());
 		InitializeAppli init = new InitializeAppli();
 		init.start();
 		final Game game = new Game();
@@ -22,7 +22,7 @@ public final class Main extends IApplication {
 		while (true) {
 			final Option op = title.start();
 			game.start(op);
-			System.out.println("Game over");
+			Game.println("Game over");
 		}
 	}
 

@@ -71,7 +71,7 @@ final class ImageLoader {
 
 				String url = IApplication.getCurrentApp().getSourceURL()
 						.concat(imageurl.concat(filename));
-				System.out.println(url);
+				Game.println(url);
 
 				connection = (HttpConnection) Connector.open(url);
 				connection.setRequestMethod("GET");
@@ -88,13 +88,13 @@ final class ImageLoader {
 				writeImage(position, filename, get);
 				images.put(filename, image);
 				position += 8 + filename.getBytes().length + get.length;
-				System.out.println(filename);
-				System.out.println(position);
+				Game.println(filename);
+				Game.println(position);
 				connection.close();
 			}
 		} catch (IOException e) {
 			if (e instanceof ConnectionException)
-				System.out.println(((ConnectionException) e).getStatus());
+				Game.println(((ConnectionException) e).getStatus());
 			e.printStackTrace();
 		} finally {
 			try {
@@ -120,16 +120,16 @@ final class ImageLoader {
 						return false;
 					return true;
 				}
-				System.out.println(length);
+				Game.println(length);
 				byte[] buffer = new byte[length];
 				if (input.read(buffer) < 0)
 					return true;
 				String filename = new String(buffer);
-				System.out.println(filename);
+				Game.println(filename);
 				position += 4 + length;
 				// image
 				length = input.readInt();
-				System.out.println(length);
+				Game.println(length);
 				if (length <= 0)
 					return true;
 				buffer = new byte[length];
@@ -169,10 +169,10 @@ final class ImageLoader {
 		try {
 			output = Connector.openOutputStream("scratchpad:///0;pos="
 					.concat(String.valueOf(position)));
-			System.out.println("filename:" + filename.getBytes().length);
+			Game.println("filename:" + filename.getBytes().length);
 			output.write(integerToByte(filename.getBytes().length));
 			output.write(filename.getBytes());
-			System.out.println("image:" + image.length);
+			Game.println("image:" + image.length);
 			output.write(integerToByte(image.length));
 			output.write(image);
 
@@ -189,7 +189,7 @@ final class ImageLoader {
 	}
 
 	void load() {
-		// System.out.println("loading");
+		// Game.println("loading");
 		if (loadImage()) {
 			Vector filelist = loadFileList();
 			downloadImage(filelist);

@@ -36,19 +36,19 @@ final class ShootingStar {
 
 	void newStar() {
 		if (parent != null) {
-			if ((Game.random.nextInt() >>> 1) % 2 == 0) {
+			if (Game.rand(4) >>> 1 == 0) {
 				if (child != null)
 					child.setParent(parent);
 				parent.setChild(child);
 				return;
 			}
 		}
-		point = new Point((Game.random.nextInt() >>> 1) % canvas.getWidth(),
-				(Game.random.nextInt() >>> 1) % canvas.getHeight());
+		point = new Point(Game.rand(canvas.getWidth()), 
+				Game.rand(canvas.getHeight()));
 		start = point.clone();
-		time = (Game.random.nextInt() >>> 1) & 0x7;
+		time = Game.rand(8);
 		if (child == null) {
-			if ((Game.random.nextInt() >>> 1) % 10 == 0) {
+			if (Game.rand(10) == 0) {
 				child = new ShootingStar(canvas, this);
 			}
 		}

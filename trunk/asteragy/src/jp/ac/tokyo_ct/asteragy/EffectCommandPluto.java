@@ -33,8 +33,8 @@ final class EffectCommandPluto extends Effect {
 				/ 2;
 		location.x -= size.x / 2;
 		location.y -= size.y / 2;
-		System.out.println("size(" + size.x + "," + size.y + ")");
-		System.out.println("location(" + location.x + "," + location.y + ")");
+		Game.println("size(" + size.x + "," + size.y + ")");
+		Game.println("location(" + location.x + "," + location.y + ")");
 	}
 
 	void start(Graphics g, CanvasControl c) {

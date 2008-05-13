@@ -75,7 +75,7 @@ final class CanvasControl extends Canvas {
 
 	void onTurnStart(Player player) {
 		turnOn.player = player;
-		System.out.println("onTurnStart");
+		Game.println("onTurnStart");
 		repaint();
 		paintEffect(turnOn);
 	}
@@ -104,12 +104,12 @@ final class CanvasControl extends Canvas {
 			if (game.initializing) {
 				paintNowloading(g);
 			} else {
-				// System.out.println("paintFlag " + paintFlag);
+				// Game.println("paintFlag " + paintFlag);
 				g.drawImage(backgroundImage, 0, 0);
-				// System.out.println("paintPlayerInfo");
+				// Game.println("paintPlayerInfo");
 				game.player[0].paint(g);
 				game.player[1].paint(g);
-				// System.out.println("paintFieldSpace");
+				// Game.println("paintFieldSpace");
 				game.getField().paint(g);
 				cursor.paint(g);
 				if (sunCommand.visible()) {
@@ -120,11 +120,11 @@ final class CanvasControl extends Canvas {
 
 				if (spaint != null)
 					spaint.paint(g);
-				System.out.println("end paint");
+				Game.println("end paint");
 			}
 			g.unlock(true); // trueÇ…ÇµÇΩÇÃÇÕà¿ëSë[íuÅB
 		} else {
-			// System.out.println("paintFlag false");
+			// Game.println("paintFlag false");
 		}
 	}
 
