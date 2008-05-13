@@ -24,7 +24,7 @@ final class CanvasControl extends Canvas {
 	final SunCommand sunCommand = new SunCommand(this);
 
 	final Range range = new Range();
-	
+
 	final Field field;
 
 	final EffectAsterDisappearControl disappearControl = new EffectAsterDisappearControl();
@@ -70,7 +70,7 @@ final class CanvasControl extends Canvas {
 	void setPaintFlag(boolean b) {
 		paintFlag = b;
 	}
-	
+
 	volatile EventProcesser eventProcesser;
 
 	void onTurnStart(Player player) {
@@ -94,8 +94,7 @@ final class CanvasControl extends Canvas {
 	private PaintString spaint;
 
 	void paintString(String string, boolean visible) {
-		spaint = visible ? new PaintString(this, string)
-		                 : null;
+		spaint = visible ? new PaintString(this, string) : null;
 		repaint();
 	}
 
@@ -105,12 +104,12 @@ final class CanvasControl extends Canvas {
 			if (game.initializing) {
 				paintNowloading(g);
 			} else {
-//				System.out.println("paintFlag " + paintFlag);
+				// System.out.println("paintFlag " + paintFlag);
 				g.drawImage(backgroundImage, 0, 0);
-//				System.out.println("paintPlayerInfo");
+				// System.out.println("paintPlayerInfo");
 				game.player[0].paint(g);
 				game.player[1].paint(g);
-//				System.out.println("paintFieldSpace");
+				// System.out.println("paintFieldSpace");
 				game.getField().paint(g);
 				cursor.paint(g);
 				if (sunCommand.visible()) {
@@ -125,7 +124,7 @@ final class CanvasControl extends Canvas {
 			}
 			g.unlock(true); // trueÇ…ÇµÇΩÇÃÇÕà¿ëSë[íuÅB
 		} else {
-//			System.out.println("paintFlag false");
+			// System.out.println("paintFlag false");
 		}
 	}
 

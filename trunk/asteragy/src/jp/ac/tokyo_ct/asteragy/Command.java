@@ -27,7 +27,8 @@ abstract class Command {
 	}
 
 	final void setCommand(int cmd, Point pt) {
-		System.out.println("Command.setCommand: cmd = " + cmd + " pt == null: " + (point == null));
+		System.out.println("Command.setCommand: cmd = " + cmd + " pt == null: "
+				+ (point == null));
 		command = cmd;
 		point = pt;
 	}
@@ -37,7 +38,8 @@ abstract class Command {
 			return;
 		if (point == null)
 			return;
-		//System.out.println("paintCommand : " + command + " point == null: " + (point == null));
+		// System.out.println("paintCommand : " + command + " point == null: " +
+		// (point == null));
 		g.setOrigin(0, 0);
 		// g.setClip(0, Player.playerheight, canvas.getWidth(),
 		// canvas.getHeight()
@@ -63,6 +65,6 @@ abstract class Command {
 		if (left >= canvas.getWidth() - imageWidth)
 			left -= imageWidth + m;
 		g.setOrigin(left, top);
-		//System.out.println("top:" + top + " left:" + left + " y:" + point.y);
+		// System.out.println("top:" + top + " left:" + left + " y:" + point.y);
 	}
 }

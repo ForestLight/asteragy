@@ -59,7 +59,7 @@ abstract class Player {
 	 *            ƒvƒŒƒCƒ„[
 	 */
 	final void paint(Graphics g) {
-//		System.out.println("Player.paint");
+		// System.out.println("Player.paint");
 		if (this.equals(game.player[0])) {
 			g.setOrigin(0, game.getCanvas().getHeight() - playerheight);
 		} else {

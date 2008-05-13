@@ -18,13 +18,13 @@ final class ExplainAsterClass extends Canvas implements Runnable {
 	private int temp;
 
 	private Thread thread;
-	
+
 	private Title title;
 
 	private static Image asterClassImage;
 
 	private static Image[] pageImage;
-	
+
 	private static Image[] pageImageInit(Frame f) {
 		Image[] pageImage = new Image[12];
 		for (int i = 0; i < 12; i++) {
@@ -37,21 +37,19 @@ final class ExplainAsterClass extends Canvas implements Runnable {
 			g.drawImage(asterClassImage, 20, 20);
 			g.setColor(Graphics.getColorOfName(Graphics.WHITE));
 			g.drawString(AsterClass.classNameF[i], 20, 60);
-			g.drawString("コマンド: ".concat(AsterClass.commandName[i]), 20,
-					90);
+			g.drawString("コマンド: ".concat(AsterClass.commandName[i]), 20, 90);
 			g.drawString(AsterClass.commandExplain[i], 20, 110);
 			if (i != 0 && i != 11) {
 				g.drawString("クラスコスト: ".concat(String
-					.valueOf(AsterClass.classCost[i])), 20, 130);
-			}
-			else {
+						.valueOf(AsterClass.classCost[i])), 20, 130);
+			} else {
 				g.drawString("クラスコスト: -", 20, 130);
 			}
 			g.drawString("コマンドコスト: ".concat(String
 					.valueOf(AsterClass.commandCost[i])), 20, 150);
 			g.drawString("行動回数： ".concat(String
 					.valueOf(AsterClass.actionNum[i])), 20, 170);
-			//g.drawString("ｱﾌﾟﾘｷｰ/ｸﾘｱｷｰ/[2]/[0]: もどる", 20, 237);
+			// g.drawString("ｱﾌﾟﾘｷｰ/ｸﾘｱｷｰ/[2]/[0]: もどる", 20, 237);
 
 			for (int j = 0; j < range.length; j++) {
 				for (int k = 0; k < range[0].length; k++) {
@@ -96,6 +94,7 @@ final class ExplainAsterClass extends Canvas implements Runnable {
 		thread = new Thread(this);
 		thread.start();
 	}
+
 	public void run() {
 		final Graphics g = title.getGraphics();
 

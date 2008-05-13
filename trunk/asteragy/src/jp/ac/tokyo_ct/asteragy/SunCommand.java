@@ -43,8 +43,7 @@ final class SunCommand extends Command {
 	}
 
 	private void loadImage() {
-		commandImage = Image.createImage(height * 4 + 4, height
-				* CLASSNUM + 1);
+		commandImage = Image.createImage(height * 4 + 4, height * CLASSNUM + 1);
 		Graphics g = commandImage.getGraphics();
 		g.setColor(back);
 		g.fillRect(0, 0, height * 4 + 4, height * CLASSNUM + 2);

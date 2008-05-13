@@ -25,9 +25,9 @@ final class EffectCommandMercury extends Effect {
 	void start(Graphics g, CanvasControl c) {
 		int r = 24;
 
-		Image back = c.getScreen(
-				c.field.getAsterLocation(point.add(new Point(-1, -1))),
-				new Point(CanvasControl.measure * 3, CanvasControl.measure * 3));
+		Image back = c.getScreen(c.field.getAsterLocation(point.add(new Point(
+				-1, -1))), new Point(CanvasControl.measure * 3,
+				CanvasControl.measure * 3));
 
 		c.field.setOrignAster(g, point, CanvasControl.measure / 2 - 1,
 				CanvasControl.measure / 2 - 1);

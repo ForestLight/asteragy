@@ -129,9 +129,10 @@ final class Game {
 			while ((a = player.getAction()) != null) {
 				a.run();
 				goPlayer = field.checkGameOver();
-				if(goPlayer != null) break;
+				if (goPlayer != null)
+					break;
 			}
-			goPlayer = field.checkGameOver(); //AI用にここにも。そのうち外す
+			goPlayer = field.checkGameOver(); // AI用にここにも。そのうち外す
 			if (goPlayer != null) {
 				/*
 				 * Game.sleep(1500);
@@ -221,7 +222,7 @@ final class Game {
 			}
 		}
 	}
-	
+
 	/**
 	 * プレイヤー
 	 */

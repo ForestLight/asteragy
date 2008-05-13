@@ -208,10 +208,10 @@ final class AIPlayer extends Player {
 						Effect.setEffect(true);
 						game.getCanvas().setPaintFlag(true);
 						return execute();
-						//if (execute())
-						//	return null;
-						//game.getCanvas().setPaintFlag(false);
-						//state = 0;
+						// if (execute())
+						// return null;
+						// game.getCanvas().setPaintFlag(false);
+						// state = 0;
 					}
 				}
 			}
@@ -549,27 +549,27 @@ final class AIPlayer extends Player {
 		a.commandType = ac.getCommand();
 		if (target[1][maxNum] != null) {
 			if (ac.getNumber() == 1 && a.commandType == 1) {
-				a.args = new int[] {target[0][maxNum].x, target[0][maxNum].y,
-						target[1][maxNum].x};
+				a.args = new int[] { target[0][maxNum].x, target[0][maxNum].y,
+						target[1][maxNum].x };
 			} else {
-				a.args = new int[] {target[0][maxNum].x, target[0][maxNum].y,
-						target[1][maxNum].x, target[1][maxNum].y};
+				a.args = new int[] { target[0][maxNum].x, target[0][maxNum].y,
+						target[1][maxNum].x, target[1][maxNum].y };
 			}
 		} else if (target[0][maxNum] != null) {
-			a.args = new int[] {target[0][maxNum].x, target[0][maxNum].y};
+			a.args = new int[] { target[0][maxNum].x, target[0][maxNum].y };
 		} else {
 			a.args = new int[0];
 		}
 		return a;
 
-//		ac.execute(null);
-//		System.out.println("実行完了");
-//
-//		Player p = field.checkGameOver();
-//		// ゲームオーバー判定
-//		if (p != null) {
-//			return true;
-//		}
+		// ac.execute(null);
+		// System.out.println("実行完了");
+		//
+		// Player p = field.checkGameOver();
+		// // ゲームオーバー判定
+		// if (p != null) {
+		// return true;
+		// }
 
 		// 消滅判定
 		/*
@@ -579,11 +579,10 @@ final class AIPlayer extends Player {
 		 * System.out.println("消去完了");
 		 */
 
-//		p = field.checkGameOver();
-//		if (p != null) {
-//			return true;
-//		}
-
-//		return false;
+		// p = field.checkGameOver();
+		// if (p != null) {
+		// return true;
+		// }
+		// return false;
 	}
 }

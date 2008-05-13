@@ -55,8 +55,9 @@ final class EffectCommandMars extends Effect {
 			c.field.setOrignAster(g, aster);
 
 			g.drawImage(effect, time * (point.x - aster.x), time
-					* (point.y - aster.y), 0, (CanvasControl.measure - 1) * time,
-					CanvasControl.measure - 1, CanvasControl.measure - 1);
+					* (point.y - aster.y), 0, (CanvasControl.measure - 1)
+					* time, CanvasControl.measure - 1,
+					CanvasControl.measure - 1);
 
 			g.unlock(true);
 

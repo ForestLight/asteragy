@@ -124,7 +124,7 @@ final class HTTPPlayer extends Player implements Runnable {
 	void sendInitField(Field f) throws IOException {
 		String url = getUrl("sendinitfield", isLocalFirst).concat("&field=")
 				.concat(f.toStringForInit());
-//		System.out.println(url);
+		// System.out.println(url);
 		System.out.println("sendInitField");
 		HttpConnection con = (HttpConnection) Connector.open(url,
 				Connector.READ);
@@ -289,8 +289,8 @@ final class HTTPPlayer extends Player implements Runnable {
 	}
 
 	private String getUrl(String cmd, boolean first) {
-		return sourceURL.concat("?cmd=").concat(cmd).concat("&id=").concat(
-				id).concat("&turn=").concat(first ? "1" : "0");
+		return sourceURL.concat("?cmd=").concat(cmd).concat("&id=").concat(id)
+				.concat("&turn=").concat(first ? "1" : "0");
 	}
 
 	private void sendLog() {
@@ -373,5 +373,5 @@ final class HTTPPlayer extends Player implements Runnable {
 	private boolean isLocalFirst = false;
 
 	private static String sourceURL = "http://clc2007.infocraft.co.jp/asteragy/";
-		//IApplication.getCurrentApp().getSourceURL();
+	// IApplication.getCurrentApp().getSourceURL();
 }
