@@ -30,8 +30,6 @@ final class AIPlayer extends Player {
 
 	private final static int WAIT = 1000;
 
-	// private Point[] pt = new Point[TRIAL];
-
 	private Point pt; // 操作中のユニット位置
 
 	private int[] cmd = new int[TRIAL]; // 選択したコマンド
@@ -57,11 +55,11 @@ final class AIPlayer extends Player {
 			int t = 0;
 			boolean cancelFlag = false;
 			final Field f = game.getField();
+			myUnit = getMyUnit();
 
 			while (state < 4) {
 				switch (state) {
 				case 0: // 操作クラスの選択
-					getMyUnit();
 					game.getCanvas().setPaintFlag(false);
 					Game.println("AIPlayer state0");
 					pt = selectAster();
@@ -222,10 +220,6 @@ final class AIPlayer extends Player {
 			Game.println(e.getMessage());
 			return null;
 		} finally {
-
-			game.getField().repaintField();
-			canvas.paintEffect(canvas.disappearControl);
-			Game.sleep(WAIT);
 			Effect.setEffect(true);
 			game.getCanvas().setPaintFlag(true);
 		}
@@ -235,11 +229,11 @@ final class AIPlayer extends Player {
 	 * 行動可能な自ユニットを取得
 	 * 
 	 */
-	private void getMyUnit() {
+	private Aster[] getMyUnit() {
 		final Field f = game.getField();
 		final int x = f.X;
 		final int y = f.Y;
-		Aster[] a = new Aster[x * y];
+		final Aster[] a = new Aster[x * y];
 		final Aster[][] field = f.field;
 		int c = 0;
 
@@ -255,13 +249,13 @@ final class AIPlayer extends Player {
 			}
 		}
 
-		if (c != 0)
-			myUnit = new Aster[c];
-		else
-			myUnit = null;
+		if (c == 0)
+			return null;
+		Aster[] myUnit = new Aster[c];
 		for (int i = 0; i < c; i++) {
 			myUnit[i] = a[i];
 		}
+		return myUnit;
 	}
 
 	/**
@@ -274,13 +268,7 @@ final class AIPlayer extends Player {
 		if (myUnit == null)
 			return null;
 		int n = Game.rand(myUnit.length);
-		Point pt = myUnit[n].getPoint();
-		// canvas.getCursor().setCursor(pt, Cursor.CURSOR_1);
-		// try {
-		// Thread.sleep(1-000);
-		// } catch (Exception e) {
-		// }
-		return pt;
+		return pt = myUnit[n].getPoint();
 	}
 
 	private int selectCommand(Point pt) {
@@ -289,16 +277,13 @@ final class AIPlayer extends Player {
 		if (AsterClass.commandCost[ac.getNumber() - 1] > ap[pNum]) {
 			return 0;
 		} else {
-			int cmd = Game.rand(2);
-			return cmd;
-			// return 0;
-
+			return Game.rand(2);
 		}
 	}
 
 	private Point selectTarget(int[][] range, Point pt) {
 		final Aster[][] f = game.getField().field;
-		int[][] frange = new int[f.length][f[0].length];
+		final int[][] frange = new int[f.length][f[0].length];
 		Point[] targetlist;
 		int c = 0;
 		Game.println("AIPlayer selectTarget()");
@@ -310,8 +295,6 @@ final class AIPlayer extends Player {
 						&& j <= pt.x + range[0].length / 2) {
 					frange[i][j] = range[i - (pt.y - range.length / 2)][j
 							- (pt.x - range[0].length / 2)];
-					// Game.println("target - "+frange[i][j]+" pt.x,y =
-					// "+pt.x+"/"+pt.y+"j(x),i(y)="+j+"/"+i);
 					if (frange[i][j] == 1) {
 						c++;
 					}
@@ -334,11 +317,7 @@ final class AIPlayer extends Player {
 				}
 			}
 		}
-
-		Point p = targetlist[Game.rand(c)];
-		// p = targetlist[0];
-
-		return p;
+		return targetlist[Game.rand(c)];
 	}
 
 	private Point selectAsterClass(Point pt) {
@@ -350,9 +329,9 @@ final class AIPlayer extends Player {
 			cmdMax++;
 		}
 
-		if (cmdMax == 0)
+		if (cmdMax == 0) {
 			return new Point(-1, 0);
-		else {
+		} else {
 			return new Point(Game.rand(cmdMax), 0);
 		}
 	}
@@ -374,12 +353,12 @@ final class AIPlayer extends Player {
 				field2.getSunPosition(p[1]), };
 
 		if (sunPoint[pNum] == null) {
-			Game.println("AIPlayer.evaluation return -10000");
-			return -10000;
+			Game.println("AIPlayer.evaluation return -100000");
+			return -100000;
 		}
 		if (sunPoint[1 - pNum] == null) {
-			Game.println("AIPlayer.evaluation return 10000");
-			return 10000;
+			Game.println("AIPlayer.evaluation return 100000");
+			return 100000;
 		}
 
 		if (sunPoint[pNum].x < 3)

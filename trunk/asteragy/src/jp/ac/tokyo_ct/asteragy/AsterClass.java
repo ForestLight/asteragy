@@ -198,6 +198,7 @@ final class AsterClass {
 				}
 				return range;
 			}
+			return new int[][] {{0}};
 		}
 		case 5: { // アース
 			// SunClassから拝借
@@ -226,7 +227,6 @@ final class AsterClass {
 			return range;
 		}
 		case 6: { // マーズ
-			// final Aster a = getAster();
 			final int[][] range = new int[marsRange.length][marsRange[0].length];
 			// レンジの左上の座標のフィールド内での位置
 			final Point pt = thisPoint;// .clone();
@@ -283,9 +283,7 @@ final class AsterClass {
 						}
 					}
 				}
-			}
-			// 対象選択2個目 (アステル)
-			else {
+			} else {// 対象選択2個目 (アステル)
 				// ターゲット1のレンジ内での位置
 				pt.x = target1.x - (thisPoint.x - range[0].length / 2);
 				pt.y = target1.y - (thisPoint.y - range.length / 2);
@@ -335,9 +333,7 @@ final class AsterClass {
 						}
 					}
 				}
-			}
-			// 2個目
-			else {
+			} else { // 2個目
 				for (int i = 0; i < uranusRange.length; i++) {
 					if (pt.y + i < 0 || pt.y + i >= f.length)
 						continue;
@@ -408,34 +404,35 @@ final class AsterClass {
 		Game.println("setPointAndNext: " + pt.x + ", " + pt.y);
 		if (mode == 0) {
 			swapSetPointAndNext(pt);
-		}
-		switch (number) {
-		case 2:
-		case 9:
-			swapSetPointAndNext(pt);
-			break;
-		case 1:
-			if (target1 == null) {
+		} else {
+			switch (number) {
+			case 2:
+			case 9:
+				swapSetPointAndNext(pt);
+				break;
+			case 1:
+				if (target1 == null) {
+					target1 = pt;
+	
+				} else {
+					asterClassSelect = pt.x;
+				}
+				break;
+			case 3:
+			case 4:
+			case 5:
+			case 6:
+			case 7:
+			case 10:
 				target1 = pt;
-
-			} else {
-				asterClassSelect = pt.x;
+				break;
+			case 8:
+			case 11:
+			case 12:
+				break;
+			default:
+				throw new RuntimeException("setPointAndNext");
 			}
-			break;
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-		case 10:
-			target1 = pt;
-			break;
-		case 8:
-		case 11:
-		case 12:
-			break;
-		default:
-			throw new RuntimeException("setPointAndNext");
 		}
 	}
 
@@ -938,7 +935,9 @@ final class AsterClass {
 	}
 
 	private final boolean swapHasNext() {
-		return target1 == null || target2 == null;
+		boolean ret = target1 == null || target2 == null;
+		Game.println("swapHasNext: " + ret);
+		return ret;
 	}
 
 	final static int[][] getDefaultRange(int n, boolean player2) {
@@ -1063,7 +1062,7 @@ final class AsterClass {
 			"リング部分を右回りにローテーション", "2つのアステルを入れ替える", "自分とアステル1個を入れ替える",
 			"レンジ内のアステルを全て破壊する", "自身を破壊して自分のサンを移動", };
 
-	final static int[] classCost = { 0, 2, 6, 5, 4, 8, 7, 11, 10, 11, 12, 0 };
+	final static int[] classCost = { 0, 2, 6, 5, 4, 8, 7, 11, 10, 12, 12, 4 };
 
 	final static int[] commandCost = { 0, 0, 3, 7, 4, 5, 1, 4, 5, 6, 18, 4 };
 
