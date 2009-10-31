@@ -1,5 +1,0 @@
-C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\AsteragyPipeline\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\AsteragyPipeline\bin\x86\Debug\AsteragyPipeline.dll
-C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\AsteragyPipeline\bin\x86\Debug\AsteragyPipeline.pdb
-C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\AsteragyPipeline\obj\x86\Debug\AsteragyPipeline.dll
-C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\AsteragyPipeline\obj\x86\Debug\AsteragyPipeline.pdb
