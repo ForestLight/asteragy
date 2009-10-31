@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Fonts\normal.spritefont</Source>
+      <Name>Fonts\normal</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>MessageProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\Asteragy\bin\x86\Debug\Content\Fonts\normal.xnb</Output>
+      <Time>2009-11-01T03:53:14.5+09:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\Asteragy\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\Asteragy\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\Asteragy\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\Asteragy\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.1\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2009-05-28T00:16:14+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.1\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2009-05-28T00:16:06+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.1\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2009-05-28T00:16:16+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.1\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2009-05-28T00:16:26+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.1\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2009-05-28T00:16:12+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.1\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2009-05-28T00:16:06+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\AsteragyPipeline\bin\x86\Debug\AsteragyPipeline.dll</Key>
+        <Value>2009-11-01T03:52:41.640625+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2009-10-30T20:52:27.9375+09:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

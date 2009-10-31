@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asteragy", "Asteragy\Asteragy.csproj", "{87BB0FB8-A06D-4014-84A6-7849BD5841AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsteragyPipeline", "AsteragyPipeline\AsteragyPipeline.csproj", "{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Debug|Xbox 360 = Debug|Xbox 360
+		Debug|Zune = Debug|Zune
+		Release|x86 = Release|x86
+		Release|Xbox 360 = Release|Xbox 360
+		Release|Zune = Release|Zune
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87BB0FB8-A06D-4014-84A6-7849BD5841AC}.Debug|x86.ActiveCfg = Debug|x86
+		{87BB0FB8-A06D-4014-84A6-7849BD5841AC}.Debug|x86.Build.0 = Debug|x86
+		{87BB0FB8-A06D-4014-84A6-7849BD5841AC}.Debug|Xbox 360.ActiveCfg = Debug|x86
+		{87BB0FB8-A06D-4014-84A6-7849BD5841AC}.Debug|Zune.ActiveCfg = Debug|x86
+		{87BB0FB8-A06D-4014-84A6-7849BD5841AC}.Release|x86.ActiveCfg = Release|x86
+		{87BB0FB8-A06D-4014-84A6-7849BD5841AC}.Release|x86.Build.0 = Release|x86
+		{87BB0FB8-A06D-4014-84A6-7849BD5841AC}.Release|Xbox 360.ActiveCfg = Release|x86
+		{87BB0FB8-A06D-4014-84A6-7849BD5841AC}.Release|Zune.ActiveCfg = Release|x86
+		{1DAE2B7A-1834-4654-AECF-E190373FE58C}.Debug|x86.ActiveCfg = Debug|x86
+		{1DAE2B7A-1834-4654-AECF-E190373FE58C}.Debug|Xbox 360.ActiveCfg = Debug|x86
+		{1DAE2B7A-1834-4654-AECF-E190373FE58C}.Debug|Zune.ActiveCfg = Debug|x86
+		{1DAE2B7A-1834-4654-AECF-E190373FE58C}.Release|x86.ActiveCfg = Release|x86
+		{1DAE2B7A-1834-4654-AECF-E190373FE58C}.Release|Xbox 360.ActiveCfg = Release|x86
+		{1DAE2B7A-1834-4654-AECF-E190373FE58C}.Release|Zune.ActiveCfg = Release|x86
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Debug|x86.ActiveCfg = Debug|x86
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Debug|x86.Build.0 = Debug|x86
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Debug|Xbox 360.ActiveCfg = Debug|Xbox 360
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Debug|Xbox 360.Build.0 = Debug|Xbox 360
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Debug|Zune.ActiveCfg = Debug|Zune
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Debug|Zune.Build.0 = Debug|Zune
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Release|x86.ActiveCfg = Release|x86
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Release|x86.Build.0 = Release|x86
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Release|Xbox 360.Build.0 = Release|Xbox 360
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Release|Zune.ActiveCfg = Release|Zune
+		{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}.Release|Zune.Build.0 = Release|Zune
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
