@@ -1,6 +1,8 @@
 Content\Fonts\normal.xnb
-Content\Datas\Menu\positions.xnb
 Content\Fonts\menu.xnb
+Content\Datas\Menu\positions.xnb
+Content\Datas\GameInformation\unit.xnb
+Content\Datas\Background\starTime.xnb
 Content\Images\Classes\earth.xnb
 Content\Images\Classes\jupiter.xnb
 Content\Images\Classes\mars.xnb
@@ -18,5 +20,3 @@ Content\Images\Cursors\cursor.xnb
 Content\Images\Cursors\target.xnb
 Content\Images\Players\cost.xnb
 Content\Effects\background.xnb
-Content\Datas\GameInformation\unit.xnb
-Content\Datas\Background\starTime.xnb
