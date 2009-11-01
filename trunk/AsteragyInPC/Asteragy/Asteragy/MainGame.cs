@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using Asteragy.Scenes;
+using Asteragy.Input;
 
 namespace Asteragy
 {
@@ -40,6 +41,7 @@ namespace Asteragy
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+			GraphicsDevice.RenderState.DepthBufferEnable = false;
             base.Initialize();
         }
 
@@ -72,10 +74,11 @@ namespace Asteragy
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
+			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+				this.Exit();
 
             // TODO: Add your update logic here
+			KeyInputListener.Update();
             IScene next = scene.Update(gameTime);
             if (scene != next)
             {
@@ -92,10 +95,10 @@ namespace Asteragy
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            scene.Draw();
+            scene.Draw(GraphicsDevice);
 
             base.Draw(gameTime);
         }

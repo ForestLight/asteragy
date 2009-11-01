@@ -12,6 +12,6 @@ namespace Asteragy
     {
         void Initialize(GraphicsDevice device,  ContentManager content);
         IScene Update(GameTime gameTime);
-        void Draw();
+        void Draw(GraphicsDevice device);
     }
 }

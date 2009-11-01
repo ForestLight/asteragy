@@ -7,20 +7,220 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>MessageProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\Asteragy\bin\x86\Debug\Content\Fonts\normal.xnb</Output>
-      <Time>2009-11-01T03:53:14.5+09:00</Time>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Fonts\normal.xnb</Output>
+      <Time>2009-11-01T04:40:48.2528641+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Datas\Menu\positions.xml</Source>
+      <Name>Datas\Menu\positions</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Datas\Menu\positions.xnb</Output>
+      <Time>2009-11-01T08:55:20.9636+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\menu.spritefont</Source>
+      <Name>Fonts\menu</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>MessageProcessor</Processor>
+      <Parameters>
+        <Data Key="MessageFilename">../Messages/MenuMessage.cs</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Fonts\menu.xnb</Output>
+      <Time>2009-11-01T04:40:48.2528641+09:00</Time>
+      <Dependency>
+        <Key>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\Messages\MenuMessage.cs</Key>
+        <Value>2009-11-01T04:40:47.9564641+09:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Images\Classes\earth.png</Source>
+      <Name>Images\Classes\earth</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\earth.xnb</Output>
+      <Time>2009-11-01T12:10:49.9074+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\jupiter.png</Source>
+      <Name>Images\Classes\jupiter</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\jupiter.xnb</Output>
+      <Time>2009-11-01T12:10:49.9114+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\mars.png</Source>
+      <Name>Images\Classes\mars</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\mars.xnb</Output>
+      <Time>2009-11-01T12:10:49.9154+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\mercury.png</Source>
+      <Name>Images\Classes\mercury</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\mercury.xnb</Output>
+      <Time>2009-11-01T12:10:49.9194+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\moon.png</Source>
+      <Name>Images\Classes\moon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\moon.xnb</Output>
+      <Time>2009-11-01T12:10:49.9244+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\neptune.png</Source>
+      <Name>Images\Classes\neptune</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\neptune.xnb</Output>
+      <Time>2009-11-01T12:10:49.9284+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\none.png</Source>
+      <Name>Images\Classes\none</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\none.xnb</Output>
+      <Time>2009-11-01T12:10:49.9324+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\pluto.png</Source>
+      <Name>Images\Classes\pluto</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\pluto.xnb</Output>
+      <Time>2009-11-01T12:10:49.9364+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\saturn.png</Source>
+      <Name>Images\Classes\saturn</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\saturn.xnb</Output>
+      <Time>2009-11-01T12:10:49.9404+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\star.png</Source>
+      <Name>Images\Classes\star</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\star.xnb</Output>
+      <Time>2009-11-01T12:10:49.9444+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\sun.png</Source>
+      <Name>Images\Classes\sun</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\sun.xnb</Output>
+      <Time>2009-11-01T12:10:49.9034+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\uranus.png</Source>
+      <Name>Images\Classes\uranus</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\uranus.xnb</Output>
+      <Time>2009-11-01T12:11:08.2254+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Classes\venus.png</Source>
+      <Name>Images\Classes\venus</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Classes\venus.xnb</Output>
+      <Time>2009-11-01T12:11:08.2384+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Cursors\cursor.png</Source>
+      <Name>Images\Cursors\cursor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Cursors\cursor.xnb</Output>
+      <Time>2009-11-01T12:12:11.2054+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Cursors\target.png</Source>
+      <Name>Images\Cursors\target</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Cursors\target.xnb</Output>
+      <Time>2009-11-01T12:13:10.6344+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Players\cost.png</Source>
+      <Name>Images\Players\cost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Images\Players\cost.xnb</Output>
+      <Time>2009-11-01T12:14:56.9664+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Effects\background.fx</Source>
+      <Name>Effects\background</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Effects\background.xnb</Output>
+      <Time>2009-11-01T18:55:18.1724+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Datas\GameInformation\unit.xml</Source>
+      <Name>Datas\GameInformation\unit</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Datas\GameInformation\unit.xnb</Output>
+      <Time>2009-11-01T11:15:46.1494+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Datas\Background\starTime.xml</Source>
+      <Name>Datas\Background\starTime</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\Datas\Background\starTime.xnb</Output>
+      <Time>2009-11-01T18:20:18.6684+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\Asteragy\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\Asteragy\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\Asteragy\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\Asteragy\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\Asteragy\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
+      <Assembly>
+        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Game\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Game.dll</Key>
+        <Value>2009-11-01T04:18:29.1452738+09:00</Value>
+      </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.1\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
         <Value>2009-05-28T00:16:14+09:00</Value>
@@ -46,12 +246,12 @@
         <Value>2009-05-28T00:16:06+09:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Documents and Settings\Kazuto\My Documents\games\Asteragy\AsteragyPipeline\bin\x86\Debug\AsteragyPipeline.dll</Key>
-        <Value>2009-11-01T03:52:41.640625+09:00</Value>
+        <Key>C:\Users\kazuto\Documents\asteragy\AsteragyInPC\Asteragy\AsteragyPipeline\bin\Zune\Debug\AsteragyPipeline.dll</Key>
+        <Value>2009-11-01T06:42:09.9100641+09:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2009-10-30T20:52:27.9375+09:00</Value>
+        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2009-11-01T04:18:49.6748738+09:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
