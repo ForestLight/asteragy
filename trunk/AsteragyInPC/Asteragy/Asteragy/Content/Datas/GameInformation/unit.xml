@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <XnaContent>
   <!-- TODO: replace this Asset with your own XML asset data. -->
-  <Asset Type="Microsoft.Xna.Framework.Vector2[]">
-		400.0 300.0
+  <Asset Type="Microsoft.Xna.Framework.Vector2">
+		40.0 40.0
 	</Asset>
 </XnaContent>
