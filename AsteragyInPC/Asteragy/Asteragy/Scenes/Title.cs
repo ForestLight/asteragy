@@ -5,32 +5,36 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Asteragy.Visuals;
+using Asteragy.Input;
+using Microsoft.Xna.Framework.Input;
+using Asteragy.Game;
 
 namespace Asteragy.Scenes
 {
-    public class Title : IScene
+    public class Title : SceneBase
     {
-        private SpriteBatch sprite;
-        
+		private Menu menu;
 
-        #region IScene メンバ
+		public override void Initialize(GraphicsDevice device, ContentManager content)
+		{
+			base.Initialize(device, content);
+			this.Parts.Add(new Background(device, content));
+			this.Parts.Add((menu = new Menu(content)));
+		}
 
-        public void Initialize(GraphicsDevice device, ContentManager content)
-        {
-            sprite = new SpriteBatch(device);
-        }
+		public override IScene Update(GameTime gameTime)
+		{
+			base.Update(gameTime);
+			if (KeyInputListener.State != KeyInputState.None)
+				return new Game(new GameInformation(10, 11, 5), this);
+			else
+				return this;
+		}
 
-        public IScene Update(GameTime gameTime)
-        {
-            return this;
-        }
-
-        public void Draw()
-        {
-            sprite.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-            sprite.End();
-        }
-
-        #endregion
+		public override void Draw(GraphicsDevice device)
+		{
+			base.Draw(device);
+		}
     }
 }

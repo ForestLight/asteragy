@@ -14,11 +14,13 @@ namespace Asteragy.Visuals
     {
         private readonly SpriteFont menuFont;
         private readonly Vector2 center;
+		private readonly Vector2[] positions;
 
         public Menu(ContentManager content)
         {
             menuFont = content.Load<SpriteFont>("Fonts/menu");
-            center = menuFont.MeasureString(MenuMessage.Menu[0]) / 2.0f;
+			positions = content.Load<Vector2[]>("Datas/Menu/positions");
+			center = menuFont.MeasureString(MenuMessage.Menu[0]) / 2.0f;
         }
 
         #region IParts メンバ
@@ -27,8 +29,11 @@ namespace Asteragy.Visuals
         {
         }
 
-        public void Draw(SpriteBatch sprite)
+        public void Draw(GraphicsDevice device, SpriteBatch sprite)
         {
+			sprite.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
+			sprite.DrawString(menuFont, MenuMessage.Menu[0], positions[0], Color.White, 0.0f, center, 1.0f, SpriteEffects.None, 0.0f);
+			sprite.End();
         }
 
         #endregion
