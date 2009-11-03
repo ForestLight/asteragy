@@ -79,7 +79,7 @@ namespace Asteragy
 
             // TODO: Add your update logic here
 			KeyInputListener.Update();
-            IScene next = scene.Update(gameTime);
+            IScene next = scene.Update(GraphicsDevice, gameTime);
             if (scene != next)
             {
                 scene = next;

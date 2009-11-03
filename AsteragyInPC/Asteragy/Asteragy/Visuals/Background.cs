@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Asteragy.Graphics;
 using Microsoft.Xna.Framework;
+using System.Runtime.InteropServices;
 
 namespace Asteragy.Visuals
 {
@@ -15,6 +16,8 @@ namespace Asteragy.Visuals
         private readonly TimeSpan starTime;
         private VertexPositionColor[] stars;
         private VertexDeclaration starsDeclaration;
+        private FullVertexBuffer full;
+        private PerlinNoiseTexture noise;
         private Effect effect;
         private TimeSpan time;
 
@@ -33,30 +36,37 @@ namespace Asteragy.Visuals
                 stars[i].Position.Z = (float)random.NextDouble();
             }
             starsDeclaration = new VertexDeclaration(device, VertexPositionColor.VertexElements);
+            full = new FullVertexBuffer(device);
+            noise = new PerlinNoiseTexture(device, content);
+            effect.Parameters["noise_map"].SetValue(noise.Noise);
             time = TimeSpan.MaxValue;
         }
 
         #region IParts メンバ
 
-        public void Update(GameTime gameTime)
+        public void Update(GraphicsDevice device, GameTime gameTime)
         {
             if (time >= starTime)
             {
                 for (int i = 0; i < stars.Length; i++)
                 {
-                    stars[i].Position.Z = noise(stars[i].Position.Z);
                     stars[i].Color.PackedValue = (uint)random.Next();
                 }
                 time = TimeSpan.Zero;
             }
+            noise.Render(device, (float)gameTime.TotalGameTime.TotalSeconds);
             time += gameTime.ElapsedGameTime;
         }
 
         public void Draw(GraphicsDevice device, SpriteBatch sprite)
         {
-            device.VertexDeclaration = starsDeclaration;
             effect.Begin(SaveStateMode.SaveState);
+            effect.CurrentTechnique.Passes[0].Begin();
+            full.Set(device);
+            full.Draw(device);
+            effect.CurrentTechnique.Passes[0].End();
             effect.CurrentTechnique.Passes[1].Begin();
+            device.VertexDeclaration = starsDeclaration;
             device.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.PointList, stars, 0, stars.Length);
             effect.CurrentTechnique.Passes[1].End();
             effect.End();

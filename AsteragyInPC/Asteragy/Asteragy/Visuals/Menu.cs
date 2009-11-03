@@ -25,7 +25,7 @@ namespace Asteragy.Visuals
 
         #region IParts メンバ
 
-        public void Update(GameTime gameTime)
+        public void Update(GraphicsDevice device, GameTime gameTime)
         {
         }
 

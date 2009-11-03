@@ -1,7 +1,8 @@
-uniform extern texture nebura_color_map;
-sampler nebura_sampler = sampler_state
+uniform extern texture noise_map;
+
+sampler noise_sampler = sampler_state
 {
-	Texture = <nebura_color_map>;
+	Texture = <noise_map>;
 	
 	MinFilter = Linear;
 	MagFilter = Linear;
@@ -15,19 +16,18 @@ struct NeburaOutputVertex
 	float2 tex : TEXCOORD0;
 };
 
-NeburaOutputVertex neburaVS(float3 position : POSITION0) : POSITION0
+NeburaOutputVertex neburaVS(float3 position : POSITION0)
 {
 	NeburaOutputVertex output;
 	output.position = float4(position.xyz, 1.0);
-	output.tex = position.xy;
+	output.tex = position.xy * 0.5 + 0.5;
 	return output;
 }
 
 float4 neburaPS(float2 tex : TEXCOORD0) : COLOR0
 {
-	float color = noise(float3(tex.xy, time))*****************************************************************************************6 * 0.5 + 0.5;
-	float alpha = noise(float3(tex.xy, time + time)) * 0.5 + 0.5;
-	return float4(tex2D(nebura_sampler, float2(color, 0.5)).xyz, alpha);
+	float n = tex2D(noise_sampler, tex).x;
+	return n * float4(0.8, 0.6, 1.0, 0.1);
 }
 
 struct PointOutputVertex
@@ -42,7 +42,7 @@ PointOutputVertex pointVS(float3 position : POSITION0, float4 color : COLOR0, fl
 {
 	PointOutputVertex output;
 	output.position = float4(position.xy * 2.0 - 1.0, 0.0, 1.0);
-	output.point_size = position.z * 3.0;
+	output.point_size = position.z * 1.2;
 	output.color = float4(color.rr * 0.1 + 0.9, 1.0, color.a * 0.5 + 0.25);
 	output.tex = tex;
 	return output;

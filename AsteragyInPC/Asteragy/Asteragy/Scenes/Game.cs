@@ -28,9 +28,9 @@ namespace Asteragy.Scenes
 			this.Parts.Add(new Background(device, content));
 		}
 
-		public override IScene Update(GameTime gameTime)
+		public override IScene Update(GraphicsDevice device, GameTime gameTime)
 		{
-			return base.Update(gameTime);
+			return base.Update(device, gameTime);
 		}
 	}
 }
