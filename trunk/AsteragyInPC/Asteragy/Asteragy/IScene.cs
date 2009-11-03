@@ -11,7 +11,7 @@ namespace Asteragy
     public interface IScene
     {
         void Initialize(GraphicsDevice device,  ContentManager content);
-        IScene Update(GameTime gameTime);
+        IScene Update(GraphicsDevice device, GameTime gameTime);
         void Draw(GraphicsDevice device);
     }
 }

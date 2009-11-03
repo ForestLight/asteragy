@@ -26,11 +26,11 @@ namespace Asteragy.Scenes
             Sprite = new SpriteBatch(device);
         }
 
-        public virtual IScene Update(GameTime gameTime)
+        public virtual IScene Update(GraphicsDevice device, GameTime gameTime)
         {
 			foreach (var part in Parts)
 			{
-				part.Update(gameTime);
+				part.Update(device, gameTime);
 			}
 			return this;
         }

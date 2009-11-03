@@ -86,7 +86,10 @@
   <ItemGroup>
     <Compile Include="Constant.cs" />
     <Compile Include="Game\GameInformation.cs" />
+    <Compile Include="Graphics\FullVertexBuffer.cs" />
     <Compile Include="Graphics\IParts.cs" />
+    <Compile Include="Graphics\PerlinNoiseTexture.cs" />
+    <Compile Include="Graphics\VertexPosition.cs" />
     <Compile Include="Input\KeyInputListener.cs" />
     <Compile Include="IScene.cs" />
     <Compile Include="Messages\MenuMessage.cs" />

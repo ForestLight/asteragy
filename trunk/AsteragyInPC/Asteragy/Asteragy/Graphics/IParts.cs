@@ -9,7 +9,7 @@ namespace Asteragy.Graphics
 {
     public interface IParts
     {
-        void Update(GameTime gameTime);
+        void Update(GraphicsDevice device, GameTime gameTime);
         void Draw(GraphicsDevice device, SpriteBatch sprite);
     }
 }

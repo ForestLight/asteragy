@@ -9,6 +9,10 @@ namespace ContentXml
 {
 	class Program
 	{
+        static void makePerlinNoise()
+        {
+        }
+
 		static void Main(string[] args)
 		{
 			using(XmlWriter writer = XmlWriter.Create(Console.Out)){

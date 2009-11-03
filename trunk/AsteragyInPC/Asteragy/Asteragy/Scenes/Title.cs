@@ -23,9 +23,9 @@ namespace Asteragy.Scenes
 			this.Parts.Add((menu = new Menu(content)));
 		}
 
-		public override IScene Update(GameTime gameTime)
+		public override IScene Update(GraphicsDevice device, GameTime gameTime)
 		{
-			base.Update(gameTime);
+			base.Update(device, gameTime);
 			if (KeyInputListener.State != KeyInputState.None)
 				return new Game(new GameInformation(10, 11, 5), this);
 			else
