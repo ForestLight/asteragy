@@ -1,5 +1,4 @@
 uniform extern texture noise_map;
-
 sampler noise_sampler = sampler_state
 {
 	Texture = <noise_map>;
@@ -7,6 +6,9 @@ sampler noise_sampler = sampler_state
 	MinFilter = Linear;
 	MagFilter = Linear;
 	MipFilter = Linear;
+	AddressU = Mirror;
+	AddressV = Mirror;
+	AddressW = Mirror;
 };
 uniform extern float time : TIME;
 
@@ -26,8 +28,8 @@ NeburaOutputVertex neburaVS(float3 position : POSITION0)
 
 float4 neburaPS(float2 tex : TEXCOORD0) : COLOR0
 {
-	float n = tex2D(noise_sampler, tex).x;
-	return n * float4(0.8, 0.6, 1.0, 0.1);
+	float n = tex3D(noise_sampler, float3(tex, time * 0.1)).x;
+	return (n * 1.1 - 0.1) * float4(0.8, 0.6, 1.0, 0.1);
 }
 
 struct PointOutputVertex

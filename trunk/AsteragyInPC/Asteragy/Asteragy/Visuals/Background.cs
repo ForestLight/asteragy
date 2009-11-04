@@ -13,32 +13,37 @@ namespace Asteragy.Visuals
     public class Background : IParts
     {
         private static readonly Random random = new Random();
-        private readonly TimeSpan starTime;
-        private VertexPositionColor[] stars;
-        private VertexDeclaration starsDeclaration;
-        private FullVertexBuffer full;
-        private PerlinNoiseTexture noise;
-        private Effect effect;
+        private static bool initialized = false;
+        private static TimeSpan starTime;
+        private static VertexPositionColor[] stars;
+        private static VertexDeclaration starsDeclaration;
+        private static FullVertexBuffer full;
+        private static PerlinNoiseTexture noise;
+        private static Effect effect;
         private TimeSpan time;
 
 
         public Background(GraphicsDevice device, ContentManager content)
         {
-            effect = content.Load<Effect>("Effects/background");
-            starTime = content.Load<TimeSpan>("Datas/Background/starTime");
-            effect.CurrentTechnique = effect.Techniques["star"];
-            stars = new VertexPositionColor[100];
-            for (int i = 0; i < stars.Length; i++)
+            if (!initialized)
             {
-                stars[i].Color = Color.White;
-                stars[i].Position.X = (float)random.NextDouble();
-                stars[i].Position.Y = (float)random.NextDouble();
-                stars[i].Position.Z = (float)random.NextDouble();
+                effect = content.Load<Effect>("Effects/background");
+                starTime = content.Load<TimeSpan>("Datas/Background/starTime");
+                effect.CurrentTechnique = effect.Techniques["star"];
+                stars = new VertexPositionColor[100];
+                for (int i = 0; i < stars.Length; i++)
+                {
+                    stars[i].Color = Color.White;
+                    stars[i].Position.X = (float)random.NextDouble();
+                    stars[i].Position.Y = (float)random.NextDouble();
+                    stars[i].Position.Z = (float)random.NextDouble();
+                }
+                starsDeclaration = new VertexDeclaration(device, VertexPositionColor.VertexElements);
+                full = new FullVertexBuffer(device);
+                noise = new PerlinNoiseTexture(device, content);
+                effect.Parameters["noise_map"].SetValue(noise.Noise);
+                initialized = true;
             }
-            starsDeclaration = new VertexDeclaration(device, VertexPositionColor.VertexElements);
-            full = new FullVertexBuffer(device);
-            noise = new PerlinNoiseTexture(device, content);
-            effect.Parameters["noise_map"].SetValue(noise.Noise);
             time = TimeSpan.MaxValue;
         }
 
@@ -54,7 +59,7 @@ namespace Asteragy.Visuals
                 }
                 time = TimeSpan.Zero;
             }
-            noise.Render(device, (float)gameTime.TotalGameTime.TotalSeconds);
+            effect.Parameters["time"].SetValue((float)gameTime.TotalGameTime.TotalSeconds);
             time += gameTime.ElapsedGameTime;
         }
 
