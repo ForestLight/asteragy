@@ -121,6 +121,8 @@ float4 perlinPS(float2 tex : TEXCOORD0, uniform float frequency, uniform float a
 	return  n;
 }
 
+//遅くて使えない。
+//試したビデオカード　：　HD4770 →　余裕です，　GeForce8200　→　コマ送り
 technique perlinnoise
 {
 	pass pass0
