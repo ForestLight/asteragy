@@ -12,6 +12,7 @@ namespace Asteragy.Game
     {
         private int ap = 0;
         public int AstarPower { get { return ap; } }
+        public string Name { get; set; }
 
         #region IParts メンバ
 
