@@ -87,6 +87,7 @@
     <Compile Include="Constant.cs" />
     <Compile Include="Game\GameInformation.cs" />
     <Compile Include="Game\Player.cs" />
+    <Compile Include="Graphics\DelegateParts.cs" />
     <Compile Include="Graphics\FullVertexBuffer.cs" />
     <Compile Include="Graphics\IParts.cs" />
     <Compile Include="Graphics\PerlinNoiseTexture.cs" />
