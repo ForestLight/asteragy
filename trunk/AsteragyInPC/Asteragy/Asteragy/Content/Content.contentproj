@@ -194,6 +194,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fonts\command.spritefont">
+      <Name>command</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>MessageProcessor</Processor>
+      <ProcessorParameters_MessageFilename>../Messages/CommandMessage.cs</ProcessorParameters_MessageFilename>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Images\Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
