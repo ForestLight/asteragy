@@ -27,7 +27,7 @@ namespace Asteragy.Scenes
 		{
 			base.Update(device, gameTime);
 			if (KeyInputListener.State != KeyInputState.None)
-				return new Game(new GameInformation(10, 11, 5), this);
+				return new Game(new GameInformation(10, 11, 5, null, null), this);
 			else
 				return this;
 		}

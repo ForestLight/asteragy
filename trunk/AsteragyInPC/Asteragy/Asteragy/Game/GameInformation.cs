@@ -14,18 +14,25 @@ namespace Asteragy.Game
 		private int columns;
 		private int colors;
 		private Vector2[,] positions;
+        private Player[] players;
 
 		public int Rows { get { return rows; } }
 		public int Columns { get { return columns; } }
 		public int Colors { get { return colors; } }
 		public Vector2[,] Positions { get { return positions; } }
+        public Player PlayerOne { get { return players[0]; } }
+        public Player PlayerTwo { get { return players[1]; } }
 
-		public GameInformation(int rows, int columns, int colors)
+
+		public GameInformation(int rows, int columns, int colors, Player one, Player two)
 		{
 			this.rows = rows;
 			this.columns = columns;
 			this.colors = colors;
 			positions = new Vector2[rows, columns];
+            players = new Player[2];
+            players[0] = one;
+            players[1] = two;
 		}
 
 		public void Initialize(ContentManager content)
