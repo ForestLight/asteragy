@@ -28,8 +28,8 @@ NeburaOutputVertex neburaVS(float3 position : POSITION0)
 
 float4 neburaPS(float2 tex : TEXCOORD0) : COLOR0
 {
-	float n = tex3D(noise_sampler, float3(tex, time * 0.1)).x;
-	return (n * 1.1 - 0.1) * float4(0.8, 0.6, 1.0, 0.1);
+	float4 n = tex3D(noise_sampler, float3(tex, time * 0.1));
+	return n.x * float4(0.4, 0.4, 1.0, 0.04) + n.y * float4(1.0, 0.4, 0.6, 0.04) + n.z * float4(0.3, 1.0, 0.3, 0.02);
 }
 
 struct PointOutputVertex

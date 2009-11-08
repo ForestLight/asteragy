@@ -8,10 +8,24 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteragy.Game
 {
+    public enum PlayerType
+    {
+        None,
+        One,
+        Two,
+    }
     public abstract class Player : IParts
     {
         private int ap = 0;
+        private PlayerType type;
+
         public int AstarPower { get { return ap; } }
+        public PlayerType Type { get { return type; } }
+
+        public Player(PlayerType type)
+        {
+            this.type = type;
+        }
 
         #region IParts メンバ
 

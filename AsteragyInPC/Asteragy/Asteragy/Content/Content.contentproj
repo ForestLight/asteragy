@@ -41,6 +41,10 @@
     <Reference Include="Microsoft.Xna.Framework.Game, Version=3.1.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=x86" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AsteragyData\AsteragyData.csproj">
+      <Project>{ECEB85E2-2277-4C96-91E6-1F79E7CE9C2F}</Project>
+      <Name>AsteragyData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\AsteragyPipeline\AsteragyPipeline.csproj">
       <Project>{E2B121F3-2BBD-4BEA-9314-B63EDBA662AD}</Project>
       <Name>AsteragyPipeline</Name>
@@ -199,6 +203,20 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>MessageProcessor</Processor>
       <ProcessorParameters_MessageFilename>../Messages/CommandMessage.cs</ProcessorParameters_MessageFilename>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Aster\colors.xml">
+      <Name>colors</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\DefaultDecorator.xml">
+      <Name>DefaultDecorator</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>

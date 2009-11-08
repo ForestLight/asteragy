@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <!-- TODO: replace this Asset with your own XML asset data. -->
+  <Asset Type="Microsoft.Xna.Framework.Graphics.Color[]">
+    ffff4f0c
+    ff59b2e1
+    ffbcff87
+    fff9f93f
+    ffff4df7
+  </Asset>
+</XnaContent>

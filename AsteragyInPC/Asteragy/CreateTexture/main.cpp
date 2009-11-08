@@ -1,11 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
-#include <d3dx9.h>
+//#include <d3dx9.h>
 #include <windows.h>
 
-#pragma comment(lib, "d3dx9.lib")
-#pragma comment(lib, "d3d9.lib")
+//#pragma comment(lib, "d3dx9.lib")
+//#pragma comment(lib, "d3d9.lib")
 
 #define DDSD_CAPS               0x00000001l
 #define DDSD_HEIGHT             0x00000002l
@@ -271,17 +271,23 @@ void perlin_noise(COLOR* data){
 		for(j = 0; j < 128; ++j){
 			for(k = 0; k < 128; ++k){
 				int index = i * 128 * 128 + j * 128 + k;
-				double x, y, z, n;
-				BYTE b;
+				double x, y, z, m, n, o, p;
+				BYTE b, c, d, e;
 				x = k * 0.05;
 				y = j * 0.05;
 				z = i * 0.1;
-				n = pnoise(x, y, z);
-				b = (BYTE)(255 * (n * 0.5 + 0.5));
-				data[index].A = b;
+				m = pnoise(x, y, z);
+				n = pnoise(x, y, z + 12.8);
+				o = pnoise(x, y, z + 25.6);
+				p = pnoise(x, y, z + 38.4);
+				b = (BYTE)(255 * (m * 0.5 + 0.5));
+				c = (BYTE)(255 * (n * 0.5 + 0.5));
+				d = (BYTE)(255 * (o * 0.5 + 0.5));
+				e = (BYTE)(255 * (p * 0.5 + 0.5));
 				data[index].R = b;
-				data[index].G = b;
-				data[index].B = b;
+				data[index].G = c;
+				data[index].B = d;
+				data[index].A = e;
 				//printf("%lf %lf %lf %lf\n", x, y, z, n);
 				//getchar();
 			}
