@@ -73,11 +73,11 @@ namespace Asteragy.Game
             sprite.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
             for (int i = 0; i < information.Rows; i++)
                 for (int j = 0; j < information.Columns; j++)
-                    asters[i][j].Draw(device, sprite, information.Positions[i, j]);
+                    asters[i][j].Draw(device, sprite, information.Positions[j, i]);
             sprite.End();
             for (int i = 0; i < information.Rows; i++)
                 for (int j = 0; j < information.Columns; j++)
-                    asters[i][j].OverDraw(device, sprite, information.Positions[i, j]);
+                    asters[i][j].OverDraw(device, sprite, information.Positions[j, i]);
         }
 
         #endregion

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Asteragy.Visuals;
+using System.Diagnostics;
 
 namespace Asteragy.Scenes
 {
@@ -29,7 +30,16 @@ namespace Asteragy.Scenes
 			base.Initialize(device, content);
 			this.Parts.Add(new Background(device, content));
             this.Parts.Add((field = new Field(content, information)));
-		}
+            //this.Parts.Add(information.PlayerOne);
+            //this.Parts.Add(information.PlayerTwo);
+            d_set(content);
+        }
+
+        [Conditional("DEBUG")]
+        private void d_set(ContentManager content)
+        {
+            this.Parts.Add(new Cursor(content, information.Positions));
+        }
 
 		public override IScene Update(GraphicsDevice device, GameTime gameTime)
 		{
