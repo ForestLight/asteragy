@@ -67,6 +67,14 @@ namespace Asteragy.Game
         }
         public void OverDraw(GraphicsDevice device, SpriteBatch sprite, Vector2 position)
         {
+            OverDrawParameters parameters = new OverDrawParameters()
+            {
+                Device = device,
+                Sprite = sprite,
+                Position = position,
+                Player = Owner,
+            };
+            decorator.OverDraw(parameters);
         }
     }
 }

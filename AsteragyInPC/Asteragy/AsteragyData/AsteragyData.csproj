@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CursorData.cs" />
     <Compile Include="DefaultDecoratorData.cs" />
     <Compile Include="IData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

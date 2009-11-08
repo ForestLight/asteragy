@@ -31,6 +31,11 @@ namespace Asteragy.Graphics
             Child.Draw(unit, parameters);
         }
 
+        public virtual void OverDraw(OverDrawParameters parameters)
+        {
+            Child.OverDraw(parameters);
+        }
+
         #endregion
     }
 }

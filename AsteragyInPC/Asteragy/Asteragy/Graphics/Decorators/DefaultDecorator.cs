@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AsteragyData;
 using Microsoft.Xna.Framework.Content;
+using Asteragy.Graphics.Animations;
 
 namespace Asteragy.Graphics.Decorators
 {
@@ -13,10 +14,7 @@ namespace Asteragy.Graphics.Decorators
     {
         private static readonly Random random = new Random();
         private DefaultDecoratorData data;
-        private TimeSpan time;
-        private Vector2 to;
-        private Vector2 from;
-        private Vector2 now;
+        private InterpolateOnce<Vector2> interpolate;
 
         public DefaultDecorator(ContentManager content)
         {
@@ -25,7 +23,7 @@ namespace Asteragy.Graphics.Decorators
         private DefaultDecorator(DefaultDecoratorData data)
         {
             this.data = data;
-            next(out to);
+            interpolate = new InterpolateOnce<Vector2>(Vector2.Lerp, data.UnitTime, Vector2.Zero, next());
         }
 
         #region IDecorator メンバ
@@ -34,32 +32,26 @@ namespace Asteragy.Graphics.Decorators
         {
         }
 
-        private void next(out Vector2 next)
+        private Vector2 next()
         {
-            next = new Vector2((float)random.NextDouble(), (float)random.NextDouble()) * data.Range;
+            return new Vector2((float)random.NextDouble(), (float)random.NextDouble()) * data.Range;
         }
 
         public IDecorator Update(GraphicsDevice device, GameTime gameTime)
         {
-            if (time < data.UnitTime)
-            {
-                Vector2.Lerp(ref from, ref to, (float)(time.TotalMilliseconds / data.UnitTime.TotalMilliseconds), out now);
-            }
-            else
-            {
-                from = to;
-                next(out to);
-                time = TimeSpan.Zero;
-            }
-            time += gameTime.ElapsedGameTime;
+            interpolate.Update(device, gameTime);
+            if (interpolate.End)
+                interpolate.Restart(interpolate.To, next());
             return this;
         }
 
         public void Draw(IAster unit, AsterDrawParameters parameters)
         {
-            parameters.Position += now;
+            parameters.Position += interpolate.Now;
             unit.Draw(parameters);
         }
+
+        public void OverDraw(OverDrawParameters parameters) { }
 
         #endregion
 

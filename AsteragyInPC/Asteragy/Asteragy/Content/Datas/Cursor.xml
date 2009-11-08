@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <!-- TODO: replace this Asset with your own XML asset data. -->
+  <Asset Type="AsteragyData.CursorDataContent">
+    <MoveTime>10.0</MoveTime>
+    <CursorTexture>
+      <Reference>#External1</Reference>
+    </CursorTexture>
+  </Asset>
+  <ExternalReferences>
+    <ExternalReference ID="#External1" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../Images/Cursors/cursor.png</ExternalReference>
+  </ExternalReferences>
+</XnaContent>

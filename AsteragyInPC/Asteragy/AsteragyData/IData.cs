@@ -7,9 +7,15 @@ using Microsoft.Xna.Framework.Content;
 
 namespace AsteragyData
 {
-    public interface IData
+    public interface IWrite
     {
         void Write(ContentWriter writer);
+    }
+    public interface IRead
+    {
         void Read(ContentReader reader);
+    }
+    public interface IData : IRead, IWrite
+    {
     }
 }

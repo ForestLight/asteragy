@@ -105,7 +105,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Decorators\DefaultDecoratorWriter.cs" />
     <Compile Include="MessageProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

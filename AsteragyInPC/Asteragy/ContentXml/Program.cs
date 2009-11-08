@@ -5,6 +5,9 @@ using System.Text;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate;
 using System.Xml;
 using Microsoft.Xna.Framework.Graphics;
+using AsteragyData;
+using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
+using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace ContentXml
 {
