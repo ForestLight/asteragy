@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Asteragy.Game.Classes;
 
 namespace Asteragy.Game
 {
@@ -15,6 +16,7 @@ namespace Asteragy.Game
 		private int colors;
 		private Vector2[,] positions;
         private Player[] players;
+        private AsterClass[] classes;
 
 		public int Rows { get { return rows; } }
 		public int Columns { get { return columns; } }
@@ -22,6 +24,7 @@ namespace Asteragy.Game
 		public Vector2[,] Positions { get { return positions; } }
         public Player PlayerOne { get { return players[0]; } }
         public Player PlayerTwo { get { return players[1]; } }
+        public AsterClass[] Classes { get { return classes; } }
 
 
 		public GameInformation(int rows, int columns, int colors, Player one, Player two)
@@ -39,6 +42,9 @@ namespace Asteragy.Game
 		{
 			unit = content.Load<Vector2>("Datas/GameInformation/unit");
 			initializePositions();
+            classes = new[]{
+                new None(content),
+            };
 		}
 
 		private void initializePositions()

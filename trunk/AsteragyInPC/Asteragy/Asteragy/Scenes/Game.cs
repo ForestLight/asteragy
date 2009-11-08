@@ -14,6 +14,7 @@ namespace Asteragy.Scenes
 	{
 		private GameInformation information;
 		private readonly IScene back;
+        private Field field;
 
 		public Game(GameInformation information, IScene back)
 		{
@@ -24,8 +25,10 @@ namespace Asteragy.Scenes
 		public override void Initialize(GraphicsDevice device, ContentManager content)
 		{
 			information.Initialize(content);
+            Aster.Initialize(content);
 			base.Initialize(device, content);
 			this.Parts.Add(new Background(device, content));
+            this.Parts.Add((field = new Field(content, information)));
 		}
 
 		public override IScene Update(GraphicsDevice device, GameTime gameTime)

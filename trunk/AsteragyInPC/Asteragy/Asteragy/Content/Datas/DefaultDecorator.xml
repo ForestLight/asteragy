@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <!-- TODO: replace this Asset with your own XML asset data. -->
+  <Asset Type="AsteragyData.DefaultDecoratorData">
+    <UnitTime>PT0.4S</UnitTime>
+    <Range>3.0</Range>
+  </Asset>
+</XnaContent>
