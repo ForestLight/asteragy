@@ -300,6 +300,20 @@
       <Processor>TextureProcessor</Processor>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Command.xml">
+      <Name>Command</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>CommandDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\Commands\actions.png">
+      <Name>actions</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

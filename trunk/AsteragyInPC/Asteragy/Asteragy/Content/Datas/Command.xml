@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <!-- TODO: replace this Asset with your own XML asset data. -->
+  <Asset Type="AsteragyData.CommandDataContent">
+    <MoveTime>PT0.3S</MoveTime>
+    <CursorRadius>46.0</CursorRadius>
+    <CommandTexture>
+      <Reference>#External1</Reference>
+    </CommandTexture>
+    <CursorTexture>
+      <Reference>#External2</Reference>
+    </CursorTexture>
+    <ActionsTexture>
+      <Reference>#External3</Reference>
+    </ActionsTexture>
+  </Asset>
+  <ExternalReferences>
+    <ExternalReference ID="#External1" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../Images/Commands/command.png</ExternalReference>
+    <ExternalReference ID="#External2" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../Images/Commands/commandCursor.png</ExternalReference>
+    <ExternalReference ID="#External3" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../Images/Commands/actions.png</ExternalReference>
+  </ExternalReferences>
+</XnaContent>
