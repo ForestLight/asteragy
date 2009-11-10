@@ -2,8 +2,9 @@
 <XnaContent>
   <!-- TODO: replace this Asset with your own XML asset data. -->
   <Asset Type="AsteragyData.CommandDataContent">
-    <MoveTime>PT0.3S</MoveTime>
+    <MoveTime>PT0.2S</MoveTime>
     <CursorRadius>46.0</CursorRadius>
+    <ActionsRadius>82.0</ActionsRadius>
     <CommandTexture>
       <Reference>#External1</Reference>
     </CommandTexture>

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Asteragy.Visuals;
 using System.Diagnostics;
+using Asteragy.Input;
 
 namespace Asteragy.Scenes
 {
@@ -35,14 +36,21 @@ namespace Asteragy.Scenes
             d_set(content);
         }
 
+        Command command;
         [Conditional("DEBUG")]
         private void d_set(ContentManager content)
         {
-            this.Parts.Add(new Cursor(content, information.Positions));
+            Cursor cursor = new Cursor(content, information.Positions);
+            command = new Command(content, field);
+            this.Parts.Add(cursor);
+            this.Parts.Add(command);
+
+            cursor.Position = new Point(4, 4);
         }
 
 		public override IScene Update(GraphicsDevice device, GameTime gameTime)
 		{
+            if (KeyInputListener.State == KeyInputState.OK) command.Change();
 			return base.Update(device, gameTime);
 		}
 	}

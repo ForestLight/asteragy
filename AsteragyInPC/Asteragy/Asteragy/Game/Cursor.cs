@@ -25,7 +25,7 @@ namespace Asteragy.Game
         private readonly AsterPosition positions;
         private readonly InterpolateOnce<Vector2> move;
 
-        public Point Position { get; private set; }
+        public Point Position { get; set; }
         public IMovable Movable { get; set; }
 
         public Cursor(ContentManager content, AsterPosition positions)
