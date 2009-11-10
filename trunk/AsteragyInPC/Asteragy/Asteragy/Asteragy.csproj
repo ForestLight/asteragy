@@ -88,6 +88,7 @@
     <Compile Include="Game\Aster.cs" />
     <Compile Include="Game\AsterClass.cs" />
     <Compile Include="Game\Classes\None.cs" />
+    <Compile Include="Game\Command.cs" />
     <Compile Include="Game\Field.cs" />
     <Compile Include="Game\GameInformation.cs" />
     <Compile Include="Game\IMovable.cs" />

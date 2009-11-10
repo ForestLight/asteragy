@@ -22,17 +22,28 @@ namespace Asteragy.Graphics.Animations
         public T Now { get { return now; } }
         public bool End { get { return time >= Unit; } }
 
+        public event Action Ended = delegate { };
+
         #region InterpolateOnce
         public InterpolateOnce(Interpolate<T> interpolate)
         {
             this.interpolate = interpolate;
         }
-        public InterpolateOnce(Interpolate<T> interpolate, TimeSpan time, T from, T to)
+        public InterpolateOnce(Interpolate<T> interpolate, TimeSpan time)
             : this(interpolate)
         {
             Unit = time;
-            From = from;
-            To = to;
+        }
+        public InterpolateOnce(Interpolate<T> interpolate, TimeSpan time, TimeSpan now)
+            : this(interpolate, time)
+        {
+            this.time = now;
+        }
+        public InterpolateOnce(Interpolate<T> interpolate, TimeSpan time, T from, T to)
+            : this(interpolate, time)
+        {
+            this.from = from;
+            this.to = to;
         }
         #endregion
 
@@ -69,6 +80,7 @@ namespace Asteragy.Graphics.Animations
             {
                 interpolate(ref from, ref to, (float)(time.TotalMilliseconds / Unit.TotalMilliseconds), out now);
                 time += gameTime.ElapsedGameTime;
+                if (time >= Unit) Ended();
             }
         }
 

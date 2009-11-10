@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsterClassData.cs" />
     <Compile Include="CommandData.cs" />
     <Compile Include="CursorData.cs" />
     <Compile Include="DefaultDecoratorData.cs" />
