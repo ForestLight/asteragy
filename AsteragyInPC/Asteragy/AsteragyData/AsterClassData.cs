@@ -20,6 +20,7 @@ namespace AsteragyData
         public string Range;
         public ExternalReference<Texture2DContent> Visual;
         public ExternalReference<Texture2DContent> CommandTexture;
+        public ExternalReference<Texture2DContent> NameTexture;
 
         private bool[][] convertRange(string input)
         {
@@ -55,6 +56,7 @@ namespace AsteragyData
                 Range = convertRange(input.Range),
                 Visual = context.BuildAndLoadAsset<Texture2DContent, Texture2DContent>(input.Visual, null),
                 CommandTexture = context.BuildAndLoadAsset<Texture2DContent, Texture2DContent>(input.CommandTexture, null),
+                NameTexture = input.CreateCost < 0 ? null : context.BuildAndLoadAsset<Texture2DContent, Texture2DContent>(input.NameTexture, null),
             };
         }
     }
@@ -67,6 +69,7 @@ namespace AsteragyData
         public bool[][] Range;
         public Texture2DContent Visual;
         public Texture2DContent CommandTexture;
+        public Texture2DContent NameTexture;
 
         #region IWrite メンバ
 
@@ -78,6 +81,7 @@ namespace AsteragyData
             writer.WriteRawObject<bool[][]>(Range);
             writer.WriteRawObject<Texture2DContent>(Visual);
             writer.WriteRawObject<Texture2DContent>(CommandTexture);
+            if (CreateCost >= 0) writer.WriteRawObject<Texture2DContent>(NameTexture);
         }
 
         #endregion
@@ -105,9 +109,11 @@ namespace AsteragyData
         public bool[][] Range;
         public Texture2D Visual;
         public Texture2D CommandTexture;
+        public Texture2D NameTexture;
 
         public Vector2 VisualCenter;
         public Vector2 CommandCenter;
+        public Vector2 NameCenter;
 
         #region IRead メンバ
 
@@ -119,9 +125,11 @@ namespace AsteragyData
             Range = reader.ReadRawObject<bool[][]>();
             Visual = reader.ReadRawObject<Texture2D>();
             CommandTexture = reader.ReadRawObject<Texture2D>();
+            NameTexture = CreateCost < 0 ? null : reader.ReadRawObject<Texture2D>();
 
             VisualCenter = new Vector2(Visual.Width, Visual.Height) / 2.0f;
             CommandCenter = new Vector2(CommandTexture.Width, CommandTexture.Height) / 2.0f;
+            NameCenter = NameTexture == null ? Vector2.Zero : new Vector2(NameTexture.Width, NameTexture.Height) / 2.0f;
         }
 
         #endregion

@@ -16,9 +16,14 @@
     <CommandTexture>
       <Reference>#External2</Reference>
     </CommandTexture>
+    <NameTexture>
+      <Reference>#External3</Reference>
+    </NameTexture>
+
   </Asset>
   <ExternalReferences>
     <ExternalReference ID="#External1" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Classes/star.png</ExternalReference>
     <ExternalReference ID="#External2" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Commands/swap.png</ExternalReference>
+    <ExternalReference ID="#External3" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Names/star.png</ExternalReference>
   </ExternalReferences>
 </XnaContent>

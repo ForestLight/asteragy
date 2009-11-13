@@ -18,6 +18,7 @@
     <CommandTexture>
       <Reference>#External2</Reference>
     </CommandTexture>
+    <NameTexture></NameTexture>
   </Asset>
   <ExternalReferences>
     <ExternalReference ID="#External1" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Classes/sun.png</ExternalReference>

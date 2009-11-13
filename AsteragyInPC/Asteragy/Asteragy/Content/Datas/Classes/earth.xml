@@ -16,9 +16,13 @@
     <CommandTexture>
       <Reference>#External2</Reference>
     </CommandTexture>
+    <NameTexture>
+      <Reference>#External3</Reference>
+    </NameTexture>
   </Asset>
   <ExternalReferences>
     <ExternalReference ID="#External1" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Classes/earth.png</ExternalReference>
     <ExternalReference ID="#External2" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Commands/summonmoon.png</ExternalReference>
+    <ExternalReference ID="#External3" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Names/earth.png</ExternalReference>
   </ExternalReferences>
 </XnaContent>
