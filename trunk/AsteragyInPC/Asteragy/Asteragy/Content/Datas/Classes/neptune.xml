@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <!-- TODO: replace this Asset with your own XML asset data. -->
+  <Asset Type="AsteragyData.AsterClassDataContent">
+    <CreateCost>12</CreateCost>
+    <CommandCost>6</CommandCost>
+    <Actions>1</Actions>
+    <Range>
+      - - - - o - - - -
+      - - - - o - - - -
+      - - - - o - - - -
+      - - - - o - - - -
+      o o o o o o o o o 
+      - - - - o - - - -
+      - - - - o - - - -
+      - - - - o - - - -
+      - - - - o - - - -
+    </Range>
+    <Visual>
+      <Reference>#External1</Reference>
+    </Visual>
+    <CommandTexture>
+      <Reference>#External2</Reference>
+    </CommandTexture>
+  </Asset>
+  <ExternalReferences>
+    <ExternalReference ID="#External1" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Classes/neptune.png</ExternalReference>
+    <ExternalReference ID="#External2" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Commands/sonicmove.png</ExternalReference>
+  </ExternalReferences>
+</XnaContent>

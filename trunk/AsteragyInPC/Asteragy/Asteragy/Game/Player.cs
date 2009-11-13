@@ -35,6 +35,8 @@ namespace Asteragy.Game
 
         public void Draw(GraphicsDevice device, SpriteBatch sprite)
         {
+            sprite.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
+            sprite.End();
         }
 
         #endregion

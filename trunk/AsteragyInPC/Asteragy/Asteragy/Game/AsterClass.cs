@@ -5,20 +5,34 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Asteragy.Graphics;
 using Microsoft.Xna.Framework;
+using AsteragyData;
 
 namespace Asteragy.Game
 {
     public abstract class AsterClass : IAster
     {
-        protected abstract Texture2D Texture { get; }
+        private AsterClassData data;
+        protected AsterClassData Data { get { return data; } }
 
-        public Vector2 Center { get { return new Vector2(Texture.Width, Texture.Height) / 2.0f; } }
+        public int Actions { get { return data.Actions; } }
+        public int CreateCost { get { return data.CreateCost; } }
+        public int CommandCost { get { return data.CommandCost; } }
+        public bool[][] Range { get { return data.Range; } }
+
+        public Vector2 Center { get { return data.VisualCenter; } }
+        public Vector2 CommandCenter { get { return data.CommandCenter; } }
+        public Texture2D CommandTexture { get { return data.CommandTexture; } }
+
+        public AsterClass(AsterClassData data)
+        {
+            this.data = data;
+        }
 
         #region IAster メンバ
 
         public void Draw(AsterDrawParameters parameters)
         {
-            parameters.Sprite.Draw(Texture, parameters.Position, null, parameters.Color, parameters.Rotate, parameters.Origin, parameters.Scale, parameters.Effect, 0.0f);
+            parameters.Sprite.Draw(Data.Visual, parameters.Position, null, parameters.Color, parameters.Rotate, parameters.Origin, parameters.Scale, parameters.Effect, 0.0f);
         }
 
         #endregion

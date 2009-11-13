@@ -30,7 +30,7 @@ namespace Asteragy.Game
                 asters[i] = new Aster[information.Columns];
                 for (int j = 0; j < asters[i].Length; j++)
                 {
-                    asters[i][j] = new Aster(information.Classes[0]);
+                    asters[i][j] = new Aster(information.Classes[(i + j) % information.Classes.Length]);
                 }
             }
             for (int i = 0; i < asters.Length; i++)

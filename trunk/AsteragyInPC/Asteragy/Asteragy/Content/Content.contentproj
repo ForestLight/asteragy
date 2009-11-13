@@ -51,13 +51,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fonts\normal.spritefont">
-      <Name>normal</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>MessageProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Fonts\menu.spritefont">
       <Name>menu</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -110,11 +103,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </None>
-    <Compile Include="Images\Classes\none.png">
+    <None Include="Images\Classes\none.png">
       <Name>none</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
+    </None>
     <None Include="Images\Classes\pluto.png">
       <Name>pluto</Name>
       <Importer>TextureImporter</Importer>
@@ -156,11 +149,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Images\Players\cost.png">
+    <None Include="Images\Players\cost.png">
       <Name>cost</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Effects\background.fx">
@@ -188,14 +181,6 @@
       <Name>perlinnoise</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Fonts\command.spritefont">
-      <Name>command</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>MessageProcessor</Processor>
-      <ProcessorParameters_MessageFilename>../Messages/CommandMessage.cs</ProcessorParameters_MessageFilename>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -240,8 +225,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </None>
-    <None Include="Images\Commands\quictime.png">
-      <Name>quictime</Name>
+    <None Include="Images\Commands\quicktime.png">
+      <Name>quicktime</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </None>
@@ -313,6 +298,97 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\none.xml">
+      <Name>none</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\sun.xml">
+      <Name>sun</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\star.xml">
+      <Name>star</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\earth.xml">
+      <Name>earth</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\jupiter.xml">
+      <Name>jupiter</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\mars.xml">
+      <Name>mars</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\mercury.xml">
+      <Name>mercury</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\moon.xml">
+      <Name>moon</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\neptune.xml">
+      <Name>neptune</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\pluto.xml">
+      <Name>pluto</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\saturn.xml">
+      <Name>saturn</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\uranus.xml">
+      <Name>uranus</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Datas\Classes\venus.xml">
+      <Name>venus</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>AsterClassDataContent</Processor>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
