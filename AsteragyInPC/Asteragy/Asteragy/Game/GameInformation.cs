@@ -74,8 +74,20 @@ namespace Asteragy.Game
         public void Initialize(ContentManager content)
 		{
             positions.Initialize(content);
-            classes = new[]{
+            classes = new AsterClass[]{
                 new None(content),
+                new Sun(content),
+                new Star(content),
+                new Mercury(content),
+                new Venus(content),
+                new Earth(content),
+                new Mars(content),
+                new Jupiter(content),
+                new Saturn(content),
+                new Uranus(content),
+                new Neptune(content),
+                new Pluto(content),
+                new Moon(content),
             };
 		}
 

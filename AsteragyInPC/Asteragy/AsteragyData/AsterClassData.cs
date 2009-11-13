@@ -14,13 +14,45 @@ namespace AsteragyData
     [ContentProcessor(DisplayName = "AsterClassProcessor")]
     public class AsterClassDataContent : ContentProcessor<AsterClassDataContent, AsterClassDataWriter>
     {
+        public int CreateCost;
+        public int CommandCost;
+        public int Actions;
+        public string Range;
         public ExternalReference<Texture2DContent> Visual;
         public ExternalReference<Texture2DContent> CommandTexture;
+
+        private bool[][] convertRange(string input)
+        {
+            List<List<bool>> range = new List<List<bool>>();
+            string[] lines = input.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in lines)
+            {
+                List<bool> r = new List<bool>();
+                string[] ms = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var m in ms)
+                {
+                    if (m == "o")
+                        r.Add(true);
+                    else if (m == "-")
+                        r.Add(false);
+                }
+                if (r.Count >= 1)
+                    range.Add(r);
+            }
+            bool[][] rrange = new bool[range.Count][];
+            for (int i = 0; i < rrange.Length; i++)
+                rrange[i] = range[i].ToArray<bool>();
+            return rrange;
+        }
 
         public override AsterClassDataWriter Process(AsterClassDataContent input, ContentProcessorContext context)
         {
             return new AsterClassDataWriter()
             {
+                CreateCost = input.CreateCost,
+                CommandCost = input.CommandCost,
+                Actions = input.Actions,
+                Range = convertRange(input.Range),
                 Visual = context.BuildAndLoadAsset<Texture2DContent, Texture2DContent>(input.Visual, null),
                 CommandTexture = context.BuildAndLoadAsset<Texture2DContent, Texture2DContent>(input.CommandTexture, null),
             };
@@ -29,6 +61,10 @@ namespace AsteragyData
     [ContentTypeWriter]
     public class AsterClassDataWriter : ContentTypeWriter<AsterClassDataWriter>, IWrite
     {
+        public int CreateCost;
+        public int CommandCost;
+        public int Actions;
+        public bool[][] Range;
         public Texture2DContent Visual;
         public Texture2DContent CommandTexture;
 
@@ -36,6 +72,10 @@ namespace AsteragyData
 
         public void Write(ContentWriter writer)
         {
+            writer.Write(CreateCost);
+            writer.Write(CommandCost);
+            writer.Write(Actions);
+            writer.WriteRawObject<bool[][]>(Range);
             writer.WriteRawObject<Texture2DContent>(Visual);
             writer.WriteRawObject<Texture2DContent>(CommandTexture);
         }
@@ -59,6 +99,10 @@ namespace AsteragyData
     }
     public class AsterClassData : ContentTypeReader<AsterClassData>, IRead
     {
+        public int CreateCost;
+        public int CommandCost;
+        public int Actions;
+        public bool[][] Range;
         public Texture2D Visual;
         public Texture2D CommandTexture;
 
@@ -69,6 +113,10 @@ namespace AsteragyData
 
         public void Read(ContentReader reader)
         {
+            CreateCost = reader.ReadInt32();
+            CommandCost = reader.ReadInt32();
+            Actions = reader.ReadInt32();
+            Range = reader.ReadRawObject<bool[][]>();
             Visual = reader.ReadRawObject<Texture2D>();
             CommandTexture = reader.ReadRawObject<Texture2D>();
 

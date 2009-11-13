@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <!-- TODO: replace this Asset with your own XML asset data. -->
+  <Asset Type="AsteragyData.AsterClassDataContent">
+    <CreateCost>-1</CreateCost>
+    <CommandCost>0</CommandCost>
+    <Actions>2</Actions>
+    <Range>
+      - - o - -
+      - o o o -
+      o o o o o
+      - o o o -
+      - - o - -
+    </Range>
+    <Visual>
+      <Reference>#External1</Reference>
+    </Visual>
+    <CommandTexture>
+      <Reference>#External2</Reference>
+    </CommandTexture>
+  </Asset>
+  <ExternalReferences>
+    <ExternalReference ID="#External1" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Classes/sun.png</ExternalReference>
+    <ExternalReference ID="#External2" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Commands/summonplanet.png</ExternalReference>
+  </ExternalReferences>
+</XnaContent>

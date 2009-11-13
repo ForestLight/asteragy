@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <!-- TODO: replace this Asset with your own XML asset data. -->
+  <Asset Type="AsteragyData.AsterClassDataContent">
+    <CreateCost>-1</CreateCost>
+    <CommandCost>-1</CommandCost>
+    <Actions>-1</Actions>
+    <Range>o</Range>
+    <Visual>
+      <Reference>#External1</Reference>
+    </Visual>
+    <CommandTexture>
+      <Reference>#External2</Reference>
+    </CommandTexture>
+  </Asset>
+  <ExternalReferences>
+    <ExternalReference ID="#External1" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Classes/none.png</ExternalReference>
+    <ExternalReference ID="#External2" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Commands/swap.png</ExternalReference>
+  </ExternalReferences>
+</XnaContent>
