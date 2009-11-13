@@ -20,8 +20,6 @@ namespace Asteragy.Game
         public bool[][] Range { get { return data.Range; } }
 
         public Vector2 Center { get { return data.VisualCenter; } }
-        public Vector2 CommandCenter { get { return data.CommandCenter; } }
-        public Texture2D CommandTexture { get { return data.CommandTexture; } }
 
         public AsterClass(AsterClassData data)
         {
@@ -36,5 +34,15 @@ namespace Asteragy.Game
         }
 
         #endregion
+
+        public void DrawCommand(SpriteBatch sprite, Vector2 position)
+        {
+            sprite.Draw(data.CommandTexture, position, null, Color.White, 0.0f, data.CommandCenter, 1.0f, SpriteEffects.None, 0.0f);
+        }
+
+        public void DrawName(SpriteBatch sprite, Vector2 position, Color color)
+        {
+            sprite.Draw(data.NameTexture, position, null, color, 0.0f, data.NameCenter, 1.0f, SpriteEffects.None, 0.0f);
+        }
     }
 }

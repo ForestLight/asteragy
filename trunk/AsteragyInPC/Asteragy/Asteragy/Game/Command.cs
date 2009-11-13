@@ -62,8 +62,8 @@ namespace Asteragy.Game
             sprite.Draw(data.CursorTexture, position, null, Color.White, move.Now, data.CursorOffset, 1.0f, SpriteEffects.None, 0.0f);
             sprite.Draw(data.ActionsTexture, position + data.ActionsPosition[0], data.ActionsRectangle[1 - (int)State], Color.White, 0.0f, data.ActionsCenter, 1.0f, SpriteEffects.None, 0.0f);
             sprite.Draw(data.ActionsTexture, position + data.ActionsPosition[1], data.ActionsRectangle[(int)State], Color.White, 0.0f, data.ActionsCenter, 1.0f, SpriteEffects.None, 0.0f);
-            sprite.Draw(none.CommandTexture, position + data.ActionsPosition[0], null, Color.White, 0.0f, none.CommandCenter, 1.0f, SpriteEffects.None, 0.0f);
-            sprite.Draw(type.CommandTexture, position + data.ActionsPosition[1], null, Color.White, 0.0f, type.CommandCenter, 1.0f, SpriteEffects.None, 0.0f);
+            none.DrawCommand(sprite, position + data.ActionsPosition[0]);
+            type.DrawCommand(sprite, position + data.ActionsPosition[1]);
             sprite.End();
         }
 

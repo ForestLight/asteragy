@@ -45,6 +45,12 @@ namespace Asteragy.Graphics.Animations
             this.from = from;
             this.to = to;
         }
+        public InterpolateOnce(Interpolate<T> interpolate, TimeSpan time, TimeSpan now, T from, T to)
+            : this(interpolate, time, now)
+        {
+            this.from = from;
+            this.to = to;
+        }
         #endregion
 
         #region Restart

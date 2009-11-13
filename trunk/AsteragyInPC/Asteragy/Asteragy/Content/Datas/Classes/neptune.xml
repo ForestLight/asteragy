@@ -22,9 +22,14 @@
     <CommandTexture>
       <Reference>#External2</Reference>
     </CommandTexture>
+    <NameTexture>
+      <Reference>#External3</Reference>
+    </NameTexture>
+
   </Asset>
   <ExternalReferences>
     <ExternalReference ID="#External1" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Classes/neptune.png</ExternalReference>
     <ExternalReference ID="#External2" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Commands/sonicmove.png</ExternalReference>
+    <ExternalReference ID="#External3" TargetType="Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent">../../Images/Names/neptune.png</ExternalReference>
   </ExternalReferences>
 </XnaContent>
