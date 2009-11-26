@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <!-- TODO: replace this Asset with your own XML asset data. -->
+  <Asset Type="AsteragyData.SunCommandData">
+    <Time>PT0.2S</Time>
+    <Radius>60.0</Radius>
+    <Scale>1.6</Scale>
+  </Asset>
+</XnaContent>

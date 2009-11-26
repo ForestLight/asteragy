@@ -7,65 +7,60 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Asteragy.Graphics.Animations;
+using Asteragy.Graphics.Animations.InterpolateFunctions;
+using AsteragyData;
 
-namespace Asteragy.Game
-{
-    public class SunCommand : IParts
-    {
+namespace Asteragy.Game {
+    public class SunCommand : IParts {
+        private readonly SunCommandData data;
         private readonly AsterPosition positions;
         private List<AsterClass> selectable;
-        private InterpolateOnce<Vector4> interpolate;
+        private InterpolateController controller;
+        private InterpolateOnce<Vector4> interpolateColor;
+        private InterpolateOnce<float, Vector2> interpolatePosition;
 
         public Point Position { get; set; }
         public int Selection { get; private set; }
 
-        public SunCommand(ContentManager content, AsterPosition positions, AsterClass[] classes)
-        {
+        public SunCommand(ContentManager content, AsterPosition positions, AsterClass[] classes) {
+            data = content.Load<SunCommandData>("Datas/SunCommand");
             this.positions = positions;
             selectable = new List<AsterClass>();
-            foreach (var item in classes)
-                if (item.CreateCost >= 0) selectable.Add(item);
-            Vector4 tangent1 = new Vector4(1.0f, 1.0f, 1.1f, 2.0f);
-            Vector4 tangent2 = new Vector4(1.0f, 1.0f, 1.0f, 8.0f);
-            interpolate = new InterpolateOnce<Vector4>(delegate(ref Vector4 a, ref Vector4 b, float amount, out Vector4 c)
-            {
-                Vector4.Hermite(ref a, ref tangent1, ref b, ref tangent2, amount, out c);
-            }, TimeSpan.FromMilliseconds(1000), new Vector4(1.0f, 1.0f, 1.0f, 0.0f), new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+            foreach(var item in classes)
+                if(item.CreateCost >= 0) selectable.Add(item);
+            controller = new InterpolateController();
+            controller.Add((interpolateColor = new InterpolateOnce<Vector4>(Vector4.Lerp, data.Time, Vector4.One, TimeSpan.MaxValue, new Vector4(1.0f, 1.0f, 1.0f, 0.0f), new Vector4(1.0f, 1.0f, 1.0f, 1.0f))));
+            controller.Add((interpolatePosition = new InterpolateOnce<float, Vector2>(InterpolateVector.InterpolateCircuit(data.Radius), data.Time, new Vector2(0, -data.Radius), TimeSpan.MaxValue, -MathHelper.PiOver2, MathHelper.PiOver2)));
         }
 
         #region Move
-        public void Next()
-        {
-            if (interpolate.End && Selection < selectable.Count - 1)
-            {
+        public void Next() {
+            if(interpolateColor.End && Selection < selectable.Count - 1) {
                 Selection++;
-                interpolate.Restart();
+                controller.Restart();
             }
         }
 
-        public void Previous()
-        {
-            if (interpolate.End && Selection > 0)
-            {
+        public void Previous() {
+            if(interpolateColor.End && Selection > 0) {
                 Selection--;
-                interpolate.Restart();
+                controller.Restart();
             }
         }
         #endregion
 
         #region IParts メンバ
 
-        public void Update(GraphicsDevice device, GameTime gameTime)
-        {
-            interpolate.Update(device, gameTime);
+        public void Update(GraphicsDevice device, GameTime gameTime) {
+            controller.Update(device, gameTime);
         }
 
-        public void Draw(GraphicsDevice device, SpriteBatch sprite)
-        {
+        public void Draw(GraphicsDevice device, SpriteBatch sprite) {
             AsterClass select = selectable[Selection];
             Vector2 position = positions[Position.X, Position.Y];
             sprite.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
-            select.DrawName(sprite, position, new Color(interpolate.Now));
+            select.Draw(sprite, position, data.Scale);
+            select.DrawName(sprite, position + interpolatePosition.Now, new Color(interpolateColor.Now));
             sprite.End();
         }
 

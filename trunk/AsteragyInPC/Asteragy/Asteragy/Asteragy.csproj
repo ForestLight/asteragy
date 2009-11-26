@@ -104,9 +104,15 @@
     <Compile Include="Game\Field.cs" />
     <Compile Include="Game\GameInformation.cs" />
     <Compile Include="Game\IMovable.cs" />
+    <Compile Include="Game\Inputter.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\SunCommand.cs" />
+    <Compile Include="Graphics\Animations\IInterpolate.cs" />
+    <Compile Include="Graphics\Animations\InterpolateController.cs" />
+    <Compile Include="Graphics\Animations\InterpolateFunctions\InterpolateFloat.cs" />
+    <Compile Include="Graphics\Animations\InterpolateFunctions\InterpolateVector.cs" />
     <Compile Include="Graphics\Animations\InterpolateOnce.cs" />
+    <Compile Include="Graphics\Animations\IRestartable.cs" />
     <Compile Include="Graphics\DecoratorBase.cs" />
     <Compile Include="Graphics\Decorators\DefaultDecorator.cs" />
     <Compile Include="Graphics\DelegateParts.cs" />
