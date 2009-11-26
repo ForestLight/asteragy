@@ -34,6 +34,15 @@ namespace Asteragy.Game
         }
 
         #endregion
+        #region Draw
+        public void Draw(SpriteBatch sprite, Vector2 position, float scale) {
+            sprite.Draw(Data.Visual, position, null, Color.White, 0.0f, Data.VisualCenter, scale, SpriteEffects.None, 0.0f);
+        }
+
+        public void Draw(SpriteBatch sprite, Vector2 position) {
+            sprite.Draw(Data.Visual, position, null, Color.White, 0.0f, Data.VisualCenter, 1.0f, SpriteEffects.None, 0.0f);
+        }
+        #endregion
 
         public void DrawCommand(SpriteBatch sprite, Vector2 position)
         {

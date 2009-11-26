@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using AsteragyData;
 using Microsoft.Xna.Framework.Content;
 using Asteragy.Graphics.Animations;
+using Asteragy.Graphics.Animations.InterpolateFunctions;
 
 namespace Asteragy.Game
 {
@@ -33,7 +34,7 @@ namespace Asteragy.Game
             this.field = field;
             this.positions = field.Information.Positions;
             none = field.Information.Classes[0];
-            move = new InterpolateOnce<float>(delegate(ref float a, ref float b, float m, out float c) { c = MathHelper.SmoothStep(a, b, m); }, data.MoveTime, TimeSpan.MaxValue);
+            move = new InterpolateOnce<float>(InterpolateFloat.SmoothStep, data.MoveTime, TimeSpan.MaxValue);
             move.Ended += () => { State = (CommandState)(1 - (int)State); };
         }
 
