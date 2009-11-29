@@ -10,15 +10,12 @@ using Microsoft.Xna.Framework.Content;
 using Asteragy.Graphics.Animations;
 using Asteragy.Graphics.Animations.InterpolateFunctions;
 
-namespace Asteragy.Game
-{
-    public enum CommandState
-    {
+namespace Asteragy.Game {
+    public enum CommandState {
         Swap,
         Command,
     }
-    public class Command : IParts
-    {
+    public class Command : IInputable {
         private readonly CommandData data;
         private readonly AsterPosition positions;
         private readonly Field field;
@@ -28,8 +25,7 @@ namespace Asteragy.Game
         public Point Position { get; set; }
         public CommandState State { get; set; }
 
-        public Command(ContentManager content, Field field)
-        {
+        public Command(ContentManager content, Field field) {
             data = content.Load<CommandData>("Datas/Command");
             this.field = field;
             this.positions = field.Information.Positions;
@@ -38,24 +34,20 @@ namespace Asteragy.Game
             move.Ended += () => { State = (CommandState)(1 - (int)State); };
         }
 
-        public void Change()
-        {
-            if (move.End)
-            {
-                if (State == CommandState.Swap) move.Restart(0.0f, MathHelper.Pi);
+        public void Change() {
+            if(move.End) {
+                if(State == CommandState.Swap) move.Restart(0.0f, MathHelper.Pi);
                 else move.Restart(MathHelper.Pi, MathHelper.TwoPi);
             }
         }
 
         #region IParts メンバ
 
-        public void Update(GraphicsDevice device, GameTime gameTime)
-        {
+        public void Update(GraphicsDevice device, GameTime gameTime) {
             move.Update(device, gameTime);
         }
 
-        public void Draw(GraphicsDevice device, SpriteBatch sprite)
-        {
+        public void Draw(GraphicsDevice device, SpriteBatch sprite) {
             AsterClass type = field[Position.X, Position.Y].Type;
             Vector2 position = positions[Position.X, Position.Y];
             sprite.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);

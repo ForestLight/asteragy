@@ -11,7 +11,7 @@ using Asteragy.Graphics.Animations.InterpolateFunctions;
 using AsteragyData;
 
 namespace Asteragy.Game {
-    public class SunCommand : IParts {
+    public class SunCommand : IInputable {
         private readonly SunCommandData data;
         private readonly AsterPosition positions;
         private List<AsterClass> selectable;

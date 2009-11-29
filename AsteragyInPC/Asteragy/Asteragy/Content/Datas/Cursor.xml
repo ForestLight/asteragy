@@ -2,7 +2,7 @@
 <XnaContent>
   <!-- TODO: replace this Asset with your own XML asset data. -->
   <Asset Type="AsteragyData.CursorDataContent">
-    <MoveTime>10.0</MoveTime>
+    <MoveTime>PT0.1S</MoveTime>
     <CursorTexture>
       <Reference>#External1</Reference>
     </CursorTexture>

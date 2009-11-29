@@ -134,6 +134,7 @@
     <Compile Include="Scenes\Game.cs" />
     <Compile Include="Scenes\SceneBase.cs" />
     <Compile Include="Scenes\Title.cs" />
+    <Compile Include="Utils\ExtendDictionary.cs" />
     <Compile Include="Visuals\Background.cs" />
     <Compile Include="Visuals\Menu.cs" />
   </ItemGroup>
