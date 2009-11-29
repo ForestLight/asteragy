@@ -12,7 +12,7 @@ namespace AsteragyData
     [ContentProcessor(DisplayName = "CursorDataProcessor")]
     public class CursorDataContent : ContentProcessor<CursorDataContent, CursorDataWrite>
     {
-        public double MoveTime;
+        public TimeSpan MoveTime;
         public ExternalReference<Texture2DContent> CursorTexture;
 
         public override CursorDataWrite Process(CursorDataContent input, ContentProcessorContext context)
@@ -27,7 +27,7 @@ namespace AsteragyData
     [ContentTypeWriter]
     public class CursorDataWrite : ContentTypeWriter<CursorDataWrite>, IWrite
     {
-        public double MoveTime;
+        public TimeSpan MoveTime;
         public Texture2DContent CursorTexture;
 
         protected override void Write(ContentWriter output, CursorDataWrite value)
@@ -49,7 +49,7 @@ namespace AsteragyData
 
         public void Write(ContentWriter writer)
         {
-            writer.Write(MoveTime);
+            writer.WriteRawObject<TimeSpan>(MoveTime);
             writer.WriteRawObject<Texture2DContent>(CursorTexture);
         }
 
@@ -58,7 +58,7 @@ namespace AsteragyData
 
     public class CursorData : ContentTypeReader<CursorData>, IRead
     {
-        public double MoveTime;
+        public TimeSpan MoveTime;
         public Texture2D CursorTexture;
         public Vector2 Center;
 
@@ -76,7 +76,7 @@ namespace AsteragyData
 
         public void Read(ContentReader reader)
         {
-            MoveTime = reader.ReadDouble();
+            MoveTime = reader.ReadRawObject<TimeSpan>();
             CursorTexture = reader.ReadRawObject<Texture2D>();
             Center = new Vector2(CursorTexture.Width, CursorTexture.Height) / 2.0f;
         }
