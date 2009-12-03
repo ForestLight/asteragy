@@ -29,20 +29,6 @@ namespace Asteragy.Scenes {
             this.Parts.Add((field = new Field(content, information)));
             //this.Parts.Add(information.PlayerOne);
             //this.Parts.Add(information.PlayerTwo);
-            d_set(content);
-        }
-
-        Inputter inputter;
-        [Conditional("DEBUG")]
-        private void d_set(ContentManager content) {
-            this.Parts.Add((inputter = new Inputter(content, field)));
-        }
-
-        public override IScene Update(GraphicsDevice device, GameTime gameTime) {
-            if(KeyInputListener.State == KeyInputState.OK) {
-                inputter.ChangeInput((InputterType)(((int)inputter.Type + 1) % 4), true);
-            }
-            return base.Update(device, gameTime);
         }
     }
 }
