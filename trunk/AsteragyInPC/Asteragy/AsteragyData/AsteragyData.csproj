@@ -53,6 +53,7 @@
     <Compile Include="CursorData.cs" />
     <Compile Include="DefaultDecoratorData.cs" />
     <Compile Include="IData.cs" />
+    <Compile Include="PlayerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SunCommandData.cs" />
   </ItemGroup>

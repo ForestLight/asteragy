@@ -9,6 +9,7 @@ using Asteragy.Visuals;
 using Asteragy.Input;
 using Microsoft.Xna.Framework.Input;
 using Asteragy.Game;
+using Asteragy.Game.Players;
 
 namespace Asteragy.Scenes
 {
@@ -27,7 +28,7 @@ namespace Asteragy.Scenes
 		{
 			base.Update(device, gameTime);
 			if (KeyInputListener.State != KeyInputState.None)
-				return new Game(new GameInformation(10, 11, 5, null, null), this);
+				return new Game(new GameInformation(10, 11, 5, new NonePlayer(), new NonePlayer()), this);
 			else
 				return this;
 		}

@@ -12,7 +12,7 @@ using Asteragy.Input;
 
 namespace Asteragy.Scenes {
     public class Game : SceneBase {
-        private GameInformation information;
+        private readonly GameInformation information;
         private readonly IScene back;
         private Field field;
 
@@ -25,10 +25,12 @@ namespace Asteragy.Scenes {
             information.Initialize(content);
             Aster.Initialize(content);
             base.Initialize(device, content);
+            information.PlayerOne.Initialize(device, content);
+            information.PlayerTwo.Initialize(device, content);
             this.Parts.Add(new Background(device, content));
             this.Parts.Add((field = new Field(content, information)));
-            //this.Parts.Add(information.PlayerOne);
-            //this.Parts.Add(information.PlayerTwo);
+            this.Parts.Add(information.PlayerOne);
+            this.Parts.Add(information.PlayerTwo);
         }
     }
 }
