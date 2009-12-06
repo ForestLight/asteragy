@@ -69,6 +69,8 @@ namespace Asteragy.Game
             players = new Player[2];
             players[0] = one;
             players[1] = two;
+            one.SetType(PlayerType.One);
+            two.SetType(PlayerType.Two);
         }
 
         public void Initialize(ContentManager content)
